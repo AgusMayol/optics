@@ -1,0 +1,466 @@
+"use client";
+import { useElementHeight } from "@/hooks/use-element-height";
+import { Sidebar } from "./sidebar";
+import { Header } from "./header";
+
+export function LayoutContent({ children }) {
+	const [contentRef, contentHeight] = useElementHeight();
+
+	const links = [
+		{
+			name: "Core",
+			items: [
+				{
+					name: "Introduction",
+					href: "/",
+				},
+				{
+					name: "Typography",
+					href: "/core/typography",
+				},
+				{
+					name: "Iconography",
+					href: "/core/iconography",
+				},
+				{
+					name: "Materials",
+					href: "/core/materials",
+				},
+				{
+					name: "Accesibility",
+					href: "/core/accesibility",
+				},
+				{
+					name: "Layout",
+					href: "/core/layout",
+				},
+				{
+					name: "Animations",
+					href: "/core/animations",
+				},
+				{
+					name: "Colors",
+					href: "/core/colors",
+				},
+			],
+		},
+		{
+			name: "Resources",
+			items: [
+				{
+					name: "Web Interface Guidelines",
+					href: "https://vercel.com/design/guidelines",
+				},
+				{
+					name: "Tailwind variables",
+					href: "/resources/tailwind-variables",
+				},
+				{
+					name: "SEO & Metadata",
+					href: "/resources/seo-metadata",
+				},
+				{
+					name: "Cursor Rules",
+					href: "/resources/cursor-rules",
+				},
+				{
+					name: "404 Page",
+					href: "/resources/404-page",
+				},
+				{
+					name: "Hooks",
+					href: "/resources/hooks",
+				},
+			],
+		},
+		{
+			name: "Components",
+			items: [
+				{
+					name: "Accordion",
+					href: "/components/accordion",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Alert",
+					href: "/components/alert",
+					own: false,
+				},
+				{
+					name: "Alert Dialog",
+					href: "/components/alert-dialog",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Aspect Ratio",
+					href: "/components/aspect-ratio",
+					own: false,
+				},
+				{
+					name: "Avatar",
+					href: "/components/avatar",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Badge",
+					href: "/components/badge",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Breadcrumb",
+					href: "/components/breadcrumb",
+					own: false,
+					custom: false,
+				},
+				{
+					name: "Button",
+					href: "/components/button",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Button Group",
+					href: "/components/button-group",
+					own: false,
+					custom: false,
+				},
+				{
+					name: "Calendar",
+					href: "/components/calendar",
+					own: false,
+				},
+				{
+					name: "Card",
+					href: "/components/card",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Carousel",
+					href: "/components/carousel",
+					own: false,
+				},
+				{
+					name: "Checkbox",
+					href: "/components/checkbox",
+					own: false,
+				},
+				{
+					name: "Code Block",
+					href: "/components/code-block",
+					own: true,
+				},
+				{
+					name: "Code Snippet",
+					href: "/components/code-snippet",
+					own: true,
+				},
+				{
+					name: "Collapsible",
+					href: "/components/collapsible",
+					own: false,
+				},
+				{
+					name: "Command",
+					href: "/components/command",
+					own: false,
+				},
+				{
+					name: "Context Menu",
+					href: "/components/context-menu",
+					own: false,
+				},
+				{
+					name: "Data Table",
+					href: "/components/data-table",
+					own: false,
+				},
+				{
+					name: "Date Picker",
+					href: "/components/date-picker",
+					own: false,
+				},
+				{
+					name: "Dialog",
+					href: "/components/dialog",
+					own: false,
+				},
+				{
+					name: "Drawer",
+					href: "/components/drawer",
+					own: false,
+				},
+				{
+					name: "Dropdown Menu",
+					href: "/components/dropdown-menu",
+					own: false,
+				},
+				{
+					name: "Emoji Picker",
+					href: "/components/emoji-picker",
+					own: true,
+				},
+				{
+					name: "Empty State",
+					href: "/components/empty-state",
+					own: false,
+					custom: false,
+				},
+				{
+					name: "Example Code Block",
+					href: "/components/example-code-block",
+					own: true,
+				},
+				{
+					name: "Feedback",
+					href: "/components/feedback",
+					own: true,
+				},
+				{
+					name: "Field",
+					href: "/components/field",
+					own: false,
+					custom: false,
+				},
+				{
+					name: "File Tree",
+					href: "/components/file-tree",
+					own: true,
+				},
+				{
+					name: "File Upload",
+					href: "/components/file-upload",
+					own: true,
+				},
+				{
+					name: "Form",
+					href: "/components/form",
+					own: false,
+				},
+				{
+					name: "Grid",
+					href: "/components/grid",
+					own: true,
+				},
+				{
+					name: "Hover Card",
+					href: "/components/hover-card",
+					own: false,
+				},
+				{
+					name: "Input",
+					href: "/components/input",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Input Group",
+					href: "/components/input-group",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Input OTP",
+					href: "/components/input-otp",
+					own: false,
+					custom: false,
+				},
+				{
+					name: "Item",
+					href: "/components/item",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Kbd",
+					href: "/components/kbd",
+					own: false,
+				},
+				{
+					name: "Label",
+					href: "/components/label",
+					own: false,
+				},
+				{
+					name: "Markdown",
+					href: "/components/markdown",
+					own: true,
+				},
+				{
+					name: "Menubar",
+					href: "/components/menubar",
+					own: false,
+				},
+				{
+					name: "Message Box",
+					href: "/components/message-box",
+					own: true,
+				},
+				{
+					name: "Navigation Menu",
+					href: "/components/navigation-menu",
+					own: false,
+				},
+				{
+					name: "Pagination",
+					href: "/components/pagination",
+					own: false,
+				},
+				{
+					name: "Popover",
+					href: "/components/popover",
+					own: false,
+				},
+				{
+					name: "Progress",
+					href: "/components/progress",
+					own: false,
+				},
+				{
+					name: "Radio Group",
+					href: "/components/radio-group",
+					own: false,
+				},
+				{
+					name: "Resizable",
+					href: "/components/resizable",
+					own: false,
+				},
+				{
+					name: "Scroll Area",
+					href: "/components/scroll-area",
+					own: false,
+				},
+				{
+					name: "Select",
+					href: "/components/select",
+					own: false,
+				},
+				{
+					name: "Separator",
+					href: "/components/separator",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Sheet",
+					href: "/components/sheet",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Show More",
+					href: "/components/show-more",
+					own: true,
+				},
+				{
+					name: "Skeleton",
+					href: "/components/skeleton",
+					own: false,
+				},
+				{
+					name: "Slider",
+					href: "/components/slider",
+					own: false,
+				},
+				{
+					name: "Sonner",
+					href: "/components/sonner",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Spinner",
+					href: "/components/spinner",
+					own: true,
+				},
+				{
+					name: "Spotlight",
+					href: "/components/spotlight",
+					own: true,
+				},
+				{
+					name: "Star Rating",
+					href: "/components/star-rating",
+					own: true,
+				},
+				{
+					name: "Switch",
+					href: "/components/switch",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Table",
+					href: "/components/table",
+					own: false,
+				},
+				{
+					name: "Tabs",
+					href: "/components/tabs",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Terminal",
+					href: "/components/terminal",
+					own: true,
+				},
+				{
+					name: "Textarea",
+					href: "/components/textarea",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Theme Switcher",
+					href: "/components/theme-switcher",
+					own: true,
+				},
+				{
+					name: "Toggle",
+					href: "/components/toggle",
+					own: false,
+				},
+				{
+					name: "Toggle Group",
+					href: "/components/toggle-group",
+					own: false,
+				},
+				{
+					name: "Tooltip",
+					href: "/components/tooltip",
+					own: false,
+					custom: true,
+				},
+				{
+					name: "Widget",
+					href: "/components/widget",
+					own: true,
+				},
+				{
+					name: "Window",
+					href: "/components/window",
+					own: true,
+				},
+			],
+		},
+	];
+
+	return (
+		<div className="w-full h-full lg:max-w-7xl mx-auto grid grid-cols-14 min-h-svh px-4 py-8 items-start">
+			<Sidebar links={links} maxHeight={contentHeight} />
+			<div
+				ref={contentRef}
+				className="w-full col-span-full lg:col-span-11 border lg:border-l-0 lg:rounded-l-none rounded-xl flex flex-col flex-1 bg-sidebar"
+			>
+				<Header links={links} />
+				{children}
+			</div>
+		</div>
+	);
+}

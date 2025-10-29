@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
+import createWithVercelToolbar from "@vercel/toolbar/plugins/next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+	htmlLimitedBots: /.*/,
+	reactCompiler: true,
+	experimental: {
+		viewTransition: true,
+	},
 };
 
-export default nextConfig;
+const withVercelToolbar = createWithVercelToolbar();
+export default withVercelToolbar(nextConfig);

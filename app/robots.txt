@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://optics.agusmayol.com.ar/sitemap.xml
