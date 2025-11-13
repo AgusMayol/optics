@@ -98,7 +98,6 @@ export default function Home() {
 					functionality, curated animations and visual appeal.
 				</p>
 			</div>
-
 			<GridContainer cols={4} rows={6}>
 				<GridRow>
 					<GridItem

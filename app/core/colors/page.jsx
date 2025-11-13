@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/registry/agusmayol/select";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -38,6 +38,7 @@ import {
 import { Fragment, useState } from "react";
 import { tailwindColors } from "@/lib/tailwind-colors";
 import { toast } from "@/registry/agusmayol/sonner";
+import { Separator } from "@/registry/agusmayol/separator";
 
 export default function Page() {
 	const colors = [
@@ -412,7 +413,7 @@ export default function Page() {
 	return (
 		<TooltipProvider delayDuration={400} skipDelayDuration={0}>
 			<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-				<div className="flex flex-col gap-4 p-12 pb-0">
+				<div className="flex flex-col gap-4 p-12 pb-4">
 					<h1 className="text-4xl font-bold tracking-tight">Colors</h1>
 					<p className="text-muted-foreground text-xl">
 						The complete Tailwind color palette in HEX, RGB, HSL, CSS variables,
@@ -420,9 +421,11 @@ export default function Page() {
 					</p>
 				</div>
 
-				<div className="flex flex-col items-end justify-start gap-4 p-12 bg-background">
+				<Separator decoration />
+
+				<div className="flex flex-col items-end justify-start gap-4 p-12 pt-4">
 					<Select value={selectedFormat} onValueChange={setSelectedFormat}>
-						<SelectTrigger className="w-[180px]">
+						<SelectTrigger className="w-[180px]" variant="raised">
 							<SelectValue placeholder="Format" />
 						</SelectTrigger>
 						<SelectContent>
@@ -453,7 +456,7 @@ export default function Page() {
 							</GridItem>
 						</GridRow>
 						{colors.map((color) => (
-							<GridRow key={color.name} className="h-[calc(100%-1px)]">
+							<GridRow key={color.name} className="not-last:h-[calc(100%-1px)]">
 								<GridItem span={2} className="text-xs font-semibold">
 									{color.name}
 								</GridItem>

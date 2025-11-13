@@ -9,6 +9,13 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CommandDialogComponent } from "./command-dialog";
+import { Button } from "@/registry/agusmayol/button";
+import {
+	ContextMenu,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuTrigger,
+} from "@/registry/agusmayol/context-menu";
 
 export function Header({ links }) {
 	const [themeSwitch, setThemeSwitch] = React.useState("system");
@@ -89,33 +96,61 @@ export function Header({ links }) {
 
 	return (
 		<div className="w-full h-16 flex items-center justify-between gap-4 rounded-t-xl border-b lg:rounded-tl-none p-4">
-			<Link
-				href="/"
-				className="w-full h-16 lg:hidden flex flex-row items-center justify-center gap-2 rounded-tl-xl"
-			>
-				<Image
-					src="/images/new_logo.svg"
-					alt="AgusMayol's Optics logo"
-					className="size-8 dark:hidden ml-1.5"
-					width={100}
-					height={100}
-				/>
-				<Image
-					src="/images/new_logo_white.svg"
-					alt="AgusMayol's Optics logo"
-					className="size-8 hidden dark:block ml-1.5"
-					width={100}
-					height={100}
-				/>
-				<span className="text-base font-bold w-full">AgusMayol's Optics</span>
-			</Link>
+			<ContextMenu>
+				<ContextMenuTrigger>
+					<Link
+						href="/"
+						className="w-full h-16 lg:hidden flex flex-row items-center justify-center gap-2 rounded-tl-xl"
+					>
+						<Image
+							src="/images/new_logo.svg"
+							alt="AgusMayol's Optics logo"
+							className="size-8 ml-1.5"
+							width={100}
+							height={100}
+						/>
+						{/* <Image
+							src="/images/new_logo_white.svg"
+							alt="AgusMayol's Optics logo"
+							className="size-8 hidden dark:block ml-1.5"
+							width={100}
+							height={100}
+						/> */}
+						<span className="text-base font-bold w-full">
+							AgusMayol's Optics
+						</span>
+					</Link>
+				</ContextMenuTrigger>
+				<ContextMenuContent>
+					<ContextMenuItem>Copy Logo as SVG</ContextMenuItem>
+				</ContextMenuContent>
+			</ContextMenu>
+
 			<CommandDialogComponent links={links} />
-			<ThemeSwitcher
-				ref={ref}
-				defaultValue={themeSwitch}
-				onChange={handleSetTheme}
-				value={themeSwitch}
-			/>
+			<div className="w-full h-full flex items-center justify-end gap-1.5">
+				<Button variant="ghost" size="icon">
+					<Link
+						href="https://github.com/agusmayol/optics"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Image
+							src="/images/GitHub_Invertocat_Dark.svg"
+							alt="AgusMayol's Optics logo"
+							className="size-4.5"
+							width={100}
+							height={100}
+						/>
+					</Link>
+				</Button>
+
+				<ThemeSwitcher
+					ref={ref}
+					defaultValue={themeSwitch}
+					onChange={handleSetTheme}
+					value={themeSwitch}
+				/>
+			</div>
 		</div>
 	);
 }

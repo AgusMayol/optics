@@ -25,7 +25,7 @@ const commands = [
 
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,6 +76,9 @@ export default function Page() {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 } from "@/registry/agusmayol/code-snippet";
+
+const [value, setValue] = React.useState(commands[0].label);
+const activeCommand = commands.find((command) => command.label === value);
 
 const commands = [
 	{

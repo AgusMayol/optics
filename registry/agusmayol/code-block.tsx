@@ -21,7 +21,10 @@ import {
 	useContext,
 	useEffect,
 	useState,
+	useLayoutEffect,
+	useRef,
 } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import type { IconType } from "react-icons";
 import {
 	SiAstro,
@@ -723,6 +726,12 @@ export const CodeBlockContent = ({
 	...props
 }: CodeBlockContentProps) => {
 	const [html, setHtml] = useState<string | null>(null);
+	const [isExpanded, setIsExpanded] = useState(false);
+	const [fullHeight, setFullHeight] = useState<number | null>(null);
+	const codeLines = (children as string).split("\n");
+	const hasMoreThan10Lines = codeLines.length > 10;
+	const measureRef = useRef<HTMLDivElement>(null);
+	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (!syntaxHighlighting) {
@@ -735,15 +744,103 @@ export const CodeBlockContent = ({
 			.catch(console.error);
 	}, [children, themes, syntaxHighlighting, language]);
 
-	if (!(syntaxHighlighting && html)) {
-		return <CodeBlockFallback>{children}</CodeBlockFallback>;
-	}
+	// Measure the full height of the content
+	useLayoutEffect(() => {
+		if (!measureRef.current) return;
+
+		const measureHeight = () => {
+			if (measureRef.current) {
+				const height = measureRef.current.getBoundingClientRect().height;
+				setFullHeight(height);
+			}
+		};
+
+		// Measure after a short delay to ensure content is rendered
+		const timeoutId = setTimeout(measureHeight, 0);
+
+		// Also measure when content changes
+		const resizeObserver = new ResizeObserver(() => {
+			measureHeight();
+		});
+
+		if (measureRef.current) {
+			resizeObserver.observe(measureRef.current);
+		}
+
+		return () => {
+			clearTimeout(timeoutId);
+			resizeObserver.disconnect();
+		};
+	}, [html, children, syntaxHighlighting]);
+
+	// Calculate approximate height for 10 lines (24px per line)
+	const collapsedHeight = 240;
+
+	const transition = {
+		type: "spring" as const,
+		stiffness: 200,
+		damping: 25,
+	};
 
 	return (
-		<div
-			// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
-			dangerouslySetInnerHTML={{ __html: html }}
-			{...props}
-		/>
+		<div className="relative" {...props}>
+			{/* Hidden element to measure full height */}
+			<div
+				ref={measureRef}
+				className="invisible pointer-events-none absolute -z-50 w-full"
+				style={{ visibility: "hidden" }}
+			>
+				{!(syntaxHighlighting && html) ? (
+					<CodeBlockFallback>{children}</CodeBlockFallback>
+				) : (
+					<div
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
+						dangerouslySetInnerHTML={{ __html: html }}
+					/>
+				)}
+			</div>
+			<motion.div
+				className="relative"
+				style={{ overflow: "hidden" }}
+				animate={{
+					height:
+						hasMoreThan10Lines && !isExpanded
+							? collapsedHeight
+							: fullHeight || "auto",
+				}}
+				transition={transition}
+			>
+				<div ref={contentRef}>
+					{!(syntaxHighlighting && html) ? (
+						<CodeBlockFallback>{children}</CodeBlockFallback>
+					) : (
+						<div
+							// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
+							dangerouslySetInnerHTML={{ __html: html }}
+						/>
+					)}
+				</div>
+				<AnimatePresence>
+					{hasMoreThan10Lines && !isExpanded && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.2 }}
+							className="absolute bottom-0 left-0 right-0 flex items-center justify-center bg-gradient-to-t from-card via-card/95 to-transparent pb-4 pt-12"
+						>
+							<Button
+								variant="ghost"
+								size="sm"
+								onClick={() => setIsExpanded(true)}
+								className="z-10 text-muted-foreground hover:bg-transparent hover:text-foreground transition-colors duration-500 ease-in-out"
+							>
+								Expand
+							</Button>
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</motion.div>
+		</div>
 	);
 };

@@ -102,7 +102,7 @@
   --muted-foreground: oklch(70.8% 0 0);
   --accent: oklch(37.1% 0 0);
   --accent-foreground: oklch(98.5% 0 0);
-  --destructive: oklch(70.4% .191 22.216);
+  --destructive: oklch(57.7% .245 27.325);
   --border: oklch(100% 0 0 / .1);
   --input: oklch(100% 0 0 / .15);
   --ring: oklch(55.6% 0 0);
@@ -181,4 +181,14 @@ html {
 
 .animate-zoom-subtle {
   animation: zoom-subtle 0.4s ease-in-out;
+}
+
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+::-moz-selection {
+  background: var(--foreground);
+  color: var(--background);
 }

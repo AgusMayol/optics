@@ -1,7 +1,9 @@
 "use client";
+import * as React from "react";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
+import { Badge } from "@/registry/agusmayol/badge";
 import {
 	ALargeSmall,
 	ArrowLeft,
@@ -34,40 +36,80 @@ import {
 	TooltipTrigger,
 	TooltipContent,
 } from "@/registry/agusmayol/tooltip";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/agusmayol/code-snippet";
+import { Separator } from "@/registry/agusmayol/separator";
+
+const commands = [
+	{
+		label: "bun",
+		code: "bun add lucide-react",
+	},
+];
 
 export default function Page() {
+	const [value, setValue] = React.useState(commands[0].label);
+	const activeCommand = commands.find((command) => command.label === value);
+
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-0">
+			<div className="flex flex-col gap-4 p-12 pb-4">
 				<h1 className="text-4xl font-bold tracking-tight">Iconography</h1>
 				<p className="text-muted-foreground text-xl">
 					Beautiful & consistent icons.
 				</p>
 			</div>
 
-			<p className="w-full flex items-center justify-start gap-2 px-12 pb-0 text-muted-foreground">
-				This proyect loves
-				<Button variant="link" className="-ml-4.5 mt-0.5" asChild>
-					<Link
-						href="https://lucide.dev/"
-						rel="noopener noreferrer"
-						target="blank"
-					>
-						Lucide Icons
-						<ArrowUpRight size={16} className="-ml-1" />
-					</Link>
-				</Button>
-			</p>
+			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 bg-background">
-				<h2 className="text-[32px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-4">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					Installation
+				</h2>
+				<p className="w-full flex items-center justify-start text-muted-foreground gap-1">
+					This design system loves{" "}
+					<Button
+						variant="link"
+						className="text-muted-foreground hover:text-primary transition-colors"
+						asChild
+					>
+						<Link
+							href="https://lucide.dev/"
+							rel="noopener noreferrer"
+							target="blank"
+						>
+							Lucide Icons
+							<ArrowUpRight size={16} className="-ml-1" />
+						</Link>
+					</Button>
+				</p>
+				<Snippet className="w-auto mt-2">
+					<SnippetHeader className="pl-4 flex gap-4 bg-transparent border-0">
+						<span className="text-xs font-mono">{activeCommand.code}</span>
+
+						<SnippetCopyButton value={activeCommand.code} />
+					</SnippetHeader>
+					<SnippetTabsContent value={activeCommand.label}>
+						{activeCommand.code}
+					</SnippetTabsContent>
+				</Snippet>
+			</div>
+
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
 				<GridContainer
 					cols={12}
 					border={false}
 					rows={5}
-					className="[&>*:not(:first-child)]:!border-t [&>*]:py-4"
+					className="[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-md [&>*:last-child]:rounded-b-md [&>*:nth-child(odd)]:bg-muted"
 				>
 					<GridRow>
 						<GridItem
@@ -91,9 +133,14 @@ export default function Page() {
 							span={4}
 							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
 						>
-							size
+							<Badge
+								variant="outline"
+								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+							>
+								size
+							</Badge>
 						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
+						<GridItem span={4} className="text-xs font-mono italic">
 							number
 						</GridItem>
 						<GridItem span={4} className="text-xs font-mono tabular-nums">
@@ -105,9 +152,14 @@ export default function Page() {
 							span={4}
 							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
 						>
-							color
+							<Badge
+								variant="outline"
+								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+							>
+								color
+							</Badge>
 						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
+						<GridItem span={4} className="text-xs font-mono italic">
 							string
 						</GridItem>
 						<GridItem span={4} className="text-xs font-mono">
@@ -119,9 +171,14 @@ export default function Page() {
 							span={4}
 							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
 						>
-							strokeWidth
+							<Badge
+								variant="outline"
+								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+							>
+								strokeWidth
+							</Badge>
 						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
+						<GridItem span={4} className="text-xs font-mono italic">
 							number
 						</GridItem>
 						<GridItem span={4} className="text-xs font-mono tabular-nums">
@@ -133,9 +190,14 @@ export default function Page() {
 							span={4}
 							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
 						>
-							absoluteStrokeWidth
+							<Badge
+								variant="outline"
+								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+							>
+								absoluteStrokeWidth
+							</Badge>
 						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
+						<GridItem span={4} className="text-xs font-mono italic">
 							boolean
 						</GridItem>
 						<GridItem span={4} className="text-xs font-mono">

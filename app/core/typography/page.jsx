@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ALargeSmall, ArrowLeft, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,24 +26,27 @@ import {
 	TooltipTrigger,
 	TooltipContent,
 } from "@/registry/agusmayol/tooltip";
+import { Separator } from "@/registry/agusmayol/separator";
 
 export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-0">
+			<div className="flex flex-col gap-4 p-12 pb-4">
 				<h1 className="text-4xl font-bold tracking-tight">Typography</h1>
 				<p className="text-muted-foreground text-xl">
 					Rules of typesetting throughout the system.
 				</p>
 			</div>
 
-			<div className="flex flex-col items-end justify-start gap-4 p-12 bg-background">
+			<Separator decoration />
+
+			<div className="flex flex-col items-end justify-start gap-4 p-12 pt-0">
 				<GridContainer
 					cols={12}
 					rows={11}
 					border={false}
-					gap={4}
-					className="[&>*:not(:first-child)]:!border-t"
+					gap={0}
+					className="[&>*:not(:first-child)]:!border-t [&>*:not(:first-child)]:hover:bg-muted [&>*:not(:first-child)]:py-1 [&>*:not(:first-child)]:px-2"
 				>
 					<GridRow>
 						<GridItem
@@ -53,7 +56,10 @@ export default function Page() {
 							<ALargeSmall />
 							Example
 						</GridItem>
-						<GridItem span={2} className="text-xs font-semibold gap-1 mr-4">
+						<GridItem
+							span={2}
+							className="text-xs font-semibold gap-1 mr-auto text-balance"
+						>
 							<svg
 								className="size-4"
 								fill="none"
@@ -72,7 +78,10 @@ export default function Page() {
 							ClassName
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs font-semibold gap-1 mr-4">
+						<GridItem
+							span={2}
+							className="text-xs font-semibold gap-1 mx-auto text-balance"
+						>
 							<Info size={16} />
 							Usage
 						</GridItem>
@@ -84,11 +93,12 @@ export default function Page() {
 						>
 							Heading 72
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[72px] leading-[1.1] tracking-[-0.03em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[72px] leading&#8209;[1.1]
+							tracking&#8209;[&#8209;0.03em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							Marketing heroes.
 						</GridItem>
 					</GridRow>
@@ -99,11 +109,12 @@ export default function Page() {
 						>
 							Heading 64
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[64px] leading-[1.1] tracking-[-0.03em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[64px] leading&#8209;[1.1]
+							tracking&#8209;[&#8209;0.03em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -114,11 +125,12 @@ export default function Page() {
 						>
 							Heading 56
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[56px] leading-[1.1] tracking-[-0.03em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[56px] leading&#8209;[1.1]
+							tracking&#8209;[&#8209;0.03em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -129,11 +141,12 @@ export default function Page() {
 						>
 							Heading 48
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[48px] leading-[1.1] tracking-[-0.03em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[48px] leading&#8209;[1.1]
+							tracking&#8209;[&#8209;0.03em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -144,11 +157,12 @@ export default function Page() {
 						>
 							Heading 40
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[40px] leading-[1.1] tracking-[-0.03em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[40px] leading&#8209;[1.1]
+							tracking&#8209;[&#8209;0.03em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -159,14 +173,15 @@ export default function Page() {
 						>
 							Heading 32{" "}
 							<strong className="text-muted-foreground font-medium">
-								with Subtle
+								with Muted
 							</strong>
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[32px] leading-[1.2] tracking-[-0.02em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[32px] leading&#8209;[1.2]
+							tracking&#8209;[&#8209;0.02em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							Marketing subheadings, paragraphs, and dashboard headings.
 						</GridItem>
 					</GridRow>
@@ -177,14 +192,15 @@ export default function Page() {
 						>
 							Heading 24{" "}
 							<strong className="text-muted-foreground font-medium">
-								with Subtle
+								with Muted
 							</strong>
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[24px] leading-[1.2] tracking-[-0.02em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[24px] leading&#8209;[1.2]
+							tracking&#8209;[&#8209;0.02em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -195,14 +211,15 @@ export default function Page() {
 						>
 							Heading 20{" "}
 							<strong className="text-muted-foreground font-medium">
-								with Subtle
+								with Muted
 							</strong>
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[20px] leading-[1.3] tracking-[-0.01em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[20px] leading&#8209;[1.3]
+							tracking&#8209;[&#8209;0.01em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -213,14 +230,15 @@ export default function Page() {
 						>
 							Heading 16{" "}
 							<strong className="text-muted-foreground font-medium">
-								with Subtle
+								with Muted
 							</strong>
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[16px] leading-[1.3] tracking-[-0.01em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[16px] leading&#8209;[1.3]
+							tracking&#8209;[&#8209;0.01em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>
@@ -231,11 +249,12 @@ export default function Page() {
 						>
 							Heading 14
 						</GridItem>
-						<GridItem span={2} className="text-xs font-mono">
-							text-[14px] leading-[1.4] tracking-[-0.01em] font-bold
+						<GridItem span={2} className="text-xs font-mono text-balance">
+							text&#8209;[14px] leading&#8209;[1.4]
+							tracking&#8209;[&#8209;0.01em] font&#8209;bold
 						</GridItem>
 						<GridItem />
-						<GridItem span={2} className="text-xs">
+						<GridItem span={2} className="text-xs text-balance">
 							—
 						</GridItem>
 					</GridRow>

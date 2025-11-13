@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +9,7 @@ import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 export default function Custom404() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">
+			<div className="flex flex-col flex-1 gap-8 p-12">
 				<GridContainer cols={12} rows={6}>
 					<GridRow>
 						<GridItem decorationTopLeft />

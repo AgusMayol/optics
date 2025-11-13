@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft, Info, Sparkle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -119,7 +119,7 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-12 pb-0">
 				<h1 className="text-4xl font-bold tracking-tight">Badge</h1>
 				<p className="text-muted-foreground text-xl">
-                Displays a badge or a component that looks like a badge.
+					Displays a badge or a component that looks like a badge.
 				</p>
 			</div>
 			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">

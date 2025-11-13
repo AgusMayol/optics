@@ -72,14 +72,17 @@ export const metadata = {
 	appleWebApp: {
 		title: process.env.NEXT_PUBLIC_APPLICATION_NAME,
 	},
+	icons: {
+		icon: "/apple-touch-icon.png",
+		shortcut: "/apple-touch-icon.png",
+		apple: "/apple-touch-icon.png",
+	},
 };
 
 export default function RootLayout({ children }) {
 	const shouldInjectToolbar = process.env.NODE_ENV === "development";
 	return (
-		<html lang="en" 
-		suppressHydrationWarning
-		>
+		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${interSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background`}
 			>

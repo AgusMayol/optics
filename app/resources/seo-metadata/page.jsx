@@ -1,21 +1,9 @@
 "use client";
+import * as React from "react";
+import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import { cn } from "@/lib/utils";
-import {
-	Accessibility,
-	CheckCircle,
-	AlertTriangle,
-	Eye,
-	Keyboard,
-	Code,
-	Search,
-	Monitor,
-	Globe,
-	Shield,
-	BookOpen,
-	ArrowUpRight,
-	Info,
-} from "lucide-react";
+import { Separator } from "@/registry/agusmayol/separator";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import {
 	Card,
@@ -36,172 +24,421 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-	CodeBlockSelect,
-	CodeBlockSelectContent,
-	CodeBlockSelectItem,
-	CodeBlockSelectTrigger,
-	CodeBlockSelectValue,
 } from "@/registry/agusmayol/code-block";
 
-const semanticHtmlCode = [
+// Code examples data
+const basicMetadataCode = [
 	{
-		language: "html",
-		filename: "semantic-html.html",
-		code: `<main>
-  <header>
-    <h1>Main Title</h1>
-    <nav aria-label="Main navigation">
-      <ul>
-        <li><a href="/">Home</a></li>
-      </ul>
-    </nav>
-  </header>
-</main>`,
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  title: {
+    default: "My Application",
+    template: "%s | My Application",
+  },
+  description: "The best web application for your needs",
+  keywords: ["nextjs", "react", "web app", "seo"],
+  authors: [{ name: "Your Name", url: "https://yourdomain.com" }],
+  creator: "Your Name",
+  publisher: "Your Company",
+  metadataBase: new URL("https://yourdomain.com"),
+};`,
 	},
 ];
 
-const altTextCode = [
+const openGraphCode = [
 	{
-		language: "html",
-		filename: "alt-text.html",
-		code: `<!-- Correct -->
-<img src="chart.png" alt="Q1 2024 sales chart: 25% increase" />
-
-<!-- Decorative -->
-<img src="decoration.png" alt="" />
-
-<!-- Incorrect -->
-<img src="chart.png" alt="image" />`,
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  openGraph: {
+    title: "My Application",
+    description: "The best web application for your needs",
+    url: "https://yourdomain.com",
+    siteName: "My Application",
+    images: [
+      {
+        url: "https://yourdomain.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "My Application Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};`,
 	},
 ];
 
-const ariaCode = [
+const twitterCode = [
 	{
-		language: "html",
-		filename: "aria.html",
-		code: `<!-- Button with ARIA -->
-<button 
-  aria-expanded="false" 
-  aria-controls="menu"
-  aria-label="Open navigation menu"
->
-  Menu
-</button>
-
-<!-- Modal with ARIA -->
-<div role="dialog" aria-labelledby="modal-title" aria-modal="true">
-  <h2 id="modal-title">Confirm action</h2>
-</div>`,
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  twitter: {
+    card: "summary_large_image",
+    title: "My Application",
+    description: "The best web application for your needs",
+    creator: "@yourusername",
+    images: ["https://yourdomain.com/twitter-image.jpg"],
+  },
+};`,
 	},
 ];
 
-const contrastCode = [
+const robotsCode = [
 	{
-		language: "css",
-		filename: "contrast.css",
-		code: `/* Adequate contrast */
-.text-primary {
-  color: #1a1a1a; /* Black on white: 21:1 */
-}
-
-/* Visible focus states */
-button:focus {
-  outline: 2px solid #0066cc;
-  outline-offset: 2px;
-}`,
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};`,
 	},
 ];
 
-const keyboardCode = [
+const iconsCode = [
 	{
-		language: "css",
-		filename: "keyboard.css",
-		code: `/* Visible focus */
-.focusable:focus {
-  outline: 2px solid #0066cc;
-  outline-offset: 2px;
-}
-
-/* Skip links */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: #000;
-  color: #fff;
-  padding: 8px;
-  text-decoration: none;
-}
-
-.skip-link:focus {
-  top: 6px;
-}`,
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  icons: {
+    icon: [
+      { url: "/icon.png" },
+      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
+    ],
+    shortcut: "/shortcut-icon.png",
+    apple: [
+      { url: "/apple-icon.png" },
+      { url: "/apple-icon-180.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+};`,
 	},
 ];
 
-const formsCode = [
+const verificationCode = [
 	{
-		language: "html",
-		filename: "forms.html",
-		code: `<form>
-  <div>
-    <label for="email">Email *</label>
-    <input 
-      type="email" 
-      id="email" 
-      name="email"
-      aria-required="true"
-      aria-describedby="email-help"
-    />
-    <div id="email-help">Enter your email address</div>
-  </div>
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  verification: {
+    google: "your-google-verification-code",
+    yandex: "your-yandex-code",
+    yahoo: "your-yahoo-code",
+  },
+};`,
+	},
+];
+
+const alternatesCode = [
+	{
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  alternates: {
+    canonical: "https://yourdomain.com",
+    languages: {
+      "en-US": "https://yourdomain.com/en",
+      "es-ES": "https://yourdomain.com/es",
+    },
+  },
+};`,
+	},
+];
+
+const completeMetadataCode = [
+	{
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  metadataBase: new URL("https://yourdomain.com"),
+  title: {
+    default: "My Application - Main Tagline",
+    template: "%s | My Application",
+  },
+  description: "The best web application for your needs. Detailed description of what you offer.",
+  keywords: ["nextjs", "react", "web app", "seo", "typescript"],
+  authors: [{ name: "Your Name", url: "https://yourdomain.com" }],
+  creator: "Your Name",
+  publisher: "Your Company",
   
-  <div>
-    <label for="password">Password *</label>
-    <input 
-      type="password" 
-      id="password" 
-      name="password"
-      aria-required="true"
-      aria-invalid="false"
-      aria-describedby="password-error"
-    />
-    <div id="password-error" role="alert">
-      Password must be at least 8 characters
-    </div>
-  </div>
-</form>`,
+  // Open Graph
+  openGraph: {
+    title: "My Application",
+    description: "The best web application for your needs",
+    url: "https://yourdomain.com",
+    siteName: "My Application",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "My Application Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  
+  // Twitter
+  twitter: {
+    card: "summary_large_image",
+    title: "My Application",
+    description: "The best web application for your needs",
+    creator: "@yourusername",
+    images: ["/twitter-image.jpg"],
+  },
+  
+  // Robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  
+  // Icons
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/shortcut-icon.png",
+    apple: "/apple-icon.png",
+  },
+  
+  // Verification
+  verification: {
+    google: "your-google-verification-code",
+  },
+  
+  // Alternates
+  alternates: {
+    canonical: "https://yourdomain.com",
+  },
+};`,
 	},
 ];
 
-const motionCode = [
+const dynamicMetadataCode = [
 	{
-		language: "css",
-		filename: "motion.css",
-		code: `/* Respect motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+		language: "jsx",
+		filename: "app/blog/[slug]/page.js",
+		code: `export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  
+  // Fetch data
+  const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
+    .then((res) => res.json());
+  
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: [post.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
 }
 
-/* Safe animation */
-.safe-animation {
-  animation: fadeIn 0.3s ease-in-out;
-}
+export default function BlogPost({ params }) {
+  // Your component...
+}`,
+	},
+];
 
-@media (prefers-reduced-motion: reduce) {
-  .safe-animation {
-    animation: none;
-  }
+const jsonLdCode = [
+	{
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "My Application",
+    "description": "The best web application for your needs",
+    "url": "https://yourdomain.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://yourdomain.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  return (
+    <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}`,
+	},
+];
+
+const sitemapCode = [
+	{
+		language: "jsx",
+		filename: "app/sitemap.js",
+		code: `export default function sitemap() {
+  return [
+    {
+      url: "https://yourdomain.com",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 1,
+    },
+    {
+      url: "https://yourdomain.com/about",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://yourdomain.com/blog",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+  ];
+}`,
+	},
+];
+
+const robotsTxtCode = [
+	{
+		language: "jsx",
+		filename: "app/robots.js",
+		code: `export default function robots() {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/admin/", "/api/"],
+    },
+    sitemap: "https://yourdomain.com/sitemap.xml",
+  };
+}`,
+	},
+];
+
+const ogImageCode = [
+	{
+		language: "jsx",
+		filename: "app/opengraph-image.tsx",
+		code: `import { ImageResponse } from 'next/og';
+
+// Image metadata
+export const alt = 'My Application';
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = 'image/png';
+
+// Image generation
+export default async function Image() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 128,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        My Application
+      </div>
+    ),
+    {
+      ...size,
+    }
+  );
+}`,
+	},
+];
+
+const ogImageDynamicCode = [
+	{
+		language: "jsx",
+		filename: "app/blog/[slug]/opengraph-image.tsx",
+		code: `import { ImageResponse } from 'next/og';
+
+export const alt = 'Blog Post';
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = 'image/png';
+
+export default async function Image({ params }) {
+  const { slug } = await params;
+  
+  // Fetch post data
+  const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
+    .then((res) => res.json());
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 48,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {post.title}
+      </div>
+    ),
+    {
+      ...size,
+    }
+  );
 }`,
 	},
 ];
@@ -209,829 +446,475 @@ const motionCode = [
 export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			{/* Header */}
-			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-4xl font-bold tracking-tight">
-					Web Accessibility Guide
-				</h1>
+			<div className="flex flex-col gap-4 p-12 pb-4">
+				<h1 className="text-4xl font-bold tracking-tight">SEO & Metadata</h1>
 				<p className="text-muted-foreground text-xl">
-					Best practices for creating accessible, inclusive, and SEO-optimized
-					websites.
+					Optimize your Next.js application for search engines with ready-to-use
+					code snippets.
 				</p>
 			</div>
 
-			{/* Introduction */}
-			<div className="px-12">
-				<Card decorations>
-					<CardContent className="p-6">
-						<div className="flex items-start gap-4">
-							<Info className="h-6 w-6 mt-1 flex-shrink-0" />
-							<div>
-								<h3 className="font-semibold mb-2">
-									Why is accessibility important?
-								</h3>
-								<p className="text-muted-foreground">
-									Web accessibility not only benefits people with disabilities,
-									but improves the experience for all users and contributes
-									significantly to SEO. Follow WCAG 2.2 guidelines to create
-									inclusive and high-quality web experiences.
-								</p>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
-			</div>
+			<Separator decoration />
 
-			{/* Core Principles */}
-			<div className="px-12 pt-8">
-				<h2 className="text-2xl font-bold mb-6">WCAG 2.2 Core Principles</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					<Card className="bg-transparent border-none shadow-none hover:bg-muted/50 transition-colors">
-						<CardHeader className="pb-3">
-							<div className="flex items-center gap-2">
-								<Eye className="h-5 w-5" />
-								<CardTitle className="text-lg">Perceivable</CardTitle>
-							</div>
-						</CardHeader>
-						<CardContent>
-							<p className="text-sm text-muted-foreground">
-								Information must be presented in ways users can perceive.
-							</p>
-						</CardContent>
-					</Card>
-
-					<Card className="bg-transparent border-none shadow-none hover:bg-muted/50 transition-colors">
-						<CardHeader className="pb-3">
-							<div className="flex items-center gap-2">
-								<Keyboard className="h-5 w-5" />
-								<CardTitle className="text-lg">Operable</CardTitle>
-							</div>
-						</CardHeader>
-						<CardContent>
-							<p className="text-sm text-muted-foreground">
-								Interface components must be operable by all users.
-							</p>
-						</CardContent>
-					</Card>
-
-					<Card className="bg-transparent border-none shadow-none hover:bg-muted/50 transition-colors">
-						<CardHeader className="pb-3">
-							<div className="flex items-center gap-2">
-								<BookOpen className="h-5 w-5" />
-								<CardTitle className="text-lg">Understandable</CardTitle>
-							</div>
-						</CardHeader>
-						<CardContent>
-							<p className="text-sm text-muted-foreground">
-								Information and interface operation must be understandable.
-							</p>
-						</CardContent>
-					</Card>
-
-					<Card className="bg-transparent border-none shadow-none hover:bg-muted/50 transition-colors">
-						<CardHeader className="pb-3">
-							<div className="flex items-center gap-2">
-								<Shield className="h-5 w-5" />
-								<CardTitle className="text-lg">Robust</CardTitle>
-							</div>
-						</CardHeader>
-						<CardContent>
-							<p className="text-sm text-muted-foreground">
-								Content must be robust enough to be interpreted by various
-								technologies.
-							</p>
-						</CardContent>
-					</Card>
-				</div>
-			</div>
-
-			{/* Essential Guidelines */}
-			<div className="px-12 pt-8">
-				<h2 className="text-2xl font-bold mb-8">
-					Essential Accessibility Guidelines
-				</h2>
-
-				{/* Semantic HTML */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Semantic HTML and Structure</CardTitle>
-							</div>
-							<CardDescription>
-								Use appropriate HTML elements to create a clear and navigable
-								structure.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Titles and Headings
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>
-											• Use unique and descriptive &lt;title&gt; tags (30-60
-											characters)
-										</li>
-										<li>• Logical hierarchy of H1-H6</li>
-										<li>• One H1 per page</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Semantic Elements
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>
-											• &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;,
-											&lt;section&gt;
-										</li>
-										<li>• &lt;article&gt;, &lt;aside&gt;, &lt;footer&gt;</li>
-										<li>• Lists &lt;ul&gt;, &lt;ol&gt;, &lt;dl&gt;</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="semantic-html" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={semanticHtmlCode}
-											defaultValue={semanticHtmlCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
+			<div className="flex flex-col items-start justify-start gap-24 p-12 pt-4">
+				{/* Introduction */}
+				<div className="flex flex-col gap-4 -mt-2">
+					<p className="text-muted-foreground leading-7">
+						Next.js includes a Metadata API that allows you to define metadata
+						to improve your application's SEO. This guide includes ready-to-copy
+						examples for your Next.js project.
+					</p>
 				</div>
 
-				{/* Images and Alt Text */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Images and Alt Text</CardTitle>
-							</div>
-							<CardDescription>
-								Provide clear descriptions for all images.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Alt Attributes
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Descriptive and concise</li>
-										<li>• Alt="" for decorative images</li>
-										<li>• Include text in images</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<AlertTriangle className="h-4 w-4" />
-										Avoid
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• "image", "photo", "graphic"</li>
-										<li>• Text as image</li>
-										<li>• Very long alt text</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="alt-text" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={altTextCode}
-											defaultValue={altTextCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-
-				{/* ARIA */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>
-									ARIA (Accessible Rich Internet Applications)
-								</CardTitle>
-							</div>
-							<CardDescription>
-								Enhance accessibility of dynamic and interactive components.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										ARIA Roles
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• role="button" for clickable elements</li>
-										<li>• role="dialog" for modals</li>
-										<li>• role="alert" for important messages</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										States and Properties
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• aria-expanded for menus</li>
-										<li>• aria-label for descriptions</li>
-										<li>• aria-describedby for help</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="aria" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={ariaCode}
-											defaultValue={ariaCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-
-				{/* Color and Contrast */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Color Contrast</CardTitle>
-							</div>
-							<CardDescription>
-								Ensure sufficient contrast for readability.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Contrast Ratios
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Normal text: 4.5:1 minimum</li>
-										<li>• Large text: 3:1 minimum</li>
-										<li>• UI elements: 3:1 minimum</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<AlertTriangle className="h-4 w-4" />
-										Considerations
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Color blindness (red-green)</li>
-										<li>• Don't rely only on color</li>
-										<li>• Hover and focus states</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="contrast" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={contrastCode}
-											defaultValue={contrastCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-
-				{/* Keyboard Navigation */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Keyboard Navigation</CardTitle>
-							</div>
-							<CardDescription>
-								All interactive elements must be accessible with keyboard.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Requirements
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Logical tab order</li>
-										<li>• Visible focus</li>
-										<li>• Keyboard shortcuts</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Important Keys
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Tab: navigate</li>
-										<li>• Enter/Space: activate</li>
-										<li>• Escape: close</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="keyboard" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={keyboardCode}
-											defaultValue={keyboardCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-
-				{/* Forms */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Accessible Forms</CardTitle>
-							</div>
-							<CardDescription>
-								Clear and easy-to-use forms for everyone.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Labels and Associations
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• &lt;label&gt; associated with each field</li>
-										<li>• aria-describedby for help</li>
-										<li>• aria-required for required fields</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Error Messages
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Clear and specific</li>
-										<li>• aria-invalid="true"</li>
-										<li>• Correction suggestions</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="forms" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={formsCode}
-											defaultValue={formsCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-
-				{/* Motion and Animation */}
-				<div className="mb-8">
-					<Card decorations>
-						<CardHeader>
-							<div className="flex items-center gap-2">
-								<CardTitle>Reduced Motion</CardTitle>
-							</div>
-							<CardDescription>
-								Respect user motion preferences.
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<CheckCircle className="h-4 w-4" />
-										Media Query
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• @media (prefers-reduced-motion)</li>
-										<li>• Disable animations</li>
-										<li>• Smoother transitions</li>
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2 flex items-center gap-2">
-										<AlertTriangle className="h-4 w-4" />
-										Avoid
-									</h4>
-									<ul className="text-sm text-muted-foreground space-y-1 ml-6">
-										<li>• Flashing &gt; 3 times/second</li>
-										<li>• Auto-playing animations</li>
-										<li>• Excessive movement</li>
-									</ul>
-								</div>
-							</div>
-
-							<Accordion type="single" collapsible className="w-full">
-								<AccordionItem value="motion" className="rounded-lg">
-									<AccordionTrigger
-										className="pt-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										Show Code
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={motionCode}
-											defaultValue={motionCode[0].filename}
-											className="border-none rounded-none rounded-b-lg shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-6 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton
-													onCopy={() => console.log("Copied code to clipboard")}
-													onError={() =>
-														console.error("Failed to copy code to clipboard")
-													}
-												/>
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.language}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-muted"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardContent>
-					</Card>
-				</div>
-			</div>
-
-			{/* SEO and Accessibility */}
-			<div className="px-12 pt-8">
-				<Card decorations>
-					<CardHeader>
-						<div className="flex items-center gap-2">
-							<CardTitle>Accessibility and SEO</CardTitle>
-						</div>
-						<CardDescription>
-							Web accessibility significantly improves search engine ranking.
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<div>
-								<h4 className="font-semibold mb-3">SEO Benefits</h4>
-								<ul className="text-sm space-y-2">
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Better user experience (Core Web Vitals)</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>More structured and semantic content</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Better search engine indexing</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Increased time on site</span>
-									</li>
-								</ul>
-							</div>
-							<div>
-								<h4 className="font-semibold mb-3">Key Practices</h4>
-								<ul className="text-sm space-y-2">
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Descriptive and unique titles</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Alt text in images</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Clear heading structure</span>
-									</li>
-									<li className="flex items-start gap-2">
-										<CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-										<span>Descriptive links</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
-			</div>
-
-			{/* Resources */}
-			<div className="px-12 pb-12 pt-8">
-				<h2 className="text-2xl font-bold mb-6">Additional Resources</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<Card className="bg-transparent border-none shadow-none">
-						<CardHeader>
-							<CardTitle className="flex items-center gap-2">
-								<BookOpen className="h-5 w-5" />
-								Official Documentation
-							</CardTitle>
-						</CardHeader>
-						<CardContent className="space-y-3">
-							<Button
-								variant="outline"
-								className="w-full justify-start"
-								asChild
+				{/* 1. Complete Configuration */}
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button variant="link" asChild className="gap-1">
+							<Link
+								href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
+								target="_blank"
+								rel="noopener noreferrer"
 							>
-								<Link
-									href="https://www.w3.org/WAI/WCAG22/quickref/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									WCAG 2.2 Quick Reference
-									<ArrowUpRight className="h-3 w-3 ml-auto" />
-								</Link>
-							</Button>
-							<Button
-								variant="outline"
-								className="w-full justify-start"
-								asChild
-							>
-								<Link
-									href="https://web.dev/accessibility/"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Web.dev Accessibility Guide
-									<ArrowUpRight className="h-3 w-3 ml-auto" />
-								</Link>
-							</Button>
-							<Button
-								variant="outline"
-								className="w-full justify-start"
-								asChild
-							>
-								<Link
-									href="https://developer.mozilla.org/en-US/docs/Web/Accessibility"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									MDN Accessibility
-									<ArrowUpRight className="h-3 w-3 ml-auto" />
-								</Link>
-							</Button>
-						</CardContent>
+								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+									<Badge
+										variant="outline"
+										className="tabular-nums aspect-square"
+									>
+										1
+									</Badge>
+									Complete Metadata
+								</h2>
+								<ArrowUpRight size={16} className="mb-4" />
+							</Link>
+						</Button>
+					</div>
+					<p className="text-muted-foreground leading-7">
+						Below is a complete example of the metadata setup, so you can easily
+						copy it into your{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/layout.jsx
+						</Badge>
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className=" px-0 py-0 rounded-b-xl">
+							<Accordion type={"single"} collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										app/layout.jsx
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={completeMetadataCode}
+											defaultValue={completeMetadataCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={item.language}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
 					</Card>
+				</div>
+
+				{/* 2. Dynamic Metadata */}
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button variant="link" asChild className="gap-1">
+							<Link
+								href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+									<Badge
+										variant="outline"
+										className="tabular-nums aspect-square"
+									>
+										2
+									</Badge>
+									Dynamic Metadata
+								</h2>
+								<ArrowUpRight size={16} className="mb-4" />
+							</Link>
+						</Button>
+					</div>
+					<p className="text-muted-foreground leading-7">
+						For pages with dynamic content (blogs, products, etc.), use{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							generateMetadata()
+						</Badge>
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 rounded-b-xl">
+							<Accordion type={"single"} collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										[slug]/page.jsx
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={dynamicMetadataCode}
+											defaultValue={dynamicMetadataCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={item.language}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
+				</div>
+
+				{/* 3. Open Graph Image Generation */}
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button variant="link" asChild className="gap-1">
+							<Link
+								href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+									<Badge
+										variant="outline"
+										className="tabular-nums aspect-square"
+									>
+										3
+									</Badge>
+									Open Graph Image Generation
+								</h2>
+								<ArrowUpRight size={16} className="mb-4" />
+							</Link>
+						</Button>
+					</div>
+					<p className="text-muted-foreground leading-7">
+						Automatically generate Open Graph images using Next.js. Create{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/opengraph-image.tsx
+						</Badge>{" "}
+						or{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/[route]/opengraph-image.tsx
+						</Badge>{" "}
+						for dynamic routes. Next.js will automatically generate the image
+						and add the correct meta tags.
+					</p>
+					<div className="flex flex-col gap-4">
+						<Card className="pt-0 pb-0 bg-background">
+							<CardFooter className="px-0 py-0 rounded-b-xl">
+								<Accordion type={"single"} collapsible className="w-full">
+									<AccordionItem value="codeblock" className="rounded-b-xl">
+										<AccordionTrigger
+											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+											showArrow
+										>
+											Static OG Image
+										</AccordionTrigger>
+										<AccordionContent
+											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+											keepRendered
+										>
+											<CodeBlock
+												data={ogImageCode}
+												defaultValue={ogImageCode[0].filename}
+												className="border-none rounded-none rounded-b-xl shadow-none group"
+											>
+												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+													<CodeBlockCopyButton />
+												</CodeBlockHeader>
+												<CodeBlockBody>
+													{(item) => (
+														<CodeBlockItem
+															key={item.language}
+															value={item.filename}
+														>
+															<CodeBlockContent
+																language={item.language}
+																className="bg-sidebar"
+															>
+																{item.code}
+															</CodeBlockContent>
+														</CodeBlockItem>
+													)}
+												</CodeBlockBody>
+											</CodeBlock>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+							</CardFooter>
+						</Card>
+
+						<Card className="pt-0 pb-0 bg-background">
+							<CardFooter className="px-0 py-0 rounded-b-xl">
+								<Accordion type={"single"} collapsible className="w-full">
+									<AccordionItem value="codeblock" className="rounded-b-xl">
+										<AccordionTrigger
+											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+											showArrow
+										>
+											Dynamic OG Image (per route)
+										</AccordionTrigger>
+										<AccordionContent
+											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+											keepRendered
+										>
+											<CodeBlock
+												data={ogImageDynamicCode}
+												defaultValue={ogImageDynamicCode[0].filename}
+												className="border-none rounded-none rounded-b-xl shadow-none group"
+											>
+												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+													<CodeBlockCopyButton />
+												</CodeBlockHeader>
+												<CodeBlockBody>
+													{(item) => (
+														<CodeBlockItem
+															key={item.language}
+															value={item.filename}
+														>
+															<CodeBlockContent
+																language={item.language}
+																className="bg-sidebar"
+															>
+																{item.code}
+															</CodeBlockContent>
+														</CodeBlockItem>
+													)}
+												</CodeBlockBody>
+											</CodeBlock>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+							</CardFooter>
+						</Card>
+					</div>
+				</div>
+
+				{/* 4. Sitemap & Robots */}
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button variant="link" asChild className="gap-1">
+							<Link
+								href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+									<Badge
+										variant="outline"
+										className="tabular-nums aspect-square"
+									>
+										4
+									</Badge>
+									Sitemap & Robots.txt
+								</h2>
+								<ArrowUpRight size={16} className="mb-4" />
+							</Link>
+						</Button>
+					</div>
+					<p className="text-muted-foreground leading-7">
+						Next.js automatically generates sitemap.xml and robots.txt files.
+						Create{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/sitemap.js
+						</Badge>{" "}
+						and{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/robots.js
+						</Badge>{" "}
+						in your app directory. These files will be automatically served at{" "}
+						<code className="text-xs">/sitemap.xml</code> and{" "}
+						<code className="text-xs">/robots.txt</code>.
+					</p>
+					<div className="flex flex-col gap-4">
+						<Card className="pt-0 pb-0 bg-background">
+							<CardFooter className="px-0 py-0 rounded-b-xl">
+								<Accordion type={"single"} collapsible className="w-full">
+									<AccordionItem value="codeblock" className="rounded-b-xl">
+										<AccordionTrigger
+											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+											showArrow
+										>
+											Sitemap (app/sitemap.js)
+										</AccordionTrigger>
+										<AccordionContent
+											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+											keepRendered
+										>
+											<CodeBlock
+												data={sitemapCode}
+												defaultValue={sitemapCode[0].filename}
+												className="border-none rounded-none rounded-b-xl shadow-none group"
+											>
+												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+													<CodeBlockCopyButton />
+												</CodeBlockHeader>
+												<CodeBlockBody>
+													{(item) => (
+														<CodeBlockItem
+															key={item.language}
+															value={item.filename}
+														>
+															<CodeBlockContent
+																language={item.language}
+																className="bg-sidebar"
+															>
+																{item.code}
+															</CodeBlockContent>
+														</CodeBlockItem>
+													)}
+												</CodeBlockBody>
+											</CodeBlock>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+							</CardFooter>
+						</Card>
+
+						<Card className="pt-0 pb-0 bg-background">
+							<CardFooter className="px-0 py-0 rounded-b-xl">
+								<Accordion type={"single"} collapsible className="w-full">
+									<AccordionItem value="codeblock" className="rounded-b-xl">
+										<AccordionTrigger
+											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+											showArrow
+										>
+											Robots.txt (app/robots.js)
+										</AccordionTrigger>
+										<AccordionContent
+											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+											keepRendered
+										>
+											<CodeBlock
+												data={robotsTxtCode}
+												defaultValue={robotsTxtCode[0].filename}
+												className="border-none rounded-none rounded-b-xl shadow-none group"
+											>
+												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+													<CodeBlockCopyButton />
+												</CodeBlockHeader>
+												<CodeBlockBody>
+													{(item) => (
+														<CodeBlockItem
+															key={item.language}
+															value={item.filename}
+														>
+															<CodeBlockContent
+																language={item.language}
+																className="bg-sidebar"
+															>
+																{item.code}
+															</CodeBlockContent>
+														</CodeBlockItem>
+													)}
+												</CodeBlockBody>
+											</CodeBlock>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+							</CardFooter>
+						</Card>
+					</div>
+				</div>
+			</div>
+
+			<Separator decoration />
+
+			{/* Additional Tips */}
+			<div className="flex flex-col items-start justify-start gap-12 p-12 pt-4">
+				<h3 className="text-xl font-semibold">Additional SEO Tips</h3>
+				<ul className="list-disc list-inside space-y-2 text-muted-foreground">
+					<li>
+						<strong>OG Images:</strong> Use 1200x630px for Open Graph (Facebook,
+						LinkedIn)
+					</li>
+					<li>
+						<strong>Twitter Images:</strong> 1200x600px works best for Twitter
+						Cards
+					</li>
+					<li>
+						<strong>Description:</strong> Between 150-160 characters is ideal
+						for Google
+					</li>
+					<li>
+						<strong>Title:</strong> Maximum 60 characters to avoid truncation in
+						results
+					</li>
+					<li>
+						<strong>Keywords:</strong> 5-10 relevant keywords is sufficient
+					</li>
+				</ul>
+
+				<div className="w-full flex items-center gap-8">
+					<Button variant="link" asChild>
+						<Link
+							href="https://www.newcopy.ai/m/tools"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							AI Marketing Tools
+							<ArrowUpRight size={16} />
+						</Link>
+					</Button>
+
+					<Button variant="link" asChild>
+						<Link
+							href="https://www.cleanmyseo.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Clean My SEO
+							<ArrowUpRight size={16} />
+						</Link>
+					</Button>
 				</div>
 			</div>
 		</main>

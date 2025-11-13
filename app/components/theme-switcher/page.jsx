@@ -3,7 +3,7 @@ import { ThemeSwitcher } from "@/registry/agusmayol/theme-switcher";
 import * as React from "react";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

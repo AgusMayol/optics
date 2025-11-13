@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft, Info, Sparkle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

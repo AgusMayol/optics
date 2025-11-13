@@ -386,7 +386,10 @@ function Toast(props) {
 						)}
 					>
 						<div
-							className={cn("flex items-center justify-center gap-2.5 -ml-2")}
+							className={cn(
+								"flex items-center justify-center gap-2.5 -ml-2",
+								!description && "-mb-1",
+							)}
 						>
 							<div
 								className={cn(
@@ -416,6 +419,7 @@ function Toast(props) {
 								className={cn(
 									"text-base font-medium transition-all duration-300",
 									toastType.iconColor,
+									!description && "text-sm !text-foreground",
 								)}
 							>
 								{title}

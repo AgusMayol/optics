@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft, Info, Sparkle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -133,15 +133,15 @@ export default function Page() {
 							</AlertDialogTrigger>
 							<AlertDialogContent>
 								<AlertDialogHeader>
-									
 									<AlertDialogIcon>
-										<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20"
-										>
+										<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
 											<Info className="text-emerald-600" />
 										</div>
-										<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+										<AlertDialogTitle>
+											Are you absolutely sure?
+										</AlertDialogTitle>
 									</AlertDialogIcon>
-									
+
 									<AlertDialogDescription>
 										This action cannot be undone. This will permanently delete
 										your account and remove your data from our servers.
@@ -188,7 +188,10 @@ export default function Page() {
 													key={item.language}
 													value={item.filename}
 												>
-													<CodeBlockContent language={item.language} className="bg-sidebar">
+													<CodeBlockContent
+														language={item.language}
+														className="bg-sidebar"
+													>
 														{item.code}
 													</CodeBlockContent>
 												</CodeBlockItem>

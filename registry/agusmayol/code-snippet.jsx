@@ -3,7 +3,13 @@
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { cloneElement, useState } from "react";
 import { Button } from "@/registry/agusmayol/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+	Tabs,
+	TabsContent,
+	TabsContents,
+	TabsList,
+	TabsTrigger,
+} from "@/registry/agusmayol/tabs";
 import { cn } from "@/lib/utils";
 
 export const Snippet = ({ className, ...props }) => (
@@ -97,7 +103,9 @@ export const SnippetCopyButton = ({
 	);
 };
 
-export const SnippetTabsList = TabsList;
+export const SnippetTabsList = ({ className, ...props }) => (
+	<TabsList className={cn(className)} {...props} />
+);
 
 export const SnippetTabsTrigger = ({ className, ...props }) => (
 	<TabsTrigger className={cn("gap-1.5", className)} {...props} />
@@ -105,10 +113,18 @@ export const SnippetTabsTrigger = ({ className, ...props }) => (
 
 export const SnippetTabsContent = ({ className, children, ...props }) => (
 	<TabsContent
-		asChild
-		className={cn("mt-0 bg-background p-4 text-sm", className)}
+		className={cn(
+			"mt-0 bg-background p-4 text-sm truncate font-mono",
+			className,
+		)}
 		{...props}
 	>
-		<pre className="truncate">{children}</pre>
+		{children}
 	</TabsContent>
+);
+
+export const SnippetTabsContents = ({ className, children, ...props }) => (
+	<TabsContents className={cn(className)} {...props}>
+		{children}
+	</TabsContents>
 );

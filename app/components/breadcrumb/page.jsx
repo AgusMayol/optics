@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
-import logo from "@/public/images/logo.svg";
+
 import { ArrowLeft, Info, Sparkle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,20 +67,20 @@ import {
 } from "@/registry/agusmayol/alert-dialog";
 
 import {
-    Breadcrumb,
-    BreadcrumbEllipsis,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-  } from "@/registry/agusmayol/breadcrumb"
-  import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-  } from "@/registry/agusmayol/dropdown-menu"
+	Breadcrumb,
+	BreadcrumbEllipsis,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from "@/registry/agusmayol/breadcrumb";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/registry/agusmayol/dropdown-menu";
 
 const code = [
 	{
@@ -145,7 +145,7 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-12 pb-0">
 				<h1 className="text-4xl font-bold tracking-tight">Breadcrumb</h1>
 				<p className="text-muted-foreground text-xl">
-                Displays the path to the current resource using a hierarchy of links.
+					Displays the path to the current resource using a hierarchy of links.
 				</p>
 			</div>
 			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">
@@ -153,38 +153,38 @@ export default function Page() {
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						{/* Component */}
 						<Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">Home</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1">
-              <BreadcrumbEllipsis className="size-4" />
-              <span className="sr-only">Toggle menu</span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuItem>Documentation</DropdownMenuItem>
-              <DropdownMenuItem>Themes</DropdownMenuItem>
-              <DropdownMenuItem>GitHub</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/ ">Components</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+							<BreadcrumbList>
+								<BreadcrumbItem>
+									<BreadcrumbLink asChild>
+										<Link href="/">Home</Link>
+									</BreadcrumbLink>
+								</BreadcrumbItem>
+								<BreadcrumbSeparator />
+								<BreadcrumbItem>
+									<DropdownMenu>
+										<DropdownMenuTrigger className="flex items-center gap-1">
+											<BreadcrumbEllipsis className="size-4" />
+											<span className="sr-only">Toggle menu</span>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent align="start">
+											<DropdownMenuItem>Documentation</DropdownMenuItem>
+											<DropdownMenuItem>Themes</DropdownMenuItem>
+											<DropdownMenuItem>GitHub</DropdownMenuItem>
+										</DropdownMenuContent>
+									</DropdownMenu>
+								</BreadcrumbItem>
+								<BreadcrumbSeparator />
+								<BreadcrumbItem>
+									<BreadcrumbLink asChild>
+										<Link href="/ ">Components</Link>
+									</BreadcrumbLink>
+								</BreadcrumbItem>
+								<BreadcrumbSeparator />
+								<BreadcrumbItem>
+									<BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+								</BreadcrumbItem>
+							</BreadcrumbList>
+						</Breadcrumb>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -220,7 +220,10 @@ export default function Page() {
 													key={item.language}
 													value={item.filename}
 												>
-													<CodeBlockContent language={item.language} className="bg-sidebar">
+													<CodeBlockContent
+														language={item.language}
+														className="bg-sidebar"
+													>
 														{item.code}
 													</CodeBlockContent>
 												</CodeBlockItem>
