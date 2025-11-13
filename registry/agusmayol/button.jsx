@@ -66,9 +66,9 @@ const buttonVariants = cva(
 );
 
 function Button({
-	className,
-	variant,
-	size,
+	className = "",
+	variant = "default",
+	size = "default",
 	animation = "all",
 	asChild = false,
 	...props
