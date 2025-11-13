@@ -1,16 +1,34 @@
 "use client";
-import { Button } from "@/registry/agusmayol/button";
+import * as React from "react";
+import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogHeader,
+	AlertDialogFooter,
+	AlertDialogTitle,
+	AlertDialogDescription,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogIcon,
+} from "@/registry/agusmayol/alert-dialog";
 import { cn } from "@/lib/utils";
-
-import { ArrowLeft, Info, Sparkle } from "lucide-react";
-import Image from "next/image";
+import { links } from "@/app/layout-content";
+import { usePathname } from "next/navigation";
+import {
+	ALargeSmall,
+	ArrowLeft,
+	ArrowRight,
+	ArrowUpRight,
+	Binary,
+	AlertTriangle,
+} from "lucide-react";
 import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+import { Badge } from "@/registry/agusmayol/badge";
+import { Button } from "@/registry/agusmayol/button";
 import {
 	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
 	CardContent,
 	CardFooter,
 } from "@/registry/agusmayol/card";
@@ -29,29 +47,217 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-	CodeBlockSelect,
-	CodeBlockSelectContent,
-	CodeBlockSelectItem,
-	CodeBlockSelectTrigger,
-	CodeBlockSelectValue,
 } from "@/registry/agusmayol/code-block";
-import { Input } from "@/registry/agusmayol/input";
+import { Separator } from "@/registry/agusmayol/separator";
 import {
-	Tooltip,
-	TooltipTrigger,
-	TooltipContent,
-} from "@/registry/agusmayol/tooltip";
+	Tabs,
+	TabsContent,
+	TabsContents,
+	TabsList,
+	TabsTrigger,
+} from "@/registry/agusmayol/tabs";
 import {
-	Sheet,
-	SheetTrigger,
-	SheetContent,
-	SheetHeader,
-	SheetFooter,
-	SheetTitle,
-	SheetDescription,
-} from "@/registry/agusmayol/sheet";
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+	SnippetTabsContents,
+} from "@/registry/agusmayol/code-snippet";
 
-import {
+const code = [
+	{
+		language: "jsx",
+		filename: "alert-dialog.jsx",
+		code: `import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogHeader,
+	AlertDialogFooter,
+	AlertDialogTitle,
+	AlertDialogDescription,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogIcon,
+} from "@/registry/agusmayol/alert-dialog";
+import { Button } from "@/registry/agusmayol/button";
+import { AlertTriangle } from "lucide-react";
+
+<AlertDialog>
+	<AlertDialogTrigger asChild>
+		<Button variant="outline">Open Alert</Button>
+	</AlertDialogTrigger>
+	<AlertDialogContent>
+		<AlertDialogIcon>
+			<AlertTriangle className="size-5 text-warning" />
+		</AlertDialogIcon>
+		<AlertDialogHeader>
+			<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+			<AlertDialogDescription>
+				This action cannot be undone. This will permanently delete your
+				account and remove your data from our servers.
+			</AlertDialogDescription>
+		</AlertDialogHeader>
+		<AlertDialogFooter>
+			<AlertDialogCancel>Cancel</AlertDialogCancel>
+			<AlertDialogAction>Continue</AlertDialogAction>
+		</AlertDialogFooter>
+	</AlertDialogContent>
+</AlertDialog>`,
+	},
+];
+
+const alertDialogComponentCode = [
+	{
+		language: "jsx",
+		filename: "components/ui/optics/alert-dialog.jsx",
+		code: `"use client";
+
+import * as React from "react";
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/registry/agusmayol/button";
+import { X } from "lucide-react";
+
+function AlertDialog({ ...props }) {
+	return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
+}
+
+function AlertDialogTrigger({ ...props }) {
+	return (
+		<AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
+	);
+}
+
+function AlertDialogPortal({ ...props }) {
+	return (
+		<AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
+	);
+}
+
+function AlertDialogOverlay({ className, ...props }) {
+	return (
+		<AlertDialogPrimitive.Overlay
+			data-slot="alert-dialog-overlay"
+			className={cn(
+				"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+				className,
+			)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogContent({ className, children, ...props }) {
+	return (
+		<AlertDialogPortal>
+			<AlertDialogOverlay />
+			<AlertDialogPrimitive.Content
+				data-slot="alert-dialog-content"
+				className={cn(
+					"bg-muted data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-2xl border p-2 shadow-lg duration-200 sm:max-w-lg",
+					className,
+				)}
+				{...props}
+			>
+				<div className="bg-background grid w-full gap-8 rounded-lg p-6 px-6 shadow-lg duration-200 sm:max-w-lg">
+					{children}
+				</div>
+			</AlertDialogPrimitive.Content>
+		</AlertDialogPortal>
+	);
+}
+
+function AlertDialogHeader({ className, ...props }) {
+	return (
+		<div
+			data-slot="alert-dialog-header"
+			className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogFooter({ className, ...props }) {
+	return (
+		<div
+			data-slot="alert-dialog-footer"
+			className={cn(
+				"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+				className,
+			)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogTitle({ className, ...props }) {
+	return (
+		<AlertDialogPrimitive.Title
+			data-slot="alert-dialog-title"
+			className={cn("text-lg font-semibold", className)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogDescription({ className, ...props }) {
+	return (
+		<AlertDialogPrimitive.Description
+			data-slot="alert-dialog-description"
+			className={cn("text-muted-foreground text-sm text-balance", className)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogAction({ className, ...props }) {
+	return (
+		<AlertDialogPrimitive.Action
+			className={cn(buttonVariants(), className)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogCancel({ className, ...props }) {
+	return (
+		<AlertDialogPrimitive.Cancel
+			className={cn(buttonVariants({ variant: "raised" }), className)}
+			{...props}
+		/>
+	);
+}
+
+function AlertDialogIcon({ className, children, ...props }) {
+	return (
+		<div className="w-full flex items-start justify-between -mt-2">
+			<div
+				className={cn(
+					"flex items-center justify-center gap-2.5 -ml-2",
+					className,
+				)}
+			>
+				{children}
+			</div>
+
+			<AlertDialogPrimitive.Cancel asChild>
+				<Button
+					variant="outline"
+					size="icon"
+					className="rounded-full size-6 p-0 -mr-4 -mt-2"
+				>
+					<X className="!size-4"></X>
+				</Button>
+			</AlertDialogPrimitive.Cancel>
+		</div>
+	);
+}
+
+export {
 	AlertDialog,
 	AlertDialogPortal,
 	AlertDialogOverlay,
@@ -64,87 +270,165 @@ import {
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogIcon,
-} from "@/registry/agusmayol/alert-dialog";
-
-const code = [
-	{
-		language: "jsx",
-		filename: "card.jsx",
-		code: `import {
-	AlertDialog,
-	AlertDialogPortal,
-	AlertDialogOverlay,
-	AlertDialogTrigger,
-	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogDescription,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogIcon
-} from "@/registry/agusmayol/alert-dialog";
-        
-        
-<AlertDialog>
-	<AlertDialogTrigger asChild>
-		<Button variant="raised">Click me</Button>
-	</AlertDialogTrigger>
-	<AlertDialogContent>
-
-		<AlertDialogHeader>
-			<AlertDialogIcon>
-				<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
-					<Info className="text-emerald-600" />
-				</div>
-				<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-			</AlertDialogIcon>
-			
-			<AlertDialogDescription>
-				This action cannot be undone. This will permanently delete
-				your account and remove your data from our servers.
-			</AlertDialogDescription>
-		</AlertDialogHeader>
-
-		<AlertDialogFooter>
-			<AlertDialogCancel>Cancel</AlertDialogCancel>
-			<AlertDialogAction>Continue</AlertDialogAction>
-		</AlertDialogFooter>
-	</AlertDialogContent>
-</AlertDialog>`,
+};`,
 	},
 ];
+
+const commands = [
+	{
+		label: "pnpm",
+		code: "pnpm dlx shadcn@latest add @optics/alert-dialog",
+	},
+	{
+		label: "npm",
+		code: "npx shadcn@latest add @optics/alert-dialog",
+	},
+	{
+		label: "yarn",
+		code: "yarn shadcn@latest add @optics/alert-dialog",
+	},
+	{
+		label: "bun",
+		code: "bunx --bun shadcn@latest add @optics/alert-dialog",
+	},
+];
+
+const installDeps = [
+	{
+		label: "pnpm",
+		code: "pnpm add @radix-ui/react-alert-dialog lucide-react",
+	},
+	{
+		label: "npm",
+		code: "npm install @radix-ui/react-alert-dialog lucide-react",
+	},
+	{
+		label: "yarn",
+		code: "yarn add @radix-ui/react-alert-dialog lucide-react",
+	},
+	{
+		label: "bun",
+		code: "bun add @radix-ui/react-alert-dialog lucide-react",
+	},
+];
+
+function getCookie(name) {
+	if (typeof document === "undefined") return null;
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(";").shift();
+	return null;
+}
+
+function setCookie(name, value, days = 365) {
+	if (typeof document === "undefined") return;
+	const date = new Date();
+	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+	const expires = `expires=${date.toUTCString()}`;
+	document.cookie = `${name}=${value};${expires};path=/`;
+}
+
 export default function Page() {
+	const pathname = usePathname();
+	const [mounted, setMounted] = React.useState(false);
+	const [value, setValue] = React.useState(commands[0].label);
+	const [installationTab, setInstallationTab] = React.useState("tab1");
+	
+	const activeCommand = commands.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find((command) => command.label === value);
+
+	React.useEffect(() => {
+		setMounted(true);
+		const savedPackageManager = getCookie("preferred-package-manager");
+		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+			setValue(savedPackageManager);
+		} else {
+			setCookie("preferred-package-manager", commands[0].label);
+		}
+		
+		const savedInstallationTab = getCookie("preferred-installation-tab");
+		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
+			setInstallationTab(savedInstallationTab);
+		} else {
+			setCookie("preferred-installation-tab", "tab1");
+		}
+	}, []);
+
+	React.useEffect(() => {
+		if (mounted) {
+			setCookie("preferred-package-manager", value);
+		}
+	}, [value, mounted]);
+
+	const handleTabChange = React.useCallback((newTab) => {
+		setInstallationTab(newTab);
+		if (mounted) {
+			setCookie("preferred-installation-tab", newTab);
+		}
+	}, [mounted]);
+
+	function getSiblingComponent(pathname, direction = "previous") {
+		const componentsSection = links.find(
+			(section) =>
+				section.name && section.name.toLowerCase().includes("component"),
+		);
+
+		if (!componentsSection || !Array.isArray(componentsSection.items))
+			return null;
+
+		const items = componentsSection.items;
+		const currentIdx = items.findIndex((item) => item.href === pathname);
+
+		if (currentIdx === -1) return null;
+		if (direction === "previous" && currentIdx === 0) return null;
+		if (direction === "next" && currentIdx === items.length - 1) return null;
+
+		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
+		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
+
+		return items[siblingIdx];
+	}
+
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-4xl font-bold tracking-tight">Alert Dialog</h1>
+			<div className="flex flex-col gap-4 p-12 pb-4">
+				<div className="w-full flex items-center justify-between">
+					<h1 className="text-4xl font-bold tracking-tight">Alert Dialog</h1>
+					<Button variant="link" size="sm" asChild>
+						<Link
+							href="https://ui.shadcn.com/docs/components/alert-dialog"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							shadcn/ui
+							<ArrowUpRight className="-ml-1" />
+						</Link>
+					</Button>
+				</div>
+
 				<p className="text-muted-foreground text-xl">
-					Displays a alert dialog or a component that looks like a alert dialog.
+					A modal dialog that interrupts the user with important content and expects a response.
 				</p>
 			</div>
-			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">
+
+			<Separator decoration />
+
+			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						{/* Component */}
+					<CardContent className="px-8 flex items-center gap-4">
 						<AlertDialog>
 							<AlertDialogTrigger asChild>
-								<Button variant="raised">Click me</Button>
+								<Button variant="outline">Show Dialog</Button>
 							</AlertDialogTrigger>
 							<AlertDialogContent>
+								<AlertDialogIcon>
+									<AlertTriangle className="size-5 text-amber-600" />
+								</AlertDialogIcon>
 								<AlertDialogHeader>
-									<AlertDialogIcon>
-										<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
-											<Info className="text-emerald-600" />
-										</div>
-										<AlertDialogTitle>
-											Are you absolutely sure?
-										</AlertDialogTitle>
-									</AlertDialogIcon>
-
+									<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
 									<AlertDialogDescription>
-										This action cannot be undone. This will permanently delete
-										your account and remove your data from our servers.
+										This action cannot be undone. This will permanently delete your
+										account and remove your data from our servers.
 									</AlertDialogDescription>
 								</AlertDialogHeader>
 								<AlertDialogFooter>
@@ -156,11 +440,10 @@ export default function Page() {
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
-						{/* Component Code */}
 						<Accordion type={"single"} collapsible className="w-full">
 							<AccordionItem value="codeblock" className="rounded-b-xl">
 								<AccordionTrigger
-									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 	hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 									showArrow
 								>
 									Show Code
@@ -175,12 +458,7 @@ export default function Page() {
 										className="border-none rounded-none rounded-b-xl shadow-none group"
 									>
 										<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-											<CodeBlockCopyButton
-												onCopy={() => console.log("Copied code to clipboard")}
-												onError={() =>
-													console.error("Failed to copy code to clipboard")
-												}
-											/>
+											<CodeBlockCopyButton />
 										</CodeBlockHeader>
 										<CodeBlockBody>
 											{(item) => (
@@ -204,6 +482,262 @@ export default function Page() {
 					</CardFooter>
 				</Card>
 			</div>
+
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					Installation
+				</h2>
+				<Tabs 
+					value={installationTab} 
+					onValueChange={handleTabChange}
+					className="w-full"
+				>
+					<TabsList variant="underline">
+						<TabsTrigger value="tab1">CLI</TabsTrigger>
+						<TabsTrigger value="tab2">Manual</TabsTrigger>
+					</TabsList>
+					<TabsContents className="w-full pt-2">
+						<TabsContent value="tab1" className="w-full pt-4">
+							<Snippet
+								onValueChange={setValue}
+								value={value}
+								className="w-full"
+							>
+								<SnippetHeader>
+									<SnippetTabsList variant="outline">
+										{commands.map((command) => (
+											<SnippetTabsTrigger
+												key={command.label}
+												value={command.label}
+											>
+												<span>{command.label}</span>
+											</SnippetTabsTrigger>
+										))}
+									</SnippetTabsList>
+								</SnippetHeader>
+								<SnippetTabsContents>
+									{commands.map((command) => (
+										<SnippetTabsContent
+											key={command.label}
+											value={command.label}
+											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+										>
+											{command.code}
+											{activeCommand && (
+												<SnippetCopyButton value={activeCommand.code} />
+											)}
+										</SnippetTabsContent>
+									))}
+								</SnippetTabsContents>
+							</Snippet>
+						</TabsContent>
+						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+							<div className="w-full flex flex-col gap-2">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Install the following dependencies:
+								</p>
+
+								<Snippet
+									onValueChange={setValue}
+									value={value}
+									className="w-full"
+								>
+									<SnippetHeader>
+										<SnippetTabsList variant="outline">
+											{installDeps.map((command) => (
+												<SnippetTabsTrigger
+													key={command.label}
+													value={command.label}
+												>
+													<span>{command.label}</span>
+												</SnippetTabsTrigger>
+											))}
+										</SnippetTabsList>
+									</SnippetHeader>
+									<SnippetTabsContents>
+										{installDeps.map((command) => (
+											<SnippetTabsContent
+												key={command.label}
+												value={command.label}
+												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+											>
+												{command.code}
+												{activeDepsCommand && (
+													<SnippetCopyButton value={activeDepsCommand.code} />
+												)}
+											</SnippetTabsContent>
+										))}
+									</SnippetTabsContents>
+								</Snippet>
+							</div>
+
+							<div className="w-full flex flex-col gap-2">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Copy and paste the following code into your project:
+								</p>
+
+								<CodeBlock
+									data={alertDialogComponentCode}
+									defaultValue={alertDialogComponentCode[0].filename}
+								>
+									<CodeBlockHeader>
+										<CodeBlockFiles>
+											{(item) => (
+												<CodeBlockFilename
+													key={item.language}
+													value={item.filename}
+												>
+													{item.filename}
+												</CodeBlockFilename>
+											)}
+										</CodeBlockFiles>
+										
+										<CodeBlockCopyButton variant="ghost" />
+									</CodeBlockHeader>
+									<CodeBlockBody>
+										{(item) => (
+											<CodeBlockItem key={item.language} value={item.filename}>
+												<CodeBlockContent
+													language={item.language}
+													className="bg-sidebar"
+												>
+													{item.code}
+												</CodeBlockContent>
+											</CodeBlockItem>
+										)}
+									</CodeBlockBody>
+								</CodeBlock>
+							</div>
+
+							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+								Update the import paths to match your project setup.
+							</p>
+						</TabsContent>
+					</TabsContents>
+				</Tabs>
+			</div>
+
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					Components
+				</h2>
+				
+				<div className="w-full flex flex-col gap-4">
+					<p className="text-sm text-muted-foreground">
+						The Alert Dialog component is composed of several sub-components that work together to create modal dialogs.
+					</p>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialog />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Main container component</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogTrigger />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Button that opens the dialog</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogContent />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Dialog content container</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogHeader />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Header section</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogTitle />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Dialog title</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogDescription />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Dialog description</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogFooter />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Footer with actions</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogAction />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Primary action button</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogCancel />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Cancel button</p>
+						</div>
+
+						<div className="flex flex-col gap-1">
+							<Badge variant="outline" className="text-xs font-mono w-fit">
+								{"<AlertDialogIcon />"}
+							</Badge>
+							<p className="text-xs text-muted-foreground">Icon with close button</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{(() => {
+				const previous = getSiblingComponent(pathname, "previous");
+				const next = getSiblingComponent(pathname, "next");
+				const hasBoth = previous && next;
+				const onlyPrevious = previous && !next;
+				const onlyNext = next && !previous;
+
+				return (
+					<div
+						className={cn(
+							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
+							hasBoth && "justify-between",
+							onlyPrevious && "justify-start",
+							onlyNext && "justify-end",
+						)}
+					>
+						{previous && (
+							<Button variant="muted" size="sm" asChild>
+								<Link href={previous.href || "#"}>
+									<ArrowLeft />
+									{previous.name || "Previous"}
+								</Link>
+							</Button>
+						)}
+
+						{next && (
+							<Button variant="muted" size="sm" asChild>
+								<Link href={next.href || "#"}>
+									{next.name || "Next"}
+									<ArrowRight />
+								</Link>
+							</Button>
+						)}
+					</div>
+				);
+			})()}
 		</main>
 	);
 }
+

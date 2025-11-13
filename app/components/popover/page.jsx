@@ -1,14 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+import { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "@/registry/agusmayol/popover";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -52,12 +44,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/agusmayol/tabs";
-
-const code = [
-	{
-		language: "jsx",
-		filename: "code-snippet.jsx",
-		code: `import {
+import {
 	Snippet,
 	SnippetCopyButton,
 	SnippetHeader,
@@ -67,206 +54,102 @@ const code = [
 	SnippetTabsContents,
 } from "@/registry/agusmayol/code-snippet";
 
-const commands = [
-	{ label: "npm", code: "npm install package" },
-	{ label: "yarn", code: "yarn add package" },
-	{ label: "pnpm", code: "pnpm add package" },
-];
+const code = [
+	{
+		language: "jsx",
+		filename: "popover.jsx",
+		code: `import { Popover, PopoverTrigger, PopoverContent } from "@/registry/agusmayol/popover";
+import { Button } from "@/registry/agusmayol/button";
 
-<Snippet value={value} onValueChange={setValue}>
-	<SnippetHeader>
-		<SnippetTabsList variant="outline">
-			{commands.map((cmd) => (
-				<SnippetTabsTrigger key={cmd.label} value={cmd.label}>
-					{cmd.label}
-				</SnippetTabsTrigger>
-			))}
-		</SnippetTabsList>
-	</SnippetHeader>
-	<SnippetTabsContents>
-		{commands.map((cmd) => (
-			<SnippetTabsContent key={cmd.label} value={cmd.label}>
-				{cmd.code}
-				<SnippetCopyButton value={cmd.code} />
-			</SnippetTabsContent>
-		))}
-	</SnippetTabsContents>
-</Snippet>`,
+<Popover>
+	<PopoverTrigger asChild>
+		<Button variant="outline">Open Popover</Button>
+	</PopoverTrigger>
+	<PopoverContent>
+		<div className="space-y-2">
+			<h4 className="font-medium leading-none">Dimensions</h4>
+			<p className="text-sm text-muted-foreground">
+				Set the dimensions for the layer.
+			</p>
+		</div>
+	</PopoverContent>
+</Popover>`,
 	},
 ];
 
-const codeSnippetComponentCode = [
+const popoverComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/code-snippet.jsx",
+		filename: "components/ui/optics/popover.jsx",
 		code: `"use client";
 
-import { CheckIcon, CopyIcon } from "lucide-react";
-import { cloneElement, useState } from "react";
-import { Button } from "@/registry/agusmayol/button";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+import * as React from "react";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+
 import { cn } from "@/lib/utils";
 
-export const Snippet = ({ className, ...props }) => (
-	<Tabs
-		className={cn(
-			"group w-full gap-0 overflow-hidden rounded-md border",
-			className,
-		)}
-		{...props}
-	/>
-);
+const Popover = PopoverPrimitive.Root;
 
-export const SnippetHeader = ({ className, ...props }) => (
-	<div
-		className={cn(
-			"flex flex-row items-center justify-between border-b bg-secondary p-1",
-			className,
-		)}
-		{...props}
-	/>
-);
+const PopoverTrigger = PopoverPrimitive.Trigger;
 
-export const SnippetCopyButton = ({
-	asChild,
-	value,
-	onCopy,
-	onError,
-	timeout = 2000,
-	children,
-	...props
-}) => {
-	const [isCopied, setIsCopied] = useState(false);
+const PopoverAnchor = PopoverPrimitive.Anchor;
 
-	const copyToClipboard = () => {
-		if (
-			typeof window === "undefined" ||
-			!navigator.clipboard.writeText ||
-			!value
-		) {
-			return;
-		}
-
-		navigator.clipboard.writeText(value).then(() => {
-			setIsCopied(true);
-			onCopy?.();
-
-			setTimeout(() => setIsCopied(false), timeout);
-		}, onError);
-	};
-
-	if (asChild) {
-		return cloneElement(children, {
-			onClick: copyToClipboard,
-		});
-	}
-
+function PopoverContent({ className, align = "center", sideOffset = 4, ...props }) {
 	return (
-		<Button
-			variant="ghost"
-			role="button"
-			aria-label="Copy to clipboard"
-			size="icon"
-			className={cn("shrink-0")}
-			onClick={copyToClipboard}
-			{...props}
-		>
-			<div className="relative">
-				<div
-					className={cn(
-						"absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out will-change-[transform,opacity,filter]",
-						isCopied
-							? "scale-100 opacity-100 blur-0"
-							: "blur-xs scale-[0.25] opacity-0",
-					)}
-				>
-					<CheckIcon className="text-muted-foreground" size={14} />
-				</div>
-				<div
-					className={cn(
-						"transition-[transform, opacity, filter] duration-300 ease-in-out will-change-[transform,opacity,filter]",
-						isCopied
-							? "blur-xs scale-[0.25] opacity-0"
-							: "scale-100 opacity-100 blur-0",
-					)}
-				>
-					<CopyIcon className="text-muted-foreground" size={14} />
-				</div>
-			</div>
-			<span className="sr-only">Copy to clipboard</span>
-		</Button>
+		<PopoverPrimitive.Portal>
+			<PopoverPrimitive.Content
+				data-slot="popover-content"
+				align={align}
+				sideOffset={sideOffset}
+				className={cn(
+					"bg-popover text-popover-foreground data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 rounded-md border p-4 shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in",
+					className,
+				)}
+				{...props}
+			/>
+		</PopoverPrimitive.Portal>
 	);
-};
+}
 
-export const SnippetTabsList = ({ className, ...props }) => (
-	<TabsList className={cn(className)} {...props} />
-);
-
-export const SnippetTabsTrigger = ({ className, ...props }) => (
-	<TabsTrigger className={cn("gap-1.5", className)} {...props} />
-);
-
-export const SnippetTabsContent = ({ className, children, ...props }) => (
-	<TabsContent
-		className={cn(
-			"mt-0 bg-background p-4 text-sm truncate font-mono",
-			className,
-		)}
-		{...props}
-	>
-		{children}
-	</TabsContent>
-);
-
-export const SnippetTabsContents = ({ className, children, ...props }) => (
-	<TabsContents className={cn(className)} {...props}>
-		{children}
-	</TabsContents>
-);`,
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/code-snippet",
+		code: "pnpm dlx shadcn@latest add @optics/popover",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/code-snippet",
+		code: "npx shadcn@latest add @optics/popover",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/code-snippet",
+		code: "yarn shadcn@latest add @optics/popover",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/code-snippet",
+		code: "bunx --bun shadcn@latest add @optics/popover",
 	},
 ];
 
 const installDeps = [
 	{
 		label: "pnpm",
-		code: "pnpm add lucide-react",
+		code: "pnpm add @radix-ui/react-popover",
 	},
 	{
 		label: "npm",
-		code: "npm install lucide-react",
+		code: "npm install @radix-ui/react-popover",
 	},
 	{
 		label: "yarn",
-		code: "yarn add lucide-react",
+		code: "yarn add @radix-ui/react-popover",
 	},
 	{
 		label: "bun",
-		code: "bun add lucide-react",
+		code: "bun add @radix-ui/react-popover",
 	},
 ];
 
@@ -351,11 +234,21 @@ export default function Page() {
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Code Snippet</h1>
+					<h1 className="text-4xl font-bold tracking-tight">Popover</h1>
+					<Button variant="link" size="sm" asChild>
+						<Link
+							href="https://ui.shadcn.com/docs/components/popover"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							shadcn/ui
+							<ArrowUpRight className="-ml-1" />
+						</Link>
+					</Button>
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A component for displaying code snippets with syntax highlighting and copy functionality.
+					Displays rich content in a portal, triggered by a button.
 				</p>
 			</div>
 
@@ -364,31 +257,19 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center gap-4">
-						<Snippet value={value} onValueChange={setValue} className="w-full max-w-md">
-							<SnippetHeader>
-								<SnippetTabsList variant="outline">
-									{commands.map((command) => (
-										<SnippetTabsTrigger key={command.label} value={command.label}>
-											{command.label}
-										</SnippetTabsTrigger>
-									))}
-								</SnippetTabsList>
-							</SnippetHeader>
-							<SnippetTabsContents>
-								{commands.map((command) => (
-									<SnippetTabsContent
-										key={command.label}
-										value={command.label}
-										className="flex items-center justify-between gap-4"
-									>
-										{command.code}
-										{activeCommand && (
-											<SnippetCopyButton value={activeCommand.code} />
-										)}
-									</SnippetTabsContent>
-								))}
-							</SnippetTabsContents>
-						</Snippet>
+						<Popover>
+							<PopoverTrigger asChild>
+								<Button variant="outline">Open Popover</Button>
+							</PopoverTrigger>
+							<PopoverContent>
+								<div className="space-y-2">
+									<h4 className="font-medium leading-none">Dimensions</h4>
+									<p className="text-sm text-muted-foreground">
+										Set the dimensions for the layer.
+									</p>
+								</div>
+							</PopoverContent>
+						</Popover>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -529,8 +410,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={codeSnippetComponentCode}
-									defaultValue={codeSnippetComponentCode[0].filename}
+									data={popoverComponentCode}
+									defaultValue={popoverComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockFiles>
@@ -571,51 +452,41 @@ export default function Page() {
 
 			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Props
+					Components
 				</h2>
 				
-				<div className="w-full flex flex-col gap-2">
-					<Badge variant="outline" className="text-xs font-mono">
-						{"<SnippetCopyButton />"}
-					</Badge>
+				<div className="w-full flex flex-col gap-6">
+					<p className="text-sm text-muted-foreground">
+						The Popover component is composed of several sub-components from Radix UI.
+					</p>
 
-					<GridContainer
-						cols={12}
-						border={false}
-						rows={3}
-						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-					>
-						<GridRow>
-							<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
-								<ALargeSmall />
-								Name
-							</GridItem>
-							<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
-								<Binary size={16} />
-								Type
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-									value
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								string
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-									timeout
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 2000)
-							</GridItem>
-						</GridRow>
-					</GridContainer>
+					<div className="w-full flex flex-col gap-2">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<Popover />"}
+						</Badge>
+						<p className="text-sm text-muted-foreground">Main container component (Radix Root).</p>
+					</div>
+
+					<div className="w-full flex flex-col gap-2">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<PopoverTrigger />"}
+						</Badge>
+						<p className="text-sm text-muted-foreground">Trigger element that opens the popover.</p>
+					</div>
+
+					<div className="w-full flex flex-col gap-2">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<PopoverContent />"}
+						</Badge>
+						<p className="text-sm text-muted-foreground">Content container with animation and styling.</p>
+					</div>
+
+					<div className="w-full flex flex-col gap-2">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<PopoverAnchor />"}
+						</Badge>
+						<p className="text-sm text-muted-foreground">Optional anchor element for positioning.</p>
+					</div>
 				</div>
 			</div>
 

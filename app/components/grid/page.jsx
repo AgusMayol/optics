@@ -1,11 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-	ButtonGroup,
-	ButtonGroupText,
-	ButtonGroupSeparator,
-} from "@/registry/agusmayol/button-group";
-import { Button } from "@/registry/agusmayol/button";
+import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -13,15 +8,12 @@ import {
 	ALargeSmall,
 	ArrowLeft,
 	ArrowRight,
-	ArrowUpRight,
 	Binary,
-	Copy,
-	Download,
-	Share2,
+	Plus,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
+import { Button } from "@/registry/agusmayol/button";
 import {
 	Card,
 	CardContent,
@@ -64,100 +56,140 @@ import {
 const code = [
 	{
 		language: "jsx",
-		filename: "button-group.jsx",
-		code: `import { ButtonGroup } from "@/registry/agusmayol/button-group";
-import { Button } from "@/registry/agusmayol/button";
+		filename: "grid.jsx",
+		code: `import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 
-<ButtonGroup>
-	<Button variant="outline">Copy</Button>
-	<Button variant="outline">Download</Button>
-	<Button variant="outline">Share</Button>
-</ButtonGroup>
-
-<ButtonGroup orientation="vertical">
-	<Button variant="outline">Copy</Button>
-	<Button variant="outline">Download</Button>
-	<Button variant="outline">Share</Button>
-</ButtonGroup>`,
+<GridContainer cols={12} rows={3} border>
+	<GridRow>
+		<GridItem span={4}>Column 1</GridItem>
+		<GridItem span={4}>Column 2</GridItem>
+		<GridItem span={4}>Column 3</GridItem>
+	</GridRow>
+	<GridRow>
+		<GridItem span={6}>Half</GridItem>
+		<GridItem span={6}>Half</GridItem>
+	</GridRow>
+	<GridRow>
+		<GridItem span={12}>Full Width</GridItem>
+	</GridRow>
+</GridContainer>`,
 	},
 ];
 
-const buttonGroupComponentCode = [
+const gridComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/button-group.jsx",
-		code: `import { Slot } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
-
+		filename: "components/ui/optics/grid.jsx",
+		code: `"use client";
+import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
 
-const buttonGroupVariants = cva(
-	"flex w-fit items-stretch [&>*]:focus-visible:z-10 [&>*]:focus-visible:relative [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md has-[>[data-slot=button-group]]:gap-2",
-	{
-		variants: {
-			orientation: {
-				horizontal:
-					"[&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none",
-				vertical:
-					"flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none",
-			},
-		},
-		defaultVariants: {
-			orientation: "horizontal",
-		},
-	},
-);
+const GridContext = React.createContext();
 
-function ButtonGroup({ className, orientation, ...props }) {
+const useGridContext = () => {
+	const context = React.useContext(GridContext);
+	if (!context) {
+		throw new Error("GridRow and GridItem must be inside GridContainer");
+	}
+	return context;
+};
+
+export const GridContainer = ({
+	cols = 12,
+	rows = 1,
+	gap = 0,
+	border = true,
+	className = "",
+	children = null,
+	...props
+}) => {
+	const contextValue = {
+		cols,
+		rows,
+		gap,
+		border,
+		...props,
+	};
+
+	return (
+		<GridContext.Provider value={contextValue}>
+			<div
+				className={cn("w-full grid", className)}
+				style={{
+					gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
+					gridTemplateRows: \`repeat(\${rows}, minmax(0, 1fr))\`,
+					gap,
+				}}
+				{...props}
+			>
+				{children}
+			</div>
+		</GridContext.Provider>
+	);
+};
+
+export const GridRow = ({
+	className = "",
+	children = null,
+	span: paramSpan = 0,
+	gap: paramGap = 0,
+	borderTop = true,
+	borderBottom = true,
+	...props
+}) => {
+	const { cols, gap: containerGap, border } = useGridContext();
+	const gap = paramGap || containerGap;
+	const span = paramSpan || cols;
+
 	return (
 		<div
-			role="group"
-			data-slot="button-group"
-			data-orientation={orientation}
-			className={cn(buttonGroupVariants({ orientation }), className)}
-			{...props}
-		/>
-	);
-}
-
-function ButtonGroupText({ className, asChild = false, ...props }) {
-	const Comp = asChild ? Slot : "div";
-
-	return (
-		<Comp
 			className={cn(
-				"bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+				"w-full grid border-t last:border-b -mb-[1px]",
+				gap > 0 && "!border-b -mb-0",
+				!border && "!border-0",
+				!borderTop && "!border-t-0",
+				!borderBottom && "!border-b-0",
 				className,
 			)}
+			style={{
+				gridColumn: \`span \${cols} / span \${span}\`,
+				gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
+				gap,
+			}}
 			{...props}
-		/>
+		>
+			{children}
+		</div>
 	);
-}
+};
 
-function ButtonGroupSeparator({
-	className,
-	orientation = "vertical",
+export const GridItem = ({
+	className = "",
+	children = null,
+	span = 1,
+	borderLeft = true,
+	borderRight = true,
 	...props
-}) {
+}) => {
+	const { cols, border } = useGridContext();
 	return (
-		<Separator
-			data-slot="button-group-separator"
-			orientation={orientation}
+		<div
 			className={cn(
-				"bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto",
+				"border-l last:border-r flex items-center justify-center relative",
+				span === 1 && "aspect-square",
+				!borderLeft && "!border-l-0",
+				!borderRight && "!border-r-0",
+				!border && "!border-0",
 				className,
 			)}
+			style={{
+				gridColumn: \`span \${span} / span \${cols}\`,
+			}}
 			{...props}
-		/>
+		>
+			{children}
+		</div>
 	);
-}
-
-export {
-	ButtonGroup,
-	ButtonGroupSeparator,
-	ButtonGroupText,
-	buttonGroupVariants,
 };`,
 	},
 ];
@@ -165,38 +197,19 @@ export {
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/button-group",
+		code: "pnpm dlx shadcn@latest add @optics/grid",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/button-group",
+		code: "npx shadcn@latest add @optics/grid",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/button-group",
+		code: "yarn shadcn@latest add @optics/grid",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/button-group",
-	},
-];
-
-const installDeps = [
-	{
-		label: "pnpm",
-		code: "pnpm add @radix-ui/react-slot class-variance-authority",
-	},
-	{
-		label: "npm",
-		code: "npm install @radix-ui/react-slot class-variance-authority",
-	},
-	{
-		label: "yarn",
-		code: "yarn add @radix-ui/react-slot class-variance-authority",
-	},
-	{
-		label: "bun",
-		code: "bun add @radix-ui/react-slot class-variance-authority",
+		code: "bunx --bun shadcn@latest add @optics/grid",
 	},
 ];
 
@@ -223,7 +236,6 @@ export default function Page() {
 	const [installationTab, setInstallationTab] = React.useState("tab1");
 	
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
 
 	React.useEffect(() => {
 		setMounted(true);
@@ -281,11 +293,11 @@ export default function Page() {
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Button Group</h1>
+					<h1 className="text-4xl font-bold tracking-tight">Grid</h1>
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A component that groups multiple buttons together with consistent styling and spacing.
+					A flexible grid system for building complex layouts with rows and columns.
 				</p>
 			</div>
 
@@ -293,50 +305,21 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-start gap-6">
-						<ButtonGroup>
-							<Button variant="outline">
-								<Copy />
-								Copy
-							</Button>
-							<Button variant="outline">
-								<Download />
-								Download
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-								Share
-							</Button>
-						</ButtonGroup>
-
-						<ButtonGroup orientation="vertical">
-							<Button variant="outline">
-								<Copy />
-								Copy
-							</Button>
-							<Button variant="outline">
-								<Download />
-								Download
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-								Share
-							</Button>
-						</ButtonGroup>
-
-						<ButtonGroup>
-							<ButtonGroupText>Actions</ButtonGroupText>
-							<ButtonGroupSeparator />
-							<Button variant="outline">
-								<Copy />
-							</Button>
-							<Button variant="outline">
-								<Download />
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-							</Button>
-						</ButtonGroup>
+					<CardContent className="px-8 flex flex-col gap-4">
+						<GridContainer cols={12} rows={3} border className="w-full max-w-2xl">
+							<GridRow>
+								<GridItem span={4}><Plus size={16} /></GridItem>
+								<GridItem span={4}><Plus size={16} /></GridItem>
+								<GridItem span={4}><Plus size={16} /></GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={6}><Plus size={16} /></GridItem>
+								<GridItem span={6}><Plus size={16} /></GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={12}><Plus size={16} /></GridItem>
+							</GridRow>
+						</GridContainer>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -434,51 +417,12 @@ export default function Page() {
 						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader>
-										<SnippetTabsList variant="outline">
-											{installDeps.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{installDeps.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeDepsCommand && (
-													<SnippetCopyButton value={activeDepsCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Copy and paste the following code into your project:
 								</p>
 
 								<CodeBlock
-									data={buttonGroupComponentCode}
-									defaultValue={buttonGroupComponentCode[0].filename}
+									data={gridComponentCode}
+									defaultValue={gridComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockFiles>
@@ -525,14 +469,14 @@ export default function Page() {
 				<div className="w-full flex flex-col gap-8">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono">
-							{"<ButtonGroup />"}
+							{"<GridContainer />"}
 						</Badge>
 
 						<GridContainer
 							cols={12}
 							border={false}
-							rows={2}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
+							rows={5}
+							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 						>
 							<GridRow>
 								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
@@ -547,11 +491,41 @@ export default function Page() {
 							<GridRow>
 								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
 									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-										orientation
+										cols
 									</Badge>
 								</GridItem>
 								<GridItem span={8} className="text-xs font-mono justify-start">
-									"horizontal" | "vertical" (default: "horizontal")
+									number (default: 12)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										rows
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									number (default: 1)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										gap
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									number (default: 0)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										border
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: true)
 								</GridItem>
 							</GridRow>
 						</GridContainer>
@@ -559,13 +533,77 @@ export default function Page() {
 
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono">
-							{"<ButtonGroupText />"}
+							{"<GridRow />"}
 						</Badge>
 
 						<GridContainer
 							cols={12}
 							border={false}
-							rows={2}
+							rows={5}
+							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
+						>
+							<GridRow>
+								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+									<ALargeSmall />
+									Name
+								</GridItem>
+								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+									<Binary size={16} />
+									Type
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										span
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									number (default: 0, uses cols if 0)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										gap
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									number (default: 0)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										borderTop
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: true)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										borderBottom
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: true)
+								</GridItem>
+							</GridRow>
+						</GridContainer>
+					</div>
+
+					<div className="w-full flex flex-col gap-2">
+						<Badge variant="outline" className="text-xs font-mono">
+							{"<GridItem />"}
+						</Badge>
+
+						<GridContainer
+							cols={12}
+							border={false}
+							rows={8}
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
@@ -581,45 +619,71 @@ export default function Page() {
 							<GridRow>
 								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
 									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-										asChild
+										span
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									number (default: 1)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										borderLeft
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: true)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										borderRight
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: true)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										decorationTopLeft
 									</Badge>
 								</GridItem>
 								<GridItem span={8} className="text-xs font-mono justify-start">
 									boolean (default: false)
 								</GridItem>
 							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<ButtonGroupSeparator />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={2}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
-						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
-									<ALargeSmall />
-									Name
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										decorationTopRight
+									</Badge>
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
-									<Binary size={16} />
-									Type
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: false)
 								</GridItem>
 							</GridRow>
 							<GridRow>
 								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
 									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-										orientation
+										decorationBottomLeft
 									</Badge>
 								</GridItem>
 								<GridItem span={8} className="text-xs font-mono justify-start">
-									"vertical" | "horizontal" (default: "vertical")
+									boolean (default: false)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+										decorationBottomRight
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									boolean (default: false)
 								</GridItem>
 							</GridRow>
 						</GridContainer>
@@ -666,3 +730,4 @@ export default function Page() {
 		</main>
 	);
 }
+

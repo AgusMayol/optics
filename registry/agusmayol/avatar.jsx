@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import {
+	TooltipProvider,
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
@@ -25,21 +26,23 @@ function AvatarStack({ data, children, ...props }) {
 
 function Avatar({ className, title, ...props }) {
 	return (
-		<Tooltip>
-			<TooltipTrigger>
-				<AvatarPrimitive.Root
-					data-slot="avatar"
-					className={cn(
-						"relative flex size-8 shrink-0 overflow-hidden rounded-full border border-background shadow-sm",
-						className,
-					)}
-					{...props}
-				/>
-			</TooltipTrigger>
-			<TooltipContent>
-				<p>{title}</p>
-			</TooltipContent>
-		</Tooltip>
+		<TooltipProvider>
+			<Tooltip>
+				<TooltipTrigger>
+					<AvatarPrimitive.Root
+						data-slot="avatar"
+						className={cn(
+							"relative flex size-8 shrink-0 overflow-hidden rounded-full border border-background shadow-sm",
+							className,
+						)}
+						{...props}
+					/>
+				</TooltipTrigger>
+				<TooltipContent>
+					<p>{title}</p>
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
 	);
 }
 

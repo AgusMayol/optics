@@ -129,12 +129,15 @@ export function Sidebar({ links, maxHeight = 0 }) {
 												<ArrowUpRight className="-ml-1" />
 											)}
 										</div>
-										{item.own && (
+										{item.installed === false && (
+											<Badge className="bg-red-600 text-xs shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-red-900)] text-white size-1.5 p-0"></Badge>
+										)}
+										{/* {item.own && (
 											<Badge className="bg-sky-700 text-xs shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-sky-900)] text-white size-1.5 p-0"></Badge>
 										)}
 										{item.custom && (
 											<Badge className="bg-emerald-700 text-xs shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-emerald-900)] text-white size-1.5 p-0"></Badge>
-										)}
+										)} */}
 										{item.logo && (
 											<Image
 												src={item.logo}

@@ -1,16 +1,21 @@
 "use client";
-import { Button } from "@/registry/agusmayol/button";
+import * as React from "react";
 import { cn } from "@/lib/utils";
-
-import { ArrowLeft, Sparkle, Eye, Edit3, Code2 } from "lucide-react";
-import Image from "next/image";
+import { links } from "@/app/layout-content";
+import { usePathname } from "next/navigation";
+import {
+	ALargeSmall,
+	ArrowLeft,
+	ArrowRight,
+	ArrowUpRight,
+	Binary,
+} from "lucide-react";
 import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+import { Badge } from "@/registry/agusmayol/badge";
+import { Button } from "@/registry/agusmayol/button";
 import {
 	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
 	CardContent,
 	CardFooter,
 } from "@/registry/agusmayol/card";
@@ -29,202 +34,194 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-	CodeBlockSelect,
-	CodeBlockSelectContent,
-	CodeBlockSelectItem,
-	CodeBlockSelectTrigger,
-	CodeBlockSelectValue,
 } from "@/registry/agusmayol/code-block";
+import { Separator } from "@/registry/agusmayol/separator";
 import {
 	Tabs,
 	TabsContent,
+	TabsContents,
 	TabsList,
 	TabsTrigger,
 } from "@/registry/agusmayol/tabs";
 import {
-	MarkdownEditor,
-	MarkdownViewer,
-	MarkdownPreview,
-	MarkdownSplitView,
-	MarkdownEditorFloatingBar,
-} from "@/registry/agusmayol/markdown";
-import { useState } from "react";
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+	SnippetTabsContents,
+} from "@/registry/agusmayol/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "markdown.jsx",
-		code: `import { 
-	MarkdownEditor, 
-	MarkdownViewer, 
-	MarkdownPreview, 
-	MarkdownSplitView 
-} from "@/registry/agusmayol/markdown";
+		code: `import { Markdown } from "@/registry/agusmayol/markdown";
 
-export function MyMarkdownComponent() {
-	const [content, setContent] = useState("");
+const markdownContent = \`
+# Hello World
 
-	return (
-		<div className="space-y-4">
-			{/* Editor with Toolbar */}
-			<MarkdownEditor
-				content={content}
-				onChange={setContent}
-				placeholder="Type '/' for commands..."
-				showToolbar={true}
-			/>
-			
-			{/* Preview Only */}
-			<MarkdownPreview content={content} />
-			
-			{/* Split View */}
-			<MarkdownSplitView
-				content={content}
-				onChange={setContent}
-				placeholder="Type '/' for commands..."
-			/>
-		</div>
-	);
-}`,
+This is a **Markdown** component with support for:
+
+- Lists
+- Code blocks
+- Tables
+- And more!
+
+\\\`\\\`\\\`javascript
+console.log("Hello, World!");
+\\\`\\\`\\\`
+\`;
+
+<Markdown>{markdownContent}</Markdown>`,
 	},
 ];
 
-const exampleContent = `# Advanced Markdown Editor
+const commands = [
+	{
+		label: "pnpm",
+		code: "pnpm dlx shadcn@latest add @optics/markdown",
+	},
+	{
+		label: "npm",
+		code: "npx shadcn@latest add @optics/markdown",
+	},
+	{
+		label: "yarn",
+		code: "yarn shadcn@latest add @optics/markdown",
+	},
+	{
+		label: "bun",
+		code: "bunx --bun shadcn@latest add @optics/markdown",
+	},
+];
 
-This is a **powerful** markdown editor with *Notion-like* features and **MDX support**.
+const installDeps = [
+	{
+		label: "pnpm",
+		code: "pnpm add react-markdown remark-gfm rehype-raw",
+	},
+	{
+		label: "npm",
+		code: "npm install react-markdown remark-gfm rehype-raw",
+	},
+	{
+		label: "yarn",
+		code: "yarn add react-markdown remark-gfm rehype-raw",
+	},
+	{
+		label: "bun",
+		code: "bun add react-markdown remark-gfm rehype-raw",
+	},
+];
 
-## Features
-
-- **Slash Commands**: Type \`/\` to see available commands
-- **Bubble Menu**: Select text to format it
-- **GitHub Markdown**: Full support for GitHub Flavored Markdown
-- **MDX Support**: Use React components in your markdown
-- **Syntax Highlighting**: Beautiful code blocks with syntax highlighting
-- **Vercel Blog Style**: Clean, modern typography
-
-### Code Example
-
-\`\`\`javascript
-function greet(name) {
-	return \`Hello, \${name}!\`;
+function getCookie(name) {
+	if (typeof document === "undefined") return null;
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(";").shift();
+	return null;
 }
 
-console.log(greet("World"));
-\`\`\`
-
-### Task List
-
-- [x] Implement slash commands
-- [x] Add bubble menu
-- [x] Create GitHub-style viewer
-- [x] Add MDX support
-- [x] Improve styling to match Vercel blogs
-- [ ] Add more formatting options
-
-### Table
-
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Slash Commands | ✅ | Type '/' for commands |
-| Bubble Menu | ✅ | Select text to format |
-| Syntax Highlighting | ✅ | Beautiful code blocks |
-| MDX Support | ✅ | React components in markdown |
-| Vercel Styling | ✅ | Clean, modern typography |
-
-> This is a blockquote with some important information about the new features.
-
----
-
-**Try it out!** Select some text to see the bubble menu, or type \`/\` to see available commands. The editor now supports MDX components and has a beautiful Vercel-inspired design.`;
+function setCookie(name, value, days = 365) {
+	if (typeof document === "undefined") return;
+	const date = new Date();
+	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+	const expires = `expires=${date.toUTCString()}`;
+	document.cookie = `${name}=${value};${expires};path=/`;
+}
 
 export default function Page() {
-	const [content, setContent] = useState(exampleContent);
-	const [activeTab, setActiveTab] = useState("editor");
+	const pathname = usePathname();
+	const [mounted, setMounted] = React.useState(false);
+	const [value, setValue] = React.useState(commands[0].label);
+	const [installationTab, setInstallationTab] = React.useState("tab1");
+	
+	const activeCommand = commands.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find((command) => command.label === value);
 
-	const onChangeContent = (newContent) => {
-		setContent(newContent);
-	};
+	React.useEffect(() => {
+		setMounted(true);
+		const savedPackageManager = getCookie("preferred-package-manager");
+		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+			setValue(savedPackageManager);
+		} else {
+			setCookie("preferred-package-manager", commands[0].label);
+		}
+		
+		const savedInstallationTab = getCookie("preferred-installation-tab");
+		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
+			setInstallationTab(savedInstallationTab);
+		} else {
+			setCookie("preferred-installation-tab", "tab1");
+		}
+	}, []);
+
+	React.useEffect(() => {
+		if (mounted) {
+			setCookie("preferred-package-manager", value);
+		}
+	}, [value, mounted]);
+
+	const handleTabChange = React.useCallback((newTab) => {
+		setInstallationTab(newTab);
+		if (mounted) {
+			setCookie("preferred-installation-tab", newTab);
+		}
+	}, [mounted]);
+
+	function getSiblingComponent(pathname, direction = "previous") {
+		const componentsSection = links.find(
+			(section) =>
+				section.name && section.name.toLowerCase().includes("component"),
+		);
+
+		if (!componentsSection || !Array.isArray(componentsSection.items))
+			return null;
+
+		const items = componentsSection.items;
+		const currentIdx = items.findIndex((item) => item.href === pathname);
+
+		if (currentIdx === -1) return null;
+		if (direction === "previous" && currentIdx === 0) return null;
+		if (direction === "next" && currentIdx === items.length - 1) return null;
+
+		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
+		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
+
+		return items[siblingIdx];
+	}
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-4xl font-bold tracking-tight">
-					Advanced Markdown Editor
-				</h1>
+			<div className="flex flex-col gap-4 p-12 pb-4">
+				<div className="w-full flex items-center justify-between">
+					<h1 className="text-4xl font-bold tracking-tight">Markdown</h1>
+				</div>
+
 				<p className="text-muted-foreground text-xl">
-					A powerful markdown editor with Notion-like features, slash commands,
-					and bubble menus.
+					A comprehensive Markdown renderer with support for GFM, syntax highlighting, and custom components.
 				</p>
 			</div>
-			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">
+
+			<Separator decoration />
+
+			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						{/* Component */}
-						<div className="w-full max-w-6xl">
-							<Tabs
-								value={activeTab}
-								onValueChange={setActiveTab}
-								className="w-full"
-							>
-								<TabsList className="grid w-full grid-cols-3 mb-4">
-									<TabsTrigger
-										value="editor"
-										className="flex items-center gap-2"
-									>
-										<Edit3 className="h-4 w-4" />
-										Editor
-									</TabsTrigger>
-									<TabsTrigger
-										value="preview"
-										className="flex items-center gap-2"
-									>
-										<Eye className="h-4 w-4" />
-										Preview
-									</TabsTrigger>
-									<TabsTrigger
-										value="split"
-										className="flex items-center gap-2"
-									>
-										<Code2 className="h-4 w-4" />
-										Split View
-									</TabsTrigger>
-								</TabsList>
-
-								<TabsContent value="editor" className="mt-0">
-									<MarkdownEditor
-										content={content}
-										onChange={onChangeContent}
-										placeholder="Type '/' for commands..."
-										showToolbar={true}
-										className="min-h-[500px]"
-									/>
-								</TabsContent>
-
-								<TabsContent value="preview" className="mt-0">
-									<MarkdownPreview
-										content={content}
-										className="min-h-[500px]"
-									/>
-								</TabsContent>
-
-								<TabsContent value="split" className="mt-0">
-									<MarkdownSplitView
-										content={content}
-										onChange={onChangeContent}
-										placeholder="Type '/' for commands..."
-										className="min-h-[500px]"
-									/>
-								</TabsContent>
-							</Tabs>
+					<CardContent className="px-8 flex items-center gap-4">
+						<div className="prose dark:prose-invert max-w-none">
+							<p className="text-muted-foreground text-sm">
+								This component renders Markdown content with full GFM support including tables, task lists, and more.
+							</p>
 						</div>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
-						{/* Component Code */}
 						<Accordion type={"single"} collapsible className="w-full">
 							<AccordionItem value="codeblock" className="rounded-b-xl">
 								<AccordionTrigger
-									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 	hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 									showArrow
 								>
 									Show Code
@@ -239,12 +236,7 @@ export default function Page() {
 										className="border-none rounded-none rounded-b-xl shadow-none group"
 									>
 										<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-											<CodeBlockCopyButton
-												onCopy={() => console.log("Copied code to clipboard")}
-												onError={() =>
-													console.error("Failed to copy code to clipboard")
-												}
-											/>
+											<CodeBlockCopyButton />
 										</CodeBlockHeader>
 										<CodeBlockBody>
 											{(item) => (
@@ -268,6 +260,197 @@ export default function Page() {
 					</CardFooter>
 				</Card>
 			</div>
+
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					Installation
+				</h2>
+				<Tabs 
+					value={installationTab} 
+					onValueChange={handleTabChange}
+					className="w-full"
+				>
+					<TabsList variant="underline">
+						<TabsTrigger value="tab1">CLI</TabsTrigger>
+						<TabsTrigger value="tab2">Manual</TabsTrigger>
+					</TabsList>
+					<TabsContents className="w-full pt-2">
+						<TabsContent value="tab1" className="w-full pt-4">
+							<Snippet
+								onValueChange={setValue}
+								value={value}
+								className="w-full"
+							>
+								<SnippetHeader>
+									<SnippetTabsList variant="outline">
+										{commands.map((command) => (
+											<SnippetTabsTrigger
+												key={command.label}
+												value={command.label}
+											>
+												<span>{command.label}</span>
+											</SnippetTabsTrigger>
+										))}
+									</SnippetTabsList>
+								</SnippetHeader>
+								<SnippetTabsContents>
+									{commands.map((command) => (
+										<SnippetTabsContent
+											key={command.label}
+											value={command.label}
+											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+										>
+											{command.code}
+											{activeCommand && (
+												<SnippetCopyButton value={activeCommand.code} />
+											)}
+										</SnippetTabsContent>
+									))}
+								</SnippetTabsContents>
+							</Snippet>
+						</TabsContent>
+						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+							<div className="w-full flex flex-col gap-2">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Install the following dependencies:
+								</p>
+
+								<Snippet
+									onValueChange={setValue}
+									value={value}
+									className="w-full"
+								>
+									<SnippetHeader>
+										<SnippetTabsList variant="outline">
+											{installDeps.map((command) => (
+												<SnippetTabsTrigger
+													key={command.label}
+													value={command.label}
+												>
+													<span>{command.label}</span>
+												</SnippetTabsTrigger>
+											))}
+										</SnippetTabsList>
+									</SnippetHeader>
+									<SnippetTabsContents>
+										{installDeps.map((command) => (
+											<SnippetTabsContent
+												key={command.label}
+												value={command.label}
+												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+											>
+												{command.code}
+												{activeDepsCommand && (
+													<SnippetCopyButton value={activeDepsCommand.code} />
+												)}
+											</SnippetTabsContent>
+										))}
+									</SnippetTabsContents>
+								</Snippet>
+							</div>
+
+							<div className="w-full flex flex-col gap-2">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Copy and paste the component code from the source:
+								</p>
+
+								<Button variant="link" size="sm" asChild className="w-fit">
+									<Link
+										href="https://github.com/agusmayol/optics/blob/main/registry/agusmayol/markdown.jsx"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										View full component code on GitHub
+										<ArrowUpRight className="-ml-1" />
+									</Link>
+								</Button>
+							</div>
+
+							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+								Update the import paths to match your project setup.
+							</p>
+						</TabsContent>
+					</TabsContents>
+				</Tabs>
+			</div>
+
+			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					Props
+				</h2>
+				
+				<div className="w-full flex flex-col gap-2">
+					<Badge variant="outline" className="text-xs font-mono">
+						{"<Markdown />"}
+					</Badge>
+
+					<GridContainer
+						cols={12}
+						border={false}
+						rows={2}
+						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
+					>
+						<GridRow>
+							<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<ALargeSmall />
+								Name
+							</GridItem>
+							<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<Binary size={16} />
+								Type
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+									children
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								string (Markdown content)
+							</GridItem>
+						</GridRow>
+					</GridContainer>
+				</div>
+			</div>
+
+			{(() => {
+				const previous = getSiblingComponent(pathname, "previous");
+				const next = getSiblingComponent(pathname, "next");
+				const hasBoth = previous && next;
+				const onlyPrevious = previous && !next;
+				const onlyNext = next && !previous;
+
+				return (
+					<div
+						className={cn(
+							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
+							hasBoth && "justify-between",
+							onlyPrevious && "justify-start",
+							onlyNext && "justify-end",
+						)}
+					>
+						{previous && (
+							<Button variant="muted" size="sm" asChild>
+								<Link href={previous.href || "#"}>
+									<ArrowLeft />
+									{previous.name || "Previous"}
+								</Link>
+							</Button>
+						)}
+
+						{next && (
+							<Button variant="muted" size="sm" asChild>
+								<Link href={next.href || "#"}>
+									{next.name || "Next"}
+									<ArrowRight />
+								</Link>
+							</Button>
+						)}
+					</div>
+				);
+			})()}
 		</main>
 	);
 }
+

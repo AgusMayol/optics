@@ -1,14 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+import { Feedback } from "@/registry/agusmayol/feedback";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -16,7 +8,6 @@ import {
 	ALargeSmall,
 	ArrowLeft,
 	ArrowRight,
-	ArrowUpRight,
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
@@ -52,12 +43,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/agusmayol/tabs";
-
-const code = [
-	{
-		language: "jsx",
-		filename: "code-snippet.jsx",
-		code: `import {
+import {
 	Snippet,
 	SnippetCopyButton,
 	SnippetHeader,
@@ -67,187 +53,128 @@ const code = [
 	SnippetTabsContents,
 } from "@/registry/agusmayol/code-snippet";
 
-const commands = [
-	{ label: "npm", code: "npm install package" },
-	{ label: "yarn", code: "yarn add package" },
-	{ label: "pnpm", code: "pnpm add package" },
-];
+const code = [
+	{
+		language: "jsx",
+		filename: "feedback.jsx",
+		code: `import { Feedback } from "@/registry/agusmayol/feedback";
 
-<Snippet value={value} onValueChange={setValue}>
-	<SnippetHeader>
-		<SnippetTabsList variant="outline">
-			{commands.map((cmd) => (
-				<SnippetTabsTrigger key={cmd.label} value={cmd.label}>
-					{cmd.label}
-				</SnippetTabsTrigger>
-			))}
-		</SnippetTabsList>
-	</SnippetHeader>
-	<SnippetTabsContents>
-		{commands.map((cmd) => (
-			<SnippetTabsContent key={cmd.label} value={cmd.label}>
-				{cmd.code}
-				<SnippetCopyButton value={cmd.code} />
-			</SnippetTabsContent>
-		))}
-	</SnippetTabsContents>
-</Snippet>`,
+<Feedback label="How was your experience?" />`,
 	},
 ];
 
-const codeSnippetComponentCode = [
+const feedbackComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/code-snippet.jsx",
-		code: `"use client";
-
-import { CheckIcon, CopyIcon } from "lucide-react";
-import { cloneElement, useState } from "react";
+		filename: "components/ui/optics/feedback.jsx",
+		code: `import React from "react";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+import { Textarea } from "@/registry/agusmayol/textarea";
 import { cn } from "@/lib/utils";
+import { Popover, PopoverTrigger, PopoverContent } from "@/registry/agusmayol/popover";
+import { otherThemes } from "@/registry/agusmayol/button";
 
-export const Snippet = ({ className, ...props }) => (
-	<Tabs
-		className={cn(
-			"group w-full gap-0 overflow-hidden rounded-md border",
-			className,
-		)}
-		{...props}
-	/>
+// Icon components for ratings
+const LoveItIcon = ({ pathClassName }) => (
+	<svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			fill="var(--color-muted-foreground)"
+			d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z"
+		/>
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			d="M6.15295 4.92093L5.375 3.5L4.59705 4.92093L3 5.21885L4.11625 6.39495L3.90717 8L5.375 7.30593L6.84283 8L6.63375 6.39495L7.75 5.21885L6.15295 4.92093Z"
+			className={pathClassName}
+		/>
+	</svg>
 );
 
-export const SnippetHeader = ({ className, ...props }) => (
-	<div
-		className={cn(
-			"flex flex-row items-center justify-between border-b bg-secondary p-1",
-			className,
-		)}
-		{...props}
-	/>
+const ItsOkayIcon = () => (
+	<svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			fill="var(--color-muted-foreground)"
+			d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z"
+		/>
+	</svg>
 );
 
-export const SnippetCopyButton = ({
-	asChild,
-	value,
-	onCopy,
-	onError,
-	timeout = 2000,
-	children,
-	...props
-}) => {
-	const [isCopied, setIsCopied] = useState(false);
+const NotGreaterIcon = () => (
+	<svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			fill="var(--color-muted-foreground)"
+			d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z"
+		/>
+	</svg>
+);
 
-	const copyToClipboard = () => {
-		if (
-			typeof window === "undefined" ||
-			!navigator.clipboard.writeText ||
-			!value
-		) {
-			return;
-		}
+const HateIcon = () => (
+	<svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			fill="var(--color-muted-foreground)"
+			d="M14.5 8C14.5 11.5899 11.5899 14.5 8 14.5C4.41015 14.5 1.5 11.5899 1.5 8C1.5 4.41015 4.41015 1.5 8 1.5C11.5899 1.5 14.5 4.41015 14.5 8ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z"
+		/>
+	</svg>
+);
 
-		navigator.clipboard.writeText(value).then(() => {
-			setIsCopied(true);
-			onCopy?.();
-
-			setTimeout(() => setIsCopied(false), timeout);
-		}, onError);
-	};
-
-	if (asChild) {
-		return cloneElement(children, {
-			onClick: copyToClipboard,
-		});
-	}
-
+export const Feedback = ({ type = "default", label }) => {
 	return (
-		<Button
-			variant="ghost"
-			role="button"
-			aria-label="Copy to clipboard"
-			size="icon"
-			className={cn("shrink-0")}
-			onClick={copyToClipboard}
-			{...props}
-		>
-			<div className="relative">
-				<div
-					className={cn(
-						"absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out will-change-[transform,opacity,filter]",
-						isCopied
-							? "scale-100 opacity-100 blur-0"
-							: "blur-xs scale-[0.25] opacity-0",
-					)}
-				>
-					<CheckIcon className="text-muted-foreground" size={14} />
+		<Popover>
+			<PopoverTrigger asChild>
+				<div className={cn(
+					otherThemes({ variant: "outline" }), 
+					"rounded-full flex items-center justify-center gap-2 !px-4 py-2 text-sm hover:bg-transparent text-muted-foreground"
+				)}>
+					{label}
+					<div className="flex items-center gap-0.5">
+						<Button variant="ghost" size="icon-sm" className="rounded-full">
+							<LoveItIcon pathClassName="fill-amber-500" />
+						</Button>
+						<Button variant="ghost" size="icon-sm" className="rounded-full">
+							<ItsOkayIcon />
+						</Button>
+						<Button variant="ghost" size="icon-sm" className="rounded-full">
+							<NotGreaterIcon />
+						</Button>
+						<Button variant="ghost" size="icon-sm" className="rounded-full">
+							<HateIcon />
+						</Button>
+					</div>
 				</div>
-				<div
-					className={cn(
-						"transition-[transform, opacity, filter] duration-300 ease-in-out will-change-[transform,opacity,filter]",
-						isCopied
-							? "blur-xs scale-[0.25] opacity-0"
-							: "scale-100 opacity-100 blur-0",
-					)}
-				>
-					<CopyIcon className="text-muted-foreground" size={14} />
-				</div>
-			</div>
-			<span className="sr-only">Copy to clipboard</span>
-		</Button>
+			</PopoverTrigger>
+			<PopoverContent>
+				{/* Feedback form content */}
+			</PopoverContent>
+		</Popover>
 	);
-};
-
-export const SnippetTabsList = ({ className, ...props }) => (
-	<TabsList className={cn(className)} {...props} />
-);
-
-export const SnippetTabsTrigger = ({ className, ...props }) => (
-	<TabsTrigger className={cn("gap-1.5", className)} {...props} />
-);
-
-export const SnippetTabsContent = ({ className, children, ...props }) => (
-	<TabsContent
-		className={cn(
-			"mt-0 bg-background p-4 text-sm truncate font-mono",
-			className,
-		)}
-		{...props}
-	>
-		{children}
-	</TabsContent>
-);
-
-export const SnippetTabsContents = ({ className, children, ...props }) => (
-	<TabsContents className={cn(className)} {...props}>
-		{children}
-	</TabsContents>
-);`,
+};`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/code-snippet",
+		code: "pnpm dlx shadcn@latest add @optics/feedback",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/code-snippet",
+		code: "npx shadcn@latest add @optics/feedback",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/code-snippet",
+		code: "yarn shadcn@latest add @optics/feedback",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/code-snippet",
+		code: "bunx --bun shadcn@latest add @optics/feedback",
 	},
 ];
 
@@ -351,11 +278,11 @@ export default function Page() {
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Code Snippet</h1>
+					<h1 className="text-4xl font-bold tracking-tight">Feedback</h1>
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A component for displaying code snippets with syntax highlighting and copy functionality.
+					A feedback widget with emoji ratings and text input for collecting user feedback.
 				</p>
 			</div>
 
@@ -364,31 +291,7 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center gap-4">
-						<Snippet value={value} onValueChange={setValue} className="w-full max-w-md">
-							<SnippetHeader>
-								<SnippetTabsList variant="outline">
-									{commands.map((command) => (
-										<SnippetTabsTrigger key={command.label} value={command.label}>
-											{command.label}
-										</SnippetTabsTrigger>
-									))}
-								</SnippetTabsList>
-							</SnippetHeader>
-							<SnippetTabsContents>
-								{commands.map((command) => (
-									<SnippetTabsContent
-										key={command.label}
-										value={command.label}
-										className="flex items-center justify-between gap-4"
-									>
-										{command.code}
-										{activeCommand && (
-											<SnippetCopyButton value={activeCommand.code} />
-										)}
-									</SnippetTabsContent>
-								))}
-							</SnippetTabsContents>
-						</Snippet>
+						<Feedback label="How was your experience?" />
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -529,8 +432,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={codeSnippetComponentCode}
-									defaultValue={codeSnippetComponentCode[0].filename}
+									data={feedbackComponentCode}
+									defaultValue={feedbackComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockFiles>
@@ -576,7 +479,7 @@ export default function Page() {
 				
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<SnippetCopyButton />"}
+						{"<Feedback />"}
 					</Badge>
 
 					<GridContainer
@@ -598,7 +501,7 @@ export default function Page() {
 						<GridRow>
 							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
 								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-									value
+									label
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
@@ -608,11 +511,11 @@ export default function Page() {
 						<GridRow>
 							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
 								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
-									timeout
+									type
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 2000)
+								string (default: "default")
 							</GridItem>
 						</GridRow>
 					</GridContainer>
