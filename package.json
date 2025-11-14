@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "bun --bun next dev --turbopack",
+		"dev": "bun next dev --turbopack",
 		"build": "bun --bun next build --turbopack",
 		"start": "bun --bun next start",
 		"lint": "biome check",

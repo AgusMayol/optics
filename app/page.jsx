@@ -4,6 +4,7 @@ import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Button } from "@/registry/agusmayol/button";
 import { ScrollArea } from "@/registry/agusmayol/scroll-area";
 import Image from "next/image";
+import { Input } from "@/registry/agusmayol/input";
 import Link from "next/link";
 import {
 	Snippet,
@@ -94,8 +95,9 @@ export default function Home() {
 					AgusMayol's Optics
 				</h1>
 				<p className="text-muted-foreground text-xl text-pretty">
-					A personalized design system that combines accessibility, intuitive
-					functionality, curated animations and visual appeal.
+					More than just a design system. It&apos;s a collection of tools and
+					resources that help build a more accessible, intuitive, and
+					aesthetically pleasing web applications.
 				</p>
 			</div>
 			<GridContainer cols={4} rows={6}>
@@ -109,6 +111,7 @@ export default function Home() {
 					>
 						<Button
 							variant="ghost"
+							animation="colors"
 							className="w-full h-[calc(100%-1px)] rounded-none flex flex-col items-center justify-center px-12 gap-8"
 						>
 							<p className="text-center text-5xl text-balance font-bold font-serif tracking-wide text-foreground truncate py-1">
@@ -129,6 +132,7 @@ export default function Home() {
 					>
 						<Button
 							variant="ghost"
+							animation="colors"
 							className="w-full h-full rounded-none"
 							asChild
 						>
@@ -136,21 +140,17 @@ export default function Home() {
 								href="/core/typography"
 								className="!p-5 !py-7 flex flex-col items-start !justify-between group"
 							>
-								<GridContainer cols={8} rows={1} className="w-full h-full p-8">
-									<GridRow className="rounded-md border-dashed">
-										<GridItem span={4} className="rounded-l-md border-dashed">
-											<span className="text-muted-foreground text-xl font-semibold truncate">
-												Inter
-											</span>
-										</GridItem>
-										<GridItem span={4} className="rounded-r-md border-dashed">
-											<span className="text-muted-foreground text-2xl font-semibold font-serif tracking-wider truncate">
-												Instrument
-											</span>
-										</GridItem>
-									</GridRow>
-								</GridContainer>
-								<div className="w-full">
+								<div className="w-full h-full absolute top-0 left-0 flex items-center justify-center overflow-hidden">
+									<Image
+										src="/images/sections/typography.svg"
+										alt="Typography"
+										className="w-[105%] h-[105%]"
+										width={100}
+										height={100}
+									/>
+								</div>
+
+								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
 										Typography
 									</h2>
@@ -168,6 +168,7 @@ export default function Home() {
 					>
 						<Button
 							variant="ghost"
+							animation="colors"
 							className="w-full h-full rounded-none"
 							asChild
 						>
@@ -176,7 +177,7 @@ export default function Home() {
 								className="!p-5 !py-7 flex flex-col items-start !justify-between group"
 							>
 								<div className="w-full flex items-center justify-between">
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 280)" }}
@@ -184,7 +185,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 254.9)" }}
@@ -192,7 +193,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 220)" }}
@@ -200,7 +201,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 180)" }}
@@ -208,7 +209,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 140)" }}
@@ -216,7 +217,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.905 0.166 98.1)" }}
@@ -224,7 +225,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 60)" }}
@@ -232,7 +233,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 20)" }}
@@ -240,7 +241,7 @@ export default function Home() {
 											<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 										</div>
 									</div>
-									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background/55">
+									<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 										<div
 											className="w-full h-full rounded-full relative"
 											style={{ backgroundColor: "oklch(0.8 0.193 0)" }}
@@ -266,7 +267,12 @@ export default function Home() {
 						span={2}
 						className="justify-start items-start h-[calc(100%-1px)]"
 					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none"
+							asChild
+						>
 							<Link
 								href="/components/accordion"
 								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group"
@@ -275,7 +281,7 @@ export default function Home() {
 									<Snippet value={null} className="">
 										<SnippetTabsContent
 											value={null}
-											className="w-full text-start text-xs flex items-center justify-between py-1 pr-1 opacity-55 text-foreground truncate"
+											className="w-full text-start text-xs flex items-center justify-between py-1 pr-1 text-muted-foreground truncate"
 										>
 											bunx --bun shadcn@latest add grid
 											<SnippetCopyButton value={null} />
@@ -283,13 +289,13 @@ export default function Home() {
 									</Snippet>
 
 									<div className="w-full flex gap-4">
-										<div className="flex items-center justify-start gap-2 opacity-55">
+										<div className="flex items-center justify-start gap-2">
 											<div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
 											<div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
 											<div className="w-3 h-3 rounded-full bg-[#27c93f]" />
 										</div>
 										<Button
-											className="opacity-55 text-xs truncate min-w-24 bg-background"
+											className="text-xs truncate min-w-24 bg-background group-hover:bg-background text-muted-foreground"
 											variant="outline"
 										>
 											Call to Action
@@ -297,7 +303,7 @@ export default function Home() {
 										<Button
 											size="icon"
 											variant="outline"
-											className="opacity-55 min-w-9 truncate bg-background"
+											className="min-w-9 truncate bg-background group-hover:bg-background text-muted-foreground"
 											role="button"
 											aria-label="Add"
 										>
@@ -305,16 +311,11 @@ export default function Home() {
 											<Plus size="4" />
 										</Button>
 
-										<div className="w-full flex opacity-55 text-foreground truncate">
-											<div className="p-2 border border-r-0 dark:border-border border-zinc-300 bg-background rounded-md rounded-r-none text-xs truncate w-10 flex items-center justify-center">
-												<span className="truncate">
-													<Mail />
-												</span>
-											</div>
-											<div className="w-full p-2 border dark:border-border border-zinc-300 bg-background rounded-md rounded-l-none text-xs truncate">
-												<span className="truncate">Email Address</span>
-											</div>
-										</div>
+										<Input
+											type="email"
+											placeholder="Email Address"
+											className="w-full text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 group-hover:bg-background"
+										/>
 									</div>
 								</div>
 
@@ -334,7 +335,12 @@ export default function Home() {
 						borderRight={false}
 						className="justify-start items-start h-[calc(100%-1px)]"
 					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none"
+							asChild
+						>
 							<Link
 								href="/core/iconography"
 								className="!p-5 !py-7 !pt-2 w-full h-full flex flex-col items-start !justify-between group"
@@ -442,198 +448,14 @@ export default function Home() {
 						span={2}
 						className="justify-start items-start h-[calc(100%-1px)]"
 					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none"
+							asChild
+						>
 							<Link
-								href="/core/layout"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group absolute"
-							>
-								<div className="w-full h-full flex items-center justify-center gap-4 relative -top-7 left-0 p-4">
-									<div className="p-4 rounded-lg border flex items-center justify-center">
-										<GridContainer cols={4} rows={4}>
-											<GridRow className="border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-4 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem className="p-2 border-dashed" span={2}>
-													<Monitor className="!size-10 text-muted-foreground absolute top-0 left-[1/4] mt-3.5 stroke-1" />
-												</GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="border-t-0 border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-2 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="-mt-[1px] border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-4 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-										</GridContainer>
-									</div>
-
-									<div className="p-4 rounded-lg border flex items-center justify-center">
-										<GridContainer cols={4} rows={4}>
-											<GridRow className="border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-4 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem className="p-2 border-dashed" span={2}>
-													<Smartphone className="!size-10 text-muted-foreground absolute top-0 left-[1/4] mt-3.5 stroke-1" />
-												</GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="border-t-0 border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-2 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-											<GridRow className="-mt-[1px] border-dashed">
-												<GridItem className="p-4 border-dashed"></GridItem>
-												<GridItem
-													className="p-4 border-dashed"
-													span={2}
-												></GridItem>
-												<GridItem className="p-4 border-dashed"></GridItem>
-											</GridRow>
-										</GridContainer>
-									</div>
-								</div>
-
-								<div className="relative -top-12 left-0 w-full">
-									<h2 className="text-base text-foreground truncate">Layout</h2>
-									<p className="text-muted-foreground font-normal truncate">
-										Consistent layout that adapts to various contexts.
-									</p>
-								</div>
-							</Link>
-						</Button>
-					</GridItem>
-					<GridItem
-						span={2}
-						borderRight={false}
-						className="justify-start items-start h-[calc(100%-1px)]"
-					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
-							<Link
-								href="/core/accesibility"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between absolute"
-							>
-								<div className="w-full h-full flex items-center justify-center relative top-0 left-0 p-4">
-									<div className="p-8 rounded-full border border-dashed flex items-center justify-center">
-										<div className="p-8 rounded-full border border-dashed flex items-center justify-center">
-											<div className="p-4 rounded-full border border-dashed flex items-center justify-center">
-												<PersonStanding className="!size-10 text-muted-foreground" />
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="relative -top-12 left-0 w-full">
-									<h2 className="text-base text-foreground truncate">
-										Accessibility
-									</h2>
-									<p className="text-muted-foreground font-normal truncate">
-										Content that everyone can access.
-									</p>
-								</div>
-							</Link>
-						</Button>
-					</GridItem>
-				</GridRow>
-
-				<GridRow className="border-b">
-					<GridItem
-						borderLeft={false}
-						span={2}
-						className="justify-start items-start"
-					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
-							<Link
-								href="/core/materials"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group absolute"
-							>
-								<GridContainer
-									cols={9}
-									rows={3}
-									className="relative -top-2.5 left-0"
-								>
-									<GridRow>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-									</GridRow>
-									<GridRow>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-									</GridRow>
-									<GridRow>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-										<GridItem className="bg-zinc-50 !border-l-4 !border-t-4 border-l-zinc-200 border-t-zinc-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,0.1)] hover:brightness-105 transition-all"></GridItem>
-										<GridItem className="bg-sky-700 !border-l-4 !border-t-4 border-l-sky-900 border-t-sky-900 shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] hover:brightness-110 transition-all"></GridItem>
-									</GridRow>
-								</GridContainer>
-
-								<div className="relative -top-1.5 left-0 w-full">
-									<h2 className="text-base text-foreground truncate">
-										Materials
-									</h2>
-									<p className="text-muted-foreground font-normal truncate">
-										Visual effect that creates a sense of depth.
-									</p>
-								</div>
-							</Link>
-						</Button>
-					</GridItem>
-
-					<GridItem
-						borderRight={false}
-						span={2}
-						className="justify-start items-start"
-					>
-						<Button variant="ghost" className="w-full rounded-none" asChild>
-							<Link
-								href="/core/animations"
+								href="/resources/animations"
 								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group absolute"
 							>
 								<div className="w-full h-full flex items-center justify-center relative -top-2.5 left-0 p-4">
@@ -750,6 +572,118 @@ export default function Home() {
 									</h2>
 									<p className="text-muted-foreground font-normal truncate">
 										Transitions that enhance the user experience.
+									</p>
+								</div>
+							</Link>
+						</Button>
+					</GridItem>
+					<GridItem
+						span={2}
+						borderRight={false}
+						className="justify-start items-start h-[calc(100%-1px)]"
+					>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none bg-transparent"
+							asChild
+						>
+							<Link
+								href="/resources/accesibility"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between"
+							>
+								<div className="w-full h-full absolute top-0 left-0 flex items-center justify-center overflow-hidden">
+									<Image
+										src="/images/sections/accessibility.svg"
+										alt="Accessibility"
+										className="w-[105%] h-[105%]"
+										width={100}
+										height={100}
+									/>
+								</div>
+
+								<div className="relative -bottom-38 left-0 w-full">
+									<h2 className="text-base text-foreground truncate">
+										Accessibility
+									</h2>
+									<p className="text-muted-foreground font-normal truncate">
+										Content that everyone can access.
+									</p>
+								</div>
+							</Link>
+						</Button>
+					</GridItem>
+				</GridRow>
+
+				<GridRow className="border-b">
+					<GridItem
+						borderLeft={false}
+						span={2}
+						className="justify-start items-start"
+					>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none"
+							asChild
+						>
+							<Link
+								href="/collections/cursor-rules"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group"
+							>
+								<div className="w-full h-full absolute top-0 left-0 flex items-center justify-center overflow-hidden">
+									<Image
+										src="/images/sections/cursor-rules.svg"
+										alt="Cursor Rules & MCPs"
+										className="w-[105%] h-[105%]"
+										width={100}
+										height={100}
+									/>
+								</div>
+
+								<div className="relative -bottom-38 left-0 w-full">
+									<h2 className="text-base text-foreground truncate">
+										Cursor Rules & MCPs
+									</h2>
+									<p className="text-muted-foreground font-normal truncate">
+										Rules that can be used to make Cursor more efficient.
+									</p>
+								</div>
+							</Link>
+						</Button>
+					</GridItem>
+
+					<GridItem
+						borderRight={false}
+						span={2}
+						className="justify-start items-start"
+					>
+						<Button
+							variant="ghost"
+							animation="colors"
+							className="w-full rounded-none"
+							asChild
+						>
+							<Link
+								href="/resources/security"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group"
+							>
+								<div className="w-full h-full absolute top-0 left-0 flex items-center justify-center overflow-hidden">
+									<Image
+										src="/images/sections/security.svg"
+										alt="Security"
+										className="w-[105%] h-[105%]"
+										width={100}
+										height={100}
+									/>
+								</div>
+
+								<div className="relative -bottom-38 left-0 w-full">
+									<h2 className="text-base text-foreground truncate">
+										Security
+									</h2>
+									<p className="text-muted-foreground font-normal truncate">
+										Best practices for your project.
 									</p>
 								</div>
 							</Link>

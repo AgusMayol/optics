@@ -110,13 +110,7 @@ function CardContent({ className, ...props }) {
 	);
 }
 
-function CardFooter({
-	className,
-	background = false,
-	color,
-	children,
-	...props
-}) {
+function CardFooter({ className, background = false, children, ...props }) {
 	return (
 		<div
 			data-slot="card-footer"

@@ -14,11 +14,22 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+	ContextMenu,
+	ContextMenuCheckboxItem,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuSeparator,
+	ContextMenuShortcut,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger,
+  } from "@/registry/agusmayol/context-menu"
 import {
 	Accordion,
 	AccordionItem,
@@ -59,18 +70,68 @@ const code = [
 		filename: "context-menu.jsx",
 		code: `import {
 	ContextMenu,
-	ContextMenuTrigger,
+	ContextMenuCheckboxItem,
 	ContextMenuContent,
 	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuSeparator,
+	ContextMenuShortcut,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger,
 } from "@/registry/agusmayol/context-menu";
 
 <ContextMenu>
-	<ContextMenuTrigger>Right click here</ContextMenuTrigger>
-	<ContextMenuContent>
-		<ContextMenuItem>Copy</ContextMenuItem>
-		<ContextMenuItem>Paste</ContextMenuItem>
-		<ContextMenuItem>Delete</ContextMenuItem>
-	</ContextMenuContent>
+    <ContextMenuTrigger>
+		<div className="bg-muted rounded-lg p-8 border border-dashed flex items-center justify-center">
+			<p className="text-muted-foreground text-sm select-none">
+				Right click here to see the context menu
+			</p>
+		</div>
+    </ContextMenuTrigger>
+
+    <ContextMenuContent className="w-52">
+        <ContextMenuItem inset>
+        	Back
+        	<ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset disabled>
+        	Forward
+        	<ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+    		Reload
+        	<ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+    		<ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+        	<ContextMenuSubContent className="w-44">
+            	<ContextMenuItem>Save Page...</ContextMenuItem>
+            	<ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            	<ContextMenuItem>Name Window...</ContextMenuItem>
+            	<ContextMenuSeparator />
+            	<ContextMenuItem>Developer Tools</ContextMenuItem>
+            	<ContextMenuSeparator />
+            	<ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+        	</ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem checked>
+        	Show Bookmarks
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        <ContextMenuSeparator />
+        <ContextMenuRadioGroup value="pedro">
+        	<ContextMenuLabel inset>People</ContextMenuLabel>
+        	<ContextMenuRadioItem value="pedro">
+        		Pedro Duarte
+    		</ContextMenuRadioItem>
+        	<ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+    </ContextMenuContent>
 </ContextMenu>`,
 	},
 ];
@@ -134,19 +195,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -161,12 +227,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -208,7 +277,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					Displays a menu to the user triggered by right-clicking or long-pressing.
+					Displays a menu to the user triggered by right-clicking or
+					long-pressing.
 				</p>
 			</div>
 
@@ -216,10 +286,57 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center gap-4">
-						<div className="bg-muted rounded-lg p-8 border border-dashed">
-							<p className="text-muted-foreground text-sm">Right click here to see the context menu</p>
+					<CardContent className="px-8 flex items-center justify-center gap-4">
+						
+
+						<ContextMenu>
+      <ContextMenuTrigger>
+	  <div className="bg-muted rounded-lg p-8 border border-dashed flex items-center justify-center">
+							<p className="text-muted-foreground text-sm select-none">
+								Right click here to see the context menu
+							</p>
 						</div>
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-52">
+        <ContextMenuItem inset>
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset disabled>
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-44">
+            <ContextMenuItem>Save Page...</ContextMenuItem>
+            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            <ContextMenuItem>Name Window...</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>Developer Tools</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem checked>
+          Show Bookmarks
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        <ContextMenuSeparator />
+        <ContextMenuRadioGroup value="pedro">
+          <ContextMenuLabel inset>People</ContextMenuLabel>
+          <ContextMenuRadioItem value="pedro">
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -270,8 +387,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -314,7 +431,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -383,20 +503,37 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-4">
 					<p className="text-muted-foreground">
-						This component includes multiple sub-components for building context menus:
+						This component includes multiple sub-components for building context
+						menus:
 					</p>
 					<div className="grid grid-cols-2 gap-2">
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenu />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuTrigger />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuContent />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuItem />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuCheckboxItem />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuRadioGroup />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuLabel />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<ContextMenuSeparator />"}</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenu />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuTrigger />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuContent />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuItem />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuCheckboxItem />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuRadioGroup />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuLabel />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<ContextMenuSeparator />"}
+						</Badge>
 					</div>
 				</div>
 			</div>
@@ -440,4 +577,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -234,28 +234,31 @@ function setCookie(name, value, days = 365) {
 export default function Page() {
 	const pathname = usePathname();
 	const [mounted, setMounted] = React.useState(false);
-	
+
 	// State for package manager (pnpm, npm, yarn, bun)
 	const [value, setValue] = React.useState(commands[0].label);
-	
+
 	// State for installation tab (CLI or Manual)
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
 
 	// Load cookies on mount
 	React.useEffect(() => {
 		setMounted(true);
-		
+
 		// Load package manager preference
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			// Set default cookie if it doesn't exist
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		// Load installation tab preference
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
@@ -274,12 +277,15 @@ export default function Page() {
 	}, [value, mounted]);
 
 	// Update cookie when installation tab changes
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	// Función para obtener el anterior o siguiente item de la sección "Components"
 	function getSiblingComponent(pathname, direction = "previous") {
@@ -345,11 +351,11 @@ export default function Page() {
 						<Button variant="warning">Warning</Button>
 						<Button variant="muted">Muted</Button>
 						<Button variant="ghost">Ghost</Button>
-						
+
 						<Button variant="destructive">Destructive</Button>
 						<Button variant="raised">Raised</Button>
 						<Button size="lg">Large</Button>
-						
+
 						<Button size="icon-lg">
 							<Sparkle />
 						</Button>
@@ -422,8 +428,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -466,44 +472,47 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
-						<div className="w-full flex flex-col gap-2">
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Install the following dependencies:
-							</p>
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
+							<div className="w-full flex flex-col gap-2">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Install the following dependencies:
+								</p>
 
-						<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
+								<Snippet
+									onValueChange={setValue}
+									value={value}
+									className="w-full"
+								>
+									<SnippetHeader className="">
+										<SnippetTabsList variant="outline">
+											{commands.map((command) => (
+												<SnippetTabsTrigger
+													key={command.label}
+													value={command.label}
+												>
+													<span>{command.label}</span>
+												</SnippetTabsTrigger>
+											))}
+										</SnippetTabsList>
+									</SnippetHeader>
+									<SnippetTabsContents>
 										{commands.map((command) => (
-											<SnippetTabsTrigger
+											<SnippetTabsContent
 												key={command.label}
 												value={command.label}
+												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
 											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
+												{command.code}
+												{activeCommand && (
+													<SnippetCopyButton value={activeCommand.code} />
+												)}
+											</SnippetTabsContent>
 										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
+									</SnippetTabsContents>
+								</Snippet>
 							</div>
 
 							<div className="w-full flex flex-col gap-2">
@@ -526,10 +535,13 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
-										<CodeBlockCopyButton variant="ghost"
+
+										<CodeBlockCopyButton
+											variant="ghost"
 											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() => console.error("Failed to copy code to clipboard")}
+											onError={() =>
+												console.error("Failed to copy code to clipboard")
+											}
 										/>
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -561,7 +573,7 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-					{"<Button />"}
+						{"<Button />"}
 					</Badge>
 
 					<GridContainer
@@ -582,7 +594,10 @@ export default function Page() {
 								<ALargeSmall />
 								Name
 							</GridItem>
-							<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+							<GridItem
+								span={8}
+								className="text-xs font-semibold gap-1 mr-auto"
+							>
 								<Binary size={16} />
 								Type
 							</GridItem>
@@ -601,7 +616,7 @@ export default function Page() {
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
 								"default" | "outline" | "ghost" | "destructive" | "secondary" |
-								"link"
+								"info" | "success" | "warning" | "muted" | "raised" | "link"
 							</GridItem>
 						</GridRow>
 						<GridRow>

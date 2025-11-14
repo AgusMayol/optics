@@ -22,11 +22,7 @@ import {
 import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -68,17 +64,53 @@ const code = [
 		code: `import { ButtonGroup } from "@/registry/agusmayol/button-group";
 import { Button } from "@/registry/agusmayol/button";
 
-<ButtonGroup>
-	<Button variant="outline">Copy</Button>
-	<Button variant="outline">Download</Button>
-	<Button variant="outline">Share</Button>
-</ButtonGroup>
+<div className="flex items-center justify-center gap-6">
+	<ButtonGroup orientation="vertical">
+		<Button variant="raised" animation="none">
+			<Copy />
+			Copy
+		</Button>
+		<Button variant="raised" animation="colors">
+			<Download />
+			Download
+		</Button>
+		<Button variant="raised" animation="colors">
+			<Share2 />
+			Share
+		</Button>
+	</ButtonGroup>
 
-<ButtonGroup orientation="vertical">
-	<Button variant="outline">Copy</Button>
-	<Button variant="outline">Download</Button>
-	<Button variant="outline">Share</Button>
-</ButtonGroup>`,
+	<div className="flex flex-col items-start justify-center gap-6">
+		<ButtonGroup>
+			<Button variant="raised" animation="colors">
+				<Copy />
+				Copy
+			</Button>
+			<Button variant="raised" animation="colors">
+				<Download />
+				Download
+			</Button>
+			<Button variant="raised" animation="colors">
+				<Share2 />
+				Share
+			</Button>
+		</ButtonGroup>
+
+		<ButtonGroup>
+			<ButtonGroupText variant="raised">Actions</ButtonGroupText>
+			<ButtonGroupSeparator />
+			<Button variant="raised" animation="colors">
+				<Copy />
+			</Button>
+			<Button variant="raised" animation="colors">
+				<Download />
+			</Button>
+			<Button variant="raised" animation="colors">
+				<Share2 />
+			</Button>
+		</ButtonGroup>
+	</div>
+</div>`,
 	},
 ];
 
@@ -221,19 +253,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -248,12 +285,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -285,7 +325,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A component that groups multiple buttons together with consistent styling and spacing.
+					A component that groups multiple buttons together with consistent
+					styling and spacing.
 				</p>
 			</div>
 
@@ -293,50 +334,54 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-start gap-6">
-						<ButtonGroup>
-							<Button variant="outline">
-								<Copy />
-								Copy
-							</Button>
-							<Button variant="outline">
-								<Download />
-								Download
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-								Share
-							</Button>
-						</ButtonGroup>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-6">
+						<div className="flex items-center justify-center gap-6">
+							<ButtonGroup orientation="vertical">
+								<Button variant="raised" animation="none">
+									<Copy />
+									Copy
+								</Button>
+								<Button variant="raised" animation="colors">
+									<Download />
+									Download
+								</Button>
+								<Button variant="raised" animation="colors">
+									<Share2 />
+									Share
+								</Button>
+							</ButtonGroup>
 
-						<ButtonGroup orientation="vertical">
-							<Button variant="outline">
-								<Copy />
-								Copy
-							</Button>
-							<Button variant="outline">
-								<Download />
-								Download
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-								Share
-							</Button>
-						</ButtonGroup>
+							<div className="flex flex-col items-start justify-center gap-6">
+								<ButtonGroup>
+									<Button variant="raised" animation="colors">
+										<Copy />
+										Copy
+									</Button>
+									<Button variant="raised" animation="colors">
+										<Download />
+										Download
+									</Button>
+									<Button variant="raised" animation="colors">
+										<Share2 />
+										Share
+									</Button>
+								</ButtonGroup>
 
-						<ButtonGroup>
-							<ButtonGroupText>Actions</ButtonGroupText>
-							<ButtonGroupSeparator />
-							<Button variant="outline">
-								<Copy />
-							</Button>
-							<Button variant="outline">
-								<Download />
-							</Button>
-							<Button variant="outline">
-								<Share2 />
-							</Button>
-						</ButtonGroup>
+								<ButtonGroup>
+									<ButtonGroupText variant="raised">Actions</ButtonGroupText>
+									<ButtonGroupSeparator />
+									<Button variant="raised" animation="colors">
+										<Copy />
+									</Button>
+									<Button variant="raised" animation="colors">
+										<Download />
+									</Button>
+									<Button variant="raised" animation="colors">
+										<Share2 />
+									</Button>
+								</ButtonGroup>
+							</div>
+						</div>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -387,8 +432,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -431,7 +476,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -491,7 +539,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -521,7 +569,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-8">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono">
@@ -535,18 +583,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										orientation
 									</Badge>
 								</GridItem>
@@ -565,27 +625,55 @@ export default function Page() {
 						<GridContainer
 							cols={12}
 							border={false}
-							rows={2}
+							rows={3}
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										asChild
 									</Badge>
 								</GridItem>
 								<GridItem span={8} className="text-xs font-mono justify-start">
 									boolean (default: false)
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										variant
+									</Badge>
+								</GridItem>
+								<GridItem span={8} className="text-xs font-mono justify-start">
+									"raised" | "ghost" | "outline" (default: "raised")
 								</GridItem>
 							</GridRow>
 						</GridContainer>
@@ -603,18 +691,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										orientation
 									</Badge>
 								</GridItem>

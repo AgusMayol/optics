@@ -63,9 +63,11 @@ const code = [
 		code: `import { Badge } from "@/registry/agusmayol/badge";
 
 <Badge>Default</Badge>
+<Badge variant="raised">Raised</Badge>
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="outline">Outline</Badge>
-<Badge variant="destructive">Destructive</Badge>`,
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="ghost">Ghost</Badge>`,
 	},
 ];
 
@@ -178,28 +180,33 @@ function setCookie(name, value, days = 365) {
 export default function Page() {
 	const pathname = usePathname();
 	const [mounted, setMounted] = React.useState(false);
-	
+
 	// State for package manager (pnpm, npm, yarn, bun)
 	const [value, setValue] = React.useState(commands[0].label);
-	
+
 	// State for installation tab (CLI or Manual)
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	// Load cookies on mount
 	React.useEffect(() => {
 		setMounted(true);
-		
+
 		// Load package manager preference
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		// Load installation tab preference
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
@@ -217,12 +224,15 @@ export default function Page() {
 	}, [value, mounted]);
 
 	// Update cookie when installation tab changes
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	// Función para obtener el anterior o siguiente item de la sección "Components"
 	function getSiblingComponent(pathname, direction = "previous") {
@@ -275,11 +285,13 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center flex-wrap gap-4">
+					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						<Badge>Default</Badge>
+						<Badge variant="raised">Raised</Badge>
 						<Badge variant="secondary">Secondary</Badge>
 						<Badge variant="outline">Outline</Badge>
 						<Badge variant="destructive">Destructive</Badge>
+						<Badge variant="ghost">Ghost</Badge>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -330,8 +342,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -374,7 +386,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -434,7 +449,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -487,7 +502,10 @@ export default function Page() {
 								<ALargeSmall />
 								Name
 							</GridItem>
-							<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+							<GridItem
+								span={8}
+								className="text-xs font-semibold gap-1 mr-auto"
+							>
 								<Binary size={16} />
 								Type
 							</GridItem>
@@ -505,7 +523,8 @@ export default function Page() {
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								"default" | "secondary" | "destructive" | "outline"
+								"default" | "secondary" | "destructive" | "outline" | "ghost" |
+								"raised"
 							</GridItem>
 						</GridRow>
 						<GridRow>
@@ -567,4 +586,3 @@ export default function Page() {
 		</main>
 	);
 }
-

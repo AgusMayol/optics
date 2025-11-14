@@ -22,16 +22,13 @@ import {
 	ArrowUpRight,
 	Binary,
 	AlertTriangle,
+	Info,
 } from "lucide-react";
 import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -87,17 +84,21 @@ import { AlertTriangle } from "lucide-react";
 
 <AlertDialog>
 	<AlertDialogTrigger asChild>
-		<Button variant="outline">Open Alert</Button>
+		<Button variant="raised">Show Dialog</Button>
 	</AlertDialogTrigger>
 	<AlertDialogContent>
-		<AlertDialogIcon>
-			<AlertTriangle className="size-5 text-warning" />
-		</AlertDialogIcon>
 		<AlertDialogHeader>
-			<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+			<AlertDialogIcon>
+				<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
+					<Info className="text-emerald-600" />
+				</div>
+				<AlertDialogTitle>
+					Are you absolutely sure?
+				</AlertDialogTitle>
+			</AlertDialogIcon>
 			<AlertDialogDescription>
-				This action cannot be undone. This will permanently delete your
-				account and remove your data from our servers.
+				This action cannot be undone. This will permanently delete
+				your account and remove your data from our servers.
 			</AlertDialogDescription>
 		</AlertDialogHeader>
 		<AlertDialogFooter>
@@ -333,19 +334,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -360,12 +366,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -407,7 +416,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A modal dialog that interrupts the user with important content and expects a response.
+					A modal dialog that interrupts the user with important content and
+					expects a response.
 				</p>
 			</div>
 
@@ -415,20 +425,25 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center gap-4">
+					<CardContent className="px-8 flex items-center justify-center gap-4">
 						<AlertDialog>
 							<AlertDialogTrigger asChild>
-								<Button variant="outline">Show Dialog</Button>
+								<Button variant="raised">Show Dialog</Button>
 							</AlertDialogTrigger>
 							<AlertDialogContent>
-								<AlertDialogIcon>
-									<AlertTriangle className="size-5 text-amber-600" />
-								</AlertDialogIcon>
 								<AlertDialogHeader>
-									<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+									<AlertDialogIcon>
+										<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
+											<Info className="text-emerald-600" />
+										</div>
+										<AlertDialogTitle>
+											Are you absolutely sure?
+										</AlertDialogTitle>
+									</AlertDialogIcon>
+
 									<AlertDialogDescription>
-										This action cannot be undone. This will permanently delete your
-										account and remove your data from our servers.
+										This action cannot be undone. This will permanently delete
+										your account and remove your data from our servers.
 									</AlertDialogDescription>
 								</AlertDialogHeader>
 								<AlertDialogFooter>
@@ -487,8 +502,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -531,7 +546,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -591,7 +609,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -621,10 +639,11 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-4">
 					<p className="text-sm text-muted-foreground">
-						The Alert Dialog component is composed of several sub-components that work together to create modal dialogs.
+						The Alert Dialog component is composed of several sub-components
+						that work together to create modal dialogs.
 					</p>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -632,21 +651,27 @@ export default function Page() {
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialog />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Main container component</p>
+							<p className="text-xs text-muted-foreground">
+								Main container component
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogTrigger />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Button that opens the dialog</p>
+							<p className="text-xs text-muted-foreground">
+								Button that opens the dialog
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogContent />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Dialog content container</p>
+							<p className="text-xs text-muted-foreground">
+								Dialog content container
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
@@ -667,21 +692,27 @@ export default function Page() {
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogDescription />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Dialog description</p>
+							<p className="text-xs text-muted-foreground">
+								Dialog description
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogFooter />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Footer with actions</p>
+							<p className="text-xs text-muted-foreground">
+								Footer with actions
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogAction />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Primary action button</p>
+							<p className="text-xs text-muted-foreground">
+								Primary action button
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
@@ -695,7 +726,9 @@ export default function Page() {
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<AlertDialogIcon />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Icon with close button</p>
+							<p className="text-xs text-muted-foreground">
+								Icon with close button
+							</p>
 						</div>
 					</div>
 				</div>
@@ -740,4 +773,3 @@ export default function Page() {
 		</main>
 	);
 }
-

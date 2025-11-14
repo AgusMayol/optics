@@ -14,11 +14,7 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -55,37 +51,9 @@ import {
 
 const code = [
 	{
-		language: "jsx",
-		filename: "example.jsx",
-		code: `import {
-	CodeBlock,
-	CodeBlockBody,
-	CodeBlockContent,
-	CodeBlockCopyButton,
-	CodeBlockHeader,
-	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-
-const codeData = [{
-	language: "javascript",
-	filename: "example.js",
-	code: "console.log('Hello World!');"
-}];
-
-<CodeBlock data={codeData} defaultValue="example.js">
-	<CodeBlockHeader>
-		<CodeBlockCopyButton />
-	</CodeBlockHeader>
-	<CodeBlockBody>
-		{(item) => (
-			<CodeBlockItem value={item.filename}>
-				<CodeBlockContent language={item.language}>
-					{item.code}
-				</CodeBlockContent>
-			</CodeBlockItem>
-		)}
-	</CodeBlockBody>
-</CodeBlock>`,
+		language: "js",
+		filename: "example.js",
+		code: `console.log("Hello World!");`,
 	},
 ];
 
@@ -148,19 +116,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -175,12 +148,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -212,7 +188,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A powerful code block component with syntax highlighting, file tabs, and copy functionality.
+					A powerful code block component with syntax highlighting, file tabs,
+					and copy functionality.
 				</p>
 			</div>
 
@@ -297,8 +274,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -341,7 +318,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -410,20 +390,37 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-4">
 					<p className="text-muted-foreground">
-						This component includes multiple sub-components for building code blocks:
+						This component includes multiple sub-components for building code
+						blocks:
 					</p>
 					<div className="grid grid-cols-2 gap-2">
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlock />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockHeader />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockBody />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockContent />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockItem />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockCopyButton />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockFiles />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<CodeBlockFilename />"}</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlock />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockHeader />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockBody />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockContent />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockItem />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockCopyButton />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockFiles />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<CodeBlockFilename />"}
+						</Badge>
 					</div>
 				</div>
 			</div>
@@ -467,4 +464,3 @@ export default function Page() {
 		</main>
 	);
 }
-

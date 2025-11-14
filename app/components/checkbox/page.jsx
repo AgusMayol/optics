@@ -16,11 +16,7 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -163,22 +159,27 @@ function setCookie(name, value, days = 365) {
 export default function Page() {
 	const pathname = usePathname();
 	const [mounted, setMounted] = React.useState(false);
-	
+
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -193,12 +194,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -242,7 +246,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A control that allows the user to toggle between checked and not checked.
+					A control that allows the user to toggle between checked and not
+					checked.
 				</p>
 			</div>
 
@@ -250,22 +255,24 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-start gap-4">
-						<div className="flex items-center space-x-2">
-							<Checkbox id="terms" />
-							<Label htmlFor="terms">Accept terms and conditions</Label>
-						</div>
+					<div className="w-full flex items-center justify-center gap-4">
+						<CardContent className="px-8 flex flex-col items-start gap-4">
+							<div className="flex items-center space-x-2">
+								<Checkbox id="terms" />
+								<Label htmlFor="terms">Accept terms and conditions</Label>
+							</div>
 
-						<div className="flex items-center space-x-2">
-							<Checkbox id="newsletter" />
-							<Label htmlFor="newsletter">Subscribe to newsletter</Label>
-						</div>
+							<div className="flex items-center space-x-2">
+								<Checkbox id="newsletter" />
+								<Label htmlFor="newsletter">Subscribe to newsletter</Label>
+							</div>
 
-						<div className="flex items-center space-x-2">
-							<Checkbox id="disabled" disabled />
-							<Label htmlFor="disabled">Disabled checkbox</Label>
-						</div>
-					</CardContent>
+							<div className="flex items-center space-x-2">
+								<Checkbox id="disabled" disabled />
+								<Label htmlFor="disabled">Disabled checkbox</Label>
+							</div>
+						</CardContent>
+					</div>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
 						<Accordion type={"single"} collapsible className="w-full">
@@ -315,8 +322,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -359,7 +366,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -419,7 +429,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -456,7 +466,8 @@ export default function Page() {
 
 					<div className="w-full p-4 border rounded-xl bg-muted">
 						<p className="text-sm text-muted-foreground">
-							No specific props. Accepts standard Radix UI Checkbox primitive props and HTML attributes.
+							No specific props. Accepts standard Radix UI Checkbox primitive
+							props and HTML attributes.
 						</p>
 					</div>
 				</div>
@@ -501,4 +512,3 @@ export default function Page() {
 		</main>
 	);
 }
-

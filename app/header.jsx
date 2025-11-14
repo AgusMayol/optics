@@ -97,7 +97,7 @@ export function Header({ links }) {
 	return (
 		<div className="w-full h-16 flex items-center justify-between gap-4 rounded-t-xl border-b lg:rounded-tl-none p-4">
 			<ContextMenu>
-				<ContextMenuTrigger>
+				<ContextMenuTrigger asChild>
 					<Link
 						href="/"
 						className="w-full h-16 lg:hidden flex flex-row items-center justify-center gap-2 rounded-tl-xl"

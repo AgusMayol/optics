@@ -114,7 +114,7 @@ export function Sidebar({ links, maxHeight = 0 }) {
 										}
 									}}
 									variant="ghost"
-									className="w-full text-xs pr-2 justify-between font-medium data-[active=true]:bg-sidebar-accent text-muted-foreground data-[active=true]:text-foreground"
+									className="w-full text-xs pr-2 justify-between font-medium data-[active=true]:bg-sidebar-accent text-muted-foreground data-[active=true]:text-foreground transition-none transition-transform"
 									data-active={item.href === pathname}
 									asChild
 								>

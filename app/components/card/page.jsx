@@ -1,6 +1,14 @@
 "use client";
 import * as React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "@/registry/agusmayol/card";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+	CardFooter,
+	CardAction,
+} from "@/registry/agusmayol/card";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -57,19 +65,45 @@ const code = [
 		code: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "@/registry/agusmayol/card";
 import { Button } from "@/registry/agusmayol/button";
 
-<Card>
+<Card className="w-[350px]">
 	<CardHeader>
-		<CardTitle>Card Title</CardTitle>
-		<CardDescription>Card Description</CardDescription>
+		<CardTitle>Notifications</CardTitle>
+		<CardDescription>You have 3 unread messages.</CardDescription>
 		<CardAction>
-			<Button size="sm" variant="outline">Action</Button>
+			<Button size="icon-sm" variant="ghost">
+				<Bell />
+			</Button>
 		</CardAction>
 	</CardHeader>
 	<CardContent>
-		<p>Card content goes here.</p>
+		<p className="text-sm">
+			This is a sample card with header, content, and footer
+			sections.
+		</p>
 	</CardContent>
 	<CardFooter>
-		<Button>Footer Action</Button>
+		<Button className="w-full">Mark all as read</Button>
+	</CardFooter>
+</Card>
+
+<Card className="w-[350px]" decorations>
+	<CardHeader>
+		<CardTitle>Notifications</CardTitle>
+		<CardDescription>You have 3 unread messages.</CardDescription>
+		<CardAction>
+			<Button size="icon-sm" variant="ghost">
+				<Bell />
+			</Button>
+		</CardAction>
+	</CardHeader>
+	<CardContent>
+		<p className="text-sm">
+			This is a sample card with header, content, and footer
+			sections.
+		</p>
+	</CardContent>
+	<CardFooter background className="justify-end">
+		<Button size="sm">Mark all as read</Button>
 	</CardFooter>
 </Card>`,
 	},
@@ -303,19 +337,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -330,12 +369,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -385,7 +427,7 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<div className="px-8 flex items-center gap-4">
+					<CardContent className="px-8 flex items-center justify-center gap-4">
 						<Card className="w-[350px]">
 							<CardHeader>
 								<CardTitle>Notifications</CardTitle>
@@ -397,13 +439,37 @@ export default function Page() {
 								</CardAction>
 							</CardHeader>
 							<CardContent>
-								<p className="text-sm">This is a sample card with header, content, and footer sections.</p>
+								<p className="text-sm">
+									This is a sample card with header, content, and footer
+									sections.
+								</p>
 							</CardContent>
 							<CardFooter>
 								<Button className="w-full">Mark all as read</Button>
 							</CardFooter>
 						</Card>
-					</div>
+
+						<Card className="w-[350px]" decorations>
+							<CardHeader>
+								<CardTitle>Notifications</CardTitle>
+								<CardDescription>You have 3 unread messages.</CardDescription>
+								<CardAction>
+									<Button size="icon-sm" variant="ghost">
+										<Bell />
+									</Button>
+								</CardAction>
+							</CardHeader>
+							<CardContent>
+								<p className="text-sm">
+									This is a sample card with header, content, and footer
+									sections.
+								</p>
+							</CardContent>
+							<CardFooter background className="justify-end">
+								<Button size="sm">Mark all as read</Button>
+							</CardFooter>
+						</Card>
+					</CardContent>
 
 					<div className="border-t px-0 py-0 bg-background rounded-b-xl mt-8">
 						<Accordion type={"single"} collapsible className="w-full">
@@ -453,8 +519,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -497,7 +563,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -557,7 +626,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -587,7 +656,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-6">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono w-fit">
@@ -601,18 +670,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										decorations
 									</Badge>
 								</GridItem>
@@ -635,18 +716,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										background
 									</Badge>
 								</GridItem>
@@ -698,4 +791,3 @@ export default function Page() {
 		</main>
 	);
 }
-
