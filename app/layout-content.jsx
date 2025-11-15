@@ -4,6 +4,7 @@ import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { Button } from "@/registry/agusmayol/button";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export const links = [
 	{
@@ -534,16 +535,16 @@ export function LayoutContent({ children }) {
 	const [contentRef, contentHeight] = useElementHeight();
 
 	return (
-		<div className="w-full h-full lg:max-w-7xl mx-auto grid grid-cols-14 min-h-svh px-4 py-8 items-start">
+		<div className="w-full h-full lg:max-w-7xl mx-auto grid grid-cols-14 min-h-svh lg:px-4 lg:py-8 items-start">
 			<Sidebar links={links} maxHeight={contentHeight} />
 			<div
 				ref={contentRef}
-				className="w-full col-span-full lg:col-span-11 border lg:border-l-0 lg:rounded-l-none rounded-xl flex flex-col flex-1 bg-sidebar"
+				className="w-full col-span-full lg:col-span-11 lg:border lg:border-l-0 lg:rounded-l-none lg:rounded-xl flex flex-col flex-1 lg:bg-sidebar"
 			>
 				<Header links={links} />
 				{children}
 			</div>
-			<footer className="col-span-full w-full flex items-center justify-end py-3 px-2">
+			<footer className="col-span-full border-t lg:border-t-0 w-full flex items-center justify-end text-end py-3 px-4 lg:px-2">
 				<p className="text-xs text-muted-foreground/80">
 					Made from 🇦🇷 by{" "}
 					<Button
@@ -557,6 +558,7 @@ export function LayoutContent({ children }) {
 							rel="noopener noreferrer"
 						>
 							AgusMayol
+							<ArrowUpRight size={16} className="-ml-2" />
 						</Link>
 					</Button>
 					. The source code is available on{" "}
@@ -571,6 +573,7 @@ export function LayoutContent({ children }) {
 							rel="noopener noreferrer"
 						>
 							GitHub
+							<ArrowUpRight size={16} className="-ml-2" />
 						</Link>
 					</Button>
 					.

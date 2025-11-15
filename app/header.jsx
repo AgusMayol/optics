@@ -95,12 +95,12 @@ export function Header({ links }) {
 	}, [systemTheme]);
 
 	return (
-		<div className="w-full h-16 flex items-center justify-between gap-4 rounded-t-xl border-b lg:rounded-tl-none p-4">
+		<div className="w-full h-16 flex items-center justify-between gap-4 lg:rounded-t-xl border-b lg:rounded-tl-none p-4">
 			<ContextMenu>
 				<ContextMenuTrigger asChild>
 					<Link
 						href="/"
-						className="w-full h-16 lg:hidden flex flex-row items-center justify-center gap-2 rounded-tl-xl"
+						className="w-full h-16 lg:hidden flex flex-row items-center justify-start lg:justify-center gap-2 rounded-tl-xl"
 					>
 						<Image
 							src="/images/new_logo.svg"
@@ -116,7 +116,7 @@ export function Header({ links }) {
 							width={100}
 							height={100}
 						/> */}
-						<span className="text-base font-bold w-full">
+						<span className="text-base font-bold w-full hidden lg:block">
 							AgusMayol's Optics
 						</span>
 					</Link>
@@ -126,7 +126,8 @@ export function Header({ links }) {
 				</ContextMenuContent>
 			</ContextMenu>
 
-			<CommandDialogComponent links={links} />
+			<CommandDialogComponent className="hidden lg:block" links={links} />
+
 			<div className="w-full h-full flex items-center justify-end gap-1.5">
 				<Button variant="ghost" size="icon">
 					<Link
