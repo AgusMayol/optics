@@ -20,11 +20,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -246,7 +242,7 @@ export default function Page() {
 									@peduarte starred 3 repositories
 								</h4>
 								<CollapsibleTrigger asChild>
-									<Button variant="ghost" size="sm" className="w-9 p-0">
+									<Button variant="raised" size="icon" className="w-9 p-0">
 										<ChevronDown className="h-4 w-4" />
 										<span className="sr-only">Toggle</span>
 									</Button>
@@ -498,4 +494,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "bun next dev --turbopack",
-		"build": "bun --bun next build --turbopack",
-		"start": "bun --bun next start",
+		"build": "bun next build --turbopack",
+		"start": "bun next start",
 		"lint": "biome check",
 		"format": "biome format --write",
 		"registry:build": "shadcn build"

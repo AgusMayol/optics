@@ -26,11 +26,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -81,7 +77,7 @@ import { Button } from "@/registry/agusmayol/button";
 
 <Drawer>
 	<DrawerTrigger asChild>
-		<Button variant="outline">Open Drawer</Button>
+		<Button variant="raised">Open Drawer</Button>
 	</DrawerTrigger>
 	<DrawerContent>
 		<DrawerHeader>
@@ -97,9 +93,9 @@ import { Button } from "@/registry/agusmayol/button";
 			</div>
 		</div>
 		<DrawerFooter>
-			<Button>Submit</Button>
+			<Button variant="raised">Submit</Button>
 			<DrawerClose asChild>
-				<Button variant="outline">Cancel</Button>
+				<Button variant="raised">Cancel</Button>
 			</DrawerClose>
 		</DrawerFooter>
 	</DrawerContent>
@@ -296,12 +292,14 @@ export default function Page() {
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						<Drawer open={open} onOpenChange={setOpen}>
 							<DrawerTrigger asChild>
-								<Button variant="outline">Open Drawer</Button>
+								<Button variant="raised">Open Drawer</Button>
 							</DrawerTrigger>
 							<DrawerContent>
 								<DrawerHeader>
 									<DrawerTitle>Are you absolutely sure?</DrawerTitle>
-									<DrawerDescription>This action cannot be undone.</DrawerDescription>
+									<DrawerDescription>
+										This action cannot be undone.
+									</DrawerDescription>
 								</DrawerHeader>
 								<div className="p-4 pb-0">
 									<div className="space-y-4">
@@ -312,9 +310,9 @@ export default function Page() {
 									</div>
 								</div>
 								<DrawerFooter>
-									<Button>Submit</Button>
+									<Button variant="raised">Submit</Button>
 									<DrawerClose asChild>
-										<Button variant="outline">Cancel</Button>
+										<Button variant="raised">Cancel</Button>
 									</DrawerClose>
 								</DrawerFooter>
 							</DrawerContent>
@@ -523,7 +521,7 @@ export default function Page() {
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								(open: boolean) => void
+								(open: boolean) =&gt; void
 							</GridItem>
 						</GridRow>
 					</GridContainer>
@@ -569,4 +567,3 @@ export default function Page() {
 		</main>
 	);
 }
-

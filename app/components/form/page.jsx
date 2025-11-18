@@ -25,11 +25,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -107,7 +103,7 @@ function onSubmit(data) {
 				</FormItem>
 			)}
 		/>
-		<Button type="submit">Submit</Button>
+		<Button type="submit" variant="raised">Submit</Button>
 	</form>
 </Form>`,
 	},
@@ -315,7 +311,10 @@ export default function Page() {
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						<Form {...form}>
-							<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full max-w-md">
+							<form
+								onSubmit={form.handleSubmit(onSubmit)}
+								className="space-y-8 w-full max-w-md"
+							>
 								<FormField
 									control={form.control}
 									name="username"
@@ -332,7 +331,9 @@ export default function Page() {
 										</FormItem>
 									)}
 								/>
-								<Button type="submit">Submit</Button>
+								<Button type="submit" variant="raised">
+									Submit
+								</Button>
 							</form>
 						</Form>
 					</CardContent>
@@ -569,4 +570,3 @@ export default function Page() {
 		</main>
 	);
 }
-

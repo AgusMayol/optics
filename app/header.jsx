@@ -116,8 +116,13 @@ export function Header({ links }) {
 			{isMobile && (
 				<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
 					<SheetTrigger asChild>
-						<Button variant="ghost" size="icon">
+						<Button
+							variant="ghost"
+							size="icon"
+							className="w-full flex items-center justify-start gap-2"
+						>
 							<MenuIcon />
+							Menu
 						</Button>
 					</SheetTrigger>
 					<SheetContent side="left" className="pb-3 pt-6">

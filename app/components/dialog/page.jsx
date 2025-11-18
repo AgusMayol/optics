@@ -25,11 +25,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -79,7 +75,7 @@ import { Button } from "@/registry/agusmayol/button";
 
 <Dialog>
 	<DialogTrigger asChild>
-		<Button variant="outline">Edit Profile</Button>
+		<Button variant="raised">Edit Profile</Button>
 	</DialogTrigger>
 	<DialogContent>
 		<DialogHeader>
@@ -97,7 +93,7 @@ import { Button } from "@/registry/agusmayol/button";
 			</div>
 		</div>
 		<DialogFooter>
-			<Button type="submit">Save changes</Button>
+			<Button type="submit" variant="raised">Save changes</Button>
 		</DialogFooter>
 	</DialogContent>
 </Dialog>`,
@@ -291,7 +287,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+					A window overlaid on either the primary window or another dialog
+					window, rendering the content underneath inert.
 				</p>
 			</div>
 
@@ -302,13 +299,14 @@ export default function Page() {
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						<Dialog open={open} onOpenChange={setOpen}>
 							<DialogTrigger asChild>
-								<Button variant="outline">Edit Profile</Button>
+								<Button variant="raised">Edit Profile</Button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
 									<DialogTitle>Edit profile</DialogTitle>
 									<DialogDescription>
-										Make changes to your profile here. Click save when you're done.
+										Make changes to your profile here. Click save when you're
+										done.
 									</DialogDescription>
 								</DialogHeader>
 								<div className="grid gap-4 py-4">
@@ -316,17 +314,27 @@ export default function Page() {
 										<Label htmlFor="name" className="text-right">
 											Name
 										</Label>
-										<Input id="name" value="Pedro Duarte" className="col-span-3" />
+										<Input
+											id="name"
+											defaultValue="Pedro Duarte"
+											className="col-span-3"
+										/>
 									</div>
 									<div className="grid grid-cols-4 items-center gap-4">
 										<Label htmlFor="username" className="text-right">
 											Username
 										</Label>
-										<Input id="username" value="@peduarte" className="col-span-3" />
+										<Input
+											id="username"
+											defaultValue="@peduarte"
+											className="col-span-3"
+										/>
 									</div>
 								</div>
 								<DialogFooter>
-									<Button type="submit">Save changes</Button>
+									<Button type="submit" variant="default">
+										Save changes
+									</Button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
@@ -534,7 +542,7 @@ export default function Page() {
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								(open: boolean) => void
+								(open: boolean) =&gt; void
 							</GridItem>
 						</GridRow>
 					</GridContainer>
@@ -580,4 +588,3 @@ export default function Page() {
 		</main>
 	);
 }
-

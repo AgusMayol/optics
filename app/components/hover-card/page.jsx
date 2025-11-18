@@ -19,11 +19,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -68,7 +64,7 @@ const code = [
 
 <HoverCard>
 	<HoverCardTrigger asChild>
-		<Button variant="link">@nextjs</Button>
+		<Button variant="raised">@nextjs</Button>
 	</HoverCardTrigger>
 	<HoverCardContent>
 		<div className="flex justify-between space-x-4">
@@ -263,7 +259,7 @@ export default function Page() {
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						<HoverCard>
 							<HoverCardTrigger asChild>
-								<Button variant="link">@nextjs</Button>
+								<Button variant="raised">@nextjs</Button>
 							</HoverCardTrigger>
 							<HoverCardContent>
 								<div className="flex justify-between space-x-4">
@@ -510,4 +506,3 @@ export default function Page() {
 		</main>
 	);
 }
-
