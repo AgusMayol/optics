@@ -16,12 +16,29 @@ import {
 	ContextMenuItem,
 	ContextMenuTrigger,
 } from "@/registry/agusmayol/context-menu";
+import { ListItems } from "./sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { MenuIcon } from "lucide-react";
+
+import {
+	Sheet,
+	SheetClose,
+	SheetContent,
+	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/registry/agusmayol/sheet";
+import { Separator } from "@/registry/agusmayol/separator";
 
 export function Header({ links }) {
 	const [themeSwitch, setThemeSwitch] = React.useState("system");
 	const { theme, setTheme, resolvedTheme, systemTheme } = useTheme();
 	const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation();
 	const [mounted, setMounted] = React.useState(false);
+	const [sheetOpen, setSheetOpen] = React.useState(false);
+	const isMobile = useIsMobile();
 
 	const checkTheme = () => {
 		let tema = resolvedTheme;
@@ -96,35 +113,49 @@ export function Header({ links }) {
 
 	return (
 		<div className="w-full h-16 flex items-center justify-between gap-4 lg:rounded-t-xl border-b lg:rounded-tl-none p-4">
-			<ContextMenu>
-				<ContextMenuTrigger asChild>
-					<Link
-						href="/"
-						className="w-full h-16 lg:hidden flex flex-row items-center justify-start lg:justify-center gap-2 rounded-tl-xl"
-					>
-						<Image
-							src="/images/new_logo.svg"
-							alt="AgusMayol's Optics logo"
-							className="size-8 ml-1.5"
-							width={100}
-							height={100}
+			{isMobile && (
+				<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+					<SheetTrigger asChild>
+						<Button variant="ghost" size="icon">
+							<MenuIcon />
+						</Button>
+					</SheetTrigger>
+					<SheetContent side="left" className="pb-3 pt-6">
+						<SheetHeader>
+							<ContextMenu>
+								<ContextMenuTrigger>
+									<Link
+										href="/"
+										className="w-full h-auto flex flex-row items-center justify-start gap-3 py-4 pt-0 pb-6"
+										onClick={() => setSheetOpen(false)}
+									>
+										<Image
+											src="/images/new_logo.svg"
+											alt="AgusMayol's Optics logo"
+											className="size-8 ml-1.5"
+											width={100}
+											height={100}
+										/>
+										<SheetTitle className="text-lg font-bold text-start truncate">
+											AgusMayol's Optics
+										</SheetTitle>
+									</Link>
+								</ContextMenuTrigger>
+								<ContextMenuContent className="w-52">
+									<ContextMenuItem inset>Copy Logo as SVG</ContextMenuItem>
+								</ContextMenuContent>
+							</ContextMenu>
+						</SheetHeader>
+						<Separator decoration />
+						<ListItems
+							links={links}
+							sidebarMaxHeight="100%"
+							isMobile={isMobile}
+							onLinkClick={() => setSheetOpen(false)}
 						/>
-						{/* <Image
-							src="/images/new_logo_white.svg"
-							alt="AgusMayol's Optics logo"
-							className="size-8 hidden dark:block ml-1.5"
-							width={100}
-							height={100}
-						/> */}
-						<span className="text-base font-bold w-full hidden lg:block">
-							AgusMayol's Optics
-						</span>
-					</Link>
-				</ContextMenuTrigger>
-				<ContextMenuContent>
-					<ContextMenuItem>Copy Logo as SVG</ContextMenuItem>
-				</ContextMenuContent>
-			</ContextMenu>
+					</SheetContent>
+				</Sheet>
+			)}
 
 			<CommandDialogComponent className="hidden lg:block" links={links} />
 

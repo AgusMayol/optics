@@ -10,6 +10,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/agusmayol/tabs";
+import { ScrollArea } from "@/registry/agusmayol/scroll-area";
 import { cn } from "@/lib/utils";
 
 export const Snippet = ({ className, ...props }) => (
@@ -43,21 +44,30 @@ export const SnippetCopyButton = ({
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
-	const copyToClipboard = () => {
-		if (
-			typeof window === "undefined" ||
-			!navigator.clipboard.writeText ||
-			!value
-		) {
-			return;
-		}
+	const copyToClipboard = async () => {
+		if (typeof window === "undefined" || !value) return;
 
-		navigator.clipboard.writeText(value).then(() => {
+		try {
+			// Try modern clipboard API first
+			if (navigator.clipboard?.writeText) {
+				await navigator.clipboard.writeText(value);
+			} else {
+				// Fallback for iOS and older browsers
+				const textArea = document.createElement("textarea");
+				textArea.value = value;
+				textArea.style.position = "fixed";
+				textArea.style.opacity = "0";
+				document.body.appendChild(textArea);
+				textArea.select();
+				document.execCommand("copy");
+				document.body.removeChild(textArea);
+			}
 			setIsCopied(true);
 			onCopy?.();
-
 			setTimeout(() => setIsCopied(false), timeout);
-		}, onError);
+		} catch (error) {
+			onError?.(error);
+		}
 	};
 
 	if (asChild) {
@@ -112,14 +122,15 @@ export const SnippetTabsTrigger = ({ className, ...props }) => (
 );
 
 export const SnippetTabsContent = ({ className, children, ...props }) => (
-	<TabsContent
-		className={cn(
-			"mt-0 bg-background p-4 text-sm truncate font-mono",
-			className,
-		)}
-		{...props}
-	>
-		{children}
+	<TabsContent className={cn("mt-0 bg-background p-4", className)} {...props}>
+		<ScrollArea
+			className="w-full"
+			viewportClassName="w-full text-sm font-mono whitespace-nowrap"
+		>
+			<div className="flex items-center justify-between gap-4 min-w-full">
+				{children}
+			</div>
+		</ScrollArea>
 	</TabsContent>
 );
 

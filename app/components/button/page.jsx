@@ -317,9 +317,11 @@ export default function Page() {
 	}
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Button</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
+						Button
+					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/button"
@@ -332,14 +334,14 @@ export default function Page() {
 					</Button>
 				</div>
 
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
 					Displays a button or a component that looks like a button.
 				</p>
 			</div>
 
 			<Separator decoration />
 
-			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
+			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center flex-wrap gap-4">
 						{/* Component */}
@@ -424,7 +426,7 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
@@ -567,7 +569,7 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>

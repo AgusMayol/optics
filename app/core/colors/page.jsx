@@ -413,8 +413,10 @@ export default function Page() {
 	return (
 		<TooltipProvider delayDuration={400} skipDelayDuration={0}>
 			<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-				<div className="flex flex-col gap-4 p-12 pb-4">
-					<h1 className="text-4xl font-bold tracking-tight">Colors</h1>
+				<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+						Colors
+					</h1>
 					<p className="text-muted-foreground text-xl">
 						The complete Tailwind color palette in HEX, RGB, HSL, CSS variables,
 						and classes. Ready to copy and paste into your project.
@@ -423,7 +425,7 @@ export default function Page() {
 
 				<Separator decoration />
 
-				<div className="flex flex-col items-end justify-start gap-4 p-12 pt-4">
+				<div className="flex flex-col items-end justify-start gap-4 p-6 lg:p-12 pt-4">
 					<Select value={selectedFormat} onValueChange={setSelectedFormat}>
 						<SelectTrigger className="w-[180px]" variant="raised">
 							<SelectValue placeholder="Format" />
@@ -467,7 +469,41 @@ export default function Page() {
 									);
 
 									const handleColorClick = () => {
-										navigator.clipboard.writeText(displayValue);
+										if (
+											typeof navigator !== "undefined" &&
+											navigator.clipboard &&
+											typeof navigator.clipboard.writeText === "function"
+										) {
+											navigator.clipboard.writeText(displayValue).catch(() => {
+												// fallback: try legacy execCommand if available
+												const textarea = document.createElement("textarea");
+												textarea.value = displayValue;
+												textarea.style.position = "fixed";
+												textarea.style.opacity = "0";
+												document.body.appendChild(textarea);
+												textarea.select();
+												try {
+													document.execCommand("copy");
+												} catch (err) {
+													// fallback failed, possibly due to iOS/WebKit limitations
+												}
+												document.body.removeChild(textarea);
+											});
+										} else {
+											// fallback if clipboard API is not available
+											const textarea = document.createElement("textarea");
+											textarea.value = displayValue;
+											textarea.style.position = "fixed";
+											textarea.style.opacity = "0";
+											document.body.appendChild(textarea);
+											textarea.select();
+											try {
+												document.execCommand("copy");
+											} catch (err) {
+												// fallback failed, possibly due to iOS/WebKit limitations
+											}
+											document.body.removeChild(textarea);
+										}
 
 										toast({
 											toastId: "success-copy-color-to-clipboard",

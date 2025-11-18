@@ -110,6 +110,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/registry/agusmayol/sonner";
+import { ScrollArea, ScrollBar } from "@/registry/agusmayol/scroll-area";
 import { cn } from "@/lib/utils";
 
 export type { BundledLanguage } from "shiki";
@@ -259,7 +260,6 @@ const codeBlockClassName = cn(
 	"[&_.shiki]:!bg-transparent",
 	"[&_code]:w-full",
 	"[&_code]:grid",
-	"[&_code]:overflow-x-auto",
 	"[&_code]:bg-transparent",
 	"[&_.line]:px-4",
 	"[&_.line]:w-full",
@@ -693,7 +693,9 @@ export const CodeBlockItem = ({
 	}
 
 	return (
-		<div
+		// @ts-expect-error - ScrollArea from .jsx file doesn't have TypeScript types
+		<ScrollArea
+			maskColor="from-sidebar"
 			className={cn(
 				codeBlockClassName,
 				lineHighlightClassNames,
@@ -704,10 +706,13 @@ export const CodeBlockItem = ({
 				lineNumbers && lineNumberClassNames,
 				className,
 			)}
+			viewportClassName="[&_code]:min-w-full"
 			{...props}
 		>
 			{children}
-		</div>
+			{/* @ts-expect-error - ScrollBar from .jsx file doesn't have TypeScript types */}
+			<ScrollBar orientation={"horizontal" as const} />
+		</ScrollArea>
 	);
 };
 
@@ -783,7 +788,7 @@ export const CodeBlockContent = ({
 	};
 
 	return (
-		<div className="relative" {...props}>
+		<div className="relative w-full" {...props}>
 			{/* Hidden element to measure full height */}
 			<div
 				ref={measureRef}
@@ -800,8 +805,7 @@ export const CodeBlockContent = ({
 				)}
 			</div>
 			<motion.div
-				className="relative"
-				style={{ overflow: "hidden" }}
+				className="relative overflow-hidden w-full"
 				animate={{
 					height:
 						hasMoreThan10Lines && !isExpanded
@@ -810,37 +814,49 @@ export const CodeBlockContent = ({
 				}}
 				transition={transition}
 			>
-				<div ref={contentRef}>
-					{!(syntaxHighlighting && html) ? (
-						<CodeBlockFallback>{children}</CodeBlockFallback>
-					) : (
-						<div
-							// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
-							dangerouslySetInnerHTML={{ __html: html }}
-						/>
-					)}
-				</div>
-				<AnimatePresence>
-					{hasMoreThan10Lines && !isExpanded && (
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.2 }}
-							className="absolute bottom-0 left-0 right-0 flex items-center justify-center bg-gradient-to-t from-card via-card/95 to-transparent pb-4 pt-12"
-						>
-							<Button
-								variant="ghost"
-								size="sm"
-								onClick={() => setIsExpanded(true)}
-								className="z-10 text-muted-foreground hover:bg-transparent hover:text-foreground transition-colors duration-500 ease-in-out"
-							>
-								Expand
-							</Button>
-						</motion.div>
-					)}
-				</AnimatePresence>
+				{/* @ts-expect-error - ScrollArea from .jsx file doesn't have TypeScript types */}
+				<ScrollArea
+					maskColor="from-sidebar"
+					className="h-full w-full"
+					viewportClassName="[&_code]:min-w-full"
+				>
+					<div ref={contentRef}>
+						{!(syntaxHighlighting && html) ? (
+							<CodeBlockFallback>{children}</CodeBlockFallback>
+						) : (
+							<div
+								// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
+								dangerouslySetInnerHTML={{ __html: html }}
+							/>
+						)}
+					</div>
+					{/* @ts-expect-error - ScrollBar from .jsx file doesn't have TypeScript types */}
+					<ScrollBar orientation={"horizontal" as const} />
+				</ScrollArea>
 			</motion.div>
+			<AnimatePresence>
+				{hasMoreThan10Lines && !isExpanded && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className="absolute bottom-0 left-0 right-0 flex items-center justify-center bg-gradient-to-t from-card via-card/95 to-transparent pb-4 pt-12 pointer-events-none z-30"
+						style={{
+							width: "100%",
+						}}
+					>
+						<Button
+							variant="ghost"
+							size="sm"
+							onClick={() => setIsExpanded(true)}
+							className="z-10 text-muted-foreground hover:bg-transparent hover:text-foreground transition-colors duration-500 ease-in-out pointer-events-auto"
+						>
+							Expand
+						</Button>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

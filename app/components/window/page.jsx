@@ -1,6 +1,13 @@
 "use client";
 import * as React from "react";
-import { Window, WindowHeader, WindowTitle, WindowAction, WindowContent, WindowFooter } from "@/registry/agusmayol/window";
+import {
+	Window,
+	WindowHeader,
+	WindowTitle,
+	WindowAction,
+	WindowContent,
+	WindowFooter,
+} from "@/registry/agusmayol/window";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -16,11 +23,7 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -65,11 +68,6 @@ import { Button } from "@/registry/agusmayol/button";
 <Window>
 	<WindowHeader>
 		<WindowTitle>Window Title</WindowTitle>
-		<WindowAction>
-			<Button size="icon-sm" variant="ghost">
-				<X />
-			</Button>
-		</WindowAction>
 	</WindowHeader>
 	<WindowContent>
 		<p>Window content goes here.</p>
@@ -235,19 +233,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -262,12 +265,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -321,18 +327,18 @@ export default function Page() {
 						<Window className="w-[400px]">
 							<WindowHeader>
 								<WindowTitle>Document.txt</WindowTitle>
-								<WindowAction>
-									<Button size="icon-sm" variant="ghost">
-										<X />
-									</Button>
-								</WindowAction>
 							</WindowHeader>
 							<WindowContent>
-								<p className="text-sm">This is a window component styled like macOS windows with traffic light buttons.</p>
+								<p className="text-sm">
+									This is a window component styled like macOS windows with
+									traffic light buttons.
+								</p>
 							</WindowContent>
 							<WindowFooter>
 								<div className="w-full flex items-center justify-between">
-									<p className="text-xs text-muted-foreground">Last saved: 2 minutes ago</p>
+									<p className="text-xs text-muted-foreground">
+										Last saved: 2 minutes ago
+									</p>
 									<Button size="sm">Save</Button>
 								</div>
 							</WindowFooter>
@@ -387,8 +393,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -431,7 +437,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -491,7 +500,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -521,10 +530,11 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-4">
 					<p className="text-sm text-muted-foreground">
-						The Window component is composed of several sub-components that work together to create a macOS-style window.
+						The Window component is composed of several sub-components that work
+						together to create a macOS-style window.
 					</p>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -532,28 +542,36 @@ export default function Page() {
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<Window />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Main container component</p>
+							<p className="text-xs text-muted-foreground">
+								Main container component
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<WindowHeader />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Header with traffic lights</p>
+							<p className="text-xs text-muted-foreground">
+								Header with traffic lights
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<WindowTitle />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Centered window title</p>
+							<p className="text-xs text-muted-foreground">
+								Centered window title
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
 							<Badge variant="outline" className="text-xs font-mono w-fit">
 								{"<WindowAction />"}
 							</Badge>
-							<p className="text-xs text-muted-foreground">Right-aligned action slot</p>
+							<p className="text-xs text-muted-foreground">
+								Right-aligned action slot
+							</p>
 						</div>
 
 						<div className="flex flex-col gap-1">
@@ -612,4 +630,3 @@ export default function Page() {
 		</main>
 	);
 }
-

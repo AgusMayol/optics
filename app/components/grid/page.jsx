@@ -4,21 +4,11 @@ import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	Binary,
-	Plus,
-} from "lucide-react";
+import { ALargeSmall, ArrowLeft, ArrowRight, Binary, Plus } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -234,18 +224,21 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -260,12 +253,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -297,7 +293,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A flexible grid system for building complex layouts with rows and columns.
+					A flexible grid system for building complex layouts with rows and
+					columns.
 				</p>
 			</div>
 
@@ -305,19 +302,35 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col gap-4">
-						<GridContainer cols={12} rows={3} border className="w-full max-w-2xl">
+					<CardContent className="px-8 flex flex-col items-center gap-4">
+						<GridContainer
+							cols={12}
+							rows={3}
+							border
+							className="w-full max-w-2xl"
+						>
 							<GridRow>
-								<GridItem span={4}><Plus size={16} /></GridItem>
-								<GridItem span={4}><Plus size={16} /></GridItem>
-								<GridItem span={4}><Plus size={16} /></GridItem>
+								<GridItem
+									decorationTopLeft
+									span={4}
+									className="aspect-square"
+								></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={6}><Plus size={16} /></GridItem>
-								<GridItem span={6}><Plus size={16} /></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={12}><Plus size={16} /></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
+								<GridItem span={4} className="aspect-square"></GridItem>
+								<GridItem
+									decorationBottomRight
+									span={4}
+									className="aspect-square"
+								></GridItem>
 							</GridRow>
 						</GridContainer>
 					</CardContent>
@@ -370,8 +383,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -414,7 +427,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Copy and paste the following code into your project:
@@ -435,7 +451,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -465,7 +481,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-8">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono">
@@ -479,18 +495,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										cols
 									</Badge>
 								</GridItem>
@@ -499,8 +527,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										rows
 									</Badge>
 								</GridItem>
@@ -509,8 +543,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										gap
 									</Badge>
 								</GridItem>
@@ -519,8 +559,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										border
 									</Badge>
 								</GridItem>
@@ -543,18 +589,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										span
 									</Badge>
 								</GridItem>
@@ -563,8 +621,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										gap
 									</Badge>
 								</GridItem>
@@ -573,8 +637,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										borderTop
 									</Badge>
 								</GridItem>
@@ -583,8 +653,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										borderBottom
 									</Badge>
 								</GridItem>
@@ -607,18 +683,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										span
 									</Badge>
 								</GridItem>
@@ -627,8 +715,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										borderLeft
 									</Badge>
 								</GridItem>
@@ -637,8 +731,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										borderRight
 									</Badge>
 								</GridItem>
@@ -647,8 +747,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										decorationTopLeft
 									</Badge>
 								</GridItem>
@@ -657,8 +763,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										decorationTopRight
 									</Badge>
 								</GridItem>
@@ -667,8 +779,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										decorationBottomLeft
 									</Badge>
 								</GridItem>
@@ -677,8 +795,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										decorationBottomRight
 									</Badge>
 								</GridItem>
@@ -730,4 +854,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -1,6 +1,12 @@
 "use client";
 import * as React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent } from "@/registry/agusmayol/tabs";
+import {
+	Tabs,
+	TabsList,
+	TabsTrigger,
+	TabsContents,
+	TabsContent,
+} from "@/registry/agusmayol/tabs";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -17,9 +23,14 @@ import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
 import {
 	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
 	CardContent,
 	CardFooter,
 } from "@/registry/agusmayol/card";
+import { Label } from "@/registry/agusmayol/label";
+import { Input } from "@/registry/agusmayol/input";
 import {
 	Accordion,
 	AccordionItem,
@@ -233,19 +244,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -260,12 +276,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -307,7 +326,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A set of layered sections of content—known as tab panels—that are displayed one at a time.
+					A set of layered sections of content—known as tab panels—that are
+					displayed one at a time.
 				</p>
 			</div>
 
@@ -315,24 +335,61 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8">
-						<Tabs defaultValue="account" className="w-full">
+					<CardContent className="px-8 w-full flex items-center justify-center">
+						<Tabs defaultValue="account" className="w-full max-w-sm">
 							<TabsList variant="default">
 								<TabsTrigger value="account">Account</TabsTrigger>
 								<TabsTrigger value="password">Password</TabsTrigger>
-								<TabsTrigger value="settings">Settings</TabsTrigger>
 							</TabsList>
-							<TabsContents className="pt-4">
-								<TabsContent value="account">
-									<p className="text-sm">Make changes to your account here. Click save when you're done.</p>
-								</TabsContent>
-								<TabsContent value="password">
-									<p className="text-sm">Change your password here. After saving, you'll be logged out.</p>
-								</TabsContent>
-								<TabsContent value="settings">
-									<p className="text-sm">Manage your account settings and preferences.</p>
-								</TabsContent>
-							</TabsContents>
+							<Card className="shadow-none py-0">
+								<TabsContents className="py-6">
+									<TabsContent value="account" className="flex flex-col gap-6">
+										<CardHeader>
+											<CardTitle>Account</CardTitle>
+											<CardDescription>
+												Make changes to your account here. Click save when
+												you&apos;re done.
+											</CardDescription>
+										</CardHeader>
+										<CardContent className="grid gap-6">
+											<div className="grid gap-3">
+												<Label htmlFor="tabs-demo-name">Name</Label>
+												<Input
+													id="tabs-demo-name"
+													defaultValue="Pedro Duarte"
+												/>
+											</div>
+										</CardContent>
+										<CardFooter>
+											<Button>Save changes</Button>
+										</CardFooter>
+									</TabsContent>
+									<TabsContent value="password" className="flex flex-col gap-6">
+										<CardHeader>
+											<CardTitle>Password</CardTitle>
+											<CardDescription>
+												Change your password here. After saving, you&apos;ll be
+												logged out.
+											</CardDescription>
+										</CardHeader>
+										<CardContent className="grid gap-6">
+											<div className="grid gap-3">
+												<Label htmlFor="tabs-demo-current">
+													Current password
+												</Label>
+												<Input id="tabs-demo-current" type="password" />
+											</div>
+											<div className="grid gap-3">
+												<Label htmlFor="tabs-demo-new">New password</Label>
+												<Input id="tabs-demo-new" type="password" />
+											</div>
+										</CardContent>
+										<CardFooter>
+											<Button>Save password</Button>
+										</CardFooter>
+									</TabsContent>
+								</TabsContents>
+							</Card>
 						</Tabs>
 					</CardContent>
 
@@ -384,8 +441,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -428,7 +485,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -488,7 +548,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -518,7 +578,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-6">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono w-fit">
@@ -532,18 +592,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										variant
 									</Badge>
 								</GridItem>
@@ -595,4 +667,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -15,11 +15,7 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -181,19 +177,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -208,12 +209,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -255,7 +259,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					An opinionated toast component for React. Supports promises, custom styling, and multiple types.
+					An opinionated toast component for React. Supports promises, custom
+					styling, and multiple types.
 				</p>
 			</div>
 
@@ -263,26 +268,67 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-wrap items-center gap-4">
-						<Button onClick={() => toast({ type: "success", title: "Success!", description: "Your action was completed successfully." })}>
+					<CardContent className="px-8 flex flex-wrap items-center justify-center gap-4">
+						<Button
+							variant="success"
+							onClick={() =>
+								toast({
+									type: "success",
+									title: "Success!",
+									description: "Your action was completed successfully.",
+								})
+							}
+						>
 							Success
 						</Button>
-						<Button onClick={() => toast({ type: "error", title: "Error", description: "Something went wrong." })}>
+						<Button
+							variant="destructive"
+							onClick={() =>
+								toast({
+									type: "error",
+									title: "Error",
+									description: "Something went wrong.",
+								})
+							}
+						>
 							Error
 						</Button>
-						<Button onClick={() => toast({ type: "info", title: "Info", description: "Here's some information." })}>
+						<Button
+							variant="info"
+							onClick={() =>
+								toast({
+									type: "info",
+									title: "Info",
+									description: "Here's some information.",
+								})
+							}
+						>
 							Info
 						</Button>
-						<Button onClick={() => toast({ type: "warning", title: "Warning", description: "Please be careful." })}>
+						<Button
+							variant="warning"
+							onClick={() =>
+								toast({
+									type: "warning",
+									title: "Warning",
+									description: "Please be careful.",
+								})
+							}
+						>
 							Warning
 						</Button>
-						<Button onClick={() => toast({ 
-							type: "promise", 
-							promise: new Promise((resolve) => setTimeout(resolve, 2000)),
-							loading: "Loading...",
-							success: "Done!",
-							error: "Failed!"
-						})}>
+						<Button
+							variant="raised"
+							onClick={() =>
+								toast({
+									type: "promise",
+									promise: new Promise((resolve) => setTimeout(resolve, 2000)),
+									loading: "Loading...",
+									success: "Done!",
+									error: "Failed!",
+								})
+							}
+						>
 							Promise
 						</Button>
 					</CardContent>
@@ -335,8 +381,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -379,7 +425,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -439,7 +488,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -469,7 +518,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-8">
 					<div className="w-full flex flex-col gap-2">
 						<Badge variant="outline" className="text-xs font-mono">
@@ -483,18 +532,30 @@ export default function Page() {
 							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 						>
 							<GridRow>
-								<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+								<GridItem
+									span={4}
+									className="text-xs font-semibold justify-start gap-1"
+								>
 									<ALargeSmall />
 									Name
 								</GridItem>
-								<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+								<GridItem
+									span={8}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
 									<Binary size={16} />
 									Type
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										type
 									</Badge>
 								</GridItem>
@@ -503,8 +564,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										title
 									</Badge>
 								</GridItem>
@@ -513,8 +580,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										description
 									</Badge>
 								</GridItem>
@@ -523,8 +596,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										button
 									</Badge>
 								</GridItem>
@@ -533,8 +612,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										promise
 									</Badge>
 								</GridItem>
@@ -543,8 +628,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										loading
 									</Badge>
 								</GridItem>
@@ -553,8 +644,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										success
 									</Badge>
 								</GridItem>
@@ -563,8 +660,14 @@ export default function Page() {
 								</GridItem>
 							</GridRow>
 							<GridRow>
-								<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-									<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+								<GridItem
+									span={4}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
 										duration
 									</Badge>
 								</GridItem>
@@ -617,4 +720,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -20,15 +20,15 @@ function WindowHeader({ className, children, ...props }) {
 		<div
 			data-slot="card-header"
 			className={cn(
-				"@container/card-header grid auto-rows-min items-start gap-1.5 rounded-t-xl py-6 px-6 grid-cols-[1fr_1fr_1fr] [.border-b]:pb-6 bg-background border-b",
+				"@container/card-header grid auto-rows-min items-center gap-1.5 rounded-t-xl py-4 px-6 grid-cols-[1fr_1fr_1fr] bg-background border-b",
 				className,
 			)}
 			{...props}
 		>
 			<div className="flex items-center justify-start gap-2">
-				<div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-				<div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-				<div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+				<div className="w-3 h-3 rounded-full squircle-none bg-[#ff5f56]" />
+				<div className="w-3 h-3 rounded-full squircle-none bg-[#ffbd2e]" />
+				<div className="w-3 h-3 rounded-full squircle-none bg-[#27c93f]" />
 			</div>
 			{children}
 		</div>

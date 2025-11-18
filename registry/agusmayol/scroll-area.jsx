@@ -19,6 +19,7 @@ const ScrollArea = React.forwardRef(
 			viewportClassName,
 			maskClassName,
 			maskHeight = 30,
+			maskColor,
 			...props
 		},
 		ref,
@@ -105,6 +106,7 @@ const ScrollArea = React.forwardRef(
 								showMask={showMask}
 								className={maskClassName}
 								maskHeight={maskHeight}
+								maskColor={maskColor}
 							/>
 						)}
 					</div>
@@ -129,6 +131,7 @@ const ScrollArea = React.forwardRef(
 								showMask={showMask}
 								className={maskClassName}
 								maskHeight={maskHeight}
+								maskColor={maskColor}
 							/>
 						)}
 						<ScrollBar />
@@ -178,47 +181,128 @@ const ScrollBar = React.forwardRef(
 
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
-const ScrollMask = ({ showMask, maskHeight, className, ...props }) => {
+const ScrollMask = ({
+	showMask,
+	maskHeight,
+	maskColor,
+	className,
+	...props
+}) => {
+	// Extract color name from maskColor (e.g., "from-sidebar" -> "sidebar", "sidebar" -> "sidebar")
+	const getColorVar = () => {
+		if (!maskColor || maskColor === "from-background") {
+			return null; // Use default Tailwind classes
+		}
+		const colorName = maskColor.startsWith("from-")
+			? maskColor.slice(5) // Remove "from-" prefix
+			: maskColor;
+		// Map color name to CSS variable
+		return `var(--${colorName})`;
+	};
+
+	const colorVar = getColorVar();
+	const useCustomColor = colorVar !== null;
+
 	return (
 		<>
 			<div
 				{...props}
 				aria-hidden="true"
-				style={{
-					"--top-fade-height": showMask.top ? `${maskHeight}px` : "0px",
-					"--bottom-fade-height": showMask.bottom ? `${maskHeight}px` : "0px",
-				}}
-				className={cn(
-					"pointer-events-none absolute inset-0 z-10",
-					"before:absolute before:inset-x-0 before:top-0 before:transition-[height,opacity] before:duration-300 before:content-['']",
-					"after:absolute after:inset-x-0 after:bottom-0 after:transition-[height,opacity] after:duration-300 after:content-['']",
-					"before:h-(--top-fade-height) after:h-(--bottom-fade-height)",
-					showMask.top ? "before:opacity-100" : "before:opacity-0",
-					showMask.bottom ? "after:opacity-100" : "after:opacity-0",
-					"before:from-background before:bg-gradient-to-b before:to-transparent",
-					"after:from-background after:bg-gradient-to-t after:to-transparent",
-					className,
+				className={cn("pointer-events-none absolute inset-0 z-10", className)}
+			>
+				{useCustomColor ? (
+					<>
+						<div
+							className="absolute inset-x-0 top-0 transition-[height,opacity] duration-300"
+							style={{
+								height: showMask.top ? `${maskHeight}px` : "0px",
+								opacity: showMask.top ? 1 : 0,
+								backgroundImage: `linear-gradient(to bottom, ${colorVar}, transparent)`,
+							}}
+						/>
+						<div
+							className="absolute inset-x-0 bottom-0 transition-[height,opacity] duration-300"
+							style={{
+								height: showMask.bottom ? `${maskHeight}px` : "0px",
+								opacity: showMask.bottom ? 1 : 0,
+								backgroundImage: `linear-gradient(to top, ${colorVar}, transparent)`,
+							}}
+						/>
+					</>
+				) : (
+					<>
+						<div
+							className={cn(
+								"absolute inset-x-0 top-0 transition-[height,opacity] duration-300 before:from-background before:bg-gradient-to-b before:to-transparent",
+								"before:absolute before:inset-x-0 before:top-0 before:h-full before:content-['']",
+								showMask.top ? "before:opacity-100" : "before:opacity-0",
+							)}
+							style={{
+								height: showMask.top ? `${maskHeight}px` : "0px",
+							}}
+						/>
+						<div
+							className={cn(
+								"absolute inset-x-0 bottom-0 transition-[height,opacity] duration-300 after:from-background after:bg-gradient-to-t after:to-transparent",
+								"after:absolute after:inset-x-0 after:bottom-0 after:h-full after:content-['']",
+								showMask.bottom ? "after:opacity-100" : "after:opacity-0",
+							)}
+							style={{
+								height: showMask.bottom ? `${maskHeight}px` : "0px",
+							}}
+						/>
+					</>
 				)}
-			/>
+			</div>
 			<div
 				{...props}
 				aria-hidden="true"
-				style={{
-					"--left-fade-width": showMask.left ? `${maskHeight}px` : "0px",
-					"--right-fade-width": showMask.right ? `${maskHeight}px` : "0px",
-				}}
-				className={cn(
-					"pointer-events-none absolute inset-0 z-10",
-					"before:absolute before:inset-y-0 before:left-0 before:transition-[width,opacity] before:duration-300 before:content-['']",
-					"after:absolute after:inset-y-0 after:right-0 after:transition-[width,opacity] after:duration-300 after:content-['']",
-					"before:w-(--left-fade-width) after:w-(--right-fade-width)",
-					showMask.left ? "before:opacity-100" : "before:opacity-0",
-					showMask.right ? "after:opacity-100" : "after:opacity-0",
-					"before:from-background before:bg-gradient-to-r before:to-transparent",
-					"after:from-background after:bg-gradient-to-l after:to-transparent",
-					className,
+				className={cn("pointer-events-none absolute inset-0 z-10", className)}
+			>
+				{useCustomColor ? (
+					<>
+						<div
+							className="absolute inset-y-0 left-0 transition-[width,opacity] duration-300"
+							style={{
+								width: showMask.left ? `${maskHeight}px` : "0px",
+								opacity: showMask.left ? 1 : 0,
+								backgroundImage: `linear-gradient(to right, ${colorVar}, transparent)`,
+							}}
+						/>
+						<div
+							className="absolute inset-y-0 right-0 transition-[width,opacity] duration-300"
+							style={{
+								width: showMask.right ? `${maskHeight}px` : "0px",
+								opacity: showMask.right ? 1 : 0,
+								backgroundImage: `linear-gradient(to left, ${colorVar}, transparent)`,
+							}}
+						/>
+					</>
+				) : (
+					<>
+						<div
+							className={cn(
+								"absolute inset-y-0 left-0 transition-[width,opacity] duration-300 before:from-background before:bg-gradient-to-r before:to-transparent",
+								"before:absolute before:inset-y-0 before:left-0 before:w-full before:content-['']",
+								showMask.left ? "before:opacity-100" : "before:opacity-0",
+							)}
+							style={{
+								width: showMask.left ? `${maskHeight}px` : "0px",
+							}}
+						/>
+						<div
+							className={cn(
+								"absolute inset-y-0 right-0 transition-[width,opacity] duration-300 after:from-background after:bg-gradient-to-l after:to-transparent",
+								"after:absolute after:inset-y-0 after:right-0 after:w-full after:content-['']",
+								showMask.right ? "after:opacity-100" : "after:opacity-0",
+							)}
+							style={{
+								width: showMask.right ? `${maskHeight}px` : "0px",
+							}}
+						/>
+					</>
 				)}
-			/>
+			</div>
 		</>
 	);
 };

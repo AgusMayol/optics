@@ -26,16 +26,16 @@ const SheetOverlay = ({ ref, className, ...props }) => (
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-	"fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out bg-sidebar h-[calc(100svh-(--spacing(4)))] m-2 md:ml-0 md:rounded-xl md:shadow-sm min-w-96 max-w-[24rem]",
+	"fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out bg-sidebar h-[calc(100svh-(--spacing(4)))] my-2 rounded-xl shadow-sm min-w-[calc(100vw-5rem)] max-w-[calc(100vw-5rem)] lg:min-w-96 lg:max-w-[24rem]",
 	{
 		variants: {
 			side: {
 				top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
 				bottom:
 					"inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-				left: "inset-y-0 left-0 w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+				left: "inset-y-0 left-2 w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
 				right:
-					"inset-y-0 right-0 w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+					"inset-y-0 right-2 w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
 			},
 		},
 		defaultVariants: {

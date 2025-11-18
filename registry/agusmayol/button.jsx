@@ -22,10 +22,6 @@ const otherThemes = cva("", {
 			"only-scale": "active:scale-[0.97] transition-scale duration-150",
 		},
 	},
-	defaultVariants: {
-		variant: "raised",
-		animation: "all",
-	},
 });
 
 const buttonVariants = cva(

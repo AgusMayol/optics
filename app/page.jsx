@@ -114,7 +114,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-[calc(100%-1px)] rounded-none flex flex-col items-center justify-center px-0 gap-8"
 							>
 								<p className="text-center text-3xl text-balance font-bold font-serif tracking-wide text-foreground truncate py-1">
@@ -136,7 +136,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-full rounded-none"
 								asChild
 							>
@@ -175,7 +175,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-full rounded-none"
 								asChild
 							>
@@ -279,7 +279,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -300,9 +300,9 @@ export default function Home() {
 
 										<div className="w-full flex gap-4">
 											<div className="flex items-center justify-start gap-2">
-												<div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-												<div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-												<div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#ff5f56]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#ffbd2e]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#27c93f]" />
 											</div>
 											<Button
 												className="text-xs truncate min-w-24 bg-background group-hover:bg-background text-muted-foreground"
@@ -324,7 +324,7 @@ export default function Home() {
 											<Input
 												type="email"
 												placeholder="Email Address"
-												className="w-full text-xs placeholder:text-xs pointer-events-none group-hover:bg-background !bg-background"
+												className="w-full text-xs placeholder:text-xs pointer-events-none group-hover:!bg-background !bg-background"
 											/>
 										</div>
 									</div>
@@ -350,7 +350,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -465,7 +465,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -603,7 +603,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none bg-transparent"
 								asChild
 							>
@@ -643,7 +643,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -683,7 +683,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -734,7 +734,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-[calc(100%-1px)] rounded-none flex flex-col items-center justify-center px-12 gap-8"
 							>
 								<p className="text-center text-5xl text-balance font-bold font-serif tracking-wide text-foreground truncate py-1">
@@ -755,7 +755,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-full rounded-none"
 								asChild
 							>
@@ -791,7 +791,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full h-full rounded-none"
 								asChild
 							>
@@ -894,7 +894,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -906,7 +906,7 @@ export default function Home() {
 										<Snippet value={null} className="">
 											<SnippetTabsContent
 												value={null}
-												className="w-full text-start text-xs flex items-center justify-between py-1 pr-1 text-muted-foreground truncate"
+												className="w-full text-start text-xs flex items-center !justify-between py-1 pr-1 text-muted-foreground truncate"
 											>
 												bunx --bun shadcn@latest add grid
 												<SnippetCopyButton value={null} />
@@ -915,9 +915,9 @@ export default function Home() {
 
 										<div className="w-full flex gap-4">
 											<div className="flex items-center justify-start gap-2">
-												<div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-												<div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-												<div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#ff5f56]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#ffbd2e]" />
+												<div className="w-3 h-3 rounded-full squircle-none bg-[#27c93f]" />
 											</div>
 											<Button
 												className="text-xs truncate min-w-24 bg-background group-hover:bg-background text-muted-foreground"
@@ -939,7 +939,7 @@ export default function Home() {
 											<Input
 												type="email"
 												placeholder="Email Address"
-												className="w-full text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 group-hover:bg-background"
+												className="w-full text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 !bg-background group-hover:!bg-background"
 											/>
 										</div>
 									</div>
@@ -962,7 +962,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -1075,7 +1075,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -1209,7 +1209,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none bg-transparent"
 								asChild
 							>
@@ -1248,7 +1248,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>
@@ -1285,7 +1285,7 @@ export default function Home() {
 						>
 							<Button
 								variant="ghost"
-								animation="colors"
+								animation="none"
 								className="w-full rounded-none"
 								asChild
 							>

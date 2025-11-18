@@ -1,6 +1,11 @@
 "use client";
 import * as React from "react";
 import { ThemeSwitcher } from "@/registry/agusmayol/theme-switcher";
+import { useTheme } from "next-themes";
+import {
+	useModeAnimation,
+	ThemeAnimationType,
+} from "react-theme-switch-animation";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -15,11 +20,7 @@ import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -59,14 +60,93 @@ const code = [
 		language: "jsx",
 		filename: "theme-switcher.jsx",
 		code: `import { ThemeSwitcher } from "@/registry/agusmayol/theme-switcher";
+import { useTheme } from "next-themes";
+import {
+	useModeAnimation,
+	ThemeAnimationType,
+} from "react-theme-switch-animation";
+import * as React from "react";
 
 export function MyComponent() {
-	const [theme, setTheme] = React.useState("system");
+	const [themeSwitch, setThemeSwitch] = React.useState("system");
+	const { theme, setTheme, resolvedTheme, systemTheme } = useTheme();
+	const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation();
+
+	const checkTheme = () => {
+		let tema = resolvedTheme;
+		if (tema === "system") {
+			tema = systemTheme;
+		}
+		return tema === "light" ? false : true;
+	};
+
+	const handleSetTheme = (newTheme) => {
+		let temaActual = localStorage.getItem("theme2");
+		setThemeSwitch(newTheme);
+
+		if (newTheme === "system") {
+			if (systemTheme === localStorage.getItem("theme"))
+				return setTimeout(() => {
+					localStorage.setItem("theme2", newTheme);
+				}, 200);
+
+			toggleSwitchTheme({
+				animationType: ThemeAnimationType.BLUR_CIRCLE,
+				isDarkMode: checkTheme(),
+				onDarkModeChange: null,
+			});
+
+			return setTimeout(() => {
+				localStorage.setItem("theme2", newTheme);
+			}, 200);
+		}
+
+		if (
+			newTheme === localStorage.getItem("theme") ||
+			(temaActual === "system" &&
+				systemTheme === newTheme &&
+				temaActual !== newTheme)
+		)
+			return setTimeout(() => {
+				localStorage.setItem("theme2", newTheme);
+			}, 200);
+
+		toggleSwitchTheme({
+			animationType: ThemeAnimationType.BLUR_CIRCLE,
+			isDarkMode: checkTheme(),
+			onDarkModeChange: null,
+		});
+
+		setTimeout(() => {
+			localStorage.setItem("theme2", newTheme);
+		}, 200);
+	};
+
+	React.useEffect(() => {
+		let tema = localStorage.getItem("theme2") || "system";
+		setThemeSwitch(tema);
+		localStorage.setItem("theme", tema === "system" ? resolvedTheme : tema);
+	}, [resolvedTheme]);
+
+	React.useEffect(() => {
+		if (
+			systemTheme !== localStorage.getItem("theme") &&
+			localStorage.getItem("theme2") === "system"
+		) {
+			toggleSwitchTheme({
+				animationType: ThemeAnimationType.BLUR_CIRCLE,
+				isDarkMode: localStorage.getItem("theme") === "light" ? false : true,
+				onDarkModeChange: null,
+			});
+		}
+	}, [systemTheme, toggleSwitchTheme]);
 	
 	return (
-		<ThemeSwitcher 
-			value={theme} 
-			onChange={setTheme}
+		<ThemeSwitcher
+			ref={ref}
+			defaultValue={themeSwitch}
+			onChange={handleSetTheme}
+			value={themeSwitch}
 		/>
 	);
 }`,
@@ -232,27 +312,106 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	const [currentTheme, setCurrentTheme] = React.useState("system");
-	
+	const [themeSwitch, setThemeSwitch] = React.useState("system");
+	const { theme, setTheme, resolvedTheme, systemTheme } = useTheme();
+	const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation();
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
+
+	const checkTheme = () => {
+		let tema = resolvedTheme;
+
+		if (tema === "system") {
+			tema = systemTheme;
+		}
+		return tema === "light" ? false : true;
+	};
+
+	const handleSetTheme = (newTheme) => {
+		let temaActual = localStorage.getItem("theme2");
+		setThemeSwitch(newTheme);
+
+		if (newTheme === "system") {
+			if (systemTheme === localStorage.getItem("theme"))
+				return setTimeout(() => {
+					localStorage.setItem("theme2", newTheme);
+				}, 200);
+
+			toggleSwitchTheme({
+				animationType: ThemeAnimationType.BLUR_CIRCLE,
+				isDarkMode: checkTheme(),
+				onDarkModeChange: null,
+			});
+
+			return setTimeout(() => {
+				localStorage.setItem("theme2", newTheme);
+			}, 200);
+		}
+
+		if (
+			newTheme === localStorage.getItem("theme") ||
+			(temaActual === "system" &&
+				systemTheme === newTheme &&
+				temaActual !== newTheme)
+		)
+			return setTimeout(() => {
+				localStorage.setItem("theme2", newTheme);
+			}, 200);
+
+		toggleSwitchTheme({
+			animationType: ThemeAnimationType.BLUR_CIRCLE,
+			isDarkMode: checkTheme(),
+			onDarkModeChange: null,
+		});
+
+		setTimeout(() => {
+			localStorage.setItem("theme2", newTheme);
+		}, 200);
+		//setTheme(newTheme);
+	};
 
 	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
+		if (!mounted) {
+			let tema = localStorage.getItem("theme2") || "system";
+			setThemeSwitch(tema);
+			localStorage.setItem("theme", tema === "system" ? resolvedTheme : tema);
+			setMounted(true);
 		}
-		
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
+		if (
+			systemTheme !== localStorage.getItem("theme") &&
+			localStorage.getItem("theme2") === "system"
+		) {
+			toggleSwitchTheme({
+				animationType: ThemeAnimationType.BLUR_CIRCLE,
+				isDarkMode: localStorage.getItem("theme") === "light" ? false : true,
+				onDarkModeChange: null,
+			});
 		}
-	}, []);
+	}, [systemTheme]);
+
+	React.useEffect(() => {
+		if (mounted) {
+			const savedPackageManager = getCookie("preferred-package-manager");
+			if (
+				savedPackageManager &&
+				commands.find((c) => c.label === savedPackageManager)
+			) {
+				setValue(savedPackageManager);
+			} else {
+				setCookie("preferred-package-manager", commands[0].label);
+			}
+
+			const savedInstallationTab = getCookie("preferred-installation-tab");
+			if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
+				setInstallationTab(savedInstallationTab);
+			} else {
+				setCookie("preferred-installation-tab", "tab1");
+			}
+		}
+	}, [mounted]);
 
 	React.useEffect(() => {
 		if (mounted) {
@@ -260,12 +419,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -307,7 +469,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-xl">
-					A theme switcher component with smooth animations between light, dark, and system modes.
+					A theme switcher component with smooth animations between light, dark,
+					and system modes.
 				</p>
 			</div>
 
@@ -315,13 +478,16 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center gap-4">
-						<ThemeSwitcher 
-							value={currentTheme} 
-							onChange={setCurrentTheme}
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-2">
+						<ThemeSwitcher
+							ref={ref}
+							defaultValue={themeSwitch}
+							onChange={handleSetTheme}
+							value={themeSwitch}
 						/>
 						<p className="text-sm text-muted-foreground">
-							Current: <span className="font-medium text-foreground">{currentTheme}</span>
+							Current:{" "}
+							<span className="font-medium text-foreground">{themeSwitch}</span>
 						</p>
 					</CardContent>
 
@@ -373,8 +539,8 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -417,7 +583,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -477,7 +646,7 @@ export default function Page() {
 												</CodeBlockFilename>
 											)}
 										</CodeBlockFiles>
-										
+
 										<CodeBlockCopyButton variant="ghost" />
 									</CodeBlockHeader>
 									<CodeBlockBody>
@@ -507,7 +676,7 @@ export default function Page() {
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
 						{"<ThemeSwitcher />"}
@@ -520,18 +689,30 @@ export default function Page() {
 						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
 					>
 						<GridRow>
-							<GridItem span={4} className="text-xs font-semibold justify-start gap-1">
+							<GridItem
+								span={4}
+								className="text-xs font-semibold justify-start gap-1"
+							>
 								<ALargeSmall />
 								Name
 							</GridItem>
-							<GridItem span={8} className="text-xs font-semibold gap-1 mr-auto">
+							<GridItem
+								span={8}
+								className="text-xs font-semibold gap-1 mr-auto"
+							>
 								<Binary size={16} />
 								Type
 							</GridItem>
 						</GridRow>
 						<GridRow>
-							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
 									value
 								</Badge>
 							</GridItem>
@@ -540,8 +721,14 @@ export default function Page() {
 							</GridItem>
 						</GridRow>
 						<GridRow>
-							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
 									onChange
 								</Badge>
 							</GridItem>
@@ -550,8 +737,14 @@ export default function Page() {
 							</GridItem>
 						</GridRow>
 						<GridRow>
-							<GridItem span={4} className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
-								<Badge variant="outline" className="font-mono text-blue-600 dark:text-blue-400 bg-background">
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
 									defaultValue
 								</Badge>
 							</GridItem>
@@ -602,4 +795,3 @@ export default function Page() {
 		</main>
 	);
 }
-
