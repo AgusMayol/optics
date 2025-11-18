@@ -343,7 +343,7 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center flex-wrap gap-4">
+					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
 						{/* Component */}
 						<Button>Default</Button>
 						<Button variant="secondary">Secondary</Button>

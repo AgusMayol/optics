@@ -230,9 +230,9 @@ export default function Page() {
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Checkbox</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Checkbox</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/checkbox"
@@ -245,7 +245,7 @@ export default function Page() {
 					</Button>
 				</div>
 
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
 					A control that allows the user to toggle between checked and not
 					checked.
 				</p>
@@ -253,10 +253,9 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
+			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<div className="w-full flex items-center justify-center gap-4">
-						<CardContent className="px-8 flex flex-col items-start gap-4">
+					<CardContent className="px-8 flex flex-col items-center gap-4">
 							<div className="flex items-center space-x-2">
 								<Checkbox id="terms" />
 								<Label htmlFor="terms">Accept terms and conditions</Label>
@@ -271,8 +270,7 @@ export default function Page() {
 								<Checkbox id="disabled" disabled />
 								<Label htmlFor="disabled">Disabled checkbox</Label>
 							</div>
-						</CardContent>
-					</div>
+					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
 						<Accordion type={"single"} collapsible className="w-full">

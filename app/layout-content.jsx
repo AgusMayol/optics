@@ -160,7 +160,7 @@ export const links = [
 				name: "Calendar",
 				href: "/components/calendar",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Card",
@@ -172,7 +172,7 @@ export const links = [
 				name: "Carousel",
 				href: "/components/carousel",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Checkbox",
@@ -193,13 +193,13 @@ export const links = [
 				name: "Collapsible",
 				href: "/components/collapsible",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Command",
 				href: "/components/command",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Context Menu",
@@ -222,13 +222,13 @@ export const links = [
 				name: "Dialog",
 				href: "/components/dialog",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Drawer",
 				href: "/components/drawer",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Dropdown Menu",
@@ -281,7 +281,7 @@ export const links = [
 				name: "Form",
 				href: "/components/form",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Grid",
@@ -298,7 +298,7 @@ export const links = [
 				name: "Hover Card",
 				href: "/components/hover-card",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Input",
@@ -318,7 +318,7 @@ export const links = [
 				href: "/components/input-otp",
 				own: false,
 				custom: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Item",
@@ -345,7 +345,7 @@ export const links = [
 				name: "Menubar",
 				href: "/components/menubar",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Message Box",
@@ -356,13 +356,13 @@ export const links = [
 				name: "Navigation Menu",
 				href: "/components/navigation-menu",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Pagination",
 				href: "/components/pagination",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Popover",
@@ -373,19 +373,19 @@ export const links = [
 				name: "Progress",
 				href: "/components/progress",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Radio Group",
 				href: "/components/radio-group",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Resizable",
 				href: "/components/resizable",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Scroll Area",
@@ -419,7 +419,7 @@ export const links = [
 				name: "Skeleton",
 				href: "/components/skeleton",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Slider",
@@ -459,7 +459,7 @@ export const links = [
 				name: "Table",
 				href: "/components/table",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Tabs",
@@ -488,13 +488,13 @@ export const links = [
 				name: "Toggle",
 				href: "/components/toggle",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Toggle Group",
 				href: "/components/toggle-group",
 				own: false,
-				installed: false,
+				installed: true,
 			},
 			{
 				name: "Tooltip",

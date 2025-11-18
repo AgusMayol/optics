@@ -310,9 +310,9 @@ export default function Page() {
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Tabs</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Tabs</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/tabs"
@@ -325,7 +325,7 @@ export default function Page() {
 					</Button>
 				</div>
 
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
 					A set of layered sections of content—known as tab panels—that are
 					displayed one at a time.
 				</p>
@@ -333,7 +333,7 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
+			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 w-full flex items-center justify-center">
 						<Tabs defaultValue="account" className="w-full max-w-sm">

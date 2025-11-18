@@ -222,9 +222,9 @@ export default function Page() {
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-4xl font-bold tracking-tight">Textarea</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Textarea</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/textarea"
@@ -237,14 +237,14 @@ export default function Page() {
 					</Button>
 				</div>
 
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
 					Displays a form textarea or a component that looks like a textarea.
 				</p>
 			</div>
 
 			<Separator decoration />
 
-			<div className="flex flex-col flex-1 gap-8 p-12 pt-4">
+			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 w-full flex flex-col items-center justify-center gap-4">
 						<div className="w-full flex flex-col gap-2 max-w-sm">
