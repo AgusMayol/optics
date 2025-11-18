@@ -23,11 +23,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -324,8 +320,8 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-center gap-4">
-						<Table className="w-full max-w-md">
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4">
+						<Table className="w-full">
 							<TableHeader>
 								<TableRow>
 									<TableHead>Name</TableHead>
@@ -585,4 +581,3 @@ export default function Page() {
 		</main>
 	);
 }
-

@@ -15,10 +15,14 @@ import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import { Button } from "@/registry/agusmayol/button";
 import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/registry/agusmayol/dropdown-menu";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -62,16 +66,22 @@ const code = [
 	DropdownMenuTrigger,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
 } from "@/registry/agusmayol/dropdown-menu";
 import { Button } from "@/registry/agusmayol/button";
 
 <DropdownMenu>
 	<DropdownMenuTrigger asChild>
-		<Button>Open Menu</Button>
+		<Button variant="raised">Open Menu</Button>
 	</DropdownMenuTrigger>
 	<DropdownMenuContent>
+		<DropdownMenuLabel>My Account</DropdownMenuLabel>
+		<DropdownMenuSeparator />
 		<DropdownMenuItem>Profile</DropdownMenuItem>
 		<DropdownMenuItem>Settings</DropdownMenuItem>
+		<DropdownMenuItem>Team</DropdownMenuItem>
+		<DropdownMenuSeparator />
 		<DropdownMenuItem>Logout</DropdownMenuItem>
 	</DropdownMenuContent>
 </DropdownMenu>`,
@@ -137,19 +147,24 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
-	
+
 	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find((command) => command.label === value);
+	const activeDepsCommand = installDeps.find(
+		(command) => command.label === value,
+	);
 
 	React.useEffect(() => {
 		setMounted(true);
 		const savedPackageManager = getCookie("preferred-package-manager");
-		if (savedPackageManager && commands.find(c => c.label === savedPackageManager)) {
+		if (
+			savedPackageManager &&
+			commands.find((c) => c.label === savedPackageManager)
+		) {
 			setValue(savedPackageManager);
 		} else {
 			setCookie("preferred-package-manager", commands[0].label);
 		}
-		
+
 		const savedInstallationTab = getCookie("preferred-installation-tab");
 		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
 			setInstallationTab(savedInstallationTab);
@@ -164,12 +179,15 @@ export default function Page() {
 		}
 	}, [value, mounted]);
 
-	const handleTabChange = React.useCallback((newTab) => {
-		setInstallationTab(newTab);
-		if (mounted) {
-			setCookie("preferred-installation-tab", newTab);
-		}
-	}, [mounted]);
+	const handleTabChange = React.useCallback(
+		(newTab) => {
+			setInstallationTab(newTab);
+			if (mounted) {
+				setCookie("preferred-installation-tab", newTab);
+			}
+		},
+		[mounted],
+	);
 
 	function getSiblingComponent(pathname, direction = "previous") {
 		const componentsSection = links.find(
@@ -197,7 +215,9 @@ export default function Page() {
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Dropdown Menu</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
+						Dropdown Menu
+					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/dropdown-menu"
@@ -220,9 +240,20 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center gap-4">
-						<div className="bg-muted rounded-lg p-8 border border-dashed">
-							<p className="text-muted-foreground text-sm">Click the button to open the dropdown menu</p>
-						</div>
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="raised">Open Menu</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent>
+								<DropdownMenuLabel>My Account</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem>Profile</DropdownMenuItem>
+								<DropdownMenuItem>Settings</DropdownMenuItem>
+								<DropdownMenuItem>Team</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem>Logout</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -269,12 +300,12 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
-				<Tabs 
-					value={installationTab} 
+				<Tabs
+					value={installationTab}
 					onValueChange={handleTabChange}
 					className="w-full"
 				>
@@ -317,7 +348,10 @@ export default function Page() {
 								</SnippetTabsContents>
 							</Snippet>
 						</TabsContent>
-						<TabsContent value="tab2" className="w-full pt-4 flex flex-col gap-12">
+						<TabsContent
+							value="tab2"
+							className="w-full pt-4 flex flex-col gap-12"
+						>
 							<div className="w-full flex flex-col gap-2">
 								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 									Install the following dependencies:
@@ -382,24 +416,41 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
-				
+
 				<div className="w-full flex flex-col gap-4">
 					<p className="text-muted-foreground">
-						This component includes multiple sub-components for building dropdown menus:
+						This component includes multiple sub-components for building
+						dropdown menus:
 					</p>
 					<div className="grid grid-cols-2 gap-2">
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenu />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuTrigger />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuContent />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuItem />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuCheckboxItem />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuRadioGroup />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuLabel />"}</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">{"<DropdownMenuSeparator />"}</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenu />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuTrigger />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuContent />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuItem />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuCheckboxItem />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuRadioGroup />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuLabel />"}
+						</Badge>
+						<Badge variant="outline" className="text-xs font-mono w-fit">
+							{"<DropdownMenuSeparator />"}
+						</Badge>
 					</div>
 				</div>
 			</div>
@@ -443,4 +494,3 @@ export default function Page() {
 		</main>
 	);
 }
-

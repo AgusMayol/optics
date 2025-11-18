@@ -22,11 +22,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -301,9 +297,12 @@ export default function Page() {
 											<li>
 												<NavigationMenuLink asChild>
 													<a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">Introduction</div>
+														<div className="text-sm font-medium leading-none">
+															Introduction
+														</div>
 														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															Re-usable components built using Radix UI and Tailwind CSS.
+															Re-usable components built using Radix UI and
+															Tailwind CSS.
 														</p>
 													</a>
 												</NavigationMenuLink>
@@ -311,9 +310,12 @@ export default function Page() {
 											<li>
 												<NavigationMenuLink asChild>
 													<a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">Installation</div>
+														<div className="text-sm font-medium leading-none">
+															Installation
+														</div>
 														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															How to install dependencies and structure your app.
+															How to install dependencies and structure your
+															app.
 														</p>
 													</a>
 												</NavigationMenuLink>
@@ -323,7 +325,10 @@ export default function Page() {
 								</NavigationMenuItem>
 								<NavigationMenuItem>
 									<NavigationMenuLink asChild>
-										<Link href="/docs" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+										<Link
+											href="#"
+											className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+										>
 											Documentation
 										</Link>
 									</NavigationMenuLink>
@@ -564,4 +569,3 @@ export default function Page() {
 		</main>
 	);
 }
-

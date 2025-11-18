@@ -94,7 +94,7 @@ function onSubmit(data) {
 				<FormItem>
 					<FormLabel>Username</FormLabel>
 					<FormControl>
-						<Input placeholder="shadcn" {...field} />
+						<Input placeholder="John Doe" variant="raised" {...field} />
 					</FormControl>
 					<FormDescription>
 						This is your public display name.
@@ -322,7 +322,11 @@ export default function Page() {
 										<FormItem>
 											<FormLabel>Username</FormLabel>
 											<FormControl>
-												<Input placeholder="shadcn" {...field} />
+												<Input
+													placeholder="John Doe"
+													variant="raised"
+													{...field}
+												/>
 											</FormControl>
 											<FormDescription>
 												This is your public display name.
@@ -331,7 +335,7 @@ export default function Page() {
 										</FormItem>
 									)}
 								/>
-								<Button type="submit" variant="raised">
+								<Button type="submit" variant="default">
 									Submit
 								</Button>
 							</form>
@@ -520,7 +524,7 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									{...form}
+									{"{"}...form{"}"}
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">

@@ -16,11 +16,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -247,7 +243,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+					A set of checkable buttons—known as radio buttons—where no more than
+					one of the buttons can be checked at a time.
 				</p>
 			</div>
 
@@ -255,17 +252,20 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-center gap-4">
-						<RadioGroup defaultValue="comfortable" className="w-full max-w-md">
-							<div className="flex items-center space-x-2">
+					<CardContent className="px-8 flex items-center justify-center gap-4">
+						<RadioGroup
+							defaultValue="comfortable"
+							className="flex flex-col items-start justify-start"
+						>
+							<div className="flex items-center justify-start gap-2">
 								<RadioGroupItem value="default" id="r1" />
 								<Label htmlFor="r1">Default</Label>
 							</div>
-							<div className="flex items-center space-x-2">
+							<div className="flex items-center justify-start gap-2">
 								<RadioGroupItem value="comfortable" id="r2" />
 								<Label htmlFor="r2">Comfortable</Label>
 							</div>
-							<div className="flex items-center space-x-2">
+							<div className="flex items-center justify-start gap-2">
 								<RadioGroupItem value="compact" id="r3" />
 								<Label htmlFor="r3">Compact</Label>
 							</div>
@@ -520,4 +520,3 @@ export default function Page() {
 		</main>
 	);
 }
-
