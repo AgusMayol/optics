@@ -23,11 +23,7 @@ import {
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
 import Link from "next/link";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-} from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
 import {
 	Accordion,
 	AccordionItem,
@@ -273,7 +269,7 @@ export default function Page() {
 	}
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
@@ -292,7 +288,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					Pagination with page navigation, next/previous buttons, and page numbers.
+					Pagination with page navigation, next/previous buttons, and page
+					numbers.
 				</p>
 			</div>
 
@@ -310,7 +307,9 @@ export default function Page() {
 									<PaginationLink href="#">1</PaginationLink>
 								</PaginationItem>
 								<PaginationItem>
-									<PaginationLink href="#" isActive>2</PaginationLink>
+									<PaginationLink href="#" isActive>
+										2
+									</PaginationLink>
 								</PaginationItem>
 								<PaginationItem>
 									<PaginationLink href="#">3</PaginationLink>
@@ -371,8 +370,8 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
 				<Tabs
@@ -464,8 +463,8 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
 				<div className="w-full flex flex-col gap-2">
@@ -554,4 +553,3 @@ export default function Page() {
 		</main>
 	);
 }
-

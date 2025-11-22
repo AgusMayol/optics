@@ -633,10 +633,12 @@ const reducedMotionCode = [
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">Web Accessibility</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Accessibility
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Build inclusive Next.js applications that work for everyone, following
 					WCAG 2.2 guidelines.
 				</p>
@@ -644,10 +646,10 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-24 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
 				{/* Introduction */}
 				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Web accessibility ensures that your application can be used by
 						everyone, including people with disabilities. This guide provides
 						practical examples following WCAG 2.2 standards and Next.js best
@@ -664,7 +666,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -677,7 +679,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use semantic HTML elements to provide meaning and structure. This
 						helps screen readers understand your content hierarchy.
 					</p>
@@ -735,20 +737,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										2
 									</Badge>
-									Skip Links (WCAG 2.4.1)
+									Skip Links
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Skip links allow keyboard users to bypass repetitive content and
 						jump directly to the main content. Essential for WCAG 2.4.1
 						compliance.
@@ -807,7 +809,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -820,7 +822,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Buttons must be keyboard accessible, have proper labels, and visible
 						focus states. Always use proper ARIA attributes when needed.
 					</p>
@@ -878,20 +880,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										4
 									</Badge>
-									Accessible Forms (WCAG 3.3)
+									Accessible Forms
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Forms must have proper labels, error messages, and validation states
 						that are accessible to screen readers.
 					</p>
@@ -949,20 +951,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										5
 									</Badge>
-									Accessible Images (WCAG 1.1.1)
+									Accessible Images
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						All images must have appropriate alt text. Use descriptive text for
 						informative images, empty alt for decorative images, and detailed
 						descriptions for complex images.
@@ -1021,20 +1023,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										6
 									</Badge>
-									ARIA Live Regions (WCAG 4.1.3)
+									ARIA Live Regions
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use live regions to announce dynamic content changes to screen
 						reader users without interrupting their current task.
 					</p>
@@ -1092,20 +1094,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										7
 									</Badge>
-									Keyboard Navigation (WCAG 2.1.1)
+									Keyboard Navigation
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						All functionality must be accessible via keyboard. Implement proper
 						arrow key navigation, Home/End keys, and Escape key support for
 						menus and dropdowns.
@@ -1164,20 +1166,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										8
 									</Badge>
-									Focus Management (WCAG 2.4.7)
+									Focus Management
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Manage focus properly when opening/closing modals, dialogs, and
 						other dynamic content. Trap focus within modals and restore it when
 						closed.
@@ -1236,20 +1238,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										9
 									</Badge>
-									Color Contrast (WCAG 1.4.3)
+									Color Contrast
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Ensure sufficient color contrast between text and background. WCAG
 						2.2 Level AA requires 4.5:1 for normal text and 3:1 for large text.
 					</p>
@@ -1307,20 +1309,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										10
 									</Badge>
-									Responsive Accessibility (WCAG 1.4.10)
+									Responsive Accessibility
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Ensure your application works on all screen sizes and orientations.
 						Mobile navigation should be just as accessible as desktop.
 					</p>
@@ -1378,20 +1380,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										11
 									</Badge>
-									Accessible Data Tables (WCAG 1.3.1)
+									Accessible Data Tables
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use proper table markup with{" "}
 						<Badge variant="outline" className="text-xs font-mono">
 							caption
@@ -1464,20 +1466,20 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
 										12
 									</Badge>
-									Motion Preferences (WCAG 2.3.3)
+									Motion Preferences
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Respect user motion preferences using{" "}
 						<Badge variant="outline" className="text-xs font-mono">
 							prefers-reduced-motion
@@ -1539,7 +1541,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1552,7 +1554,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure Next.js for better accessibility with React Strict Mode,
 						internationalization, and optimized images.
 					</p>
@@ -1605,7 +1607,7 @@ export default function Page() {
 			<Separator decoration />
 
 			{/* WCAG 2.2 Principles & Testing Tools */}
-			<div className="w-full flex flex-col items-start justify-start gap-12 p-12 pt-4">
+			<div className="w-full flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
 				<div className="w-full flex flex-col gap-8">
 					<h3 className="text-xl font-semibold">WCAG 2.2 Core Principles</h3>
 					<div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">

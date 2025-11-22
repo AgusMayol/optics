@@ -39,8 +39,10 @@ import { Fragment, useState } from "react";
 import { tailwindColors } from "@/lib/tailwind-colors";
 import { toast } from "@/registry/agusmayol/sonner";
 import { Separator } from "@/registry/agusmayol/separator";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Page() {
+	const isMobile = useIsMobile();
 	const colors = [
 		{
 			name: "Neutral",
@@ -412,12 +414,12 @@ export default function Page() {
 
 	return (
 		<TooltipProvider delayDuration={400} skipDelayDuration={0}>
-			<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
+			<main className="flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 				<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
 						Colors
 					</h1>
-					<p className="text-muted-foreground text-xl">
+					<p className="text-muted-foreground text-base lg:text-xl">
 						The complete Tailwind color palette in HEX, RGB, HSL, CSS variables,
 						and classes. Ready to copy and paste into your project.
 					</p>
@@ -440,28 +442,41 @@ export default function Page() {
 						</SelectContent>
 					</Select>
 
-					<GridContainer cols={13} rows={23} border={true} className="border-r">
-						<GridRow>
-							<GridItem span={2} decorationTopLeft></GridItem>
-							<GridItem className="text-xs font-semibold">50</GridItem>
-							<GridItem className="text-xs font-semibold">100</GridItem>
-							<GridItem className="text-xs font-semibold">200</GridItem>
-							<GridItem className="text-xs font-semibold">300</GridItem>
-							<GridItem className="text-xs font-semibold">400</GridItem>
-							<GridItem className="text-xs font-semibold">500</GridItem>
-							<GridItem className="text-xs font-semibold">600</GridItem>
-							<GridItem className="text-xs font-semibold">700</GridItem>
-							<GridItem className="text-xs font-semibold">800</GridItem>
-							<GridItem className="text-xs font-semibold">900</GridItem>
-							<GridItem className="text-xs font-semibold !border-r-0">
-								950
-							</GridItem>
-						</GridRow>
-						{colors.map((color) => (
-							<GridRow key={color.name} className="not-last:h-[calc(100%-1px)]">
-								<GridItem span={2} className="text-xs font-semibold">
-									{color.name}
+					<GridContainer
+						cols={isMobile ? 11 : 13}
+						rows={isMobile ? 22 : 23}
+						border={true}
+						className="border-r w-full"
+					>
+						{!isMobile && (
+							<GridRow>
+								<GridItem span={2} decorationTopLeft></GridItem>
+								<GridItem className="text-xs font-semibold">50</GridItem>
+								<GridItem className="text-xs font-semibold">100</GridItem>
+								<GridItem className="text-xs font-semibold">200</GridItem>
+								<GridItem className="text-xs font-semibold">300</GridItem>
+								<GridItem className="text-xs font-semibold">400</GridItem>
+								<GridItem className="text-xs font-semibold">500</GridItem>
+								<GridItem className="text-xs font-semibold">600</GridItem>
+								<GridItem className="text-xs font-semibold">700</GridItem>
+								<GridItem className="text-xs font-semibold">800</GridItem>
+								<GridItem className="text-xs font-semibold">900</GridItem>
+								<GridItem className="text-xs font-semibold !border-r-0">
+									950
 								</GridItem>
+							</GridRow>
+						)}
+						{colors.map((color) => (
+							<GridRow
+								key={color.name}
+								className="not-last:h-[calc(100%-1px)] min-h-0"
+							>
+								{!isMobile && (
+									<GridItem span={2} className="text-xs font-semibold">
+										{color.name}
+									</GridItem>
+								)}
+
 								{color.colors.map((colorClass) => {
 									const displayValue = getColorValue(
 										colorClass,
@@ -519,12 +534,12 @@ export default function Page() {
 											<TooltipTrigger asChild>
 												<GridItem
 													decorationBottomRight={colorClass === "bg-rose-950"}
-													className="!border-r-0 cursor-pointer"
+													className="!border-r-0 cursor-pointer aspect-square !min-h-0 min-w-0 p-0.5 sm:p-1"
 													onClick={handleColorClick}
 												>
 													<Card
 														className={cn(
-															"aspect-square rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg",
+															"w-full h-full aspect-square rounded-sm md:rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg",
 															colorClass,
 														)}
 													/>

@@ -53,7 +53,7 @@ export const ThemeSwitcher = forwardRef(
 			<div
 				ref={ref}
 				className={cn(
-					"relative isolate flex h-8 rounded-full bg-background p-1 ring-1 ring-border",
+					"relative isolate flex h-8 rounded-full squircle-none bg-background p-1 ring-1 ring-border",
 					className,
 				)}
 				{...props}
@@ -64,14 +64,14 @@ export const ThemeSwitcher = forwardRef(
 					return (
 						<button
 							aria-label={label}
-							className="relative h-6 w-6 rounded-full"
+							className="relative h-6 w-6 rounded-full squircle-none"
 							key={key}
 							onClick={() => handleThemeClick(key)}
 							type="button"
 						>
 							{isActive && (
 								<motion.div
-									className="absolute inset-0 rounded-full bg-secondary"
+									className="absolute inset-0 rounded-full squircle-none bg-secondary"
 									layoutId="activeTheme"
 									transition={{ type: "spring", duration: 0.5 }}
 								/>

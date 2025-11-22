@@ -91,7 +91,7 @@ export default function Home() {
 	}, [state]);
 
 	return (
-		<main className="flex flex-col flex-1 gap-8 bg-background lg:rounded-b-xl lg:rounded-bl-none">
+		<main className="flex flex-col flex-1 gap-8 bg-background lg:rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12">
 				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
 					AgusMayol's Optics
@@ -291,7 +291,8 @@ export default function Home() {
 										<Snippet value={null} className="">
 											<SnippetTabsContent
 												value={null}
-												className="w-full text-start text-xs flex items-center justify-between py-1 pr-1 text-muted-foreground truncate"
+												className="w-full text-start flex items-center justify-between py-1 pr-1 text-muted-foreground truncate"
+												textClassName="!text-xs"
 											>
 												bunx --bun shadcn@latest add grid
 												<SnippetCopyButton value={null} />
@@ -906,7 +907,8 @@ export default function Home() {
 										<Snippet value={null} className="">
 											<SnippetTabsContent
 												value={null}
-												className="w-full text-start text-xs flex items-center !justify-between py-1 pr-1 text-muted-foreground truncate"
+												className="w-full text-start flex items-center !justify-between py-1 pr-1 text-muted-foreground truncate !text-xs"
+												textClassName="!text-xs"
 											>
 												bunx --bun shadcn@latest add grid
 												<SnippetCopyButton value={null} />

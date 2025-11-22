@@ -841,10 +841,12 @@ yarn-error.log*
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">Next.js Security</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Security
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Complete guide to security best practices for Next.js applications
 					deployed on Vercel.
 				</p>
@@ -852,10 +854,10 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-24 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
 				{/* Introduction */}
 				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Security is fundamental in modern web applications. This guide
 						provides practical examples and proven patterns to protect your
 						Next.js application deployed on Vercel, based on official
@@ -872,7 +874,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -885,7 +887,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						CSP is essential to protect against XSS attacks, clickjacking, and
 						code injection. Implement CSP with nonces in Next.js for enhanced
 						security.
@@ -944,7 +946,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -957,7 +959,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Handle secrets and credentials securely with environment variables.
 						Vercel offers encrypted sensitive variables that are never exposed.
 					</p>
@@ -1015,7 +1017,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1028,7 +1030,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect routes and APIs with Proxy (formerly Middleware in Next.js
 						15). Verify authentication, authorization, and add security headers
 						on every request.
@@ -1087,7 +1089,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1100,7 +1102,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Validate and sanitize all user inputs. Use validation schemas and
 						sanitize HTML to prevent XSS attacks.
 					</p>
@@ -1158,7 +1160,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1171,7 +1173,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect your APIs against abuse and DDoS attacks by implementing
 						rate limiting. Limit the number of requests per IP or user within a
 						time period.
@@ -1230,7 +1232,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1243,7 +1245,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Vercel provides multiple security layers: Firewall, DDoS protection,
 						encrypted sensitive variables, and automatic HTTPS on all
 						deployments.
@@ -1302,7 +1304,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -1315,7 +1317,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect against Cross-Site Request Forgery attacks using CSRF
 						tokens. Verify the authenticity of each request that modifies data.
 					</p>
@@ -1364,78 +1366,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 8. Secure Authentication */}
-				<div className="flex flex-col gap-4 w-full">
-					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/guides/authentication"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										8
-									</Badge>
-									Secure Authentication with NextAuth
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
-					</div>
-					<p className="text-muted-foreground leading-7">
-						Implement secure authentication with NextAuth.js. Use bcrypt to hash
-						passwords and JWT for secure sessions.
-					</p>
-					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
-							<Accordion type={"single"} collapsible className="w-full">
-								<AccordionItem value="codeblock" className="rounded-b-xl">
-									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-										showArrow
-									>
-										NextAuth Configuration
-									</AccordionTrigger>
-									<AccordionContent
-										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-										keepRendered
-									>
-										<CodeBlock
-											data={secureAuthCode}
-											defaultValue={secureAuthCode[0].filename}
-											className="border-none rounded-none rounded-b-xl shadow-none group"
-										>
-											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-												<CodeBlockCopyButton />
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.filename}
-														value={item.filename}
-													>
-														<CodeBlockContent
-															language={item.language}
-															className="bg-sidebar"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
-						</CardFooter>
-					</Card>
-				</div>
-
-				{/* 9. Dependency Security */}
+				{/* 8. Dependency Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1444,12 +1375,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										9
+										8
 									</Badge>
 									Dependency Security
 								</h2>
@@ -1457,7 +1388,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Keep your dependencies updated and free from vulnerabilities. Use
 						npm audit, Snyk, or Dependabot to detect and fix issues.
 					</p>
@@ -1506,7 +1437,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 10. Secure Cookies & Sessions */}
+				{/* 9. Secure Cookies & Sessions */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1515,12 +1446,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										10
+										9
 									</Badge>
 									Secure Cookies & Sessions
 								</h2>
@@ -1528,7 +1459,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure cookies with security flags. Use httpOnly, secure, and
 						sameSite to protect against XSS and CSRF.
 					</p>
@@ -1577,7 +1508,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 11. SQL Injection Prevention */}
+				{/* 10. SQL Injection Prevention */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1586,12 +1517,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										11
+										10
 									</Badge>
 									SQL Injection Prevention
 								</h2>
@@ -1599,7 +1530,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use ORMs like Prisma or parameterized queries to prevent SQL
 						injection. Never concatenate strings directly in queries.
 					</p>
@@ -1648,7 +1579,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 12. Security Headers */}
+				{/* 11. Security Headers */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1657,12 +1588,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										12
+										11
 									</Badge>
 									Security Headers
 								</h2>
@@ -1670,7 +1601,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure security headers in next.config.js. Include HSTS,
 						X-Frame-Options, X-Content-Type-Options, and Referrer-Policy.
 					</p>
@@ -1719,7 +1650,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 13. Server Actions Security */}
+				{/* 12. Server Actions Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1728,12 +1659,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										13
+										12
 									</Badge>
 									Server Actions Security
 								</h2>
@@ -1741,7 +1672,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Server Actions must validate authentication and authorization.
 						Always validate inputs and verify user permissions.
 					</p>
@@ -1790,7 +1721,7 @@ export default function Page() {
 					</Card>
 				</div>
 
-				{/* 14. Source Maps Security */}
+				{/* 13. Source Maps Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
 						<Button variant="link" asChild className="gap-1">
@@ -1799,12 +1730,12 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
 									>
-										14
+										13
 									</Badge>
 									Source Maps Security
 								</h2>
@@ -1812,7 +1743,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Disable source maps in production to prevent exposing your original
 						source code. Source maps reveal your application's internal
 						structure and logic, making it easier for attackers to find

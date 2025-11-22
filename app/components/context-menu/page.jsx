@@ -29,7 +29,7 @@ import {
 	ContextMenuSubContent,
 	ContextMenuSubTrigger,
 	ContextMenuTrigger,
-  } from "@/registry/agusmayol/context-menu"
+} from "@/registry/agusmayol/context-menu";
 import {
 	Accordion,
 	AccordionItem,
@@ -260,10 +260,12 @@ export default function Page() {
 	}
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Context Menu</h1>
+					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
+						Context Menu
+					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
 							href="https://ui.shadcn.com/docs/components/context-menu"
@@ -287,56 +289,62 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center gap-4">
-						
-
 						<ContextMenu>
-      <ContextMenuTrigger>
-	  <div className="bg-muted rounded-lg p-8 border border-dashed flex items-center justify-center">
-							<p className="text-muted-foreground text-sm select-none">
-								Right click here to see the context menu
-							</p>
-						</div>
-      </ContextMenuTrigger>
-      <ContextMenuContent className="w-52">
-        <ContextMenuItem inset>
-          Back
-          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem inset disabled>
-          Forward
-          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem inset>
-          Reload
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuSub>
-          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
-          <ContextMenuSubContent className="w-44">
-            <ContextMenuItem>Save Page...</ContextMenuItem>
-            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-            <ContextMenuItem>Name Window...</ContextMenuItem>
-            <ContextMenuSeparator />
-            <ContextMenuItem>Developer Tools</ContextMenuItem>
-            <ContextMenuSeparator />
-            <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
-          </ContextMenuSubContent>
-        </ContextMenuSub>
-        <ContextMenuSeparator />
-        <ContextMenuCheckboxItem checked>
-          Show Bookmarks
-        </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
-        <ContextMenuSeparator />
-        <ContextMenuRadioGroup value="pedro">
-          <ContextMenuLabel inset>People</ContextMenuLabel>
-          <ContextMenuRadioItem value="pedro">
-            Pedro Duarte
-          </ContextMenuRadioItem>
-          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
-        </ContextMenuRadioGroup>
-      </ContextMenuContent>
-    </ContextMenu>
+							<ContextMenuTrigger>
+								<div className="bg-muted rounded-lg p-8 border border-dashed flex items-center justify-center">
+									<p className="text-muted-foreground text-sm select-none">
+										Right click here to see the context menu
+									</p>
+								</div>
+							</ContextMenuTrigger>
+							<ContextMenuContent className="w-52">
+								<ContextMenuItem inset>
+									Back
+									<ContextMenuShortcut>⌘[</ContextMenuShortcut>
+								</ContextMenuItem>
+								<ContextMenuItem inset disabled>
+									Forward
+									<ContextMenuShortcut>⌘]</ContextMenuShortcut>
+								</ContextMenuItem>
+								<ContextMenuItem inset>
+									Reload
+									<ContextMenuShortcut>⌘R</ContextMenuShortcut>
+								</ContextMenuItem>
+								<ContextMenuSub>
+									<ContextMenuSubTrigger inset>
+										More Tools
+									</ContextMenuSubTrigger>
+									<ContextMenuSubContent className="w-44">
+										<ContextMenuItem>Save Page...</ContextMenuItem>
+										<ContextMenuItem>Create Shortcut...</ContextMenuItem>
+										<ContextMenuItem>Name Window...</ContextMenuItem>
+										<ContextMenuSeparator />
+										<ContextMenuItem>Developer Tools</ContextMenuItem>
+										<ContextMenuSeparator />
+										<ContextMenuItem variant="destructive">
+											Delete
+										</ContextMenuItem>
+									</ContextMenuSubContent>
+								</ContextMenuSub>
+								<ContextMenuSeparator />
+								<ContextMenuCheckboxItem checked>
+									Show Bookmarks
+								</ContextMenuCheckboxItem>
+								<ContextMenuCheckboxItem>
+									Show Full URLs
+								</ContextMenuCheckboxItem>
+								<ContextMenuSeparator />
+								<ContextMenuRadioGroup value="pedro">
+									<ContextMenuLabel inset>People</ContextMenuLabel>
+									<ContextMenuRadioItem value="pedro">
+										Pedro Duarte
+									</ContextMenuRadioItem>
+									<ContextMenuRadioItem value="colm">
+										Colm Tuite
+									</ContextMenuRadioItem>
+								</ContextMenuRadioGroup>
+							</ContextMenuContent>
+						</ContextMenu>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -383,8 +391,8 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
-				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
+				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
 				<Tabs
@@ -499,8 +507,8 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-0">
-				<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
+				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>
 

@@ -30,19 +30,21 @@ import { Separator } from "@/registry/agusmayol/separator";
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">Materials</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Materials
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Materials are the building blocks of the system.
 				</p>
 			</div>
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-4 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-4">
 				<div className="flex flex-col gap-2 -mb-24">
-					<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 						Surface
 					</h2>
 					<p className="text-muted-foreground text-md">On the page.</p>

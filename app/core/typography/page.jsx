@@ -30,17 +30,19 @@ import { Separator } from "@/registry/agusmayol/separator";
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">Typography</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Typography
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Rules of typesetting throughout the system.
 				</p>
 			</div>
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-end justify-start gap-4 p-12 pt-0">
+			<div className="flex flex-col items-end justify-start gap-4 p-6 lg:p-12 pt-0">
 				<GridContainer
 					cols={12}
 					rows={11}

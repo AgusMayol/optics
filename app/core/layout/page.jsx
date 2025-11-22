@@ -228,13 +228,13 @@ const breakpointsCode = [
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			{/* Header */}
-			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-4xl font-bold tracking-tight">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-0">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
 					Layout Design System
 				</h1>
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Comprehensive guide for creating consistent, responsive, and beautiful
 					layouts using modern design principles.
 				</p>

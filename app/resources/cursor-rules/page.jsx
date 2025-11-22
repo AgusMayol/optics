@@ -61,14 +61,16 @@ export default function Page() {
 	];
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-4xl font-bold tracking-tight">Cursor Rules</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-0">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Cursor Rules
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					A set of rules that can be used to make Cursor more efficient.
 				</p>
 			</div>
-			<div className="flex flex-col flex-1 gap-8 p-12 bg-background">
+			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 bg-background">
 				{code.map((itemCode, index) => (
 					<Card className="pt-0 pb-0 bg-background" key={itemCode.filename}>
 						<CardFooter className="px-0 py-0 bg-background rounded-xl">

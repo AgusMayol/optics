@@ -18,10 +18,12 @@ import {
 } from "@/registry/agusmayol/context-menu";
 import { ListItems } from "./sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { MenuIcon } from "lucide-react";
-
+import { MenuIcon, XIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
 	Sheet,
+	SheetPortal,
+	SheetOverlay,
 	SheetClose,
 	SheetContent,
 	SheetDescription,
@@ -29,6 +31,8 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
+	SheetVariants,
+	SheetPrimitive,
 } from "@/registry/agusmayol/sheet";
 import { Separator } from "@/registry/agusmayol/separator";
 
@@ -112,60 +116,55 @@ export function Header({ links }) {
 	}, [systemTheme]);
 
 	return (
-		<div className="w-full h-16 flex items-center justify-between gap-4 lg:rounded-t-xl border-b lg:rounded-tl-none p-4">
+		<div className="w-full h-16 flex items-center justify-between gap-4 lg:rounded-t-3xl border-b lg:rounded-tl-none p-4">
 			{isMobile && (
 				<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
 					<SheetTrigger asChild>
 						<Button
 							variant="ghost"
 							size="icon"
+							animation="none"
 							className="w-full flex items-center justify-start gap-2"
 						>
 							<MenuIcon />
 							Menu
 						</Button>
 					</SheetTrigger>
-					<SheetContent side="left" className="pb-3 pt-6">
-						<SheetHeader>
-							<ContextMenu>
-								<ContextMenuTrigger>
-									<Link
-										href="/"
-										className="w-full h-auto flex flex-row items-center justify-start gap-3 py-4 pt-0 pb-6"
-										onClick={() => setSheetOpen(false)}
+					<SheetPortal>
+						<SheetOverlay className="fixed inset-0 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-[16px] h-[200svh] bg-gradient-to-b from-background via-transparent to-transparent via-[50%] [mask-image:linear-gradient(to_bottom,white_0%_50%,transparent_50%_100%)]" />
+						<SheetPrimitive.Content
+							className={cn(
+								SheetVariants({ side: "popIn" }),
+								"py-3 !max-w-none w-full h-full bg-transparent border-none rounded-none shadow-none",
+							)}
+						>
+							<SheetHeader className="-ml-6.5">
+								<SheetClose asChild>
+									<Button
+										variant="ghost"
+										animation="none"
+										className="w-full items-center justify-start px-6.5"
 									>
-										<Image
-											src="/images/new_logo.svg"
-											alt="AgusMayol's Optics logo"
-											className="size-8 ml-1.5"
-											width={100}
-											height={100}
-										/>
-										<SheetTitle className="text-lg font-bold text-start truncate">
-											AgusMayol's Optics
-										</SheetTitle>
-									</Link>
-								</ContextMenuTrigger>
-								<ContextMenuContent className="w-52">
-									<ContextMenuItem inset>Copy Logo as SVG</ContextMenuItem>
-								</ContextMenuContent>
-							</ContextMenu>
-						</SheetHeader>
-						<Separator decoration />
-						<ListItems
-							links={links}
-							sidebarMaxHeight="100%"
-							isMobile={isMobile}
-							onLinkClick={() => setSheetOpen(false)}
-						/>
-					</SheetContent>
+										<XIcon className="!size-5.5" />
+										<SheetTitle className="">Close</SheetTitle>
+									</Button>
+								</SheetClose>
+							</SheetHeader>
+							<ListItems
+								links={links}
+								sidebarMaxHeight="100%"
+								isMobile={isMobile}
+								onLinkClick={() => setSheetOpen(false)}
+							/>
+						</SheetPrimitive.Content>
+					</SheetPortal>
 				</Sheet>
 			)}
 
 			<CommandDialogComponent className="hidden lg:block" links={links} />
 
 			<div className="w-full h-full flex items-center justify-end gap-1.5">
-				<Button variant="ghost" size="icon">
+				<Button variant="ghost" size="icon" animation="none">
 					<Link
 						href="https://github.com/agusmayol/optics"
 						target="_blank"

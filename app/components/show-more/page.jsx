@@ -59,9 +59,11 @@ export default function Page() {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-12 pb-0">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">Show More</h1>
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
+					Show More
+				</h1>
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
 					Displays a button that shows more content when clicked.
 				</p>

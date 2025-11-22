@@ -186,11 +186,11 @@ function ProgressIndicator() {
 	}, []);
 
 	return (
-		<div className="p-6 bg-muted rounded-lg">
-			<div className="mb-4 w-xs">
+		<div className="p-6 bg-muted rounded-lg w-full max-w-full overflow-hidden">
+			<div className="mb-4 w-full max-w-full">
 				<div className="flex justify-between text-sm text-muted-foreground mb-2 gap-8">
 					<span>Progress</span>
-					<div className="flex items-center gap-0.5">
+					<div className="flex items-center gap-0.5 shrink-0">
 						<NumberFlow
 							value={progress}
 							locales="es-ES"
@@ -389,12 +389,12 @@ const cssAnimationCode = [
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">
-					Web Animations Guide
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					Animations
 				</h1>
-				<p className="text-muted-foreground text-xl">
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Create beautiful, performant animations for modern web applications
 					using React, Motion, and CSS.
 				</p>
@@ -402,10 +402,10 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-24 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
 				{/* Introduction */}
 				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Animations enhance user experience by providing visual feedback,
 						guiding attention, and creating delightful interactions. This guide
 						provides practical examples and best practices for implementing
@@ -422,7 +422,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -435,7 +435,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Smooth number transitions with NumberFlow for counters, statistics,
 						and progress indicators. Perfect for dashboards and data
 						visualizations.
@@ -503,8 +503,8 @@ export default function Page() {
 									Animated progress bars with smooth number transitions
 								</CardDescription>
 							</CardHeader>
-							<CardContent className="p-6">
-								<div className="flex justify-center">
+							<CardContent className="p-6 overflow-hidden">
+								<div className="flex justify-center w-full max-w-full">
 									<ProgressIndicator />
 								</div>
 							</CardContent>
@@ -521,7 +521,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -534,7 +534,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Delightful icon animations using Motion (Framer Motion) for scale,
 						rotation, and state changes. Add personality to your interface
 						interactions.
@@ -604,7 +604,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -617,7 +617,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Animate layout changes automatically when items are added, removed,
 						or reordered. Perfect for dynamic lists and grids.
 					</p>
@@ -675,7 +675,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -688,7 +688,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Lightweight CSS animations for hover effects, loading states, and
 						transitions. No JavaScript required for simple animations.
 					</p>
@@ -741,7 +741,7 @@ export default function Page() {
 			<Separator decoration />
 
 			{/* Animation Principles & Resources */}
-			<div className="flex flex-col items-start justify-start gap-12 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
 				<div className="flex flex-col gap-8">
 					<h3 className="text-xl font-semibold">Animation Principles</h3>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

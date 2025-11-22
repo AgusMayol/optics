@@ -50,7 +50,6 @@ export const links = [
 			{
 				name: "Performance",
 				href: "/resources/performance",
-				installed: false,
 			},
 			{
 				name: "Accesibility",
@@ -353,6 +352,12 @@ export const links = [
 				own: true,
 			},
 			{
+				name: "Multi Select",
+				href: "/components/multi-select",
+				own: true,
+				custom: false,
+			},
+			{
 				name: "Navigation Menu",
 				href: "/components/navigation-menu",
 				own: false,
@@ -539,7 +544,7 @@ export function LayoutContent({ children }) {
 			<Sidebar links={links} maxHeight={contentHeight} />
 			<div
 				ref={contentRef}
-				className="w-full col-span-full lg:col-span-11 lg:border lg:border-l-0 lg:rounded-l-none lg:rounded-xl flex flex-col flex-1 lg:bg-sidebar"
+				className="w-full col-span-full lg:col-span-11 lg:border lg:border-l-0 lg:rounded-l-none lg:rounded-3xl flex flex-col flex-1 lg:bg-sidebar"
 			>
 				<Header links={links} />
 				{children}

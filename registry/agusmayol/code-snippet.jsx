@@ -121,11 +121,19 @@ export const SnippetTabsTrigger = ({ className, ...props }) => (
 	<TabsTrigger className={cn("gap-1.5", className)} {...props} />
 );
 
-export const SnippetTabsContent = ({ className, children, ...props }) => (
+export const SnippetTabsContent = ({
+	className,
+	children,
+	textClassName,
+	...props
+}) => (
 	<TabsContent className={cn("mt-0 bg-background p-4", className)} {...props}>
 		<ScrollArea
 			className="w-full"
-			viewportClassName="w-full text-sm font-mono whitespace-nowrap"
+			viewportClassName={cn(
+				"w-full text-sm font-mono whitespace-nowrap",
+				textClassName,
+			)}
 		>
 			<div className="flex items-center justify-between gap-4 min-w-full">
 				{children}

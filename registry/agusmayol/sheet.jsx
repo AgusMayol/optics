@@ -16,7 +16,7 @@ const SheetPortal = SheetPrimitive.Portal;
 const SheetOverlay = ({ ref, className, ...props }) => (
 	<SheetPrimitive.Overlay
 		className={cn(
-			"fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+			"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
 			className,
 		)}
 		{...props}
@@ -25,7 +25,7 @@ const SheetOverlay = ({ ref, className, ...props }) => (
 );
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
-const sheetVariants = cva(
+const SheetVariants = cva(
 	"fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out bg-sidebar h-[calc(100svh-(--spacing(4)))] my-2 rounded-xl shadow-sm min-w-[calc(100vw-5rem)] max-w-[calc(100vw-5rem)] lg:min-w-96 lg:max-w-[24rem]",
 	{
 		variants: {
@@ -36,6 +36,8 @@ const sheetVariants = cva(
 				left: "inset-y-0 left-2 w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
 				right:
 					"inset-y-0 right-2 w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+				popIn:
+					"inset-y-0 inset-x-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-150 data-[state=open]:duration-150",
 			},
 		},
 		defaultVariants: {
@@ -55,7 +57,7 @@ const SheetContent = ({
 		<SheetOverlay />
 		<SheetPrimitive.Content
 			ref={ref}
-			className={cn(sheetVariants({ side }), className)}
+			className={cn(SheetVariants({ side }), className)}
 			{...props}
 		>
 			{/* <SheetPrimitive.Close
@@ -122,4 +124,6 @@ export {
 	SheetFooter,
 	SheetTitle,
 	SheetDescription,
+	SheetVariants,
+	SheetPrimitive,
 };

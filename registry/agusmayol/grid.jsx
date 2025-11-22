@@ -102,11 +102,15 @@ export const GridItem = ({
 		<div
 			className={cn(
 				`border-l last:border-r flex items-center justify-center relative`,
-				span === 1 && "aspect-square",
+				// Aspect square solo en desktop para evitar elementos muy pequeños en mobile
+				span === 1 && "md:aspect-square",
+				// En mobile, asegurar altura mínima razonable solo si es aspect-square
+				span === 1 && "min-h-[60px] md:min-h-0",
 				!borderLeft && "!border-l-0",
 				!borderRight && "!border-r-0",
 				!border && "!border-0",
-
+				// Prevenir overflow de contenido
+				"overflow-hidden",
 				className,
 			)}
 			style={{

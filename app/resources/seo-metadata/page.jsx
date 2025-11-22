@@ -445,10 +445,12 @@ export default async function Image({ params }) {
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-12 pb-4">
-				<h1 className="text-4xl font-bold tracking-tight">SEO & Metadata</h1>
-				<p className="text-muted-foreground text-xl">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+					SEO & Metadata
+				</h1>
+				<p className="text-muted-foreground text-base lg:text-xl">
 					Optimize your Next.js application for search engines with ready-to-use
 					code snippets.
 				</p>
@@ -456,10 +458,10 @@ export default function Page() {
 
 			<Separator decoration />
 
-			<div className="flex flex-col items-start justify-start gap-24 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
 				{/* Introduction */}
 				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js includes a Metadata API that allows you to define metadata
 						to improve your application's SEO. This guide includes ready-to-copy
 						examples for your Next.js project.
@@ -475,7 +477,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -488,7 +490,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Below is a complete example of the metadata setup, so you can easily
 						copy it into your{" "}
 						<Badge variant="outline" className="text-xs font-mono">
@@ -549,7 +551,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -562,7 +564,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						For pages with dynamic content (blogs, products, etc.), use{" "}
 						<Badge variant="outline" className="text-xs font-mono">
 							generateMetadata()
@@ -622,7 +624,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -635,7 +637,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Automatically generate Open Graph images using Next.js. Create{" "}
 						<Badge variant="outline" className="text-xs font-mono">
 							app/opengraph-image.tsx
@@ -747,7 +749,7 @@ export default function Page() {
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								<h2 className="text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 									<Badge
 										variant="outline"
 										className="tabular-nums aspect-square"
@@ -760,7 +762,7 @@ export default function Page() {
 							</Link>
 						</Button>
 					</div>
-					<p className="text-muted-foreground leading-7">
+					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js automatically generates sitemap.xml and robots.txt files.
 						Create{" "}
 						<Badge variant="outline" className="text-xs font-mono">
@@ -869,7 +871,7 @@ export default function Page() {
 			<Separator decoration />
 
 			{/* Additional Tips */}
-			<div className="flex flex-col items-start justify-start gap-12 p-12 pt-4">
+			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
 				<h3 className="text-xl font-semibold">Additional SEO Tips</h3>
 				<ul className="list-disc list-inside space-y-2 text-muted-foreground">
 					<li>

@@ -107,9 +107,8 @@ export const metadata = {
 		title: process.env.NEXT_PUBLIC_APPLICATION_NAME,
 	},
 	icons: {
-		icon: "/apple-touch-icon.png",
-		shortcut: "/apple-touch-icon.png",
-		apple: "/apple-touch-icon.png",
+		icon: "/favicon.ico",
+		apple: "/apple-icon.png",
 	},
 };
 
