@@ -1,10 +1,13 @@
 "use client";
 import * as React from "react";
 import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	Empty,
+	EmptyContent,
+	EmptyDescription,
+	EmptyHeader,
+	EmptyMedia,
+	EmptyTitle,
+} from "@/registry/agusmayol/empty";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
@@ -15,6 +18,7 @@ import {
 	ArrowRight,
 	ArrowUpRight,
 	Binary,
+	FolderCode,
 } from "lucide-react";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
@@ -55,95 +59,173 @@ import {
 const code = [
 	{
 		language: "jsx",
-		filename: "hover-card.jsx",
+		filename: "empty-state.jsx",
 		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	Empty,
+	EmptyContent,
+	EmptyDescription,
+	EmptyHeader,
+	EmptyMedia,
+	EmptyTitle,
+} from "@/registry/agusmayol/empty";
+import { Button } from "@/registry/agusmayol/button";
+import { FolderCode } from "lucide-react";
 
-<HoverCard>
-	<HoverCardTrigger asChild>
-		<Button variant="raised">@nextjs</Button>
-	</HoverCardTrigger>
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
+<Empty>
+	<EmptyHeader>
+		<EmptyMedia variant="icon">
+			<FolderCode />
+		</EmptyMedia>
+		<EmptyTitle>No Projects Yet</EmptyTitle>
+		<EmptyDescription>
+			You haven't created any projects yet. Get started by creating
+			your first project.
+		</EmptyDescription>
+	</EmptyHeader>
+	<EmptyContent>
+		<div className="flex gap-2">
+			<Button>Create Project</Button>
+			<Button variant="outline">Import Project</Button>
 		</div>
-	</HoverCardContent>
-</HoverCard>`,
+	</EmptyContent>
+</Empty>`,
 	},
 ];
 
-const hoverCardComponentCode = [
+const emptyStateComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/hover-card.jsx",
-		code: `"use client"
+		filename: "components/ui/optics/empty.jsx",
+		code: `"use client";
 
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
-
-function HoverCard({
-  ...props
-}) {
-  return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
-}
-
-function HoverCardTrigger({
-  ...props
-}) {
-  return (<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
-}
-
-function HoverCardContent({
+function Empty({
   className,
-  align = "center",
-  sideOffset = 4,
   ...props
 }) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border p-4 shadow-md outline-hidden",
-          className
-        )}
-        {...props} />
-    </HoverCardPrimitive.Portal>
+    <div
+      data-slot="empty"
+      className={cn(
+        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12",
+        className
+      )}
+      {...props} />
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }`,
+function EmptyHeader({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-header"
+      className={cn("flex max-w-sm flex-col items-center gap-2 text-center", className)}
+      {...props} />
+  );
+}
+
+const emptyMediaVariants = cva(
+  "flex shrink-0 items-center justify-center mb-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent",
+        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*='size-'])]:size-6",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+function EmptyMedia({
+  className,
+  variant = "default",
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-icon"
+      data-variant={variant}
+      className={cn(emptyMediaVariants({ variant, className }))}
+      {...props} />
+  );
+}
+
+function EmptyTitle({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-title"
+      className={cn("text-lg font-medium tracking-tight", className)}
+      {...props} />
+  );
+}
+
+function EmptyDescription({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-description"
+      className={cn(
+        "text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4",
+        className
+      )}
+      {...props} />
+  );
+}
+
+function EmptyContent({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="empty-content"
+      className={cn(
+        "flex w-full max-w-sm min-w-0 flex-col items-center gap-4 text-sm text-balance",
+        className
+      )}
+      {...props} />
+  );
+}
+
+export {
+  Empty,
+  EmptyHeader,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+  EmptyMedia,
+};`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/hover-card",
+		code: "pnpm dlx shadcn@latest add @optics/empty",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/hover-card",
+		code: "npx shadcn@latest add @optics/empty",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/hover-card",
+		code: "yarn shadcn@latest add @optics/empty",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/hover-card",
+		code: "bunx --bun shadcn@latest add @optics/empty",
 	},
 ];
 
@@ -233,11 +315,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Hover Card
+						Empty State
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/hover-card"
+							href="https://ui.shadcn.com/docs/components/empty"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -248,7 +330,7 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					For sighted users to preview content available behind a link.
+					Display an empty state when there's no data to show.
 				</p>
 			</div>
 
@@ -256,22 +338,25 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<Button variant="raised">@nextjs</Button>
-							</HoverCardTrigger>
-							<HoverCardContent>
-								<div className="flex justify-between space-x-4">
-									<div className="space-y-1">
-										<h4 className="text-sm font-semibold">@nextjs</h4>
-										<p className="text-sm">
-											The React Framework – created and maintained by @vercel.
-										</p>
-									</div>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4 min-h-[300px]">
+						<Empty>
+							<EmptyHeader>
+								<EmptyMedia variant="icon">
+									<FolderCode className="size-6" />
+								</EmptyMedia>
+								<EmptyTitle>No Projects Yet</EmptyTitle>
+								<EmptyDescription>
+									You haven't created any projects yet. Get started by creating
+									your first project.
+								</EmptyDescription>
+							</EmptyHeader>
+							<EmptyContent>
+								<div className="flex gap-2">
+									<Button>Create Project</Button>
+									<Button variant="outline">Import Project</Button>
 								</div>
-							</HoverCardContent>
-						</HoverCard>
+							</EmptyContent>
+						</Empty>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -381,8 +466,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={hoverCardComponentCode}
-									defaultValue={hoverCardComponentCode[0].filename}
+									data={emptyStateComponentCode}
+									defaultValue={emptyStateComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockCopyButton
@@ -422,7 +507,7 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<HoverCard />"}
+						{"<Empty />"}
 					</Badge>
 
 					<GridContainer
@@ -456,11 +541,11 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									openDelay
+									className
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 700)
+								string
 							</GridItem>
 						</GridRow>
 					</GridContainer>

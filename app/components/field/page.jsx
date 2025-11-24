@@ -1,11 +1,16 @@
 "use client";
 import * as React from "react";
 import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	Field,
+	FieldDescription,
+	FieldGroup,
+	FieldLabel,
+	FieldLegend,
+	FieldSeparator,
+	FieldSet,
+} from "@/registry/agusmayol/field";
 import { Button } from "@/registry/agusmayol/button";
+import { Input } from "@/registry/agusmayol/input";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -55,95 +60,201 @@ import {
 const code = [
 	{
 		language: "jsx",
-		filename: "hover-card.jsx",
+		filename: "field.jsx",
 		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	Field,
+	FieldDescription,
+	FieldGroup,
+	FieldLabel,
+	FieldLegend,
+	FieldSet,
+} from "@/registry/agusmayol/field";
+import { Input } from "@/registry/agusmayol/input";
 
-<HoverCard>
-	<HoverCardTrigger asChild>
-		<Button variant="raised">@nextjs</Button>
-	</HoverCardTrigger>
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
-		</div>
-	</HoverCardContent>
-</HoverCard>`,
+<FieldGroup>
+	<FieldSet>
+		<FieldLegend>Payment Method</FieldLegend>
+		<FieldDescription>
+			All transactions are secure and encrypted
+		</FieldDescription>
+		<FieldGroup>
+			<Field>
+				<FieldLabel htmlFor="card-name">Name on Card</FieldLabel>
+				<Input id="card-name" placeholder="John Doe" required />
+			</Field>
+			<Field>
+				<FieldLabel htmlFor="card-number">Card Number</FieldLabel>
+				<Input id="card-number" placeholder="1234 5678 9012 3456" required />
+				<FieldDescription>
+					Enter your 16-digit card number
+				</FieldDescription>
+			</Field>
+		</FieldGroup>
+	</FieldSet>
+</FieldGroup>`,
 	},
 ];
 
-const hoverCardComponentCode = [
+const fieldComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/hover-card.jsx",
-		code: `"use client"
+		filename: "components/ui/optics/field.jsx",
+		code: `"use client";
 
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import { useMemo } from "react";
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { Label } from "@/registry/agusmayol/label";
+import { Separator } from "@/registry/agusmayol/separator";
 
-import { cn } from "@/lib/utils"
-
-function HoverCard({
-  ...props
-}) {
-  return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
-}
-
-function HoverCardTrigger({
-  ...props
-}) {
-  return (<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
-}
-
-function HoverCardContent({
+function FieldSet({
   className,
-  align = "center",
-  sideOffset = 4,
   ...props
 }) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border p-4 shadow-md outline-hidden",
-          className
-        )}
-        {...props} />
-    </HoverCardPrimitive.Portal>
+    <fieldset
+      data-slot="field-set"
+      className={cn(
+        "flex flex-col gap-6",
+        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+        className
+      )}
+      {...props} />
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }`,
+function FieldLegend({
+  className,
+  variant = "legend",
+  ...props
+}) {
+  return (
+    <legend
+      data-slot="field-legend"
+      data-variant={variant}
+      className={cn(
+        "mb-3 font-medium",
+        "data-[variant=legend]:text-base",
+        "data-[variant=label]:text-sm",
+        className
+      )}
+      {...props} />
+  );
+}
+
+function FieldGroup({
+  className,
+  ...props
+}) {
+  return (
+    <div
+      data-slot="field-group"
+      className={cn(
+        "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4",
+        className
+      )}
+      {...props} />
+  );
+}
+
+const fieldVariants = cva("group/field flex w-full gap-3 data-[invalid=true]:text-destructive", {
+  variants: {
+    orientation: {
+      vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],
+      horizontal: [
+        "flex-row items-center",
+        "[&>[data-slot=field-label]]:flex-auto",
+        "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+      ],
+      responsive: [
+        "flex-col [&>*]:w-full [&>.sr-only]:w-auto @md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto",
+        "@md/field-group:[&>[data-slot=field-label]]:flex-auto",
+        "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+      ],
+    },
+  },
+  defaultVariants: {
+    orientation: "vertical",
+  },
+});
+
+function Field({
+  className,
+  orientation = "vertical",
+  ...props
+}) {
+  return (
+    <div
+      role="group"
+      data-slot="field"
+      data-orientation={orientation}
+      className={cn(fieldVariants({ orientation }), className)}
+      {...props} />
+  );
+}
+
+function FieldLabel({
+  className,
+  ...props
+}) {
+  return (
+    <Label
+      data-slot="field-label"
+      className={cn(
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50",
+        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",
+        "has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10",
+        className
+      )}
+      {...props} />
+  );
+}
+
+function FieldDescription({
+  className,
+  ...props
+}) {
+  return (
+    <p
+      data-slot="field-description"
+      className={cn(
+        "text-muted-foreground text-sm leading-normal font-normal group-has-[[data-orientation=horizontal]]/field:text-balance",
+        "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
+        "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
+        className
+      )}
+      {...props} />
+  );
+}
+
+export {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldGroup,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+};`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/hover-card",
+		code: "pnpm dlx shadcn@latest add @optics/field",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/hover-card",
+		code: "npx shadcn@latest add @optics/field",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/hover-card",
+		code: "yarn shadcn@latest add @optics/field",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/hover-card",
+		code: "bunx --bun shadcn@latest add @optics/field",
 	},
 ];
 
@@ -233,11 +344,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Hover Card
+						Field
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/hover-card"
+							href="https://ui.shadcn.com/docs/components/field"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -248,7 +359,7 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					For sighted users to preview content available behind a link.
+					Composable form field components for building accessible forms.
 				</p>
 			</div>
 
@@ -256,22 +367,42 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<Button variant="raised">@nextjs</Button>
-							</HoverCardTrigger>
-							<HoverCardContent>
-								<div className="flex justify-between space-x-4">
-									<div className="space-y-1">
-										<h4 className="text-sm font-semibold">@nextjs</h4>
-										<p className="text-sm">
-											The React Framework – created and maintained by @vercel.
-										</p>
-									</div>
-								</div>
-							</HoverCardContent>
-						</HoverCard>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4 min-h-[300px]">
+						<div className="w-full max-w-md">
+							<FieldGroup>
+								<FieldSet>
+									<FieldLegend>Payment Method</FieldLegend>
+									<FieldDescription>
+										All transactions are secure and encrypted
+									</FieldDescription>
+									<FieldGroup>
+										<Field>
+											<FieldLabel htmlFor="demo-card-name">
+												Name on Card
+											</FieldLabel>
+											<Input
+												id="demo-card-name"
+												placeholder="John Doe"
+												required
+											/>
+										</Field>
+										<Field>
+											<FieldLabel htmlFor="demo-card-number">
+												Card Number
+											</FieldLabel>
+											<Input
+												id="demo-card-number"
+												placeholder="1234 5678 9012 3456"
+												required
+											/>
+											<FieldDescription>
+												Enter your 16-digit card number
+											</FieldDescription>
+										</Field>
+									</FieldGroup>
+								</FieldSet>
+							</FieldGroup>
+						</div>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -381,8 +512,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={hoverCardComponentCode}
-									defaultValue={hoverCardComponentCode[0].filename}
+									data={fieldComponentCode}
+									defaultValue={fieldComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockCopyButton
@@ -422,7 +553,7 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<HoverCard />"}
+						{"<Field />"}
 					</Badge>
 
 					<GridContainer
@@ -456,11 +587,11 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									openDelay
+									orientation
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 700)
+								"vertical" | "horizontal" | "responsive"
 							</GridItem>
 						</GridRow>
 					</GridContainer>

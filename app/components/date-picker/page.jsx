@@ -1,10 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+import { DatePicker } from "@/registry/agusmayol/date-picker";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
@@ -55,95 +51,94 @@ import {
 const code = [
 	{
 		language: "jsx",
-		filename: "hover-card.jsx",
-		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+		filename: "date-picker.jsx",
+		code: `import { DatePicker } from "@/registry/agusmayol/date-picker";
+import { useState } from "react";
 
-<HoverCard>
-	<HoverCardTrigger asChild>
-		<Button variant="raised">@nextjs</Button>
-	</HoverCardTrigger>
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
-		</div>
-	</HoverCardContent>
-</HoverCard>`,
+const [date, setDate] = useState();
+
+<DatePicker
+	date={date}
+	onDateChange={setDate}
+	placeholder="Pick a date"
+/>`,
 	},
 ];
 
-const hoverCardComponentCode = [
+const datePickerComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/hover-card.jsx",
-		code: `"use client"
+		filename: "components/ui/optics/date-picker.jsx",
+		code: `"use client";
 
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import * as React from "react";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/agusmayol/button";
+import { Calendar } from "@/registry/agusmayol/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/registry/agusmayol/popover";
 
-function HoverCard({
-  ...props
-}) {
-  return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
-}
-
-function HoverCardTrigger({
-  ...props
-}) {
-  return (<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
-}
-
-function HoverCardContent({
+function DatePicker({
+  date,
+  onDateChange,
+  placeholder = "Pick a date",
   className,
-  align = "center",
-  sideOffset = 4,
   ...props
 }) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border p-4 shadow-md outline-hidden",
-          className
-        )}
-        {...props} />
-    </HoverCardPrimitive.Portal>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !date && "text-muted-foreground",
+            className
+          )}
+          {...props}
+        >
+          <CalendarIcon />
+          {date ? format(date, "PPP") : <span>{placeholder}</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={onDateChange}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }`,
+export { DatePicker };`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/hover-card",
+		code: "pnpm dlx shadcn@latest add @optics/date-picker",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/hover-card",
+		code: "npx shadcn@latest add @optics/date-picker",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/hover-card",
+		code: "yarn shadcn@latest add @optics/date-picker",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/hover-card",
+		code: "bunx --bun shadcn@latest add @optics/date-picker",
 	},
 ];
 
@@ -168,6 +163,7 @@ export default function Page() {
 	const [mounted, setMounted] = React.useState(false);
 	const [value, setValue] = React.useState(commands[0].label);
 	const [installationTab, setInstallationTab] = React.useState("tab1");
+	const [date, setDate] = React.useState();
 
 	const activeCommand = commands.find((command) => command.label === value);
 
@@ -233,11 +229,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Hover Card
+						Date Picker
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/hover-card"
+							href="https://ui.shadcn.com/docs/components/date-picker"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -248,7 +244,7 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					For sighted users to preview content available behind a link.
+					A date picker component built with Calendar and Popover.
 				</p>
 			</div>
 
@@ -256,22 +252,12 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<Button variant="raised">@nextjs</Button>
-							</HoverCardTrigger>
-							<HoverCardContent>
-								<div className="flex justify-between space-x-4">
-									<div className="space-y-1">
-										<h4 className="text-sm font-semibold">@nextjs</h4>
-										<p className="text-sm">
-											The React Framework – created and maintained by @vercel.
-										</p>
-									</div>
-								</div>
-							</HoverCardContent>
-						</HoverCard>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4 min-h-[200px]">
+						<DatePicker
+							date={date}
+							onDateChange={setDate}
+							placeholder="Pick a date"
+						/>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -381,8 +367,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={hoverCardComponentCode}
-									defaultValue={hoverCardComponentCode[0].filename}
+									data={datePickerComponentCode}
+									defaultValue={datePickerComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockCopyButton
@@ -409,8 +395,10 @@ export default function Page() {
 							</div>
 
 							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
+								Update the import paths to match your project setup. Also
+								install date-fns:
 							</p>
+							<p className="text-sm text-muted-foreground">bun add date-fns</p>
 						</TabsContent>
 					</TabsContents>
 				</Tabs>
@@ -422,13 +410,13 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<HoverCard />"}
+						{"<DatePicker />"}
 					</Badge>
 
 					<GridContainer
 						cols={12}
 						border={false}
-						rows={2}
+						rows={4}
 						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 					>
 						<GridRow>
@@ -456,11 +444,43 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									openDelay
+									date
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 700)
+								Date | undefined
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									onDateChange
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								(date: Date | undefined) =&gt; void
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									placeholder
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								string
 							</GridItem>
 						</GridRow>
 					</GridContainer>

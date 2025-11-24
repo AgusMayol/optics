@@ -4,28 +4,31 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const otherThemes = cva("", {
-	variants: {
-		variant: {
-			raised:
-				"[text-shadow:0_1px_0_var(--color-zinc-100)] dark:[text-shadow:0_1px_0_var(--color-zinc-900)] bg-background border-input/50 relative border-b-2 shadow-sm shadow-zinc-950/15 ring-1 ring-zinc-300 dark:ring-zinc-700 text-foreground",
-			ghost:
-				"bg-transparent hover:bg-accent text-foreground border-none !shadow-none",
-			outline:
-				"border border-input bg-transparent shadow-xs hover:bg-accent text-foreground",
-		},
+const otherThemes = cva(
+	"data-[state='open']:!scale-[0.97] data-[state='open']:ring-[3px] data-[state='open']:ring-ring/25",
+	{
+		variants: {
+			variant: {
+				raised:
+					"[text-shadow:0_1px_0_var(--color-zinc-100)] dark:[text-shadow:0_1px_0_var(--color-zinc-900)] bg-background border-input/50 relative border-b-2 shadow-sm shadow-zinc-950/15 ring-1 ring-zinc-300 dark:ring-zinc-700 text-foreground",
+				ghost:
+					"bg-transparent hover:bg-accent text-foreground border-none !shadow-none",
+				outline:
+					"border border-input bg-transparent shadow-xs hover:bg-accent text-foreground",
+			},
 
-		animation: {
-			colors: "transition-colors duration-150",
-			all: "active:scale-[0.97] transition-all duration-150",
-			none: "transition-none",
-			"only-scale": "active:scale-[0.97] transition-scale duration-150",
+			animation: {
+				colors: "transition-colors duration-150",
+				all: "active:scale-[0.97] transition-all duration-150",
+				none: "transition-none",
+				"only-scale": "active:scale-[0.97] transition-scale duration-150",
+			},
 		},
 	},
-});
+);
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none cursor-pointer text-white",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none cursor-pointer text-white data-[state='open']:!scale-[0.97] data-[state='open']:ring-[3px] data-[state='open']:ring-ring/25",
 	{
 		variants: {
 			variant: {

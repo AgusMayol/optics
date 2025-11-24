@@ -1,10 +1,11 @@
 "use client";
 import * as React from "react";
 import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	InputGroup,
+	InputGroupAddon,
+	InputGroupInput,
+	InputGroupText,
+} from "@/registry/agusmayol/input-group";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
@@ -15,6 +16,7 @@ import {
 	ArrowRight,
 	ArrowUpRight,
 	Binary,
+	Search,
 } from "lucide-react";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
 import { Badge } from "@/registry/agusmayol/badge";
@@ -55,95 +57,144 @@ import {
 const code = [
 	{
 		language: "jsx",
-		filename: "hover-card.jsx",
+		filename: "input-group.jsx",
 		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+	InputGroup,
+	InputGroupAddon,
+	InputGroupInput,
+	InputGroupText,
+} from "@/registry/agusmayol/input-group";
+import { Search } from "lucide-react";
 
-<HoverCard>
-	<HoverCardTrigger asChild>
-		<Button variant="raised">@nextjs</Button>
-	</HoverCardTrigger>
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
-		</div>
-	</HoverCardContent>
-</HoverCard>`,
+<InputGroup>
+	<InputGroupInput placeholder="Search..." />
+	<InputGroupAddon>
+		<Search />
+	</InputGroupAddon>
+	<InputGroupAddon align="inline-end">
+		<InputGroupText>12 results</InputGroupText>
+	</InputGroupAddon>
+</InputGroup>`,
 	},
 ];
 
-const hoverCardComponentCode = [
+const inputGroupComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/hover-card.jsx",
-		code: `"use client"
+		filename: "components/ui/optics/input-group.jsx",
+		code: `"use client";
 
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import * as React from "react";
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/agusmayol/button";
+import { Input } from "@/registry/agusmayol/input";
+import { Textarea } from "@/registry/agusmayol/textarea";
 
-import { cn } from "@/lib/utils"
-
-function HoverCard({
-  ...props
-}) {
-  return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
-}
-
-function HoverCardTrigger({
-  ...props
-}) {
-  return (<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
-}
-
-function HoverCardContent({
+function InputGroup({
   className,
-  align = "center",
-  sideOffset = 4,
   ...props
 }) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border p-4 shadow-md outline-hidden",
-          className
-        )}
-        {...props} />
-    </HoverCardPrimitive.Portal>
+    <div
+      data-slot="input-group"
+      role="group"
+      className={cn(
+        "group/input-group border-input dark:bg-input/30 relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none",
+        "h-9 min-w-0 has-[>textarea]:h-auto",
+        "has-[>[data-align=inline-start]]:[&>input]:pl-2",
+        "has-[>[data-align=inline-end]]:[&>input]:pr-2",
+        "has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50 has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]",
+        className
+      )}
+      {...props} />
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }`,
+const inputGroupAddonVariants = cva(
+  "text-muted-foreground flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium select-none [&>svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      align: {
+        "inline-start": "order-first pl-3",
+        "inline-end": "order-last pr-3",
+      },
+    },
+    defaultVariants: {
+      align: "inline-start",
+    },
+  }
+);
+
+function InputGroupAddon({
+  className,
+  align = "inline-start",
+  ...props
+}) {
+  return (
+    <div
+      role="group"
+      data-slot="input-group-addon"
+      data-align={align}
+      className={cn(inputGroupAddonVariants({ align }), className)}
+      {...props} />
+  );
+}
+
+function InputGroupText({
+  className,
+  ...props
+}) {
+  return (
+    <span
+      className={cn(
+        "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props} />
+  );
+}
+
+function InputGroupInput({
+  className,
+  ...props
+}) {
+  return (
+    <Input
+      data-slot="input-group-control"
+      className={cn(
+        "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent",
+        className
+      )}
+      {...props} />
+  );
+}
+
+export {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroupInput,
+};`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/hover-card",
+		code: "pnpm dlx shadcn@latest add @optics/input-group",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/hover-card",
+		code: "npx shadcn@latest add @optics/input-group",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/hover-card",
+		code: "yarn shadcn@latest add @optics/input-group",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/hover-card",
+		code: "bunx --bun shadcn@latest add @optics/input-group",
 	},
 ];
 
@@ -233,11 +284,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Hover Card
+						Input Group
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/hover-card"
+							href="https://ui.shadcn.com/docs/components/input-group"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -248,7 +299,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					For sighted users to preview content available behind a link.
+					Group input elements with addons, icons, and text for enhanced form
+					controls.
 				</p>
 			</div>
 
@@ -256,22 +308,18 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<Button variant="raised">@nextjs</Button>
-							</HoverCardTrigger>
-							<HoverCardContent>
-								<div className="flex justify-between space-x-4">
-									<div className="space-y-1">
-										<h4 className="text-sm font-semibold">@nextjs</h4>
-										<p className="text-sm">
-											The React Framework – created and maintained by @vercel.
-										</p>
-									</div>
-								</div>
-							</HoverCardContent>
-						</HoverCard>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4 min-h-[200px]">
+						<div className="w-full max-w-sm">
+							<InputGroup>
+								<InputGroupInput placeholder="Search..." />
+								<InputGroupAddon>
+									<Search className="size-4" />
+								</InputGroupAddon>
+								<InputGroupAddon align="inline-end">
+									<InputGroupText>12 results</InputGroupText>
+								</InputGroupAddon>
+							</InputGroup>
+						</div>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -381,8 +429,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={hoverCardComponentCode}
-									defaultValue={hoverCardComponentCode[0].filename}
+									data={inputGroupComponentCode}
+									defaultValue={inputGroupComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockCopyButton
@@ -422,7 +470,7 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<HoverCard />"}
+						{"<InputGroup />"}
 					</Badge>
 
 					<GridContainer
@@ -456,11 +504,11 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									openDelay
+									className
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 700)
+								string
 							</GridItem>
 						</GridRow>
 					</GridContainer>

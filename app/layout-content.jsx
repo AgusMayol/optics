@@ -209,13 +209,11 @@ export const links = [
 				name: "Data Table",
 				href: "/components/data-table",
 				own: false,
-				installed: false,
 			},
 			{
 				name: "Date Picker",
 				href: "/components/date-picker",
 				own: false,
-				installed: false,
 			},
 			{
 				name: "Dialog",
@@ -244,7 +242,6 @@ export const links = [
 				href: "/components/empty-state",
 				own: false,
 				custom: false,
-				installed: false,
 			},
 			{
 				name: "Example Code Block",
@@ -262,7 +259,6 @@ export const links = [
 				href: "/components/field",
 				own: false,
 				custom: false,
-				installed: false,
 			},
 			{
 				name: "File Tree",
@@ -310,7 +306,6 @@ export const links = [
 				href: "/components/input-group",
 				own: false,
 				custom: true,
-				installed: false,
 			},
 			{
 				name: "Input OTP",
@@ -443,12 +438,6 @@ export const links = [
 				own: true,
 			},
 			{
-				name: "Spotlight",
-				href: "/components/spotlight",
-				own: true,
-				installed: false,
-			},
-			{
 				name: "Star Rating",
 				href: "/components/star-rating",
 				own: true,
@@ -473,12 +462,6 @@ export const links = [
 				custom: true,
 			},
 			{
-				name: "Terminal",
-				href: "/components/terminal",
-				own: true,
-				installed: false,
-			},
-			{
 				name: "Textarea",
 				href: "/components/textarea",
 				own: false,
@@ -487,6 +470,11 @@ export const links = [
 			{
 				name: "Theme Switcher",
 				href: "/components/theme-switcher",
+				own: true,
+			},
+			{
+				name: "Timezone",
+				href: "/components/timezone",
 				own: true,
 			},
 			{
@@ -506,17 +494,6 @@ export const links = [
 				href: "/components/tooltip",
 				own: false,
 				custom: true,
-			},
-			{
-				name: "Widget",
-				href: "/components/widget",
-				own: true,
-				installed: false,
-			},
-			{
-				name: "Window",
-				href: "/components/window",
-				own: true,
 			},
 		],
 	},

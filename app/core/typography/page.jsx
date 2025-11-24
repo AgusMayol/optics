@@ -89,10 +89,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[72px] leading-[1.1] tracking-[-0.03em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-72">
 							Heading 72
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">
@@ -105,10 +102,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[64px] leading-[1.1] tracking-[-0.03em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-64">
 							Heading 64
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">
@@ -121,10 +115,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[56px] leading-[1.1] tracking-[-0.03em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-56">
 							Heading 56
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">
@@ -137,10 +128,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[48px] leading-[1.1] tracking-[-0.03em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-48">
 							Heading 48
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">
@@ -153,10 +141,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[40px] leading-[1.1] tracking-[-0.03em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-40">
 							Heading 40
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">
@@ -169,10 +154,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[32px] leading-[1.2] tracking-[-0.02em] font-bold gap-1"
-						>
+						<GridItem span={7} className="justify-start text-32 gap-1">
 							Heading 32{" "}
 							<strong className="text-muted-foreground font-medium">
 								with Muted
@@ -188,10 +170,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[24px] leading-[1.2] tracking-[-0.02em] font-bold gap-1"
-						>
+						<GridItem span={7} className="justify-start text-24 gap-1">
 							Heading 24{" "}
 							<strong className="text-muted-foreground font-medium">
 								with Muted
@@ -207,10 +186,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[20px] leading-[1.3] tracking-[-0.01em] font-bold gap-1"
-						>
+						<GridItem span={7} className="justify-start text-20 gap-1">
 							Heading 20{" "}
 							<strong className="text-muted-foreground font-medium">
 								with Muted
@@ -226,10 +202,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[16px] leading-[1.3] tracking-[-0.01em] font-bold gap-1"
-						>
+						<GridItem span={7} className="justify-start text-16 gap-1">
 							Heading 16{" "}
 							<strong className="text-muted-foreground font-medium">
 								with Muted
@@ -245,10 +218,7 @@ export default function Page() {
 						</GridItem>
 					</GridRow>
 					<GridRow>
-						<GridItem
-							span={7}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em] font-bold"
-						>
+						<GridItem span={7} className="justify-start text-14">
 							Heading 14
 						</GridItem>
 						<GridItem span={2} className="text-xs font-mono text-balance">

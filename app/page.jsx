@@ -23,15 +23,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import {
-	Window,
-	WindowAction,
-	WindowContent,
-	// WindowDescription,
-	WindowFooter,
-	WindowHeader,
-	WindowTitle,
-} from "@/registry/agusmayol/window";
 import { MessageBox } from "../registry/agusmayol/message-box";
 import {
 	Brush,

@@ -304,7 +304,7 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
@@ -397,7 +397,7 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>

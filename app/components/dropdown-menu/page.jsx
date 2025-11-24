@@ -17,9 +17,15 @@ import { Button } from "@/registry/agusmayol/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
+	DropdownMenuPortal,
 	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@/registry/agusmayol/dropdown-menu";
 import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
@@ -244,14 +250,56 @@ export default function Page() {
 							<DropdownMenuTrigger asChild>
 								<Button variant="raised">Open Menu</Button>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent>
+							<DropdownMenuContent className="w-56" align="start">
 								<DropdownMenuLabel>My Account</DropdownMenuLabel>
+								<DropdownMenuGroup>
+									<DropdownMenuItem>
+										Profile
+										<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										Billing
+										<DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										Settings
+										<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										Keyboard shortcuts
+										<DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+									</DropdownMenuItem>
+								</DropdownMenuGroup>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem>Profile</DropdownMenuItem>
-								<DropdownMenuItem>Settings</DropdownMenuItem>
-								<DropdownMenuItem>Team</DropdownMenuItem>
+								<DropdownMenuGroup>
+									<DropdownMenuItem>Team</DropdownMenuItem>
+									<DropdownMenuSub>
+										<DropdownMenuSubTrigger>
+											Invite users
+										</DropdownMenuSubTrigger>
+										<DropdownMenuPortal>
+											<DropdownMenuSubContent>
+												<DropdownMenuItem>Email</DropdownMenuItem>
+												<DropdownMenuItem>Message</DropdownMenuItem>
+												<DropdownMenuSeparator />
+												<DropdownMenuItem>More...</DropdownMenuItem>
+											</DropdownMenuSubContent>
+										</DropdownMenuPortal>
+									</DropdownMenuSub>
+									<DropdownMenuItem>
+										New Team
+										<DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+									</DropdownMenuItem>
+								</DropdownMenuGroup>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem>Logout</DropdownMenuItem>
+								<DropdownMenuItem>GitHub</DropdownMenuItem>
+								<DropdownMenuItem>Support</DropdownMenuItem>
+								<DropdownMenuItem disabled>API</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem>
+									Log out
+									<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
 					</CardContent>
@@ -300,7 +348,7 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Installation
 				</h2>
@@ -416,7 +464,7 @@ export default function Page() {
 				</Tabs>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-6 lg:p-12 pt-0">
+			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Components
 				</h2>

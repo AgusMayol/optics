@@ -89,7 +89,7 @@ import { AlertTriangle } from "lucide-react";
 	<AlertDialogContent>
 		<AlertDialogHeader>
 			<AlertDialogIcon>
-				<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
+				<div className="p-2 rounded-full squircle-none flex items-center justify-center shadow-md bg-emerald-500/20">
 					<Info className="text-emerald-600" />
 				</div>
 				<AlertDialogTitle>
@@ -435,7 +435,7 @@ export default function Page() {
 							<AlertDialogContent>
 								<AlertDialogHeader>
 									<AlertDialogIcon>
-										<div className="p-2 rounded-full flex items-center justify-center shadow-md bg-emerald-500/20">
+										<div className="p-2 rounded-full squircle-none flex items-center justify-center shadow-md bg-emerald-500/20">
 											<Info className="text-emerald-600" />
 										</div>
 										<AlertDialogTitle>

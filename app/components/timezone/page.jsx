@@ -1,13 +1,5 @@
 "use client";
 import * as React from "react";
-import {
-	Window,
-	WindowHeader,
-	WindowTitle,
-	WindowAction,
-	WindowContent,
-	WindowFooter,
-} from "@/registry/agusmayol/window";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -17,7 +9,6 @@ import {
 	ArrowRight,
 	ArrowUpRight,
 	Binary,
-	X,
 } from "lucide-react";
 import Link from "next/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
@@ -57,158 +48,287 @@ import {
 	SnippetTabsTrigger,
 	SnippetTabsContents,
 } from "@/registry/agusmayol/code-snippet";
+import { Timezone } from "@/registry/agusmayol/timezone";
 
 const code = [
 	{
 		language: "jsx",
-		filename: "window.jsx",
-		code: `import { Window, WindowHeader, WindowTitle, WindowAction, WindowContent, WindowFooter } from "@/registry/agusmayol/window";
+		filename: "timezone.jsx",
+		code: `import { Timezone } from "@/registry/agusmayol/timezone";
 import { Button } from "@/registry/agusmayol/button";
 
-<Window>
-	<WindowHeader>
-		<WindowTitle>Window Title</WindowTitle>
-	</WindowHeader>
-	<WindowContent>
-		<p>Window content goes here.</p>
-	</WindowContent>
-	<WindowFooter>
-		<Button>Footer Action</Button>
-	</WindowFooter>
-</Window>`,
+<Timezone 
+	timestamp={Date.now() - 5 * 60 * 1000} 
+	asChild
+	side="top"
+	sideOffset={4}
+>
+	<Button variant="raised">Open Timezone</Button>
+</Timezone>`,
 	},
 ];
 
-const windowComponentCode = [
+const timezoneComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/window.jsx",
-		code: `import * as React from "react";
+		filename: "components/ui/optics/timezone.jsx",
+		code: `"use client";
 
-import { cn } from "@/lib/utils";
+import * as React from "react";
+import ms from "ms";
+import {
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+	TooltipProvider,
+} from "@/registry/agusmayol/tooltip";
 
-function Window({ className, ...props }) {
+// Constantes de tiempo calculadas una vez para evitar recálculos
+const ONE_SECOND = ms("1s");
+const ONE_MINUTE = ms("1m");
+const ONE_HOUR = ms("1h");
+const ONE_DAY = ms("1d");
+
+function Timezone({
+	timestamp,
+	asChild = false,
+	children,
+	className,
+	side,
+	sideOffset,
+	...props
+}) {
+	const [userTimezone, setUserTimezone] = React.useState(null);
+	const [formattedUserTime, setFormattedUserTime] = React.useState("");
+	const [formattedUtcTime, setFormattedUtcTime] = React.useState("");
+	const [relativeTime, setRelativeTime] = React.useState("");
+	const [isOpen, setIsOpen] = React.useState(false);
+
+	// Memoizar los formatters para evitar recrearlos en cada render
+	const utcFormatter = React.useMemo(
+		() =>
+			new Intl.DateTimeFormat("en-US", {
+				timeZone: "UTC",
+				year: "numeric",
+				month: "short",
+				day: "numeric",
+				hour: "numeric",
+				minute: "2-digit",
+				second: "2-digit",
+				hour12: true,
+			}),
+		[],
+	);
+
+	const userFormatter = React.useMemo(
+		() =>
+			userTimezone
+				? new Intl.DateTimeFormat("en-US", {
+						timeZone: userTimezone,
+						year: "numeric",
+						month: "short",
+						day: "numeric",
+						hour: "numeric",
+						minute: "2-digit",
+						second: "2-digit",
+						hour12: true,
+					})
+				: null,
+		[userTimezone],
+	);
+
+	React.useEffect(() => {
+		// Obtener el huso horario del usuario de manera no invasiva
+		if (typeof window !== "undefined") {
+			const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			setUserTimezone(timeZone);
+		}
+	}, []);
+
+	// Función para actualizar los valores de tiempo
+	const updateTimeValues = React.useCallback(() => {
+		if (!timestamp || !userTimezone || !userFormatter) return;
+
+		// Convertir timestamp a Date
+		// Acepta: string ISO (timestampz), número en milisegundos, o número en segundos
+		let date;
+		if (typeof timestamp === "string") {
+			// String ISO (timestampz) o timestamp en string
+			date = new Date(timestamp);
+		} else if (typeof timestamp === "number") {
+			// Si es menor a 1e12, asumimos que está en segundos y lo convertimos a milisegundos
+			// Si es mayor o igual, asumimos que ya está en milisegundos
+			date = new Date(timestamp < 1e12 ? timestamp * 1000 : timestamp);
+		} else {
+			date = new Date(timestamp);
+		}
+
+		// Validar que la fecha sea válida
+		if (isNaN(date.getTime())) {
+			setFormattedUserTime("Invalid date");
+			setFormattedUtcTime("Invalid date");
+			setRelativeTime("Invalid date");
+			return;
+		}
+
+		// Formatear fecha en UTC
+		setFormattedUtcTime(utcFormatter.format(date));
+
+		// Formatear fecha en la zona horaria del usuario
+		setFormattedUserTime(userFormatter.format(date));
+
+		// Calcular tiempo relativo usando constantes precalculadas
+		const now = new Date();
+		const diffInMs = date.getTime() - now.getTime();
+		const absDiffInMs = Math.abs(diffInMs);
+		const isPast = diffInMs < 0;
+		const direction = isPast ? "ago" : "in";
+
+		let relative;
+
+		// Si está dentro de los minutos (< 1 hora), mostrar minutos y segundos
+		if (absDiffInMs < ONE_HOUR) {
+			const minutes = Math.floor(absDiffInMs / ONE_MINUTE);
+			const remainingMs = absDiffInMs % ONE_MINUTE;
+			const seconds = Math.floor(remainingMs / ONE_SECOND);
+
+			if (seconds > 0 && minutes > 0) {
+				// Mostrar minutos y segundos
+				const minutesStr = ms(minutes * ONE_MINUTE, { long: true });
+				const secondsStr = ms(seconds * ONE_SECOND, { long: true });
+				relative = \`\${minutesStr} \${secondsStr} \${direction}\`;
+			} else if (minutes > 0) {
+				// Solo minutos
+				relative = \`\${ms(minutes * ONE_MINUTE, { long: true })} \${direction}\`;
+			} else {
+				// Solo segundos
+				relative = \`\${ms(absDiffInMs, { long: true })} \${direction}\`;
+			}
+		}
+		// Si está dentro de las horas (< 24 horas), mostrar horas y minutos
+		else if (absDiffInMs < ONE_DAY) {
+			const hours = Math.floor(absDiffInMs / ONE_HOUR);
+			const remainingMs = absDiffInMs % ONE_HOUR;
+			const minutes = Math.floor(remainingMs / ONE_MINUTE);
+
+			if (minutes > 0) {
+				// Mostrar horas y minutos
+				const hoursStr = ms(hours * ONE_HOUR, { long: true });
+				const minutesStr = ms(minutes * ONE_MINUTE, { long: true });
+				relative = \`\${hoursStr} \${minutesStr} \${direction}\`;
+			} else {
+				// Solo horas
+				relative = \`\${ms(hours * ONE_HOUR, { long: true })} \${direction}\`;
+			}
+		}
+		// Para otros casos, usar el string completo de ms
+		else {
+			relative = \`\${ms(absDiffInMs, { long: true })} \${direction}\`;
+		}
+
+		setRelativeTime(relative);
+	}, [timestamp, userTimezone, userFormatter, utcFormatter]);
+
+	// Actualizar cuando cambian timestamp o userTimezone
+	React.useEffect(() => {
+		updateTimeValues();
+	}, [updateTimeValues]);
+
+	// Actualizar en tiempo real mientras el tooltip esté abierto
+	React.useEffect(() => {
+		if (!isOpen) return;
+
+		// Actualizar inmediatamente
+		updateTimeValues();
+
+		// Configurar intervalo para actualizar cada segundo
+		const interval = setInterval(() => {
+			updateTimeValues();
+		}, 1000);
+
+		// Limpiar intervalo cuando el tooltip se cierre
+		return () => {
+			clearInterval(interval);
+		};
+	}, [isOpen, updateTimeValues]);
+
 	return (
-		<div
-			data-slot="card"
-			className={cn(
-				"bg-card text-card-foreground flex flex-col gap-6 rounded-xl border pb-6 shadow-sm",
-				className,
-			)}
-			{...props}
-		/>
+		<TooltipProvider>
+			<Tooltip open={isOpen} onOpenChange={setIsOpen}>
+				<TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
+				<TooltipContent
+					className={className}
+					side={side}
+				sideOffset={sideOffset}
+				{...props}
+				>
+					<div className="w-full flex flex-col gap-2 p-1">
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">
+								{userTimezone || "Loading..."}
+							</div>
+							<p className="tabular-nums font-mono">
+								{formattedUserTime || "—"}
+							</p>
+						</div>
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">UTC</div>
+							<p className="tabular-nums font-mono">
+								{formattedUtcTime || "—"}
+							</p>
+						</div>
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">
+								Relative
+							</div>
+							<p className="tabular-nums font-mono">{relativeTime || "—"}</p>
+						</div>
+					</div>
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
 	);
 }
 
-function WindowHeader({ className, children, ...props }) {
-	return (
-		<div
-			data-slot="card-header"
-			className={cn(
-				"@container/card-header grid auto-rows-min items-start gap-1.5 rounded-t-xl py-6 px-6 grid-cols-[1fr_1fr_1fr] [.border-b]:pb-6 bg-background border-b",
-				className,
-			)}
-			{...props}
-		>
-			<div className="flex items-center justify-start gap-2">
-				<div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-				<div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-				<div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-			</div>
-			{children}
-		</div>
-	);
-}
-
-function WindowTitle({ className, ...props }) {
-	return (
-		<div
-			data-slot="card-title"
-			className={cn(
-				"leading-none text-muted-foreground text-sm text-center self-start",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function WindowAction({ className, ...props }) {
-	return (
-		<div
-			data-slot="card-action"
-			className={cn("self-start justify-self-end", className)}
-			{...props}
-		/>
-	);
-}
-
-function WindowContent({ className, ...props }) {
-	return (
-		<div
-			data-slot="card-content"
-			className={cn("px-6", className)}
-			{...props}
-		/>
-	);
-}
-
-function WindowFooter({ className, ...props }) {
-	return (
-		<div
-			data-slot="card-footer"
-			className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
-			{...props}
-		/>
-	);
-}
-
-export {
-	Window,
-	WindowHeader,
-	WindowFooter,
-	WindowTitle,
-	WindowAction,
-	WindowContent,
-};`,
+export { Timezone };`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/window",
+		code: "pnpm dlx shadcn@latest add @optics/timezone",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/window",
+		code: "npx shadcn@latest add @optics/timezone",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/window",
+		code: "yarn shadcn@latest add @optics/timezone",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/window",
+		code: "bunx --bun shadcn@latest add @optics/timezone",
 	},
 ];
 
 const installDeps = [
 	{
 		label: "pnpm",
-		code: "pnpm add lucide-react",
+		code: "pnpm add @radix-ui/react-tooltip ms",
 	},
 	{
 		label: "npm",
-		code: "npm install lucide-react",
+		code: "npm install @radix-ui/react-tooltip ms",
 	},
 	{
 		label: "yarn",
-		code: "yarn add lucide-react",
+		code: "yarn add @radix-ui/react-tooltip ms",
 	},
 	{
 		label: "bun",
-		code: "bun add lucide-react",
+		code: "bun add @radix-ui/react-tooltip ms",
 	},
 ];
 
@@ -302,11 +422,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Window
+						Timezone
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/card"
+							href="https://ui.shadcn.com/docs/components/tooltip"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -317,7 +437,7 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A macOS-style window component with traffic lights and header.
+					Display the current timezone and relative time from a given timestamp.
 				</p>
 			</div>
 
@@ -325,26 +445,10 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center">
-						<Window className="w-[400px]">
-							<WindowHeader>
-								<WindowTitle>Document.txt</WindowTitle>
-							</WindowHeader>
-							<WindowContent>
-								<p className="text-sm">
-									This is a window component styled like macOS windows with
-									traffic light buttons.
-								</p>
-							</WindowContent>
-							<WindowFooter>
-								<div className="w-full flex items-center justify-between">
-									<p className="text-xs text-muted-foreground">
-										Last saved: 2 minutes ago
-									</p>
-									<Button size="sm">Save</Button>
-								</div>
-							</WindowFooter>
-						</Window>
+					<CardContent className="px-8 flex items-center justify-center gap-4">
+						<Timezone timestamp={Date.now() - 5 * 60 * 1000} asChild>
+							<Button variant="raised">Open Timezone</Button>
+						</Timezone>
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -488,8 +592,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={windowComponentCode}
-									defaultValue={windowComponentCode[0].filename}
+									data={timezoneComponentCode}
+									defaultValue={timezoneComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockFiles>
@@ -530,66 +634,149 @@ export default function Page() {
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Components
+					Props
 				</h2>
 
-				<div className="w-full flex flex-col gap-4">
-					<p className="text-sm text-muted-foreground">
-						The Window component is composed of several sub-components that work
-						together to create a macOS-style window.
-					</p>
+				<div className="w-full flex flex-col gap-2">
+					<Badge variant="outline" className="text-xs font-mono">
+						{"<Timezone />"}
+					</Badge>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<Window />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Main container component
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<WindowHeader />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Header with traffic lights
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<WindowTitle />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Centered window title
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<WindowAction />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Right-aligned action slot
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<WindowContent />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">Main content area</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<WindowFooter />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">Footer section</p>
-						</div>
-					</div>
+					<GridContainer
+						cols={12}
+						border={false}
+						rows={8}
+						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
+					>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="text-xs font-semibold justify-start gap-1"
+							>
+								<ALargeSmall />
+								Name
+							</GridItem>
+							<GridItem
+								span={8}
+								className="text-xs font-semibold gap-1 mr-auto"
+							>
+								<Binary size={16} />
+								Type
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									timestamp
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								string | number (required)
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									asChild
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								boolean (default: false)
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									children
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								ReactNode (required)
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									className
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								string
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									side
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								"top" | "right" | "bottom" | "left"
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									sideOffset
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								number (default: 0)
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									...props
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								TooltipContentProps (align, alignOffset, etc.)
+							</GridItem>
+						</GridRow>
+					</GridContainer>
 				</div>
 			</div>
 

@@ -2,12 +2,14 @@
 
 import * as React from "react";
 import {
+	Bot,
 	Calculator,
 	Calendar,
 	Circle,
 	CircleDashed,
 	CreditCard,
 	FileText,
+	Folder,
 	Settings,
 	Smile,
 	User,
@@ -22,7 +24,7 @@ import {
 	CommandList,
 	CommandSeparator,
 	CommandShortcut,
-} from "@/components/ui/command";
+} from "@/registry/agusmayol/command";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { DialogFooter } from "@/components/ui/dialog";
@@ -46,7 +48,11 @@ export function CommandDialogComponent({ links, className }) {
 	return (
 		<>
 			<Button
-				className={cn("text-muted-foreground text-xs", className)}
+				className={cn(
+					"text-muted-foreground text-xs",
+					open && "!scale-[0.97] !ring-[3px] !ring-ring/25",
+					className,
+				)}
 				variant="raised"
 				size="sm"
 				onClick={() => setOpen(true)}
@@ -59,10 +65,10 @@ export function CommandDialogComponent({ links, className }) {
 			<CommandDialog
 				open={open}
 				onOpenChange={setOpen}
-				className="w-full !max-w-xl"
+				className="w-full"
 			>
-				<CommandInput placeholder="Search the site..." />
-				<CommandList>
+				<CommandInput className="bg-background" placeholder="Search the site..." />
+				<CommandList className="bg-background">
 					<CommandEmpty>No results found. Please try again.</CommandEmpty>
 					{links.map((link, index) => (
 						<React.Fragment key={link.name}>
@@ -83,9 +89,14 @@ export function CommandDialogComponent({ links, className }) {
 											<Circle />
 										) : link.name === "Resources" ? (
 											<FileText />
-										) : (
+										) : link.name === "Collections" ? (
+											<Folder />
+										) : link.name === "Components" ? (
 											<CircleDashed />
-										)}
+										) : (
+											<Bot />
+										)
+									}
 
 										<span>{item.name}</span>
 									</CommandItem>
@@ -94,7 +105,7 @@ export function CommandDialogComponent({ links, className }) {
 						</React.Fragment>
 					))}
 				</CommandList>
-				<DialogFooter className="bg-sidebar border-t p-2">
+				<DialogFooter className="bg-background border-t p-2">
 					<Button
 						className="text-muted-foreground text-xs"
 						variant="ghost"

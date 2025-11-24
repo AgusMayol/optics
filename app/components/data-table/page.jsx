@@ -1,10 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+import { DataTable } from "@/registry/agusmayol/data-table";
 import { Button } from "@/registry/agusmayol/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
@@ -51,99 +47,204 @@ import {
 	SnippetTabsTrigger,
 	SnippetTabsContents,
 } from "@/registry/agusmayol/code-snippet";
+import { ColumnDef } from "@tanstack/react-table";
+
+const paymentData = [
+	{
+		id: "m5gr84i9",
+		amount: 316,
+		status: "success",
+		email: "ken99@example.com",
+	},
+	{
+		id: "3u1reuv4",
+		amount: 242,
+		status: "success",
+		email: "Abe45@example.com",
+	},
+	{
+		id: "derv1ws0",
+		amount: 837,
+		status: "processing",
+		email: "Monserrat44@example.com",
+	},
+];
+
+const columns = [
+	{
+		accessorKey: "email",
+		header: "Email",
+	},
+	{
+		accessorKey: "status",
+		header: "Status",
+	},
+	{
+		accessorKey: "amount",
+		header: "Amount",
+	},
+];
 
 const code = [
 	{
 		language: "jsx",
-		filename: "hover-card.jsx",
-		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/registry/agusmayol/hover-card";
+		filename: "data-table.jsx",
+		code: `import { DataTable } from "@/registry/agusmayol/data-table";
+import { ColumnDef } from "@tanstack/react-table";
 
-<HoverCard>
-	<HoverCardTrigger asChild>
-		<Button variant="raised">@nextjs</Button>
-	</HoverCardTrigger>
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
-		</div>
-	</HoverCardContent>
-</HoverCard>`,
+const columns = [
+	{
+		accessorKey: "email",
+		header: "Email",
+	},
+	{
+		accessorKey: "status",
+		header: "Status",
 	},
 ];
 
-const hoverCardComponentCode = [
+const data = [
+	{
+		email: "ken99@example.com",
+		status: "success",
+	},
+];
+
+<DataTable columns={columns} data={data} />`,
+	},
+];
+
+const dataTableComponentCode = [
 	{
 		language: "jsx",
-		filename: "components/ui/optics/hover-card.jsx",
-		code: `"use client"
+		filename: "components/ui/optics/data-table.jsx",
+		code: `"use client";
 
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import * as React from "react";
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
-import { cn } from "@/lib/utils"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/registry/agusmayol/table";
 
-function HoverCard({
+function DataTable({
+  columns,
+  data,
   ...props
 }) {
-  return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
-}
+  const [sorting, setSorting] = React.useState([]);
+  const [columnFilters, setColumnFilters] = React.useState([]);
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
-function HoverCardTrigger({
-  ...props
-}) {
-  return (<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
-}
+  const table = useReactTable({
+    data,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+    ...props,
+  });
 
-function HoverCardContent({
-  className,
-  align = "center",
-  sideOffset = 4,
-  ...props
-}) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-md border p-4 shadow-md outline-hidden",
-          className
-        )}
-        {...props} />
-    </HoverCardPrimitive.Portal>
+    <div className="w-full">
+      <div className="overflow-hidden rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }`,
+export { DataTable };`,
 	},
 ];
 
 const commands = [
 	{
 		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/hover-card",
+		code: "pnpm dlx shadcn@latest add @optics/data-table",
 	},
 	{
 		label: "npm",
-		code: "npx shadcn@latest add @optics/hover-card",
+		code: "npx shadcn@latest add @optics/data-table",
 	},
 	{
 		label: "yarn",
-		code: "yarn shadcn@latest add @optics/hover-card",
+		code: "yarn shadcn@latest add @optics/data-table",
 	},
 	{
 		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/hover-card",
+		code: "bunx --bun shadcn@latest add @optics/data-table",
 	},
 ];
 
@@ -233,11 +334,11 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Hover Card
+						Data Table
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/hover-card"
+							href="https://ui.shadcn.com/docs/components/data-table"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -248,7 +349,8 @@ export default function Page() {
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					For sighted users to preview content available behind a link.
+					Powerful data table built with TanStack Table for sorting, filtering,
+					and pagination.
 				</p>
 			</div>
 
@@ -256,22 +358,8 @@ export default function Page() {
 
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<Button variant="raised">@nextjs</Button>
-							</HoverCardTrigger>
-							<HoverCardContent>
-								<div className="flex justify-between space-x-4">
-									<div className="space-y-1">
-										<h4 className="text-sm font-semibold">@nextjs</h4>
-										<p className="text-sm">
-											The React Framework – created and maintained by @vercel.
-										</p>
-									</div>
-								</div>
-							</HoverCardContent>
-						</HoverCard>
+					<CardContent className="px-8 flex flex-col items-center justify-center gap-4">
+						<DataTable columns={columns} data={paymentData} />
 					</CardContent>
 
 					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
@@ -381,8 +469,8 @@ export default function Page() {
 								</p>
 
 								<CodeBlock
-									data={hoverCardComponentCode}
-									defaultValue={hoverCardComponentCode[0].filename}
+									data={dataTableComponentCode}
+									defaultValue={dataTableComponentCode[0].filename}
 								>
 									<CodeBlockHeader>
 										<CodeBlockCopyButton
@@ -409,7 +497,11 @@ export default function Page() {
 							</div>
 
 							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
+								Update the import paths to match your project setup. Also
+								install @tanstack/react-table:
+							</p>
+							<p className="text-sm text-muted-foreground">
+								bun add @tanstack/react-table
 							</p>
 						</TabsContent>
 					</TabsContents>
@@ -422,13 +514,13 @@ export default function Page() {
 				</h2>
 				<div className="w-full flex flex-col gap-2">
 					<Badge variant="outline" className="text-xs font-mono">
-						{"<HoverCard />"}
+						{"<DataTable />"}
 					</Badge>
 
 					<GridContainer
 						cols={12}
 						border={false}
-						rows={2}
+						rows={3}
 						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
 					>
 						<GridRow>
@@ -456,11 +548,27 @@ export default function Page() {
 									variant="outline"
 									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
 								>
-									openDelay
+									columns
 								</Badge>
 							</GridItem>
 							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 700)
+								ColumnDef[]
+							</GridItem>
+						</GridRow>
+						<GridRow>
+							<GridItem
+								span={4}
+								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+							>
+								<Badge
+									variant="outline"
+									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+								>
+									data
+								</Badge>
+							</GridItem>
+							<GridItem span={8} className="text-xs font-mono justify-start">
+								TData[]
 							</GridItem>
 						</GridRow>
 					</GridContainer>
