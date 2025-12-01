@@ -55,7 +55,6 @@ export const metadata = {
 		description: process.env.NEXT_PUBLIC_DESCRIPTION,
 		url: `https://www.${process.env.NEXT_PUBLIC_DOMAIN}`,
 		siteName: process.env.NEXT_PUBLIC_APPLICATION_NAME,
-		images: "/images/assets/og.png",
 	},
 	appleWebApp: {
 		title: process.env.NEXT_PUBLIC_APPLICATION_NAME,
