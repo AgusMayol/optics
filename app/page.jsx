@@ -1,74 +1,48 @@
 "use client";
-import * as React from "react";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Button } from "@/registry/agusmayol/button";
-import { ScrollArea } from "@/registry/agusmayol/scroll-area";
-import Image from "next/image";
-import { Input } from "@/registry/agusmayol/input";
-import Link from "next/link";
+import { Button } from "@/registry/optics/button";
 import {
 	Snippet,
 	SnippetCopyButton,
-	SnippetHeader,
 	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
+import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
+import { Input } from "@/registry/optics/input";
 import {
-	Card,
-	CardAction,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import { MessageBox } from "../registry/agusmayol/message-box";
-import {
-	Brush,
 	AppWindowMac,
-	Zap,
-	Star,
-	Heart,
-	Crown,
-	Feather,
-	Rocket,
-	Sparkle,
-	Wand2,
-	Layers,
-	Compass,
-	Shield,
-	Sparkles,
-	Palette,
-	Command,
+	ArrowRight,
 	ArrowUpRight,
 	BadgeCheck,
-	Database,
-	Shapes,
-	Lightbulb,
-	Puzzle,
-	Gem,
-	Infinity,
-	Ear,
-	Accessibility,
-	PersonStanding,
-	Eye,
-	Speech,
-	Contrast,
-	ClosedCaption,
-	Glasses,
-	ChartSpline,
-	Plus,
-	Mail,
-	Monitor,
-	Smartphone,
+	Brush,
 	Check,
+	Command,
+	Compass,
+	Crown,
+	Database,
+	Feather,
+	Gem,
+	Heart,
+	Infinity,
+	Layers,
+	Lightbulb,
+	Palette,
+	Plus,
+	Puzzle,
+	Rocket,
+	Shapes,
+	Shield,
+	Sparkle,
+	Sparkles,
+	Star,
+	Wand2,
 	X,
+	Zap,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 
-import { AnimationsBackground } from "@/components/animations-background";
-import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
 	const [state, setState] = React.useState(false);
@@ -175,73 +149,73 @@ export default function Home() {
 									className="!p-5 !py-7 flex flex-col items-start !justify-between group"
 								>
 									<div className="w-full flex items-center justify-between">
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 280)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 254.9)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 220)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 180)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 140)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.905 0.166 98.1)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 60)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 20)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 0)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
@@ -314,6 +288,7 @@ export default function Home() {
 											</Button>
 
 											<Input
+												name="email"
 												type="email"
 												placeholder="Email Address"
 												className="w-full text-xs placeholder:text-xs pointer-events-none group-hover:!bg-background !bg-background"
@@ -710,8 +685,16 @@ export default function Home() {
 							span={4}
 							borderLeft={false}
 							borderRight={false}
-							className="mt-[1px]"
-						></GridItem>
+							decorationTopRight
+							className="mt-[1px] flex items-end justify-end p-4"
+						>
+							<Button variant="muted" asChild>
+								<Link href="/installation">
+									Installation
+									<ArrowRight />
+								</Link>
+							</Button>
+						</GridItem>
 					</GridRow>
 				</GridContainer>
 			) : (
@@ -792,33 +775,33 @@ export default function Home() {
 									className="!p-5 !py-7 flex flex-col items-start !justify-between group"
 								>
 									<div className="w-full flex items-center justify-between">
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 280)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 254.9)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 220)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 180)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
@@ -826,39 +809,39 @@ export default function Home() {
 										</div>
 										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 140)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.905 0.166 98.1)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 60)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 20)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
 											</div>
 										</div>
-										<div className="w-9 h-32 border rounded-full p-2 shadow-xs bg-background">
+										<div className="w-9 h-32 border rounded-full squircle-none p-2 shadow-xs bg-background">
 											<div
-												className="w-full h-full rounded-full relative"
+												className="w-full h-full rounded-full squircle-none relative"
 												style={{ backgroundColor: "oklch(0.8 0.193 0)" }}
 											>
 												<div className="absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-full border border-black/5 dark:border-white/5" />
@@ -895,7 +878,7 @@ export default function Home() {
 									className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group"
 								>
 									<div className="w-full flex flex-col gap-4 mt-4">
-										<Snippet value={null} className="">
+										<Snippet value={null} className="border border-input">
 											<SnippetTabsContent
 												value={null}
 												className="w-full text-start flex items-center !justify-between py-1 pr-1 text-muted-foreground truncate !text-xs"
@@ -931,6 +914,7 @@ export default function Home() {
 
 											<Input
 												type="email"
+												name="email"
 												placeholder="Email Address"
 												className="w-full text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 !bg-background group-hover:!bg-background"
 											/>
@@ -1314,8 +1298,15 @@ export default function Home() {
 							borderLeft={false}
 							borderRight={false}
 							decorationTopRight
-							className="mt-[1px]"
-						></GridItem>
+							className="mt-[1px] flex items-end justify-end p-4"
+						>
+							<Button variant="muted" asChild>
+								<Link href="/installation">
+									Installation
+									<ArrowRight />
+								</Link>
+							</Button>
+						</GridItem>
 					</GridRow>
 				</GridContainer>
 			)}

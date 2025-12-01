@@ -14,7 +14,7 @@ import {
 	Smile,
 	User,
 } from "lucide-react";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import {
 	CommandDialog,
 	CommandEmpty,
@@ -24,32 +24,22 @@ import {
 	CommandList,
 	CommandSeparator,
 	CommandShortcut,
-} from "@/registry/agusmayol/command";
+} from "@/registry/optics/command";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { DialogFooter } from "@/components/ui/dialog";
+import { Kbd } from "@/registry/optics/kbd";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export function CommandDialogComponent({ links, className }) {
 	const [open, setOpen] = React.useState(false);
 	const router = useRouter();
 
-	React.useEffect(() => {
-		const down = (e) => {
-			if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
-				e.preventDefault();
-				setOpen((open) => !open);
-			}
-		};
-
-		document.addEventListener("keydown", down);
-		return () => document.removeEventListener("keydown", down);
-	}, []);
-
 	return (
 		<>
 			<Button
 				className={cn(
-					"text-muted-foreground text-xs",
+					"text-muted-foreground text-xs justify-between pr-1.5 gap-2",
 					open && "!scale-[0.97] !ring-[3px] !ring-ring/25",
 					className,
 				)}
@@ -57,18 +47,20 @@ export function CommandDialogComponent({ links, className }) {
 				size="sm"
 				onClick={() => setOpen(true)}
 			>
-				Search the site ...{" "}
-				<kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none">
-					<span className="text-xs">⌘</span>J
-				</kbd>
+				<span className=" items-center text-xs pr-2">Search the site ...</span>{" "}
+				<Kbd
+					useHotkey
+					hotkey="cmd+J"
+					onHotkeyPress={() => setOpen(true)}
+					className=""
+					variant="legacy"
+				>
+					⌘ J
+				</Kbd>
 			</Button>
-			<CommandDialog
-				open={open}
-				onOpenChange={setOpen}
-				className="w-full"
-			>
-				<CommandInput className="bg-background" placeholder="Search the site..." />
-				<CommandList className="bg-background">
+			<CommandDialog open={open} onOpenChange={setOpen} className="w-full">
+				<CommandInput className="" placeholder="Search the site..." />
+				<CommandList className="bg-background py-2">
 					<CommandEmpty>No results found. Please try again.</CommandEmpty>
 					{links.map((link, index) => (
 						<React.Fragment key={link.name}>
@@ -95,8 +87,7 @@ export function CommandDialogComponent({ links, className }) {
 											<CircleDashed />
 										) : (
 											<Bot />
-										)
-									}
+										)}
 
 										<span>{item.name}</span>
 									</CommandItem>
@@ -107,15 +98,20 @@ export function CommandDialogComponent({ links, className }) {
 				</CommandList>
 				<DialogFooter className="bg-background border-t p-2">
 					<Button
-						className="text-muted-foreground text-xs"
+						className="text-muted-foreground text-xs pr-0.25"
 						variant="ghost"
 						size="sm"
 						onClick={() => setOpen(true)}
 					>
 						Go to page{" "}
-						<kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none">
-							<span className="text-xs">&#9166; Enter</span>
-						</kbd>
+						<Kbd
+							useHotkey
+							hotkey="Enter"
+							onHotkeyPress={() => setOpen(true)}
+							className="aspect-auto mt-1"
+						>
+							&#9166; Enter
+						</Kbd>
 					</Button>
 				</DialogFooter>
 			</CommandDialog>

@@ -1,11 +1,11 @@
 "use client";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import {
 	Card,
 	CardHeader,
@@ -13,14 +13,14 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/registry/agusmayol/select";
+} from "@/registry/optics/select";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -28,17 +28,17 @@ import {
 	SnippetTabsContent,
 	SnippetTabsList,
 	SnippetTabsTrigger,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 import {
 	Tooltip,
 	TooltipTrigger,
 	TooltipContent,
 	TooltipProvider,
-} from "@/registry/agusmayol/tooltip";
+} from "@/registry/optics/tooltip";
 import { Fragment, useState } from "react";
 import { tailwindColors } from "@/lib/tailwind-colors";
-import { toast } from "@/registry/agusmayol/sonner";
-import { Separator } from "@/registry/agusmayol/separator";
+import { toast } from "@/registry/optics/sonner";
+import { Separator } from "@/registry/optics/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Page() {

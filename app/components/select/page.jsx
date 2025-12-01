@@ -8,7 +8,7 @@ import {
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "@/registry/agusmayol/select";
+} from "@/registry/optics/select";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -20,16 +20,16 @@ import {
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -39,15 +39,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -56,7 +56,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -70,7 +70,7 @@ const code = [
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "@/registry/agusmayol/select";
+} from "@/registry/optics/select";
 
 <Select>
 	<SelectTrigger>
@@ -99,7 +99,7 @@ const selectComponentCode = [
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
-import { otherThemes } from "@/registry/agusmayol/button";
+import { otherThemes } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
 function Select({ ...props }) {

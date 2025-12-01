@@ -6,9 +6,9 @@ import {
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/registry/agusmayol/carousel";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent } from "@/registry/agusmayol/card";
+} from "@/registry/optics/carousel";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent } from "@/registry/optics/card";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -19,16 +19,16 @@ import {
 	ArrowUpRight,
 	Binary,
 } from "lucide-react";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
 import Link from "next/link";
-import { CardFooter } from "@/registry/agusmayol/card";
+import { CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -36,15 +36,15 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -53,7 +53,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -65,7 +65,7 @@ const code = [
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/registry/agusmayol/carousel";
+} from "@/registry/optics/carousel";
 
 <Carousel className="w-full max-w-xs">
 	<CarouselContent>
@@ -104,7 +104,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/registry/agusmayol/button"
+import { Button } from "@/registry/optics/button"
 
 const CarouselContext = React.createContext(null)
 

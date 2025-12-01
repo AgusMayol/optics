@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./theme-provider";
 import { LayoutContent } from "./layout-content";
 import { VercelToolbar } from "@vercel/toolbar/next";
-import { Toaster } from "@/registry/agusmayol/sonner";
+import { Toaster } from "@/registry/optics/sonner";
 import { ViewTransition } from "react";
 
 const interSans = Inter({

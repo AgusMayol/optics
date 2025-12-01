@@ -2,7 +2,7 @@
 import { useElementHeight } from "@/hooks/use-element-height";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -72,31 +72,37 @@ export const links = [
 				name: "Cursor Rules & MCPs",
 				href: "/collections/cursor-rules",
 				installed: false,
+				disabled: true,
 			},
 			{
 				name: "Next.js Configuration",
 				href: "/collections/nextjs-configuration",
 				installed: false,
+				disabled: true,
 			},
 			{
 				name: "Biome Configuration",
 				href: "/collections/biome",
 				installed: false,
+				disabled: true,
 			},
 			{
 				name: "Tailwind Variables",
 				href: "/resources/tailwind-variables",
 				installed: false,
+				disabled: true,
 			},
 			{
 				name: "Gitignore File",
 				href: "/collections/gitignore",
 				installed: false,
+				disabled: true,
 			},
 			{
 				name: "Hooks",
 				href: "/collections/hooks",
 				installed: false,
+				disabled: true,
 			},
 		],
 	},
@@ -244,12 +250,6 @@ export const links = [
 				custom: false,
 			},
 			{
-				name: "Example Code Block",
-				href: "/components/example-code-block",
-				own: true,
-				installed: false,
-			},
-			{
 				name: "Feedback",
 				href: "/components/feedback",
 				own: true,
@@ -259,18 +259,6 @@ export const links = [
 				href: "/components/field",
 				own: false,
 				custom: false,
-			},
-			{
-				name: "File Tree",
-				href: "/components/file-tree",
-				own: true,
-				installed: false,
-			},
-			{
-				name: "File Upload",
-				href: "/components/file-upload",
-				own: true,
-				installed: false,
 			},
 			{
 				name: "Form",
@@ -287,7 +275,6 @@ export const links = [
 				name: "Guided Tour",
 				href: "/components/guided-tour",
 				own: true,
-				installed: false,
 			},
 			{
 				name: "Hover Card",
@@ -331,20 +318,10 @@ export const links = [
 				own: false,
 			},
 			{
-				name: "Markdown",
-				href: "/components/markdown",
-				own: true,
-			},
-			{
 				name: "Menubar",
 				href: "/components/menubar",
 				own: false,
 				installed: true,
-			},
-			{
-				name: "Message Box",
-				href: "/components/message-box",
-				own: true,
 			},
 			{
 				name: "Multi Select",
@@ -413,7 +390,6 @@ export const links = [
 				name: "Show More",
 				href: "/components/show-more",
 				own: true,
-				installed: false,
 			},
 			{
 				name: "Skeleton",
@@ -441,7 +417,6 @@ export const links = [
 				name: "Star Rating",
 				href: "/components/star-rating",
 				own: true,
-				installed: false,
 			},
 			{
 				name: "Switch",
@@ -550,7 +525,7 @@ export function LayoutContent({ children }) {
 						asChild
 					>
 						<Link
-							href="https://github.com/agusmayol/optics"
+							href="https://github.com/optics/optics"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

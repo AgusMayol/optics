@@ -5,7 +5,7 @@ import {
 	TooltipTrigger,
 	TooltipContent,
 	TooltipProvider,
-} from "@/registry/agusmayol/tooltip";
+} from "@/registry/optics/tooltip";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -17,16 +17,16 @@ import {
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -36,15 +36,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -53,14 +53,14 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "tooltip.jsx",
-		code: `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/registry/agusmayol/tooltip";
-import { Button } from "@/registry/agusmayol/button";
+		code: `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/registry/optics/tooltip";
+import { Button } from "@/registry/optics/button";
 
 <TooltipProvider>
 	<Tooltip>
@@ -85,7 +85,7 @@ import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 import { cn } from "@/lib/utils";
-import { otherThemes } from "@/registry/agusmayol/button";
+import { otherThemes } from "@/registry/optics/button";
 
 const TooltipContext = React.createContext({
 	hasActiveTooltip: false,

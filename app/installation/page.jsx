@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
-import { Button } from "@/registry/agusmayol/button";
-import { Badge } from "@/registry/agusmayol/badge";
+import { Button } from "@/registry/optics/button";
+import { Badge } from "@/registry/optics/badge";
 import { Terminal, ArrowUpRight, Package, Sparkles } from "lucide-react";
 import Link from "next/link";
 import {
@@ -10,14 +10,14 @@ import {
 	CardTitle,
 	CardDescription,
 	CardContent,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Snippet,
 	SnippetCopyButton,
 	SnippetHeader,
 	SnippetTabsContent,
-} from "@/registry/agusmayol/code-snippet";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-snippet";
+import { Separator } from "@/registry/optics/separator";
 
 export default function Page() {
 	return (

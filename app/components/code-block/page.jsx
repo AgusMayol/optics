@@ -11,16 +11,16 @@ import {
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -30,15 +30,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -47,7 +47,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -370,7 +370,7 @@ export default function Page() {
 
 								<Button variant="link" size="sm" asChild className="w-fit">
 									<Link
-										href="https://github.com/agusmayol/optics/blob/main/registry/agusmayol/code-block.tsx"
+										href="https://github.com/optics/optics/blob/main/registry/optics/code-block.tsx"
 										target="_blank"
 										rel="noopener noreferrer"
 									>

@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
-import { Input } from "@/registry/agusmayol/input";
-import { Label } from "@/registry/agusmayol/label";
+import { Input } from "@/registry/optics/input";
+import { Label } from "@/registry/optics/label";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -14,16 +14,16 @@ import {
 	Mail,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -33,15 +33,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -50,13 +50,13 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "input.jsx",
-		code: `import { Input } from "@/registry/agusmayol/input";
+		code: `import { Input } from "@/registry/optics/input";
 
 <Input type="email" placeholder="Email" />
 <Input type="password" placeholder="Password" />
@@ -69,7 +69,7 @@ const inputComponentCode = [
 		language: "jsx",
 		filename: "components/ui/optics/input.jsx",
 		code: `import * as React from "react";
-import { otherThemes } from "@/registry/agusmayol/button";
+import { otherThemes } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
 function Input({ className, type, variant, ...props }) {

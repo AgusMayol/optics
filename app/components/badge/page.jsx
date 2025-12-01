@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Badge } from "@/registry/agusmayol/badge";
+import { Badge } from "@/registry/optics/badge";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -12,8 +12,8 @@ import {
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Button } from "@/registry/agusmayol/button";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Button } from "@/registry/optics/button";
 import {
 	Card,
 	CardHeader,
@@ -21,13 +21,13 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -37,15 +37,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -54,13 +54,13 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "badge.jsx",
-		code: `import { Badge } from "@/registry/agusmayol/badge";
+		code: `import { Badge } from "@/registry/optics/badge";
 
 <Badge>Default</Badge>
 <Badge variant="raised">Raised</Badge>
@@ -78,7 +78,7 @@ const badgeComponentCode = [
 		code: `import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
-import { otherThemes } from "@/registry/agusmayol/button";
+import { otherThemes } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(

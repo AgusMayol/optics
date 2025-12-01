@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Kbd, KbdGroup } from "@/registry/agusmayol/kbd";
+import { Kbd, KbdGroup } from "@/registry/optics/kbd";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -13,16 +13,16 @@ import {
 	Command,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -32,15 +32,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -49,23 +49,38 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "kbd.jsx",
-		code: `import { Kbd, KbdGroup } from "@/registry/agusmayol/kbd";
+		code: `import { Kbd, KbdGroup } from "@/registry/optics/kbd";
 import { Command } from "lucide-react";
 
+// Basic usage
 <Kbd>⌘</Kbd>
 <Kbd>K</Kbd>
 
+// Grouped keys
 <KbdGroup>
 	<Kbd><Command /></Kbd>
 	<Kbd>+</Kbd>
 	<Kbd>K</Kbd>
-</KbdGroup>`,
+</KbdGroup>
+
+// With hotkey detection and animation
+<Kbd useHotkey>⌘</Kbd>
+<Kbd useHotkey>K</Kbd>
+
+// With custom hotkey prop
+<Kbd useHotkey hotkey="mod+k" onHotkeyPress={() => console.log("Pressed!")}>
+	⌘ K
+</Kbd>
+
+// Legacy variant
+<Kbd variant="legacy">⌘</Kbd>
+<Kbd variant="legacy">K</Kbd>`,
 	},
 ];
 
@@ -73,20 +88,84 @@ const kbdComponentCode = [
 	{
 		language: "jsx",
 		filename: "components/ui/optics/kbd.jsx",
-		code: `import { cn } from "@/lib/utils";
+		code: `"use client";
 
-function Kbd({ className, ...props }) {
+import { cn } from "@/lib/utils";
+import { cva } from "class-variance-authority";
+import { useHotkeys } from "react-hotkeys-hook";
+import {
+	useCallback,
+	useRef,
+	useState,
+	useMemo,
+	isValidElement,
+	useEffect,
+} from "react";
+
+// ... (helper functions for text extraction and hotkey normalization)
+
+const kbdVariants = cva(
+	"select-none outline-hidden transition-all duration-150",
+	{
+		variants: {
+			variant: {
+				default:
+					"transform-gpu cursor-pointer rounded-lg border border-neutral-500/50 bg-neutral-300 shadow-[-10px_0px_15px_rgba(255,255,255,1),3px_10px_12.5px_rgba(0,0,0,0.1)] active:shadow-none dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-[-10px_0px_15px_rgba(0,0,0,0.3),3px_10px_12.5px_rgba(255,255,255,0.05)]",
+				legacy:
+					"bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium [&_svg:not([class*='size-'])]:size-3 [[data-slot=tooltip-content]_&]:bg-background/20 [[data-slot=tooltip-content]_&]:text-background dark:[[data-slot=tooltip-content]_&]:bg-background/10",
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+		},
+	},
+);
+
+function Kbd({
+	className,
+	variant = "default",
+	useHotkey = false,
+	animate = true,
+	onHotkeyPress,
+	hotkey: hotkeyProp,
+	...props
+}) {
+	// ... (hotkey detection and animation logic)
+	
+	if (variant === "legacy") {
+		return (
+			<kbd
+				data-slot="kbd"
+				className={cn(kbdVariants({ variant }), className)}
+				{...props}
+			>
+				{props.children}
+			</kbd>
+		);
+	}
+
 	return (
 		<kbd
 			data-slot="kbd"
 			className={cn(
-				"bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium select-none",
-				"[&_svg:not([class*='size-'])]:size-3",
-				"[[data-slot=tooltip-content]_&]:bg-background/20 [[data-slot=tooltip-content]_&]:text-background dark:[[data-slot=tooltip-content]_&]:bg-background/10",
+				!isCompound && "aspect-square",
+				kbdVariants({ variant }),
+				isPressed && "shadow-none",
 				className,
 			)}
 			{...props}
-		/>
+		>
+			<span
+				className={cn(
+					kbdInnerVariants({ variant }),
+					isPressed && "translate-y-0 shadow-transparent",
+				)}
+			>
+				<span className="block text-center align-center text-xs">
+					{props.children}
+				</span>
+			</span>
+		</kbd>
 	);
 }
 
@@ -126,19 +205,19 @@ const commands = [
 const installDeps = [
 	{
 		label: "pnpm",
-		code: "pnpm add clsx tailwind-merge",
+		code: "pnpm add clsx tailwind-merge class-variance-authority react-hotkeys-hook",
 	},
 	{
 		label: "npm",
-		code: "npm install clsx tailwind-merge",
+		code: "npm install clsx tailwind-merge class-variance-authority react-hotkeys-hook",
 	},
 	{
 		label: "yarn",
-		code: "yarn add clsx tailwind-merge",
+		code: "yarn add clsx tailwind-merge class-variance-authority react-hotkeys-hook",
 	},
 	{
 		label: "bun",
-		code: "bun add clsx tailwind-merge",
+		code: "bun add clsx tailwind-merge class-variance-authority react-hotkeys-hook",
 	},
 ];
 
@@ -238,6 +317,17 @@ export default function Page() {
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
 						Kbd
 					</h1>
+
+					<Button variant="link" size="sm" asChild>
+						<Link
+							href="https://cuicui.day/application-ui/kbd"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							CuiCui
+							<ArrowUpRight className="-ml-1" />
+						</Link>
+					</Button>
 				</div>
 
 				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
@@ -252,19 +342,15 @@ export default function Page() {
 					<CardContent className="px-8 flex flex-col items-center gap-6">
 						<div className="flex items-center gap-2">
 							<p className="text-sm">Press</p>
-							<Kbd>⌘</Kbd>
-							<Kbd>K</Kbd>
+							<Kbd useHotkey>⌘</Kbd>
+							<Kbd useHotkey>K</Kbd>
 							<p className="text-sm">to open search</p>
 						</div>
 
 						<div className="flex items-center gap-2">
 							<p className="text-sm">Or use</p>
 							<KbdGroup>
-								<Kbd>
-									<Command />
-								</Kbd>
-								<Kbd>+</Kbd>
-								<Kbd>K</Kbd>
+								<Kbd useHotkey>⌘ + K</Kbd>
 							</KbdGroup>
 						</div>
 					</CardContent>
@@ -457,28 +543,207 @@ export default function Page() {
 
 				<div className="w-full flex flex-col gap-6">
 					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
 							{"<Kbd />"}
 						</Badge>
 
-						<div className="w-full p-4 border rounded-xl bg-muted">
-							<p className="text-sm text-muted-foreground">
-								No specific props. Accepts standard HTML kbd element attributes.
-							</p>
-						</div>
+						<GridContainer
+							cols={12}
+							border={false}
+							rows={6}
+							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
+						>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="text-xs font-semibold justify-start gap-1"
+								>
+									<ALargeSmall />
+									Name
+								</GridItem>
+								<GridItem
+									span={4}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
+									<Binary size={16} />
+									Type
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
+									Description
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										variant
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									"default" | "legacy"
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								></GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										useHotkey
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									boolean
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								>
+									Enable hotkey detection and animation. The hotkey is
+									automatically extracted from children or can be provided via
+									the hotkey prop.
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										hotkey
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									string
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								>
+									Explicit hotkey string. If not provided, extracted from
+									children.
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										onHotkeyPress
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									(event) =&gt; void
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								>
+									Callback function called when the hotkey is pressed.
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										animate
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									boolean
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								></GridItem>
+							</GridRow>
+						</GridContainer>
 					</div>
 
 					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
+						<Badge variant="outline" className="text-xs font-mono w-fit">
 							{"<KbdGroup />"}
 						</Badge>
 
-						<div className="w-full p-4 border rounded-xl bg-muted">
-							<p className="text-sm text-muted-foreground">
-								No specific props. Accepts standard HTML kbd element attributes.
-								Used to group multiple Kbd components.
-							</p>
-						</div>
+						<GridContainer
+							cols={12}
+							border={false}
+							rows={2}
+							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
+						>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="text-xs font-semibold justify-start gap-1"
+								>
+									<ALargeSmall />
+									Name
+								</GridItem>
+								<GridItem
+									span={4}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
+									<Binary size={16} />
+									Type
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs font-semibold gap-1 mr-auto"
+								>
+									Description
+								</GridItem>
+							</GridRow>
+							<GridRow>
+								<GridItem
+									span={3}
+									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+								>
+									<Badge
+										variant="outline"
+										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+									>
+										className
+									</Badge>
+								</GridItem>
+								<GridItem span={4} className="text-xs font-mono justify-start">
+									string
+								</GridItem>
+								<GridItem
+									span={5}
+									className="text-xs text-muted-foreground justify-start pr-4"
+								>
+									Accepts standard HTML kbd element attributes. Used to group
+									multiple Kbd components.
+								</GridItem>
+							</GridRow>
+						</GridContainer>
 					</div>
 				</div>
 			</div>

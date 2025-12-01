@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Separator } from "@/registry/agusmayol/separator";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import {
@@ -12,13 +12,13 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -26,7 +26,7 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
+} from "@/registry/optics/code-block";
 
 // Code examples data
 const basicMetadataCode = [

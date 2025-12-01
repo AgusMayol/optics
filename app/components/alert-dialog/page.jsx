@@ -11,7 +11,7 @@ import {
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogIcon,
-} from "@/registry/agusmayol/alert-dialog";
+} from "@/registry/optics/alert-dialog";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -25,16 +25,16 @@ import {
 	Info,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -44,15 +44,15 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -61,7 +61,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -78,8 +78,8 @@ const code = [
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogIcon,
-} from "@/registry/agusmayol/alert-dialog";
-import { Button } from "@/registry/agusmayol/button";
+} from "@/registry/optics/alert-dialog";
+import { Button } from "@/registry/optics/button";
 import { AlertTriangle } from "lucide-react";
 
 <AlertDialog>
@@ -120,7 +120,7 @@ import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/registry/agusmayol/button";
+import { Button, buttonVariants } from "@/registry/optics/button";
 import { X } from "lucide-react";
 
 function AlertDialog({ ...props }) {

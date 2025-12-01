@@ -6,7 +6,7 @@ import {
 	TabsTrigger,
 	TabsContents,
 	TabsContent,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -18,9 +18,9 @@ import {
 	Binary,
 } from "lucide-react";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
-import { Button } from "@/registry/agusmayol/button";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
 import {
 	Card,
 	CardHeader,
@@ -28,15 +28,15 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
-import { Label } from "@/registry/agusmayol/label";
-import { Input } from "@/registry/agusmayol/input";
+} from "@/registry/optics/card";
+import { Label } from "@/registry/optics/label";
+import { Input } from "@/registry/optics/input";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -46,8 +46,8 @@ import {
 	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -56,14 +56,14 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "tabs.jsx",
-		code: `import { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent } from "@/registry/agusmayol/tabs";
-import { Card } from "@/registry/agusmayol/card";
+		code: `import { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent } from "@/registry/optics/tabs";
+import { Card } from "@/registry/optics/card";
 
 <Tabs defaultValue="account" className="w-[400px]">
 	<TabsList variant="default">
@@ -317,11 +317,11 @@ export default function Page() {
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link
-							href="https://ui.shadcn.com/docs/components/tabs"
+							href="https://animate-ui.com/docs/components/radix/tabs"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							shadcn/ui
+							animate-ui
 							<ArrowUpRight className="-ml-1" />
 						</Link>
 					</Button>

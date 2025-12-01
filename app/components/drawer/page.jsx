@@ -9,10 +9,10 @@ import {
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@/registry/agusmayol/drawer";
-import { Button } from "@/registry/agusmayol/button";
-import { Input } from "@/registry/agusmayol/input";
-import { Label } from "@/registry/agusmayol/label";
+} from "@/registry/optics/drawer";
+import { Button } from "@/registry/optics/button";
+import { Input } from "@/registry/optics/input";
+import { Label } from "@/registry/optics/label";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -23,16 +23,16 @@ import {
 	ArrowUpRight,
 	Binary,
 } from "lucide-react";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
 import Link from "next/link";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -40,15 +40,15 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -57,7 +57,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -72,8 +72,8 @@ const code = [
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@/registry/agusmayol/drawer";
-import { Button } from "@/registry/agusmayol/button";
+} from "@/registry/optics/drawer";
+import { Button } from "@/registry/optics/button";
 
 <Drawer>
 	<DrawerTrigger asChild>

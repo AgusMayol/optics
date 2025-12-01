@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
-import { Badge } from "@/registry/agusmayol/badge";
+import { Badge } from "@/registry/optics/badge";
 import {
 	ALargeSmall,
 	ArrowLeft,
@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import {
 	Card,
 	CardHeader,
@@ -23,7 +23,7 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Select,
 	SelectContent,
@@ -35,7 +35,7 @@ import {
 	Tooltip,
 	TooltipTrigger,
 	TooltipContent,
-} from "@/registry/agusmayol/tooltip";
+} from "@/registry/optics/tooltip";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -43,8 +43,8 @@ import {
 	SnippetTabsContent,
 	SnippetTabsList,
 	SnippetTabsTrigger,
-} from "@/registry/agusmayol/code-snippet";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-snippet";
+import { Separator } from "@/registry/optics/separator";
 
 const commands = [
 	{

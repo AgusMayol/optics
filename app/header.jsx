@@ -1,5 +1,5 @@
 "use client";
-import { ThemeSwitcher } from "@/registry/agusmayol/theme-switcher";
+import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
 import { useTheme } from "next-themes";
 import {
 	useModeAnimation,
@@ -9,13 +9,13 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CommandDialogComponent } from "./command-dialog";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
 	ContextMenuTrigger,
-} from "@/registry/agusmayol/context-menu";
+} from "@/registry/optics/context-menu";
 import { ListItems } from "./sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -33,8 +33,8 @@ import {
 	SheetTrigger,
 	SheetVariants,
 	SheetPrimitive,
-} from "@/registry/agusmayol/sheet";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/sheet";
+import { Separator } from "@/registry/optics/separator";
 
 export function Header({ links }) {
 	const [themeSwitch, setThemeSwitch] = React.useState("system");
@@ -166,7 +166,7 @@ export function Header({ links }) {
 			<div className="w-full h-full flex items-center justify-end gap-1.5">
 				<Button variant="ghost" size="icon" animation="none">
 					<Link
-						href="https://github.com/agusmayol/optics"
+						href="https://github.com/optics/optics"
 						target="_blank"
 						rel="noopener noreferrer"
 					>

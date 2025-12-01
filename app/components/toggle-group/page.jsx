@@ -1,10 +1,7 @@
 "use client";
 import * as React from "react";
-import {
-	ToggleGroup,
-	ToggleGroupItem,
-} from "@/registry/agusmayol/toggle-group";
-import { Button } from "@/registry/agusmayol/button";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -18,16 +15,16 @@ import {
 	Italic,
 	Underline,
 } from "lucide-react";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
 import Link from "next/link";
-import { Card, CardContent, CardFooter } from "@/registry/agusmayol/card";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -35,15 +32,15 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -52,13 +49,13 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
+} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
 		language: "jsx",
 		filename: "toggle-group.jsx",
-		code: `import { ToggleGroup, ToggleGroupItem } from "@/registry/agusmayol/toggle-group";
+		code: `import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
 
 <ToggleGroup type="multiple">
 	<ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -83,7 +80,7 @@ import * as React from "react"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 
 import { cn } from "@/lib/utils"
-import { toggleVariants } from "@/registry/agusmayol/toggle"
+import { toggleVariants } from "@/registry/optics/toggle"
 
 const ToggleGroupContext = React.createContext({
   size: "default",

@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 import { links } from "@/app/layout-content";
 import { usePathname } from "next/navigation";
@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
-import { Badge } from "@/registry/agusmayol/badge";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { Badge } from "@/registry/optics/badge";
 import {
 	Card,
 	CardHeader,
@@ -24,13 +24,13 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -45,15 +45,15 @@ import {
 	CodeBlockSelectItem,
 	CodeBlockSelectTrigger,
 	CodeBlockSelectValue,
-} from "@/registry/agusmayol/code-block";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
 	TabsContent,
 	TabsContents,
 	TabsList,
 	TabsTrigger,
-} from "@/registry/agusmayol/tabs";
+} from "@/registry/optics/tabs";
 import {
 	Snippet,
 	SnippetCopyButton,
@@ -62,13 +62,13 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/agusmayol/code-snippet";
-import { Feedback } from "@/registry/agusmayol/feedback";
+} from "@/registry/optics/code-snippet";
+import { Feedback } from "@/registry/optics/feedback";
 const code = [
 	{
 		language: "jsx",
 		filename: "card.jsx",
-		code: `import { Button } from "@/registry/agusmayol/button";
+		code: `import { Button } from "@/registry/optics/button";
 
 <Button>Default</Button>
 <Button variant="secondary">Secondary</Button>

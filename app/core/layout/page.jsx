@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 import {
 	Layout,
@@ -26,13 +26,13 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionTrigger,
 	AccordionContent,
-} from "@/registry/agusmayol/accordion";
+} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -47,14 +47,14 @@ import {
 	CodeBlockSelectItem,
 	CodeBlockSelectTrigger,
 	CodeBlockSelectValue,
-} from "@/registry/agusmayol/code-block";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+} from "@/registry/optics/code-block";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 
 const gridBasicCode = [
 	{
 		language: "jsx",
 		filename: "grid-basic.jsx",
-		code: `import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+		code: `import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 
 // Basic 12-column grid
 <GridContainer cols={12} gap={4}>

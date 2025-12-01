@@ -1,11 +1,11 @@
 "use client";
-import { Button } from "@/registry/agusmayol/button";
+import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
 import { ALargeSmall, ArrowLeft, Info } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/agusmayol/grid";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import {
 	Card,
 	CardHeader,
@@ -13,7 +13,7 @@ import {
 	CardDescription,
 	CardContent,
 	CardFooter,
-} from "@/registry/agusmayol/card";
+} from "@/registry/optics/card";
 import {
 	Select,
 	SelectContent,
@@ -25,8 +25,8 @@ import {
 	Tooltip,
 	TooltipTrigger,
 	TooltipContent,
-} from "@/registry/agusmayol/tooltip";
-import { Separator } from "@/registry/agusmayol/separator";
+} from "@/registry/optics/tooltip";
+import { Separator } from "@/registry/optics/separator";
 
 export default function Page() {
 	return (
