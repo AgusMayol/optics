@@ -30,63 +30,17 @@ export const metadata = {
 	keywords: [
 		"AgusMayol Optics",
 		"design system",
-		"component registry",
-		"react components",
-		"nextjs",
-		"next.js 16",
-		"tailwind css",
-		"tailwind v4",
-		"ui components",
-		"shadcn",
-		"shadcn ui",
-		"radix ui",
-		"web development",
-		"frontend development",
-		"react hooks",
-		"javascript",
-		"typescript",
-		"responsive design",
 		"component library",
-		"modern ui",
-		"dark mode",
-		"theme switcher",
+		"React components",
+		"Next.js 16",
+		"Tailwind CSS",
+		"ui components",
+		"shadcn ui",
+		"Radix UI",
+		"frontend development",
+		"UI/UX",
 		"accessibility",
-		"a11y",
-		"web components",
-		"react framework",
-		"css framework",
-		"ui/ux",
-		"frontend architecture",
-		"design patterns",
-		"reusable components",
-		"web design",
-		"developer tools",
-		"typography",
-		"iconography",
-		"color palette",
-		"animations",
-		"transitions",
-		"cursor rules",
-		"mcp",
-		"model context protocol",
-		"react 19",
-		"server components",
-		"client components",
-		"form components",
-		"dialog components",
-		"drawer components",
-		"button components",
-		"input components",
-		"card components",
-		"table components",
-		"navigation components",
-		"layout system",
-		"design tokens",
-		"css variables",
-		"tailwind utilities",
 		"component documentation",
-		"code snippets",
-		"copy paste components",
 	],
 	applicationName: process.env.NEXT_PUBLIC_APPLICATION_NAME,
 	metadataBase: new URL(`https://www.${process.env.NEXT_PUBLIC_DOMAIN}`),
@@ -114,11 +68,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	const shouldInjectToolbar = process.env.NODE_ENV === "development";
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: process.env.NEXT_PUBLIC_APPLICATION_NAME,
+		url: `https://www.${process.env.NEXT_PUBLIC_DOMAIN}`,
+		description: process.env.NEXT_PUBLIC_DESCRIPTION,
+	};
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${interSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background`}
 			>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+					}}
+				/>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "bun next dev",
-		"build": "bun next build",
+		"build": "bun next build && bun shadcn build",
 		"start": "bun next start",
 		"lint": "biome check",
 		"format": "biome format --write",
