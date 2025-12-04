@@ -103,6 +103,12 @@ export const GridItem = ({
 	...props
 }) => {
 	const { cols, border } = useGridContext();
+	const hasDecorations =
+		decorationTopLeft ||
+		decorationTopRight ||
+		decorationBottomLeft ||
+		decorationBottomRight;
+
 	return (
 		<div
 			className={cn(
@@ -116,8 +122,8 @@ export const GridItem = ({
 				borderTop && "!border-t",
 				borderBottom && "!border-b",
 				!border && "!border-0",
-				// Prevenir overflow de contenido
-				"overflow-hidden",
+				// Prevenir overflow de contenido solo cuando no hay decoraciones
+				!hasDecorations && "overflow-hidden",
 				className,
 			)}
 			style={{

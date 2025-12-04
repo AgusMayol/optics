@@ -239,11 +239,6 @@ export const links = [
 				own: false,
 			},
 			{
-				name: "Emoji Picker",
-				href: "/components/emoji-picker",
-				own: true,
-			},
-			{
 				name: "Empty State",
 				href: "/components/empty-state",
 				own: false,

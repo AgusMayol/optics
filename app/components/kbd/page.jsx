@@ -464,7 +464,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the keyboard key.",
+									description:
+										"Additional CSS classes to apply to the keyboard key.",
 								},
 								{
 									name: "variant",
@@ -474,17 +475,20 @@ export default function Page() {
 								{
 									name: "useHotkey",
 									type: "boolean (default: false)",
-									description: "Enable hotkey detection and animation. The hotkey is automatically extracted from children or can be provided via the hotkey prop.",
+									description:
+										"Enable hotkey detection and animation. The hotkey is automatically extracted from children or can be provided via the hotkey prop.",
 								},
 								{
 									name: "hotkey",
 									type: "string",
-									description: "Explicit hotkey string. If not provided, extracted from children.",
+									description:
+										"Explicit hotkey string. If not provided, extracted from children.",
 								},
 								{
 									name: "onHotkeyPress",
 									type: "(event) => void",
-									description: "Callback function called when the hotkey is pressed.",
+									description:
+										"Callback function called when the hotkey is pressed.",
 								},
 								{
 									name: "animate",
@@ -499,17 +503,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the keyboard key group.",
-								},
-							],
-						},
-						{
-							component: "<KbdGroup />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Accepts standard HTML kbd element attributes. Used to group multiple Kbd components.",
+									description:
+										"Additional CSS classes to apply to the keyboard key group.",
 								},
 							],
 						},

@@ -791,12 +791,14 @@ export default function Page() {
 								{
 									name: "onValuesChange",
 									type: "(values: Array<{value: string, checked: boolean}>) => void",
-									description: "Callback function called when selected values change.",
+									description:
+										"Callback function called when selected values change.",
 								},
 								{
 									name: "onOpenChange",
 									type: "(open: boolean) => void",
-									description: "Callback function called when the select opens or closes.",
+									description:
+										"Callback function called when the select opens or closes.",
 								},
 							],
 						},
@@ -806,7 +808,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the trigger.",
+									description:
+										"Additional CSS classes to apply to the trigger.",
 								},
 								{
 									name: "size",
@@ -826,7 +829,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 								{
 									name: "position",
@@ -851,27 +855,8 @@ export default function Page() {
 								{
 									name: "color",
 									type: "string (Tailwind color class)",
-									description: "Tailwind color class for the item's badge when selected.",
-								},
-							],
-						},
-						{
-							component: "<SelectItem />",
-							props: [
-								{
-									name: "value",
-									type: "string (required)",
-									description: "The value of the select item.",
-								},
-								{
-									name: "color",
-									type: "string (Tailwind color class)",
-									description: "Color class for the item indicator.",
-								},
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes.",
+									description:
+										"Tailwind color class for the item's badge when selected.",
 								},
 							],
 						},

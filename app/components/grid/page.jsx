@@ -124,6 +124,7 @@ export const GridRow = ({
 	children = null,
 	span: paramSpan = 0,
 	gap: paramGap = 0,
+	overrideStyles = false,
 	borderTop = true,
 	borderBottom = true,
 	...props
@@ -142,11 +143,15 @@ export const GridRow = ({
 				!borderBottom && "!border-b-0",
 				className,
 			)}
-			style={{
-				gridColumn: \`span \${cols} / span \${span}\`,
-				gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
-				gap,
-			}}
+			style={
+				overrideStyles
+					? undefined
+					: {
+							gridColumn: \`span \${cols} / span \${span}\`,
+							gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
+							gap,
+					  }
+			}
 			{...props}
 		>
 			{children}
@@ -160,17 +165,33 @@ export const GridItem = ({
 	span = 1,
 	borderLeft = true,
 	borderRight = true,
+	borderTop = false,
+	borderBottom = false,
+	decorationTopLeft = false,
+	decorationTopRight = false,
+	decorationBottomLeft = false,
+	decorationBottomRight = false,
 	...props
 }) => {
 	const { cols, border } = useGridContext();
+	const hasDecorations =
+		decorationTopLeft ||
+		decorationTopRight ||
+		decorationBottomLeft ||
+		decorationBottomRight;
+
 	return (
 		<div
 			className={cn(
 				"border-l last:border-r flex items-center justify-center relative",
-				span === 1 && "aspect-square",
+				span === 1 && "md:aspect-square",
+				span === 1 && "min-h-[60px] md:min-h-0",
 				!borderLeft && "!border-l-0",
 				!borderRight && "!border-r-0",
+				borderTop && "!border-t",
+				borderBottom && "!border-b",
 				!border && "!border-0",
+				!hasDecorations && "overflow-hidden",
 				className,
 			)}
 			style={{
@@ -179,6 +200,42 @@ export const GridItem = ({
 			{...props}
 		>
 			{children}
+
+			{decorationTopLeft && (
+				<div className="absolute -left-[1px] -top-[1px] z-10">
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
+						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
+					</div>
+				</div>
+			)}
+
+			{decorationTopRight && (
+				<div className="absolute -right-[0px] -top-[1px] z-10">
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
+						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
+					</div>
+				</div>
+			)}
+
+			{decorationBottomLeft && (
+				<div className="absolute -left-[1px] -bottom-[0px] z-10">
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
+						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
+					</div>
+				</div>
+			)}
+
+			{decorationBottomRight && (
+				<div className="absolute -right-[0px] -bottom-[0px] z-10">
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
+						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };`,
@@ -462,6 +519,12 @@ export default function Page() {
 									name: "gap",
 									type: "number (default: 0)",
 									description: "Gap between items in this row in pixels.",
+								},
+								{
+									name: "overrideStyles",
+									type: "boolean (default: false)",
+									description:
+										"When true, disables the default grid styles so you can fully control layout via className and style.",
 								},
 								{
 									name: "borderTop",

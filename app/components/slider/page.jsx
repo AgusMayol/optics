@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -167,6 +168,9 @@ const installDeps = [
 ];
 
 export default function Page() {
+	const [sliderValue, setSliderValue] = React.useState([50]);
+	const [rangeValue, setRangeValue] = React.useState([25, 75]);
+
 	const {
 		mounted,
 		value,
@@ -429,12 +433,14 @@ export default function Page() {
 								{
 									name: "defaultValue",
 									type: "number[]",
-									description: "The default value of the slider (uncontrolled).",
+									description:
+										"The default value of the slider (uncontrolled).",
 								},
 								{
 									name: "value",
 									type: "number[]",
-									description: "The controlled value of the slider. Use with onValueChange.",
+									description:
+										"The controlled value of the slider. Use with onValueChange.",
 								},
 								{
 									name: "onValueChange",
@@ -459,17 +465,20 @@ export default function Page() {
 								{
 									name: "orientation",
 									type: `"horizontal" | "vertical"`,
-									description: "The orientation of the slider. Defaults to 'horizontal'.",
+									description:
+										"The orientation of the slider. Defaults to 'horizontal'.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the slider.",
+									description:
+										"When true, prevents user interaction with the slider.",
 								},
 								{
 									name: "variant",
 									type: `"raised" | "ghost" | "outline"`,
-									description: "Variant style that inherits button variant styles.",
+									description:
+										"Variant style that inherits button variant styles.",
 								},
 							],
 						},

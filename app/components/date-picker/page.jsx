@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -338,21 +339,24 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the date picker trigger button.",
+									description:
+										"Additional CSS classes to apply to the date picker trigger button.",
 								},
 								{
 									name: "date",
 									type: "Date | undefined",
-									description: "The selected date value (controlled). Use with onDateChange.",
+									description:
+										"The selected date value (controlled). Use with onDateChange.",
 								},
 								{
 									name: "onDateChange",
 									type: "(date: Date | undefined) => void",
-									description: "Callback function called when the date changes.",
+									description:
+										"Callback function called when the date changes.",
 								},
 								{
 									name: "placeholder",
-									type: "string (default: \"Pick a date\")",
+									type: 'string (default: "Pick a date")',
 									description: "Placeholder text for the date input.",
 								},
 							],

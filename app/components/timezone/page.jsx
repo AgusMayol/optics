@@ -7,6 +7,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
@@ -567,7 +568,8 @@ export default function Page() {
 								{
 									name: "asChild",
 									type: "boolean (default: false)",
-									description: "Render as a child element instead of the default element.",
+									description:
+										"Render as a child element instead of the default element.",
 								},
 								{
 									name: "children",
