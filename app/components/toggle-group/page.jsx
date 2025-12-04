@@ -1,30 +1,16 @@
 "use client";
-import * as React from "react";
-import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
-import { Button } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-	Bold,
-	Italic,
-	Underline,
-} from "lucide-react";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
-import { Badge } from "@/registry/optics/badge";
-import Link from "next/link";
-import { Card, CardContent, CardFooter } from "@/registry/optics/card";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
 	Accordion,
+	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-	AccordionContent,
 } from "@/registry/optics/accordion";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -33,6 +19,15 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -41,15 +36,10 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
+import { ArrowUpRight, Bold, Italic, Underline } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -165,86 +155,16 @@ const commands = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, []);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -434,137 +354,93 @@ export default function Page() {
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				<div className="w-full flex flex-col gap-2">
-					<Badge variant="outline" className="text-xs font-mono">
-						{"<ToggleGroup />"}
-					</Badge>
-
-					<GridContainer
-						cols={12}
-						border={false}
-						rows={5}
-						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-					>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="text-xs font-semibold justify-start gap-1"
-							>
-								<ALargeSmall />
-								Name
-							</GridItem>
-							<GridItem
-								span={8}
-								className="text-xs font-semibold gap-1 mr-auto"
-							>
-								<Binary size={16} />
-								Type
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									variant
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								"default" | "outline"
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									size
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								"default" | "sm" | "lg"
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									spacing
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								number (default: 0)
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									className
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								string
-							</GridItem>
-						</GridRow>
-					</GridContainer>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<ToggleGroup />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the toggle group.",
+								},
+								{
+									name: "type",
+									type: `"single" | "multiple"`,
+									description: "Determines whether one or multiple items can be pressed at the same time.",
+								},
+								{
+									name: "value",
+									type: "string | string[]",
+									description: "The controlled value of the toggle group. Use with onValueChange.",
+								},
+								{
+									name: "defaultValue",
+									type: "string | string[]",
+									description: "The uncontrolled default value of the toggle group.",
+								},
+								{
+									name: "onValueChange",
+									type: "(value: string | string[]) => void",
+									description: "Callback fired when the value changes.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents user interaction with the toggle group.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "outline"`,
+									description: "Variant style for the toggle group items.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" | "lg"`,
+									description: "Size of the toggle group items.",
+								},
+								{
+									name: "spacing",
+									type: "number (default: 0)",
+									description: "Spacing in pixels between toggle group items.",
+								},
+							],
+						},
+						{
+							component: "<ToggleGroupItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the toggle group item.",
+								},
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The value of the toggle group item.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents the item from being pressed.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "outline"`,
+									description: "Variant style for the item. Inherits from ToggleGroup if not specified.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" | "lg"`,
+									description: "Size of the item. Inherits from ToggleGroup if not specified.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

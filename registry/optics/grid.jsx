@@ -55,6 +55,7 @@ export const GridRow = ({
 	children = null,
 	span: paramSpan = 0,
 	gap: paramGap = 0,
+	overrideStyles = false,
 	borderTop = true,
 	borderBottom = true,
 	...props
@@ -73,11 +74,13 @@ export const GridRow = ({
 				!borderBottom && "!border-b-0",
 				className,
 			)}
-			style={{
-				gridColumn: `span ${cols} / span ${span}`,
-				gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-				gap,
-			}}
+			style={
+				overrideStyles ? undefined : {
+					gridColumn: `span ${cols} / span ${span}`,
+					gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+					gap,
+				}
+			}
 			{...props}
 		>
 			{children}
@@ -91,6 +94,8 @@ export const GridItem = ({
 	span = 1,
 	borderLeft = true,
 	borderRight = true,
+	borderTop = false,
+	borderBottom = false,
 	decorationTopLeft = false,
 	decorationTopRight = false,
 	decorationBottomLeft = false,
@@ -108,6 +113,8 @@ export const GridItem = ({
 				span === 1 && "min-h-[60px] md:min-h-0",
 				!borderLeft && "!border-l-0",
 				!borderRight && "!border-r-0",
+				borderTop && "!border-t",
+				borderBottom && "!border-b",
 				!border && "!border-0",
 				// Prevenir overflow de contenido
 				"overflow-hidden",

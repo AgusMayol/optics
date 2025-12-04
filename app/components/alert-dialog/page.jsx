@@ -1,40 +1,28 @@
 "use client";
-import * as React from "react";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/registry/optics/accordion";
 import {
 	AlertDialog,
-	AlertDialogTrigger,
-	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogDescription,
 	AlertDialogAction,
 	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
 	AlertDialogIcon,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 } from "@/registry/optics/alert-dialog";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-	AlertTriangle,
-	Info,
-} from "lucide-react";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	Accordion,
-	AccordionItem,
-	AccordionTrigger,
-	AccordionContent,
-} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -45,6 +33,15 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -53,15 +50,9 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+import { ArrowUpRight, Info } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -313,90 +304,16 @@ const installDeps = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find(
-		(command) => command.label === value,
-	);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -639,139 +556,185 @@ export default function Page() {
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Components
+					Props
 				</h2>
-
-				<div className="w-full flex flex-col gap-4">
-					<p className="text-sm text-muted-foreground">
-						The Alert Dialog component is composed of several sub-components
-						that work together to create modal dialogs.
-					</p>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialog />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Main container component
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogTrigger />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Button that opens the dialog
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogContent />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Dialog content container
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogHeader />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">Header section</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogTitle />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">Dialog title</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogDescription />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Dialog description
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogFooter />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Footer with actions
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogAction />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Primary action button
-							</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogCancel />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">Cancel button</p>
-						</div>
-
-						<div className="flex flex-col gap-1">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<AlertDialogIcon />"}
-							</Badge>
-							<p className="text-xs text-muted-foreground">
-								Icon with close button
-							</p>
-						</div>
-					</div>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<AlertDialog />",
+							props: [
+								{
+									name: "open",
+									type: "boolean",
+									description: "The controlled open state of the alert dialog. Use with onOpenChange.",
+								},
+								{
+									name: "defaultOpen",
+									type: "boolean",
+									description: "The uncontrolled default open state of the alert dialog.",
+								},
+								{
+									name: "onOpenChange",
+									type: "(open: boolean) => void",
+									description: "Callback fired when the open state changes.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogTrigger />",
+							props: [
+								{
+									name: "asChild",
+									type: "boolean",
+									description: "When true, the trigger will render as its child element instead of a button.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogContent />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the content.",
+								},
+								{
+									name: "onEscapeKeyDown",
+									type: "(event: KeyboardEvent) => void",
+									description: "Callback fired when the Escape key is pressed.",
+								},
+								{
+									name: "onPointerDownOutside",
+									type: "(event: PointerEvent) => void",
+									description: "Callback fired when a pointer event occurs outside the dialog.",
+								},
+								{
+									name: "onInteractOutside",
+									type: "(event: Event) => void",
+									description: "Callback fired when an interaction occurs outside the dialog.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogHeader />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the header.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogFooter />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the footer.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogTitle />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the title.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogDescription />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the description.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogAction />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the action button.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link"`,
+									description: "Variant style that inherits button variant styles.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg"`,
+									description: "Size that inherits button size styles.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogCancel />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the cancel button.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link" (default: "raised")`,
+									description: "Variant style that inherits button variant styles. Defaults to 'raised'.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg"`,
+									description: "Size that inherits button size styles.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogIcon />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the icon container.",
+								},
+								{
+									name: "children",
+									type: "React.ReactNode",
+									description: "The icon element to display.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogOverlay />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the overlay.",
+								},
+							],
+						},
+						{
+							component: "<AlertDialogPortal />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the portal.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

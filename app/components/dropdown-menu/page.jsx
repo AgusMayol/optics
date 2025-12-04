@@ -1,19 +1,33 @@
 "use client";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-} from "lucide-react";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/registry/optics/accordion";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
+import {
+	CodeBlock,
+	CodeBlockBody,
+	CodeBlockContent,
+	CodeBlockCopyButton,
+	CodeBlockHeader,
+	CodeBlockItem,
+} from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -28,23 +42,6 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@/registry/optics/dropdown-menu";
-import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	Accordion,
-	AccordionItem,
-	AccordionTrigger,
-	AccordionContent,
-} from "@/registry/optics/accordion";
-import {
-	CodeBlock,
-	CodeBlockBody,
-	CodeBlockContent,
-	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
-	CodeBlockHeader,
-	CodeBlockItem,
-} from "@/registry/optics/code-block";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -53,15 +50,9 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -132,90 +123,16 @@ const installDeps = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find(
-		(command) => command.label === value,
-	);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -466,79 +383,316 @@ export default function Page() {
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Components
+					Props
 				</h2>
 
-				<div className="w-full flex flex-col gap-4">
-					<p className="text-muted-foreground">
-						This component includes multiple sub-components for building
-						dropdown menus:
-					</p>
-					<div className="grid grid-cols-2 gap-2">
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenu />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuTrigger />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuContent />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuItem />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuCheckboxItem />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuRadioGroup />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuLabel />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<DropdownMenuSeparator />"}
-						</Badge>
-					</div>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<DropdownMenu />",
+							props: [
+								{
+									name: "open",
+									type: "boolean",
+									description: "The controlled open state of the dropdown menu. Use with onOpenChange.",
+								},
+								{
+									name: "defaultOpen",
+									type: "boolean",
+									description: "The uncontrolled default open state of the dropdown menu.",
+								},
+								{
+									name: "onOpenChange",
+									type: "(open: boolean) => void",
+									description: "Callback fired when the open state changes.",
+								},
+								{
+									name: "modal",
+									type: "boolean (default: true)",
+									description: "When true, interaction with outside elements is disabled. Defaults to true.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuTrigger />",
+							props: [
+								{
+									name: "asChild",
+									type: "boolean",
+									description: "When true, the trigger will render as its child element instead of a button.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents user interaction with the trigger.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuContent />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the content.",
+								},
+								{
+									name: "side",
+									type: `"top" | "right" | "bottom" | "left"`,
+									description: "The preferred side of the trigger to render against.",
+								},
+								{
+									name: "sideOffset",
+									type: "number (default: 4)",
+									description: "The distance in pixels from the trigger.",
+								},
+								{
+									name: "align",
+									type: `"start" | "center" | "end"`,
+									description: "The preferred alignment against the trigger.",
+								},
+								{
+									name: "alignOffset",
+									type: "number",
+									description: "An offset in pixels from the 'align' option.",
+								},
+								{
+									name: "onEscapeKeyDown",
+									type: "(event: KeyboardEvent) => void",
+									description: "Callback fired when the Escape key is pressed.",
+								},
+								{
+									name: "onPointerDownOutside",
+									type: "(event: PointerEvent) => void",
+									description: "Callback fired when a pointer event occurs outside the menu.",
+								},
+								{
+									name: "onInteractOutside",
+									type: "(event: Event) => void",
+									description: "Callback fired when an interaction occurs outside the menu.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the item.",
+								},
+								{
+									name: "inset",
+									type: "boolean",
+									description: "When true, adds left padding to accommodate an icon.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "destructive" (default: "default")`,
+									description: "Variant style for the item.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents the item from being selected.",
+								},
+								{
+									name: "onSelect",
+									type: "(event: Event) => void",
+									description: "Callback fired when the item is selected.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuCheckboxItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the checkbox item.",
+								},
+								{
+									name: "checked",
+									type: "boolean",
+									description: "The controlled checked state. Use with onCheckedChange.",
+								},
+								{
+									name: "defaultChecked",
+									type: "boolean",
+									description: "The uncontrolled default checked state.",
+								},
+								{
+									name: "onCheckedChange",
+									type: "(checked: boolean) => void",
+									description: "Callback fired when the checked state changes.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents the item from being toggled.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuRadioGroup />",
+							props: [
+								{
+									name: "value",
+									type: "string",
+									description: "The controlled value of the radio group. Use with onValueChange.",
+								},
+								{
+									name: "defaultValue",
+									type: "string",
+									description: "The uncontrolled default value of the radio group.",
+								},
+								{
+									name: "onValueChange",
+									type: "(value: string) => void",
+									description: "Callback fired when the value changes.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuRadioItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the radio item.",
+								},
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The value of the radio item.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents the item from being selected.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuLabel />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the label.",
+								},
+								{
+									name: "inset",
+									type: "boolean",
+									description: "When true, adds left padding to match items with icons.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuSeparator />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the separator.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuGroup />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the group.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuSub />",
+							props: [
+								{
+									name: "open",
+									type: "boolean",
+									description: "The controlled open state of the submenu. Use with onOpenChange.",
+								},
+								{
+									name: "defaultOpen",
+									type: "boolean",
+									description: "The uncontrolled default open state of the submenu.",
+								},
+								{
+									name: "onOpenChange",
+									type: "(open: boolean) => void",
+									description: "Callback fired when the open state changes.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuSubTrigger />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the sub trigger.",
+								},
+								{
+									name: "inset",
+									type: "boolean",
+									description: "When true, adds left padding to accommodate an icon.",
+								},
+								{
+									name: "disabled",
+									type: "boolean",
+									description: "When true, prevents the submenu from opening.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuSubContent />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the sub content.",
+								},
+								{
+									name: "side",
+									type: `"top" | "right" | "bottom" | "left"`,
+									description: "The preferred side of the trigger to render against.",
+								},
+								{
+									name: "sideOffset",
+									type: "number (default: 2)",
+									description: "The distance in pixels from the trigger.",
+								},
+								{
+									name: "align",
+									type: `"start" | "center" | "end" (default: "start")`,
+									description: "The preferred alignment against the trigger.",
+								},
+								{
+									name: "alignOffset",
+									type: "number (default: -4)",
+									description: "An offset in pixels from the 'align' option.",
+								},
+							],
+						},
+						{
+							component: "<DropdownMenuShortcut />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the shortcut.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

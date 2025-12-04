@@ -8,7 +8,7 @@ export function useElementHeight() {
 	useEffect(() => {
 		const updateHeight = () => {
 			if (ref.current) {
-				setHeight(ref.current.offsetHeight);
+				setHeight(ref.current.getBoundingClientRect().height);
 			}
 		};
 

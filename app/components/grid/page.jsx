@@ -2,9 +2,10 @@
 import * as React from "react";
 import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import { ALargeSmall, ArrowLeft, ArrowRight, Binary, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import Link from "next/link";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
@@ -50,7 +51,7 @@ const code = [
 		code: `import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 
 <GridContainer cols={12} rows={3} border>
-	<GridRow>
+	<GridRow className="rounded-t-xl" className="rounded-t-xl">
 		<GridItem span={4}>Column 1</GridItem>
 		<GridItem span={4}>Column 2</GridItem>
 		<GridItem span={4}>Column 3</GridItem>
@@ -62,7 +63,7 @@ const code = [
 	<GridRow>
 		<GridItem span={12}>Full Width</GridItem>
 	</GridRow>
-</GridContainer>`,
+						</GridContainer>`,
 	},
 ];
 
@@ -203,87 +204,16 @@ const commands = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, []);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -311,7 +241,7 @@ export default function Page() {
 							border
 							className="w-full max-w-2xl"
 						>
-							<GridRow>
+							<GridRow className="rounded-t-xl">
 								<GridItem
 									decorationTopLeft
 									span={4}
@@ -483,376 +413,128 @@ export default function Page() {
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-
-				<div className="w-full flex flex-col gap-8">
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<GridContainer />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={5}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										cols
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 12)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										rows
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 1)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										gap
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 0)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										border
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: true)
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<GridRow />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={5}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										span
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 0, uses cols if 0)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										gap
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 0)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										borderTop
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: true)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										borderBottom
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: true)
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<GridItem />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={8}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										span
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									number (default: 1)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										borderLeft
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: true)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										borderRight
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: true)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										decorationTopLeft
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: false)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										decorationTopRight
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: false)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										decorationBottomLeft
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: false)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										decorationBottomRight
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									boolean (default: false)
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<GridContainer />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the grid container.",
+								},
+								{
+									name: "cols",
+									type: "number (default: 12)",
+									description: "Number of columns in the grid.",
+								},
+								{
+									name: "rows",
+									type: "number (default: 1)",
+									description: "Number of rows in the grid.",
+								},
+								{
+									name: "gap",
+									type: "number (default: 0)",
+									description: "Gap between grid items in pixels.",
+								},
+								{
+									name: "border",
+									type: "boolean (default: true)",
+									description: "Whether to show borders between grid items.",
+								},
+							],
+						},
+						{
+							component: "<GridRow />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the grid row.",
+								},
+								{
+									name: "span",
+									type: "number (default: 0, uses cols if 0)",
+									description: "Number of columns this row spans.",
+								},
+								{
+									name: "gap",
+									type: "number (default: 0)",
+									description: "Gap between items in this row in pixels.",
+								},
+								{
+									name: "borderTop",
+									type: "boolean (default: true)",
+									description: "Whether to show top border.",
+								},
+								{
+									name: "borderBottom",
+									type: "boolean (default: true)",
+									description: "Whether to show bottom border.",
+								},
+							],
+						},
+						{
+							component: "<GridItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the grid item.",
+								},
+								{
+									name: "span",
+									type: "number (default: 1)",
+									description: "Number of columns this item spans.",
+								},
+								{
+									name: "borderLeft",
+									type: "boolean (default: true)",
+									description: "Whether to show left border.",
+								},
+								{
+									name: "borderRight",
+									type: "boolean (default: true)",
+									description: "Whether to show right border.",
+								},
+								{
+									name: "borderTop",
+									type: "boolean (default: false)",
+									description: "Whether to show top border.",
+								},
+								{
+									name: "borderBottom",
+									type: "boolean (default: false)",
+									description: "Whether to show bottom border.",
+								},
+								{
+									name: "decorationTopLeft",
+									type: "boolean (default: false)",
+									description: "Whether to show top-left decoration.",
+								},
+								{
+									name: "decorationTopRight",
+									type: "boolean (default: false)",
+									description: "Whether to show top-right decoration.",
+								},
+								{
+									name: "decorationBottomLeft",
+									type: "boolean (default: false)",
+									description: "Whether to show bottom-left decoration.",
+								},
+								{
+									name: "decorationBottomRight",
+									type: "boolean (default: false)",
+									description: "Whether to show bottom-right decoration.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

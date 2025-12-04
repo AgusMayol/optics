@@ -1,26 +1,16 @@
 "use client";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-} from "lucide-react";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/registry/optics/accordion";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	Accordion,
-	AccordionItem,
-	AccordionTrigger,
-	AccordionContent,
-} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -31,6 +21,15 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -39,15 +38,9 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -95,90 +88,16 @@ const installDeps = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find(
-		(command) => command.label === value,
-	);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -390,79 +309,200 @@ export default function Page() {
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Components
+					Props
 				</h2>
-
-				<div className="w-full flex flex-col gap-4">
-					<p className="text-muted-foreground">
-						This component includes multiple sub-components for building code
-						blocks:
-					</p>
-					<div className="grid grid-cols-2 gap-2">
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlock />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockHeader />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockBody />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockContent />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockItem />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockCopyButton />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockFiles />"}
-						</Badge>
-						<Badge variant="outline" className="text-xs font-mono w-fit">
-							{"<CodeBlockFilename />"}
-						</Badge>
-					</div>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<CodeBlock />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the code block container.",
+								},
+								{
+									name: "data",
+									type: "Array<{ language: string, filename: string, code: string }> (required)",
+									description: "Array of code files to display in the code block.",
+								},
+								{
+									name: "value",
+									type: "string",
+									description: "The controlled active filename. Use with onValueChange.",
+								},
+								{
+									name: "defaultValue",
+									type: "string",
+									description: "The uncontrolled default active filename.",
+								},
+								{
+									name: "onValueChange",
+									type: "(value: string) => void",
+									description: "Callback fired when the active filename changes.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockHeader />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the header.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockBody />",
+							props: [
+								{
+									name: "children",
+									type: "(item: { language: string, filename: string, code: string }) => React.ReactNode",
+									description: "Render function that receives each code file item.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockContent />",
+							props: [
+								{
+									name: "children",
+									type: "string (required)",
+									description: "The code content to display.",
+								},
+								{
+									name: "language",
+									type: "string",
+									description: "The programming language for syntax highlighting.",
+								},
+								{
+									name: "themes",
+									type: "{ light: string, dark: string }",
+									description: "Shiki theme configuration for light and dark modes.",
+								},
+								{
+									name: "syntaxHighlighting",
+									type: "boolean (default: true)",
+									description: "Whether to enable syntax highlighting.",
+								},
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the content.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the item.",
+								},
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The filename that identifies this code block item.",
+								},
+								{
+									name: "lineNumbers",
+									type: "boolean (default: true)",
+									description: "Whether to show line numbers.",
+								},
+								{
+									name: "children",
+									type: "React.ReactNode (required)",
+									description: "The code content to display (usually CodeBlockContent).",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockCopyButton />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the button.",
+								},
+								{
+									name: "variant",
+									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link" (default: "outline")`,
+									description: "Variant style for the button.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" (default: "icon")`,
+									description: "Size of the button.",
+								},
+								{
+									name: "asChild",
+									type: "boolean",
+									description: "When true, the button will render as its child element instead of a button.",
+								},
+								{
+									name: "timeout",
+									type: "number (default: 2000)",
+									description: "Duration in milliseconds before the 'copied' state resets.",
+								},
+								{
+									name: "onCopy",
+									type: "() => void",
+									description: "Callback fired when code is successfully copied.",
+								},
+								{
+									name: "onError",
+									type: "(error: Error) => void",
+									description: "Callback fired when copy operation fails.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockFiles />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the files container.",
+								},
+								{
+									name: "children",
+									type: "(item: { language: string, filename: string, code: string }) => React.ReactNode",
+									description: "Render function that receives each code file item.",
+								},
+							],
+						},
+						{
+							component: "<CodeBlockFilename />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the filename.",
+								},
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The filename value that identifies this tab.",
+								},
+								{
+									name: "icon",
+									type: "React.ComponentType",
+									description: "Custom icon component to display before the filename.",
+								},
+								{
+									name: "children",
+									type: "React.ReactNode (required)",
+									description: "The filename text to display.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

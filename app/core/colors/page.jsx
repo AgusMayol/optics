@@ -1,19 +1,18 @@
 "use client";
-import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 
-import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { tailwindColors } from "@/lib/tailwind-colors";
+import { Card } from "@/registry/optics/card";
 import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-	CardContent,
-	CardFooter,
-} from "@/registry/optics/card";
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+} from "@/registry/optics/code-snippet";
+import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
+import { Input } from "@/registry/optics/input";
+import { Label } from "@/registry/optics/label";
 import {
 	Select,
 	SelectContent,
@@ -21,25 +20,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/registry/optics/select";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
+import { Separator } from "@/registry/optics/separator";
+import { toast } from "@/registry/optics/sonner";
 import {
 	Tooltip,
-	TooltipTrigger,
 	TooltipContent,
 	TooltipProvider,
+	TooltipTrigger,
 } from "@/registry/optics/tooltip";
-import { Fragment, useState } from "react";
-import { tailwindColors } from "@/lib/tailwind-colors";
-import { toast } from "@/registry/optics/sonner";
-import { Separator } from "@/registry/optics/separator";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useState, useMemo, useCallback } from "react";
 
 export default function Page() {
 	const isMobile = useIsMobile();
@@ -412,8 +401,275 @@ export default function Page() {
 
 	const [selectedFormat, setSelectedFormat] = useState("classname");
 
+	// Color picker states
+	const [colorPickerValue, setColorPickerValue] = useState("#3b82f6");
+	const [colorPickerFormat, setColorPickerFormat] = useState("hex");
+
+	// Color converter states
+	const [inputColorValue, setInputColorValue] = useState("");
+	const [inputColorFormat, setInputColorFormat] = useState("hex");
+	const [outputColorFormat, setOutputColorFormat] = useState("rgb");
+
+	// Color conversion utilities
+	const hexToRgb = (hex) => {
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result
+			? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16),
+				}
+			: null;
+	};
+
+	const rgbToHsl = (r, g, b) => {
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		const max = Math.max(r, g, b);
+		const min = Math.min(r, g, b);
+		let h,
+			s,
+			l = (max + min) / 2;
+
+		if (max === min) {
+			h = s = 0;
+		} else {
+			const d = max - min;
+			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+			switch (max) {
+				case r:
+					h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+					break;
+				case g:
+					h = ((b - r) / d + 2) / 6;
+					break;
+				case b:
+					h = ((r - g) / d + 4) / 6;
+					break;
+			}
+		}
+
+		// Calculate hue in degrees and ensure it's in valid CSS range (0-359)
+		const hueDegrees = h * 360;
+		const roundedHue = Math.round(hueDegrees);
+		// Use modulo 360 to ensure hue is always in 0-359 range
+		// This handles cases where rounding produces 360
+		const validHue = roundedHue % 360;
+
+		return {
+			h: validHue,
+			s: Math.round(s * 100),
+			l: Math.round(l * 100),
+		};
+	};
+
+	const hslToRgb = (h, s, l) => {
+		h /= 360;
+		s /= 100;
+		l /= 100;
+		let r, g, b;
+
+		if (s === 0) {
+			r = g = b = l;
+		} else {
+			const hue2rgb = (p, q, t) => {
+				if (t < 0) t += 1;
+				if (t > 1) t -= 1;
+				if (t < 1 / 6) return p + (q - p) * 6 * t;
+				if (t < 1 / 2) return q;
+				if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+				return p;
+			};
+
+			const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+			const p = 2 * l - q;
+			r = hue2rgb(p, q, h + 1 / 3);
+			g = hue2rgb(p, q, h);
+			b = hue2rgb(p, q, h - 1 / 3);
+		}
+
+		return {
+			r: Math.round(r * 255),
+			g: Math.round(g * 255),
+			b: Math.round(b * 255),
+		};
+	};
+
+	const rgbToOklch = (r, g, b) => {
+		// Convert RGB to linear RGB
+		const linearR = r / 255;
+		const linearG = g / 255;
+		const linearB = b / 255;
+
+		// Convert linear RGB to XYZ (sRGB to XYZ matrix)
+		const x = 0.4124564 * linearR + 0.3575761 * linearG + 0.1804375 * linearB;
+		const y = 0.2126729 * linearR + 0.7151522 * linearG + 0.072175 * linearB;
+		const z = 0.0193339 * linearR + 0.119192 * linearG + 0.9503041 * linearB;
+
+		// Convert XYZ to Lab
+		const fx = x > 0.008856 ? Math.cbrt(x) : 7.787 * x + 16 / 116;
+		const fy = y > 0.008856 ? Math.cbrt(y) : 7.787 * y + 16 / 116;
+		const fz = z > 0.008856 ? Math.cbrt(z) : 7.787 * z + 16 / 116;
+
+		const l = 116 * fy - 16;
+		const a = 500 * (fx - fy);
+		const bLab = 200 * (fy - fz);
+
+		// Convert Lab to OKLab (simplified approximation)
+		const lOk = l / 100;
+		const aOk = a / 100;
+		const bOk = bLab / 100;
+
+		// Convert OKLab to OKLCH
+		const c = Math.sqrt(aOk * aOk + bOk * bOk);
+		const h = Math.atan2(bOk, aOk) * (180 / Math.PI);
+		const hNormalized = h < 0 ? h + 360 : h;
+
+		return {
+			l: Number(lOk.toFixed(2)),
+			c: Number(c.toFixed(2)),
+			h: Number(hNormalized.toFixed(0)),
+		};
+	};
+
+	const oklchToRgb = (l, c, h) => {
+		// Convert OKLCH to OKLab
+		const hRad = (h * Math.PI) / 180;
+		const a = c * Math.cos(hRad);
+		const b = c * Math.sin(hRad);
+
+		// Convert OKLab to Lab (simplified approximation)
+		const lLab = l * 100;
+		const aLab = a * 100;
+		const bLab = b * 100;
+
+		// Convert Lab to XYZ
+		const fy = (lLab + 16) / 116;
+		const fx = aLab / 500 + fy;
+		const fz = fy - bLab / 200;
+
+		const x = fx > 0.206897 ? fx * fx * fx : (fx - 16 / 116) / 7.787;
+		const y = fy > 0.206897 ? fy * fy * fy : (fy - 16 / 116) / 7.787;
+		const z = fz > 0.206897 ? fz * fz * fz : (fz - 16 / 116) / 7.787;
+
+		// Convert XYZ to linear RGB
+		const linearR = 3.2404542 * x - 1.5371385 * y - 0.4985314 * z;
+		const linearG = -0.969266 * x + 1.8760108 * y + 0.041556 * z;
+		const linearB = 0.0556434 * x - 0.2040259 * y + 1.0572252 * z;
+
+		// Convert linear RGB to sRGB
+		const gamma = (val) => {
+			if (val <= 0.0031308) {
+				return 12.92 * val;
+			}
+			return 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
+		};
+
+		return {
+			r: Math.round(Math.max(0, Math.min(255, gamma(linearR) * 255))),
+			g: Math.round(Math.max(0, Math.min(255, gamma(linearG) * 255))),
+			b: Math.round(Math.max(0, Math.min(255, gamma(linearB) * 255))),
+		};
+	};
+
+	const parseColor = useCallback((colorString, format) => {
+		if (!colorString) return null;
+
+		try {
+			switch (format) {
+				case "hex": {
+					const hex = colorString.replace("#", "");
+					if (!/^[0-9A-Fa-f]{6}$/.test(hex)) return null;
+					return hexToRgb(`#${hex}`);
+				}
+				case "rgb": {
+					const match = colorString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+					if (!match) return null;
+					return {
+						r: parseInt(match[1], 10),
+						g: parseInt(match[2], 10),
+						b: parseInt(match[3], 10),
+					};
+				}
+				case "hsl": {
+					const match = colorString.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+					if (!match) return null;
+					const hsl = {
+						h: parseInt(match[1], 10),
+						s: parseInt(match[2], 10),
+						l: parseInt(match[3], 10),
+					};
+					return hslToRgb(hsl.h, hsl.s, hsl.l);
+				}
+				case "oklch": {
+					const match = colorString.match(
+						/oklch\(([\d.]+),\s*([\d.]+),\s*([\d.]+)\)/,
+					);
+					if (!match) return null;
+					const oklch = {
+						l: parseFloat(match[1]),
+						c: parseFloat(match[2]),
+						h: parseFloat(match[3]),
+					};
+					return oklchToRgb(oklch.l, oklch.c, oklch.h);
+				}
+				default:
+					return null;
+			}
+		} catch {
+			return null;
+		}
+	}, []);
+
+	const formatColor = useCallback((rgb, format) => {
+		if (!rgb) return "";
+
+		switch (format) {
+			case "hex":
+				return `#${[rgb.r, rgb.g, rgb.b]
+					.map((x) => {
+						const hex = x.toString(16);
+						return hex.length === 1 ? "0" + hex : hex;
+					})
+					.join("")}`;
+			case "rgb":
+				return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+			case "hsl": {
+				const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+				return `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+			}
+			case "oklch": {
+				const oklch = rgbToOklch(rgb.r, rgb.g, rgb.b);
+				return `oklch(${oklch.l}, ${oklch.c}, ${oklch.h})`;
+			}
+			default:
+				return "";
+		}
+	}, []);
+
+	// Convert color picker value to selected format
+	const colorPickerConverted = useMemo(() => {
+		const rgb = hexToRgb(colorPickerValue);
+		if (!rgb) return "";
+		return formatColor(rgb, colorPickerFormat);
+	}, [colorPickerValue, colorPickerFormat, formatColor]);
+
+	// Convert input color value to output format
+	const convertedColor = useMemo(() => {
+		const rgb = parseColor(inputColorValue, inputColorFormat);
+		if (!rgb) return "";
+		return formatColor(rgb, outputColorFormat);
+	}, [
+		inputColorValue,
+		inputColorFormat,
+		outputColorFormat,
+		parseColor,
+		formatColor,
+	]);
+
 	return (
-		<TooltipProvider delayDuration={400} skipDelayDuration={0}>
+		<TooltipProvider delayDuration={400} skipDelayDuration={0} shared={true}>
 			<main className="flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 				<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
@@ -423,6 +679,186 @@ export default function Page() {
 						The complete Tailwind color palette in HEX, RGB, HSL, CSS variables,
 						and classes. Ready to copy and paste into your project.
 					</p>
+				</div>
+
+				<Separator decoration />
+
+				{/* Color Picker Section */}
+				<div className="flex flex-col gap-6 p-6 lg:p-12 pt-4">
+					<div className="flex flex-col gap-4">
+						<h2 className="text-2xl font-bold tracking-tight">Color Picker</h2>
+						<p className="text-muted-foreground text-sm">
+							Selecciona un color y elige el formato en que quieres verlo.
+						</p>
+					</div>
+
+					<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+						<div className="flex items-center gap-4">
+							<Label htmlFor="color-picker" className="text-sm font-medium">
+								Color:
+							</Label>
+							<input
+								id="color-picker"
+								type="color"
+								value={colorPickerValue}
+								onChange={(e) => setColorPickerValue(e.target.value)}
+								className="h-10 w-20 cursor-pointer rounded-md border border-input bg-transparent"
+							/>
+						</div>
+
+						<div className="flex items-center gap-4">
+							<Label
+								htmlFor="color-picker-format"
+								className="text-sm font-medium"
+							>
+								Formato:
+							</Label>
+							<Select
+								value={colorPickerFormat}
+								onValueChange={setColorPickerFormat}
+							>
+								<SelectTrigger
+									id="color-picker-format"
+									className="w-[140px]"
+									variant="raised"
+								>
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="hex">HEX</SelectItem>
+									<SelectItem value="rgb">RGB</SelectItem>
+									<SelectItem value="hsl">HSL</SelectItem>
+									<SelectItem value="oklch">OKLCH</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div className="flex-1">
+							<Card className="p-4 bg-muted/50">
+								<div className="flex items-center gap-2">
+									<Label className="text-sm font-medium">Valor:</Label>
+									<Snippet className="flex-1 bg-transparent border-0">
+										<SnippetHeader className="bg-transparent border-0">
+											<span className="text-sm font-mono">
+												{colorPickerConverted}
+											</span>
+											<SnippetCopyButton value={colorPickerConverted} />
+										</SnippetHeader>
+									</Snippet>
+								</div>
+							</Card>
+						</div>
+					</div>
+				</div>
+
+				<Separator decoration />
+
+				{/* Color Converter Section */}
+				<div className="flex flex-col gap-6 p-6 lg:p-12 pt-4">
+					<div className="flex flex-col gap-4">
+						<h2 className="text-2xl font-bold tracking-tight">
+							Color Converter
+						</h2>
+						<p className="text-muted-foreground text-sm">
+							Ingresa un valor de color y conviértelo a otro formato en tiempo
+							real.
+						</p>
+					</div>
+
+					<div className="flex flex-col gap-4">
+						<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+							<Label
+								htmlFor="input-color"
+								className="text-sm font-medium min-w-[80px]"
+							>
+								Entrada:
+							</Label>
+							<div className="flex-1 flex gap-2">
+								<Input
+									id="input-color"
+									type="text"
+									value={inputColorValue}
+									onChange={(e) => setInputColorValue(e.target.value)}
+									placeholder="Ej: #3b82f6 o rgb(59, 130, 246)"
+									className="flex-1"
+								/>
+								<Select
+									value={inputColorFormat}
+									onValueChange={setInputColorFormat}
+								>
+									<SelectTrigger className="w-[120px]" variant="raised">
+										<SelectValue />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="hex">HEX</SelectItem>
+										<SelectItem value="rgb">RGB</SelectItem>
+										<SelectItem value="hsl">HSL</SelectItem>
+										<SelectItem value="oklch">OKLCH</SelectItem>
+									</SelectContent>
+								</Select>
+							</div>
+						</div>
+
+						<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+							<Label
+								htmlFor="output-color"
+								className="text-sm font-medium min-w-[80px]"
+							>
+								Salida:
+							</Label>
+							<div className="flex-1 flex gap-2">
+								<Card className="flex-1 p-4 bg-muted/50">
+									<div className="flex items-center gap-2">
+										<span className="text-sm font-mono text-muted-foreground">
+											{convertedColor || "Ingresa un color válido"}
+										</span>
+										{convertedColor && (
+											<SnippetCopyButton value={convertedColor} />
+										)}
+									</div>
+								</Card>
+								<Select
+									value={outputColorFormat}
+									onValueChange={setOutputColorFormat}
+								>
+									<SelectTrigger className="w-[120px]" variant="raised">
+										<SelectValue />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="hex">HEX</SelectItem>
+										<SelectItem value="rgb">RGB</SelectItem>
+										<SelectItem value="hsl">HSL</SelectItem>
+										<SelectItem value="oklch">OKLCH</SelectItem>
+									</SelectContent>
+								</Select>
+							</div>
+						</div>
+
+						{inputColorValue && convertedColor && (
+							<div className="flex items-center gap-4 mt-2">
+								<div
+									className="w-16 h-16 rounded-md border border-input shadow-sm"
+									style={{
+										backgroundColor: formatColor(
+											parseColor(inputColorValue, inputColorFormat),
+											"hex",
+										),
+									}}
+								/>
+								<div className="flex flex-col gap-1">
+									<span className="text-xs text-muted-foreground">
+										Vista previa
+									</span>
+									<span className="text-sm font-mono">
+										{formatColor(
+											parseColor(inputColorValue, inputColorFormat),
+											"hex",
+										)}
+									</span>
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
 
 				<Separator decoration />

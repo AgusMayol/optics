@@ -1,35 +1,16 @@
 "use client";
-import * as React from "react";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "@/registry/optics/multi-select";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-} from "lucide-react";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/registry/optics/accordion";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	Accordion,
-	AccordionItem,
-	AccordionTrigger,
-	AccordionContent,
-} from "@/registry/optics/accordion";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -40,6 +21,24 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/registry/optics/multi-select";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -48,15 +47,9 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -535,90 +528,16 @@ const installDeps = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-	const activeDepsCommand = installDeps.find(
-		(command) => command.label === value,
-	);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -864,329 +783,103 @@ export default function Page() {
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-
-				<div className="w-full flex flex-col gap-8">
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<Select />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={3}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										onValuesChange
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									(values: Array{"<"}
-									{"{value: string, checked: boolean}"}
-									{">"}
-									{") => void"}
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										onOpenChange
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									{"(open: boolean) => void"}
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<SelectTrigger />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={4}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										size
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									"default" | "sm"
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										variant
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									"raised" | "ghost" | "outline"
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										className
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									string
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<SelectContent />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={3}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										position
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									"popper" | "item-aligned"
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										className
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									string
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-
-					<div className="w-full flex flex-col gap-2">
-						<Badge variant="outline" className="text-xs font-mono">
-							{"<SelectItem />"}
-						</Badge>
-
-						<GridContainer
-							cols={12}
-							border={false}
-							rows={4}
-							className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(even)]:bg-muted`}
-						>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="text-xs font-semibold justify-start gap-1"
-								>
-									<ALargeSmall />
-									Name
-								</GridItem>
-								<GridItem
-									span={8}
-									className="text-xs font-semibold gap-1 mr-auto"
-								>
-									<Binary size={16} />
-									Type
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										value
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									string (required)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										color
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									string (Tailwind color class)
-								</GridItem>
-							</GridRow>
-							<GridRow>
-								<GridItem
-									span={4}
-									className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-								>
-									<Badge
-										variant="outline"
-										className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-									>
-										className
-									</Badge>
-								</GridItem>
-								<GridItem span={8} className="text-xs font-mono justify-start">
-									string
-								</GridItem>
-							</GridRow>
-						</GridContainer>
-					</div>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<Select />",
+							props: [
+								{
+									name: "onValuesChange",
+									type: "(values: Array<{value: string, checked: boolean}>) => void",
+									description: "Callback function called when selected values change.",
+								},
+								{
+									name: "onOpenChange",
+									type: "(open: boolean) => void",
+									description: "Callback function called when the select opens or closes.",
+								},
+							],
+						},
+						{
+							component: "<SelectTrigger />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the trigger.",
+								},
+								{
+									name: "size",
+									type: `"default" | "sm" (default: "default")`,
+									description: "Size of the trigger button.",
+								},
+								{
+									name: "variant",
+									type: `"raised" | "ghost" | "outline"`,
+									description: "Variant style for the trigger button.",
+								},
+							],
+						},
+						{
+							component: "<SelectContent />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the content.",
+								},
+								{
+									name: "position",
+									type: `"popper" | "item-aligned" (default: "popper")`,
+									description: "Positioning strategy for the content.",
+								},
+							],
+						},
+						{
+							component: "<SelectItem />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the item.",
+								},
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The value of the select item.",
+								},
+								{
+									name: "color",
+									type: "string (Tailwind color class)",
+									description: "Tailwind color class for the item's badge when selected.",
+								},
+							],
+						},
+						{
+							component: "<SelectItem />",
+							props: [
+								{
+									name: "value",
+									type: "string (required)",
+									description: "The value of the select item.",
+								},
+								{
+									name: "color",
+									type: "string (Tailwind color class)",
+									description: "Color class for the item indicator.",
+								},
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

@@ -49,8 +49,9 @@ export function Sidebar({ links, maxHeight = 0 }) {
 							className="size-8 ml-1.5"
 							width={100}
 							height={100}
+							priority
 						/>
-						<span className="text-lg font-bold w-full text-center truncate">
+						<span className="text-lg font-bold w-full text-center truncate select-none">
 							AgusMayol's Optics
 						</span>
 					</Link>
@@ -71,6 +72,7 @@ export function Sidebar({ links, maxHeight = 0 }) {
 							className="size-5 mr-0.5"
 							width={16}
 							height={16}
+							priority
 						/>
 						Copy Logo as SVG
 					</ContextMenuItem>

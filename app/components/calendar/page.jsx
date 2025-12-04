@@ -1,19 +1,10 @@
 "use client";
 import * as React from "react";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import { Calendar } from "@/registry/optics/calendar";
 import { Button } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-} from "lucide-react";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
-import { Badge } from "@/registry/optics/badge";
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -47,6 +38,7 @@ import {
 	SnippetTabsTrigger,
 	SnippetTabsContents,
 } from "@/registry/optics/code-snippet";
+import { ArrowUpRight } from "lucide-react";
 
 const code = [
 	{
@@ -128,87 +120,17 @@ const commands = [
 	},
 ];
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
-
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-	const [value, setValue] = React.useState(commands[0].label);
-	const [installationTab, setInstallationTab] = React.useState("tab1");
 	const [date, setDate] = React.useState();
-
-	const activeCommand = commands.find((command) => command.label === value);
-
-	React.useEffect(() => {
-		setMounted(true);
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	function getSiblingComponent(pathname, direction = "previous") {
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-		if (direction === "previous" && currentIdx === 0) return null;
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, []);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -393,170 +315,53 @@ export default function Page() {
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				<div className="w-full flex flex-col gap-2">
-					<Badge variant="outline" className="text-xs font-mono">
-						{"<Calendar />"}
-					</Badge>
-
-					<GridContainer
-						cols={12}
-						border={false}
-						rows={7}
-						className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-					>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="text-xs font-semibold justify-start gap-1"
-							>
-								<ALargeSmall />
-								Name
-							</GridItem>
-							<GridItem
-								span={8}
-								className="text-xs font-semibold gap-1 mr-auto"
-							>
-								<Binary size={16} />
-								Type
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									showOutsideDays
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								boolean (default: true)
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									captionLayout
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								"label" | "dropdown" | "dropdown-months" | "dropdown-years"
-								(default: "label")
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									buttonVariant
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								string (default: "ghost")
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									classNames
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								object (DayPicker classNames)
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									formatters
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								object (DayPicker formatters)
-							</GridItem>
-						</GridRow>
-						<GridRow>
-							<GridItem
-								span={4}
-								className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-							>
-								<Badge
-									variant="outline"
-									className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-								>
-									className
-								</Badge>
-							</GridItem>
-							<GridItem span={8} className="text-xs font-mono justify-start">
-								string
-							</GridItem>
-						</GridRow>
-					</GridContainer>
-				</div>
+				<PropsTable
+					data={[
+						{
+							component: "<Calendar />",
+							props: [
+								{
+									name: "className",
+									type: "string",
+									description: "Additional CSS classes to apply to the calendar.",
+								},
+								{
+									name: "classNames",
+									type: "object",
+									description: "DayPicker classNames object to customize individual calendar elements.",
+								},
+								{
+									name: "showOutsideDays",
+									type: "boolean (default: true)",
+									description: "When true, displays days from the previous and next months. Defaults to true.",
+								},
+								{
+									name: "captionLayout",
+									type: `"label" | "dropdown" | "dropdown-months" | "dropdown-years"`,
+									description: "Layout style for the month/year caption. Defaults to 'label'.",
+								},
+								{
+									name: "buttonVariant",
+									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link" (default: "ghost")`,
+									description: "Variant style for navigation buttons. Defaults to 'ghost'.",
+								},
+								{
+									name: "formatters",
+									type: "object",
+									description: "DayPicker formatters object to customize date formatting.",
+								},
+								{
+									name: "components",
+									type: "object",
+									description: "DayPicker components object to customize calendar components.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 
-			{(() => {
-				const previous = getSiblingComponent(pathname, "previous");
-				const next = getSiblingComponent(pathname, "next");
-				const hasBoth = previous && next;
-				const onlyPrevious = previous && !next;
-				const onlyNext = next && !previous;
-
-				return (
-					<div
-						className={cn(
-							"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-							hasBoth && "justify-between",
-							onlyPrevious && "justify-start",
-							onlyNext && "justify-end",
-						)}
-					>
-						{previous && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={previous.href || "#"}>
-									<ArrowLeft />
-									{previous.name || "Previous"}
-								</Link>
-							</Button>
-						)}
-
-						{next && (
-							<Button variant="muted" size="sm" asChild>
-								<Link href={next.href || "#"}>
-									{next.name || "Next"}
-									<ArrowRight />
-								</Link>
-							</Button>
-						)}
-					</div>
-				);
-			})()}
+			<ComponentNavigation />
 		</main>
 	);
 }

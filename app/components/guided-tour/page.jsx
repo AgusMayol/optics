@@ -1,35 +1,16 @@
 "use client";
-import * as React from "react";
-import { Button } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
-import { links } from "@/app/layout-content";
-import { usePathname } from "next/navigation";
-import {
-	ALargeSmall,
-	ArrowLeft,
-	ArrowRight,
-	ArrowUpRight,
-	Binary,
-	Sparkle,
-	HelpCircle,
-} from "lucide-react";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
-import { Badge } from "@/registry/optics/badge";
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-	CardContent,
-	CardFooter,
-} from "@/registry/optics/card";
+import { ComponentNavigation } from "@/components/component-navigation";
+import { PropsTable } from "@/components/props-table";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
 	Accordion,
+	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-	AccordionContent,
 } from "@/registry/optics/accordion";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -40,6 +21,24 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsContents,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from "@/registry/optics/code-snippet";
+import {
+	GuidedTour,
+	GuidedTourOverlay,
+	GuidedTourProvider,
+	GuidedTourStep,
+	GuidedTourTrigger,
+} from "@/registry/optics/guided-tour";
+import { Input } from "@/registry/optics/input";
+import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Tabs,
@@ -48,24 +47,9 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
-import {
-	GuidedTourProvider,
-	GuidedTour,
-	GuidedTourTrigger,
-	GuidedTourStep,
-	GuidedTourOverlay,
-} from "@/registry/optics/guided-tour";
-import { Input } from "@/registry/optics/input";
-import { Label } from "@/registry/optics/label";
+import { ArrowUpRight, HelpCircle } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const code = [
 	{
@@ -479,106 +463,17 @@ const commands = [
 ];
 
 // Helper functions for cookies
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(";").shift();
-	return null;
-}
-
-function setCookie(name, value, days = 365) {
-	if (typeof document === "undefined") return;
-	const date = new Date();
-	date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-	const expires = `expires=${date.toUTCString()}`;
-	document.cookie = `${name}=${value};${expires};path=/`;
-}
 
 export default function Page() {
-	const pathname = usePathname();
-	const [mounted, setMounted] = React.useState(false);
-
-	// State for package manager (pnpm, npm, yarn, bun)
-	const [value, setValue] = React.useState(commands[0].label);
-
-	// State for installation tab (CLI or Manual)
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	const activeCommand = commands.find((command) => command.label === value);
-
-	// Load cookies on mount
-	React.useEffect(() => {
-		setMounted(true);
-
-		// Load package manager preference
-		const savedPackageManager = getCookie("preferred-package-manager");
-		if (
-			savedPackageManager &&
-			commands.find((c) => c.label === savedPackageManager)
-		) {
-			setValue(savedPackageManager);
-		} else {
-			// Set default cookie if it doesn't exist
-			setCookie("preferred-package-manager", commands[0].label);
-		}
-
-		// Load installation tab preference
-		const savedInstallationTab = getCookie("preferred-installation-tab");
-		if (savedInstallationTab === "tab1" || savedInstallationTab === "tab2") {
-			setInstallationTab(savedInstallationTab);
-		} else {
-			// Set default cookie if it doesn't exist
-			setCookie("preferred-installation-tab", "tab1");
-		}
-	}, []);
-
-	// Update cookie when package manager changes
-	React.useEffect(() => {
-		if (mounted) {
-			setCookie("preferred-package-manager", value);
-		}
-	}, [value, mounted]);
-
-	// Update cookie when installation tab changes
-	const handleTabChange = React.useCallback(
-		(newTab) => {
-			setInstallationTab(newTab);
-			if (mounted) {
-				setCookie("preferred-installation-tab", newTab);
-			}
-		},
-		[mounted],
-	);
-
-	// Function to get the previous or next item from the "Components" section
-	function getSiblingComponent(pathname, direction = "previous") {
-		// Find the "Components" section
-		const componentsSection = links.find(
-			(section) =>
-				section.name && section.name.toLowerCase().includes("component"),
-		);
-
-		if (!componentsSection || !Array.isArray(componentsSection.items))
-			return null;
-
-		const items = componentsSection.items;
-		const currentIdx = items.findIndex((item) => item.href === pathname);
-
-		if (currentIdx === -1) return null;
-
-		// If on the first item and "previous" is requested, return nothing
-		if (direction === "previous" && currentIdx === 0) return null;
-
-		// If on the last item and "next" is requested, return nothing
-		if (direction === "next" && currentIdx === items.length - 1) return null;
-
-		let siblingIdx = direction === "previous" ? currentIdx - 1 : currentIdx + 1;
-
-		if (siblingIdx < 0 || siblingIdx >= items.length) return null;
-
-		return items[siblingIdx];
-	}
+	const {
+		mounted,
+		value,
+		setValue,
+		installationTab,
+		handleTabChange,
+		activeCommand,
+		activeDepsCommand,
+	} = useCookiePreferences(commands, []);
 
 	return (
 		<GuidedTourProvider>
@@ -895,236 +790,95 @@ export default function Page() {
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 						Props
 					</h2>
-					<div className="w-full flex flex-col gap-6">
-						<div className="w-full flex flex-col gap-2">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<GuidedTourProvider />"}
-							</Badge>
-							<p className="text-sm text-muted-foreground">
-								Provider that wraps the entire application or section where the
-								guided tour will be used. No props required.
-							</p>
-						</div>
-
-						<div className="w-full flex flex-col gap-2">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<GuidedTour />"}
-							</Badge>
-							<p className="text-sm text-muted-foreground">
-								Main container for the tour. Wraps all elements that will be
-								part of the tour.
-							</p>
-						</div>
-
-						<div className="w-full flex flex-col gap-2">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<GuidedTourOverlay />"}
-							</Badge>
-							<p className="text-sm text-muted-foreground">
-								Dark overlay that appears when a tour is active. Automatically
-								displayed when there is an active tour.
-							</p>
-						</div>
-
-						<div className="w-full flex flex-col gap-2">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<GuidedTourTrigger />"}
-							</Badge>
-							<GridContainer
-								cols={12}
-								border={false}
-								rows={3}
-								className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl ${
-									3 % 2 === 0
-										? "[&>*:nth-child(even)]:bg-muted"
-										: "[&>*:nth-child(odd)]:bg-muted"
-								}`}
-							>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="text-xs font-semibold justify-start gap-1"
-									>
-										<ALargeSmall />
-										Name
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-semibold gap-1 mr-auto"
-									>
-										<Binary size={16} />
-										Type
-									</GridItem>
-								</GridRow>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-									>
-										<Badge
-											variant="outline"
-											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-										>
-											tourId
-										</Badge>
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-mono justify-start"
-									>
-										string (required)
-									</GridItem>
-								</GridRow>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-									>
-										<Badge
-											variant="outline"
-											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-										>
-											asChild
-										</Badge>
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-mono justify-start"
-									>
-										boolean (default: false)
-									</GridItem>
-								</GridRow>
-							</GridContainer>
-						</div>
-
-						<div className="w-full flex flex-col gap-2">
-							<Badge variant="outline" className="text-xs font-mono w-fit">
-								{"<GuidedTourStep />"}
-							</Badge>
-							<GridContainer
-								cols={12}
-								border={false}
-								rows={3}
-								className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl shadow border rounded-xl ${
-									3 % 2 === 0
-										? "[&>*:nth-child(even)]:bg-muted"
-										: "[&>*:nth-child(odd)]:bg-muted"
-								}`}
-							>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="text-xs font-semibold justify-start gap-1"
-									>
-										<ALargeSmall />
-										Name
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-semibold gap-1 mr-auto"
-									>
-										<Binary size={16} />
-										Type
-									</GridItem>
-								</GridRow>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-									>
-										<Badge
-											variant="outline"
-											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-										>
-											tourId
-										</Badge>
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-mono justify-start"
-									>
-										string (required)
-									</GridItem>
-								</GridRow>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-									>
-										<Badge
-											variant="outline"
-											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-										>
-											step
-										</Badge>
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-mono justify-start"
-									>
-										number (required)
-									</GridItem>
-								</GridRow>
-								<GridRow>
-									<GridItem
-										span={4}
-										className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-									>
-										<Badge
-											variant="outline"
-											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-										>
-											content
-										</Badge>
-									</GridItem>
-									<GridItem
-										span={8}
-										className="text-xs font-mono justify-start"
-									>
-										ReactNode (required)
-									</GridItem>
-								</GridRow>
-							</GridContainer>
-						</div>
-					</div>
+					<PropsTable
+						data={[
+							{
+								component: "<GuidedTourProvider />",
+								props: [
+									{
+										name: "",
+										type: "No props required",
+										description:
+											"Provider that wraps the entire application or section where the guided tour will be used.",
+									},
+								],
+							},
+							{
+								component: "<GuidedTour />",
+								props: [
+									{
+										name: "",
+										type: "No specific props",
+										description:
+											"Main container for the tour. Wraps all elements that will be part of the tour.",
+									},
+								],
+							},
+							{
+								component: "<GuidedTourOverlay />",
+								props: [
+									{
+										name: "",
+										type: "No specific props",
+										description:
+											"Dark overlay that appears when a tour is active. Automatically displayed when there is an active tour.",
+									},
+								],
+							},
+							{
+								component: "<GuidedTourTrigger />",
+								props: [
+									{
+										name: "className",
+										type: "string",
+										description:
+											"Additional CSS classes to apply to the trigger.",
+									},
+									{
+										name: "tourId",
+										type: "string (required)",
+										description: "Unique identifier for the tour.",
+									},
+									{
+										name: "asChild",
+										type: "boolean (default: false)",
+										description:
+											"Render as a child element instead of the default button element.",
+									},
+								],
+							},
+							{
+								component: "<GuidedTourStep />",
+								props: [
+									{
+										name: "className",
+										type: "string",
+										description:
+											"Additional CSS classes to apply to the step element.",
+									},
+									{
+										name: "tourId",
+										type: "string (required)",
+										description:
+											"Unique identifier for the tour this step belongs to.",
+									},
+									{
+										name: "step",
+										type: "number (required)",
+										description: "Step number in the tour sequence.",
+									},
+									{
+										name: "content",
+										type: "ReactNode (required)",
+										description: "Content to display in the tour step popover.",
+									},
+								],
+							},
+						]}
+					/>
 				</div>
 
-				{(() => {
-					const previous = getSiblingComponent(pathname, "previous");
-					const next = getSiblingComponent(pathname, "next");
-					const hasBoth = previous && next;
-					const onlyPrevious = previous && !next;
-					const onlyNext = next && !previous;
-
-					return (
-						<div
-							className={cn(
-								"w-full flex items-center gap-4 p-4 pt-8 pb-4",
-								hasBoth && "justify-between",
-								onlyPrevious && "justify-start",
-								onlyNext && "justify-end",
-							)}
-						>
-							{previous && (
-								<Button variant="muted" size="sm" asChild>
-									<Link href={previous.href || "#"}>
-										<ArrowLeft />
-										{previous.name || "Previous"}
-									</Link>
-								</Button>
-							)}
-
-							{next && (
-								<Button variant="muted" size="sm" asChild>
-									<Link href={next.href || "#"}>
-										{next.name || "Next"}
-										<ArrowRight />
-									</Link>
-								</Button>
-							)}
-						</div>
-					);
-				})()}
+				<ComponentNavigation />
 			</main>
 		</GuidedTourProvider>
 	);
