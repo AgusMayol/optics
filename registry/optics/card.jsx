@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function Card({ className, decorations = false, children, ...props }) {
 	return (

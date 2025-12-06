@@ -100,7 +100,7 @@ import {
 } from "@/registry/optics/select";
 import { toast } from "@/registry/optics/sonner";
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 const filenameIconMap = {
 	".env": SiDotenv,

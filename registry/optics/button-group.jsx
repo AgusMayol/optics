@@ -1,7 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { otherThemes } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Separator } from "@/registry/optics/separator";
 
 const buttonGroupVariants = cva(

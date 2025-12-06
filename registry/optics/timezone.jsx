@@ -9,7 +9,7 @@ import {
 	TooltipProvider,
 } from "@/registry/optics/tooltip";
 import { Button } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 // Constantes de tiempo calculadas una vez para evitar recálculos
 const ONE_SECOND = ms("1s");

@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Button } from "@/registry/optics/button";
 import { X } from "lucide-react";
 

@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { otherThemes } from "@/registry/optics/button";
 
 // Context personalizado para manejar el estado de tooltips (global)

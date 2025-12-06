@@ -45,6 +45,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/timezone.jsx.txt";
+import utilsCode from '@/registry/optics/lib/utils.ts.txt';
 
 const code = [
 	{
@@ -62,7 +63,12 @@ import { Button } from "@/registry/optics/button";
 	<Button variant="raised">Open Timezone</Button>
 </Timezone>`,
 	},
-];
+,
+		{
+			path: 'lib/utils.ts',
+			code: utilsCode,
+		}
+	];
 
 const timezoneComponentCode = [
 	{

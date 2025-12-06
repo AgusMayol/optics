@@ -45,6 +45,8 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/scroll-area.jsx.txt";
+import utilsCode from "@/registry/optics/lib/utils.ts.txt";
+import useHasPrimaryTouchCode from "@/registry/optics/hooks/use-has-primary-touch.jsx.txt";
 
 const code = [
 	{
@@ -143,6 +145,14 @@ const componentFiles = [
 	{
 		path: "@/components/optics/scroll-area.jsx",
 		code: componentCode,
+	},
+	{
+		path: "@/registry/optics/lib/utils.ts",
+		code: utilsCode,
+	},
+	{
+		path: "@/registry/optics/hooks/use-has-primary-touch.jsx",
+		code: useHasPrimaryTouchCode,
 	},
 ];
 

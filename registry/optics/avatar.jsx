@@ -9,7 +9,7 @@ import {
 	TooltipTrigger,
 } from "@/registry/optics/tooltip";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function AvatarStack({ data, children, ...props }) {
 	return (

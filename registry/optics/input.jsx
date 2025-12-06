@@ -1,6 +1,6 @@
 import * as React from "react";
 import { otherThemes } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function Input({ className, type, variant, ...props }) {
 	return (

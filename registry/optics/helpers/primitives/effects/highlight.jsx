@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/optics/lib/utils';
 
 const HighlightContext = React.createContext(// eslint-disable-next-line @typescript-eslint/no-explicit-any
 undefined);

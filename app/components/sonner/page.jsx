@@ -45,6 +45,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/sonner.jsx.txt";
+import utilsCode from '@/registry/optics/lib/utils.ts.txt';
 
 const code = [
 	{
@@ -66,7 +67,12 @@ const code = [
 	Promise Toast
 </Button>`,
 	},
-];
+,
+		{
+			path: 'lib/utils.ts',
+			code: utilsCode,
+		}
+	];
 
 const sonnerComponentCode = [
 	{

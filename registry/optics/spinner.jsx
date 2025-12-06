@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 export function Spinner({ size = "size-6", className, ...props }) {
 	const bars = Array(12).fill(0);

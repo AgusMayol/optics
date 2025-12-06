@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
 

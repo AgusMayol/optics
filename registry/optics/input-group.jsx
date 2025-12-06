@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Button } from "@/registry/optics/button";
 import { Input } from "@/registry/optics/input";
 import { Textarea } from "@/registry/optics/textarea";

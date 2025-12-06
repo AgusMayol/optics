@@ -2,7 +2,7 @@
 
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function Empty({ className, ...props }) {
 	return (

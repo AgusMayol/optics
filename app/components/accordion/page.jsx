@@ -27,6 +27,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/accordion.jsx.txt";
+import utilsCode from '@/registry/optics/lib/utils.ts.txt';
 
 const code = [
 	{
@@ -49,7 +50,12 @@ const code = [
 	</AccordionItem>
 </Accordion>`,
 	},
-];
+,
+		{
+			path: 'lib/utils.ts',
+			code: utilsCode,
+		}
+	];
 
 import accordionPrimitiveCode from "@/registry/optics/accordion-primitive.jsx.txt";
 

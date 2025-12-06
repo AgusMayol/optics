@@ -13,7 +13,7 @@ import {
 	Loader2,
 } from "lucide-react";
 import { Spinner } from "@/registry/optics/spinner";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 // Toast type definitions
 const TOAST_TYPES = {

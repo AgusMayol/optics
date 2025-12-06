@@ -8,7 +8,10 @@
       "type": "registry:component",
       "title": "Accordion Primitive",
       "description": "Primitive accordion component built on Radix UI.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/get-strict-context.json",
+        "https://optics.agusmayol.com.ar/r/use-controlled-state.json"
+      ],
       "dependencies": [
         "@radix-ui/react-accordion",
         "clsx",
@@ -28,7 +31,8 @@
       "title": "Accordion",
       "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/accordion-primitive.json"
+        "https://optics.agusmayol.com.ar/r/accordion-primitive.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -49,7 +53,8 @@
       "title": "Alert Dialog",
       "description": "A modal dialog that interrupts the user with important content and expects a response.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-alert-dialog",
@@ -70,7 +75,9 @@
       "type": "registry:component",
       "title": "Alert",
       "description": "Displays a callout for user attention.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "class-variance-authority",
         "clsx",
@@ -108,7 +115,9 @@
       "type": "registry:component",
       "title": "Avatar",
       "description": "An image element with a fallback for representing the user.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-avatar",
         "clsx",
@@ -127,7 +136,9 @@
       "type": "registry:component",
       "title": "Badge",
       "description": "Displays a badge or a component that looks like a badge.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-slot",
         "class-variance-authority",
@@ -147,7 +158,9 @@
       "type": "registry:component",
       "title": "Breadcrumb",
       "description": "Displays the path to the current resource using a hierarchy of links.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -168,7 +181,8 @@
       "description": "Groups buttons together with proper spacing and styling.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
-        "https://optics.agusmayol.com.ar/r/separator.json"
+        "https://optics.agusmayol.com.ar/r/separator.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -189,7 +203,9 @@
       "type": "registry:component",
       "title": "Button",
       "description": "Displays a button or a component that looks like a button.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-slot",
         "class-variance-authority",
@@ -210,7 +226,8 @@
       "title": "Calendar",
       "description": "A date field component that allows users to enter and edit date.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "react-day-picker",
@@ -232,7 +249,9 @@
       "type": "registry:component",
       "title": "Card",
       "description": "Displays a card with header, content, and footer.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -251,7 +270,8 @@
       "title": "Carousel",
       "description": "A carousel with motion and swipe built using Embla.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "embla-carousel-react",
@@ -271,7 +291,9 @@
       "type": "registry:component",
       "title": "Checkbox",
       "description": "A control that allows the user to toggle between checked and unchecked states.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-checkbox",
         "class-variance-authority",
@@ -294,7 +316,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
         "https://optics.agusmayol.com.ar/r/sonner.json",
-        "https://optics.agusmayol.com.ar/r/scroll-area.json"
+        "https://optics.agusmayol.com.ar/r/scroll-area.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-use-controllable-state",
@@ -322,7 +345,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
         "https://optics.agusmayol.com.ar/r/tabs.json",
-        "https://optics.agusmayol.com.ar/r/scroll-area.json"
+        "https://optics.agusmayol.com.ar/r/scroll-area.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -362,7 +386,8 @@
       "title": "Command",
       "description": "Fast, composable, unstyled command menu for React.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/scroll-area.json"
+        "https://optics.agusmayol.com.ar/r/scroll-area.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "cmdk",
@@ -382,7 +407,9 @@
       "type": "registry:component",
       "title": "Context Menu",
       "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a right click or a long press.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-context-menu",
         "clsx",
@@ -423,7 +450,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
         "https://optics.agusmayol.com.ar/r/calendar.json",
-        "https://optics.agusmayol.com.ar/r/popover.json"
+        "https://optics.agusmayol.com.ar/r/popover.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "react-day-picker",
@@ -445,7 +473,8 @@
       "title": "Dialog",
       "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-dialog",
@@ -466,7 +495,9 @@
       "type": "registry:component",
       "title": "Drawer",
       "description": "A drawer component built with Vaul.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "vaul",
         "clsx",
@@ -485,7 +516,9 @@
       "type": "registry:component",
       "title": "Dropdown Menu",
       "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-dropdown-menu",
         "clsx",
@@ -504,7 +537,9 @@
       "type": "registry:component",
       "title": "Empty",
       "description": "Displays an empty state with optional illustration, title, and description.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "class-variance-authority",
         "clsx",
@@ -525,7 +560,8 @@
       "description": "A field component for grouping form elements with labels and descriptions.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/label.json",
-        "https://optics.agusmayol.com.ar/r/separator.json"
+        "https://optics.agusmayol.com.ar/r/separator.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -546,7 +582,8 @@
       "title": "Form",
       "description": "Builds forms with React Hook Form.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/label.json"
+        "https://optics.agusmayol.com.ar/r/label.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -567,7 +604,9 @@
       "type": "registry:component",
       "title": "Grid",
       "description": "A flexible grid system component for layout.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "lucide-react",
         "clsx",
@@ -587,7 +626,8 @@
       "title": "Guided Tour",
       "description": "A guided tour component for onboarding users.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-popover",
@@ -609,7 +649,9 @@
       "type": "registry:component",
       "title": "Hover Card",
       "description": "For sighted users to preview content available behind a link.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-hover-card",
         "clsx",
@@ -631,7 +673,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
         "https://optics.agusmayol.com.ar/r/input.json",
-        "https://optics.agusmayol.com.ar/r/textarea.json"
+        "https://optics.agusmayol.com.ar/r/textarea.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -652,7 +695,8 @@
       "title": "Input OTP",
       "description": "Accessible one-time password component with copy paste support.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "input-otp",
@@ -674,7 +718,9 @@
       "type": "registry:component",
       "title": "Input",
       "description": "Displays a form input field or a component that looks like an input.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "class-variance-authority",
         "clsx",
@@ -695,7 +741,8 @@
       "description": "A flexible item component for displaying content with media, title, description, and actions.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/separator.json",
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -716,7 +763,9 @@
       "type": "registry:component",
       "title": "KBD",
       "description": "Keyboard key component for displaying keyboard shortcuts.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "class-variance-authority",
         "react-hotkeys-hook",
@@ -736,7 +785,9 @@
       "type": "registry:component",
       "title": "Label",
       "description": "Renders an accessible label associated with controls.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-label",
         "clsx",
@@ -755,7 +806,9 @@
       "type": "registry:component",
       "title": "Menubar",
       "description": "A visually persistent menu common in desktop applications.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-menubar",
         "clsx",
@@ -777,7 +830,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
         "https://optics.agusmayol.com.ar/r/badge.json",
-        "https://optics.agusmayol.com.ar/r/checkbox.json"
+        "https://optics.agusmayol.com.ar/r/checkbox.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-select",
@@ -798,7 +852,9 @@
       "type": "registry:component",
       "title": "Navigation Menu",
       "description": "A collection of links for navigating websites.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-navigation-menu",
         "clsx",
@@ -818,7 +874,8 @@
       "title": "Pagination",
       "description": "Pagination with page navigation, next and previous links, and page number indicators.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -838,7 +895,9 @@
       "type": "registry:component",
       "title": "Popover",
       "description": "Displays rich content in a portal, triggered by a button.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-popover",
         "clsx",
@@ -857,7 +916,9 @@
       "type": "registry:component",
       "title": "Progress",
       "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-progress",
         "clsx",
@@ -876,7 +937,9 @@
       "type": "registry:component",
       "title": "Radio Group",
       "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-radio-group",
         "clsx",
@@ -895,7 +958,9 @@
       "type": "registry:component",
       "title": "Resizable",
       "description": "Accessible resizable panel groups and layouts with keyboard support.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "react-resizable-panels",
         "lucide-react",
@@ -915,7 +980,10 @@
       "type": "registry:component",
       "title": "Scroll Area",
       "description": "Augments native scroll functionality for custom, cross-browser styling.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json",
+        "https://optics.agusmayol.com.ar/r/use-has-primary-touch.json"
+      ],
       "dependencies": [
         "@radix-ui/react-scroll-area",
         "clsx",
@@ -935,7 +1003,8 @@
       "title": "Select",
       "description": "Displays a list of options for the user to pick from—triggered by a button.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-select",
@@ -957,7 +1026,9 @@
       "type": "registry:component",
       "title": "Separator",
       "description": "Visually or semantically separates content.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-separator",
         "clsx",
@@ -976,7 +1047,9 @@
       "type": "registry:component",
       "title": "Sheet",
       "description": "Extends the Dialog component to display content that complements the main content of the screen.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-dialog",
         "clsx",
@@ -998,7 +1071,8 @@
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/separator.json",
         "https://optics.agusmayol.com.ar/r/button.json",
-        "https://optics.agusmayol.com.ar/r/accordion.json"
+        "https://optics.agusmayol.com.ar/r/accordion.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -1018,7 +1092,9 @@
       "type": "registry:component",
       "title": "Skeleton",
       "description": "Use to show a placeholder while content is loading.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -1037,7 +1113,8 @@
       "title": "Slider",
       "description": "An input where the user selects a value from within a given range.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-slider",
@@ -1060,7 +1137,8 @@
       "description": "Toast component built with Sonner.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/button.json",
-        "https://optics.agusmayol.com.ar/r/spinner.json"
+        "https://optics.agusmayol.com.ar/r/spinner.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "next-themes",
@@ -1082,7 +1160,9 @@
       "type": "registry:component",
       "title": "Spinner",
       "description": "An animated spinner component.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -1100,7 +1180,9 @@
       "type": "registry:component",
       "title": "Star Rating",
       "description": "An interactive star rating component.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "lucide-react",
         "framer-motion",
@@ -1120,7 +1202,9 @@
       "type": "registry:component",
       "title": "Switch",
       "description": "A control that allows the user to toggle between checked and unchecked states.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-switch",
         "class-variance-authority",
@@ -1140,7 +1224,9 @@
       "type": "registry:component",
       "title": "Table",
       "description": "A responsive table component.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -1158,7 +1244,10 @@
       "type": "registry:component",
       "title": "Tabs Primitive",
       "description": "Primitive tabs component built on Radix UI.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/get-strict-context.json",
+        "https://optics.agusmayol.com.ar/r/use-controlled-state.json"
+      ],
       "dependencies": [
         "@radix-ui/react-tabs",
         "clsx",
@@ -1178,7 +1267,9 @@
       "title": "Tabs",
       "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/tabs-primitive.json"
+        "https://optics.agusmayol.com.ar/r/tabs-primitive.json",
+        "https://optics.agusmayol.com.ar/r/utils.json",
+        "https://optics.agusmayol.com.ar/r/get-strict-context.json"
       ],
       "dependencies": [
         "clsx",
@@ -1197,7 +1288,9 @@
       "type": "registry:component",
       "title": "Textarea",
       "description": "Displays a form textarea field or a component that looks like a textarea.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "class-variance-authority",
         "clsx",
@@ -1216,7 +1309,9 @@
       "type": "registry:component",
       "title": "Theme Switcher",
       "description": "A theme switcher component for toggling between light, dark, and system themes.",
-      "registryDependencies": [],
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
       "dependencies": [
         "@radix-ui/react-use-controllable-state",
         "lucide-react",
@@ -1239,7 +1334,8 @@
       "description": "A component for displaying and converting timezones.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/tooltip.json",
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "ms",
@@ -1260,7 +1356,8 @@
       "title": "Toggle Group",
       "description": "A set of two-state buttons that can be toggled on or off.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/toggle.json"
+        "https://optics.agusmayol.com.ar/r/toggle.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-toggle-group",
@@ -1281,7 +1378,8 @@
       "title": "Toggle",
       "description": "A two-state button that can be either on or off.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-toggle",
@@ -1303,7 +1401,8 @@
       "title": "Tooltip",
       "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
       "registryDependencies": [
-        "https://optics.agusmayol.com.ar/r/button.json"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/utils.json"
       ],
       "dependencies": [
         "@radix-ui/react-tooltip",
@@ -1316,6 +1415,84 @@
           "path": "registry/optics/tooltip.jsx",
           "type": "registry:component",
           "target": "components/optics/tooltip.jsx"
+        }
+      ]
+    },
+    {
+      "name": "get-strict-context",
+      "type": "registry:lib",
+      "title": "Get strict context",
+      "description": "Library utility: get-strict-context",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/optics/lib/get-strict-context.jsx",
+          "type": "registry:lib",
+          "target": "lib/get-strict-context.jsx"
+        }
+      ]
+    },
+    {
+      "name": "use-controlled-state",
+      "type": "registry:lib",
+      "title": "Use controlled state",
+      "description": "Hook utility: use-controlled-state",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/optics/hooks/use-controlled-state.jsx",
+          "type": "registry:lib",
+          "target": "hooks/use-controlled-state.jsx"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "Library utility: utils",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-auto-height",
+      "type": "registry:lib",
+      "title": "Use auto height",
+      "description": "Hook utility: use-auto-height",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/optics/hooks/use-auto-height.jsx",
+          "type": "registry:lib",
+          "target": "hooks/use-auto-height.jsx"
+        }
+      ]
+    },
+    {
+      "name": "use-has-primary-touch",
+      "type": "registry:lib",
+      "title": "Use has primary touch",
+      "description": "Hook utility: use-has-primary-touch",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/optics/hooks/use-has-primary-touch.jsx",
+          "type": "registry:lib",
+          "target": "hooks/use-has-primary-touch.jsx"
         }
       ]
     }

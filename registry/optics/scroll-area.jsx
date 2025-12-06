@@ -4,9 +4,9 @@ import * as React from "react";
 
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
-import { useTouchPrimary } from "@/hooks/use-has-primary-touch";
+import { useTouchPrimary } from '@/registry/optics/hooks/use-has-primary-touch';
 
 const ScrollAreaContext = React.createContext(false);
 

@@ -4,7 +4,7 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { Button, buttonVariants, otherThemes } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Badge } from "@/registry/optics/badge";
 import { Checkbox, CheckboxPrimitive } from "@/registry/optics/checkbox";
 

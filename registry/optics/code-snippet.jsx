@@ -11,7 +11,7 @@ import {
 	TabsTrigger,
 } from "@/registry/optics/tabs";
 import { ScrollArea } from "@/registry/optics/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 export const Snippet = ({ className, ...props }) => (
 	<Tabs

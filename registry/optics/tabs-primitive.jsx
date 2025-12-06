@@ -7,8 +7,8 @@ import {
 	Highlight,
 	HighlightItem,
 } from "@/registry/optics/helpers/primitives/effects/highlight";
-import { getStrictContext } from "@/lib/get-strict-context";
-import { useControlledState } from "@/hooks/use-controlled-state";
+import { getStrictContext } from '@/registry/optics/lib/get-strict-context';
+import { useControlledState } from '@/registry/optics/hooks/use-controlled-state';
 import { AutoHeight } from "@/registry/optics/helpers/primitives/effects/auto-height";
 
 const [TabsProvider, useTabs] = getStrictContext("TabsContext");

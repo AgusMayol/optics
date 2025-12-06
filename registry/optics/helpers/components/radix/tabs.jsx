@@ -9,7 +9,7 @@ import {
 	TabsHighlight as TabsHighlightPrimitive,
 	TabsHighlightItem as TabsHighlightItemPrimitive,
 } from "@/registry/optics/helpers/primitives/radix/tabs";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function Tabs({ className, ...props }) {
 	return (

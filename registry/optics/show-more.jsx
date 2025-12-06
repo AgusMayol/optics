@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { ChevronDown } from "lucide-react";
 import { Separator } from "@/registry/optics/separator";
 import {
@@ -10,7 +10,6 @@ import {
 } from "@/registry/optics/accordion";
 import { buttonVariants } from "@/registry/optics/button";
 import { useState } from "react";
-import { tailwindColors } from "@/lib/tailwind-colors";
 
 export function ShowMore({
 	children,
@@ -94,25 +93,13 @@ export function ShowMore({
 			return color;
 		}
 
-		// Check if it's a Tailwind color class (like red-300, blue-500, etc.)
+		// Extract color name from Tailwind classes like "from-background" or "bg-background"
 		const colorName = color.startsWith("from-")
 			? color.slice(5)
 			: color.startsWith("bg-")
 				? color.slice(3)
 				: color;
 
-		// Check if it matches pattern like "red-300", "blue-500", etc.
-		if (/^[a-z]+-\d+$/.test(colorName)) {
-			// It's a Tailwind color class, get the value from tailwindColors
-			const colorKey = `bg-${colorName}`;
-			const colorData = tailwindColors[colorKey];
-			if (colorData) {
-				// Use RGB value for better compatibility
-				return colorData.rgb || colorData.hex || colorData.hsl;
-			}
-		}
-
-		// If it's a Tailwind class like "from-background" or "background", extract the color name
 		// Return CSS variable format
 		return `var(--${colorName})`;
 	};

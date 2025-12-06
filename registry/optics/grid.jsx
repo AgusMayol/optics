@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { Plus } from "lucide-react";
 
 // Crear el contexto

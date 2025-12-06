@@ -2,7 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 const otherThemes = cva(
 	"data-[state='open']:!ring-offset-2 data-[state='open']:!ring-offset-transparent data-[state='open']:!ring-ring/25",

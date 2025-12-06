@@ -2,7 +2,7 @@
 import * as React from "react";
 import { motion } from "motion/react";
 
-import { useAutoHeight } from "@/hooks/use-auto-height";
+import { useAutoHeight } from '@/registry/optics/hooks/use-auto-height';
 import { Slot } from "@/registry/optics/helpers/primitives/animate/slot";
 
 function AutoHeight({

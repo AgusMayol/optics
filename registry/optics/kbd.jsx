@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { cva } from "class-variance-authority";
 import { useHotkeys } from "react-hotkeys-hook";
 import {

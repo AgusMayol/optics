@@ -5,7 +5,7 @@ import {
 	MoreHorizontalIcon,
 } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 import { buttonVariants, otherThemes } from "@/registry/optics/button";
 
 function Pagination({ className, ...props }) {

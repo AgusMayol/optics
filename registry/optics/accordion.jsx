@@ -8,7 +8,7 @@ import {
 	AccordionTrigger as AccordionTriggerPrimitive,
 	AccordionContent as AccordionContentPrimitive,
 } from "@/registry/optics/accordion-primitive";
-import { cn } from "@/lib/utils";
+import { cn } from '@/registry/optics/lib/utils';
 
 function Accordion(props) {
 	return <AccordionPrimitive {...props} />;

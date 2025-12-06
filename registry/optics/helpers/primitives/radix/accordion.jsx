@@ -3,8 +3,8 @@ import * as React from "react";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { motion, AnimatePresence } from "motion/react";
 
-import { useControlledState } from "@/hooks/use-controlled-state";
-import { getStrictContext } from "@/lib/get-strict-context";
+import { useControlledState } from '@/registry/optics/hooks/use-controlled-state';
+import { getStrictContext } from '@/registry/optics/lib/get-strict-context';
 
 const [AccordionProvider, useAccordion] = getStrictContext("AccordionContext");
 
