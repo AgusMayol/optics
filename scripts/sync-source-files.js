@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 const registryPath = join(__dirname, "..", "registry", "optics");
 
 // Extensiones de archivos a procesar
-const EXTENSIONS = [".jsx", ".ts", ".js"];
+const EXTENSIONS = [".jsx", ".js"];
 
 function getAllSourceFiles(dir) {
 	const files = [];

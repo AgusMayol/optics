@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
 	turbopack: {
 		rules: {
 			// Archivos .jsx.txt se cargan como texto plano usando raw-loader
-			"*.jsx.txt": {
+			"{*.jsx.txt,*.js.txt}": {
 				loaders: ["raw-loader"],
 				as: "*.js",
 			},
