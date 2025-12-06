@@ -144,6 +144,6 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 ## Additional Resources
 [MCP Server](https://optics.agusmayol.com.ar/mcp-server): Information on the MCP server related to the design system.
 [llms.txt](https://optics.agusmayol.com.ar/llms.txt): A file containing additional resources and links.
-[Github](https://github.com/optics/optics): Placeholder for any additional content or links.
+[Github](https://github.com/agusmayol/optics): Placeholder for any additional content or links.
 [AgusMayol](https://agusmayol.com.ar/): The main page for AgusMayol, the creator of the design system.
 [AgusMayol's Optics - Design System for Modern Web Apps](https://optics.agusmayol.com.ar/): A repeat of the main title for emphasis.

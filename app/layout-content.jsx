@@ -515,7 +515,7 @@ export function LayoutContent({ children }) {
 						asChild
 					>
 						<Link
-							href="https://github.com/optics/optics"
+							href="https://github.com/agusmayol/optics"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
