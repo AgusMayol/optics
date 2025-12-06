@@ -18,7 +18,7 @@
         {
           "path": "registry/optics/accordion-primitive.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/accordion-primitive.jsx"
         }
       ]
     },
@@ -28,7 +28,7 @@
       "title": "Accordion",
       "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
       "registryDependencies": [
-        "accordion-primitive"
+        "https://optics.agusmayol.com.ar/r/accordion-primitive.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -39,7 +39,7 @@
         {
           "path": "registry/optics/accordion.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/accordion.jsx"
         }
       ]
     },
@@ -49,7 +49,7 @@
       "title": "Alert Dialog",
       "description": "A modal dialog that interrupts the user with important content and expects a response.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-alert-dialog",
@@ -61,7 +61,7 @@
         {
           "path": "registry/optics/alert-dialog.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/alert-dialog.jsx"
         }
       ]
     },
@@ -80,7 +80,7 @@
         {
           "path": "registry/optics/alert.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/alert.jsx"
         }
       ]
     },
@@ -99,7 +99,7 @@
         {
           "path": "registry/optics/aspect-ratio.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/aspect-ratio.jsx"
         }
       ]
     },
@@ -118,7 +118,7 @@
         {
           "path": "registry/optics/avatar.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/avatar.jsx"
         }
       ]
     },
@@ -138,7 +138,7 @@
         {
           "path": "registry/optics/badge.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/badge.jsx"
         }
       ]
     },
@@ -157,7 +157,7 @@
         {
           "path": "registry/optics/breadcrumb.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/breadcrumb.jsx"
         }
       ]
     },
@@ -167,8 +167,8 @@
       "title": "Button Group",
       "description": "Groups buttons together with proper spacing and styling.",
       "registryDependencies": [
-        "button",
-        "separator"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/separator.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -180,7 +180,7 @@
         {
           "path": "registry/optics/button-group.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/button-group.jsx"
         }
       ]
     },
@@ -200,7 +200,7 @@
         {
           "path": "registry/optics/button.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/button.jsx"
         }
       ]
     },
@@ -210,7 +210,7 @@
       "title": "Calendar",
       "description": "A date field component that allows users to enter and edit date.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "react-day-picker",
@@ -223,7 +223,7 @@
         {
           "path": "registry/optics/calendar.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/calendar.jsx"
         }
       ]
     },
@@ -241,7 +241,7 @@
         {
           "path": "registry/optics/card.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/card.jsx"
         }
       ]
     },
@@ -251,7 +251,7 @@
       "title": "Carousel",
       "description": "A carousel with motion and swipe built using Embla.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "embla-carousel-react",
@@ -262,7 +262,7 @@
         {
           "path": "registry/optics/carousel.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/carousel.jsx"
         }
       ]
     },
@@ -282,7 +282,7 @@
         {
           "path": "registry/optics/checkbox.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/checkbox.jsx"
         }
       ]
     },
@@ -292,9 +292,9 @@
       "title": "Code Block",
       "description": "A syntax-highlighted code block component with copy functionality.",
       "registryDependencies": [
-        "button",
-        "sonner",
-        "scroll-area"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/sonner.json",
+        "https://optics.agusmayol.com.ar/r/scroll-area.json"
       ],
       "dependencies": [
         "@radix-ui/react-use-controllable-state",
@@ -310,7 +310,7 @@
         {
           "path": "registry/optics/code-block.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/code-block.jsx"
         }
       ]
     },
@@ -320,9 +320,9 @@
       "title": "Code Snippet",
       "description": "A code snippet component with tabs and copy functionality.",
       "registryDependencies": [
-        "button",
-        "tabs",
-        "scroll-area"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/tabs.json",
+        "https://optics.agusmayol.com.ar/r/scroll-area.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -333,7 +333,7 @@
         {
           "path": "registry/optics/code-snippet.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/code-snippet.jsx"
         }
       ]
     },
@@ -352,7 +352,7 @@
         {
           "path": "registry/optics/collapsible.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/collapsible.jsx"
         }
       ]
     },
@@ -362,7 +362,7 @@
       "title": "Command",
       "description": "Fast, composable, unstyled command menu for React.",
       "registryDependencies": [
-        "scroll-area"
+        "https://optics.agusmayol.com.ar/r/scroll-area.json"
       ],
       "dependencies": [
         "cmdk",
@@ -373,7 +373,7 @@
         {
           "path": "registry/optics/command.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/command.jsx"
         }
       ]
     },
@@ -392,7 +392,7 @@
         {
           "path": "registry/optics/context-menu.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/context-menu.jsx"
         }
       ]
     },
@@ -411,7 +411,7 @@
         {
           "path": "registry/optics/data-table.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/data-table.jsx"
         }
       ]
     },
@@ -421,9 +421,9 @@
       "title": "Date Picker",
       "description": "A date field component that allows users to enter and edit date.",
       "registryDependencies": [
-        "button",
-        "calendar",
-        "popover"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/calendar.json",
+        "https://optics.agusmayol.com.ar/r/popover.json"
       ],
       "dependencies": [
         "react-day-picker",
@@ -435,7 +435,7 @@
         {
           "path": "registry/optics/date-picker.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/date-picker.jsx"
         }
       ]
     },
@@ -445,7 +445,7 @@
       "title": "Dialog",
       "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-dialog",
@@ -457,7 +457,7 @@
         {
           "path": "registry/optics/dialog.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/dialog.jsx"
         }
       ]
     },
@@ -476,7 +476,7 @@
         {
           "path": "registry/optics/drawer.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/drawer.jsx"
         }
       ]
     },
@@ -495,7 +495,7 @@
         {
           "path": "registry/optics/dropdown-menu.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/dropdown-menu.jsx"
         }
       ]
     },
@@ -514,7 +514,7 @@
         {
           "path": "registry/optics/empty.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/empty.jsx"
         }
       ]
     },
@@ -524,8 +524,8 @@
       "title": "Field",
       "description": "A field component for grouping form elements with labels and descriptions.",
       "registryDependencies": [
-        "label",
-        "separator"
+        "https://optics.agusmayol.com.ar/r/label.json",
+        "https://optics.agusmayol.com.ar/r/separator.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -536,7 +536,7 @@
         {
           "path": "registry/optics/field.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/field.jsx"
         }
       ]
     },
@@ -546,7 +546,7 @@
       "title": "Form",
       "description": "Builds forms with React Hook Form.",
       "registryDependencies": [
-        "label"
+        "https://optics.agusmayol.com.ar/r/label.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -558,7 +558,7 @@
         {
           "path": "registry/optics/form.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/form.jsx"
         }
       ]
     },
@@ -577,7 +577,7 @@
         {
           "path": "registry/optics/grid.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/grid.jsx"
         }
       ]
     },
@@ -587,7 +587,7 @@
       "title": "Guided Tour",
       "description": "A guided tour component for onboarding users.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-popover",
@@ -600,7 +600,7 @@
         {
           "path": "registry/optics/guided-tour.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/guided-tour.jsx"
         }
       ]
     },
@@ -619,7 +619,7 @@
         {
           "path": "registry/optics/hover-card.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/hover-card.jsx"
         }
       ]
     },
@@ -629,9 +629,9 @@
       "title": "Input Group",
       "description": "Groups input fields with addons, buttons, and text.",
       "registryDependencies": [
-        "button",
-        "input",
-        "textarea"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/input.json",
+        "https://optics.agusmayol.com.ar/r/textarea.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -642,7 +642,7 @@
         {
           "path": "registry/optics/input-group.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/input-group.jsx"
         }
       ]
     },
@@ -652,7 +652,7 @@
       "title": "Input OTP",
       "description": "Accessible one-time password component with copy paste support.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "input-otp",
@@ -665,7 +665,7 @@
         {
           "path": "registry/optics/input-otp.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/input-otp.jsx"
         }
       ]
     },
@@ -684,7 +684,7 @@
         {
           "path": "registry/optics/input.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/input.jsx"
         }
       ]
     },
@@ -694,8 +694,8 @@
       "title": "Item",
       "description": "A flexible item component for displaying content with media, title, description, and actions.",
       "registryDependencies": [
-        "separator",
-        "button"
+        "https://optics.agusmayol.com.ar/r/separator.json",
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-slot",
@@ -707,7 +707,7 @@
         {
           "path": "registry/optics/item.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/item.jsx"
         }
       ]
     },
@@ -727,7 +727,7 @@
         {
           "path": "registry/optics/kbd.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/kbd.jsx"
         }
       ]
     },
@@ -746,7 +746,7 @@
         {
           "path": "registry/optics/label.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/label.jsx"
         }
       ]
     },
@@ -765,7 +765,7 @@
         {
           "path": "registry/optics/menubar.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/menubar.jsx"
         }
       ]
     },
@@ -775,9 +775,9 @@
       "title": "Multi Select",
       "description": "A select component for allowing multiple selections.",
       "registryDependencies": [
-        "button",
-        "badge",
-        "checkbox"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/badge.json",
+        "https://optics.agusmayol.com.ar/r/checkbox.json"
       ],
       "dependencies": [
         "@radix-ui/react-select",
@@ -789,7 +789,7 @@
         {
           "path": "registry/optics/multi-select.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/multi-select.jsx"
         }
       ]
     },
@@ -808,7 +808,7 @@
         {
           "path": "registry/optics/navigation-menu.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/navigation-menu.jsx"
         }
       ]
     },
@@ -818,7 +818,7 @@
       "title": "Pagination",
       "description": "Pagination with page navigation, next and previous links, and page number indicators.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "class-variance-authority",
@@ -829,7 +829,7 @@
         {
           "path": "registry/optics/pagination.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/pagination.jsx"
         }
       ]
     },
@@ -848,7 +848,7 @@
         {
           "path": "registry/optics/popover.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/popover.jsx"
         }
       ]
     },
@@ -867,7 +867,7 @@
         {
           "path": "registry/optics/progress.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/progress.jsx"
         }
       ]
     },
@@ -886,7 +886,7 @@
         {
           "path": "registry/optics/radio-group.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/radio-group.jsx"
         }
       ]
     },
@@ -906,7 +906,7 @@
         {
           "path": "registry/optics/resizable.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/resizable.jsx"
         }
       ]
     },
@@ -925,7 +925,7 @@
         {
           "path": "registry/optics/scroll-area.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/scroll-area.jsx"
         }
       ]
     },
@@ -935,7 +935,7 @@
       "title": "Select",
       "description": "Displays a list of options for the user to pick from—triggered by a button.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-select",
@@ -948,7 +948,7 @@
         {
           "path": "registry/optics/select.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/select.jsx"
         }
       ]
     },
@@ -967,7 +967,7 @@
         {
           "path": "registry/optics/separator.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/separator.jsx"
         }
       ]
     },
@@ -986,7 +986,7 @@
         {
           "path": "registry/optics/sheet.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/sheet.jsx"
         }
       ]
     },
@@ -996,9 +996,9 @@
       "title": "Show More",
       "description": "A component that shows/hides additional content with smooth animations.",
       "registryDependencies": [
-        "separator",
-        "button",
-        "accordion"
+        "https://optics.agusmayol.com.ar/r/separator.json",
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/accordion.json"
       ],
       "dependencies": [
         "lucide-react",
@@ -1009,7 +1009,7 @@
         {
           "path": "registry/optics/show-more.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/show-more.jsx"
         }
       ]
     },
@@ -1027,7 +1027,7 @@
         {
           "path": "registry/optics/skeleton.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/skeleton.jsx"
         }
       ]
     },
@@ -1037,7 +1037,7 @@
       "title": "Slider",
       "description": "An input where the user selects a value from within a given range.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-slider",
@@ -1049,7 +1049,7 @@
         {
           "path": "registry/optics/slider.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/slider.jsx"
         }
       ]
     },
@@ -1059,8 +1059,8 @@
       "title": "Sonner",
       "description": "Toast component built with Sonner.",
       "registryDependencies": [
-        "button",
-        "spinner"
+        "https://optics.agusmayol.com.ar/r/button.json",
+        "https://optics.agusmayol.com.ar/r/spinner.json"
       ],
       "dependencies": [
         "next-themes",
@@ -1073,7 +1073,7 @@
         {
           "path": "registry/optics/sonner.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/sonner.jsx"
         }
       ]
     },
@@ -1091,7 +1091,7 @@
         {
           "path": "registry/optics/spinner.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/spinner.jsx"
         }
       ]
     },
@@ -1111,7 +1111,7 @@
         {
           "path": "registry/optics/star-rating.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/star-rating.jsx"
         }
       ]
     },
@@ -1131,7 +1131,7 @@
         {
           "path": "registry/optics/switch.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/switch.jsx"
         }
       ]
     },
@@ -1149,7 +1149,7 @@
         {
           "path": "registry/optics/table.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/table.jsx"
         }
       ]
     },
@@ -1168,7 +1168,7 @@
         {
           "path": "registry/optics/tabs-primitive.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/tabs-primitive.jsx"
         }
       ]
     },
@@ -1178,7 +1178,7 @@
       "title": "Tabs",
       "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
       "registryDependencies": [
-        "tabs-primitive"
+        "https://optics.agusmayol.com.ar/r/tabs-primitive.json"
       ],
       "dependencies": [
         "clsx",
@@ -1188,7 +1188,7 @@
         {
           "path": "registry/optics/tabs.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/tabs.jsx"
         }
       ]
     },
@@ -1207,7 +1207,7 @@
         {
           "path": "registry/optics/textarea.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/textarea.jsx"
         }
       ]
     },
@@ -1228,7 +1228,7 @@
         {
           "path": "registry/optics/theme-switcher.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/theme-switcher.jsx"
         }
       ]
     },
@@ -1238,8 +1238,8 @@
       "title": "Timezone",
       "description": "A component for displaying and converting timezones.",
       "registryDependencies": [
-        "tooltip",
-        "button"
+        "https://optics.agusmayol.com.ar/r/tooltip.json",
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "ms",
@@ -1250,7 +1250,7 @@
         {
           "path": "registry/optics/timezone.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/timezone.jsx"
         }
       ]
     },
@@ -1260,7 +1260,7 @@
       "title": "Toggle Group",
       "description": "A set of two-state buttons that can be toggled on or off.",
       "registryDependencies": [
-        "toggle"
+        "https://optics.agusmayol.com.ar/r/toggle.json"
       ],
       "dependencies": [
         "@radix-ui/react-toggle-group",
@@ -1271,7 +1271,7 @@
         {
           "path": "registry/optics/toggle-group.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/toggle-group.jsx"
         }
       ]
     },
@@ -1281,7 +1281,7 @@
       "title": "Toggle",
       "description": "A two-state button that can be either on or off.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-toggle",
@@ -1293,7 +1293,7 @@
         {
           "path": "registry/optics/toggle.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/toggle.jsx"
         }
       ]
     },
@@ -1303,7 +1303,7 @@
       "title": "Tooltip",
       "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
       "registryDependencies": [
-        "button"
+        "https://optics.agusmayol.com.ar/r/button.json"
       ],
       "dependencies": [
         "@radix-ui/react-tooltip",
@@ -1315,7 +1315,7 @@
         {
           "path": "registry/optics/tooltip.jsx",
           "type": "registry:component",
-          "basePath": "components/optics"
+          "target": "components/optics/tooltip.jsx"
         }
       ]
     }
