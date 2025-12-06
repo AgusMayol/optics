@@ -48,3 +48,5 @@ bun.lockb
 package-lock.json
 /registry/optics/**/*.txt
 .env*.local
+
+/public/r/*

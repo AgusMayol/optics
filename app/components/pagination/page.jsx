@@ -350,7 +350,8 @@ export default function Page() {
 								{
 									name: "variant",
 									type: "string",
-									description: "Variant style for the active link (inherits button variant styles).",
+									description:
+										"Variant style for the active link (inherits button variant styles).",
 								},
 								{
 									name: "size",

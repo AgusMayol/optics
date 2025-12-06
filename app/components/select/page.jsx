@@ -402,7 +402,8 @@ export default function Page() {
 								{
 									name: "value",
 									type: "string",
-									description: "The controlled value of the select. Use with onValueChange.",
+									description:
+										"The controlled value of the select. Use with onValueChange.",
 								},
 								{
 									name: "defaultValue",
@@ -417,12 +418,14 @@ export default function Page() {
 								{
 									name: "open",
 									type: "boolean",
-									description: "The controlled open state of the select. Use with onOpenChange.",
+									description:
+										"The controlled open state of the select. Use with onOpenChange.",
 								},
 								{
 									name: "defaultOpen",
 									type: "boolean",
-									description: "The uncontrolled default open state of the select.",
+									description:
+										"The uncontrolled default open state of the select.",
 								},
 								{
 									name: "onOpenChange",
@@ -432,17 +435,20 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the select.",
+									description:
+										"When true, prevents user interaction with the select.",
 								},
 								{
 									name: "name",
 									type: "string",
-									description: "The name of the select. Submitted with its owning form as part of a name/value pair.",
+									description:
+										"The name of the select. Submitted with its owning form as part of a name/value pair.",
 								},
 								{
 									name: "required",
 									type: "boolean",
-									description: "When true, indicates that the user must select a value before the owning form can be submitted.",
+									description:
+										"When true, indicates that the user must select a value before the owning form can be submitted.",
 								},
 							],
 						},
@@ -452,7 +458,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the trigger.",
+									description:
+										"Additional CSS classes to apply to the trigger.",
 								},
 								{
 									name: "size",
@@ -467,12 +474,14 @@ export default function Page() {
 								{
 									name: "variant",
 									type: `"raised" | "ghost" | "outline"`,
-									description: "Variant style that inherits button variant styles.",
+									description:
+										"Variant style that inherits button variant styles.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the trigger.",
+									description:
+										"When true, prevents user interaction with the trigger.",
 								},
 							],
 						},
@@ -482,7 +491,8 @@ export default function Page() {
 								{
 									name: "placeholder",
 									type: "string",
-									description: "The placeholder text displayed when no value is selected.",
+									description:
+										"The placeholder text displayed when no value is selected.",
 								},
 							],
 						},
@@ -492,7 +502,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 								{
 									name: "position",
@@ -502,7 +513,8 @@ export default function Page() {
 								{
 									name: "side",
 									type: `"top" | "right" | "bottom" | "left"`,
-									description: "The preferred side of the trigger to render against.",
+									description:
+										"The preferred side of the trigger to render against.",
 								},
 								{
 									name: "sideOffset",
@@ -537,7 +549,8 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents the item from being selected.",
+									description:
+										"When true, prevents the item from being selected.",
 								},
 							],
 						},
@@ -567,7 +580,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the separator.",
+									description:
+										"Additional CSS classes to apply to the separator.",
 								},
 							],
 						},

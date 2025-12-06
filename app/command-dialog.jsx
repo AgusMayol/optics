@@ -101,13 +101,13 @@ export function CommandDialogComponent({ links, className }) {
 						className="text-muted-foreground text-xs pr-0.25"
 						variant="ghost"
 						size="sm"
-						onClick={() => setOpen(true)}
+						onClick={() => setOpen(false)}
 					>
 						Go to page{" "}
 						<Kbd
 							useHotkey
 							hotkey="Enter"
-							onHotkeyPress={() => setOpen(true)}
+							onHotkeyPress={() => setOpen(false)}
 							className="aspect-auto mt-1"
 						>
 							&#9166; Enter
