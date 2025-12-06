@@ -18,8 +18,22 @@ import {
 	SnippetTabsContent,
 } from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
+import { FFResolver } from "@/components/ff-resolver";
 
 export default function Page() {
+	const [registryPrefixState, setRegistryPrefixState] = React.useState(false);
+	React.useEffect(() => {
+		async function fetchRegistryPrefix() {
+			const registryPrefixValue = await FFResolver();
+			setRegistryPrefixState(registryPrefixValue);
+		}
+		fetchRegistryPrefix();
+	}, []);
+
+	const registryPrefix = registryPrefixState
+		? "@optics"
+		: `https://${process.env.NEXT_PUBLIC_DOMAIN}/r`;
+
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
@@ -83,12 +97,16 @@ export default function Page() {
 					<Snippet>
 						<SnippetHeader className="pl-4 flex gap-4 bg-transparent border-0">
 							<span className="text-xs font-mono">
-								bunx --bun shadcn@latest add @optics/accordion
+								bunx --bun shadcn@latest add {registryPrefix}/accordion
+								{!registryPrefixState ? `.json` : ""}
 							</span>
-							<SnippetCopyButton value="bunx --bun shadcn@latest add @optics/accordion" />
+							<SnippetCopyButton
+								value={`bunx --bun shadcn@latest add ${registryPrefix}/accordion${!registryPrefixState ? `.json` : ""}`}
+							/>
 						</SnippetHeader>
 						<SnippetTabsContent>
-							bunx --bun shadcn@latest add @optics/accordion
+							bunx --bun shadcn@latest add {registryPrefix}/accordion
+							{!registryPrefixState ? `.json` : ""}
 						</SnippetTabsContent>
 					</Snippet>
 					<p className="text-sm text-muted-foreground">

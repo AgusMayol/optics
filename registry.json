@@ -17,7 +17,8 @@
       "files": [
         {
           "path": "registry/optics/accordion-primitive.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -37,7 +38,8 @@
       "files": [
         {
           "path": "registry/optics/accordion.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -58,7 +60,8 @@
       "files": [
         {
           "path": "registry/optics/alert-dialog.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -76,7 +79,8 @@
       "files": [
         {
           "path": "registry/optics/alert.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -94,7 +98,8 @@
       "files": [
         {
           "path": "registry/optics/aspect-ratio.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -112,7 +117,8 @@
       "files": [
         {
           "path": "registry/optics/avatar.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -131,7 +137,8 @@
       "files": [
         {
           "path": "registry/optics/badge.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -149,7 +156,8 @@
       "files": [
         {
           "path": "registry/optics/breadcrumb.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -171,7 +179,8 @@
       "files": [
         {
           "path": "registry/optics/button-group.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -190,7 +199,8 @@
       "files": [
         {
           "path": "registry/optics/button.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -212,7 +222,8 @@
       "files": [
         {
           "path": "registry/optics/calendar.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -229,7 +240,8 @@
       "files": [
         {
           "path": "registry/optics/card.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -249,7 +261,8 @@
       "files": [
         {
           "path": "registry/optics/carousel.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -268,7 +281,8 @@
       "files": [
         {
           "path": "registry/optics/checkbox.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -295,7 +309,8 @@
       "files": [
         {
           "path": "registry/optics/code-block.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -317,7 +332,8 @@
       "files": [
         {
           "path": "registry/optics/code-snippet.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -335,7 +351,8 @@
       "files": [
         {
           "path": "registry/optics/collapsible.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -355,7 +372,8 @@
       "files": [
         {
           "path": "registry/optics/command.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -373,7 +391,8 @@
       "files": [
         {
           "path": "registry/optics/context-menu.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -391,7 +410,8 @@
       "files": [
         {
           "path": "registry/optics/data-table.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -414,7 +434,8 @@
       "files": [
         {
           "path": "registry/optics/date-picker.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -435,7 +456,8 @@
       "files": [
         {
           "path": "registry/optics/dialog.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -453,7 +475,8 @@
       "files": [
         {
           "path": "registry/optics/drawer.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -471,7 +494,8 @@
       "files": [
         {
           "path": "registry/optics/dropdown-menu.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -489,7 +513,8 @@
       "files": [
         {
           "path": "registry/optics/empty.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -510,7 +535,8 @@
       "files": [
         {
           "path": "registry/optics/field.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -531,7 +557,8 @@
       "files": [
         {
           "path": "registry/optics/form.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -549,7 +576,8 @@
       "files": [
         {
           "path": "registry/optics/grid.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -571,7 +599,8 @@
       "files": [
         {
           "path": "registry/optics/guided-tour.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -589,7 +618,8 @@
       "files": [
         {
           "path": "registry/optics/hover-card.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -611,7 +641,8 @@
       "files": [
         {
           "path": "registry/optics/input-group.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -633,7 +664,8 @@
       "files": [
         {
           "path": "registry/optics/input-otp.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -651,7 +683,8 @@
       "files": [
         {
           "path": "registry/optics/input.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -673,7 +706,8 @@
       "files": [
         {
           "path": "registry/optics/item.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -692,7 +726,8 @@
       "files": [
         {
           "path": "registry/optics/kbd.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -710,7 +745,8 @@
       "files": [
         {
           "path": "registry/optics/label.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -728,7 +764,8 @@
       "files": [
         {
           "path": "registry/optics/menubar.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -751,7 +788,8 @@
       "files": [
         {
           "path": "registry/optics/multi-select.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -769,7 +807,8 @@
       "files": [
         {
           "path": "registry/optics/navigation-menu.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -789,7 +828,8 @@
       "files": [
         {
           "path": "registry/optics/pagination.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -807,7 +847,8 @@
       "files": [
         {
           "path": "registry/optics/popover.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -825,7 +866,8 @@
       "files": [
         {
           "path": "registry/optics/progress.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -843,7 +885,8 @@
       "files": [
         {
           "path": "registry/optics/radio-group.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -862,7 +905,8 @@
       "files": [
         {
           "path": "registry/optics/resizable.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -880,7 +924,8 @@
       "files": [
         {
           "path": "registry/optics/scroll-area.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -902,7 +947,8 @@
       "files": [
         {
           "path": "registry/optics/select.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -920,7 +966,8 @@
       "files": [
         {
           "path": "registry/optics/separator.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -938,7 +985,8 @@
       "files": [
         {
           "path": "registry/optics/sheet.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -960,7 +1008,8 @@
       "files": [
         {
           "path": "registry/optics/show-more.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -977,7 +1026,8 @@
       "files": [
         {
           "path": "registry/optics/skeleton.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -998,7 +1048,8 @@
       "files": [
         {
           "path": "registry/optics/slider.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1021,7 +1072,8 @@
       "files": [
         {
           "path": "registry/optics/sonner.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1038,7 +1090,8 @@
       "files": [
         {
           "path": "registry/optics/spinner.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1057,7 +1110,8 @@
       "files": [
         {
           "path": "registry/optics/star-rating.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1076,7 +1130,8 @@
       "files": [
         {
           "path": "registry/optics/switch.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1093,7 +1148,8 @@
       "files": [
         {
           "path": "registry/optics/table.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1111,7 +1167,8 @@
       "files": [
         {
           "path": "registry/optics/tabs-primitive.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1130,7 +1187,8 @@
       "files": [
         {
           "path": "registry/optics/tabs.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1148,7 +1206,8 @@
       "files": [
         {
           "path": "registry/optics/textarea.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1168,7 +1227,8 @@
       "files": [
         {
           "path": "registry/optics/theme-switcher.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1189,7 +1249,8 @@
       "files": [
         {
           "path": "registry/optics/timezone.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1209,7 +1270,8 @@
       "files": [
         {
           "path": "registry/optics/toggle-group.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1230,7 +1292,8 @@
       "files": [
         {
           "path": "registry/optics/toggle.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     },
@@ -1251,7 +1314,8 @@
       "files": [
         {
           "path": "registry/optics/tooltip.jsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "basePath": "components/optics"
         }
       ]
     }
