@@ -44,7 +44,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/code-block.jsx.txt";
-import utilsCode from "@/registry/optics/lib/utils.ts.txt";
+import utilsCode from "@/registry/optics/lib/utils.js.txt";
 
 const code = [
 	{
@@ -60,7 +60,7 @@ const componentFiles = [
 		code: componentCode,
 	},
 	{
-		path: "@/registry/optics/lib/utils.ts",
+		path: "@/registry/optics/lib/utils.js",
 		code: utilsCode,
 	},
 ];

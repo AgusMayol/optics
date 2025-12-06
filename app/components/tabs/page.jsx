@@ -184,7 +184,7 @@ import tabsPrimitiveCode from "@/registry/optics/helpers/primitives/radix/tabs.j
 import highlightCode from "@/registry/optics/helpers/primitives/effects/highlight.jsx.txt";
 import autoHeightCode from "@/registry/optics/helpers/primitives/effects/auto-height.jsx.txt";
 import slotCode from "@/registry/optics/helpers/primitives/animate/slot.jsx.txt";
-import utilsCode from "@/registry/optics/lib/utils.ts.txt";
+import utilsCode from "@/registry/optics/lib/utils.js.txt";
 import getStrictContextCode from "@/registry/optics/lib/get-strict-context.jsx.txt";
 
 const componentFiles = [
@@ -209,7 +209,7 @@ const componentFiles = [
 		code: slotCode,
 	},
 	{
-		path: "@/registry/optics/lib/utils.ts",
+		path: "@/registry/optics/lib/utils.js",
 		code: utilsCode,
 	},
 	{

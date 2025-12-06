@@ -1460,9 +1460,9 @@
       ],
       "files": [
         {
-          "path": "registry/optics/lib/utils.ts",
+          "path": "registry/optics/lib/utils.js",
           "type": "registry:lib",
-          "target": "lib/utils.ts"
+          "target": "lib/utils.js"
         }
       ]
     },

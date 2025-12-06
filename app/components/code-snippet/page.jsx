@@ -31,7 +31,7 @@ import { Separator } from "@/registry/optics/separator";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/code-snippet.jsx.txt";
-import utilsCode from '@/registry/optics/lib/utils.ts.txt';
+import utilsCode from '@/registry/optics/lib/utils.js.txt';
 
 const code = [
 	{
@@ -80,7 +80,7 @@ const commandsExample = [
 	},
 ,
 		{
-			path: 'lib/utils.ts',
+			path: 'lib/utils.js',
 			code: utilsCode,
 		}
 	];

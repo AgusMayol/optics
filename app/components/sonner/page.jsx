@@ -45,7 +45,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/sonner.jsx.txt";
-import utilsCode from '@/registry/optics/lib/utils.ts.txt';
+import utilsCode from "@/registry/optics/lib/utils.js.txt";
 
 const code = [
 	{
@@ -67,12 +67,12 @@ const code = [
 	Promise Toast
 </Button>`,
 	},
-,
-		{
-			path: 'lib/utils.ts',
-			code: utilsCode,
-		}
-	];
+	,
+	{
+		path: "lib/utils.js",
+		code: utilsCode,
+	},
+];
 
 const sonnerComponentCode = [
 	{
@@ -354,7 +354,8 @@ export default function Page() {
 								{
 									name: "duration",
 									type: "number (default: 5500)",
-									description: "Duration in milliseconds before the toast auto-dismisses.",
+									description:
+										"Duration in milliseconds before the toast auto-dismisses.",
 								},
 							],
 						},
