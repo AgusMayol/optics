@@ -8,9 +8,9 @@ import {
 	TabsContents as TabsContentsPrimitive,
 	TabsHighlight as TabsHighlightPrimitive,
 	TabsHighlightItem as TabsHighlightItemPrimitive,
-} from "@/registry/optics/helpers/primitives/radix/tabs";
-import { cn } from '@/registry/optics/lib/utils';
-import { getStrictContext } from '@/registry/optics/lib/get-strict-context';
+} from "@/registry/optics/tabs-primitive";
+import { cn } from "@/registry/optics/lib/utils";
+import { getStrictContext } from "@/registry/optics/lib/get-strict-context";
 
 const [TabsVariantProvider, useTabsVariant] =
 	getStrictContext("TabsVariantContext");

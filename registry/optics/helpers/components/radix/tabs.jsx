@@ -8,8 +8,8 @@ import {
 	TabsContents as TabsContentsPrimitive,
 	TabsHighlight as TabsHighlightPrimitive,
 	TabsHighlightItem as TabsHighlightItemPrimitive,
-} from "@/registry/optics/helpers/primitives/radix/tabs";
-import { cn } from '@/registry/optics/lib/utils';
+} from "@/registry/optics/tabs-primitive";
+import { cn } from "@/registry/optics/lib/utils";
 
 function Tabs({ className, ...props }) {
 	return (

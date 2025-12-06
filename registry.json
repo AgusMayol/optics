@@ -1246,12 +1246,17 @@
       "description": "Primitive tabs component built on Radix UI.",
       "registryDependencies": [
         "https://optics.agusmayol.com.ar/r/get-strict-context.json",
-        "https://optics.agusmayol.com.ar/r/use-controlled-state.json"
+        "https://optics.agusmayol.com.ar/r/use-controlled-state.json",
+        "https://optics.agusmayol.com.ar/r/use-auto-height.json",
+        "https://optics.agusmayol.com.ar/r/utils.json",
+        "https://optics.agusmayol.com.ar/r/highlight.json",
+        "https://optics.agusmayol.com.ar/r/auto-height.json"
       ],
       "dependencies": [
         "@radix-ui/react-tabs",
         "clsx",
-        "tailwind-merge"
+        "tailwind-merge",
+        "motion"
       ],
       "files": [
         {
@@ -1493,6 +1498,70 @@
           "path": "registry/optics/hooks/use-has-primary-touch.jsx",
           "type": "registry:lib",
           "target": "hooks/use-has-primary-touch.jsx"
+        }
+      ]
+    },
+    {
+      "name": "highlight",
+      "type": "registry:component",
+      "title": "Highlight",
+      "description": "Highlight effect component for tabs and other interactive elements.",
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
+      "dependencies": [
+        "motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/helpers/primitives/effects/highlight.jsx",
+          "type": "registry:component",
+          "target": "components/optics/helpers/primitives/effects/highlight.jsx"
+        }
+      ]
+    },
+    {
+      "name": "auto-height",
+      "type": "registry:component",
+      "title": "Auto Height",
+      "description": "Auto height component for dynamic height animations.",
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/use-auto-height.json",
+        "https://optics.agusmayol.com.ar/r/slot.json"
+      ],
+      "dependencies": [
+        "motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/helpers/primitives/effects/auto-height.jsx",
+          "type": "registry:component",
+          "target": "components/optics/helpers/primitives/effects/auto-height.jsx"
+        }
+      ]
+    },
+    {
+      "name": "slot",
+      "type": "registry:component",
+      "title": "Slot",
+      "description": "Slot component for motion animations.",
+      "registryDependencies": [
+        "https://optics.agusmayol.com.ar/r/utils.json"
+      ],
+      "dependencies": [
+        "motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/helpers/primitives/animate/slot.jsx",
+          "type": "registry:component",
+          "target": "components/optics/helpers/primitives/animate/slot.jsx"
         }
       ]
     }

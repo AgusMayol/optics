@@ -1,14 +1,14 @@
 "use client";
 import * as React from "react";
-import { Tabs as TabsPrimitive } from "radix-ui";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { motion, AnimatePresence } from "motion/react";
 
 import {
 	Highlight,
 	HighlightItem,
 } from "@/registry/optics/helpers/primitives/effects/highlight";
-import { getStrictContext } from '@/registry/optics/lib/get-strict-context';
-import { useControlledState } from '@/registry/optics/hooks/use-controlled-state';
+import { getStrictContext } from "@/registry/optics/lib/get-strict-context";
+import { useControlledState } from "@/registry/optics/hooks/use-controlled-state";
 import { AutoHeight } from "@/registry/optics/helpers/primitives/effects/auto-height";
 
 const [TabsProvider, useTabs] = getStrictContext("TabsContext");
