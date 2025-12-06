@@ -1,6 +1,6 @@
 "use client";
-import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
+import { InstallationGuide } from "@/components/installation-guide";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,15 +20,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	Empty,
 	EmptyContent,
 	EmptyDescription,
@@ -38,23 +28,16 @@ import {
 	EmptyTitle,
 } from "@/registry/optics/empty";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, FolderCode } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
-import componentCode from "@/registry/optics/empty-state.jsx.txt";
+import componentCode from "@/registry/optics/empty.jsx.txt";
 
 const code = [
 	{
 		language: "jsx",
-		filename: "empty-state.jsx",
+		filename: "empty.jsx",
 		code: `import {
 	Empty,
 	EmptyContent,
@@ -87,129 +70,11 @@ import { FolderCode } from "lucide-react";
 	},
 ];
 
-const emptyStateComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/empty-state.jsx",
-		code: `"use client";
-
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-
-function Empty({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty"
-      className={cn(
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function EmptyHeader({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty-header"
-      className={cn("flex max-w-sm flex-col items-center gap-2 text-center", className)}
-      {...props} />
-  );
-}
-
-const emptyMediaVariants = cva(
-  "flex shrink-0 items-center justify-center mb-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-transparent",
-        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*='size-'])]:size-6",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
-
-function EmptyMedia({
-  className,
-  variant = "default",
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty-icon"
-      data-variant={variant}
-      className={cn(emptyMediaVariants({ variant, className }))}
-      {...props} />
-  );
-}
-
-function EmptyTitle({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty-title"
-      className={cn("text-lg font-medium tracking-tight", className)}
-      {...props} />
-  );
-}
-
-function EmptyDescription({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty-description"
-      className={cn(
-        "text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function EmptyContent({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="empty-content"
-      className={cn(
-        "flex w-full max-w-sm min-w-0 flex-col items-center gap-4 text-sm text-balance",
-        className
-      )}
-      {...props} />
-  );
-}
-
-export {
-  Empty,
-  EmptyHeader,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-  EmptyMedia,
-};`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
 	{
-		path: "@/components/optics/empty-state.jsx",
+		path: "@/components/optics/empty.jsx",
 		code: componentCode,
 	},
 ];
@@ -223,7 +88,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences("empty-state", installDeps);
+	} = useCookiePreferences("empty", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -328,7 +193,7 @@ export default function Page() {
 				setValue={setValue}
 				activeCommand={activeCommand}
 				activeDepsCommand={activeDepsCommand}
-				componentName="empty-state"
+				componentName="empty"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
 				installationTab={installationTab}
