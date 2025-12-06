@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Script para sincronizar archivos .jsx con .jsx.txt automáticamente
+ * Script para sincronizar archivos .jsx, .ts, .js con .txt automáticamente
  * Ejecuta: bun scripts/sync-source-files.js
  */
 
@@ -18,7 +18,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const registryPath = join(__dirname, "..", "registry", "optics");
 
-function getAllJsxFiles(dir) {
+// Extensiones de archivos a procesar
+const EXTENSIONS = [".jsx", ".ts", ".js"];
+
+function getAllSourceFiles(dir) {
 	const files = [];
 	const items = readdirSync(dir);
 
@@ -29,36 +32,45 @@ function getAllJsxFiles(dir) {
 		if (stat.isDirectory()) {
 			// Incluir todos los directorios excepto los que empiezan con punto
 			if (!item.startsWith(".")) {
-				files.push(...getAllJsxFiles(fullPath));
+				files.push(...getAllSourceFiles(fullPath));
 			}
-		} else if (item.endsWith(".jsx") && !item.endsWith(".source.jsx")) {
-			// Incluir todos los archivos .jsx excepto .source.jsx
-			// Incluir helpers, primitives, y todos los demás
-			files.push(fullPath);
+		} else {
+			// Incluir archivos .jsx, .ts, .js excepto .source.jsx y .txt
+			const ext = EXTENSIONS.find((ext) => item.endsWith(ext));
+			if (
+				ext &&
+				!item.endsWith(".source.jsx") &&
+				!item.endsWith(".txt")
+			) {
+				files.push(fullPath);
+			}
 		}
 	}
 
 	return files;
 }
 
-const jsxFiles = getAllJsxFiles(registryPath);
+const sourceFiles = getAllSourceFiles(registryPath);
 
-console.log(`Encontrados ${jsxFiles.length} archivos .jsx`);
+console.log(`Encontrados ${sourceFiles.length} archivos fuente`);
 
-for (const jsxFile of jsxFiles) {
-	const sourceFile = jsxFile.replace(".jsx", ".jsx.txt");
-	const content = readFileSync(jsxFile, "utf-8");
+let syncedCount = 0;
+
+for (const sourceFile of sourceFiles) {
+	// Generar el nombre del archivo .txt manteniendo la extensión original
+	const txtFile = `${sourceFile}.txt`;
+	const content = readFileSync(sourceFile, "utf-8");
 
 	// Solo crear/actualizar si no existe o si el contenido es diferente
-	if (
-		!existsSync(sourceFile) ||
-		readFileSync(sourceFile, "utf-8") !== content
-	) {
-		writeFileSync(sourceFile, content, "utf-8");
+	if (!existsSync(txtFile) || readFileSync(txtFile, "utf-8") !== content) {
+		writeFileSync(txtFile, content, "utf-8");
+		const relativePath = sourceFile.replace(registryPath + "/", "");
+		const relativeTxtPath = txtFile.replace(registryPath + "/", "");
 		console.log(
-			`✓ Sincronizado: ${jsxFile.split("/").pop()} -> ${sourceFile.split("/").pop()}`,
+			`✓ Sincronizado: ${relativePath} -> ${relativeTxtPath}`,
 		);
+		syncedCount++;
 	}
 }
 
-console.log("✅ Sincronización completada");
+console.log(`✅ Sincronización completada (${syncedCount} archivos actualizados)`);
