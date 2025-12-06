@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
 	experimental: {
 		viewTransition: true,
 	},
+	turbopack: {
+		rules: {
+			// Archivos .jsx.txt se cargan como texto plano usando raw-loader
+			"*.jsx.txt": {
+				loaders: ["raw-loader"],
+				as: "*.js",
+			},
+		},
+	},
 	productionBrowserSourceMaps: false,
 	compiler: {
 		removeConsole:

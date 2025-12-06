@@ -1,0 +1,149 @@
+# AgusMayol's Optics - Design System for Modern Web Apps
+
+AgusMayol's Optics: A comprehensive design system and component registry for building accessible, modern web applications with React, Next.js, and Tailwind CSS.
+
+## Overview
+[AgusMayol's Optics](https://optics.agusmayol.com.ar/): This is the main entry point for the design system, providing an overview of its purpose and features.
+
+## Installation
+[Installation](https://optics.agusmayol.com.ar/installation): Instructions on how to set up AgusMayol's Optics in your project, including prerequisites and step-by-step guidance.
+
+
+## Design Principles
+
+### Typography
+[Typography](https://optics.agusmayol.com.ar/core/typography): Guidelines for using typography within the design system, including font choices, sizes, and usage recommendations.
+
+### Iconography
+[Iconography](https://optics.agusmayol.com.ar/core/iconography): Standards for icon usage, including styles, sizes, and best practices for integrating icons into your applications.
+
+### Materials
+[Materials](https://optics.agusmayol.com.ar/core/materials): Information on the materials used in the design system, focusing on textures, patterns, and their applications.
+
+### Colors
+[Colors](https://optics.agusmayol.com.ar/core/colors): A detailed palette of colors available in the design system, including primary, secondary, and accent colors with usage examples.
+
+
+## Guidelines
+### Web Interface Guidelines
+[Web Interface Guidelines](https://vercel.com/design/guidelines): Best practices for creating user interfaces that are intuitive and user-friendly.
+
+### SEO & Metadata
+[SEO & Metadata](https://optics.agusmayol.com.ar/resources/seo-metadata): Recommendations for optimizing web applications for search engines, including metadata usage.
+
+### Performance
+[Performance](https://optics.agusmayol.com.ar/resources/performance): Tips and techniques for ensuring that applications built with the design system are performant and efficient.
+
+### Accessibility
+[Accesibility](https://optics.agusmayol.com.ar/resources/accesibility): Guidelines to ensure that applications are accessible to all users, including those with disabilities.
+
+### Animations
+[Animations](https://optics.agusmayol.com.ar/resources/animations): Standards for implementing animations within the design system, including timing and easing functions.
+
+### Security
+[Security](https://optics.agusmayol.com.ar/resources/security): Best practices for securing applications built with the design system.
+
+
+## Configuration
+
+### Cursor Rules & MCPs
+[Cursor Rules & MCPsSoon](https://optics.agusmayol.com.ar/collections/cursor-rules): Upcoming guidelines for cursor behavior and multi-cursor patterns.
+
+### Next.js Configuration
+[Next.js ConfigurationSoon](https://optics.agusmayol.com.ar/collections/nextjs-configuration): Future documentation on configuring Next.js with the design system.
+
+### Biome Configuration
+[Biome ConfigurationSoon](https://optics.agusmayol.com.ar/collections/biome): Upcoming details on configuring the Biome environment with the design system.
+
+### Tailwind Variables
+[Tailwind VariablesSoon](https://optics.agusmayol.com.ar/resources/tailwind-variables): Future documentation on using Tailwind CSS variables within the design system.
+
+### Gitignore File
+[Gitignore FileSoon](https://optics.agusmayol.com.ar/collections/gitignore): Upcoming guidelines for setting up a .gitignore file for projects using the design system.
+
+### Hooks
+[HooksSoon](https://optics.agusmayol.com.ar/collections/hooks): Future documentation on custom hooks available in the design system.
+
+
+## Components
+
+### Basic Components
+- [Accordion](https://optics.agusmayol.com.ar/components/accordion): A component for displaying collapsible content.
+- [Alert](https://optics.agusmayol.com.ar/components/alert): A component for displaying alerts and notifications.
+- [Alert Dialog](https://optics.agusmayol.com.ar/components/alert-dialog): A dialog component for alert messages.
+- [Aspect Ratio](https://optics.agusmayol.com.ar/components/aspect-ratio): A component for maintaining aspect ratios in media.
+- [Avatar](https://optics.agusmayol.com.ar/components/avatar): A component for displaying user avatars.
+- [Badge](https://optics.agusmayol.com.ar/components/badge): A component for displaying badges or labels.
+- [Breadcrumb](https://optics.agusmayol.com.ar/components/breadcrumb): A navigation component for showing the user's location within a hierarchy.
+- [Button](https://optics.agusmayol.com.ar/components/button): A standard button component with various styles.
+- [Button Group](https://optics.agusmayol.com.ar/components/button-group): A component for grouping buttons together.
+
+### Advanced Components
+- [Calendar](https://optics.agusmayol.com.ar/components/calendar): A component for displaying and selecting dates.
+- [Card](https://optics.agusmayol.com.ar/components/card): A flexible container for displaying content.
+- [Carousel](https://optics.agusmayol.com.ar/components/carousel): A component for creating image or content sliders.
+- [Checkbox](https://optics.agusmayol.com.ar/components/checkbox): A component for selecting multiple options.
+- [Code Block](https://optics.agusmayol.com.ar/components/code-block): A component for displaying code snippets.
+- [Code Snippet](https://optics.agusmayol.com.ar/components/code-snippet): A component for inline code display.
+- [Collapsible](https://optics.agusmayol.com.ar/components/collapsible): A component for collapsible sections of content.
+- [Command](https://optics.agusmayol.com.ar/components/command): A component for command input.
+- [Context Menu](https://optics.agusmayol.com.ar/components/context-menu): A component for displaying context menus.
+
+### Data Display Components
+- [Data Table](https://optics.agusmayol.com.ar/components/data-table): A component for displaying tabular data.
+- [Date Picker](https://optics.agusmayol.com.ar/components/date-picker): A component for selecting dates.
+- [Dialog](https://optics.agusmayol.com.ar/components/dialog): A modal dialog component for user interactions.
+- [Drawer](https://optics.agusmayol.com.ar/components/drawer): A component for side navigation.
+- [Dropdown Menu](https://optics.agusmayol.com.ar/components/dropdown-menu): A component for dropdown selections.
+- [Emoji Picker](https://optics.agusmayol.com.ar/components/emoji-picker): A component for selecting emojis.
+- [Empty State](https://optics.agusmayol.com.ar/components/empty-state): A component for displaying empty states in applications.
+- [Feedback](https://optics.agusmayol.com.ar/components/feedback): A component for providing user feedback.
+- [Field](https://optics.agusmayol.com.ar/components/field): A component for form fields.
+
+### Form Components
+- [Form](https://optics.agusmayol.com.ar/components/form): A component for creating forms.
+- [Grid](https://optics.agusmayol.com.ar/components/grid): A layout component for organizing content in a grid.
+- [Guided Tour](https://optics.agusmayol.com.ar/components/guided-tour): A component for creating guided tours of applications.
+- [Hover Card](https://optics.agusmayol.com.ar/components/hover-card): A component for displaying additional information on hover.
+- [Input](https://optics.agusmayol.com.ar/components/input): A standard input field component.
+- [Input Group](https://optics.agusmayol.com.ar/components/input-group): A component for grouping input fields.
+- [Input OTP](https://optics.agusmayol.com.ar/components/input-otp): A component for one-time password input.
+- [Item](https://optics.agusmayol.com.ar/components/item): A generic item component for lists.
+- [Kbd](https://optics.agusmayol.com.ar/components/kbd): A component for displaying keyboard shortcuts.
+- [Label](https://optics.agusmayol.com.ar/components/label): A component for labeling form fields.
+
+### Navigation Components
+- [Menubar](https://optics.agusmayol.com.ar/components/menubar): A component for creating a menu bar.
+- [Multi Select](https://optics.agusmayol.com.ar/components/multi-select): A component for selecting multiple items from a list.
+- [Navigation Menu](https://optics.agusmayol.com.ar/components/navigation-menu): A component for navigation menus.
+- [Pagination](https://optics.agusmayol.com.ar/components/pagination): A component for paginating content.
+- [Popover](https://optics.agusmayol.com.ar/components/popover): A component for displaying popover content.
+- [Progress](https://optics.agusmayol.com.ar/components/progress): A component for displaying progress indicators.
+- [Radio Group](https://optics.agusmayol.com.ar/components/radio-group): A component for selecting a single option from a group.
+- [Resizable](https://optics.agusmayol.com.ar/components/resizable): A component for resizable elements.
+- [Scroll Area](https://optics.agusmayol.com.ar/components/scroll-area): A component for scrollable areas.
+- [Select](https://optics.agusmayol.com.ar/components/select): A component for dropdown selections.
+- [Separator](https://optics.agusmayol.com.ar/components/separator): A component for separating content.
+- [Sheet](https://optics.agusmayol.com.ar/components/sheet): A component for displaying sheets of content.
+- [Show More](https://optics.agusmayol.com.ar/components/show-more): A component for expanding content sections.
+- [Skeleton](https://optics.agusmayol.com.ar/components/skeleton): A component for loading placeholders.
+- [Slider](https://optics.agusmayol.com.ar/components/slider): A component for selecting values from a range.
+- [Sonner](https://optics.agusmayol.com.ar/components/sonner): A component for displaying notifications.
+- [Spinner](https://optics.agusmayol.com.ar/components/spinner): A component for loading indicators.
+- [Star Rating](https://optics.agusmayol.com.ar/components/star-rating): A component for displaying star ratings.
+- [Switch](https://optics.agusmayol.com.ar/components/switch): A toggle switch component.
+- [Table](https://optics.agusmayol.com.ar/components/table): A component for displaying tabular data.
+- [Tabs](https://optics.agusmayol.com.ar/components/tabs): A component for tabbed navigation.
+- [Textarea](https://optics.agusmayol.com.ar/components/textarea): A component for multi-line text input.
+- [Theme Switcher](https://optics.agusmayol.com.ar/components/theme-switcher): A component for switching themes.
+- [Timezone](https://optics.agusmayol.com.ar/components/timezone): A component for selecting time zones.
+- [Toggle](https://optics.agusmayol.com.ar/components/toggle): A toggle component for binary choices.
+- [Toggle Group](https://optics.agusmayol.com.ar/components/toggle-group): A component for grouping toggle switches.
+- [Tooltip](https://optics.agusmayol.com.ar/components/tooltip): A component for displaying tooltips.
+
+## Additional Resources
+[MCP Server](https://optics.agusmayol.com.ar/mcp-server): Information on the MCP server related to the design system.
+[llms.txt](https://optics.agusmayol.com.ar/llms.txt): A file containing additional resources and links.
+[Github](https://github.com/optics/optics): Placeholder for any additional content or links.
+[AgusMayol](https://agusmayol.com.ar/): The main page for AgusMayol, the creator of the design system.
+[AgusMayol's Optics - Design System for Modern Web Apps](https://optics.agusmayol.com.ar/): A repeat of the main title for emphasis.

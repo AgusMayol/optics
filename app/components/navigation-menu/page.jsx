@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -27,6 +28,7 @@ import {
 	SnippetTabsList,
 	SnippetTabsTrigger,
 } from "@/registry/optics/code-snippet";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -34,6 +36,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
+	navigationMenuTriggerStyle,
 } from "@/registry/optics/navigation-menu";
 import { Separator } from "@/registry/optics/separator";
 import {
@@ -43,9 +46,16 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/registry/optics/tabs";
-import { ArrowUpRight } from "lucide-react";
+import {
+	ArrowUpRight,
+	CircleCheckIcon,
+	CircleHelpIcon,
+	CircleIcon,
+} from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/navigation-menu.jsx.txt";
 
 const code = [
 	{
@@ -88,12 +98,12 @@ const navigationMenuComponentCode = [
 	{
 		language: "jsx",
 		filename: "components/ui/optics/navigation-menu.jsx",
-		code: `import * as React from "react"
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
-import { cva } from "class-variance-authority"
-import { ChevronDownIcon } from "lucide-react"
+		code: `import * as React from "react";
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import { cva } from "class-variance-authority";
+import { ChevronDownIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function NavigationMenu({
   className,
@@ -151,26 +161,54 @@ export {
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/navigation-menu",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/navigation-menu",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/navigation-menu",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/navigation-menu",
+		path: "@/components/optics/navigation-menu.jsx",
+		code: componentCode,
 	},
 ];
 
 export default function Page() {
+	const isMobile = useIsMobile();
+	const components = [
+		{
+			title: "Alert Dialog",
+			href: "/docs/primitives/alert-dialog",
+			description:
+				"A modal dialog that interrupts the user with important content and expects a response.",
+		},
+		{
+			title: "Hover Card",
+			href: "/docs/primitives/hover-card",
+			description:
+				"For sighted users to preview content available behind a link.",
+		},
+		{
+			title: "Progress",
+			href: "/docs/primitives/progress",
+			description:
+				"Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+		},
+		{
+			title: "Scroll-area",
+			href: "/docs/primitives/scroll-area",
+			description: "Visually or semantically separates content.",
+		},
+		{
+			title: "Tabs",
+			href: "/docs/primitives/tabs",
+			description:
+				"A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+		},
+		{
+			title: "Tooltip",
+			href: "/docs/primitives/tooltip",
+			description:
+				"A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+		},
+	];
 	const {
 		mounted,
 		value,
@@ -179,7 +217,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("navigation-menu", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -210,50 +248,154 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<NavigationMenu>
-							<NavigationMenuList>
+						<NavigationMenu viewport={isMobile}>
+							<NavigationMenuList className="flex-wrap">
 								<NavigationMenuItem>
-									<NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+									<NavigationMenuTrigger>Home</NavigationMenuTrigger>
 									<NavigationMenuContent>
-										<ul className="grid gap-3 p-4 w-[400px]">
-											<li>
+										<ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+											<li className="row-span-3">
 												<NavigationMenuLink asChild>
-													<a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">
-															Introduction
+													<a
+														className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:p-6"
+														href="/"
+													>
+														<div className="mb-2 text-lg font-medium sm:mt-4">
+															shadcn/ui
 														</div>
-														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															Re-usable components built using Radix UI and
+														<p className="text-muted-foreground text-sm leading-tight">
+															Beautifully designed components built with
 															Tailwind CSS.
 														</p>
 													</a>
 												</NavigationMenuLink>
 											</li>
+											<ListItem href="/docs" title="Introduction">
+												Re-usable components built using Radix UI and Tailwind
+												CSS.
+											</ListItem>
+											<ListItem href="/docs/installation" title="Installation">
+												How to install dependencies and structure your app.
+											</ListItem>
+											<ListItem
+												href="/docs/primitives/typography"
+												title="Typography"
+											>
+												Styles for headings, paragraphs, lists...etc
+											</ListItem>
+										</ul>
+									</NavigationMenuContent>
+								</NavigationMenuItem>
+								<NavigationMenuItem>
+									<NavigationMenuTrigger>Components</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+											{components.map((component) => (
+												<ListItem
+													key={component.title}
+													title={component.title}
+													href={component.href}
+												>
+													{component.description}
+												</ListItem>
+											))}
+										</ul>
+									</NavigationMenuContent>
+								</NavigationMenuItem>
+								<NavigationMenuItem>
+									<NavigationMenuLink
+										asChild
+										className={navigationMenuTriggerStyle()}
+									>
+										<Link href="/docs">Docs</Link>
+									</NavigationMenuLink>
+								</NavigationMenuItem>
+								<NavigationMenuItem className="hidden md:block">
+									<NavigationMenuTrigger>List</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<ul className="grid w-[300px] gap-4">
 											<li>
 												<NavigationMenuLink asChild>
-													<a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">
-															Installation
+													<Link href="#">
+														<div className="font-medium">Components</div>
+														<div className="text-muted-foreground">
+															Browse all components in the library.
 														</div>
-														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															How to install dependencies and structure your
-															app.
-														</p>
-													</a>
+													</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link href="#">
+														<div className="font-medium">Documentation</div>
+														<div className="text-muted-foreground">
+															Learn how to use the library.
+														</div>
+													</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link href="#">
+														<div className="font-medium">Blog</div>
+														<div className="text-muted-foreground">
+															Read our latest blog posts.
+														</div>
+													</Link>
 												</NavigationMenuLink>
 											</li>
 										</ul>
 									</NavigationMenuContent>
 								</NavigationMenuItem>
-								<NavigationMenuItem>
-									<NavigationMenuLink asChild>
-										<Link
-											href="#"
-											className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-										>
-											Documentation
-										</Link>
-									</NavigationMenuLink>
+								<NavigationMenuItem className="hidden md:block">
+									<NavigationMenuTrigger>Simple</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<ul className="grid w-[200px] gap-4">
+											<li>
+												<NavigationMenuLink asChild>
+													<Link href="#">Components</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link href="#">Documentation</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link href="#">Blocks</Link>
+												</NavigationMenuLink>
+											</li>
+										</ul>
+									</NavigationMenuContent>
+								</NavigationMenuItem>
+								<NavigationMenuItem className="hidden md:block">
+									<NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
+									<NavigationMenuContent>
+										<ul className="grid w-[200px] gap-4">
+											<li>
+												<NavigationMenuLink asChild>
+													<Link
+														href="#"
+														className="flex-row items-center gap-2"
+													>
+														<CircleHelpIcon />
+														Backlog
+													</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link
+														href="#"
+														className="flex-row items-center gap-2"
+													>
+														<CircleIcon />
+														To Do
+													</Link>
+												</NavigationMenuLink>
+												<NavigationMenuLink asChild>
+													<Link
+														href="#"
+														className="flex-row items-center gap-2"
+													>
+														<CircleCheckIcon />
+														Done
+													</Link>
+												</NavigationMenuLink>
+											</li>
+										</ul>
+									</NavigationMenuContent>
 								</NavigationMenuItem>
 							</NavigationMenuList>
 						</NavigationMenu>
@@ -308,98 +450,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={navigationMenuComponentCode}
-									defaultValue={navigationMenuComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="navigation-menu"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -413,7 +474,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the navigation menu.",
+									description:
+										"Additional CSS classes to apply to the navigation menu.",
 								},
 								{
 									name: "viewport",
@@ -453,7 +515,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the trigger.",
+									description:
+										"Additional CSS classes to apply to the trigger.",
 								},
 								{
 									name: "children",
@@ -468,7 +531,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 							],
 						},
@@ -488,7 +552,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the viewport.",
+									description:
+										"Additional CSS classes to apply to the viewport.",
 								},
 							],
 						},
@@ -498,7 +563,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the indicator.",
+									description:
+										"Additional CSS classes to apply to the indicator.",
 								},
 							],
 						},
@@ -508,5 +574,20 @@ export default function Page() {
 
 			<ComponentNavigation />
 		</main>
+	);
+}
+
+function ListItem({ title, children, href, ...props }) {
+	return (
+		<li {...props}>
+			<NavigationMenuLink asChild>
+				<Link href={href}>
+					<div className="text-sm leading-none font-medium">{title}</div>
+					<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+						{children}
+					</p>
+				</Link>
+			</NavigationMenuLink>
+		</li>
 	);
 }

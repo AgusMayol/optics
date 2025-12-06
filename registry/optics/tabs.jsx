@@ -8,7 +8,7 @@ import {
 	TabsContents as TabsContentsPrimitive,
 	TabsHighlight as TabsHighlightPrimitive,
 	TabsHighlightItem as TabsHighlightItemPrimitive,
-} from "@/components/animate-ui/primitives/radix/tabs";
+} from "@/registry/optics/helpers/primitives/radix/tabs";
 import { cn } from "@/lib/utils";
 import { getStrictContext } from "@/lib/get-strict-context";
 

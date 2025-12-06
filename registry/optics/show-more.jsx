@@ -9,50 +9,21 @@ import {
 	AccordionContent,
 } from "@/registry/optics/accordion";
 import { buttonVariants } from "@/registry/optics/button";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { tailwindColors } from "@/lib/tailwind-colors";
 
 export function ShowMore({
 	children,
-	defaultContent,
-	maxLength,
-	maxLines,
+	moreContent,
 	maskColor = "oklch(var(--background))",
+	showSeparator = true,
 }) {
 	const [open, setOpen] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
 	const [isOpening, setIsOpening] = useState(false);
 
-	const content = children || defaultContent;
-
-	// Calculate if content needs truncation
-	const needsTruncation = useMemo(() => {
-		if (typeof content === "string" && maxLength) {
-			return content.length > maxLength;
-		}
-		return maxLines !== undefined;
-	}, [content, maxLength, maxLines]);
-
-	// Get base content (always visible)
-	const baseContent = useMemo(() => {
-		if (typeof content === "string" && maxLength) {
-			return content.slice(0, maxLength);
-		}
-		return content;
-	}, [content, maxLength]);
-
-	// Get additional content (shown when expanded)
-	const additionalContent = useMemo(() => {
-		if (
-			typeof content === "string" &&
-			maxLength &&
-			content.length > maxLength
-		) {
-			return content.slice(maxLength);
-		}
-		// For maxLines, we show the same content but without line-clamp
-		return maxLines ? content : null;
-	}, [content, maxLength, maxLines]);
+	// If no moreContent is provided, don't render the show more functionality
+	const hasMoreContent = moreContent != null;
 
 	const handleButtonClick = (e) => {
 		if (open) {
@@ -111,20 +82,9 @@ export function ShowMore({
 		</div>
 	);
 
-	const baseContentStyle = useMemo(() => {
-		if (maxLines && !open) {
-			return {
-				display: "-webkit-box",
-				WebkitLineClamp: maxLines,
-				WebkitBoxOrient: "vertical",
-				overflow: "hidden",
-			};
-		}
-		return {};
-	}, [open, maxLines]);
-
-	if (!needsTruncation) {
-		return <div>{content}</div>;
+	// If no moreContent, just render children
+	if (!hasMoreContent) {
+		return <div>{children}</div>;
 	}
 
 	// Helper function to extract color variable
@@ -199,17 +159,14 @@ export function ShowMore({
 		>
 			<AccordionItem value="show-more" className="w-full rounded-b-xl">
 				<div className="relative">
-					{/* Base content - always visible */}
+					{/* Main content - always visible */}
 					<div className="relative">
-						<div
-							className="relative transition-all duration-200 ease-in-out"
-							style={baseContentStyle}
-						>
-							{baseContent}
+						<div className="relative transition-all duration-200 ease-in-out">
+							{children}
 						</div>
 					</div>
 
-					{/* Show More button - appears during closing animation */}
+					{/* Show More button - appears when collapsed */}
 					{!open && (
 						<div
 							className={cn(
@@ -220,9 +177,11 @@ export function ShowMore({
 								transition: "opacity 250ms cubic-bezier(0.4, 0, 1, 1)",
 							}}
 						>
-							<div className="relative z-[1]">
-								<Separator decoration />
-							</div>
+							{showSeparator && (
+								<div className="relative z-[1]">
+									<Separator decoration />
+								</div>
+							)}
 							{/* Fade mask container - covers from separator (bottom) to top (text) */}
 							<div
 								aria-hidden="true"
@@ -280,7 +239,7 @@ export function ShowMore({
 										: "opacity 400ms cubic-bezier(0.4, 0, 0.2, 1), transform 400ms cubic-bezier(0.4, 0, 0.2, 1)",
 						}}
 					>
-						{additionalContent}
+						{moreContent}
 					</div>
 				</AccordionContent>
 
@@ -292,9 +251,11 @@ export function ShowMore({
 							isClosing ? "opacity-0" : "opacity-100",
 						)}
 					>
-						<div className="relative z-[10]">
-							<Separator decoration />
-						</div>
+						{showSeparator && (
+							<div className="relative z-[10]">
+								<Separator decoration />
+							</div>
+						)}
 						<AccordionTrigger
 							showArrow={false}
 							className="w-full px-0 pt-0 pb-0 group flex-row-reverse items-center justify-end hover:no-underline hover:cursor-pointer rounded-none [&>svg]:hidden relative z-[11]"

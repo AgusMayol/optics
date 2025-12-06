@@ -56,7 +56,7 @@ function Slider({
 					data-slot="slider-thumb"
 					key={index}
 					className={cn(
-						"border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-2 focus-visible:ring-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+						"border-primary ring-ring/50 block size-4 shrink-0 squircle-none rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-2 focus-visible:ring-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
 						otherThemes({ variant: variant }),
 					)}
 				/>

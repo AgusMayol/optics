@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const otherThemes = cva(
-	"data-[state='open']:!scale-[0.97] data-[state='open']:ring-[3px] data-[state='open']:ring-ring/25",
+	"data-[state='open']:!ring-offset-2 data-[state='open']:!ring-offset-transparent data-[state='open']:!ring-ring/25",
 	{
 		variants: {
 			variant: {
@@ -19,10 +19,20 @@ const otherThemes = cva(
 					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary from-primary/70 to-primary/95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border text-sm shadow-md shadow-zinc-950/30 ring-0 transition-[filter] duration-200 hover:brightness-125 active:brightness-95",
 			},
 
+			size: {
+				default: "h-9 px-4 py-2",
+				sm: "h-8 px-3 text-xs",
+				lg: "h-10 rounded-lg px-8",
+				icon: "h-9 w-9",
+				"icon-sm": "size-8",
+				"icon-lg": "size-10",
+			},
+
 			animation: {
-				colors: "transition-colors duration-150",
+				colors:
+					"transition-colors duration-150 data-[state='open']:!scale-[1] scale-[1]",
 				all: "active:scale-[0.97] transition-all duration-150",
-				none: "transition-none",
+				none: "transition-none data-[state='open']:!scale-[1] scale-[1]",
 				"only-scale": "active:scale-[0.97] transition-scale duration-150",
 			},
 		},
@@ -30,7 +40,7 @@ const otherThemes = cva(
 );
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none cursor-pointer text-white data-[state='open']:!scale-[0.97] data-[state='open']:ring-[3px] data-[state='open']:ring-ring/25",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none cursor-pointer text-white data-[state='open']:!ring-offset-2 data-[state='open']:!ring-offset-transparent data-[state='open']:!ring-ring/25",
 	{
 		variants: {
 			variant: {

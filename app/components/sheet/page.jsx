@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -53,6 +54,8 @@ import {
 import { ALargeSmall, ArrowUpRight, Binary } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/sheet.jsx.txt";
 
 const code = [
 	{
@@ -232,22 +235,10 @@ export {
 	},
 ];
 
-const commands = [
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/sheet",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/sheet",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/sheet",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/sheet",
+		path: "@/components/optics/sheet.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -279,7 +270,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, installDeps);
+	} = useCookiePreferences("sheet", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -398,142 +389,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader>
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader>
-										<SnippetTabsList variant="outline">
-											{installDeps.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{installDeps.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeDepsCommand && (
-													<SnippetCopyButton value={activeDepsCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={sheetComponentCode}
-									defaultValue={sheetComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockFiles>
-											{(item) => (
-												<CodeBlockFilename
-													key={item.language}
-													value={item.filename}
-												>
-													{item.filename}
-												</CodeBlockFilename>
-											)}
-										</CodeBlockFiles>
-
-										<CodeBlockCopyButton variant="ghost" />
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="sheet"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">

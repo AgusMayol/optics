@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/optics/button";
+import { buttonVariants, otherThemes } from "@/registry/optics/button";
 
 function Pagination({ className, ...props }) {
 	return (
@@ -34,7 +34,13 @@ function PaginationItem({ ...props }) {
 	return <li data-slot="pagination-item" {...props} />;
 }
 
-function PaginationLink({ className, isActive, size = "icon", ...props }) {
+function PaginationLink({
+	className,
+	isActive,
+	variant,
+	size = "icon",
+	...props
+}) {
 	return (
 		<a
 			aria-current={isActive ? "page" : undefined}
@@ -42,7 +48,7 @@ function PaginationLink({ className, isActive, size = "icon", ...props }) {
 			data-active={isActive}
 			className={cn(
 				buttonVariants({
-					variant: isActive ? "outline" : "ghost",
+					variant: isActive ? variant || "outline" : "ghost",
 					size,
 				}),
 				className,

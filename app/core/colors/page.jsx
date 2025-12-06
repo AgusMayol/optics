@@ -21,6 +21,13 @@ import {
 	SelectValue,
 } from "@/registry/optics/select";
 import { Separator } from "@/registry/optics/separator";
+import {
+	InputGroup,
+	InputGroupAddon,
+	InputGroupInput,
+	InputGroupText,
+} from "@/registry/optics/input-group";
+import { ButtonGroup, ButtonGroupText } from "@/registry/optics/button-group";
 import { toast } from "@/registry/optics/sonner";
 import {
 	Tooltip,
@@ -28,7 +35,197 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/registry/optics/tooltip";
-import { useState, useMemo, useCallback } from "react";
+import {
+	useState,
+	useMemo,
+	useCallback,
+	useDeferredValue,
+	useTransition,
+	useRef,
+} from "react";
+import { ArrowDown } from "lucide-react";
+import { HexColorPicker } from "react-colorful";
+
+// Helper function to copy text to clipboard
+const copyToClipboard = async (text) => {
+	if (
+		typeof navigator !== "undefined" &&
+		navigator.clipboard &&
+		typeof navigator.clipboard.writeText === "function"
+	) {
+		try {
+			await navigator.clipboard.writeText(text);
+			return true;
+		} catch {
+			// Fallback to execCommand
+		}
+	}
+
+	// Fallback: use execCommand
+	try {
+		const textarea = document.createElement("textarea");
+		textarea.value = text;
+		textarea.style.position = "fixed";
+		textarea.style.opacity = "0";
+		document.body.appendChild(textarea);
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		return true;
+	} catch {
+		return false;
+	}
+};
+
+// Color conversion utilities (moved outside component for performance)
+const hexToRgb = (hex) => {
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result
+		? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16),
+			}
+		: null;
+};
+
+const rgbToHsl = (r, g, b) => {
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	const max = Math.max(r, g, b);
+	const min = Math.min(r, g, b);
+	let h,
+		s,
+		l = (max + min) / 2;
+
+	if (max === min) {
+		h = s = 0;
+	} else {
+		const d = max - min;
+		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+		switch (max) {
+			case r:
+				h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+				break;
+			case g:
+				h = ((b - r) / d + 2) / 6;
+				break;
+			case b:
+				h = ((r - g) / d + 4) / 6;
+				break;
+		}
+	}
+
+	const hueDegrees = h * 360;
+	const roundedHue = Math.round(hueDegrees);
+	const validHue = roundedHue % 360;
+
+	return {
+		h: validHue,
+		s: Math.round(s * 100),
+		l: Math.round(l * 100),
+	};
+};
+
+const hslToRgb = (h, s, l) => {
+	h /= 360;
+	s /= 100;
+	l /= 100;
+	let r, g, b;
+
+	if (s === 0) {
+		r = g = b = l;
+	} else {
+		const hue2rgb = (p, q, t) => {
+			if (t < 0) t += 1;
+			if (t > 1) t -= 1;
+			if (t < 1 / 6) return p + (q - p) * 6 * t;
+			if (t < 1 / 2) return q;
+			if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+			return p;
+		};
+
+		const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+		const p = 2 * l - q;
+		r = hue2rgb(p, q, h + 1 / 3);
+		g = hue2rgb(p, q, h);
+		b = hue2rgb(p, q, h - 1 / 3);
+	}
+
+	return {
+		r: Math.round(r * 255),
+		g: Math.round(g * 255),
+		b: Math.round(b * 255),
+	};
+};
+
+const rgbToOklch = (r, g, b) => {
+	const linearR = r / 255;
+	const linearG = g / 255;
+	const linearB = b / 255;
+
+	const x = 0.4124564 * linearR + 0.3575761 * linearG + 0.1804375 * linearB;
+	const y = 0.2126729 * linearR + 0.7151522 * linearG + 0.072175 * linearB;
+	const z = 0.0193339 * linearR + 0.119192 * linearG + 0.9503041 * linearB;
+
+	const fx = x > 0.008856 ? Math.cbrt(x) : 7.787 * x + 16 / 116;
+	const fy = y > 0.008856 ? Math.cbrt(y) : 7.787 * y + 16 / 116;
+	const fz = z > 0.008856 ? Math.cbrt(z) : 7.787 * z + 16 / 116;
+
+	const l = 116 * fy - 16;
+	const a = 500 * (fx - fy);
+	const bLab = 200 * (fy - fz);
+
+	const lOk = l / 100;
+	const aOk = a / 100;
+	const bOk = bLab / 100;
+
+	const c = Math.sqrt(aOk * aOk + bOk * bOk);
+	const h = Math.atan2(bOk, aOk) * (180 / Math.PI);
+	const hNormalized = h < 0 ? h + 360 : h;
+
+	return {
+		l: Number(lOk.toFixed(2)),
+		c: Number(c.toFixed(2)),
+		h: Number(hNormalized.toFixed(0)),
+	};
+};
+
+const oklchToRgb = (l, c, h) => {
+	const hRad = (h * Math.PI) / 180;
+	const a = c * Math.cos(hRad);
+	const b = c * Math.sin(hRad);
+
+	const lLab = l * 100;
+	const aLab = a * 100;
+	const bLab = b * 100;
+
+	const fy = (lLab + 16) / 116;
+	const fx = aLab / 500 + fy;
+	const fz = fy - bLab / 200;
+
+	const x = fx > 0.206897 ? fx * fx * fx : (fx - 16 / 116) / 7.787;
+	const y = fy > 0.206897 ? fy * fy * fy : (fy - 16 / 116) / 7.787;
+	const z = fz > 0.206897 ? fz * fz * fz : (fz - 16 / 116) / 7.787;
+
+	const linearR = 3.2404542 * x - 1.5371385 * y - 0.4985314 * z;
+	const linearG = -0.969266 * x + 1.8760108 * y + 0.041556 * z;
+	const linearB = 0.0556434 * x - 0.2040259 * y + 1.0572252 * z;
+
+	const gamma = (val) => {
+		if (val <= 0.0031308) {
+			return 12.92 * val;
+		}
+		return 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
+	};
+
+	return {
+		r: Math.round(Math.max(0, Math.min(255, gamma(linearR) * 255))),
+		g: Math.round(Math.max(0, Math.min(255, gamma(linearG) * 255))),
+		b: Math.round(Math.max(0, Math.min(255, gamma(linearB) * 255))),
+	};
+};
 
 export default function Page() {
 	const isMobile = useIsMobile();
@@ -401,226 +598,145 @@ export default function Page() {
 
 	const [selectedFormat, setSelectedFormat] = useState("classname");
 
-	// Color picker states
-	const [colorPickerValue, setColorPickerValue] = useState("#3b82f6");
-	const [colorPickerFormat, setColorPickerFormat] = useState("hex");
-
-	// Color converter states
-	const [inputColorValue, setInputColorValue] = useState("");
-	const [inputColorFormat, setInputColorFormat] = useState("hex");
+	// Color converter states (unified)
+	const [inputColorValue, setInputColorValue] = useState("#74ACDF");
 	const [outputColorFormat, setOutputColorFormat] = useState("rgb");
+	const [isPending, startTransition] = useTransition();
 
-	// Color conversion utilities
-	const hexToRgb = (hex) => {
-		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-		return result
-			? {
-					r: parseInt(result[1], 16),
-					g: parseInt(result[2], 16),
-					b: parseInt(result[3], 16),
-				}
-			: null;
-	};
+	// Defer expensive parsing operations
+	const deferredInputColor = useDeferredValue(inputColorValue);
 
-	const rgbToHsl = (r, g, b) => {
-		r /= 255;
-		g /= 255;
-		b /= 255;
-		const max = Math.max(r, g, b);
-		const min = Math.min(r, g, b);
-		let h,
-			s,
-			l = (max + min) / 2;
+	// Detect color format automatically (optimized with early returns)
+	const detectColorFormat = useCallback((colorString) => {
+		if (!colorString || typeof colorString !== "string") return null;
 
-		if (max === min) {
-			h = s = 0;
-		} else {
-			const d = max - min;
-			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-			switch (max) {
-				case r:
-					h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-					break;
-				case g:
-					h = ((b - r) / d + 2) / 6;
-					break;
-				case b:
-					h = ((r - g) / d + 4) / 6;
-					break;
-			}
-		}
+		const trimmed = colorString.trim();
+		if (!trimmed) return null;
 
-		// Calculate hue in degrees and ensure it's in valid CSS range (0-359)
-		const hueDegrees = h * 360;
-		const roundedHue = Math.round(hueDegrees);
-		// Use modulo 360 to ensure hue is always in 0-359 range
-		// This handles cases where rounding produces 360
-		const validHue = roundedHue % 360;
+		// Fast path: Check hex format first (most common)
+		if (/^#?[0-9A-Fa-f]{6}$/.test(trimmed)) return "hex";
 
-		return {
-			h: validHue,
-			s: Math.round(s * 100),
-			l: Math.round(l * 100),
-		};
-	};
+		// Check rgb format
+		if (
+			trimmed.startsWith("rgb(") &&
+			/^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/i.test(trimmed)
+		)
+			return "rgb";
 
-	const hslToRgb = (h, s, l) => {
-		h /= 360;
-		s /= 100;
-		l /= 100;
-		let r, g, b;
+		// Check hsl format
+		if (
+			trimmed.startsWith("hsl(") &&
+			/^hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\)$/i.test(trimmed)
+		)
+			return "hsl";
 
-		if (s === 0) {
-			r = g = b = l;
-		} else {
-			const hue2rgb = (p, q, t) => {
-				if (t < 0) t += 1;
-				if (t > 1) t -= 1;
-				if (t < 1 / 6) return p + (q - p) * 6 * t;
-				if (t < 1 / 2) return q;
-				if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-				return p;
-			};
+		// Check oklch format
+		if (
+			trimmed.startsWith("oklch(") &&
+			/^oklch\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*\)$/i.test(trimmed)
+		)
+			return "oklch";
 
-			const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-			const p = 2 * l - q;
-			r = hue2rgb(p, q, h + 1 / 3);
-			g = hue2rgb(p, q, h);
-			b = hue2rgb(p, q, h - 1 / 3);
-		}
-
-		return {
-			r: Math.round(r * 255),
-			g: Math.round(g * 255),
-			b: Math.round(b * 255),
-		};
-	};
-
-	const rgbToOklch = (r, g, b) => {
-		// Convert RGB to linear RGB
-		const linearR = r / 255;
-		const linearG = g / 255;
-		const linearB = b / 255;
-
-		// Convert linear RGB to XYZ (sRGB to XYZ matrix)
-		const x = 0.4124564 * linearR + 0.3575761 * linearG + 0.1804375 * linearB;
-		const y = 0.2126729 * linearR + 0.7151522 * linearG + 0.072175 * linearB;
-		const z = 0.0193339 * linearR + 0.119192 * linearG + 0.9503041 * linearB;
-
-		// Convert XYZ to Lab
-		const fx = x > 0.008856 ? Math.cbrt(x) : 7.787 * x + 16 / 116;
-		const fy = y > 0.008856 ? Math.cbrt(y) : 7.787 * y + 16 / 116;
-		const fz = z > 0.008856 ? Math.cbrt(z) : 7.787 * z + 16 / 116;
-
-		const l = 116 * fy - 16;
-		const a = 500 * (fx - fy);
-		const bLab = 200 * (fy - fz);
-
-		// Convert Lab to OKLab (simplified approximation)
-		const lOk = l / 100;
-		const aOk = a / 100;
-		const bOk = bLab / 100;
-
-		// Convert OKLab to OKLCH
-		const c = Math.sqrt(aOk * aOk + bOk * bOk);
-		const h = Math.atan2(bOk, aOk) * (180 / Math.PI);
-		const hNormalized = h < 0 ? h + 360 : h;
-
-		return {
-			l: Number(lOk.toFixed(2)),
-			c: Number(c.toFixed(2)),
-			h: Number(hNormalized.toFixed(0)),
-		};
-	};
-
-	const oklchToRgb = (l, c, h) => {
-		// Convert OKLCH to OKLab
-		const hRad = (h * Math.PI) / 180;
-		const a = c * Math.cos(hRad);
-		const b = c * Math.sin(hRad);
-
-		// Convert OKLab to Lab (simplified approximation)
-		const lLab = l * 100;
-		const aLab = a * 100;
-		const bLab = b * 100;
-
-		// Convert Lab to XYZ
-		const fy = (lLab + 16) / 116;
-		const fx = aLab / 500 + fy;
-		const fz = fy - bLab / 200;
-
-		const x = fx > 0.206897 ? fx * fx * fx : (fx - 16 / 116) / 7.787;
-		const y = fy > 0.206897 ? fy * fy * fy : (fy - 16 / 116) / 7.787;
-		const z = fz > 0.206897 ? fz * fz * fz : (fz - 16 / 116) / 7.787;
-
-		// Convert XYZ to linear RGB
-		const linearR = 3.2404542 * x - 1.5371385 * y - 0.4985314 * z;
-		const linearG = -0.969266 * x + 1.8760108 * y + 0.041556 * z;
-		const linearB = 0.0556434 * x - 0.2040259 * y + 1.0572252 * z;
-
-		// Convert linear RGB to sRGB
-		const gamma = (val) => {
-			if (val <= 0.0031308) {
-				return 12.92 * val;
-			}
-			return 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
-		};
-
-		return {
-			r: Math.round(Math.max(0, Math.min(255, gamma(linearR) * 255))),
-			g: Math.round(Math.max(0, Math.min(255, gamma(linearG) * 255))),
-			b: Math.round(Math.max(0, Math.min(255, gamma(linearB) * 255))),
-		};
-	};
-
-	const parseColor = useCallback((colorString, format) => {
-		if (!colorString) return null;
-
-		try {
-			switch (format) {
-				case "hex": {
-					const hex = colorString.replace("#", "");
-					if (!/^[0-9A-Fa-f]{6}$/.test(hex)) return null;
-					return hexToRgb(`#${hex}`);
-				}
-				case "rgb": {
-					const match = colorString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-					if (!match) return null;
-					return {
-						r: parseInt(match[1], 10),
-						g: parseInt(match[2], 10),
-						b: parseInt(match[3], 10),
-					};
-				}
-				case "hsl": {
-					const match = colorString.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-					if (!match) return null;
-					const hsl = {
-						h: parseInt(match[1], 10),
-						s: parseInt(match[2], 10),
-						l: parseInt(match[3], 10),
-					};
-					return hslToRgb(hsl.h, hsl.s, hsl.l);
-				}
-				case "oklch": {
-					const match = colorString.match(
-						/oklch\(([\d.]+),\s*([\d.]+),\s*([\d.]+)\)/,
-					);
-					if (!match) return null;
-					const oklch = {
-						l: parseFloat(match[1]),
-						c: parseFloat(match[2]),
-						h: parseFloat(match[3]),
-					};
-					return oklchToRgb(oklch.l, oklch.c, oklch.h);
-				}
-				default:
-					return null;
-			}
-		} catch {
-			return null;
-		}
+		return null;
 	}, []);
+
+	// Simple cache to avoid re-parsing the same value (using ref to persist across renders)
+	const parseCacheRef = useRef(new Map());
+
+	const parseColor = useCallback(
+		(colorString) => {
+			if (!colorString) return null;
+
+			const cache = parseCacheRef.current;
+
+			// Check cache first
+			const cached = cache.get(colorString);
+			if (cached !== undefined) return cached;
+
+			const format = detectColorFormat(colorString);
+			if (!format) {
+				cache.set(colorString, null);
+				return null;
+			}
+
+			try {
+				let result = null;
+				switch (format) {
+					case "hex": {
+						const hex = colorString.replace("#", "").trim();
+						if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+							cache.set(colorString, null);
+							return null;
+						}
+						result = hexToRgb(`#${hex}`);
+						break;
+					}
+					case "rgb": {
+						const match = colorString.match(
+							/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
+						);
+						if (!match) {
+							cache.set(colorString, null);
+							return null;
+						}
+						result = {
+							r: Math.max(0, Math.min(255, parseInt(match[1], 10))),
+							g: Math.max(0, Math.min(255, parseInt(match[2], 10))),
+							b: Math.max(0, Math.min(255, parseInt(match[3], 10))),
+						};
+						break;
+					}
+					case "hsl": {
+						const match = colorString.match(
+							/hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)/i,
+						);
+						if (!match) {
+							cache.set(colorString, null);
+							return null;
+						}
+						const hsl = {
+							h: Math.max(0, Math.min(360, parseInt(match[1], 10))),
+							s: Math.max(0, Math.min(100, parseInt(match[2], 10))),
+							l: Math.max(0, Math.min(100, parseInt(match[3], 10))),
+						};
+						result = hslToRgb(hsl.h, hsl.s, hsl.l);
+						break;
+					}
+					case "oklch": {
+						const match = colorString.match(
+							/oklch\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/i,
+						);
+						if (!match) {
+							cache.set(colorString, null);
+							return null;
+						}
+						const oklch = {
+							l: Math.max(0, Math.min(1, parseFloat(match[1]))),
+							c: Math.max(0, parseFloat(match[2])),
+							h: parseFloat(match[3]),
+						};
+						result = oklchToRgb(oklch.l, oklch.c, oklch.h);
+						break;
+					}
+					default:
+						cache.set(colorString, null);
+						return null;
+				}
+
+				// Cache result (limit cache size to prevent memory issues)
+				if (cache.size > 50) {
+					const firstKey = cache.keys().next().value;
+					cache.delete(firstKey);
+				}
+				cache.set(colorString, result);
+				return result;
+			} catch {
+				cache.set(colorString, null);
+				return null;
+			}
+		},
+		[detectColorFormat],
+	);
 
 	const formatColor = useCallback((rgb, format) => {
 		if (!rgb) return "";
@@ -648,25 +764,45 @@ export default function Page() {
 		}
 	}, []);
 
-	// Convert color picker value to selected format
-	const colorPickerConverted = useMemo(() => {
-		const rgb = hexToRgb(colorPickerValue);
-		if (!rgb) return "";
-		return formatColor(rgb, colorPickerFormat);
-	}, [colorPickerValue, colorPickerFormat, formatColor]);
+	// Get RGB from input color (using deferred value for performance)
+	const inputRgb = useMemo(() => {
+		return parseColor(deferredInputColor);
+	}, [deferredInputColor, parseColor]);
+
+	// Convert input color value to hex (for color picker) - use immediate value for picker
+	const inputColorHex = useMemo(() => {
+		// For hex values, use immediate value for instant feedback
+		if (/^#?[0-9A-Fa-f]{6}$/i.test(inputColorValue.trim())) {
+			const hex = inputColorValue.replace("#", "").trim();
+			return `#${hex}`;
+		}
+		// For other formats, use parsed RGB
+		if (!inputRgb) return "#74ACDF";
+		return formatColor(inputRgb, "hex");
+	}, [inputColorValue, inputRgb, formatColor]);
 
 	// Convert input color value to output format
 	const convertedColor = useMemo(() => {
-		const rgb = parseColor(inputColorValue, inputColorFormat);
-		if (!rgb) return "";
-		return formatColor(rgb, outputColorFormat);
-	}, [
-		inputColorValue,
-		inputColorFormat,
-		outputColorFormat,
-		parseColor,
-		formatColor,
-	]);
+		if (!inputRgb) return "";
+		return formatColor(inputRgb, outputColorFormat);
+	}, [inputRgb, outputColorFormat, formatColor]);
+
+	// Optimized handlers
+	const handleColorPickerChange = useCallback((hex) => {
+		// react-colorful provides hex directly
+		setInputColorValue(hex);
+	}, []);
+
+	const handleInputChange = useCallback(
+		(e) => {
+			const value = e.target.value;
+			// Use transition for text input to avoid blocking UI
+			startTransition(() => {
+				setInputColorValue(value);
+			});
+		},
+		[startTransition],
+	);
 
 	return (
 		<TooltipProvider delayDuration={400} skipDelayDuration={0} shared={true}>
@@ -688,176 +824,102 @@ export default function Page() {
 					<div className="flex flex-col gap-4">
 						<h2 className="text-2xl font-bold tracking-tight">Color Picker</h2>
 						<p className="text-muted-foreground text-sm">
-							Selecciona un color y elige el formato en que quieres verlo.
+							Select a color and choose the format you want to see it in.
 						</p>
 					</div>
 
-					<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-						<div className="flex items-center gap-4">
-							<Label htmlFor="color-picker" className="text-sm font-medium">
-								Color:
-							</Label>
-							<input
-								id="color-picker"
-								type="color"
-								value={colorPickerValue}
-								onChange={(e) => setColorPickerValue(e.target.value)}
-								className="h-10 w-20 cursor-pointer rounded-md border border-input bg-transparent"
-							/>
+					<div className="flex items-center justify-start gap-12">
+						<div className="flex items-start gap-6 flex-wrap">
+							<div className="relative p-4 rounded-lg border border-border bg-card">
+								<HexColorPicker
+									color={inputColorHex}
+									onChange={handleColorPickerChange}
+									className="!w-40 !h-40"
+								/>
+							</div>
 						</div>
 
-						<div className="flex items-center gap-4">
-							<Label
-								htmlFor="color-picker-format"
-								className="text-sm font-medium"
-							>
-								Formato:
-							</Label>
-							<Select
-								value={colorPickerFormat}
-								onValueChange={setColorPickerFormat}
-							>
-								<SelectTrigger
-									id="color-picker-format"
-									className="w-[140px]"
-									variant="raised"
-								>
-									<SelectValue />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value="hex">HEX</SelectItem>
-									<SelectItem value="rgb">RGB</SelectItem>
-									<SelectItem value="hsl">HSL</SelectItem>
-									<SelectItem value="oklch">OKLCH</SelectItem>
-								</SelectContent>
-							</Select>
-						</div>
-
-						<div className="flex-1">
-							<Card className="p-4 bg-muted/50">
-								<div className="flex items-center gap-2">
-									<Label className="text-sm font-medium">Valor:</Label>
-									<Snippet className="flex-1 bg-transparent border-0">
-										<SnippetHeader className="bg-transparent border-0">
-											<span className="text-sm font-mono">
-												{colorPickerConverted}
-											</span>
-											<SnippetCopyButton value={colorPickerConverted} />
-										</SnippetHeader>
-									</Snippet>
-								</div>
-							</Card>
-						</div>
-					</div>
-				</div>
-
-				<Separator decoration />
-
-				{/* Color Converter Section */}
-				<div className="flex flex-col gap-6 p-6 lg:p-12 pt-4">
-					<div className="flex flex-col gap-4">
-						<h2 className="text-2xl font-bold tracking-tight">
-							Color Converter
-						</h2>
-						<p className="text-muted-foreground text-sm">
-							Ingresa un valor de color y conviértelo a otro formato en tiempo
-							real.
-						</p>
-					</div>
-
-					<div className="flex flex-col gap-4">
-						<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+						<div className="grid grid-cols-[auto_1fr] grid-rows-3 gap-4">
 							<Label
 								htmlFor="input-color"
 								className="text-sm font-medium min-w-[80px]"
 							>
-								Entrada:
+								Input:
 							</Label>
-							<div className="flex-1 flex gap-2">
-								<Input
+							<InputGroup>
+								<InputGroupInput
 									id="input-color"
 									type="text"
 									value={inputColorValue}
-									onChange={(e) => setInputColorValue(e.target.value)}
-									placeholder="Ej: #3b82f6 o rgb(59, 130, 246)"
+									onChange={handleInputChange}
+									placeholder=""
 									className="flex-1"
 								/>
-								<Select
-									value={inputColorFormat}
-									onValueChange={setInputColorFormat}
-								>
-									<SelectTrigger className="w-[120px]" variant="raised">
-										<SelectValue />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="hex">HEX</SelectItem>
-										<SelectItem value="rgb">RGB</SelectItem>
-										<SelectItem value="hsl">HSL</SelectItem>
-										<SelectItem value="oklch">OKLCH</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-						</div>
+								<InputGroupAddon align="inline-end" className="pr-0.25">
+									<InputGroupText>
+										<SnippetCopyButton
+											size="icon-sm"
+											className="rounded-sm"
+											value={inputColorValue}
+										/>
+									</InputGroupText>
+								</InputGroupAddon>
+							</InputGroup>
 
-						<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+							<div className="col-start-2 w-full flex items-center justify-center">
+								<ButtonGroup>
+									<ButtonGroupText
+										size="icon"
+										variant="outline"
+										className="p-0 text-center flex items-center justify-center text-muted-foreground hover:bg-background dark:bg-input/30 dark:hover:bg-input/30"
+									>
+										<ArrowDown />
+									</ButtonGroupText>
+									<Select
+										value={outputColorFormat}
+										onValueChange={setOutputColorFormat}
+									>
+										<SelectTrigger className="w-[120px]" animation="colors">
+											<SelectValue />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="hex">HEX</SelectItem>
+											<SelectItem value="rgb">RGB</SelectItem>
+											<SelectItem value="hsl">HSL</SelectItem>
+											<SelectItem value="oklch">OKLCH</SelectItem>
+										</SelectContent>
+									</Select>
+								</ButtonGroup>
+							</div>
+
 							<Label
 								htmlFor="output-color"
 								className="text-sm font-medium min-w-[80px]"
 							>
-								Salida:
+								Output:
 							</Label>
 							<div className="flex-1 flex gap-2">
-								<Card className="flex-1 p-4 bg-muted/50">
-									<div className="flex items-center gap-2">
-										<span className="text-sm font-mono text-muted-foreground">
-											{convertedColor || "Ingresa un color válido"}
-										</span>
-										{convertedColor && (
-											<SnippetCopyButton value={convertedColor} />
-										)}
-									</div>
-								</Card>
-								<Select
-									value={outputColorFormat}
-									onValueChange={setOutputColorFormat}
-								>
-									<SelectTrigger className="w-[120px]" variant="raised">
-										<SelectValue />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="hex">HEX</SelectItem>
-										<SelectItem value="rgb">RGB</SelectItem>
-										<SelectItem value="hsl">HSL</SelectItem>
-										<SelectItem value="oklch">OKLCH</SelectItem>
-									</SelectContent>
-								</Select>
+								<InputGroup>
+									<InputGroupInput
+										id="input-color"
+										type="text"
+										value={convertedColor}
+										placeholder=""
+										className="flex-1"
+										readOnly
+									/>
+									<InputGroupAddon align="inline-end" className="pr-0.25">
+										<InputGroupText>
+											<SnippetCopyButton
+												size="icon-sm"
+												className="rounded-sm"
+												value={convertedColor}
+											/>
+										</InputGroupText>
+									</InputGroupAddon>
+								</InputGroup>
 							</div>
 						</div>
-
-						{inputColorValue && convertedColor && (
-							<div className="flex items-center gap-4 mt-2">
-								<div
-									className="w-16 h-16 rounded-md border border-input shadow-sm"
-									style={{
-										backgroundColor: formatColor(
-											parseColor(inputColorValue, inputColorFormat),
-											"hex",
-										),
-									}}
-								/>
-								<div className="flex flex-col gap-1">
-									<span className="text-xs text-muted-foreground">
-										Vista previa
-									</span>
-									<span className="text-sm font-mono">
-										{formatColor(
-											parseColor(inputColorValue, inputColorFormat),
-											"hex",
-										)}
-									</span>
-								</div>
-							</div>
-						)}
 					</div>
 				</div>
 
@@ -919,49 +981,12 @@ export default function Page() {
 										selectedFormat,
 									);
 
-									const handleColorClick = () => {
-										if (
-											typeof navigator !== "undefined" &&
-											navigator.clipboard &&
-											typeof navigator.clipboard.writeText === "function"
-										) {
-											navigator.clipboard.writeText(displayValue).catch(() => {
-												// fallback: try legacy execCommand if available
-												const textarea = document.createElement("textarea");
-												textarea.value = displayValue;
-												textarea.style.position = "fixed";
-												textarea.style.opacity = "0";
-												document.body.appendChild(textarea);
-												textarea.select();
-												try {
-													document.execCommand("copy");
-												} catch (err) {
-													// fallback failed, possibly due to iOS/WebKit limitations
-												}
-												document.body.removeChild(textarea);
-											});
-										} else {
-											// fallback if clipboard API is not available
-											const textarea = document.createElement("textarea");
-											textarea.value = displayValue;
-											textarea.style.position = "fixed";
-											textarea.style.opacity = "0";
-											document.body.appendChild(textarea);
-											textarea.select();
-											try {
-												document.execCommand("copy");
-											} catch (err) {
-												// fallback failed, possibly due to iOS/WebKit limitations
-											}
-											document.body.removeChild(textarea);
-										}
-
+									const handleColorClick = async () => {
+										await copyToClipboard(displayValue);
 										toast({
 											toastId: "success-copy-color-to-clipboard",
 											type: "success",
 											title: "Copied to clipboard!",
-											//description:
-											//	"The color has been copied to your clipboard.",
 										});
 									};
 

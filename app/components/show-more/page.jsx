@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -42,6 +43,8 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/show-more.jsx.txt";
 
 const code = [
 	{
@@ -410,22 +413,12 @@ export function ShowMore({
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/show-more",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/show-more",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/show-more",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/show-more",
+		path: "@/components/optics/show-more.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -440,9 +433,8 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("show-more", installDeps);
 
-	// Función para obtener el anterior o siguiente item de la sección "Components"
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
@@ -547,148 +539,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader className="">
-										<SnippetTabsList variant="outline">
-											{commands.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{commands.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeCommand && (
-													<SnippetCopyButton value={activeCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={showMoreComponentCode}
-									defaultValue={showMoreComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockFiles>
-											{(item) => (
-												<CodeBlockFilename
-													key={item.language}
-													value={item.filename}
-												>
-													{item.filename}
-												</CodeBlockFilename>
-											)}
-										</CodeBlockFiles>
-
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="show-more"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -705,24 +566,20 @@ export default function Page() {
 									description: "The content to display.",
 								},
 								{
-									name: "defaultContent",
+									name: "moreContent",
 									type: "React.ReactNode",
-									description: "Default content to show when collapsed.",
-								},
-								{
-									name: "maxLength",
-									type: "number",
-									description: "Maximum character length before truncation.",
-								},
-								{
-									name: "maxLines",
-									type: "number",
-									description: "Maximum number of lines before truncation.",
+									description: "Additional content to show when expanded.",
 								},
 								{
 									name: "maskColor",
 									type: 'string | { default: string, dark: string } (default: "oklch(var(--background))")',
 									description: "Color for the fade mask effect.",
+								},
+								{
+									name: "showSeparator",
+									type: "boolean (default: true)",
+									description:
+										"Whether to show the separator line above the Show More button.",
 								},
 							],
 						},

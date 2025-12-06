@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -41,6 +42,8 @@ import { ArrowUpRight, Bold, Italic, Underline } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
+import componentCode from "@/registry/optics/toggle.jsx.txt";
+
 const code = [
 	{
 		language: "jsx",
@@ -57,13 +60,13 @@ const toggleComponentCode = [
 	{
 		language: "jsx",
 		filename: "components/ui/optics/toggle.jsx",
-		code: `"use client"
+		code: `"use client";
 
-import * as React from "react"
-import * as TogglePrimitive from "@radix-ui/react-toggle"
+import * as React from "react";
+import * as TogglePrimitive from "@radix-ui/react-toggle";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const toggleVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium hover:bg-muted hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-[color,box-shadow] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive whitespace-nowrap",
@@ -105,22 +108,12 @@ export { Toggle, toggleVariants }`,
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/toggle",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/toggle",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/toggle",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/toggle",
+		path: "@/components/optics/toggle.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -133,7 +126,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("toggle", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -164,13 +157,13 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<Toggle aria-label="Toggle italic">
+						<Toggle aria-label="Toggle italic" variant="raised">
 							<Italic className="h-4 w-4" />
 						</Toggle>
-						<Toggle aria-label="Toggle bold" variant="outline">
+						<Toggle aria-label="Toggle bold" variant="raised">
 							<Bold className="h-4 w-4" />
 						</Toggle>
-						<Toggle aria-label="Toggle underline" size="sm">
+						<Toggle aria-label="Toggle underline" variant="raised">
 							<Underline className="h-4 w-4" />
 						</Toggle>
 					</CardContent>
@@ -224,98 +217,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={toggleComponentCode}
-									defaultValue={toggleComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="toggle"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -344,12 +256,14 @@ export default function Page() {
 								{
 									name: "pressed",
 									type: "boolean",
-									description: "The controlled pressed state of the toggle. Use with onPressedChange.",
+									description:
+										"The controlled pressed state of the toggle. Use with onPressedChange.",
 								},
 								{
 									name: "defaultPressed",
 									type: "boolean",
-									description: "The uncontrolled default pressed state of the toggle.",
+									description:
+										"The uncontrolled default pressed state of the toggle.",
 								},
 								{
 									name: "onPressedChange",
@@ -359,7 +273,8 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the toggle.",
+									description:
+										"When true, prevents user interaction with the toggle.",
 								},
 							],
 						},

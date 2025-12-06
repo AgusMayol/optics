@@ -30,7 +30,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/registry/optics/select";
 import {
 	Tooltip,
 	TooltipTrigger,
@@ -45,6 +45,7 @@ import {
 	SnippetTabsTrigger,
 } from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
+import { PropsTable } from "@/components/props-table";
 
 const commands = [
 	{
@@ -107,106 +108,36 @@ export default function Page() {
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 					Props
 				</h2>
-				<GridContainer
-					cols={12}
-					border={false}
-					rows={5}
-					className="[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-md [&>*:last-child]:rounded-b-md [&>*:nth-child(odd)]:bg-muted"
-				>
-					<GridRow>
-						<GridItem
-							span={4}
-							className="text-xs font-semibold justify-start gap-1"
-						>
-							<ALargeSmall />
-							Name
-						</GridItem>
-						<GridItem span={4} className="text-xs font-semibold gap-1 mr-4">
-							<Binary size={16} />
-							Type
-						</GridItem>
-						<GridItem span={4} className="text-xs font-semibold gap-1 mr-4">
-							<CircleDashed size={16} />
-							Default
-						</GridItem>
-					</GridRow>
-					<GridRow>
-						<GridItem
-							span={4}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-						>
-							<Badge
-								variant="outline"
-								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-							>
-								size
-							</Badge>
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono italic">
-							number
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono tabular-nums">
-							24
-						</GridItem>
-					</GridRow>
-					<GridRow>
-						<GridItem
-							span={4}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-						>
-							<Badge
-								variant="outline"
-								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-							>
-								color
-							</Badge>
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono italic">
-							string
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
-							currentColor
-						</GridItem>
-					</GridRow>
-					<GridRow>
-						<GridItem
-							span={4}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-						>
-							<Badge
-								variant="outline"
-								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-							>
-								strokeWidth
-							</Badge>
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono italic">
-							number
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono tabular-nums">
-							2
-						</GridItem>
-					</GridRow>
-					<GridRow>
-						<GridItem
-							span={4}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
-						>
-							<Badge
-								variant="outline"
-								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-							>
-								absoluteStrokeWidth
-							</Badge>
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono italic">
-							boolean
-						</GridItem>
-						<GridItem span={4} className="text-xs font-mono">
-							false
-						</GridItem>
-					</GridRow>
-				</GridContainer>
+
+				<PropsTable
+					data={[
+						{
+							component: "<Icon />",
+							props: [
+								{
+									name: "size",
+									type: "number (default: 24)",
+									description: "The size of the icon.",
+								},
+								{
+									name: "color",
+									type: "string (default: currentColor)",
+									description: "The color of the icon.",
+								},
+								{
+									name: "strokeWidth",
+									type: "number (default: 2)",
+									description: "The stroke width of the icon.",
+								},
+								{
+									name: "absoluteStrokeWidth",
+									type: "boolean (default: false)",
+									description: "Whether to use absolute stroke width.",
+								},
+							],
+						},
+					]}
+				/>
 			</div>
 		</main>
 	);

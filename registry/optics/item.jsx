@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/registry/optics/separator";
 import { otherThemes } from "@/registry/optics/button";
 
 function ItemGroup({ className, ...props }) {

@@ -20,7 +20,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/registry/optics/select";
 import {
 	Tooltip,
 	TooltipTrigger,

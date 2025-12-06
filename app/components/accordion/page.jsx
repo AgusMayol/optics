@@ -1,5 +1,6 @@
 "use client";
 import { ComponentNavigation } from "@/components/component-navigation";
+import { InstallationGuide } from "@/components/installation-guide";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import {
@@ -20,26 +21,12 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/accordion.jsx.txt";
 
 const code = [
 	{
@@ -64,82 +51,17 @@ const code = [
 	},
 ];
 
-const accordionComponentCode = [
+import accordionPrimitiveCode from "@/registry/optics/accordion-primitive.jsx.txt";
+
+// Leer archivos en build time usando readManualFiles
+const componentFiles = [
 	{
-		language: "jsx",
-		filename: "components/ui/optics/accordion.jsx",
-		code: `import * as React from "react";
-import { ChevronDownIcon } from "lucide-react";
-
-import {
-	Accordion as AccordionPrimitive,
-	AccordionItem as AccordionItemPrimitive,
-	AccordionHeader as AccordionHeaderPrimitive,
-	AccordionTrigger as AccordionTriggerPrimitive,
-	AccordionContent as AccordionContentPrimitive,
-} from "@/registry/optics/accordion-primitive";
-import { cn } from "@/lib/utils";
-
-function Accordion(props) {
-	return <AccordionPrimitive {...props} />;
-}
-
-function AccordionItem({ className, ...props }) {
-	return (
-		<AccordionItemPrimitive
-			className={cn("border-b last:border-b-0", className)}
-			{...props}
-		/>
-	);
-}
-
-function AccordionTrigger({ className, children, showArrow = true, ...props }) {
-	return (
-		<AccordionHeaderPrimitive className="flex">
-			<AccordionTriggerPrimitive
-				className={cn(
-					"focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
-					className,
-				)}
-				{...props}
-			>
-				{children}
-				{showArrow && (
-					<ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
-				)}
-			</AccordionTriggerPrimitive>
-		</AccordionHeaderPrimitive>
-	);
-}
-
-function AccordionContent({ className, children, ...props }) {
-	return (
-		<AccordionContentPrimitive {...props}>
-			<div className={cn("text-sm pt-0 pb-4", className)}>{children}</div>
-		</AccordionContentPrimitive>
-	);
-}
-
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };`,
-	},
-];
-
-const commands = [
-	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/accordion",
+		path: "@/components/optics/accordion.jsx",
+		code: componentCode,
 	},
 	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/accordion",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/accordion",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/accordion",
+		path: "@/components/optics/accordion-primitive.jsx",
+		code: accordionPrimitiveCode,
 	},
 ];
 
@@ -171,7 +93,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, installDeps);
+	} = useCookiePreferences("accordion", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -271,142 +193,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader>
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader>
-										<SnippetTabsList variant="outline">
-											{installDeps.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{installDeps.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeDepsCommand && (
-													<SnippetCopyButton value={activeDepsCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={accordionComponentCode}
-									defaultValue={accordionComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockFiles>
-											{(item) => (
-												<CodeBlockFilename
-													key={item.language}
-													value={item.filename}
-												>
-													{item.filename}
-												</CodeBlockFilename>
-											)}
-										</CodeBlockFiles>
-
-										<CodeBlockCopyButton variant="ghost" />
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="accordion"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -421,32 +218,38 @@ export default function Page() {
 								{
 									name: "type",
 									type: `"single" | "multiple"`,
-									description: "Determines whether one or multiple items can be opened at the same time.",
+									description:
+										"Determines whether one or multiple items can be opened at the same time.",
 								},
 								{
 									name: "value",
 									type: "string | string[]",
-									description: "The controlled value of the accordion. Use with onValueChange.",
+									description:
+										"The controlled value of the accordion. Use with onValueChange.",
 								},
 								{
 									name: "defaultValue",
 									type: "string | string[]",
-									description: "The uncontrolled default value of the accordion.",
+									description:
+										"The uncontrolled default value of the accordion.",
 								},
 								{
 									name: "onValueChange",
 									type: "(value: string | string[]) => void",
-									description: "Callback fired when the accordion value changes.",
+									description:
+										"Callback fired when the accordion value changes.",
 								},
 								{
 									name: "collapsible",
 									type: "boolean",
-									description: "When type is 'single', allows closing content when clicking trigger for an open item.",
+									description:
+										"When type is 'single', allows closing content when clicking trigger for an open item.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the accordion.",
+									description:
+										"When true, prevents user interaction with the accordion.",
 								},
 								{
 									name: "dir",
@@ -456,12 +259,14 @@ export default function Page() {
 								{
 									name: "orientation",
 									type: `"horizontal" | "vertical"`,
-									description: "The orientation of the accordion. Defaults to 'vertical'.",
+									description:
+										"The orientation of the accordion. Defaults to 'vertical'.",
 								},
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the accordion.",
+									description:
+										"Additional CSS classes to apply to the accordion.",
 								},
 							],
 						},
@@ -471,12 +276,14 @@ export default function Page() {
 								{
 									name: "value",
 									type: "string (required)",
-									description: "A unique value for the item. Used to identify which item is open.",
+									description:
+										"A unique value for the item. Used to identify which item is open.",
 								},
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the accordion item.",
+									description:
+										"Additional CSS classes to apply to the accordion item.",
 								},
 							],
 						},
@@ -486,17 +293,20 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the trigger.",
+									description:
+										"Additional CSS classes to apply to the trigger.",
 								},
 								{
 									name: "showArrow",
 									type: "boolean (default: true)",
-									description: "Whether to show the chevron arrow icon. Defaults to true.",
+									description:
+										"Whether to show the chevron arrow icon. Defaults to true.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the trigger.",
+									description:
+										"When true, prevents user interaction with the trigger.",
 								},
 							],
 						},
@@ -506,17 +316,20 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 								{
 									name: "keepRendered",
 									type: "boolean (default: false)",
-									description: "When true, the content remains in the DOM even when closed. Defaults to false.",
+									description:
+										"When true, the content remains in the DOM even when closed. Defaults to false.",
 								},
 								{
 									name: "transition",
 									type: "object",
-									description: "Animation transition configuration. Defaults to { type: 'spring', stiffness: 150, damping: 22 }.",
+									description:
+										"Animation transition configuration. Defaults to { type: 'spring', stiffness: 150, damping: 22 }.",
 								},
 							],
 						},

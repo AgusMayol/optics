@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -45,6 +46,8 @@ import {
 import { ArrowUpRight, Search } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/input-group.jsx.txt";
 
 const code = [
 	{
@@ -171,22 +174,12 @@ export {
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/input-group",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/input-group",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/input-group",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/input-group",
+		path: "@/components/optics/input-group.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -199,7 +192,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("input-group", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -232,7 +225,7 @@ export default function Page() {
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex flex-col items-center justify-center gap-4 min-h-[200px]">
 						<div className="w-full max-w-sm">
-							<InputGroup>
+							<InputGroup variant="raised">
 								<InputGroupInput placeholder="Search..." />
 								<InputGroupAddon>
 									<Search className="size-4" />
@@ -293,98 +286,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={inputGroupComponentCode}
-									defaultValue={inputGroupComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="input-group"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -398,7 +310,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the input group.",
+									description:
+										"Additional CSS classes to apply to the input group.",
+								},
+								{
+									name: "variant",
+									type: "string",
+									description:
+										"Variant style for the input group (inherits button variant styles).",
 								},
 							],
 						},
@@ -413,7 +332,8 @@ export default function Page() {
 								{
 									name: "align",
 									type: `"inline-start" | "inline-end" | "block-start" | "block-end" (default: "inline-start")`,
-									description: "The alignment of the addon relative to the input. Defaults to 'inline-start'.",
+									description:
+										"The alignment of the addon relative to the input. Defaults to 'inline-start'.",
 								},
 							],
 						},
@@ -433,7 +353,8 @@ export default function Page() {
 								{
 									name: "variant",
 									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link" (default: "ghost")`,
-									description: "Variant style for the button. Defaults to 'ghost'.",
+									description:
+										"Variant style for the button. Defaults to 'ghost'.",
 								},
 								{
 									name: "size",
@@ -448,7 +369,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the text element.",
+									description:
+										"Additional CSS classes to apply to the text element.",
 								},
 							],
 						},
@@ -463,12 +385,14 @@ export default function Page() {
 								{
 									name: "type",
 									type: "string (standard HTML input types)",
-									description: "The type of input (text, email, password, etc.).",
+									description:
+										"The type of input (text, email, password, etc.).",
 								},
 								{
 									name: "variant",
 									type: `"raised" | "ghost" | "outline"`,
-									description: "Variant style that inherits button variant styles.",
+									description:
+										"Variant style that inherits button variant styles.",
 								},
 							],
 						},
@@ -478,12 +402,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the textarea.",
+									description:
+										"Additional CSS classes to apply to the textarea.",
 								},
 								{
 									name: "variant",
 									type: `"raised" | "ghost" | "outline"`,
-									description: "Variant style that inherits button variant styles.",
+									description:
+										"Variant style that inherits button variant styles.",
 								},
 							],
 						},

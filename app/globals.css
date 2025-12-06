@@ -345,3 +345,33 @@ img {
   font-weight: bold;
 }
 
+/* react-colorful styles */
+.react-colorful {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+}
+
+.react-colorful__saturation {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.react-colorful__hue {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.react-colorful__pointer {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.react-colorful__hue-pointer {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+

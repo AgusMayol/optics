@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/registry/optics/button";
 import { usePathname } from "next/navigation";
 import { ScrollArea } from "@/registry/optics/scroll-area";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/registry/optics/badge";
 import { useRef, useEffect } from "react";
 import { ArrowUpRight, Lock } from "lucide-react";
 import {

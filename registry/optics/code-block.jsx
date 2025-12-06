@@ -97,7 +97,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/registry/optics/select";
 import { toast } from "@/registry/optics/sonner";
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
 import { cn } from "@/lib/utils";

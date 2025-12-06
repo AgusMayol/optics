@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -45,6 +46,8 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
+import componentCode from "@/registry/optics/input-otp.jsx.txt";
+
 const code = [
 	{
 		language: "jsx",
@@ -72,13 +75,13 @@ const inputOtpComponentCode = [
 	{
 		language: "jsx",
 		filename: "components/ui/optics/input-otp.jsx",
-		code: `"use client"
+		code: `"use client";
 
-import * as React from "react"
-import { OTPInput, OTPInputContext } from "input-otp"
-import { MinusIcon } from "lucide-react"
+import * as React from "react";
+import { OTPInput, OTPInputContext } from "input-otp";
+import { MinusIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function InputOTP({
   className,
@@ -137,22 +140,12 @@ export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }`,
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/input-otp",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/input-otp",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/input-otp",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/input-otp",
+		path: "@/components/optics/input-otp.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -165,7 +158,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("input-otp", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -196,14 +189,14 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<InputOTP maxLength={6}>
+						<InputOTP maxLength={6} variant="raised">
 							<InputOTPGroup>
-								<InputOTPSlot index={0} />
-								<InputOTPSlot index={1} />
-								<InputOTPSlot index={2} />
-								<InputOTPSlot index={3} />
-								<InputOTPSlot index={4} />
-								<InputOTPSlot index={5} />
+								<InputOTPSlot variant="raised" index={0} />
+								<InputOTPSlot variant="raised" index={1} />
+								<InputOTPSlot variant="raised" index={2} />
+								<InputOTPSlot variant="raised" index={3} />
+								<InputOTPSlot variant="raised" index={4} />
+								<InputOTPSlot variant="raised" index={5} />
 							</InputOTPGroup>
 						</InputOTP>
 					</CardContent>
@@ -257,98 +250,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={inputOtpComponentCode}
-									defaultValue={inputOtpComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="input-otp"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -362,7 +274,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the OTP input.",
+									description:
+										"Additional CSS classes to apply to the OTP input.",
 								},
 								{
 									name: "containerClassName",
@@ -370,19 +283,27 @@ export default function Page() {
 									description: "CSS classes for the container element.",
 								},
 								{
+									name: "variant",
+									type: 'string (default: "outline")',
+									description: "Variant style for the OTP input slots.",
+								},
+								{
 									name: "maxLength",
 									type: "number (required)",
-									description: "Maximum number of characters allowed in the OTP.",
+									description:
+										"Maximum number of characters allowed in the OTP.",
 								},
 								{
 									name: "value",
 									type: "string",
-									description: "The controlled value of the OTP input. Use with onChange.",
+									description:
+										"The controlled value of the OTP input. Use with onChange.",
 								},
 								{
 									name: "defaultValue",
 									type: "string",
-									description: "The uncontrolled default value of the OTP input.",
+									description:
+										"The uncontrolled default value of the OTP input.",
 								},
 								{
 									name: "onChange",
@@ -392,12 +313,14 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the OTP input.",
+									description:
+										"When true, prevents user interaction with the OTP input.",
 								},
 								{
 									name: "pattern",
 									type: "RegExp",
-									description: "Regular expression pattern to validate each character.",
+									description:
+										"Regular expression pattern to validate each character.",
 								},
 								{
 									name: "type",
@@ -429,6 +352,11 @@ export default function Page() {
 									type: "number (required)",
 									description: "The index of the slot in the OTP input.",
 								},
+								{
+									name: "variant",
+									type: 'string (default: "outline")',
+									description: "Variant style for the slot.",
+								},
 							],
 						},
 						{
@@ -437,7 +365,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the separator.",
+									description:
+										"Additional CSS classes to apply to the separator.",
 								},
 							],
 						},

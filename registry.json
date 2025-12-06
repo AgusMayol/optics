@@ -1,0 +1,1259 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "optics",
+  "homepage": "https://optics.agusmayol.com.ar",
+  "items": [
+    {
+      "name": "accordion-primitive",
+      "type": "registry:component",
+      "title": "Accordion Primitive",
+      "description": "Primitive accordion component built on Radix UI.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-accordion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/accordion-primitive.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:component",
+      "title": "Accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+      "registryDependencies": [
+        "accordion-primitive"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/accordion.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:component",
+      "title": "Alert Dialog",
+      "description": "A modal dialog that interrupts the user with important content and expects a response.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-alert-dialog",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/alert-dialog.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:component",
+      "title": "Alert",
+      "description": "Displays a callout for user attention.",
+      "registryDependencies": [],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/alert.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:component",
+      "title": "Aspect Ratio",
+      "description": "Displays content within a desired ratio.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-aspect-ratio",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/aspect-ratio.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:component",
+      "title": "Avatar",
+      "description": "An image element with a fallback for representing the user.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-avatar",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/avatar.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:component",
+      "title": "Badge",
+      "description": "Displays a badge or a component that looks like a badge.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/badge.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:component",
+      "title": "Breadcrumb",
+      "description": "Displays the path to the current resource using a hierarchy of links.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/breadcrumb.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:component",
+      "title": "Button Group",
+      "description": "Groups buttons together with proper spacing and styling.",
+      "registryDependencies": [
+        "button",
+        "separator"
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/button-group.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:component",
+      "title": "Button",
+      "description": "Displays a button or a component that looks like a button.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/button.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:component",
+      "title": "Calendar",
+      "description": "A date field component that allows users to enter and edit date.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/calendar.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:component",
+      "title": "Card",
+      "description": "Displays a card with header, content, and footer.",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/card.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:component",
+      "title": "Carousel",
+      "description": "A carousel with motion and swipe built using Embla.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "embla-carousel-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/carousel.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:component",
+      "title": "Checkbox",
+      "description": "A control that allows the user to toggle between checked and unchecked states.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/checkbox.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:component",
+      "title": "Code Block",
+      "description": "A syntax-highlighted code block component with copy functionality.",
+      "registryDependencies": [
+        "button",
+        "sonner",
+        "scroll-area"
+      ],
+      "dependencies": [
+        "@radix-ui/react-use-controllable-state",
+        "@shikijs/transformers",
+        "shiki",
+        "lucide-react",
+        "motion",
+        "react-icons",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/code-block.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "code-snippet",
+      "type": "registry:component",
+      "title": "Code Snippet",
+      "description": "A code snippet component with tabs and copy functionality.",
+      "registryDependencies": [
+        "button",
+        "tabs",
+        "scroll-area"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/code-snippet.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:component",
+      "title": "Collapsible",
+      "description": "An interactive component which expands/collapses a panel.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-collapsible",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/collapsible.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:component",
+      "title": "Command",
+      "description": "Fast, composable, unstyled command menu for React.",
+      "registryDependencies": [
+        "scroll-area"
+      ],
+      "dependencies": [
+        "cmdk",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/command.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:component",
+      "title": "Context Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a right click or a long press.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-context-menu",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/context-menu.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "Data Table",
+      "description": "Powerful table and datagrid built with TanStack Table.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@tanstack/react-table",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/data-table.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:component",
+      "title": "Date Picker",
+      "description": "A date field component that allows users to enter and edit date.",
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/date-picker.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:component",
+      "title": "Dialog",
+      "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/dialog.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:component",
+      "title": "Drawer",
+      "description": "A drawer component built with Vaul.",
+      "registryDependencies": [],
+      "dependencies": [
+        "vaul",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/drawer.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/dropdown-menu.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:component",
+      "title": "Empty",
+      "description": "Displays an empty state with optional illustration, title, and description.",
+      "registryDependencies": [],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/empty.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:component",
+      "title": "Field",
+      "description": "A field component for grouping form elements with labels and descriptions.",
+      "registryDependencies": [
+        "label",
+        "separator"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/field.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "type": "registry:component",
+      "title": "Form",
+      "description": "Builds forms with React Hook Form.",
+      "registryDependencies": [
+        "label"
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "react-hook-form",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/form.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "grid",
+      "type": "registry:component",
+      "title": "Grid",
+      "description": "A flexible grid system component for layout.",
+      "registryDependencies": [],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/grid.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "guided-tour",
+      "type": "registry:component",
+      "title": "Guided Tour",
+      "description": "A guided tour component for onboarding users.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "@radix-ui/react-slot",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/guided-tour.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:component",
+      "title": "Hover Card",
+      "description": "For sighted users to preview content available behind a link.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-hover-card",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/hover-card.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:component",
+      "title": "Input Group",
+      "description": "Groups input fields with addons, buttons, and text.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "textarea"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/input-group.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:component",
+      "title": "Input OTP",
+      "description": "Accessible one-time password component with copy paste support.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "input-otp",
+        "lucide-react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/input-otp.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:component",
+      "title": "Input",
+      "description": "Displays a form input field or a component that looks like an input.",
+      "registryDependencies": [],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/input.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:component",
+      "title": "Item",
+      "description": "A flexible item component for displaying content with media, title, description, and actions.",
+      "registryDependencies": [
+        "separator",
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/item.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:component",
+      "title": "KBD",
+      "description": "Keyboard key component for displaying keyboard shortcuts.",
+      "registryDependencies": [],
+      "dependencies": [
+        "class-variance-authority",
+        "react-hotkeys-hook",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/kbd.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:component",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-label",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/label.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:component",
+      "title": "Menubar",
+      "description": "A visually persistent menu common in desktop applications.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-menubar",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/menubar.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:component",
+      "title": "Multi Select",
+      "description": "A select component for allowing multiple selections.",
+      "registryDependencies": [
+        "button",
+        "badge",
+        "checkbox"
+      ],
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/multi-select.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:component",
+      "title": "Navigation Menu",
+      "description": "A collection of links for navigating websites.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-navigation-menu",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/navigation-menu.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "Pagination with page navigation, next and previous links, and page number indicators.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/pagination.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:component",
+      "title": "Popover",
+      "description": "Displays rich content in a portal, triggered by a button.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/popover.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:component",
+      "title": "Progress",
+      "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-progress",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/progress.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:component",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/radio-group.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:component",
+      "title": "Resizable",
+      "description": "Accessible resizable panel groups and layouts with keyboard support.",
+      "registryDependencies": [],
+      "dependencies": [
+        "react-resizable-panels",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/resizable.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:component",
+      "title": "Scroll Area",
+      "description": "Augments native scroll functionality for custom, cross-browser styling.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-scroll-area",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/scroll-area.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:component",
+      "title": "Select",
+      "description": "Displays a list of options for the user to pick from—triggered by a button.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/select.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:component",
+      "title": "Separator",
+      "description": "Visually or semantically separates content.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-separator",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/separator.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:component",
+      "title": "Sheet",
+      "description": "Extends the Dialog component to display content that complements the main content of the screen.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/sheet.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "show-more",
+      "type": "registry:component",
+      "title": "Show More",
+      "description": "A component that shows/hides additional content with smooth animations.",
+      "registryDependencies": [
+        "separator",
+        "button",
+        "accordion"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/show-more.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:component",
+      "title": "Skeleton",
+      "description": "Use to show a placeholder while content is loading.",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/skeleton.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:component",
+      "title": "Slider",
+      "description": "An input where the user selects a value from within a given range.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-slider",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/slider.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:component",
+      "title": "Sonner",
+      "description": "Toast component built with Sonner.",
+      "registryDependencies": [
+        "button",
+        "spinner"
+      ],
+      "dependencies": [
+        "next-themes",
+        "sonner",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/sonner.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:component",
+      "title": "Spinner",
+      "description": "An animated spinner component.",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/spinner.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "star-rating",
+      "type": "registry:component",
+      "title": "Star Rating",
+      "description": "An interactive star rating component.",
+      "registryDependencies": [],
+      "dependencies": [
+        "lucide-react",
+        "framer-motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/star-rating.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:component",
+      "title": "Switch",
+      "description": "A control that allows the user to toggle between checked and unchecked states.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-switch",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/switch.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:component",
+      "title": "Table",
+      "description": "A responsive table component.",
+      "registryDependencies": [],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/table.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tabs-primitive",
+      "type": "registry:component",
+      "title": "Tabs Primitive",
+      "description": "Primitive tabs component built on Radix UI.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-tabs",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/tabs-primitive.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:component",
+      "title": "Tabs",
+      "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "registryDependencies": [
+        "tabs-primitive"
+      ],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/tabs.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:component",
+      "title": "Textarea",
+      "description": "Displays a form textarea field or a component that looks like a textarea.",
+      "registryDependencies": [],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/textarea.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "theme-switcher",
+      "type": "registry:component",
+      "title": "Theme Switcher",
+      "description": "A theme switcher component for toggling between light, dark, and system themes.",
+      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-use-controllable-state",
+        "lucide-react",
+        "motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/theme-switcher.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "timezone",
+      "type": "registry:component",
+      "title": "Timezone",
+      "description": "A component for displaying and converting timezones.",
+      "registryDependencies": [
+        "tooltip",
+        "button"
+      ],
+      "dependencies": [
+        "ms",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/timezone.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:component",
+      "title": "Toggle Group",
+      "description": "A set of two-state buttons that can be toggled on or off.",
+      "registryDependencies": [
+        "toggle"
+      ],
+      "dependencies": [
+        "@radix-ui/react-toggle-group",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/toggle-group.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:component",
+      "title": "Toggle",
+      "description": "A two-state button that can be either on or off.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-toggle",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/toggle.jsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:component",
+      "title": "Tooltip",
+      "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [
+        "@radix-ui/react-tooltip",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/optics/tooltip.jsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

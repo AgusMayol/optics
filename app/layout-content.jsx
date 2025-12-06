@@ -245,11 +245,6 @@ export const links = [
 				custom: false,
 			},
 			{
-				name: "Feedback",
-				href: "/components/feedback",
-				own: true,
-			},
-			{
 				name: "Field",
 				href: "/components/field",
 				own: false,

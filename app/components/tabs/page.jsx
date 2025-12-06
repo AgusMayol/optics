@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -50,6 +51,8 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
+import componentCode from "@/registry/optics/tabs.jsx.txt";
+
 const code = [
 	{
 		language: "jsx",
@@ -92,7 +95,7 @@ import {
 	TabsContents as TabsContentsPrimitive,
 	TabsHighlight as TabsHighlightPrimitive,
 	TabsHighlightItem as TabsHighlightItemPrimitive,
-} from "@/components/animate-ui/primitives/radix/tabs";
+} from "@/registry/optics/helpers/primitives/radix/tabs";
 import { cn } from "@/lib/utils";
 import { getStrictContext } from "@/lib/get-strict-context";
 
@@ -177,22 +180,31 @@ export { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent };`,
 	},
 ];
 
-const commands = [
+import tabsPrimitiveCode from "@/registry/optics/helpers/primitives/radix/tabs.jsx.txt";
+import highlightCode from "@/registry/optics/helpers/primitives/effects/highlight.jsx.txt";
+import autoHeightCode from "@/registry/optics/helpers/primitives/effects/auto-height.jsx.txt";
+import slotCode from "@/registry/optics/helpers/primitives/animate/slot.jsx.txt";
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/tabs",
+		path: "@/components/optics/tabs.jsx",
+		code: componentCode,
 	},
 	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/tabs",
+		path: "@/components/optics/helpers/primitives/radix/tabs.jsx",
+		code: tabsPrimitiveCode,
 	},
 	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/tabs",
+		path: "@/components/optics/helpers/primitives/effects/highlight.jsx",
+		code: highlightCode,
 	},
 	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/tabs",
+		path: "@/components/optics/helpers/primitives/effects/auto-height.jsx",
+		code: autoHeightCode,
+	},
+	{
+		path: "@/components/optics/helpers/primitives/animate/slot.jsx",
+		code: slotCode,
 	},
 ];
 
@@ -224,7 +236,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, installDeps);
+	} = useCookiePreferences("tabs", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -357,142 +369,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader>
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader>
-										<SnippetTabsList variant="outline">
-											{installDeps.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{installDeps.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeDepsCommand && (
-													<SnippetCopyButton value={activeDepsCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={tabsComponentCode}
-									defaultValue={tabsComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockFiles>
-											{(item) => (
-												<CodeBlockFilename
-													key={item.language}
-													value={item.filename}
-												>
-													{item.filename}
-												</CodeBlockFilename>
-											)}
-										</CodeBlockFiles>
-
-										<CodeBlockCopyButton variant="ghost" />
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="tabs"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -506,17 +393,20 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the tabs container.",
+									description:
+										"Additional CSS classes to apply to the tabs container.",
 								},
 								{
 									name: "value",
 									type: "string",
-									description: "The controlled value of the active tab. Use with onValueChange.",
+									description:
+										"The controlled value of the active tab. Use with onValueChange.",
 								},
 								{
 									name: "defaultValue",
 									type: "string",
-									description: "The uncontrolled default value of the active tab.",
+									description:
+										"The uncontrolled default value of the active tab.",
 								},
 								{
 									name: "onValueChange",
@@ -526,7 +416,8 @@ export default function Page() {
 								{
 									name: "orientation",
 									type: `"horizontal" | "vertical"`,
-									description: "The orientation of the tabs. Defaults to 'horizontal'.",
+									description:
+										"The orientation of the tabs. Defaults to 'horizontal'.",
 								},
 								{
 									name: "dir",
@@ -541,12 +432,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the tabs list.",
+									description:
+										"Additional CSS classes to apply to the tabs list.",
 								},
 								{
 									name: "variant",
 									type: `"default" | "outline" | "underline"`,
-									description: "The visual style variant of the tabs list. Defaults to 'default'.",
+									description:
+										"The visual style variant of the tabs list. Defaults to 'default'.",
 								},
 							],
 						},
@@ -556,17 +449,20 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the tab trigger.",
+									description:
+										"Additional CSS classes to apply to the tab trigger.",
 								},
 								{
 									name: "value",
 									type: "string (required)",
-									description: "The value of the tab. Must be unique within the tabs container.",
+									description:
+										"The value of the tab. Must be unique within the tabs container.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the tab trigger.",
+									description:
+										"When true, prevents user interaction with the tab trigger.",
 								},
 							],
 						},
@@ -576,12 +472,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the tab content.",
+									description:
+										"Additional CSS classes to apply to the tab content.",
 								},
 								{
 									name: "value",
 									type: "string (required)",
-									description: "The value of the tab content. Must match a TabsTrigger value.",
+									description:
+										"The value of the tab content. Must match a TabsTrigger value.",
 								},
 							],
 						},
@@ -591,7 +489,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the tabs contents container.",
+									description:
+										"Additional CSS classes to apply to the tabs contents container.",
 								},
 							],
 						},

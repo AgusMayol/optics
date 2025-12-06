@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -42,6 +43,8 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+
+import componentCode from "@/registry/optics/checkbox.jsx.txt";
 
 const code = [
 	{
@@ -93,22 +96,10 @@ export { Checkbox };`,
 	},
 ];
 
-const commands = [
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/checkbox",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/checkbox",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/checkbox",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/checkbox",
+		path: "@/components/optics/checkbox.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -142,7 +133,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, installDeps);
+	} = useCookiePreferences("checkbox", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -174,19 +165,21 @@ export default function Page() {
 			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
 				<Card className="pt-8 pb-0 bg-sidebar">
 					<CardContent className="px-8 flex flex-col items-center gap-4">
-						<div className="flex items-center space-x-2">
-							<Checkbox id="terms" />
-							<Label htmlFor="terms">Accept terms and conditions</Label>
-						</div>
+						<div className="flex flex-col items-start gap-4">
+							<div className="flex items-center space-x-2">
+								<Checkbox id="terms" />
+								<Label htmlFor="terms">Accept terms and conditions</Label>
+							</div>
 
-						<div className="flex items-center space-x-2">
-							<Checkbox id="newsletter" />
-							<Label htmlFor="newsletter">Subscribe to newsletter</Label>
-						</div>
+							<div className="flex items-center space-x-2">
+								<Checkbox id="newsletter" />
+								<Label htmlFor="newsletter">Subscribe to newsletter</Label>
+							</div>
 
-						<div className="flex items-center space-x-2">
-							<Checkbox id="disabled" disabled />
-							<Label htmlFor="disabled">Disabled checkbox</Label>
+							<div className="flex items-center space-x-2">
+								<Checkbox id="disabled" disabled />
+								<Label htmlFor="disabled">Disabled checkbox</Label>
+							</div>
 						</div>
 					</CardContent>
 
@@ -234,142 +227,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader>
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Install the following dependencies:
-								</p>
-
-								<Snippet
-									onValueChange={setValue}
-									value={value}
-									className="w-full"
-								>
-									<SnippetHeader>
-										<SnippetTabsList variant="outline">
-											{installDeps.map((command) => (
-												<SnippetTabsTrigger
-													key={command.label}
-													value={command.label}
-												>
-													<span>{command.label}</span>
-												</SnippetTabsTrigger>
-											))}
-										</SnippetTabsList>
-									</SnippetHeader>
-									<SnippetTabsContents>
-										{installDeps.map((command) => (
-											<SnippetTabsContent
-												key={command.label}
-												value={command.label}
-												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-											>
-												{command.code}
-												{activeDepsCommand && (
-													<SnippetCopyButton value={activeDepsCommand.code} />
-												)}
-											</SnippetTabsContent>
-										))}
-									</SnippetTabsContents>
-								</Snippet>
-							</div>
-
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={checkboxComponentCode}
-									defaultValue={checkboxComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockFiles>
-											{(item) => (
-												<CodeBlockFilename
-													key={item.language}
-													value={item.filename}
-												>
-													{item.filename}
-												</CodeBlockFilename>
-											)}
-										</CodeBlockFiles>
-
-										<CodeBlockCopyButton variant="ghost" />
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="checkbox"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -383,32 +251,38 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the checkbox.",
+									description:
+										"Additional CSS classes to apply to the checkbox.",
 								},
 								{
 									name: "variant",
 									type: `"black" | "raised" | "ghost" | "outline"`,
-									description: "Variant style for the checkbox. Defaults to 'black'.",
+									description:
+										"Variant style for the checkbox. Defaults to 'black'.",
 								},
 								{
 									name: "variantChecked",
 									type: `"black" | "raised" | "ghost" | "outline"`,
-									description: "Variant style when the checkbox is checked. Overrides variant when checked.",
+									description:
+										"Variant style when the checkbox is checked. Overrides variant when checked.",
 								},
 								{
 									name: "variantUnchecked",
 									type: `"black" | "raised" | "ghost" | "outline"`,
-									description: "Variant style when the checkbox is unchecked. Overrides variant when unchecked.",
+									description:
+										"Variant style when the checkbox is unchecked. Overrides variant when unchecked.",
 								},
 								{
 									name: "checked",
 									type: "boolean",
-									description: "The controlled checked state of the checkbox. Use with onCheckedChange.",
+									description:
+										"The controlled checked state of the checkbox. Use with onCheckedChange.",
 								},
 								{
 									name: "defaultChecked",
 									type: "boolean",
-									description: "The uncontrolled default checked state of the checkbox.",
+									description:
+										"The uncontrolled default checked state of the checkbox.",
 								},
 								{
 									name: "onCheckedChange",
@@ -418,22 +292,26 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the checkbox.",
+									description:
+										"When true, prevents user interaction with the checkbox.",
 								},
 								{
 									name: "required",
 									type: "boolean",
-									description: "When true, indicates that the user must check the checkbox before the owning form can be submitted.",
+									description:
+										"When true, indicates that the user must check the checkbox before the owning form can be submitted.",
 								},
 								{
 									name: "name",
 									type: "string",
-									description: "The name of the checkbox. Submitted with its owning form as part of a name/value pair.",
+									description:
+										"The name of the checkbox. Submitted with its owning form as part of a name/value pair.",
 								},
 								{
 									name: "value",
 									type: "string",
-									description: "The value given as data when submitted with a name.",
+									description:
+										"The value given as data when submitted with a name.",
 								},
 							],
 						},

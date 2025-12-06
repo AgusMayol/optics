@@ -46,3 +46,5 @@ next-env.d.ts
 bun.lock
 bun.lockb
 package-lock.json
+/registry/optics/**/*.txt
+.env*.local

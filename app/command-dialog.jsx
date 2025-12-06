@@ -27,7 +27,7 @@ import {
 } from "@/registry/optics/command";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { DialogFooter } from "@/components/ui/dialog";
+import { DialogFooter } from "@/registry/optics/dialog";
 import { Kbd } from "@/registry/optics/kbd";
 import { ChevronDown, ChevronUp } from "lucide-react";
 

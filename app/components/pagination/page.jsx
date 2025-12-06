@@ -1,4 +1,5 @@
 "use client";
+import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -47,6 +48,8 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
+import componentCode from "@/registry/optics/pagination.jsx.txt";
+
 const code = [
 	{
 		language: "jsx",
@@ -86,14 +89,14 @@ const paginationComponentCode = [
 	{
 		language: "jsx",
 		filename: "components/ui/optics/pagination.jsx",
-		code: `import * as React from "react"
+		code: `import * as React from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/optics/button";
 
 function Pagination({
@@ -159,22 +162,12 @@ export {
 	},
 ];
 
-const commands = [
+const installDeps = [];
+
+const componentFiles = [
 	{
-		label: "pnpm",
-		code: "pnpm dlx shadcn@latest add @optics/pagination",
-	},
-	{
-		label: "npm",
-		code: "npx shadcn@latest add @optics/pagination",
-	},
-	{
-		label: "yarn",
-		code: "yarn shadcn@latest add @optics/pagination",
-	},
-	{
-		label: "bun",
-		code: "bunx --bun shadcn@latest add @optics/pagination",
+		path: "@/components/optics/pagination.jsx",
+		code: componentCode,
 	},
 ];
 
@@ -187,7 +180,7 @@ export default function Page() {
 		handleTabChange,
 		activeCommand,
 		activeDepsCommand,
-	} = useCookiePreferences(commands, []);
+	} = useCookiePreferences("pagination", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -228,7 +221,7 @@ export default function Page() {
 									<PaginationLink href="#">1</PaginationLink>
 								</PaginationItem>
 								<PaginationItem>
-									<PaginationLink href="#" isActive>
+									<PaginationLink href="#" isActive variant="raised">
 										2
 									</PaginationLink>
 								</PaginationItem>
@@ -291,98 +284,17 @@ export default function Page() {
 				</Card>
 			</div>
 
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
-				<Tabs
-					value={installationTab}
-					onValueChange={handleTabChange}
-					className="w-full"
-				>
-					<TabsList variant="underline">
-						<TabsTrigger value="tab1">CLI</TabsTrigger>
-						<TabsTrigger value="tab2">Manual</TabsTrigger>
-					</TabsList>
-					<TabsContents className="w-full pt-2">
-						<TabsContent value="tab1" className="w-full pt-4">
-							<Snippet
-								onValueChange={setValue}
-								value={value}
-								className="w-full"
-							>
-								<SnippetHeader className="">
-									<SnippetTabsList variant="outline">
-										{commands.map((command) => (
-											<SnippetTabsTrigger
-												key={command.label}
-												value={command.label}
-											>
-												<span>{command.label}</span>
-											</SnippetTabsTrigger>
-										))}
-									</SnippetTabsList>
-								</SnippetHeader>
-								<SnippetTabsContents>
-									{commands.map((command) => (
-										<SnippetTabsContent
-											key={command.label}
-											value={command.label}
-											className="w-full flex items-center justify-between gap-8 py-2 pr-2"
-										>
-											{command.code}
-											{activeCommand && (
-												<SnippetCopyButton value={activeCommand.code} />
-											)}
-										</SnippetTabsContent>
-									))}
-								</SnippetTabsContents>
-							</Snippet>
-						</TabsContent>
-						<TabsContent
-							value="tab2"
-							className="w-full pt-4 flex flex-col gap-12"
-						>
-							<div className="w-full flex flex-col gap-2">
-								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-									Copy and paste the following code into your project:
-								</p>
-
-								<CodeBlock
-									data={paginationComponentCode}
-									defaultValue={paginationComponentCode[0].filename}
-								>
-									<CodeBlockHeader>
-										<CodeBlockCopyButton
-											variant="ghost"
-											onCopy={() => console.log("Copied code to clipboard")}
-											onError={() =>
-												console.error("Failed to copy code to clipboard")
-											}
-										/>
-									</CodeBlockHeader>
-									<CodeBlockBody>
-										{(item) => (
-											<CodeBlockItem key={item.language} value={item.filename}>
-												<CodeBlockContent
-													language={item.language}
-													className="bg-sidebar"
-												>
-													{item.code}
-												</CodeBlockContent>
-											</CodeBlockItem>
-										)}
-									</CodeBlockBody>
-								</CodeBlock>
-							</div>
-
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Update the import paths to match your project setup.
-							</p>
-						</TabsContent>
-					</TabsContents>
-				</Tabs>
-			</div>
+			<InstallationGuide
+				value={value}
+				setValue={setValue}
+				activeCommand={activeCommand}
+				activeDepsCommand={activeDepsCommand}
+				componentName="pagination"
+				installDeps={installDeps}
+				manualFiles={componentFiles}
+				installationTab={installationTab}
+				handleTabChange={handleTabChange}
+			/>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
 				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
@@ -396,7 +308,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the pagination container.",
+									description:
+										"Additional CSS classes to apply to the pagination container.",
 								},
 							],
 						},
@@ -406,7 +319,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 							],
 						},
@@ -434,6 +348,11 @@ export default function Page() {
 									description: "Whether the link represents the current page.",
 								},
 								{
+									name: "variant",
+									type: "string",
+									description: "Variant style for the active link (inherits button variant styles).",
+								},
+								{
 									name: "size",
 									type: `"default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" (default: "icon")`,
 									description: "Size of the link button.",
@@ -446,7 +365,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the previous button.",
+									description:
+										"Additional CSS classes to apply to the previous button.",
 								},
 							],
 						},
@@ -456,7 +376,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the next button.",
+									description:
+										"Additional CSS classes to apply to the next button.",
 								},
 							],
 						},
@@ -466,7 +387,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the ellipsis.",
+									description:
+										"Additional CSS classes to apply to the ellipsis.",
 								},
 							],
 						},
