@@ -52,7 +52,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "scroll-area.jsx",
-		code: `import { ScrollArea } from "@/registry/optics/scroll-area";
+		code: `import { ScrollArea } from "@/components/optics/scroll-area";
 
 <ScrollArea className="h-72 w-48 rounded-md border">
 	<div className="p-4">
@@ -147,11 +147,11 @@ const componentFiles = [
 		code: componentCode,
 	},
 	{
-		path: "@/registry/optics/lib/utils.js",
+		path: "@/components/optics/lib/utils.js",
 		code: utilsCode,
 	},
 	{
-		path: "@/registry/optics/hooks/use-has-primary-touch.jsx",
+		path: "@/components/optics/hooks/use-has-primary-touch.jsx",
 		code: useHasPrimaryTouchCode,
 	},
 ];

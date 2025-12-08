@@ -51,8 +51,8 @@ const code = [
 	{
 		language: "jsx",
 		filename: "timezone.jsx",
-		code: `import { Timezone } from "@/registry/optics/timezone";
-import { Button } from "@/registry/optics/button";
+		code: `import { Timezone } from "@/components/optics/timezone";
+import { Button } from "@/components/optics/button";
 
 <Timezone 
 	timestamp={Date.now() - 5 * 60 * 1000} 

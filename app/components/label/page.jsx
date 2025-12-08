@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "label.jsx",
-		code: `import { Label } from "@/registry/optics/label";
+		code: `import { Label } from "@/components/optics/label";
 import { Input } from "@/registry/optics/input";
 
 <div className="flex flex-col gap-2">

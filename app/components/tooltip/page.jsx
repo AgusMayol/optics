@@ -56,8 +56,8 @@ const code = [
 	{
 		language: "jsx",
 		filename: "tooltip.jsx",
-		code: `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/registry/optics/tooltip";
-import { Button } from "@/registry/optics/button";
+		code: `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/optics/tooltip";
+import { Button } from "@/components/optics/button";
 
 <TooltipProvider>
 	<Tooltip>

@@ -45,7 +45,7 @@ const code = [
 	SnippetTabsList,
 	SnippetTabsTrigger,
 	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
+} from "@/components/optics/code-snippet";
 
 <Snippet value={value} onValueChange={setValue}>
 	<SnippetHeader>

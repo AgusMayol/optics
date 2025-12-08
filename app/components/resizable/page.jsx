@@ -56,7 +56,7 @@ const code = [
 	ResizablePanelGroup,
 	ResizablePanel,
 	ResizableHandle,
-} from "@/registry/optics/resizable";
+} from "@/components/optics/resizable";
 
 <ResizablePanelGroup direction="horizontal" className="max-w-md rounded-lg border">
 	<ResizablePanel defaultSize={50}>

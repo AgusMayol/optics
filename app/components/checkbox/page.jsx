@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "checkbox.jsx",
-		code: `import { Checkbox } from "@/registry/optics/checkbox";
+		code: `import { Checkbox } from "@/components/optics/checkbox";
 import { Label } from "@/registry/optics/label";
 
 <div className="flex items-center space-x-2">

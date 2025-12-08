@@ -58,7 +58,7 @@ const code = [
 	InputGroupAddon,
 	InputGroupInput,
 	InputGroupText,
-} from "@/registry/optics/input-group";
+} from "@/components/optics/input-group";
 import { Search } from "lucide-react";
 
 <InputGroup>

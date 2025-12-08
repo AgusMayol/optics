@@ -60,7 +60,7 @@ const code = [
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/registry/optics/carousel";
+} from "@/components/optics/carousel";
 
 <Carousel className="w-full max-w-xs">
 	<CarouselContent>

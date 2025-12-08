@@ -64,8 +64,8 @@ const code = [
 	GuidedTourTrigger,
 	GuidedTourStep,
 	GuidedTourOverlay,
-} from "@/registry/optics/guided-tour";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/guided-tour";
+import { Button } from "@/components/optics/button";
 
 function MyComponent() {
 	return (

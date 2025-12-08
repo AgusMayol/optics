@@ -47,7 +47,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "button.jsx",
-		code: `import { Button } from "@/registry/optics/button";
+		code: `import { Button } from "@/components/optics/button";
 
 <Button>Default</Button>
 <Button variant="secondary">Secondary</Button>

@@ -56,7 +56,7 @@ const code = [
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
-} from "@/registry/optics/hover-card";
+} from "@/components/optics/hover-card";
 
 <HoverCard>
 	<HoverCardTrigger asChild>

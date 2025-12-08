@@ -70,9 +70,9 @@ const code = [
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from "@/registry/optics/sheet";
-import { Button } from "@/registry/optics/button";
-import { Input } from "@/registry/optics/input";
+} from "@/components/optics/sheet";
+import { Button } from "@/components/optics/button";
+import { Input } from "@/components/optics/input";
 import { Label } from "@/registry/optics/label";
 
 <Sheet>

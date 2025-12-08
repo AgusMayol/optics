@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "textarea.jsx",
-		code: `import { Textarea } from "@/registry/optics/textarea";
+		code: `import { Textarea } from "@/components/optics/textarea";
 
 <Textarea placeholder="Type your message here." />
 <Textarea placeholder="Disabled" disabled />`,

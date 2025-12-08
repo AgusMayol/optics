@@ -65,8 +65,8 @@ const code = [
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/registry/optics/dialog";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/dialog";
+import { Button } from "@/components/optics/button";
 
 <Dialog>
 	<DialogTrigger asChild>

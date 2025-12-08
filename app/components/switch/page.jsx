@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "switch.jsx",
-		code: `import { Switch } from "@/registry/optics/switch";
+		code: `import { Switch } from "@/components/optics/switch";
 import { Label } from "@/registry/optics/label";
 
 <div className="flex items-center space-x-2">

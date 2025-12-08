@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "spinner.jsx",
-		code: `import { Spinner } from "@/registry/optics/spinner";
+		code: `import { Spinner } from "@/components/optics/spinner";
 
 <Spinner />
 <Spinner size="size-8" />

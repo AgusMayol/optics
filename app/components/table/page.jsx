@@ -62,7 +62,7 @@ const code = [
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@/registry/optics/table";
+} from "@/components/optics/table";
 
 <Table>
 	<TableHeader>

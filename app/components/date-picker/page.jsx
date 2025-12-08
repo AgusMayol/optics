@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "date-picker.jsx",
-		code: `import { DatePicker } from "@/registry/optics/date-picker";
+		code: `import { DatePicker } from "@/components/optics/date-picker";
 import { useState } from "react";
 
 const [date, setDate] = useState();

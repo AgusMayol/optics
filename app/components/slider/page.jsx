@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "slider.jsx",
-		code: `import { Slider } from "@/registry/optics/slider";
+		code: `import { Slider } from "@/components/optics/slider";
 
 <Slider defaultValue={[50]} max={100} step={1} />
 <Slider defaultValue={[25, 75]} max={100} step={1} />`,

@@ -56,7 +56,7 @@ const code = [
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from "@/registry/optics/collapsible";
+} from "@/components/optics/collapsible";
 
 <Collapsible>
 	<CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>

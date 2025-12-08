@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "show-more.jsx",
-		code: `import { ShowMore } from "@/registry/optics/show-more";
+		code: `import { ShowMore } from "@/components/optics/show-more";
 
 <ShowMore maxLines={3}>
 	<p className="text-base font-normal">

@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "sonner.jsx",
-		code: `import { toast } from "@/registry/optics/sonner";
+		code: `import { toast } from "@/components/optics/sonner";
 
 <Button onClick={() => toast({ type: "success", title: "Success!", description: "Your action was completed." })}>
 	Show Toast

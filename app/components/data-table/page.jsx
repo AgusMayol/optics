@@ -84,7 +84,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "data-table.jsx",
-		code: `import { DataTable } from "@/registry/optics/data-table";
+		code: `import { DataTable } from "@/components/optics/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 const columns = [

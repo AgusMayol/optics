@@ -77,7 +77,7 @@ const code = [
 	CommandList,
 	CommandSeparator,
 	CommandShortcut,
-} from "@/registry/optics/command";
+} from "@/components/optics/command";
 
 <Command className="rounded-lg border shadow-md">
 	<CommandInput placeholder="Type a command or search..." />

@@ -31,7 +31,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "badge.jsx",
-		code: `import { Badge } from "@/registry/optics/badge";
+		code: `import { Badge } from "@/components/optics/badge";
 
 <Badge>Default</Badge>
 <Badge variant="raised">Raised</Badge>

@@ -72,7 +72,7 @@ const code = [
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogIcon,
-} from "@/registry/optics/alert-dialog";
+} from "@/components/optics/alert-dialog";
 import { Button } from "@/registry/optics/button";
 import { AlertTriangle } from "lucide-react";
 

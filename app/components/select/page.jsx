@@ -65,7 +65,7 @@ const code = [
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "@/registry/optics/select";
+} from "@/components/optics/select";
 
 <Select>
 	<SelectTrigger>

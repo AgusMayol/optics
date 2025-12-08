@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "skeleton.jsx",
-		code: `import { Skeleton } from "@/registry/optics/skeleton";
+		code: `import { Skeleton } from "@/components/optics/skeleton";
 
 <div className="flex items-center space-x-4">
 	<Skeleton className="h-12 w-12 rounded-full" />

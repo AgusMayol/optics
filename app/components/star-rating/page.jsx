@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "star-rating.jsx",
-		code: `import { StarRating } from "@/registry/optics/star-rating";
+		code: `import { StarRating } from "@/components/optics/star-rating";
 
 <StarRating />
 <StarRating defaultValue={3} />

@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "grid.jsx",
-		code: `import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
+		code: `import { GridContainer, GridRow, GridItem } from "@/components/optics/grid";
 
 <GridContainer cols={12} rows={3} border>
 	<GridRow className="rounded-t-xl">

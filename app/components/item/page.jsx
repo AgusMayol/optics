@@ -65,8 +65,8 @@ const code = [
 	ItemTitle,
 	ItemDescription,
 	ItemActions,
-} from "@/registry/optics/item";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/item";
+import { Button } from "@/components/optics/button";
 import { Mail } from "lucide-react";
 
 <Item>

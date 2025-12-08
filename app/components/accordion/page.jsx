@@ -33,7 +33,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "accordion.jsx",
-		code: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/registry/optics/accordion";
+		code: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/optics/accordion";
 
 <Accordion type="single" collapsible>
 	<AccordionItem value="item-1">

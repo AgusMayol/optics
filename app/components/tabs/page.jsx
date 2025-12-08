@@ -57,8 +57,8 @@ const code = [
 	{
 		language: "jsx",
 		filename: "tabs.jsx",
-		code: `import { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent } from "@/registry/optics/tabs";
-import { Card } from "@/registry/optics/card";
+		code: `import { Tabs, TabsList, TabsTrigger, TabsContents, TabsContent } from "@/components/optics/tabs";
+import { Card } from "@/components/optics/card";
 
 <Tabs defaultValue="account" className="w-[400px]">
 	<TabsList variant="default">
@@ -209,11 +209,11 @@ const componentFiles = [
 		code: slotCode,
 	},
 	{
-		path: "@/registry/optics/lib/utils.js",
+		path: "@/components/optics/lib/utils.js",
 		code: utilsCode,
 	},
 	{
-		path: "@/registry/optics/lib/get-strict-context.jsx",
+		path: "@/components/optics/lib/get-strict-context.jsx",
 		code: getStrictContextCode,
 	},
 ];

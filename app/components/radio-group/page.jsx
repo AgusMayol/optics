@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "radio-group.jsx",
-		code: `import { RadioGroup, RadioGroupItem } from "@/registry/optics/radio-group";
+		code: `import { RadioGroup, RadioGroupItem } from "@/components/optics/radio-group";
 import { Label } from "@/registry/optics/label";
 
 <RadioGroup defaultValue="comfortable">

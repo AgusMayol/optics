@@ -54,7 +54,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "popover.jsx",
-		code: `import { Popover, PopoverTrigger, PopoverContent } from "@/registry/optics/popover";
+		code: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/optics/popover";
 import { Button } from "@/registry/optics/button";
 
 <Popover>

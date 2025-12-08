@@ -55,7 +55,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "theme-switcher.jsx",
-		code: `import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
+		code: `import { ThemeSwitcher } from "@/components/optics/theme-switcher";
 import { useTheme } from "next-themes";
 import {
 	useModeAnimation,

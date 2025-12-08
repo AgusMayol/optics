@@ -47,7 +47,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "calendar.jsx",
-		code: `import { Calendar } from "@/registry/optics/calendar";
+		code: `import { Calendar } from "@/components/optics/calendar";
 
 <Calendar
 	mode="single"

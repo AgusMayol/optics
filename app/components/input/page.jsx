@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "input.jsx",
-		code: `import { Input } from "@/registry/optics/input";
+		code: `import { Input } from "@/components/optics/input";
 
 <Input type="email" placeholder="Email" />
 <Input type="password" placeholder="Password" />

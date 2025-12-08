@@ -56,7 +56,7 @@ const code = [
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSlot,
-} from "@/registry/optics/input-otp";
+} from "@/components/optics/input-otp";
 
 <InputOTP maxLength={6}>
 	<InputOTPGroup>

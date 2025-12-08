@@ -69,7 +69,7 @@ const code = [
 	MenubarSeparator,
 	MenubarShortcut,
 	MenubarTrigger,
-} from "@/registry/optics/menubar";
+} from "@/components/optics/menubar";
 
 <Menubar>
 	<MenubarMenu>

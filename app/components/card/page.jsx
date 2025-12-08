@@ -56,8 +56,8 @@ const code = [
 	{
 		language: "jsx",
 		filename: "card.jsx",
-		code: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "@/registry/optics/card";
-import { Button } from "@/registry/optics/button";
+		code: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "@/components/optics/card";
+import { Button } from "@/components/optics/button";
 
 <Card className="w-[350px]">
 	<CardHeader>

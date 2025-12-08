@@ -68,8 +68,8 @@ const code = [
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@/registry/optics/drawer";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/drawer";
+import { Button } from "@/components/optics/button";
 
 <Drawer>
 	<DrawerTrigger asChild>

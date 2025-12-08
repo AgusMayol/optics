@@ -60,7 +60,7 @@ const componentFiles = [
 		code: componentCode,
 	},
 	{
-		path: "@/registry/optics/lib/utils.js",
+		path: "@/components/optics/lib/utils.js",
 		code: utilsCode,
 	},
 ];

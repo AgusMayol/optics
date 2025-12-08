@@ -51,7 +51,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "aspect-ratio.jsx",
-		code: `import { AspectRatio } from "@/registry/optics/aspect-ratio";
+		code: `import { AspectRatio } from "@/components/optics/aspect-ratio";
 import Image from "next/image";
 
 <div className="w-[450px]">

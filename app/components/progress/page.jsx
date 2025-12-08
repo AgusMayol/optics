@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "progress.jsx",
-		code: `import { Progress } from "@/registry/optics/progress";
+		code: `import { Progress } from "@/components/optics/progress";
 
 <Progress value={33} />`,
 	},

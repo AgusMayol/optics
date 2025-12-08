@@ -75,7 +75,7 @@ const code = [
 	ContextMenuSubContent,
 	ContextMenuSubTrigger,
 	ContextMenuTrigger,
-} from "@/registry/optics/context-menu";
+} from "@/components/optics/context-menu";
 
 <ContextMenu>
     <ContextMenuTrigger>

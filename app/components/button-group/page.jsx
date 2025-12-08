@@ -52,7 +52,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "button-group.jsx",
-		code: `import { ButtonGroup } from "@/registry/optics/button-group";
+		code: `import { ButtonGroup } from "@/components/optics/button-group";
 import { Button } from "@/registry/optics/button";
 
 <div className="flex items-center justify-center gap-6">

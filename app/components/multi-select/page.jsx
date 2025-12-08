@@ -66,7 +66,7 @@ const code = [
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "@/registry/optics/multi-select";
+} from "@/components/optics/multi-select";
 
 <Select onValuesChange={(values) => console.log(values)}>
 	<SelectTrigger variant="raised">

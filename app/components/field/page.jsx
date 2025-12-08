@@ -63,8 +63,8 @@ const code = [
 	FieldLabel,
 	FieldLegend,
 	FieldSet,
-} from "@/registry/optics/field";
-import { Input } from "@/registry/optics/input";
+} from "@/components/optics/field";
+import { Input } from "@/components/optics/input";
 
 <FieldGroup>
 	<FieldSet>

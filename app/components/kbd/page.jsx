@@ -50,7 +50,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "kbd.jsx",
-		code: `import { Kbd, KbdGroup } from "@/registry/optics/kbd";
+		code: `import { Kbd, KbdGroup } from "@/components/optics/kbd";
 import { Command } from "lucide-react";
 
 // Basic usage

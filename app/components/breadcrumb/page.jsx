@@ -64,7 +64,7 @@ const code = [
 	BreadcrumbLink,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@/registry/optics/breadcrumb";
+} from "@/components/optics/breadcrumb";
 import Link from "next/link";
 
 <Breadcrumb>

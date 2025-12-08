@@ -54,7 +54,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "avatar.jsx",
-		code: `import { Avatar, AvatarImage, AvatarFallback } from "@/registry/optics/avatar";
+		code: `import { Avatar, AvatarImage, AvatarFallback } from "@/components/optics/avatar";
 
 <Avatar title="Optics">
 	<AvatarImage src="/images/logo.svg" alt="optics" />

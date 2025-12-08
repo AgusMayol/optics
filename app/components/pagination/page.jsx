@@ -61,7 +61,7 @@ const code = [
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/registry/optics/pagination";
+} from "@/components/optics/pagination";
 
 <Pagination>
 	<PaginationContent>

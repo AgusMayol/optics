@@ -68,7 +68,7 @@ const code = [
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from "@/registry/optics/navigation-menu";
+} from "@/components/optics/navigation-menu";
 
 <NavigationMenu>
 	<NavigationMenuList>

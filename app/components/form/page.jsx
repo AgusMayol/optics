@@ -67,8 +67,8 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/registry/optics/form";
-import { Input } from "@/registry/optics/input";
+} from "@/components/optics/form";
+import { Input } from "@/components/optics/input";
 import { Button } from "@/registry/optics/button";
 
 const form = useForm({

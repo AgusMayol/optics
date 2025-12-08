@@ -49,7 +49,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "alert.jsx",
-		code: `import { Alert, AlertTitle, AlertDescription } from "@/registry/optics/alert";
+		code: `import { Alert, AlertTitle, AlertDescription } from "@/components/optics/alert";
 import { Terminal, AlertCircle } from "lucide-react";
 
 <Alert>

@@ -68,8 +68,8 @@ const code = [
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-} from "@/registry/optics/dropdown-menu";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/dropdown-menu";
+import { Button } from "@/components/optics/button";
 
 <DropdownMenu>
 	<DropdownMenuTrigger asChild>

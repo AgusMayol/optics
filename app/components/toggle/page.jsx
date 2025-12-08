@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "toggle.jsx",
-		code: `import { Toggle } from "@/registry/optics/toggle";
+		code: `import { Toggle } from "@/components/optics/toggle";
 
 <Toggle aria-label="Toggle italic">
 	<Italic className="h-4 w-4" />

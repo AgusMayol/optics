@@ -49,7 +49,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "separator.jsx",
-		code: `import { Separator } from "@/registry/optics/separator";
+		code: `import { Separator } from "@/components/optics/separator";
 
 <Separator />
 <Separator decoration />

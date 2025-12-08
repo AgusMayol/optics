@@ -45,8 +45,8 @@ const code = [
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
-} from "@/registry/optics/empty";
-import { Button } from "@/registry/optics/button";
+} from "@/components/optics/empty";
+import { Button } from "@/components/optics/button";
 import { FolderCode } from "lucide-react";
 
 <Empty>

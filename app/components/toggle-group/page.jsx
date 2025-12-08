@@ -48,7 +48,7 @@ const code = [
 	{
 		language: "jsx",
 		filename: "toggle-group.jsx",
-		code: `import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
+		code: `import { ToggleGroup, ToggleGroupItem } from "@/components/optics/toggle-group";
 
 <ToggleGroup type="multiple">
 	<ToggleGroupItem value="bold" aria-label="Toggle bold">
