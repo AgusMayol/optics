@@ -95,7 +95,7 @@ export default function Page() {
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<div className="w-full flex items-center justify-between">
 					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Empty State
+						Empty
 					</h1>
 					<Button variant="link" size="sm" asChild>
 						<Link

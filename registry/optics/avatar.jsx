@@ -9,7 +9,7 @@ import {
 	TooltipTrigger,
 } from "@/registry/optics/tooltip";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 function AvatarStack({ data, children, ...props }) {
 	return (
@@ -24,7 +24,7 @@ function AvatarStack({ data, children, ...props }) {
 	);
 }
 
-function Avatar({ className, title, ...props }) {
+function Avatar({ className, title, side, sideOffset = 0, ...props }) {
 	return (
 		<TooltipProvider>
 			<Tooltip>
@@ -38,7 +38,7 @@ function Avatar({ className, title, ...props }) {
 						{...props}
 					/>
 				</TooltipTrigger>
-				<TooltipContent>
+				<TooltipContent side={side} sideOffset={sideOffset}>
 					<p>{title}</p>
 				</TooltipContent>
 			</Tooltip>

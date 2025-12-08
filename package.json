@@ -48,6 +48,7 @@
 		"@shikijs/transformers": "^3.12.2",
 		"@tanstack/react-table": "^8.21.3",
 		"@types/mdx": "^2.0.13",
+		"@vercel/analytics": "^1.6.1",
 		"@vercel/toolbar": "^0.1.41",
 		"ajv": "^8.17.1",
 		"async_hooks": "^1.0.0",

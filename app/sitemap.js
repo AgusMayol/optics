@@ -11,6 +11,7 @@ export default function sitemap() {
 	const staticPaths = [
 		"/",
 		"/installation",
+		"/components",
 		"/resources/accesibility",
 		"/resources/animations",
 		"/resources/cursor-rules",
@@ -48,8 +49,7 @@ export default function sitemap() {
 		"dialog",
 		"drawer",
 		"dropdown-menu",
-		"empty-state",
-		"feedback",
+		"empty",
 		"field",
 		"form",
 		"grid",

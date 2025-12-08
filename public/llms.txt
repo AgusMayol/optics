@@ -66,6 +66,7 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 
 
 ## Components
+[Components](https://optics.agusmayol.com.ar/components): A comprehensive list of all available components in the design system, providing an overview and quick access to each component's documentation.
 
 ### Basic Components
 - [Accordion](https://optics.agusmayol.com.ar/components/accordion): A component for displaying collapsible content.
@@ -96,7 +97,7 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 - [Drawer](https://optics.agusmayol.com.ar/components/drawer): A component for side navigation.
 - [Dropdown Menu](https://optics.agusmayol.com.ar/components/dropdown-menu): A component for dropdown selections.
 - [Emoji Picker](https://optics.agusmayol.com.ar/components/emoji-picker): A component for selecting emojis.
-- [Empty State](https://optics.agusmayol.com.ar/components/empty-state): A component for displaying empty states in applications.
+- [Empty State](https://optics.agusmayol.com.ar/components/empty): A component for displaying empty states in applications.
 - [Feedback](https://optics.agusmayol.com.ar/components/feedback): A component for providing user feedback.
 - [Field](https://optics.agusmayol.com.ar/components/field): A component for form fields.
 

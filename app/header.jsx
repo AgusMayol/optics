@@ -166,13 +166,13 @@ export function Header({ links }) {
 			<div className="w-full h-full flex items-center justify-end gap-1.5">
 				<Button variant="ghost" size="icon" animation="none">
 					<Link
-						href="https://github.com/optics/optics"
+						href="https://github.com/agusmayol/optics"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						<Image
 							src="/images/GitHub_Invertocat_Dark.svg"
-							alt="AgusMayol's Optics logo"
+							alt="GitHub logo"
 							className="size-4.5"
 							width={100}
 							height={100}

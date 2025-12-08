@@ -317,6 +317,16 @@ export default function Page() {
 									type: "string",
 									description: "Tooltip text displayed when hovering over the avatar.",
 								},
+								{
+									name: "side",
+									type: "string",
+									description: "The side of the tooltip relative to the avatar.",
+								},
+								{
+									name: "sideOffset",
+									type: "number",
+									description: "The distance in pixels from the tooltip to the avatar. Defaults to 0.",
+								},
 							],
 						},
 						{

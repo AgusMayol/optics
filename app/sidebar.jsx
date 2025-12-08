@@ -149,7 +149,7 @@ export function ListItems({ links, sidebarMaxHeight, isMobile, onLinkClick }) {
 								variant="ghost"
 								className={cn(
 									"w-full text-sm lg:text-xs pr-2 justify-between font-medium data-[active=true]:bg-sidebar-accent/80 data-[active=true]:lg:bg-sidebar-accent text-foreground lg:text-muted-foreground data-[active=true]:text-foreground transition-none transition-transform",
-									item.disabled && "cursor-not-allowed pointer-events-none",
+									item.disabled && "cursor-not-allowed",
 								)}
 								data-active={item.href === pathname}
 								asChild
@@ -158,10 +158,14 @@ export function ListItems({ links, sidebarMaxHeight, isMobile, onLinkClick }) {
 									href={item.href}
 									rel="noopener noreferrer"
 									target={item.href.includes("https://") ? "_blank" : "_self"}
-									onClick={isMobile && onLinkClick ? onLinkClick : undefined}
-									className={cn(
-										item.disabled && "cursor-not-allowed pointer-events-none",
-									)}
+									onClick={(e) => {
+										item.disabled
+											? e.preventDefault()
+											: isMobile && onLinkClick
+												? onLinkClick
+												: undefined;
+									}}
+									className={cn(item.disabled && "cursor-not-allowed")}
 								>
 									<div className="flex flex-row items-center justify-start gap-2">
 										{item.name}
@@ -169,17 +173,14 @@ export function ListItems({ links, sidebarMaxHeight, isMobile, onLinkClick }) {
 											<ArrowUpRight className="-ml-1" />
 										)}
 									</div>
-									{item.installed === false && (
-										<Badge className="squircle-none bg-red-600/80 dark:bg-red-600/20 !text-[10px] shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-red-900)] text-white">
+									{item.disabled && (
+										<Badge
+											variant="outline"
+											className="squircle-none !text-[10px]"
+										>
 											Soon
 										</Badge>
 									)}
-									{/* {item.own && (
-									<Badge className="bg-sky-700 text-xs shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-sky-900)] text-white size-1.5 p-0"></Badge>
-								)}
-								{item.custom && (
-									<Badge className="bg-emerald-700 text-xs shadow-[inset_-8px_-8px_12px_rgba(0,0,0,0.2)] [text-shadow:0_1px_0_var(--color-emerald-900)] text-white size-1.5 p-0"></Badge>
-								)} */}
 									{item.logo && (
 										<Image
 											src={item.logo}

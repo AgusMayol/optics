@@ -16,7 +16,7 @@ import {
 	CodeBlockContent,
 	CodeBlockCopyButton,
 	CodeBlockHeader,
-	CodeBlockItem
+	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
 	Snippet,
@@ -31,7 +31,7 @@ import { Separator } from "@/registry/optics/separator";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/code-snippet.jsx.txt";
-import utilsCode from '@/registry/optics/lib/utils.js.txt';
+import utilsCode from "@/registry/optics/lib/utils.js.txt";
 
 const code = [
 	{
@@ -78,12 +78,7 @@ const commandsExample = [
 		label: "yarn",
 		code: "yarn add package",
 	},
-,
-		{
-			path: 'lib/utils.js',
-			code: utilsCode,
-		}
-	];
+];
 
 const installDeps = [
 	{
