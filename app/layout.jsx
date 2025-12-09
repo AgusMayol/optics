@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./theme-provider";
 import { LayoutContent } from "./layout-content";
 import { VercelToolbar } from "@vercel/toolbar/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/registry/optics/sonner";
 import { ViewTransition } from "react";
@@ -96,6 +97,7 @@ export default function RootLayout({ children }) {
 				>
 					<ViewTransition>
 						<Analytics />
+						<SpeedInsights />
 						<LayoutContent>{children}</LayoutContent>
 						<Toaster />
 						{shouldInjectToolbar && <VercelToolbar />}
