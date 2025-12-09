@@ -18,6 +18,7 @@
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@flags-sdk/growthbook": "^0.2.0",
 		"@headless-tree/core": "^1.5.1",
 		"@headless-tree/react": "^1.5.1",
 		"@hookform/resolvers": "^5.2.2",

@@ -50,12 +50,12 @@ const code = [
 	</AccordionItem>
 </Accordion>`,
 	},
-,
-		{
-			path: 'lib/utils.js',
-			code: utilsCode,
-		}
-	];
+	{
+		language: "javascript",
+		filename: "lib/utils.js",
+		code: utilsCode,
+	},
+];
 
 import accordionPrimitiveCode from "@/registry/optics/accordion-primitive.jsx.txt";
 
@@ -179,7 +179,7 @@ export default function Page() {
 										<CodeBlockBody>
 											{(item) => (
 												<CodeBlockItem
-													key={item.language}
+												key={item.filename}
 													value={item.filename}
 												>
 													<CodeBlockContent
