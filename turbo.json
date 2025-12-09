@@ -1,6 +1,6 @@
 {
 "$schema": "https://turbo.build/schema.json",
-	"globalPassThroughEnv": ["FLAGS_SECRET"],
+	"globalPassThroughEnv": ["FLAGS_SECRET", "GROWTHBOOK_CLIENT_KEY"],
 "tasks": {
     "dev": {
         "cache": false,

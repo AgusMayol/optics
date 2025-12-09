@@ -4,8 +4,8 @@
 	"private": true,
 	"packageManager": "bun@1.2.0",
 	"scripts": {
-		"dev": "bun scripts/sync-source-files.js && bun next dev",
-		"build": "bun scripts/sync-source-files.js && bun shadcn build && bun next build",
+		"dev": "bun next dev",
+		"build": "bun shadcn build && bun next build",
 		"start": "bun next start",
 		"lint": "biome check",
 		"format": "biome format --write",
