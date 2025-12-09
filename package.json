@@ -2,14 +2,20 @@
 	"name": "AgusMayol's Optics",
 	"version": "0.1.0",
 	"private": true,
+	"packageManager": "bun@1.2.0",
 	"scripts": {
 		"dev": "bun scripts/sync-source-files.js && bun next dev",
 		"build": "bun scripts/sync-source-files.js && bun shadcn build && bun next build",
 		"start": "bun next start",
 		"lint": "biome check",
 		"format": "biome format --write",
+		"turbo": "turbo run",
+		"turbo:dev": "turbo run dev",
+		"turbo:build": "turbo run build",
+		"turbo:lint": "turbo run lint",
 		"registry:build": "shadcn build",
-		"sync:sources": "bun scripts/sync-source-files.js"
+		"sync:sources": "bun scripts/sync-source-files.js",
+		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@headless-tree/core": "^1.5.1",
@@ -105,6 +111,7 @@
 		"baseline-browser-mapping": "^2.8.32",
 		"raw-loader": "^4.0.2",
 		"tailwindcss": "^4.1.11",
+		"turbo": "^2.6.3",
 		"typescript": "^5.9.2"
 	},
 	"overrides": {

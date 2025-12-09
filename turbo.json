@@ -1,0 +1,27 @@
+{
+"$schema": "https://turbo.build/schema.json",
+"tasks": {
+    "dev": {
+        "cache": false,
+        "persistent": true,
+        "dependsOn": ["sync:sources"]
+    },
+    "build": {
+        "dependsOn": ["^build", "sync:sources"],
+        "outputs": [".next/**", "registry/**/dist/**"]
+    },
+    "registry:build": {
+        "dependsOn": ["sync:sources"],
+        "outputs": ["registry/**"]
+    },
+    "lint": {
+        "outputs": []
+    },
+    "format": {
+        "cache": false
+    },
+    "sync:sources": {
+        "outputs": []
+    }
+}
+}

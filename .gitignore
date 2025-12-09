@@ -50,3 +50,5 @@ package-lock.json
 .env*.local
 
 /public/r/*
+
+.turbo
