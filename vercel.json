@@ -1,9 +1,3 @@
 {
-	"bunVersion": "1.x",
-	"$schema": "https://openapi.vercel.sh/vercel.json",
-	"framework": "nextjs",
-	"env": {
-		"npm_config_target_platform": "linuxmusl",
-		"npm_config_target_arch": "x64"
-	}
+	"bunVersion": "1.x"
 }
