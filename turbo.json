@@ -1,6 +1,13 @@
 {
 	"$schema": "https://turbo.build/schema.json",
-	"globalPassThroughEnv": ["FLAGS_SECRET", "GROWTHBOOK_CLIENT_KEY"],
+	"globalPassThroughEnv": [
+		"FLAGS_SECRET",
+		"GROWTHBOOK_CLIENT_KEY",
+		"VERCEL_TARGET_ENV",
+		"VERCEL",
+		"VERCEL_ENV",
+		"VERCEL_URL"
+	],
 	"tasks": {
 		"dev": {
 			"cache": false,
@@ -9,6 +16,19 @@
 		},
 		"build": {
 			"dependsOn": ["^build", "sync:sources", "registry:build"],
+			"inputs": [
+				"app/**",
+				"components/**",
+				"hooks/**",
+				"lib/**",
+				"public/**",
+				"!public/r/**",
+				"*.{js,jsx,ts,tsx}",
+				"next.config.ts",
+				"tailwind.config.*",
+				"tsconfig.json",
+				"package.json"
+			],
 			"outputs": [".next/**", "registry/**/dist/**"]
 		},
 		"registry:build": {
