@@ -828,8 +828,8 @@ export default function Page() {
 						</p>
 					</div>
 
-					<div className="flex items-center justify-start gap-12">
-						<div className="flex items-start gap-6 flex-wrap">
+					<div className="flex flex-col lg:flex-row lg:items-center justify-start gap-12">
+						<div className="w-full flex items-center justify-center lg:items-start gap-6 flex-wrap">
 							<div className="relative p-4 rounded-lg border border-border bg-card">
 								<HexColorPicker
 									color={inputColorHex}
@@ -1000,7 +1000,7 @@ export default function Page() {
 												>
 													<Card
 														className={cn(
-															"w-full h-full aspect-square rounded-sm md:rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg",
+															"w-full h-full aspect-square rounded-sm md:rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg p-0",
 															colorClass,
 														)}
 													/>

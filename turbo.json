@@ -1,28 +1,34 @@
 {
-"$schema": "https://turbo.build/schema.json",
+	"$schema": "https://turbo.build/schema.json",
 	"globalPassThroughEnv": ["FLAGS_SECRET", "GROWTHBOOK_CLIENT_KEY"],
-"tasks": {
-    "dev": {
-        "cache": false,
-        "persistent": true,
-        "dependsOn": ["sync:sources"]
-    },
-    "build": {
-        "dependsOn": ["^build", "sync:sources"],
-        "outputs": [".next/**", "registry/**/dist/**"]
-    },
-    "registry:build": {
-        "dependsOn": ["sync:sources"],
-        "outputs": ["registry/**"]
-    },
-    "lint": {
-        "outputs": []
-    },
-    "format": {
-        "cache": false
-    },
-    "sync:sources": {
-        "outputs": []
-    }
-}
+	"tasks": {
+		"dev": {
+			"cache": false,
+			"persistent": true,
+			"dependsOn": ["sync:sources"]
+		},
+		"build": {
+			"dependsOn": ["^build", "sync:sources", "registry:build"],
+			"outputs": [".next/**", "registry/**/dist/**"]
+		},
+		"registry:build": {
+			"dependsOn": ["sync:sources"],
+			"inputs": ["registry.json"],
+			"outputs": ["public/r/**"]
+		},
+		"lint": {
+			"outputs": []
+		},
+		"format": {
+			"cache": false
+		},
+		"sync:sources": {
+			"inputs": [
+				"registry/optics/**/*.jsx",
+				"registry/optics/**/*.js",
+				"scripts/sync-source-files.js"
+			],
+			"outputs": ["registry/optics/**/*.txt"]
+		}
+	}
 }

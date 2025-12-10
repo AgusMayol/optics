@@ -5,7 +5,7 @@
 	"packageManager": "bun@1.2.0",
 	"scripts": {
 		"dev": "bun next dev",
-		"build": "bun shadcn build && bun next build",
+		"build": "next build",
 		"start": "bun next start",
 		"lint": "biome check",
 		"format": "biome format --write",

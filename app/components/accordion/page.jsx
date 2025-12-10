@@ -27,7 +27,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import componentCode from "@/registry/optics/accordion.jsx.txt";
-import utilsCode from '@/registry/optics/lib/utils.js.txt';
+import utilsCode from "@/registry/optics/lib/utils.js.txt";
 
 const code = [
 	{
@@ -179,7 +179,7 @@ export default function Page() {
 										<CodeBlockBody>
 											{(item) => (
 												<CodeBlockItem
-												key={item.filename}
+													key={item.filename}
 													value={item.filename}
 												>
 													<CodeBlockContent
