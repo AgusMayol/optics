@@ -5,11 +5,10 @@
 		"GROWTHBOOK_CLIENT_KEY",
 		"VERCEL_TARGET_ENV",
 		"VERCEL",
-        "VERCEL_URL",
 		"VERCEL_ENV",
 		"VERCEL_URL"
-
 	],
+	"envMode": "loose",
 	"tasks": {
 		"dev": {
 			"cache": false,
