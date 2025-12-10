@@ -43,7 +43,6 @@ next-env.d.ts
 # cursor
 .cursor
 
-bun.lock
 bun.lockb
 package-lock.json
 /registry/optics/**/*.txt
