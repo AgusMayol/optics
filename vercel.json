@@ -1,3 +1,11 @@
 {
-	"bunVersion": "1.x"
+	"bunVersion": "1.x",
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"buildCommand": "bun turbo build",
+	"installCommand": "bun install --no-save --platform=linuxmusl --arch=x64 lightningcss",
+	"framework": "nextjs",
+	"env": {
+		"npm_config_target_platform": "linuxmusl",
+		"npm_config_target_arch": "x64"
+	}
 }
