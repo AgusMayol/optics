@@ -1,0 +1,353 @@
+---
+description: Rules for back-end development
+globs: *.js, *.jsx, *.ts, *.tsx
+alwaysApply: false
+---
+# Backend Development Rules
+
+## Languages and Frameworks
+
+Expert in Node.js, Express, Next.js API Routes, Server Actions, Route Handlers, Fastify, Prisma, Drizzle.
+
+Use JavaScript by default. Use TypeScript when explicitly requested or when project requires it.
+
+For monolithic Next.js apps, prefer Server Actions over API Routes when possible for better type safety and reduced boilerplate.
+
+## Next.js Backend Patterns
+
+Server Actions are the preferred way to handle mutations in Next.js 16:
+```javascript
+'use server'
+export async function createUser(formData) {
+  // Validate, process, return result
+}
+```
+
+Use Route Handlers (app/api) for:
+- External API consumption
+- Webhooks
+- Non-form mutations
+- Integrations with third-party services
+
+Server Actions provide automatic serialization, type safety, and progressive enhancement.
+
+Use "use cache" directive for caching expensive computations or data fetching.
+
+Always revalidate or update cache after mutations using updateTag() or revalidateTag().
+
+## Error Handling
+
+Wrap all async operations in try-catch blocks. Never let errors crash the server.
+
+Return structured error responses with appropriate HTTP status codes and messages.
+
+Create custom error classes for different error types (ValidationError, AuthError, NotFoundError).
+
+Good:
+```javascript
+try {
+  const user = await db.user.findUnique({ where: { id } })
+  if (!user) throw new NotFoundError('User not found')
+  return user
+} catch (error) {
+  if (error instanceof NotFoundError) {
+    return { error: error.message, status: 404 }
+  }
+  return { error: 'Internal server error', status: 500 }
+}
+```
+
+Log errors properly with context (user ID, request ID, timestamp) but never expose stack traces to clients.
+
+## Input Validation
+
+Validate all incoming data at the entry point. Never trust client input.
+
+Use validation libraries like Zod or Yup for schema validation:
+```javascript
+const userSchema = z.object({
+  email: z.string().email(),
+  age: z.number().min(18)
+})
+
+const result = userSchema.safeParse(data)
+if (!result.success) {
+  return { error: result.error.flatten(), status: 400 }
+}
+```
+
+Validate types, formats, lengths, and business rules before processing.
+
+Sanitize HTML and SQL inputs to prevent injection attacks.
+
+Return clear validation errors that help clients fix issues without exposing system internals.
+
+## Authentication and Authorization
+
+Always verify authentication before accessing protected resources.
+
+Implement authorization checks at the business logic level, not just at the route level.
+
+Use JWT tokens, session cookies, or OAuth depending on requirements.
+
+In Next.js, use middleware or Server Actions for auth checks:
+```javascript
+import { auth } from '@/lib/auth'
+
+export async function deletePost(postId) {
+  'use server'
+  const session = await auth()
+  if (!session) throw new AuthError('Unauthorized')
+  // Proceed with deletion
+}
+```
+
+Never expose sensitive data in responses (passwords, internal IDs, tokens).
+
+Hash passwords with bcrypt or Argon2, never store plain text.
+
+Implement rate limiting for authentication endpoints to prevent brute force attacks.
+
+## Security Best Practices
+
+Sanitize all user inputs to prevent XSS, SQL injection, and command injection.
+
+Use parameterized queries or ORMs to prevent SQL injection.
+
+Implement CSRF protection for state-changing operations.
+
+Set security headers (Content-Security-Policy, X-Frame-Options, X-Content-Type-Options).
+
+Use HTTPS in production. Redirect HTTP to HTTPS.
+
+Configure CORS properly. Whitelist specific origins, avoid using wildcards in production.
+
+Implement rate limiting to prevent abuse and DDoS attacks.
+
+Keep dependencies updated. Regularly audit for vulnerabilities with npm audit or Snyk.
+
+Never commit secrets, API keys, or credentials to version control. Use environment variables.
+
+Disable unnecessary HTTP headers that expose technology stack (X-Powered-By).
+
+## Logging and Monitoring
+
+Use structured logging libraries (Winston, Pino) instead of console.log.
+
+Log levels: error, warn, info, debug. Use appropriately.
+
+Include context in logs: request ID, user ID, timestamp, relevant data.
+
+Never log sensitive information (passwords, tokens, credit cards, PII).
+
+Good:
+```javascript
+logger.info('User created', { 
+  userId: user.id, 
+  requestId: req.id,
+  timestamp: new Date().toISOString()
+})
+```
+
+Implement centralized error logging and monitoring (Sentry, LogRocket, Datadog).
+
+Track key metrics: response times, error rates, throughput.
+
+## HTTP Status Codes
+
+Use status codes correctly and consistently:
+
+- 200 OK: Successful GET, PUT, PATCH
+- 201 Created: Successful POST that creates a resource
+- 204 No Content: Successful DELETE
+- 400 Bad Request: Validation errors, malformed requests
+- 401 Unauthorized: Missing or invalid authentication
+- 403 Forbidden: Authenticated but not authorized
+- 404 Not Found: Resource doesn't exist
+- 409 Conflict: Resource conflict (duplicate email, version mismatch)
+- 422 Unprocessable Entity: Valid syntax but semantic errors
+- 429 Too Many Requests: Rate limit exceeded
+- 500 Internal Server Error: Unexpected server errors
+- 503 Service Unavailable: Temporary unavailability
+
+## Response Structure
+
+Return consistent response structures across all endpoints.
+
+Good:
+```javascript
+// Success
+{ data: { user: {...} }, success: true }
+
+// Error
+{ error: 'User not found', success: false }
+
+// Validation error
+{ error: 'Validation failed', errors: { email: ['Invalid format'] }, success: false }
+```
+
+Include pagination metadata for list endpoints:
+```javascript
+{ 
+  data: [...], 
+  pagination: { page: 1, limit: 20, total: 100, hasMore: true }
+}
+```
+
+## Code Structure and Organization
+
+Organize code by feature or domain, not by technical role:
+```
+/features
+  /users
+    user.service.js
+    user.controller.js
+    user.validation.js
+  /posts
+    post.service.js
+    post.controller.js
+```
+
+Separate concerns clearly:
+- Routes: Define endpoints and basic request handling
+- Controllers: Handle HTTP specifics (request/response)
+- Services: Contain business logic
+- Repositories/DAL: Database access layer
+- Middleware: Cross-cutting concerns (auth, logging, validation)
+
+Keep controllers thin. Move business logic to services.
+
+Good:
+```javascript
+// Controller
+export async function createUser(req, res) {
+  const result = await userService.create(req.body)
+  return res.status(201).json(result)
+}
+
+// Service
+export async function create(userData) {
+  // Business logic here
+  return await db.user.create({ data: userData })
+}
+```
+
+## Database Best Practices
+
+Use an ORM or query builder (Prisma, Drizzle, Knex) for type safety and migrations.
+
+Always use transactions for operations that modify multiple records.
+
+Implement database-level constraints (unique, foreign keys, not null).
+
+Index frequently queried columns for better performance.
+
+Use connection pooling to manage database connections efficiently.
+
+Avoid N+1 queries. Use eager loading or batch queries.
+
+Validate data before database operations to catch errors early.
+
+## API Design
+
+Use RESTful conventions when appropriate:
+- GET /users - List users
+- GET /users/:id - Get specific user
+- POST /users - Create user
+- PUT/PATCH /users/:id - Update user
+- DELETE /users/:id - Delete user
+
+Use plural nouns for resources (users, posts, orders).
+
+Version APIs when breaking changes are needed (/api/v1/, /api/v2/).
+
+Keep endpoints predictable and consistent.
+
+Return appropriate resource representations after mutations (created/updated resource).
+
+## Environment Configuration
+
+Use environment variables for configuration. Never hardcode credentials or URLs.
+
+Validate required environment variables at startup:
+```javascript
+const requiredEnvVars = ['DATABASE_URL', 'JWT_SECRET']
+requiredEnvVars.forEach(key => {
+  if (!process.env[key]) {
+    throw new Error(`Missing required environment variable: ${key}`)
+  }
+})
+```
+
+Use different configurations for development, staging, and production.
+
+Provide sensible defaults for non-sensitive configuration.
+
+## Testing
+
+Write unit tests for business logic in services.
+
+Write integration tests for API endpoints.
+
+Test error cases, not just happy paths.
+
+Mock external dependencies in tests.
+
+Use descriptive test names that explain what is being tested.
+
+## Performance
+
+Implement caching strategies where appropriate (Redis, in-memory, CDN).
+
+Use async/await consistently. Avoid blocking operations.
+
+Implement pagination for large datasets. Never return unbounded lists.
+
+Use database indexes on frequently queried fields.
+
+Consider background jobs for heavy operations (emails, image processing).
+
+Monitor and optimize slow queries and endpoints.
+
+## Documentation
+
+Document all API endpoints with expected inputs and outputs.
+
+Include example requests and responses.
+
+Document error responses and status codes.
+
+Keep documentation updated when endpoints change.
+
+Use JSDoc comments for complex functions.
+
+## Code Quality Principles
+
+Follow KISS: Keep solutions simple and straightforward.
+
+Follow DRY: Don't repeat yourself. Extract common logic.
+
+Keep functions focused on a single responsibility.
+
+Use pure functions when possible (same input always produces same output, no side effects).
+
+Name functions clearly based on what they do (createUser, validateEmail, sendNotification).
+
+Keep functions small. If over 30-40 lines, consider refactoring.
+
+## Deployment Considerations
+
+Use health check endpoints for monitoring:
+```javascript
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() })
+})
+```
+
+Implement graceful shutdown to finish pending requests before stopping.
+
+Use process managers (PM2) or container orchestration (Docker, Kubernetes).
+
+Set up proper logging and monitoring in production.
+
+Configure appropriate timeouts for requests and connections.
