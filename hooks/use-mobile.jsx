@@ -65,7 +65,7 @@ export function useIsMobile() {
 	);
 
 	// Defer initial render until we know the real value on the client
-	const [hydrated, setHydrated] = React.useState(typeof window !== "undefined");
+	const [hydrated, setHydrated] = React.useState(false);
 
 	React.useEffect(() => {
 		setHydrated(true);

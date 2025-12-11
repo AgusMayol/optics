@@ -28,7 +28,8 @@
 				"next.config.ts",
 				"tailwind.config.*",
 				"tsconfig.json",
-				"package.json"
+				"package.json",
+				"registry.json"
 			],
 			"outputs": [".next/**", "registry/**/dist/**"]
 		},
