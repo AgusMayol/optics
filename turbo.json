@@ -23,6 +23,7 @@
 				"hooks/**",
 				"lib/**",
 				"public/**",
+				"registry/**",
 				"!public/r/**",
 				"*.{js,jsx,ts,tsx}",
 				"next.config.ts",

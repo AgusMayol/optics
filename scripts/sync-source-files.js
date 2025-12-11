@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 const registryPath = join(__dirname, "..", "registry", "optics");
 
 // Extensiones de archivos a procesar
-const EXTENSIONS = [".jsx", ".js"];
+const EXTENSIONS = [".jsx", ".js", ".mdc"];
 
 function getAllSourceFiles(dir) {
 	const files = [];
@@ -35,13 +35,9 @@ function getAllSourceFiles(dir) {
 				files.push(...getAllSourceFiles(fullPath));
 			}
 		} else {
-			// Incluir archivos .jsx, .ts, .js excepto .source.jsx y .txt
+			// Incluir archivos .jsx, .ts, .js, .mdc excepto .source.jsx y .txt
 			const ext = EXTENSIONS.find((ext) => item.endsWith(ext));
-			if (
-				ext &&
-				!item.endsWith(".source.jsx") &&
-				!item.endsWith(".txt")
-			) {
+			if (ext && !item.endsWith(".source.jsx") && !item.endsWith(".txt")) {
 				files.push(fullPath);
 			}
 		}
@@ -66,11 +62,11 @@ for (const sourceFile of sourceFiles) {
 		writeFileSync(txtFile, content, "utf-8");
 		const relativePath = sourceFile.replace(registryPath + "/", "");
 		const relativeTxtPath = txtFile.replace(registryPath + "/", "");
-		console.log(
-			`✓ Sincronizado: ${relativePath} -> ${relativeTxtPath}`,
-		);
+		console.log(`✓ Sincronizado: ${relativePath} -> ${relativeTxtPath}`);
 		syncedCount++;
 	}
 }
 
-console.log(`✅ Sincronización completada (${syncedCount} archivos actualizados)`);
+console.log(
+	`✅ Sincronización completada (${syncedCount} archivos actualizados)`,
+);

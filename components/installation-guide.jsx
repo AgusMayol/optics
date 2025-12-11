@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import { FFResolver } from "@/components/ff-resolver";
+import { cn } from "@/lib/utils";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -35,7 +36,6 @@ import { ShowMore } from "@/registry/optics/show-more";
  * @returns {Array} Array of command objects with label and code
  */
 
-
 export function InstallationGuide({
 	value,
 	setValue,
@@ -44,50 +44,61 @@ export function InstallationGuide({
 	manualFiles = [],
 	installationTab,
 	handleTabChange,
+	className = "",
+	showUpdateImportPaths = true,
 }) {
-    const [registryPrefixState, setRegistryPrefixState] = useState(false);
-    useEffect(() => {
-        async function fetchRegistryPrefix() {
-            const registryPrefixValue = await FFResolver();
-            setRegistryPrefixState(registryPrefixValue);
-        }
-        fetchRegistryPrefix();
-    }, []);
+	const [registryPrefixState, setRegistryPrefixState] = useState(false);
+	useEffect(() => {
+		async function fetchRegistryPrefix() {
+			const registryPrefixValue = await FFResolver();
+			setRegistryPrefixState(registryPrefixValue);
+		}
+		fetchRegistryPrefix();
+	}, []);
 
-    const commands = useMemo(() => {
-        const registryPrefix = registryPrefixState ? "@optics" : `https://${process.env.NEXT_PUBLIC_DOMAIN}/r`;
-        const finalComponentName = registryPrefixState ? componentName : `${componentName}.json`;
-    
-        return [
-            {
-                label: "pnpm",
-                code: `pnpm dlx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
-            },
-            {
-                label: "npm",
-                code: `npx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
-            },
-            {
-                label: "yarn",
-                code: `yarn shadcn@latest add ${registryPrefix}/${finalComponentName}`,
-            },
-            {
-                label: "bun",
-                code: `bunx --bun shadcn@latest add ${registryPrefix}/${finalComponentName}`,
-            },
-        ];
-    }, [registryPrefixState, componentName]);
-	
+	const commands = useMemo(() => {
+		const registryPrefix = registryPrefixState
+			? "@optics"
+			: `https://${process.env.NEXT_PUBLIC_DOMAIN}/r`;
+		const finalComponentName = registryPrefixState
+			? componentName
+			: `${componentName}.json`;
+
+		return [
+			{
+				label: "pnpm",
+				code: `pnpm dlx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+			},
+			{
+				label: "npm",
+				code: `npx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+			},
+			{
+				label: "yarn",
+				code: `yarn shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+			},
+			{
+				label: "bun",
+				code: `bunx --bun shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+			},
+		];
+	}, [registryPrefixState, componentName]);
+
 	// Calculate activeCommand and activeDepsCommand based on current value and commands
 	const activeCommand = useMemo(() => {
 		return commands.find((command) => command.label === value);
 	}, [commands, value]);
-	
+
 	const activeDepsCommand = useMemo(() => {
 		return installDeps.find((command) => command.label === value);
 	}, [installDeps, value]);
 	return (
-		<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
+		<div
+			className={cn(
+				"flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0",
+				className,
+			)}
+		>
 			<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
 				Installation
 			</h2>
@@ -180,78 +191,93 @@ export function InstallationGuide({
 							</div>
 						)}
 
-					{/* Sección de archivos */}
-					{manualFiles.length > 0 && (
-						<div className="w-full flex flex-col gap-8">
-							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
-								Copy and paste the following code into your project:
-							</p>
-
-							{(() => {
-								const renderCodeBlock = (file, index) => (
-									<div key={file.path || index} className="w-full flex flex-col gap-2">
-										<CodeBlock
-											data={[file]}
-											defaultValue={file.path}
-										>
-											<CodeBlockHeader>
-												<CodeBlockFiles>
-													{(item) => (
-														<CodeBlockFilename
-															key={item.path}
-															value={item.path}
-														>
-															{item.path}
-														</CodeBlockFilename>
-													)}
-												</CodeBlockFiles>
-
-												<CodeBlockCopyButton variant="ghost" />
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem key={item.path} value={item.path}>
-														<CodeBlockContent
-															language="jsx"
-															className="bg-sidebar"
-														>
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</div>
-								);
-
-								// If there's only one file, render it normally
-								if (manualFiles.length === 1) {
-									return renderCodeBlock(manualFiles[0], 0);
-								}
-
-								// If there are multiple files, use ShowMore
-								const firstFile = manualFiles[0];
-								const remainingFiles = manualFiles.slice(1);
-
-								return (
-									<ShowMore
-										moreContent={
-											<div className="flex flex-col gap-8 mt-12">
-												{remainingFiles.map((file, index) =>
-													renderCodeBlock(file, index + 1)
-												)}
-											</div>
-										}
-										showSeparator={false}
-									>
-										{renderCodeBlock(firstFile, 0)}
-									</ShowMore>
-								);
-							})()}
-						</div>
-					)}
-
+						{/* Sección de archivos */}
 						{manualFiles.length > 0 && (
+							<div className="w-full flex flex-col gap-8">
+								<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
+									Copy and paste the following code into your project:
+								</p>
+
+								{(() => {
+									const getLanguageFromPath = (path) => {
+										if (path.endsWith(".mdc")) return "markdown";
+										if (path.endsWith(".jsx")) return "jsx";
+										if (path.endsWith(".tsx")) return "tsx";
+										if (path.endsWith(".js")) return "javascript";
+										if (path.endsWith(".ts")) return "typescript";
+										if (path.endsWith(".css")) return "css";
+										if (path.endsWith(".json")) return "json";
+										return "jsx";
+									};
+
+									const renderCodeBlock = (file, index) => {
+										const language =
+											file.language || getLanguageFromPath(file.path);
+										return (
+											<div
+												key={file.path || index}
+												className="w-full flex flex-col gap-2"
+											>
+												<CodeBlock data={[file]} defaultValue={file.path}>
+													<CodeBlockHeader>
+														<CodeBlockFiles>
+															{(item) => (
+																<CodeBlockFilename
+																	key={item.path}
+																	value={item.path}
+																>
+																	{item.path}
+																</CodeBlockFilename>
+															)}
+														</CodeBlockFiles>
+
+														<CodeBlockCopyButton variant="ghost" />
+													</CodeBlockHeader>
+													<CodeBlockBody>
+														{(item) => (
+															<CodeBlockItem key={item.path} value={item.path}>
+																<CodeBlockContent
+																	language={language}
+																	className="bg-sidebar"
+																>
+																	{item.code}
+																</CodeBlockContent>
+															</CodeBlockItem>
+														)}
+													</CodeBlockBody>
+												</CodeBlock>
+											</div>
+										);
+									};
+
+									// If there's only one file, render it normally
+									if (manualFiles.length === 1) {
+										return renderCodeBlock(manualFiles[0], 0);
+									}
+
+									// If there are multiple files, use ShowMore
+									const firstFile = manualFiles[0];
+									const remainingFiles = manualFiles.slice(1);
+
+									return (
+										<ShowMore
+											moreContent={
+												<div className="flex flex-col gap-8 mt-12">
+													{remainingFiles.map((file, index) =>
+														renderCodeBlock(file, index + 1),
+													)}
+												</div>
+											}
+											showSeparator={false}
+										>
+											{renderCodeBlock(firstFile, 0)}
+										</ShowMore>
+									);
+								})()}
+							</div>
+						)}
+
+						{manualFiles.length > 0 && showUpdateImportPaths && (
 							<p className="text-[16px] leading-[1.3] tracking-[-0.01em] font-semibold">
 								Update the import paths to match your project setup.
 							</p>
