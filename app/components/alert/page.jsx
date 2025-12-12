@@ -17,31 +17,12 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { AlertCircle, ArrowUpRight, Terminal } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/alert.jsx.txt";
 
@@ -67,72 +48,6 @@ import { Terminal, AlertCircle } from "lucide-react";
 		Your session has expired. Please log in again.
 	</AlertDescription>
 </Alert>`,
-	},
-];
-
-const alertComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/alert.jsx",
-		code: `import * as React from "react";
-import { cva } from "class-variance-authority";
-
-import { cn } from "@/lib/utils";
-
-const alertVariants = cva(
-	"relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
-	{
-		variants: {
-			variant: {
-				default: "bg-card text-card-foreground",
-				destructive:
-					"text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-		},
-	},
-);
-
-function Alert({ className, variant, ...props }) {
-	return (
-		<div
-			data-slot="alert"
-			role="alert"
-			className={cn(alertVariants({ variant }), className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertTitle({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-title"
-			className={cn(
-				"col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDescription({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-description"
-			className={cn(
-				"text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-export { Alert, AlertTitle, AlertDescription };`,
 	},
 ];
 
@@ -163,15 +78,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("alert", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("alert", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -266,8 +174,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="alert"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -293,7 +199,8 @@ export default function Page() {
 								{
 									name: "variant",
 									type: `"default" | "destructive"`,
-									description: "The visual style variant of the alert. Defaults to 'default'.",
+									description:
+										"The visual style variant of the alert. Defaults to 'default'.",
 								},
 							],
 						},
@@ -303,7 +210,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the alert title.",
+									description:
+										"Additional CSS classes to apply to the alert title.",
 								},
 							],
 						},
@@ -313,7 +221,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the alert description.",
+									description:
+										"Additional CSS classes to apply to the alert description.",
 								},
 							],
 						},

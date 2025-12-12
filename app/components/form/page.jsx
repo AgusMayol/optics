@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,15 +20,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	Form,
 	FormControl,
 	FormDescription,
@@ -40,16 +30,8 @@ import {
 } from "@/registry/optics/form";
 import { Input } from "@/registry/optics/input";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/form.jsx.txt";
 import { useForm } from "react-hook-form";
@@ -105,69 +87,6 @@ function onSubmit(data) {
 	},
 ];
 
-const formComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/form.jsx",
-		code: `"use client";
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { Controller, FormProvider, useFormContext, useFormState } from "react-hook-form";
-
-import { cn } from "@/lib/utils";
-import { Label } from "@/registry/optics/label";
-
-const Form = FormProvider
-
-const FormFieldContext = React.createContext({})
-
-const FormField = ({ ...props }) => {
-  return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>
-  );
-}
-
-function FormItem({
-  className,
-  ...props
-}) {
-  const id = React.useId()
-  return (
-    <FormItemContext.Provider value={{ id }}>
-      <div data-slot="form-item" className={cn("grid gap-2", className)} {...props} />
-    </FormItemContext.Provider>
-  );
-}
-
-function FormLabel({
-  className,
-  ...props
-}) {
-  const { error, formItemId } = useFormField()
-  return (
-    <Label
-      data-slot="form-label"
-      data-error={!!error}
-      className={cn("data-[error=true]:text-destructive", className)}
-      htmlFor={formItemId}
-      {...props} />
-  );
-}
-
-export {
-  Form,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-  FormField,
-}`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -179,13 +98,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("form", installDeps);
 
 	const form = useForm({
@@ -311,8 +227,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="form"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,15 +20,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	Field,
 	FieldDescription,
 	FieldGroup,
@@ -39,16 +29,8 @@ import {
 } from "@/registry/optics/field";
 import { Input } from "@/registry/optics/input";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/field.jsx.txt";
 
@@ -90,150 +72,6 @@ import { Input } from "@/components/optics/input";
 	},
 ];
 
-const fieldComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/field.jsx",
-		code: `"use client";
-
-import { useMemo } from "react";
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { Label } from "@/registry/optics/label";
-import { Separator } from "@/registry/optics/separator";
-
-function FieldSet({
-  className,
-  ...props
-}) {
-  return (
-    <fieldset
-      data-slot="field-set"
-      className={cn(
-        "flex flex-col gap-6",
-        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function FieldLegend({
-  className,
-  variant = "legend",
-  ...props
-}) {
-  return (
-    <legend
-      data-slot="field-legend"
-      data-variant={variant}
-      className={cn(
-        "mb-3 font-medium",
-        "data-[variant=legend]:text-base",
-        "data-[variant=label]:text-sm",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function FieldGroup({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="field-group"
-      className={cn(
-        "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4",
-        className
-      )}
-      {...props} />
-  );
-}
-
-const fieldVariants = cva("group/field flex w-full gap-3 data-[invalid=true]:text-destructive", {
-  variants: {
-    orientation: {
-      vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],
-      horizontal: [
-        "flex-row items-center",
-        "[&>[data-slot=field-label]]:flex-auto",
-        "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
-      ],
-      responsive: [
-        "flex-col [&>*]:w-full [&>.sr-only]:w-auto @md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto",
-        "@md/field-group:[&>[data-slot=field-label]]:flex-auto",
-        "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
-      ],
-    },
-  },
-  defaultVariants: {
-    orientation: "vertical",
-  },
-});
-
-function Field({
-  className,
-  orientation = "vertical",
-  ...props
-}) {
-  return (
-    <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props} />
-  );
-}
-
-function FieldLabel({
-  className,
-  ...props
-}) {
-  return (
-    <Label
-      data-slot="field-label"
-      className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",
-        "has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function FieldDescription({
-  className,
-  ...props
-}) {
-  return (
-    <p
-      data-slot="field-description"
-      className={cn(
-        "text-muted-foreground text-sm leading-normal font-normal group-has-[[data-orientation=horizontal]]/field:text-balance",
-        "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
-        "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
-        className
-      )}
-      {...props} />
-  );
-}
-
-export {
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldGroup,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-};`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -245,13 +83,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("field", installDeps);
 
 	return (
@@ -374,8 +209,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="field"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

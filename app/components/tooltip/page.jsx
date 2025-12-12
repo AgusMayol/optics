@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,38 +16,18 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/registry/optics/tooltip";
-import { ALargeSmall, ArrowUpRight, Binary } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/tooltip.jsx.txt";
 
@@ -69,126 +48,6 @@ import { Button } from "@/components/optics/button";
 		</TooltipContent>
 	</Tooltip>
 </TooltipProvider>`,
-	},
-];
-
-const tooltipComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/tooltip.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-
-import { cn } from "@/lib/utils";
-import { otherThemes } from "@/registry/optics/button";
-
-const TooltipContext = React.createContext({
-	hasActiveTooltip: false,
-	setHasActiveTooltip: () => {},
-	firstTooltipDelay: 400,
-	subsequentTooltipDelay: 0,
-	isFirstTooltip: true,
-	setIsFirstTooltip: () => {},
-});
-
-function TooltipProvider({
-	delayDuration = 400,
-	skipDelayDuration = 0,
-	...props
-}) {
-	const [hasActiveTooltip, setHasActiveTooltip] = React.useState(false);
-	const [isFirstTooltip, setIsFirstTooltip] = React.useState(true);
-	
-	const currentDelay = hasActiveTooltip ? skipDelayDuration : delayDuration;
-
-	return (
-		<TooltipContext.Provider 
-			value={{ 
-				hasActiveTooltip, 
-				setHasActiveTooltip,
-				firstTooltipDelay: delayDuration,
-				subsequentTooltipDelay: skipDelayDuration,
-				isFirstTooltip,
-				setIsFirstTooltip
-			}}
-		>
-			<TooltipPrimitive.Provider
-				data-slot="tooltip-provider"
-				delayDuration={currentDelay}
-				{...props}
-			/>
-		</TooltipContext.Provider>
-	);
-}
-
-function Tooltip({ ...props }) {
-	const { hasActiveTooltip, setHasActiveTooltip, setIsFirstTooltip } = React.useContext(TooltipContext);
-	const [isOpen, setIsOpen] = React.useState(false);
-
-	const handleOpenChange = React.useCallback((open) => {
-		setIsOpen(open);
-		if (open) {
-			if (!hasActiveTooltip) {
-				setIsFirstTooltip(true);
-			} else {
-				setIsFirstTooltip(false);
-			}
-			setHasActiveTooltip(true);
-		} else {
-			setHasActiveTooltip(false);
-			setIsFirstTooltip(true);
-		}
-	}, [hasActiveTooltip, setHasActiveTooltip, setIsFirstTooltip]);
-
-	return (
-		<TooltipPrimitive.Root 
-			data-slot="tooltip" 
-			open={isOpen}
-			onOpenChange={handleOpenChange}
-			{...props} 
-		/>
-	);
-}
-
-function TooltipTrigger({ ...props }) {
-	return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
-}
-
-function TooltipContent({ className, sideOffset = 0, children, ...props }) {
-	const { isFirstTooltip } = React.useContext(TooltipContext);
-	
-	const animationClasses = isFirstTooltip 
-		? "animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
-		: "";
-
-	return (
-		<TooltipPrimitive.Portal>
-			<TooltipPrimitive.Content
-				data-slot="tooltip-content"
-				sideOffset={sideOffset}
-				className={cn(
-					"bg-foreground text-background data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
-					animationClasses,
-					className,
-					otherThemes({ variant: "raised" }),
-					"bg-sidebar",
-				)}
-				{...props}
-			>
-				{children}
-				<TooltipPrimitive.Arrow
-					className={cn(
-						"bg-sidebar fill-sidebar z-20 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]",
-					)}
-				/>
-			</TooltipPrimitive.Content>
-		</TooltipPrimitive.Portal>
-	);
-}
-
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };`,
 	},
 ];
 
@@ -220,13 +79,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("tooltip", installDeps);
 
 	return (
@@ -318,8 +174,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="tooltip"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

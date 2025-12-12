@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,33 +16,14 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { Textarea } from "@/registry/optics/textarea";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/textarea.jsx.txt";
 
@@ -55,37 +35,6 @@ const code = [
 
 <Textarea placeholder="Type your message here." />
 <Textarea placeholder="Disabled" disabled />`,
-	},
-];
-
-const textareaComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/textarea.jsx",
-		code: `import * as React from "react";
-
-import { cn } from "@/lib/utils";
-import { otherThemes } from "@/registry/optics/button";
-
-function Textarea({ className, variant, ...props }) {
-	return (
-		<textarea
-			data-slot="textarea"
-			className={cn(
-				"border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-				variant &&
-					otherThemes({
-						variant: variant,
-					}),
-				"transition-[color,box-shadow]",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-export { Textarea };`,
 	},
 ];
 
@@ -119,13 +68,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("textarea", installDeps);
 
 	return (
@@ -224,8 +170,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="textarea"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

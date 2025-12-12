@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,32 +16,13 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import { toast, Toaster } from "@/registry/optics/sonner";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/sonner.jsx.txt";
 import utilsCode from "@/registry/optics/lib/utils.js.txt";
@@ -74,52 +54,6 @@ const code = [
 	},
 ];
 
-const sonnerComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/sonner.jsx",
-		code: `"use client";
-import React from "react";
-import { useTheme } from "next-themes";
-import { toast as sonnerToast, Toaster as Sonner } from "sonner";
-
-export function Toaster({ ...props }) {
-	const { theme = "system" } = useTheme();
-
-	return (
-		<Sonner
-			theme={theme}
-			className="toaster group"
-			style={{
-				"--normal-bg": "var(--popover)",
-				"--normal-text": "var(--popover-foreground)",
-				"--normal-border": "var(--border)",
-			}}
-			{...props}
-		/>
-	);
-}
-
-export function toast(toastConfig) {
-	const {
-		type = "info",
-		title,
-		description,
-		button,
-		promise,
-		loading,
-		success,
-		error,
-		toastId,
-		duration = 5500,
-	} = toastConfig;
-
-	// Toast implementation
-	// See full implementation in the source code
-}`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/sonner.jsx",
@@ -148,13 +82,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("sonner", installDeps);
 
 	return (
@@ -298,8 +229,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="sonner"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

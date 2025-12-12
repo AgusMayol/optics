@@ -2,16 +2,11 @@
 import * as React from "react";
 
 import componentCode from "@/registry/optics/grid.jsx.txt";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
-import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
 import { InstallationGuide } from "@/components/installation-guide";
 import { ComponentNavigation } from "@/components/component-navigation";
 import { PropsTable } from "@/components/props-table";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
-import Link from "next/link";
-import { Badge } from "@/registry/optics/badge";
-import { Button } from "@/registry/optics/button";
+import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	Accordion,
@@ -24,28 +19,10 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
 
 const code = [
 	{
@@ -70,181 +47,6 @@ const code = [
 	},
 ];
 
-const gridComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/grid.jsx",
-		code: `"use client";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-
-const GridContext = React.createContext();
-
-const useGridContext = () => {
-	const context = React.useContext(GridContext);
-	if (!context) {
-		throw new Error("GridRow and GridItem must be inside GridContainer");
-	}
-	return context;
-};
-
-export const GridContainer = ({
-	cols = 12,
-	rows = 1,
-	gap = 0,
-	border = true,
-	className = "",
-	children = null,
-	...props
-}) => {
-	const contextValue = {
-		cols,
-		rows,
-		gap,
-		border,
-		...props,
-	};
-
-	return (
-		<GridContext.Provider value={contextValue}>
-			<div
-				className={cn("w-full grid", className)}
-				style={{
-					gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
-					gridTemplateRows: \`repeat(\${rows}, minmax(0, 1fr))\`,
-					gap,
-				}}
-				{...props}
-			>
-				{children}
-			</div>
-		</GridContext.Provider>
-	);
-};
-
-export const GridRow = ({
-	className = "",
-	children = null,
-	span: paramSpan = 0,
-	gap: paramGap = 0,
-	overrideStyles = false,
-	borderTop = true,
-	borderBottom = true,
-	...props
-}) => {
-	const { cols, gap: containerGap, border } = useGridContext();
-	const gap = paramGap || containerGap;
-	const span = paramSpan || cols;
-
-	return (
-		<div
-			className={cn(
-				"w-full grid border-t last:border-b -mb-[1px]",
-				gap > 0 && "!border-b -mb-0",
-				!border && "!border-0",
-				!borderTop && "!border-t-0",
-				!borderBottom && "!border-b-0",
-				className,
-			)}
-			style={
-				overrideStyles
-					? undefined
-					: {
-							gridColumn: \`span \${cols} / span \${span}\`,
-							gridTemplateColumns: \`repeat(\${cols}, minmax(0, 1fr))\`,
-							gap,
-					  }
-			}
-			{...props}
-		>
-			{children}
-		</div>
-	);
-};
-
-export const GridItem = ({
-	className = "",
-	children = null,
-	span = 1,
-	borderLeft = true,
-	borderRight = true,
-	borderTop = false,
-	borderBottom = false,
-	decorationTopLeft = false,
-	decorationTopRight = false,
-	decorationBottomLeft = false,
-	decorationBottomRight = false,
-	...props
-}) => {
-	const { cols, border } = useGridContext();
-	const hasDecorations =
-		decorationTopLeft ||
-		decorationTopRight ||
-		decorationBottomLeft ||
-		decorationBottomRight;
-
-	return (
-		<div
-			className={cn(
-				"border-l last:border-r flex items-center justify-center relative",
-				span === 1 && "md:aspect-square",
-				span === 1 && "min-h-[60px] md:min-h-0",
-				!borderLeft && "!border-l-0",
-				!borderRight && "!border-r-0",
-				borderTop && "!border-t",
-				borderBottom && "!border-b",
-				!border && "!border-0",
-				!hasDecorations && "overflow-hidden",
-				className,
-			)}
-			style={{
-				gridColumn: \`span \${span} / span \${cols}\`,
-			}}
-			{...props}
-		>
-			{children}
-
-			{decorationTopLeft && (
-				<div className="absolute -left-[1px] -top-[1px] z-10">
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
-						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
-					</div>
-				</div>
-			)}
-
-			{decorationTopRight && (
-				<div className="absolute -right-[0px] -top-[1px] z-10">
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
-						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
-					</div>
-				</div>
-			)}
-
-			{decorationBottomLeft && (
-				<div className="absolute -left-[1px] -bottom-[0px] z-10">
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
-						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
-					</div>
-				</div>
-			)}
-
-			{decorationBottomRight && (
-				<div className="absolute -right-[0px] -bottom-[0px] z-10">
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[21px] rounded-full absolute -top-2.5" />
-						<div className="bg-muted-foreground w-[21px] h-[1px] rounded-full absolute -left-2.5" />
-					</div>
-				</div>
-			)}
-		</div>
-	);
-};`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -256,13 +58,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("grid", installDeps);
 
 	return (
@@ -364,8 +163,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="grid"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

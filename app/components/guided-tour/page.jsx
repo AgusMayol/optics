@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,20 +16,9 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import {
 	GuidedTour,
 	GuidedTourOverlay,
@@ -41,16 +29,8 @@ import {
 import { Input } from "@/registry/optics/input";
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/guided-tour.jsx.txt";
 
@@ -130,322 +110,6 @@ function MyComponent() {
 	},
 ];
 
-const guidedTourComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/guided-tour.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/optics/button";
-import { X } from "lucide-react";
-
-const GuidedTourContext = React.createContext({
-	activeTour: null,
-	setActiveTour: () => {},
-	currentStep: 0,
-	setCurrentStep: () => {},
-	steps: [],
-	setSteps: () => {},
-	totalSteps: 0,
-});
-
-function GuidedTourProvider({ children, ...props }) {
-	const [activeTour, setActiveTour] = React.useState(null);
-	const [currentStep, setCurrentStep] = React.useState(0);
-	const [steps, setSteps] = React.useState([]);
-	const [totalSteps, setTotalSteps] = React.useState(0);
-
-	const contextValue = React.useMemo(
-		() => ({
-			activeTour,
-			setActiveTour,
-			currentStep,
-			setCurrentStep,
-			steps,
-			setSteps,
-			totalSteps,
-			setTotalSteps,
-		}),
-		[activeTour, currentStep, steps, totalSteps],
-	);
-
-	return (
-		<GuidedTourContext.Provider value={contextValue} {...props}>
-			{children}
-		</GuidedTourContext.Provider>
-	);
-}
-
-function useGuidedTour() {
-	const context = React.useContext(GuidedTourContext);
-	if (!context) {
-		throw new Error("useGuidedTour must be used within GuidedTourProvider");
-	}
-	return context;
-}
-
-const GuidedTourOverlay = React.forwardRef(({ className, ...props }, ref) => {
-	const { activeTour } = useGuidedTour();
-
-	if (!activeTour) return null;
-
-	return (
-		<div
-			ref={ref}
-			className={cn(
-				"fixed inset-0 z-[100] bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-				className,
-			)}
-			{...props}
-		/>
-	);
-});
-GuidedTourOverlay.displayName = "GuidedTourOverlay";
-
-function GuidedTour({ children, ...props }) {
-	return <div data-slot="guided-tour" {...props}>{children}</div>;
-}
-
-function GuidedTourTrigger({
-	tourId,
-	children,
-	className,
-	...props
-}) {
-	const { setActiveTour, setCurrentStep, setTotalSteps } = useGuidedTour();
-
-	const handleClick = () => {
-		const tourSteps = document.querySelectorAll(
-			\`[data-tour="\${tourId}"][data-step]\`,
-		);
-		const sortedSteps = Array.from(tourSteps).sort((a, b) => {
-			const stepA = parseInt(a.getAttribute("data-step")) || 0;
-			const stepB = parseInt(b.getAttribute("data-step")) || 0;
-			return stepA - stepB;
-		});
-
-		if (sortedSteps.length > 0) {
-			setTotalSteps(sortedSteps.length);
-			setCurrentStep(0);
-			setActiveTour(tourId);
-
-			setTimeout(() => {
-				sortedSteps[0]?.scrollIntoView({
-					behavior: "smooth",
-					block: "center",
-				});
-			}, 100);
-		}
-	};
-
-	return (
-		<button
-			type="button"
-			onClick={handleClick}
-			className={cn("cursor-pointer", className)}
-			{...props}
-		>
-			{children}
-		</button>
-	);
-}
-
-const GuidedTourStep = React.forwardRef(
-	({ tourId, step, children, className, content, ...props }, ref) => {
-		const { activeTour, currentStep } = useGuidedTour();
-		const isActive = activeTour === tourId && currentStep === step - 1;
-		const elementRef = React.useRef(null);
-		const [open, setOpen] = React.useState(false);
-
-		React.useEffect(() => {
-			if (isActive && elementRef.current) {
-				setOpen(true);
-				setTimeout(() => {
-					elementRef.current?.scrollIntoView({
-						behavior: "smooth",
-						block: "center",
-					});
-				}, 100);
-			} else {
-				setOpen(false);
-			}
-		}, [isActive]);
-
-		const clonedElement = React.cloneElement(children, {
-			ref: (node) => {
-				elementRef.current = node;
-				if (typeof children.ref === "function") {
-					children.ref(node);
-				} else if (ref) {
-					if (typeof ref === "function") {
-						ref(node);
-					} else {
-						ref.current = node;
-					}
-				}
-			},
-			"data-tour": tourId,
-			"data-step": step,
-			className: cn(
-				className,
-				isActive && "relative z-[101]",
-				children.props?.className,
-			),
-			...props,
-		});
-
-		if (!isActive || !content) {
-			return clonedElement;
-		}
-
-		return (
-			<PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
-				<PopoverPrimitive.Anchor asChild>{clonedElement}</PopoverPrimitive.Anchor>
-				<GuidedTourStepContent>{content}</GuidedTourStepContent>
-			</PopoverPrimitive.Root>
-		);
-	},
-);
-GuidedTourStep.displayName = "GuidedTourStep";
-
-function GuidedTourStepContent({ children }) {
-	const {
-		currentStep,
-		setCurrentStep,
-		setActiveTour,
-		totalSteps,
-	} = useGuidedTour();
-
-	const handleNext = () => {
-		if (currentStep < totalSteps - 1) {
-			setCurrentStep(currentStep + 1);
-		} else {
-			handleFinish();
-		}
-	};
-
-	const handleSkip = () => {
-		setActiveTour(null);
-		setCurrentStep(0);
-	};
-
-	const handleFinish = () => {
-		setActiveTour(null);
-		setCurrentStep(0);
-	};
-
-	const isLastStep = currentStep === totalSteps - 1;
-
-	return (
-		<GuidedTourContent
-			onSkip={handleSkip}
-			onNext={handleNext}
-			onFinish={handleFinish}
-			isLastStep={isLastStep}
-		>
-			{children}
-		</GuidedTourContent>
-	);
-}
-
-function GuidedTourContent({
-	children,
-	className,
-	onSkip,
-	onNext,
-	onFinish,
-	isLastStep = false,
-	...props
-}) {
-	const { currentStep, totalSteps } = useGuidedTour();
-
-	return (
-		<PopoverPrimitive.Portal>
-			<PopoverPrimitive.Content
-				data-slot="guided-tour-content"
-				className={cn(
-					"z-[102] w-80 rounded-lg border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-					className,
-				)}
-				side="bottom"
-				align="start"
-				sideOffset={8}
-				{...props}
-			>
-				<div className="flex flex-col gap-4">
-					<div className="flex items-start justify-between gap-2">
-						<div className="flex-1">{children}</div>
-						{onSkip && (
-							<PopoverPrimitive.Close asChild>
-								<button
-									type="button"
-									onClick={onSkip}
-									className="rounded-sm opacity-70 hover:opacity-100 transition-opacity p-1 -mt-1 -mr-1"
-									aria-label="Cerrar"
-								>
-									<X className="h-4 w-4" />
-								</button>
-							</PopoverPrimitive.Close>
-						)}
-					</div>
-
-					<div className="flex items-center justify-between gap-2">
-						<div className="text-xs text-muted-foreground">
-							Step {currentStep + 1} of {totalSteps}
-						</div>
-						<div className="flex items-center gap-2">
-							{onSkip && (
-								<Button
-									variant="ghost"
-									size="sm"
-									onClick={onSkip}
-									type="button"
-								>
-									Skip
-								</Button>
-							)}
-							{isLastStep ? (
-								<Button
-									variant="default"
-									size="sm"
-									onClick={onFinish}
-									type="button"
-								>
-									Finish
-								</Button>
-							) : (
-								<Button
-									variant="default"
-									size="sm"
-									onClick={onNext}
-									type="button"
-								>
-									Next
-								</Button>
-							)}
-						</div>
-					</div>
-				</div>
-			</PopoverPrimitive.Content>
-		</PopoverPrimitive.Portal>
-	);
-}
-
-export {
-	GuidedTourProvider,
-	GuidedTour,
-	GuidedTourTrigger,
-	GuidedTourStep,
-	GuidedTourOverlay,
-	GuidedTourContent,
-	useGuidedTour,
-};`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -459,13 +123,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("guided-tour", installDeps);
 
 	return (
@@ -636,8 +297,6 @@ export default function Page() {
 				<InstallationGuide
 					value={value}
 					setValue={setValue}
-					activeCommand={activeCommand}
-					activeDepsCommand={activeDepsCommand}
 					componentName="guided-tour"
 					installDeps={installDeps}
 					manualFiles={componentFiles}

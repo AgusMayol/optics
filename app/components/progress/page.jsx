@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,24 +19,8 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Progress } from "@/registry/optics/progress";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
@@ -54,42 +37,6 @@ const code = [
 	},
 ];
 
-const progressComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/progress.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as ProgressPrimitive from "@radix-ui/react-progress";
-
-import { cn } from "@/lib/utils";
-
-function Progress({
-  className,
-  value,
-  ...props
-}) {
-  return (
-    <ProgressPrimitive.Root
-      data-slot="progress"
-      className={cn(
-        "bg-primary/20 relative h-2 w-full overflow-hidden rounded-full",
-        className
-      )}
-      {...props}>
-      <ProgressPrimitive.Indicator
-        data-slot="progress-indicator"
-        className="bg-primary h-full w-full flex-1 transition-all"
-        style={{ transform: \`translateX(-\${100 - (value || 0)}%)\` }} />
-    </ProgressPrimitive.Root>
-  );
-}
-
-export { Progress }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -102,13 +49,10 @@ const componentFiles = [
 export default function Page() {
 	const [progress, setProgress] = React.useState(33);
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("progress", installDeps);
 
 	return (
@@ -199,8 +143,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="progress"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

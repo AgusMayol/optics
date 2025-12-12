@@ -25,22 +25,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/registry/optics/code-snippet";
 import { ArrowUpRight } from "lucide-react";
 
 const code = [
@@ -58,52 +42,6 @@ const code = [
 	},
 ];
 
-const calendarComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/calendar.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "lucide-react";
-import { DayPicker, getDefaultClassNames } from "react-day-picker";
-
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/registry/optics/button";
-
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  captionLayout = "label",
-  buttonVariant = "ghost",
-  formatters,
-  components,
-  ...props
-}) {
-  const defaultClassNames = getDefaultClassNames()
-
-  return (
-    <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={cn(
-        "bg-background group/calendar p-3 [--cell-size:--spacing(8)]",
-        className
-      )}
-      captionLayout={captionLayout}
-      {...props}
-    />
-  );
-}
-
-export { Calendar }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -115,15 +53,8 @@ const componentFiles = [
 
 export default function Page() {
 	const [date, setDate] = React.useState();
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("calendar", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("calendar", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -214,8 +145,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="calendar"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

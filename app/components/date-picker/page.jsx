@@ -8,7 +8,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -20,24 +19,8 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { DatePicker } from "@/registry/optics/date-picker";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
@@ -61,64 +44,6 @@ const [date, setDate] = useState();
 	},
 ];
 
-const datePickerComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/date-picker.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/optics/button";
-import { Calendar } from "@/registry/optics/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/registry/optics/popover";
-
-function DatePicker({
-  date,
-  onDateChange,
-  placeholder = "Pick a date",
-  className,
-  ...props
-}) {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[240px] justify-start text-left font-normal",
-            !date && "text-muted-foreground",
-            className
-          )}
-          {...props}
-        >
-          <CalendarIcon />
-          {date ? format(date, "PPP") : <span>{placeholder}</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={onDateChange}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
-  );
-}
-
-export { DatePicker };`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -130,15 +55,8 @@ const componentFiles = [
 
 export default function Page() {
 	const [date, setDate] = React.useState();
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("date-picker", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("date-picker", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -229,8 +147,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="date-picker"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

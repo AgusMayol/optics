@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,20 +16,9 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import {
 	Item,
 	ItemActions,
@@ -42,15 +30,7 @@ import {
 	ItemTitle,
 } from "@/registry/optics/item";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { Mail, Star } from "lucide-react";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/item.jsx.txt";
 
@@ -86,184 +66,6 @@ import { Mail } from "lucide-react";
 	},
 ];
 
-const itemComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/item.jsx",
-		code: `import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { Separator } from "@/registry/optics/separator";
-import { otherThemes } from "@/registry/optics/button";
-
-function ItemGroup({ className, ...props }) {
-	return (
-		<div
-			role="list"
-			data-slot="item-group"
-			className={cn("group/item-group flex flex-col", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemSeparator({ className, ...props }) {
-	return (
-		<Separator
-			data-slot="item-separator"
-			orientation="horizontal"
-			className={cn("my-0", className)}
-			{...props}
-		/>
-	);
-}
-
-const itemVariants = cva(
-	"group/item flex items-center border border-transparent text-sm rounded-md transition-colors duration-100 flex-wrap outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-	{
-		variants: {
-			variant: {
-				default: "bg-transparent",
-				outline: "border-border",
-				muted: "bg-muted/50",
-			},
-			size: {
-				default: "p-4 gap-4",
-				sm: "py-3 px-4 gap-2.5",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-			size: "default",
-		},
-	}
-);
-
-function Item({
-	className,
-	variant = "default",
-	size = "default",
-	asChild = false,
-	...props
-}) {
-	const Comp = asChild ? Slot : "div";
-	return (
-		<Comp
-			data-slot="item"
-			data-variant={variant}
-			data-size={size}
-			className={cn(
-				itemVariants({ variant, size, className }),
-				otherThemes({ variant }),
-			)}
-			{...props}
-		/>
-	);
-}
-
-const itemMediaVariants = cva(
-	"flex shrink-0 items-center justify-center gap-2",
-	{
-		variants: {
-			variant: {
-				default: "bg-transparent",
-				icon: "size-8 border rounded-sm bg-muted [&_svg:not([class*='size-'])]:size-4",
-				image: "size-10 rounded-sm overflow-hidden [&_img]:size-full [&_img]:object-cover",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-		},
-	}
-);
-
-function ItemMedia({ className, variant = "default", ...props }) {
-	return (
-		<div
-			data-slot="item-media"
-			data-variant={variant}
-			className={cn(itemMediaVariants({ variant, className }))}
-			{...props}
-		/>
-	);
-}
-
-function ItemContent({ className, ...props }) {
-	return (
-		<div
-			data-slot="item-content"
-			className={cn("flex flex-1 flex-col gap-1", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemTitle({ className, ...props }) {
-	return (
-		<div
-			data-slot="item-title"
-			className={cn("flex w-fit items-center gap-2 text-sm leading-snug font-medium", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemDescription({ className, ...props }) {
-	return (
-		<p
-			data-slot="item-description"
-			className={cn("text-muted-foreground line-clamp-2 text-sm leading-normal font-normal", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemActions({ className, ...props }) {
-	return (
-		<div
-			data-slot="item-actions"
-			className={cn("flex items-center gap-2", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemHeader({ className, ...props }) {
-	return (
-		<div
-			data-slot="item-header"
-			className={cn("flex basis-full items-center justify-between gap-2", className)}
-			{...props}
-		/>
-	);
-}
-
-function ItemFooter({ className, ...props }) {
-	return (
-		<div
-			data-slot="item-footer"
-			className={cn("flex basis-full items-center justify-between gap-2", className)}
-			{...props}
-		/>
-	);
-}
-
-export {
-	Item,
-	ItemMedia,
-	ItemContent,
-	ItemActions,
-	ItemGroup,
-	ItemSeparator,
-	ItemTitle,
-	ItemDescription,
-	ItemHeader,
-	ItemFooter,
-};`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/item.jsx",
@@ -292,13 +94,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("item", installDeps);
 
 	return (
@@ -403,8 +202,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="item"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

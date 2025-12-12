@@ -21,30 +21,11 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { Copy, Download, Share2 } from "lucide-react";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/button-group.jsx.txt";
 
@@ -105,86 +86,6 @@ import { Button } from "@/registry/optics/button";
 	},
 ];
 
-const buttonGroupComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/button-group.jsx",
-		code: `import { Slot } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
-
-import { cn } from "@/lib/utils";
-import { Separator } from "@/registry/optics/separator";
-
-const buttonGroupVariants = cva(
-	"flex w-fit items-stretch [&>*]:focus-visible:z-10 [&>*]:focus-visible:relative [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md has-[>[data-slot=button-group]]:gap-2",
-	{
-		variants: {
-			orientation: {
-				horizontal:
-					"[&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none",
-				vertical:
-					"flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none",
-			},
-		},
-		defaultVariants: {
-			orientation: "horizontal",
-		},
-	},
-);
-
-function ButtonGroup({ className, orientation, ...props }) {
-	return (
-		<div
-			role="group"
-			data-slot="button-group"
-			data-orientation={orientation}
-			className={cn(buttonGroupVariants({ orientation }), className)}
-			{...props}
-		/>
-	);
-}
-
-function ButtonGroupText({ className, asChild = false, ...props }) {
-	const Comp = asChild ? Slot : "div";
-
-	return (
-		<Comp
-			className={cn(
-				"bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function ButtonGroupSeparator({
-	className,
-	orientation = "vertical",
-	...props
-}) {
-	return (
-		<Separator
-			data-slot="button-group-separator"
-			orientation={orientation}
-			className={cn(
-				"bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-export {
-	ButtonGroup,
-	ButtonGroupSeparator,
-	ButtonGroupText,
-	buttonGroupVariants,
-};`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/button-group.jsx",
@@ -212,15 +113,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("button-group", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("button-group", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -338,8 +232,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="button-group"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

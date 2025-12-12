@@ -9,8 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
-import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
 	CodeBlock,
@@ -22,26 +20,7 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/code-block.jsx.txt";
 import utilsCode from "@/registry/optics/lib/utils.js.txt";
@@ -85,15 +64,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("code-block", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("code-block", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -190,8 +162,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="code-block"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

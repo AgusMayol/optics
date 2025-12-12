@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,15 +19,6 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import {
 	Command,
 	CommandEmpty,
@@ -41,16 +31,7 @@ import {
 } from "@/registry/optics/command";
 import { Separator } from "@/registry/optics/separator";
 import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import {
-	ALargeSmall,
 	ArrowUpRight,
-	Binary,
 	Calculator,
 	Calendar,
 	CreditCard,
@@ -59,7 +40,6 @@ import {
 	User,
 } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/command.jsx.txt";
 
@@ -106,67 +86,6 @@ const code = [
 	},
 ];
 
-const commandComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/command.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { Command as CommandPrimitive } from "cmdk";
-import { SearchIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-
-function Command({
-  className,
-  ...props
-}) {
-  return (
-    <CommandPrimitive
-      data-slot="command"
-      className={cn(
-        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function CommandInput({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="command-input-wrapper"
-      className="flex h-9 items-center gap-2 border-b px-3">
-      <SearchIcon className="size-4 shrink-0 opacity-50" />
-      <CommandPrimitive.Input
-        data-slot="command-input"
-        className={cn(
-          "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        {...props} />
-    </div>
-  );
-}
-
-export {
-  Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-  CommandSeparator,
-}`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -177,15 +96,8 @@ const componentFiles = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("command", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("command", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -308,8 +220,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="command"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -329,7 +239,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the command palette.",
+									description:
+										"Additional CSS classes to apply to the command palette.",
 								},
 							],
 						},
@@ -343,23 +254,25 @@ export default function Page() {
 								},
 								{
 									name: "title",
-									type: "string (default: \"Command Palette\")",
+									type: 'string (default: "Command Palette")',
 									description: "Title for the command dialog.",
 								},
 								{
 									name: "description",
-									type: "string (default: \"Search for a command to run...\")",
+									type: 'string (default: "Search for a command to run...")',
 									description: "Description text for the command dialog.",
 								},
 								{
 									name: "showCloseButton",
 									type: "boolean (default: false)",
-									description: "Whether to show the close button in the dialog.",
+									description:
+										"Whether to show the close button in the dialog.",
 								},
 								{
 									name: "open",
 									type: "boolean",
-									description: "The controlled open state of the dialog. Use with onOpenChange.",
+									description:
+										"The controlled open state of the dialog. Use with onOpenChange.",
 								},
 								{
 									name: "onOpenChange",
@@ -399,7 +312,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the empty state.",
+									description:
+										"Additional CSS classes to apply to the empty state.",
 								},
 							],
 						},
@@ -439,7 +353,8 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents the item from being selected.",
+									description:
+										"When true, prevents the item from being selected.",
 								},
 							],
 						},
@@ -449,7 +364,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the separator.",
+									description:
+										"Additional CSS classes to apply to the separator.",
 								},
 							],
 						},
@@ -459,7 +375,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the shortcut.",
+									description:
+										"Additional CSS classes to apply to the shortcut.",
 								},
 							],
 						},

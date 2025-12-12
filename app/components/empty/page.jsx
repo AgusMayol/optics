@@ -30,7 +30,6 @@ import {
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight, FolderCode } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/empty.jsx.txt";
 
@@ -81,13 +80,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("empty", installDeps);
 
 	return (
@@ -191,8 +187,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="empty"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

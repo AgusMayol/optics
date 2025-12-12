@@ -68,30 +68,33 @@ export function CommandDialogComponent({ links, className }) {
 								heading={link.name}
 								// className={cn("pb-6", index > 0 && "mt-6")}
 							>
-								{link.items.map((item) => (
-									<CommandItem
-										key={item.name}
-										className="cursor-pointer"
-										onSelect={() => {
-											setOpen(false);
-											router.push(item.href);
-										}}
-									>
-										{link.name === "Core" ? (
-											<Circle />
-										) : link.name === "Resources" ? (
-											<FileText />
-										) : link.name === "Collections" ? (
-											<Folder />
-										) : link.name === "Components" ? (
-											<CircleDashed />
-										) : (
-											<Bot />
-										)}
+								{link.items.map(
+									(item) =>
+										!item.disabled && (
+											<CommandItem
+												key={item.name}
+												className="cursor-pointer"
+												onSelect={() => {
+													setOpen(false);
+													router.push(item.href);
+												}}
+											>
+												{link.name === "Core" ? (
+													<Circle />
+												) : link.name === "Resources" ? (
+													<FileText />
+												) : link.name === "Collections" ? (
+													<Folder />
+												) : link.name === "Components" ? (
+													<CircleDashed />
+												) : (
+													<Bot />
+												)}
 
-										<span>{item.name}</span>
-									</CommandItem>
-								))}
+												<span>{item.name}</span>
+											</CommandItem>
+										),
+								)}
 							</CommandGroup>
 						</React.Fragment>
 					))}

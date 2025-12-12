@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,30 +20,13 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSlot,
 } from "@/registry/optics/input-otp";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/input-otp.jsx.txt";
 
@@ -71,75 +53,6 @@ const code = [
 	},
 ];
 
-const inputOtpComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/input-otp.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { OTPInput, OTPInputContext } from "input-otp";
-import { MinusIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-
-function InputOTP({
-  className,
-  containerClassName,
-  ...props
-}) {
-  return (
-    <OTPInput
-      data-slot="input-otp"
-      containerClassName={cn("flex items-center gap-2 has-disabled:opacity-50", containerClassName)}
-      className={cn("disabled:cursor-not-allowed", className)}
-      {...props} />
-  );
-}
-
-function InputOTPGroup({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="input-otp-group"
-      className={cn("flex items-center", className)}
-      {...props} />
-  );
-}
-
-function InputOTPSlot({
-  index,
-  className,
-  ...props
-}) {
-  const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}
-
-  return (
-    <div
-      data-slot="input-otp-slot"
-      data-active={isActive}
-      className={cn(
-        "data-[active=true]:border-ring data-[active=true]:ring-ring/50 border-input relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]",
-        className
-      )}
-      {...props}>
-      {char}
-      {hasFakeCaret && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="animate-caret-blink bg-foreground h-4 w-px duration-1000" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -151,13 +64,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("input-otp", installDeps);
 
 	return (
@@ -253,8 +163,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="input-otp"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

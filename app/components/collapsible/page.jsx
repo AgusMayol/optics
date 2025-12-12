@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,27 +20,11 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/registry/optics/collapsible";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
@@ -67,36 +50,6 @@ const code = [
 	},
 ];
 
-const collapsibleComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/collapsible.jsx",
-		code: `"use client";
-
-import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
-
-function Collapsible({
-  ...props
-}) {
-  return <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />;
-}
-
-function CollapsibleTrigger({
-  ...props
-}) {
-  return (<CollapsiblePrimitive.CollapsibleTrigger data-slot="collapsible-trigger" {...props} />);
-}
-
-function CollapsibleContent({
-  ...props
-}) {
-  return (<CollapsiblePrimitive.CollapsibleContent data-slot="collapsible-content" {...props} />);
-}
-
-export { Collapsible, CollapsibleTrigger, CollapsibleContent }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -108,15 +61,8 @@ const componentFiles = [
 
 export default function Page() {
 	const [isOpen, setIsOpen] = React.useState(false);
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("collapsible", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("collapsible", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -229,8 +175,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="collapsible"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -250,12 +194,14 @@ export default function Page() {
 								{
 									name: "open",
 									type: "boolean",
-									description: "The controlled open state of the collapsible. Use with onOpenChange.",
+									description:
+										"The controlled open state of the collapsible. Use with onOpenChange.",
 								},
 								{
 									name: "defaultOpen",
 									type: "boolean",
-									description: "The uncontrolled default open state of the collapsible.",
+									description:
+										"The uncontrolled default open state of the collapsible.",
 								},
 								{
 									name: "onOpenChange",
@@ -265,7 +211,8 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the collapsible.",
+									description:
+										"When true, prevents user interaction with the collapsible.",
 								},
 							],
 						},
@@ -275,12 +222,14 @@ export default function Page() {
 								{
 									name: "asChild",
 									type: "boolean",
-									description: "When true, the trigger will render as its child element instead of a button.",
+									description:
+										"When true, the trigger will render as its child element instead of a button.",
 								},
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents user interaction with the trigger.",
+									description:
+										"When true, prevents user interaction with the trigger.",
 								},
 							],
 						},
@@ -290,12 +239,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 								{
 									name: "forceMount",
 									type: "boolean",
-									description: "When true, the content remains in the DOM even when closed.",
+									description:
+										"When true, the content remains in the DOM even when closed.",
 								},
 							],
 						},

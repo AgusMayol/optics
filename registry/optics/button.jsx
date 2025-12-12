@@ -2,7 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 const otherThemes = cva(
 	"data-[state='open']:!ring-offset-2 data-[state='open']:!ring-offset-transparent data-[state='open']:!ring-ring/25",
@@ -16,7 +16,7 @@ const otherThemes = cva(
 				outline:
 					"border border-input bg-transparent shadow-xs hover:bg-accent text-foreground",
 				black:
-					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary from-primary/70 to-primary/95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border text-sm shadow-md shadow-zinc-950/30 ring-0 transition-[filter] duration-200 hover:brightness-125 active:brightness-95",
+					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary bg-background from-primary/70 to-primary/95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border text-sm shadow-md shadow-zinc-950/30 ring-0 transition-[filter] duration-200 hover:brightness-125 active:brightness-95",
 			},
 
 			size: {
@@ -45,9 +45,9 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary from-primary/70 to-primary/95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border text-sm shadow-md shadow-zinc-950/30 ring-0 transition-[filter] duration-200 hover:brightness-125 active:brightness-95",
+					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary bg-background from-primary/70 to-primary/95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border text-sm shadow-md shadow-zinc-950/30 ring-0 transition-[filter] duration-200 hover:brightness-125 active:brightness-95",
 				secondary:
-					"shadow-xs bg-linear-to-t hover:to-muted to-sidebar from-muted dark:from-muted/50 dark:border-border border border-zinc-300 shadow-zinc-950/10 duration-200 text-foreground",
+					"shadow-xs bg-linear-to-t hover:to-muted to-sidebar from-muted bg-background dark:from-muted/50 dark:border-border border border-zinc-300 shadow-zinc-950/10 duration-200 text-foreground",
 				muted:
 					"bg-muted hover:bg-neutral-200 dark:hover:bg-accent shadow-zinc-950/10 duration-200 text-foreground",
 				outline:

@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,27 +19,10 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@/registry/optics/toggle-group";
 import { ArrowUpRight, Bold, Italic, Underline } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/toggle-group.jsx.txt";
 
@@ -64,81 +46,6 @@ const code = [
 	},
 ];
 
-const toggleGroupComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/toggle-group.jsx",
-		code: `"use client";
-import * as React from "react";
-import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
-
-import { cn } from "@/lib/utils";
-import { toggleVariants } from "@/registry/optics/toggle";
-
-const ToggleGroupContext = React.createContext({
-  size: "default",
-  variant: "default",
-  spacing: 0,
-})
-
-function ToggleGroup({
-  className,
-  variant,
-  size,
-  spacing = 0,
-  children,
-  ...props
-}) {
-  return (
-    <ToggleGroupPrimitive.Root
-      data-slot="toggle-group"
-      data-variant={variant}
-      data-size={size}
-      data-spacing={spacing}
-      style={{
-        "--gap": spacing
-      }}
-      className={cn(
-        "group/toggle-group flex w-fit items-center gap-[--spacing(var(--gap))] rounded-md data-[spacing=default]:data-[variant=outline]:shadow-xs",
-        className
-      )}
-      {...props}>
-      <ToggleGroupContext.Provider value={{ variant, size, spacing }}>
-        {children}
-      </ToggleGroupContext.Provider>
-    </ToggleGroupPrimitive.Root>
-  );
-}
-
-function ToggleGroupItem({
-  className,
-  children,
-  variant,
-  size,
-  ...props
-}) {
-  const context = React.useContext(ToggleGroupContext)
-
-  return (
-    <ToggleGroupPrimitive.Item
-      data-slot="toggle-group-item"
-      data-variant={context.variant || variant}
-      data-size={context.size || size}
-      data-spacing={context.spacing}
-      className={cn(toggleVariants({
-        variant: context.variant || variant,
-        size: context.size || size,
-      }), "w-auto min-w-0 shrink-0 px-3 focus:z-10 focus-visible:z-10", "data-[spacing=0]:rounded-none data-[spacing=0]:shadow-none data-[spacing=0]:first:rounded-l-md data-[spacing=0]:last:rounded-r-md data-[spacing=0]:data-[variant=outline]:border-l-0 data-[spacing=0]:data-[variant=outline]:first:border-l", className)}
-      {...props}>
-      {children}
-    </ToggleGroupPrimitive.Item>
-  );
-}
-
-export { ToggleGroup, ToggleGroupItem }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -150,13 +57,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("toggle-group", installDeps);
 
 	return (
@@ -253,8 +157,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="toggle-group"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

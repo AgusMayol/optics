@@ -25,31 +25,12 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, Slash } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/breadcrumb.jsx.txt";
 
@@ -89,109 +70,6 @@ import Link from "next/link";
 	},
 ];
 
-const breadcrumbComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/breadcrumb.jsx",
-		code: `import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-
-function Breadcrumb({ ...props }) {
-	return <nav aria-label="breadcrumb" data-slot="breadcrumb" {...props} />;
-}
-
-function BreadcrumbList({ className, ...props }) {
-	return (
-		<ol
-			data-slot="breadcrumb-list"
-			className={cn(
-				"text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function BreadcrumbItem({ className, ...props }) {
-	return (
-		<li
-			data-slot="breadcrumb-item"
-			className={cn("inline-flex items-center gap-1.5", className)}
-			{...props}
-		/>
-	);
-}
-
-function BreadcrumbLink({ asChild, className, ...props }) {
-	const Comp = asChild ? Slot : "a";
-
-	return (
-		<Comp
-			data-slot="breadcrumb-link"
-			className={cn("hover:text-foreground transition-colors", className)}
-			{...props}
-		/>
-	);
-}
-
-function BreadcrumbPage({ className, ...props }) {
-	return (
-		<span
-			data-slot="breadcrumb-page"
-			role="link"
-			aria-disabled="true"
-			aria-current="page"
-			className={cn("text-foreground font-normal", className)}
-			{...props}
-		/>
-	);
-}
-
-function BreadcrumbSeparator({ children, className, ...props }) {
-	return (
-		<li
-			data-slot="breadcrumb-separator"
-			role="presentation"
-			aria-hidden="true"
-			className={cn("[&>svg]:size-3.5", className)}
-			{...props}
-		>
-			{children ?? <ChevronRight />}
-		</li>
-	);
-}
-
-function BreadcrumbEllipsis({ className, ...props }) {
-	return (
-		<span
-			data-slot="breadcrumb-ellipsis"
-			role="presentation"
-			aria-hidden="true"
-			className={cn("flex size-9 items-center justify-center", className)}
-			{...props}
-		>
-			<MoreHorizontal className="size-4" />
-			<span className="sr-only">More</span>
-		</span>
-	);
-}
-
-export {
-	Breadcrumb,
-	BreadcrumbList,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-	BreadcrumbEllipsis,
-};`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/breadcrumb.jsx",
@@ -219,15 +97,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("breadcrumb", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("breadcrumb", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -348,8 +219,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="breadcrumb"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -405,7 +274,8 @@ export default function Page() {
 								{
 									name: "asChild",
 									type: "boolean",
-									description: "When true, the link will render as its child element instead of an anchor tag.",
+									description:
+										"When true, the link will render as its child element instead of an anchor tag.",
 								},
 								{
 									name: "className",
@@ -420,7 +290,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the page indicator.",
+									description:
+										"Additional CSS classes to apply to the page indicator.",
 								},
 							],
 						},
@@ -430,12 +301,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the separator.",
+									description:
+										"Additional CSS classes to apply to the separator.",
 								},
 								{
 									name: "children",
 									type: "React.ReactNode",
-									description: "Custom separator element. Defaults to ChevronRight icon if not provided.",
+									description:
+										"Custom separator element. Defaults to ChevronRight icon if not provided.",
 								},
 							],
 						},
@@ -445,7 +318,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the ellipsis.",
+									description:
+										"Additional CSS classes to apply to the ellipsis.",
 								},
 							],
 						},

@@ -95,25 +95,25 @@ export function InstallationGuide({
 	return (
 		<div
 			className={cn(
-				"flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0",
+				"flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0 w-full min-w-0",
 				className,
 			)}
 		>
-			<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
+			<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold shrink-0">
 				Installation
 			</h2>
 			<Tabs
 				value={installationTab}
 				onValueChange={handleTabChange}
-				className="w-full"
+				className="w-full min-w-0"
 			>
-				<TabsList variant="underline">
+				<TabsList variant="underline" className="shrink-0">
 					<TabsTrigger value="tab1">CLI</TabsTrigger>
 					<TabsTrigger value="tab2">Manual</TabsTrigger>
 				</TabsList>
-				<TabsContents className="w-full pt-2">
+				<TabsContents mode="layout" className="w-full pt-2 min-w-0">
 					{/* Tab CLI */}
-					<TabsContent value="tab1" className="w-full pt-4">
+					<TabsContent value="tab1" className="w-full pt-4 min-w-0">
 						<Snippet onValueChange={setValue} value={value} className="w-full">
 							<SnippetHeader>
 								<SnippetTabsList variant="outline">
@@ -147,7 +147,7 @@ export function InstallationGuide({
 					{/* Tab Manual */}
 					<TabsContent
 						value="tab2"
-						className="w-full pt-4 flex flex-col gap-12"
+						className="w-full pt-4 flex flex-col gap-12 min-w-0"
 					>
 						{/* Sección de dependencias */}
 						{installDeps.length > 0 && (
@@ -213,20 +213,29 @@ export function InstallationGuide({
 									const renderCodeBlock = (file, index) => {
 										const language =
 											file.language || getLanguageFromPath(file.path);
+										// Transform file to match CodeBlock expected format
+										const codeBlockFile = {
+											...file,
+											filename: file.filename || file.path,
+										};
 										return (
 											<div
 												key={file.path || index}
-												className="w-full flex flex-col gap-2"
+												className="w-full flex flex-col gap-2 min-w-0"
 											>
-												<CodeBlock data={[file]} defaultValue={file.path}>
+												<CodeBlock
+													data={[codeBlockFile]}
+													defaultValue={codeBlockFile.filename}
+													className="w-full min-w-0"
+												>
 													<CodeBlockHeader>
 														<CodeBlockFiles>
 															{(item) => (
 																<CodeBlockFilename
-																	key={item.path}
-																	value={item.path}
+																	key={item.filename || item.path}
+																	value={item.filename || item.path}
 																>
-																	{item.path}
+																	{item.filename || item.path}
 																</CodeBlockFilename>
 															)}
 														</CodeBlockFiles>
@@ -235,7 +244,10 @@ export function InstallationGuide({
 													</CodeBlockHeader>
 													<CodeBlockBody>
 														{(item) => (
-															<CodeBlockItem key={item.path} value={item.path}>
+															<CodeBlockItem
+																key={item.filename || item.path}
+																value={item.filename || item.path}
+															>
 																<CodeBlockContent
 																	language={language}
 																	className="bg-sidebar"

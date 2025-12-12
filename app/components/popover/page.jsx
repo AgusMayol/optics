@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,36 +16,17 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from "@/registry/optics/popover";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/popover.jsx.txt";
 
@@ -70,44 +50,6 @@ import { Button } from "@/registry/optics/button";
 		</div>
 	</PopoverContent>
 </Popover>`,
-	},
-];
-
-const popoverComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/popover.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-
-import { cn } from "@/lib/utils";
-
-const Popover = PopoverPrimitive.Root;
-
-const PopoverTrigger = PopoverPrimitive.Trigger;
-
-const PopoverAnchor = PopoverPrimitive.Anchor;
-
-function PopoverContent({ className, align = "center", sideOffset = 4, ...props }) {
-	return (
-		<PopoverPrimitive.Portal>
-			<PopoverPrimitive.Content
-				data-slot="popover-content"
-				align={align}
-				sideOffset={sideOffset}
-				className={cn(
-					"bg-popover text-popover-foreground data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 rounded-md border p-4 shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in",
-					className,
-				)}
-				{...props}
-			/>
-		</PopoverPrimitive.Portal>
-	);
-}
-
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };`,
 	},
 ];
 
@@ -139,13 +81,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("popover", installDeps);
 
 	return (
@@ -239,8 +178,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="popover"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

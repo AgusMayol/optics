@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,31 +16,12 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/separator.jsx.txt";
 
@@ -54,85 +34,6 @@ const code = [
 <Separator />
 <Separator decoration />
 <Separator orientation="vertical" className="h-20" />`,
-	},
-];
-
-const separatorComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/separator.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
-
-import { cn } from "@/lib/utils";
-
-function Separator({
-	className,
-	children,
-	decoration = false,
-	decorationLeft = false,
-	decorationRight = false,
-	decorationTop = false,
-	decorationBottom = false,
-	orientation = "horizontal",
-	decorative = true,
-	...props
-}) {
-	return (
-		<SeparatorPrimitive.Root
-			data-slot="separator"
-			decorative={decorative}
-			orientation={orientation}
-			className={cn(
-				"bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px relative",
-				className,
-			)}
-			{...props}
-		>
-			{children}
-
-			{(decoration || decorationLeft) && orientation === "horizontal" && (
-				<div className={cn("absolute -left-[1px] -top-[0px] z-10")}>
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[5.9px] rounded-full absolute -top-[2.25px]" />
-						<div className="bg-muted-foreground w-[3.93px] h-[1px] rounded-full absolute left-0" />
-					</div>
-				</div>
-			)}
-
-			{(decoration || decorationRight) && orientation === "horizontal" && (
-				<div className={cn("absolute -right-[0px] -top-[0px] z-10")}>
-					<div className="relative">
-						<div className="bg-muted-foreground w-[1px] h-[5.9px] rounded-full absolute -top-[2.5px]" />
-						<div className="bg-muted-foreground w-[3.93px] h-[1px] rounded-full absolute -left-[3.5px]" />
-					</div>
-				</div>
-			)}
-
-			{(decoration || decorationTop) && orientation === "vertical" && (
-				<div className={cn("absolute -left-[0px] -top-[0px] z-10")}>
-					<div className="relative">
-						<div className="bg-muted-foreground w-[5.9px] h-[1px] rounded-full absolute -left-[2.5px]" />
-						<div className="bg-muted-foreground w-[1px] h-[3.93px] rounded-full absolute left-0" />
-					</div>
-				</div>
-			)}
-
-			{(decoration || decorationBottom) && orientation === "vertical" && (
-				<div className={cn("absolute -left-[0px] -bottom-[0px] z-10")}>
-					<div className="relative">
-						<div className="bg-muted-foreground w-[5.9px] h-[1px] rounded-full absolute -left-[2.5px] bottom-0" />
-						<div className="bg-muted-foreground w-[1px] h-[3.93px] rounded-full absolute left-0 bottom-0" />
-					</div>
-				</div>
-			)}
-		</SeparatorPrimitive.Root>
-	);
-}
-
-export { Separator };`,
 	},
 ];
 
@@ -166,13 +67,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("separator", installDeps);
 
 	return (
@@ -271,8 +169,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="separator"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

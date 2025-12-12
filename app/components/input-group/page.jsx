@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,31 +20,14 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupInput,
 	InputGroupText,
 } from "@/registry/optics/input-group";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, Search } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/input-group.jsx.txt";
 
@@ -73,107 +55,6 @@ import { Search } from "lucide-react";
 	},
 ];
 
-const inputGroupComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/input-group.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/optics/button";
-import { Input } from "@/registry/optics/input";
-import { Textarea } from "@/registry/optics/textarea";
-
-function InputGroup({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="input-group"
-      role="group"
-      className={cn(
-        "group/input-group border-input dark:bg-input/30 relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none",
-        "h-9 min-w-0 has-[>textarea]:h-auto",
-        "has-[>[data-align=inline-start]]:[&>input]:pl-2",
-        "has-[>[data-align=inline-end]]:[&>input]:pr-2",
-        "has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50 has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]",
-        className
-      )}
-      {...props} />
-  );
-}
-
-const inputGroupAddonVariants = cva(
-  "text-muted-foreground flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium select-none [&>svg:not([class*='size-'])]:size-4",
-  {
-    variants: {
-      align: {
-        "inline-start": "order-first pl-3",
-        "inline-end": "order-last pr-3",
-      },
-    },
-    defaultVariants: {
-      align: "inline-start",
-    },
-  }
-);
-
-function InputGroupAddon({
-  className,
-  align = "inline-start",
-  ...props
-}) {
-  return (
-    <div
-      role="group"
-      data-slot="input-group-addon"
-      data-align={align}
-      className={cn(inputGroupAddonVariants({ align }), className)}
-      {...props} />
-  );
-}
-
-function InputGroupText({
-  className,
-  ...props
-}) {
-  return (
-    <span
-      className={cn(
-        "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function InputGroupInput({
-  className,
-  ...props
-}) {
-  return (
-    <Input
-      data-slot="input-group-control"
-      className={cn(
-        "flex-1 rounded-none border-0 bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent",
-        className
-      )}
-      {...props} />
-  );
-}
-
-export {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupInput,
-};`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -185,13 +66,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("input-group", installDeps);
 
 	return (
@@ -289,8 +167,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="input-group"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

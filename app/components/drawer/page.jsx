@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,15 +19,6 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import {
 	Drawer,
 	DrawerClose,
@@ -42,14 +32,7 @@ import {
 import { Input } from "@/registry/optics/input";
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import { ALargeSmall, ArrowUpRight, Binary } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
@@ -99,63 +82,6 @@ import { Button } from "@/components/optics/button";
 	},
 ];
 
-const drawerComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/drawer.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { Drawer as DrawerPrimitive } from "vaul";
-
-import { cn } from "@/lib/utils";
-
-function Drawer({
-  ...props
-}) {
-  return <DrawerPrimitive.Root data-slot="drawer" {...props} />;
-}
-
-function DrawerTrigger({
-  ...props
-}) {
-  return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />;
-}
-
-function DrawerContent({
-  className,
-  children,
-  ...props
-}) {
-  return (
-    <DrawerPortal data-slot="drawer-portal">
-      <DrawerOverlay />
-      <DrawerPrimitive.Content
-        data-slot="drawer-content"
-        className={cn(
-          "group/drawer-content bg-background fixed z-50 flex h-auto flex-col",
-          "data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t",
-          className
-        )}
-        {...props}>
-        {children}
-      </DrawerPrimitive.Content>
-    </DrawerPortal>
-  );
-}
-
-export {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-}`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -168,13 +94,10 @@ const componentFiles = [
 export default function Page() {
 	const [open, setOpen] = React.useState(false);
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("drawer", installDeps);
 
 	return (
@@ -287,8 +210,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="drawer"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

@@ -16,34 +16,14 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
 import { Switch } from "@/registry/optics/switch";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
-import { ALargeSmall, ArrowUpRight, Binary } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/switch.jsx.txt";
 
@@ -58,48 +38,6 @@ import { Label } from "@/registry/optics/label";
 	<Switch id="airplane-mode" />
 	<Label htmlFor="airplane-mode">Airplane Mode</Label>
 </div>`,
-	},
-];
-
-const switchComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/switch.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as SwitchPrimitive from "@radix-ui/react-switch";
-
-import { cn } from "@/lib/utils";
-import { otherThemes } from "@/registry/optics/button";
-
-function Switch({
-  className,
-  variant,
-  ...props
-}) {
-  return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      className={cn(
-        "peer data-[state=checked]:bg-emerald-600 data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
-      {...props}>
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className={cn(
-          "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0",
-          variant &&
-					otherThemes({
-						variant: variant,
-					}),
-        )} />
-    </SwitchPrimitive.Root>
-  );
-}
-
-export { Switch }`,
 	},
 ];
 
@@ -133,13 +71,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("switch", installDeps);
 
 	return (
@@ -225,8 +160,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="switch"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

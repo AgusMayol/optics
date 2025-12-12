@@ -20,15 +20,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	ContextMenu,
 	ContextMenuCheckboxItem,
 	ContextMenuContent,
@@ -44,16 +35,8 @@ import {
 	ContextMenuTrigger,
 } from "@/registry/optics/context-menu";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/context-menu.jsx.txt";
 
@@ -156,15 +139,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("context-menu", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("context-menu", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -301,8 +277,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="context-menu"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -328,12 +302,14 @@ export default function Page() {
 								{
 									name: "open",
 									type: "boolean",
-									description: "The controlled open state of the context menu. Use with onOpenChange.",
+									description:
+										"The controlled open state of the context menu. Use with onOpenChange.",
 								},
 								{
 									name: "defaultOpen",
 									type: "boolean",
-									description: "The uncontrolled default open state of the context menu.",
+									description:
+										"The uncontrolled default open state of the context menu.",
 								},
 								{
 									name: "onOpenChange",
@@ -343,7 +319,8 @@ export default function Page() {
 								{
 									name: "modal",
 									type: "boolean (default: true)",
-									description: "When true, interaction with outside elements is disabled. Defaults to true.",
+									description:
+										"When true, interaction with outside elements is disabled. Defaults to true.",
 								},
 							],
 						},
@@ -353,7 +330,8 @@ export default function Page() {
 								{
 									name: "",
 									type: "No specific props. Accepts standard Radix ContextMenu.Trigger props.",
-									description: "Element that the user interacts with to open the menu.",
+									description:
+										"Element that the user interacts with to open the menu.",
 								},
 							],
 						},
@@ -363,7 +341,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 							],
 						},
@@ -378,7 +357,8 @@ export default function Page() {
 								{
 									name: "inset",
 									type: "boolean",
-									description: "When true, adds left padding to accommodate an icon.",
+									description:
+										"When true, adds left padding to accommodate an icon.",
 								},
 								{
 									name: "variant",
@@ -388,7 +368,8 @@ export default function Page() {
 								{
 									name: "disabled",
 									type: "boolean",
-									description: "When true, prevents the item from being selected.",
+									description:
+										"When true, prevents the item from being selected.",
 								},
 							],
 						},
@@ -398,7 +379,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the checkbox item.",
+									description:
+										"Additional CSS classes to apply to the checkbox item.",
 								},
 								{
 									name: "checked",
@@ -418,7 +400,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the radio item.",
+									description:
+										"Additional CSS classes to apply to the radio item.",
 								},
 								{
 									name: "children",
@@ -433,7 +416,8 @@ export default function Page() {
 								{
 									name: "",
 									type: "No specific props. Accepts standard Radix ContextMenu.RadioGroup props.",
-									description: "Group of radio items where a single value can be selected.",
+									description:
+										"Group of radio items where a single value can be selected.",
 								},
 							],
 						},
@@ -448,7 +432,8 @@ export default function Page() {
 								{
 									name: "inset",
 									type: "boolean",
-									description: "When true, adds left padding to accommodate an icon.",
+									description:
+										"When true, adds left padding to accommodate an icon.",
 								},
 							],
 						},
@@ -458,7 +443,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the separator.",
+									description:
+										"Additional CSS classes to apply to the separator.",
 								},
 							],
 						},
@@ -468,7 +454,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the shortcut.",
+									description:
+										"Additional CSS classes to apply to the shortcut.",
 								},
 							],
 						},
@@ -488,7 +475,8 @@ export default function Page() {
 								{
 									name: "",
 									type: "No specific props. Accepts standard Radix ContextMenu.Portal props.",
-									description: "Portal component for rendering content outside the DOM hierarchy.",
+									description:
+										"Portal component for rendering content outside the DOM hierarchy.",
 								},
 							],
 						},
@@ -508,12 +496,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the sub trigger.",
+									description:
+										"Additional CSS classes to apply to the sub trigger.",
 								},
 								{
 									name: "inset",
 									type: "boolean",
-									description: "When true, adds left padding to accommodate an icon.",
+									description:
+										"When true, adds left padding to accommodate an icon.",
 								},
 								{
 									name: "children",
@@ -528,7 +518,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the sub content.",
+									description:
+										"Additional CSS classes to apply to the sub content.",
 								},
 								{
 									name: "sideOffset",

@@ -110,15 +110,8 @@ export default function Page() {
 	const [valueExample, setValueExample] = React.useState(
 		commandsExample[0].label,
 	);
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("code-snippet", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("code-snippet", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -219,8 +212,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="code-snippet"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

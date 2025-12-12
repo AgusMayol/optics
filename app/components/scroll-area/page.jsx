@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,32 +16,13 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { ScrollArea } from "@/registry/optics/scroll-area";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/scroll-area.jsx.txt";
 import utilsCode from "@/registry/optics/lib/utils.js.txt";
@@ -64,80 +44,6 @@ const code = [
 		))}
 	</div>
 </ScrollArea>`,
-	},
-];
-
-const scrollAreaComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/scroll-area.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
-import { cn } from "@/lib/utils";
-import { useTouchPrimary } from "@/hooks/use-has-primary-touch";
-
-const ScrollArea = React.forwardRef(
-	(
-		{
-			className,
-			children,
-			scrollHideDelay = 0,
-			viewportClassName,
-			maskClassName,
-			maskHeight = 30,
-			...props
-		},
-		ref,
-	) => {
-		return (
-			<ScrollAreaPrimitive.Root
-				ref={ref}
-				data-slot="scroll-area"
-				scrollHideDelay={scrollHideDelay}
-				className={cn("relative overflow-hidden", className)}
-				{...props}
-			>
-				<ScrollAreaPrimitive.Viewport
-					data-slot="scroll-area-viewport"
-					className={cn("size-full rounded-[inherit]", viewportClassName)}
-				>
-					{children}
-				</ScrollAreaPrimitive.Viewport>
-				<ScrollBar />
-				<ScrollAreaPrimitive.Corner />
-			</ScrollAreaPrimitive.Root>
-		);
-	},
-);
-
-ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
-
-const ScrollBar = React.forwardRef(
-	({ className, orientation = "vertical", ...props }, ref) => (
-		<ScrollAreaPrimitive.ScrollAreaScrollbar
-			ref={ref}
-			orientation={orientation}
-			data-slot="scroll-area-scrollbar"
-			className={cn(
-				"hover:bg-muted flex touch-none p-px transition-colors",
-				orientation === "vertical" && "h-full w-2.5 border-l",
-				orientation === "horizontal" && "h-2.5 flex-col border-t",
-				className,
-			)}
-			{...props}
-		>
-			<ScrollAreaPrimitive.ScrollAreaThumb
-				className="bg-border relative flex-1 rounded-full"
-			/>
-		</ScrollAreaPrimitive.ScrollAreaScrollbar>
-	),
-);
-
-ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
-
-export { ScrollArea, ScrollBar };`,
 	},
 ];
 
@@ -177,13 +83,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("scroll-area", installDeps);
 
 	return (
@@ -275,8 +178,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="scroll-area"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

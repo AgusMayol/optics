@@ -1,10 +1,8 @@
 "use client";
-import * as React from "react";
-import { Badge } from "@/registry/optics/badge";
-import { Button } from "@/registry/optics/button";
-import { Separator } from "@/registry/optics/separator";
 import { InstallationGuide } from "@/components/installation-guide";
-import { FFResolver } from "@/components/ff-resolver";
+import { useCookiePreferences } from "@/lib/use-cookie-preferences";
+import { Button } from "@/registry/optics/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/optics/card";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -15,16 +13,26 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-
-import generalCode from "@/registry/optics/cursor/rules/general.mdc.txt";
-import frontEndCode from "@/registry/optics/cursor/rules/front-end.mdc.txt";
 import backEndCode from "@/registry/optics/cursor/rules/back-end.mdc.txt";
+import bulkProcessingCode from "@/registry/optics/cursor/rules/bulk-processing.mdc.txt";
+import commitsConventionCode from "@/registry/optics/cursor/rules/commits-convention.mdc.txt";
+import frontEndCode from "@/registry/optics/cursor/rules/front-end.mdc.txt";
+import generalCode from "@/registry/optics/cursor/rules/general.mdc.txt";
 import reactOptimizationCode from "@/registry/optics/cursor/rules/react-optimization.mdc.txt";
 import webInterfaceGuidelinesCode from "@/registry/optics/cursor/rules/web-interface-guidelines.mdc.txt";
-import commitsConventionCode from "@/registry/optics/cursor/rules/commits-convention.mdc.txt";
-import bulkProcessingCode from "@/registry/optics/cursor/rules/bulk-processing.mdc.txt";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger
+} from "@/registry/optics/dialog";
+import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
+import { Separator } from "@/registry/optics/separator";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const cursorRules = [
 	{
@@ -88,7 +96,7 @@ const mcps = [
 		config: {
 			filename: ".cursor/mcp.json",
 			code: `{
-"mcpServers": {
+	"mcpServers": {
         "shadcn": {
             "command": "npx",
             "args": ["shadcn@latest", "mcp"]
@@ -96,7 +104,7 @@ const mcps = [
     }
 }`,
 		},
-		docsUrl: "https://www.shadcn.io/mcp/cursor",
+		docsUrl: "https://ui.shadcn.com/docs/mcp",
 	},
 	{
 		name: "next-devtools",
@@ -136,7 +144,7 @@ const mcps = [
 }`,
 		},
 		docsUrl:
-			"https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+			"https://github.com/github/github-mcp-server",
 	},
 	{
 		name: "supabase",
@@ -161,23 +169,17 @@ const mcps = [
     }
 }`,
 		},
-		docsUrl: "https://www.mcp.pizza/mcp-server/NEav/Supabase-MCP",
+		docsUrl: "https://supabase.com/mcp",
 	},
 ];
 
 export default function Page() {
-	const [registryPrefixState, setRegistryPrefixState] = React.useState(false);
-	const [selectedPackageManager, setSelectedPackageManager] =
-		React.useState("bun");
-	const [installationTab, setInstallationTab] = React.useState("tab1");
-
-	React.useEffect(() => {
-		async function fetchRegistryPrefix() {
-			const registryPrefixValue = await FFResolver();
-			setRegistryPrefixState(registryPrefixValue);
-		}
-		fetchRegistryPrefix();
-	}, []);
+	const {
+		value: selectedPackageManager,
+		setValue: setSelectedPackageManager,
+		installationTab,
+		handleTabChange,
+	} = useCookiePreferences(cursorRules[0]?.name || "cursor-rule");
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -207,7 +209,7 @@ export default function Page() {
 
 				{/* Available Rules */}
 				<div className="flex flex-col gap-8 w-full">
-					<div className="flex flex-col gap-12">
+					<div className="grid grid-cols-2 items-start justify-center gap-12 px-6">
 						{cursorRules.map((rule, index) => {
 							const manualFiles = [
 								{
@@ -217,30 +219,40 @@ export default function Page() {
 							];
 
 							return (
-								<div key={rule.name} className="flex flex-col gap-4">
-									{index > 0 && <Separator decoration />}
-									<div className="flex flex-col gap-0 px-6 py-4 lg:py-8 lg:px-12">
-										<div className="flex flex-col gap-2">
-											<h3 className="text-2xl lg:text-3xl font-bold tracking-tight truncate">
-												{rule.title}
-											</h3>
-											<p className="text-sm lg:text-lg text-muted-foreground">
+								<Dialog key={rule.name}>
+									<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
+										<Card className="w-[350px] h-full">
+											<CardHeader className="flex flex-col items-start justify-start">
+												<CardTitle>{rule.title}</CardTitle>
+												<CardDescription className="text-start text-pretty">{rule.description}</CardDescription>
+											</CardHeader>
+										</Card>
+									</DialogTrigger>
+									<DialogContent className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden" containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden">
+										<DialogHeader className="shrink-0">
+											<DialogTitle>{rule.title}</DialogTitle>
+											<DialogDescription>
 												{rule.description}
-											</p>
-										</div>
-										<InstallationGuide
-											value={selectedPackageManager}
-											setValue={setSelectedPackageManager}
-											componentName={rule.name}
-											installDeps={[]}
-											manualFiles={manualFiles}
-											installationTab={installationTab}
-											handleTabChange={setInstallationTab}
-											className="px-0!"
-											showUpdateImportPaths={false}
-										/>
-									</div>
-								</div>
+											</DialogDescription>
+										</DialogHeader>
+										<ScrollArea className="flex-1 min-h-0 w-full overflow-x-hidden" maskColor="from-background" viewportClassName="overflow-x-hidden">
+											<div className="pr-0 min-w-0">
+												<InstallationGuide
+													value={selectedPackageManager}
+													setValue={setSelectedPackageManager}
+													componentName={rule.name}
+													installDeps={[]}
+													manualFiles={manualFiles}
+													installationTab={installationTab}
+													handleTabChange={handleTabChange}
+													className="px-0! py-2! w-full min-w-0"
+													showUpdateImportPaths={false}
+												/>
+											</div>
+											<ScrollBar orientation="vertical" />
+										</ScrollArea>
+									</DialogContent>
+								</Dialog>
 							);
 						})}
 					</div>
@@ -248,23 +260,30 @@ export default function Page() {
 
 				{/* MCP Servers Guide */}
 				<Separator decoration />
-				<div className="flex flex-col gap-8 w-full pt-4">
-					<div className="flex flex-col gap-12">
+				<div className="flex flex-col gap-8 w-full pt-4 pb-12">
+				<div className="grid grid-cols-2 items-start justify-center gap-12 px-6">
 						{mcps.map((mcp, index) => (
-							<div key={mcp.name} className="flex flex-col gap-4">
-								{index > 0 && <Separator decoration />}
-								<div className="flex flex-col gap-0 px-6 py-4 lg:py-8 lg:px-12">
-									<div className="flex flex-col gap-2">
-										<div className="flex items-start justify-between gap-4">
-											<div className="flex flex-col gap-2 flex-1">
-												<h3 className="text-2xl lg:text-3xl font-bold tracking-tight truncate">
-													{mcp.title}
-												</h3>
-												<p className="text-sm lg:text-lg text-muted-foreground">
-													{mcp.description}
-												</p>
-											</div>
-											<Button variant="outline" size="sm" asChild>
+							<Dialog key={mcp.name}>
+							<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
+								<Card className="w-[350px] h-full">
+									<CardHeader className="flex flex-col items-start justify-start">
+										<CardTitle>{mcp.title}</CardTitle>
+										<CardDescription className="text-start text-pretty">{mcp.description}</CardDescription>
+									</CardHeader>
+								</Card>
+							</DialogTrigger>
+							<DialogContent className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden" containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden">
+								<DialogHeader className="shrink-0">
+									<DialogTitle>{mcp.title}</DialogTitle>
+									<DialogDescription>
+									{mcp.description}
+									</DialogDescription>
+								</DialogHeader>
+								<ScrollArea className="flex-1 min-h-0 w-full overflow-x-hidden" maskColor="from-background" viewportClassName="overflow-x-hidden">
+								
+
+									<div className="pr-0 min-w-0 flex flex-col items-end justify-end gap-4">
+									<Button variant="outline" size="sm" asChild>
 												<Link
 													href={mcp.docsUrl}
 													target="_blank"
@@ -274,10 +293,7 @@ export default function Page() {
 													<ArrowUpRight className="ml-2 h-4 w-4" />
 												</Link>
 											</Button>
-										</div>
-									</div>
-									<div className="mt-4">
-										<CodeBlock
+									<CodeBlock
 											data={[mcp.config]}
 											defaultValue={mcp.config.filename}
 										>
@@ -308,8 +324,12 @@ export default function Page() {
 											</CodeBlockBody>
 										</CodeBlock>
 									</div>
-								</div>
-							</div>
+									<ScrollBar orientation="vertical" />
+								</ScrollArea>
+							</DialogContent>
+						</Dialog>
+
+							
 						))}
 					</div>
 				</div>

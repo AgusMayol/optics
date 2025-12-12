@@ -248,9 +248,11 @@ const codeBlockClassName = cn(
 	"[&_code]:w-full",
 	"[&_code]:grid",
 	"[&_code]:bg-transparent",
+	"[&_code]:min-w-0",
 	"[&_.line]:px-4",
 	"[&_.line]:w-full",
 	"[&_.line]:relative",
+	"[&_.line]:min-w-0",
 );
 
 const highlight = (html, language, themes) =>
@@ -302,7 +304,7 @@ export const CodeBlock = ({
 	return (
 		<CodeBlockContext.Provider value={{ value, onValueChange, data }}>
 			<div
-				className={cn("size-full overflow-hidden rounded-md border", className)}
+				className={cn("w-full overflow-hidden rounded-md border", className)}
 				{...props}
 			/>
 		</CodeBlockContext.Provider>
@@ -595,9 +597,10 @@ export const CodeBlockItem = ({
 				wordHighlightClassNames,
 				darkModeClassNames,
 				lineNumbers && lineNumberClassNames,
+				"min-w-0",
 				className,
 			)}
-			viewportClassName="[&_code]:min-w-full"
+			viewportClassName="[&_code]:min-w-full overflow-x-auto [&_code]:max-w-full"
 			{...props}
 		>
 			{children}
@@ -667,7 +670,7 @@ export const CodeBlockContent = ({
 	};
 
 	return (
-		<div className="relative w-full" {...props}>
+		<div className="relative w-full flex flex-col min-h-0 min-w-0" {...props}>
 			<div
 				ref={measureRef}
 				className="invisible pointer-events-none absolute -z-50 w-full"
@@ -683,7 +686,8 @@ export const CodeBlockContent = ({
 				)}
 			</div>
 			<motion.div
-				className="relative overflow-hidden w-full"
+				className="relative overflow-hidden w-full min-h-0 min-w-0"
+				style={{ maxHeight: "100%" }}
 				animate={{
 					height:
 						hasMoreThan10Lines && !isExpanded
@@ -694,8 +698,8 @@ export const CodeBlockContent = ({
 			>
 				<ScrollArea
 					maskColor="from-sidebar"
-					className="h-full w-full"
-					viewportClassName="[&_code]:min-w-full"
+					className="w-full min-w-0"
+					viewportClassName="[&_code]:min-w-full overflow-x-auto [&_code]:max-w-full"
 				>
 					<div ref={contentRef}>
 						{!(syntaxHighlighting && html) ? (

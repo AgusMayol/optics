@@ -10,7 +10,6 @@ import {
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
 import { AspectRatio } from "@/registry/optics/aspect-ratio";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -18,32 +17,13 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/aspect-ratio.jsx.txt";
 
@@ -64,22 +44,6 @@ import Image from "next/image";
 		/>
 	</AspectRatio>
 </div>`,
-	},
-];
-
-const aspectRatioComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/aspect-ratio.jsx",
-		code: `"use client";
-
-import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio";
-
-function AspectRatio({ ...props }) {
-	return <AspectRatioPrimitive.Root data-slot="aspect-ratio" {...props} />;
-}
-
-export { AspectRatio };`,
 	},
 ];
 
@@ -109,18 +73,9 @@ const installDeps = [
 	},
 ];
 
-// Helper functions for cookies
-
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("aspect-ratio", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("aspect-ratio", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -210,8 +165,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="aspect-ratio"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -236,7 +189,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the aspect ratio container.",
+									description:
+										"Additional CSS classes to apply to the aspect ratio container.",
 								},
 							],
 						},

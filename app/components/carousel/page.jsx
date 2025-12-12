@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -27,26 +26,9 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/carousel.jsx.txt";
 
@@ -89,67 +71,6 @@ const code = [
 	},
 ];
 
-const carouselComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/carousel.jsx",
-		code: `"use client";
-import * as React from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/optics/button";
-
-const CarouselContext = React.createContext(null)
-
-function useCarousel() {
-  const context = React.useContext(CarouselContext)
-  if (!context) {
-    throw new Error("useCarousel must be used within a <Carousel />")
-  }
-  return context
-}
-
-function Carousel({
-  orientation = "horizontal",
-  opts,
-  setApi,
-  plugins,
-  className,
-  children,
-  ...props
-}) {
-  const [carouselRef, api] = useEmblaCarousel({
-    ...opts,
-    axis: orientation === "horizontal" ? "x" : "y",
-  }, plugins)
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-  const [canScrollNext, setCanScrollNext] = React.useState(false)
-
-  React.useEffect(() => {
-    if (!api) return
-    setCanScrollPrev(api.canScrollPrev())
-    setCanScrollNext(api.canScrollNext())
-    api.on("select", () => {
-      setCanScrollPrev(api.canScrollPrev())
-      setCanScrollNext(api.canScrollNext())
-    })
-  }, [api])
-
-  return (
-    <CarouselContext.Provider value={{ carouselRef, api, orientation }}>
-      <div className={cn("relative", className)} {...props}>
-        {children}
-      </div>
-    </CarouselContext.Provider>
-  );
-}
-
-export { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -160,15 +81,8 @@ const componentFiles = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("carousel", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("carousel", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -272,8 +186,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="carousel"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -293,7 +205,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the carousel.",
+									description:
+										"Additional CSS classes to apply to the carousel.",
 								},
 								{
 									name: "orientation",
@@ -308,7 +221,8 @@ export default function Page() {
 								{
 									name: "setApi",
 									type: "(api: EmblaCarouselType) => void",
-									description: "Callback to receive the Embla carousel API instance.",
+									description:
+										"Callback to receive the Embla carousel API instance.",
 								},
 								{
 									name: "plugins",
@@ -323,7 +237,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content container.",
+									description:
+										"Additional CSS classes to apply to the content container.",
 								},
 							],
 						},
@@ -343,7 +258,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the previous button.",
+									description:
+										"Additional CSS classes to apply to the previous button.",
 								},
 								{
 									name: "variant",
@@ -363,7 +279,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the next button.",
+									description:
+										"Additional CSS classes to apply to the next button.",
 								},
 								{
 									name: "variant",

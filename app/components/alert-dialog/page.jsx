@@ -21,7 +21,6 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/registry/optics/alert-dialog";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -29,31 +28,12 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight, Info } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/alert-dialog.jsx.txt";
 
@@ -104,171 +84,6 @@ import { AlertTriangle } from "lucide-react";
 	},
 ];
 
-const alertDialogComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/alert-dialog.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
-
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/registry/optics/button";
-import { X } from "lucide-react";
-
-function AlertDialog({ ...props }) {
-	return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
-}
-
-function AlertDialogTrigger({ ...props }) {
-	return (
-		<AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
-	);
-}
-
-function AlertDialogPortal({ ...props }) {
-	return (
-		<AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
-	);
-}
-
-function AlertDialogOverlay({ className, ...props }) {
-	return (
-		<AlertDialogPrimitive.Overlay
-			data-slot="alert-dialog-overlay"
-			className={cn(
-				"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogContent({ className, children, ...props }) {
-	return (
-		<AlertDialogPortal>
-			<AlertDialogOverlay />
-			<AlertDialogPrimitive.Content
-				data-slot="alert-dialog-content"
-				className={cn(
-					"bg-muted data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-2xl border p-2 shadow-lg duration-200 sm:max-w-lg",
-					className,
-				)}
-				{...props}
-			>
-				<div className="bg-background grid w-full gap-8 rounded-lg p-6 px-6 shadow-lg duration-200 sm:max-w-lg">
-					{children}
-				</div>
-			</AlertDialogPrimitive.Content>
-		</AlertDialogPortal>
-	);
-}
-
-function AlertDialogHeader({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-dialog-header"
-			className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogFooter({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-dialog-footer"
-			className={cn(
-				"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogTitle({ className, ...props }) {
-	return (
-		<AlertDialogPrimitive.Title
-			data-slot="alert-dialog-title"
-			className={cn("text-lg font-semibold", className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogDescription({ className, ...props }) {
-	return (
-		<AlertDialogPrimitive.Description
-			data-slot="alert-dialog-description"
-			className={cn("text-muted-foreground text-sm text-balance", className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogAction({ className, ...props }) {
-	return (
-		<AlertDialogPrimitive.Action
-			className={cn(buttonVariants(), className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogCancel({ className, ...props }) {
-	return (
-		<AlertDialogPrimitive.Cancel
-			className={cn(buttonVariants({ variant: "raised" }), className)}
-			{...props}
-		/>
-	);
-}
-
-function AlertDialogIcon({ className, children, ...props }) {
-	return (
-		<div className="w-full flex items-start justify-between -mt-2">
-			<div
-				className={cn(
-					"flex items-center justify-center gap-2.5 -ml-2",
-					className,
-				)}
-			>
-				{children}
-			</div>
-
-			<AlertDialogPrimitive.Cancel asChild>
-				<Button
-					variant="outline"
-					size="icon"
-					className="rounded-full size-6 p-0 -mr-4 -mt-2"
-				>
-					<X className="!size-4"></X>
-				</Button>
-			</AlertDialogPrimitive.Cancel>
-		</div>
-	);
-}
-
-export {
-	AlertDialog,
-	AlertDialogPortal,
-	AlertDialogOverlay,
-	AlertDialogTrigger,
-	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogDescription,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogIcon,
-};`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/alert-dialog.jsx",
@@ -296,15 +111,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("alert-dialog", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("alert-dialog", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -411,8 +219,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="alert-dialog"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -432,12 +238,14 @@ export default function Page() {
 								{
 									name: "open",
 									type: "boolean",
-									description: "The controlled open state of the alert dialog. Use with onOpenChange.",
+									description:
+										"The controlled open state of the alert dialog. Use with onOpenChange.",
 								},
 								{
 									name: "defaultOpen",
 									type: "boolean",
-									description: "The uncontrolled default open state of the alert dialog.",
+									description:
+										"The uncontrolled default open state of the alert dialog.",
 								},
 								{
 									name: "onOpenChange",
@@ -452,7 +260,8 @@ export default function Page() {
 								{
 									name: "asChild",
 									type: "boolean",
-									description: "When true, the trigger will render as its child element instead of a button.",
+									description:
+										"When true, the trigger will render as its child element instead of a button.",
 								},
 							],
 						},
@@ -462,7 +271,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the content.",
+									description:
+										"Additional CSS classes to apply to the content.",
 								},
 								{
 									name: "onEscapeKeyDown",
@@ -472,12 +282,14 @@ export default function Page() {
 								{
 									name: "onPointerDownOutside",
 									type: "(event: PointerEvent) => void",
-									description: "Callback fired when a pointer event occurs outside the dialog.",
+									description:
+										"Callback fired when a pointer event occurs outside the dialog.",
 								},
 								{
 									name: "onInteractOutside",
 									type: "(event: Event) => void",
-									description: "Callback fired when an interaction occurs outside the dialog.",
+									description:
+										"Callback fired when an interaction occurs outside the dialog.",
 								},
 							],
 						},
@@ -517,7 +329,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the description.",
+									description:
+										"Additional CSS classes to apply to the description.",
 								},
 							],
 						},
@@ -527,12 +340,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the action button.",
+									description:
+										"Additional CSS classes to apply to the action button.",
 								},
 								{
 									name: "variant",
 									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link"`,
-									description: "Variant style that inherits button variant styles.",
+									description:
+										"Variant style that inherits button variant styles.",
 								},
 								{
 									name: "size",
@@ -547,12 +362,14 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the cancel button.",
+									description:
+										"Additional CSS classes to apply to the cancel button.",
 								},
 								{
 									name: "variant",
 									type: `"default" | "outline" | "ghost" | "destructive" | "secondary" | "info" | "success" | "warning" | "muted" | "raised" | "link" (default: "raised")`,
-									description: "Variant style that inherits button variant styles. Defaults to 'raised'.",
+									description:
+										"Variant style that inherits button variant styles. Defaults to 'raised'.",
 								},
 								{
 									name: "size",
@@ -567,7 +384,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the icon container.",
+									description:
+										"Additional CSS classes to apply to the icon container.",
 								},
 								{
 									name: "children",
@@ -582,7 +400,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the overlay.",
+									description:
+										"Additional CSS classes to apply to the overlay.",
 								},
 							],
 						},

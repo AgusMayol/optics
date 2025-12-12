@@ -20,15 +20,6 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	Pagination,
 	PaginationContent,
 	PaginationItem,
@@ -37,16 +28,8 @@ import {
 	PaginationPrevious,
 } from "@/registry/optics/pagination";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/pagination.jsx.txt";
 
@@ -85,83 +68,6 @@ const code = [
 	},
 ];
 
-const paginationComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/pagination.jsx",
-		code: `import * as React from "react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/optics/button";
-
-function Pagination({
-  className,
-  ...props
-}) {
-  return (
-    <nav
-      role="navigation"
-      aria-label="pagination"
-      data-slot="pagination"
-      className={cn("mx-auto flex w-full justify-center", className)}
-      {...props} />
-  );
-}
-
-function PaginationContent({
-  className,
-  ...props
-}) {
-  return (
-    <ul
-      data-slot="pagination-content"
-      className={cn("flex flex-row items-center gap-1", className)}
-      {...props} />
-  );
-}
-
-function PaginationItem({
-  ...props
-}) {
-  return <li data-slot="pagination-item" {...props} />;
-}
-
-function PaginationLink({
-  className,
-  isActive,
-  size = "icon",
-  ...props
-}) {
-  return (
-    <a
-      aria-current={isActive ? "page" : undefined}
-      data-slot="pagination-link"
-      data-active={isActive}
-      className={cn(buttonVariants({
-        variant: isActive ? "outline" : "ghost",
-        size,
-      }), className)}
-      {...props} />
-  );
-}
-
-export {
-  Pagination,
-  PaginationContent,
-  PaginationLink,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-}`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -173,13 +79,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("pagination", installDeps);
 
 	return (
@@ -287,8 +190,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="pagination"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

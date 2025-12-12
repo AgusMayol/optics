@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,33 +16,14 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Input } from "@/registry/optics/input";
 import { Label } from "@/registry/optics/label";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/label.jsx.txt";
 
@@ -58,34 +38,6 @@ import { Input } from "@/registry/optics/input";
 	<Label htmlFor="email">Email</Label>
 	<Input id="email" type="email" placeholder="Enter your email" />
 </div>`,
-	},
-];
-
-const labelComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/label.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
-
-import { cn } from "@/lib/utils";
-
-function Label({ className, ...props }) {
-	return (
-		<LabelPrimitive.Root
-			data-slot="label"
-			className={cn(
-				"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-export { Label };`,
 	},
 ];
 
@@ -119,13 +71,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("label", installDeps);
 
 	return (
@@ -215,8 +164,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="label"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

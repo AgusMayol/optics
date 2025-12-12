@@ -22,31 +22,12 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/avatar.jsx.txt";
 
@@ -78,82 +59,6 @@ const code = [
 	},
 ];
 
-const avatarComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/avatar.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "@/registry/optics/tooltip";
-
-import { cn } from "@/lib/utils";
-
-function AvatarStack({ data, children, ...props }) {
-	return (
-		<div className="flex items-center -space-x-2">
-			{data.map((item, index) => (
-				<Avatar title={item.title} key={index}>
-					<AvatarImage src={item.image} />
-					<AvatarFallback>{item.fallback}</AvatarFallback>
-				</Avatar>
-			))}
-		</div>
-	);
-}
-
-function Avatar({ className, title, ...props }) {
-	return (
-		<Tooltip>
-			<TooltipTrigger>
-				<AvatarPrimitive.Root
-					data-slot="avatar"
-					className={cn(
-						"relative flex size-8 shrink-0 overflow-hidden rounded-full border border-background shadow-sm",
-						className,
-					)}
-					{...props}
-				/>
-			</TooltipTrigger>
-			<TooltipContent>
-				<p>{title}</p>
-			</TooltipContent>
-		</Tooltip>
-	);
-}
-
-function AvatarImage({ className, ...props }) {
-	return (
-		<AvatarPrimitive.Image
-			data-slot="avatar-image"
-			className={cn("aspect-square size-full", className)}
-			{...props}
-		/>
-	);
-}
-
-function AvatarFallback({ className, ...props }) {
-	return (
-		<AvatarPrimitive.Fallback
-			data-slot="avatar-fallback"
-			className={cn(
-				"bg-muted flex size-full items-center justify-center rounded-full",
-				className,
-			)}
-			{...props}
-		/>
-	);
-}
-
-export { Avatar, AvatarImage, AvatarFallback, AvatarStack };`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/avatar.jsx",
@@ -181,15 +86,8 @@ const installDeps = [
 ];
 
 export default function Page() {
-	const {
-		mounted,
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
-	} = useCookiePreferences("avatar", installDeps);
+	const { value, setValue, installationTab, handleTabChange } =
+		useCookiePreferences("avatar", installDeps);
 
 	return (
 		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
@@ -288,8 +186,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="avatar"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
@@ -315,17 +211,20 @@ export default function Page() {
 								{
 									name: "title",
 									type: "string",
-									description: "Tooltip text displayed when hovering over the avatar.",
+									description:
+										"Tooltip text displayed when hovering over the avatar.",
 								},
 								{
 									name: "side",
 									type: "string",
-									description: "The side of the tooltip relative to the avatar.",
+									description:
+										"The side of the tooltip relative to the avatar.",
 								},
 								{
 									name: "sideOffset",
 									type: "number",
-									description: "The distance in pixels from the tooltip to the avatar. Defaults to 0.",
+									description:
+										"The distance in pixels from the tooltip to the avatar. Defaults to 0.",
 								},
 							],
 						},
@@ -335,7 +234,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the avatar image.",
+									description:
+										"Additional CSS classes to apply to the avatar image.",
 								},
 								{
 									name: "src",
@@ -355,7 +255,8 @@ export default function Page() {
 								{
 									name: "className",
 									type: "string",
-									description: "Additional CSS classes to apply to the avatar fallback.",
+									description:
+										"Additional CSS classes to apply to the avatar fallback.",
 								},
 							],
 						},
@@ -365,7 +266,8 @@ export default function Page() {
 								{
 									name: "data",
 									type: "Array<{ image: string, fallback: string, title: string }>",
-									description: "Array of avatar data objects containing image URL, fallback text, and tooltip title.",
+									description:
+										"Array of avatar data objects containing image URL, fallback text, and tooltip title.",
 								},
 							],
 						},

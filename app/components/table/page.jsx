@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,15 +19,6 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import {
 	Table,
@@ -38,16 +28,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/registry/optics/table";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/table.jsx.txt";
 
@@ -83,110 +65,6 @@ const code = [
 	},
 ];
 
-const tableComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/table.jsx",
-		code: `"use client";
-
-import * as React from "react";
-
-import { cn } from "@/lib/utils";
-
-function Table({
-  className,
-  ...props
-}) {
-  return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto">
-      <table
-        data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
-        {...props} />
-    </div>
-  );
-}
-
-function TableHeader({
-  className,
-  ...props
-}) {
-  return (
-    <thead
-      data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
-      {...props} />
-  );
-}
-
-function TableBody({
-  className,
-  ...props
-}) {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props} />
-  );
-}
-
-function TableRow({
-  className,
-  ...props
-}) {
-  return (
-    <tr
-      data-slot="table-row"
-      className={cn(
-        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function TableHead({
-  className,
-  ...props
-}) {
-  return (
-    <th
-      data-slot="table-head"
-      className={cn(
-        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function TableCell({
-  className,
-  ...props
-}) {
-  return (
-    <td
-      data-slot="table-cell"
-      className={cn(
-        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
-      )}
-      {...props} />
-  );
-}
-
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-}`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -198,13 +76,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("table", installDeps);
 
 	return (
@@ -316,8 +191,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="table"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

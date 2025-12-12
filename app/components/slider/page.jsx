@@ -8,7 +8,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
@@ -17,29 +16,11 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import { Slider } from "@/registry/optics/slider";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
@@ -54,81 +35,6 @@ const code = [
 
 <Slider defaultValue={[50]} max={100} step={1} />
 <Slider defaultValue={[25, 75]} max={100} step={1} />`,
-	},
-];
-
-const sliderComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/slider.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import * as SliderPrimitive from "@radix-ui/react-slider";
-
-import { cn } from "@/lib/utils";
-import { otherThemes } from "@/registry/optics/button";
-
-function Slider({
-	className,
-	defaultValue,
-	value,
-	min = 0,
-	max = 100,
-	variant,
-	...props
-}) {
-	const _values = React.useMemo(
-		() =>
-			Array.isArray(value)
-				? value
-				: Array.isArray(defaultValue)
-					? defaultValue
-					: [min, max],
-		[value, defaultValue, min, max],
-	);
-
-	return (
-		<SliderPrimitive.Root
-			data-slot="slider"
-			defaultValue={defaultValue}
-			value={value}
-			min={min}
-			max={max}
-			className={cn(
-				"relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
-				className,
-			)}
-			{...props}
-		>
-			<SliderPrimitive.Track
-				data-slot="slider-track"
-				className={cn(
-					"bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
-				)}
-			>
-				<SliderPrimitive.Range
-					data-slot="slider-range"
-					className={cn(
-						"bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
-					)}
-				/>
-			</SliderPrimitive.Track>
-			{Array.from({ length: _values.length }, (_, index) => (
-				<SliderPrimitive.Thumb
-					data-slot="slider-thumb"
-					key={index}
-					className={cn(
-						"border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-2 focus-visible:ring-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-						otherThemes({ variant: variant }),
-					)}
-				/>
-			))}
-		</SliderPrimitive.Root>
-	);
-}
-
-export { Slider };`,
 	},
 ];
 
@@ -163,13 +69,10 @@ export default function Page() {
 	const [rangeValue, setRangeValue] = React.useState([25, 75]);
 
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("slider", installDeps);
 
 	return (
@@ -273,8 +176,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="slider"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

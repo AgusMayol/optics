@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,28 +16,10 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
 import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -149,106 +130,6 @@ export function MyComponent() {
 	},
 ];
 
-const themeSwitcherComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/theme-switcher.jsx",
-		code: `"use client";
-
-import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Monitor, Moon, Sun } from "lucide-react";
-import { motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-
-const themes = [
-	{
-		key: "system",
-		icon: Monitor,
-		label: "System theme",
-	},
-	{
-		key: "light",
-		icon: Sun,
-		label: "Light theme",
-	},
-	{
-		key: "dark",
-		icon: Moon,
-		label: "Dark theme",
-	},
-];
-
-export const ThemeSwitcher = ({
-	value,
-	onChange,
-	defaultValue = "system",
-	className,
-	...props
-}) => {
-	const [theme, setTheme] = useControllableState({
-		defaultProp: defaultValue,
-		prop: value,
-		onChange,
-	});
-	const [mounted, setMounted] = useState(false);
-
-	const handleThemeClick = useCallback(
-		(themeKey) => {
-			setTheme(themeKey);
-		},
-		[setTheme],
-	);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	if (!mounted) {
-		return null;
-	}
-
-	return (
-		<div
-			className={cn(
-				"relative isolate flex h-8 rounded-full bg-background p-1 ring-1 ring-border",
-				className,
-			)}
-			{...props}
-		>
-			{themes.map(({ key, icon: Icon, label }) => {
-				const isActive = theme === key;
-
-				return (
-					<button
-						aria-label={label}
-						className="relative h-6 w-6 rounded-full"
-						key={key}
-						onClick={() => handleThemeClick(key)}
-						type="button"
-					>
-						{isActive && (
-							<motion.div
-								className="absolute inset-0 rounded-full bg-secondary"
-								layoutId="activeTheme"
-								transition={{ type: "spring", duration: 0.5 }}
-							/>
-						)}
-						<Icon
-							className={cn(
-								"relative z-10 m-auto h-4 w-4",
-								isActive ? "text-foreground" : "text-muted-foreground",
-							)}
-						/>
-					</button>
-				);
-			})}
-		</div>
-	);
-};`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/theme-switcher.jsx",
@@ -286,8 +167,6 @@ export default function Page() {
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("theme-switcher", installDeps);
 
 	const checkTheme = () => {
@@ -450,8 +329,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="theme-switcher"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

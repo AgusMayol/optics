@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -21,30 +20,13 @@ import {
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
 import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
-import {
 	ResizableHandle,
 	ResizablePanel,
 	ResizablePanelGroup,
 } from "@/registry/optics/resizable";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/resizable.jsx.txt";
 
@@ -74,65 +56,6 @@ const code = [
 	},
 ];
 
-const resizableComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/resizable.jsx",
-		code: `"use client";
-
-import * as React from "react";
-import { GripVerticalIcon } from "lucide-react";
-import * as ResizablePrimitive from "react-resizable-panels";
-
-import { cn } from "@/lib/utils";
-
-function ResizablePanelGroup({
-  className,
-  ...props
-}) {
-  return (
-    <ResizablePrimitive.PanelGroup
-      data-slot="resizable-panel-group"
-      className={cn(
-        "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function ResizablePanel({
-  ...props
-}) {
-  return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />;
-}
-
-function ResizableHandle({
-  withHandle,
-  className,
-  ...props
-}) {
-  return (
-    <ResizablePrimitive.PanelResizeHandle
-      data-slot="resizable-handle"
-      className={cn(
-        "bg-border focus-visible:ring-ring relative flex w-px items-center justify-center after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:outline-hidden",
-        className
-      )}
-      {...props}>
-      {withHandle && (
-        <div className="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-xs border">
-          <GripVerticalIcon className="size-2.5" />
-        </div>
-      )}
-    </ResizablePrimitive.PanelResizeHandle>
-  );
-}
-
-export { ResizablePanelGroup, ResizablePanel, ResizableHandle }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -144,13 +67,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("resizable", installDeps);
 
 	return (
@@ -252,8 +172,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="resizable"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -20,27 +19,10 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Separator } from "@/registry/optics/separator";
 import { Skeleton } from "@/registry/optics/skeleton";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/skeleton.jsx.txt";
 
@@ -60,28 +42,6 @@ const code = [
 	},
 ];
 
-const skeletonComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/skeleton.jsx",
-		code: `import { cn } from "@/lib/utils";
-
-function Skeleton({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="skeleton"
-      className={cn("bg-accent animate-pulse rounded-md", className)}
-      {...props} />
-  );
-}
-
-export { Skeleton }`,
-	},
-];
-
 const installDeps = [];
 
 const componentFiles = [
@@ -93,13 +53,10 @@ const componentFiles = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("skeleton", installDeps);
 
 	return (
@@ -192,8 +149,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="skeleton"
 				installDeps={installDeps}
 				manualFiles={componentFiles}

@@ -9,7 +9,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/registry/optics/accordion";
-import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Card, CardContent, CardFooter } from "@/registry/optics/card";
 import {
@@ -17,32 +16,13 @@ import {
 	CodeBlockBody,
 	CodeBlockContent,
 	CodeBlockCopyButton,
-	CodeBlockFilename,
-	CodeBlockFiles,
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsContents,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from "@/registry/optics/code-snippet";
 import { Kbd, KbdGroup } from "@/registry/optics/kbd";
 import { Separator } from "@/registry/optics/separator";
-import {
-	Tabs,
-	TabsContent,
-	TabsContents,
-	TabsList,
-	TabsTrigger,
-} from "@/registry/optics/tabs";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 
 import componentCode from "@/registry/optics/kbd.jsx.txt";
 
@@ -79,105 +59,6 @@ import { Command } from "lucide-react";
 	},
 ];
 
-const kbdComponentCode = [
-	{
-		language: "jsx",
-		filename: "components/ui/optics/kbd.jsx",
-		code: `"use client";
-
-import { cn } from "@/lib/utils";
-import { cva } from "class-variance-authority";
-import { useHotkeys } from "react-hotkeys-hook";
-import {
-	useCallback,
-	useRef,
-	useState,
-	useMemo,
-	isValidElement,
-	useEffect,
-} from "react";
-
-// ... (helper functions for text extraction and hotkey normalization)
-
-const kbdVariants = cva(
-	"select-none outline-hidden transition-all duration-150",
-	{
-		variants: {
-			variant: {
-				default:
-					"transform-gpu cursor-pointer rounded-lg border border-neutral-500/50 bg-neutral-300 shadow-[-10px_0px_15px_rgba(255,255,255,1),3px_10px_12.5px_rgba(0,0,0,0.1)] active:shadow-none dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-[-10px_0px_15px_rgba(0,0,0,0.3),3px_10px_12.5px_rgba(255,255,255,0.05)]",
-				legacy:
-					"bg-muted text-muted-foreground pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm px-1 font-sans text-xs font-medium [&_svg:not([class*='size-'])]:size-3 [[data-slot=tooltip-content]_&]:bg-background/20 [[data-slot=tooltip-content]_&]:text-background dark:[[data-slot=tooltip-content]_&]:bg-background/10",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-		},
-	},
-);
-
-function Kbd({
-	className,
-	variant = "default",
-	useHotkey = false,
-	animate = true,
-	onHotkeyPress,
-	hotkey: hotkeyProp,
-	...props
-}) {
-	// ... (hotkey detection and animation logic)
-	
-	if (variant === "legacy") {
-		return (
-			<kbd
-				data-slot="kbd"
-				className={cn(kbdVariants({ variant }), className)}
-				{...props}
-			>
-				{props.children}
-			</kbd>
-		);
-	}
-
-	return (
-		<kbd
-			data-slot="kbd"
-			className={cn(
-				!isCompound && "aspect-square",
-				kbdVariants({ variant }),
-				isPressed && "shadow-none",
-				className,
-			)}
-			{...props}
-		>
-			<span
-				className={cn(
-					kbdInnerVariants({ variant }),
-					isPressed && "translate-y-0 shadow-transparent",
-				)}
-			>
-				<span className="block text-center align-center text-xs">
-					{props.children}
-				</span>
-			</span>
-		</kbd>
-	);
-}
-
-function KbdGroup({ className, ...props }) {
-	return (
-		<kbd
-			data-slot="kbd-group"
-			className={cn("inline-flex items-center gap-1", className)}
-			{...props}
-		/>
-	);
-}
-
-export { Kbd, KbdGroup };`,
-	},
-];
-
 const componentFiles = [
 	{
 		path: "@/components/optics/kbd.jsx",
@@ -208,13 +89,10 @@ const installDeps = [
 
 export default function Page() {
 	const {
-		mounted,
 		value,
 		setValue,
 		installationTab,
 		handleTabChange,
-		activeCommand,
-		activeDepsCommand,
 	} = useCookiePreferences("kbd", installDeps);
 
 	return (
@@ -309,8 +187,6 @@ export default function Page() {
 			<InstallationGuide
 				value={value}
 				setValue={setValue}
-				activeCommand={activeCommand}
-				activeDepsCommand={activeDepsCommand}
 				componentName="kbd"
 				installDeps={installDeps}
 				manualFiles={componentFiles}
