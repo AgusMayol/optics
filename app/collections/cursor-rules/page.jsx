@@ -2,7 +2,12 @@
 import { InstallationGuide } from "@/components/installation-guide";
 import { useCookiePreferences } from "@/lib/use-cookie-preferences";
 import { Button } from "@/registry/optics/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/optics/card";
+import {
+	Card,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/registry/optics/card";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -13,20 +18,20 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-import backEndCode from "@/registry/optics/cursor/rules/back-end.mdc.txt";
-import bulkProcessingCode from "@/registry/optics/cursor/rules/bulk-processing.mdc.txt";
-import commitsConventionCode from "@/registry/optics/cursor/rules/commits-convention.mdc.txt";
-import frontEndCode from "@/registry/optics/cursor/rules/front-end.mdc.txt";
-import generalCode from "@/registry/optics/cursor/rules/general.mdc.txt";
-import reactOptimizationCode from "@/registry/optics/cursor/rules/react-optimization.mdc.txt";
-import webInterfaceGuidelinesCode from "@/registry/optics/cursor/rules/web-interface-guidelines.mdc.txt";
+import backEndCode from "@/registry/optics/dist/cursor/rules/back-end.mdc.txt";
+import bulkProcessingCode from "@/registry/optics/dist/cursor/rules/bulk-processing.mdc.txt";
+import commitsConventionCode from "@/registry/optics/dist/cursor/rules/commits-convention.mdc.txt";
+import frontEndCode from "@/registry/optics/dist/cursor/rules/front-end.mdc.txt";
+import generalCode from "@/registry/optics/dist/cursor/rules/general.mdc.txt";
+import reactOptimizationCode from "@/registry/optics/dist/cursor/rules/react-optimization.mdc.txt";
+import webInterfaceGuidelinesCode from "@/registry/optics/dist/cursor/rules/web-interface-guidelines.mdc.txt";
 import {
 	Dialog,
-	DialogContent,
 	DialogDescription,
 	DialogHeader,
+	DialogPopup,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
 } from "@/registry/optics/dialog";
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
 import { Separator } from "@/registry/optics/separator";
@@ -143,8 +148,7 @@ const mcps = [
     }
 }`,
 		},
-		docsUrl:
-			"https://github.com/github/github-mcp-server",
+		docsUrl: "https://github.com/github/github-mcp-server",
 	},
 	{
 		name: "supabase",
@@ -224,18 +228,25 @@ export default function Page() {
 										<Card className="w-[350px] h-full">
 											<CardHeader className="flex flex-col items-start justify-start">
 												<CardTitle>{rule.title}</CardTitle>
-												<CardDescription className="text-start text-pretty">{rule.description}</CardDescription>
+												<CardDescription className="text-start text-pretty">
+													{rule.description}
+												</CardDescription>
 											</CardHeader>
 										</Card>
 									</DialogTrigger>
-									<DialogContent className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden" containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden">
+									<DialogPopup
+										className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden "
+										containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden"
+									>
 										<DialogHeader className="shrink-0">
 											<DialogTitle>{rule.title}</DialogTitle>
-											<DialogDescription>
-												{rule.description}
-											</DialogDescription>
+											<DialogDescription>{rule.description}</DialogDescription>
 										</DialogHeader>
-										<ScrollArea className="flex-1 min-h-0 w-full overflow-x-hidden" maskColor="from-background" viewportClassName="overflow-x-hidden">
+										<ScrollArea
+											className="flex-1 min-h-0 w-full overflow-x-hidden"
+											maskColor="from-background"
+											viewportClassName="overflow-x-hidden"
+										>
 											<div className="pr-0 min-w-0">
 												<InstallationGuide
 													value={selectedPackageManager}
@@ -251,7 +262,7 @@ export default function Page() {
 											</div>
 											<ScrollBar orientation="vertical" />
 										</ScrollArea>
-									</DialogContent>
+									</DialogPopup>
 								</Dialog>
 							);
 						})}
@@ -261,75 +272,83 @@ export default function Page() {
 				{/* MCP Servers Guide */}
 				<Separator decoration />
 				<div className="flex flex-col gap-8 w-full pt-4 pb-12">
-				<div className="grid grid-cols-2 items-start justify-center gap-12 px-6">
+					<div className="grid grid-cols-2 items-start justify-center gap-12 px-6">
 						{mcps.map((mcp, index) => (
 							<Dialog key={mcp.name}>
-							<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
-								<Card className="w-[350px] h-full">
-									<CardHeader className="flex flex-col items-start justify-start">
-										<CardTitle>{mcp.title}</CardTitle>
-										<CardDescription className="text-start text-pretty">{mcp.description}</CardDescription>
-									</CardHeader>
-								</Card>
-							</DialogTrigger>
-							<DialogContent className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden" containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden">
-								<DialogHeader className="shrink-0">
-									<DialogTitle>{mcp.title}</DialogTitle>
-									<DialogDescription>
-									{mcp.description}
-									</DialogDescription>
-								</DialogHeader>
-								<ScrollArea className="flex-1 min-h-0 w-full overflow-x-hidden" maskColor="from-background" viewportClassName="overflow-x-hidden">
-								
-
-									<div className="pr-0 min-w-0 flex flex-col items-end justify-end gap-4">
-									<Button variant="outline" size="sm" asChild>
-												<Link
-													href={mcp.docsUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-												>
-													Documentation
-													<ArrowUpRight className="ml-2 h-4 w-4" />
-												</Link>
-											</Button>
-									<CodeBlock
-											data={[mcp.config]}
-											defaultValue={mcp.config.filename}
-										>
-											<CodeBlockHeader>
-												<CodeBlockFiles>
+								<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
+									<Card className="w-[350px] h-full">
+										<CardHeader className="flex flex-col items-start justify-start">
+											<CardTitle>{mcp.title}</CardTitle>
+											<CardDescription className="text-start text-pretty">
+												{mcp.description}
+											</CardDescription>
+										</CardHeader>
+									</Card>
+								</DialogTrigger>
+								<DialogPopup
+									className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden"
+									containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden"
+								>
+									<DialogHeader className="shrink-0">
+										<DialogTitle>{mcp.title}</DialogTitle>
+										<DialogDescription>{mcp.description}</DialogDescription>
+									</DialogHeader>
+									<ScrollArea
+										className="flex-1 min-h-0 w-full overflow-x-hidden"
+										maskColor="from-background"
+										viewportClassName="overflow-x-hidden"
+									>
+										<div className="pr-0 min-w-0 flex flex-col items-end justify-end gap-4">
+											<Button
+												variant="outline"
+												size="sm"
+												nativeButton={false}
+												render={
+													<Link
+														href={mcp.docsUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														Documentation
+														<ArrowUpRight className="ml-2 h-4 w-4" />
+													</Link>
+												}
+											/>
+											<CodeBlock
+												data={[mcp.config]}
+												defaultValue={mcp.config.filename}
+											>
+												<CodeBlockHeader>
+													<CodeBlockFiles>
+														{(item) => (
+															<CodeBlockFilename
+																key={item.filename}
+																value={item.filename}
+															>
+																{item.filename}
+															</CodeBlockFilename>
+														)}
+													</CodeBlockFiles>
+													<CodeBlockCopyButton />
+												</CodeBlockHeader>
+												<CodeBlockBody>
 													{(item) => (
-														<CodeBlockFilename
+														<CodeBlockItem
 															key={item.filename}
 															value={item.filename}
 														>
-															{item.filename}
-														</CodeBlockFilename>
+															<CodeBlockContent language="json">
+																{item.code}
+															</CodeBlockContent>
+														</CodeBlockItem>
 													)}
-												</CodeBlockFiles>
-												<CodeBlockCopyButton />
-											</CodeBlockHeader>
-											<CodeBlockBody>
-												{(item) => (
-													<CodeBlockItem
-														key={item.filename}
-														value={item.filename}
-													>
-														<CodeBlockContent language="json">
-															{item.code}
-														</CodeBlockContent>
-													</CodeBlockItem>
-												)}
-											</CodeBlockBody>
-										</CodeBlock>
-									</div>
-									<ScrollBar orientation="vertical" />
-								</ScrollArea>
-							</DialogContent>
-						</Dialog>
-
-							
+												</CodeBlockBody>
+											</CodeBlock>
+										</div>
+										<ScrollBar orientation="vertical" />
+									</ScrollArea>
+								</DialogPopup>
+							</Dialog>
 						))}
 					</div>
 				</div>

@@ -13,7 +13,7 @@ import {
 	Loader2,
 } from "lucide-react";
 import { Spinner } from "@/registry/optics/spinner";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 // Toast type definitions
 const TOAST_TYPES = {
@@ -45,7 +45,7 @@ const TOAST_TYPES = {
 	},
 };
 
-export function Toaster({ ...props }) {
+export function Toaster({ className = "", ...props }) {
 	const { theme = "system" } = useTheme();
 
 	return (
@@ -71,7 +71,7 @@ const promiseStates = new Map();
 
 /** I recommend abstracting the toast function
  *  so that you can call it without having to use toast.custom everytime. */
-export function toast(toastConfig) {
+export function toast(toastConfig = {}) {
 	const {
 		type = "info",
 		title,

@@ -10,7 +10,6 @@ import {
 } from "@shikijs/transformers";
 import { CheckIcon, CopyIcon, Loader2 } from "lucide-react";
 import {
-	cloneElement,
 	createContext,
 	useContext,
 	useEffect,
@@ -18,6 +17,8 @@ import {
 	useLayoutEffect,
 	useRef,
 } from "react";
+import { useRender } from "@base-ui/react/use-render";
+import { mergeProps } from "@base-ui/react/merge-props";
 import { motion, AnimatePresence } from "motion/react";
 import {
 	SiAstro,
@@ -100,7 +101,7 @@ import {
 } from "@/registry/optics/select";
 import { toast } from "@/registry/optics/sonner";
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 const filenameIconMap = {
 	".env": SiDotenv,
@@ -288,11 +289,11 @@ const CodeBlockContext = createContext({
 });
 
 export const CodeBlock = ({
-	value: controlledValue,
-	onValueChange: controlledOnValueChange,
-	defaultValue,
-	className,
-	data,
+	value: controlledValue = undefined,
+	onValueChange: controlledOnValueChange = undefined,
+	defaultValue = "",
+	className = "",
+	data = [],
 	...props
 }) => {
 	const [value, onValueChange] = useControllableState({
@@ -311,7 +312,7 @@ export const CodeBlock = ({
 	);
 };
 
-export const CodeBlockHeader = ({ className, ...props }) => (
+export const CodeBlockHeader = ({ className = "", ...props }) => (
 	<div
 		className={cn(
 			"flex flex-row items-center border-b bg-secondary p-1",
@@ -321,7 +322,11 @@ export const CodeBlockHeader = ({ className, ...props }) => (
 	/>
 );
 
-export const CodeBlockFiles = ({ className, children, ...props }) => {
+export const CodeBlockFiles = ({
+	className = "",
+	children = null,
+	...props
+}) => {
 	const { data } = useContext(CodeBlockContext);
 
 	return (
@@ -335,10 +340,10 @@ export const CodeBlockFiles = ({ className, children, ...props }) => {
 };
 
 export const CodeBlockFilename = ({
-	className,
-	icon,
-	value,
-	children,
+	className = "",
+	icon = undefined,
+	value = undefined,
+	children = null,
 	...props
 }) => {
 	const { value: activeValue } = useContext(CodeBlockContext);
@@ -365,13 +370,13 @@ export const CodeBlockFilename = ({
 	);
 };
 
-export const CodeBlockSelect = (props) => {
+export const CodeBlockSelect = (props = {}) => {
 	const { value, onValueChange } = useContext(CodeBlockContext);
 
 	return <Select onValueChange={onValueChange} value={value} {...props} />;
 };
 
-export const CodeBlockSelectTrigger = ({ className, ...props }) => (
+export const CodeBlockSelectTrigger = ({ className = "", ...props }) => (
 	<SelectTrigger
 		className={cn(
 			"w-fit border-none text-muted-foreground text-xs shadow-none",
@@ -381,9 +386,13 @@ export const CodeBlockSelectTrigger = ({ className, ...props }) => (
 	/>
 );
 
-export const CodeBlockSelectValue = (props) => <SelectValue {...props} />;
+export const CodeBlockSelectValue = (props = {}) => <SelectValue {...props} />;
 
-export const CodeBlockSelectContent = ({ children, className, ...props }) => {
+export const CodeBlockSelectContent = ({
+	children = null,
+	className = "",
+	...props
+}) => {
 	const { data } = useContext(CodeBlockContext);
 
 	return (
@@ -393,17 +402,16 @@ export const CodeBlockSelectContent = ({ children, className, ...props }) => {
 	);
 };
 
-export const CodeBlockSelectItem = ({ className, ...props }) => (
+export const CodeBlockSelectItem = ({ className = "", ...props }) => (
 	<SelectItem className={cn("text-sm", className)} {...props} />
 );
 
 export const CodeBlockCopyButton = ({
-	asChild,
-	onCopy,
-	onError,
+	render = undefined,
+	onCopy = undefined,
+	onError = undefined,
 	timeout = 2000,
-	children,
-	className,
+	className = "",
 	variant = "outline",
 	size = "icon",
 	...props
@@ -489,29 +497,8 @@ export const CodeBlockCopyButton = ({
 		}
 	};
 
-	if (asChild) {
-		return cloneElement(children, {
-			// sabemos que es un botón
-			onClick: copyToClipboard,
-		});
-	}
-
-	const Icon = isLoading ? Loader2 : isCopied ? CheckIcon : CopyIcon;
-
-	return (
-		<Button
-			role="button"
-			aria-label={isCopied ? "Copied!" : "Copy to clipboard"}
-			disabled={isLoading}
-			className={cn(
-				"shrink-0 z-50 pointer-events-auto selection-all",
-				className,
-			)}
-			onClick={copyToClipboard}
-			variant={variant}
-			size={size}
-			{...props}
-		>
+	const buttonContent = (
+		<>
 			<div className="relative">
 				<div
 					className={cn(
@@ -545,11 +532,43 @@ export const CodeBlockCopyButton = ({
 				</div>
 			</div>
 			<span className="sr-only">Copy to clipboard</span>
-		</Button>
+		</>
 	);
+
+	const defaultProps = {
+		role: "button",
+		"aria-label": isCopied ? "Copied!" : "Copy to clipboard",
+		disabled: isLoading,
+		className: cn("shrink-0 z-50 pointer-events-auto selection-all", className),
+		onClick: copyToClipboard,
+		variant,
+		size,
+		children: buttonContent,
+	};
+
+	if (render) {
+		const element = useRender({
+			defaultTagName: "button",
+			render:
+				typeof render === "function"
+					? (props, state) => {
+							const mergedProps = mergeProps("button", defaultProps, props);
+							return render(mergedProps, { isCopied, isLoading, ...state });
+						}
+					: render,
+			props: mergeProps("button", defaultProps, props),
+			state: {
+				isCopied,
+				isLoading,
+			},
+		});
+		return element;
+	}
+
+	return <Button {...defaultProps} {...props} />;
 };
 
-const CodeBlockFallback = ({ children, ...props }) => (
+const CodeBlockFallback = ({ children = null, ...props } = {}) => (
 	<div {...props}>
 		<pre className="w-full">
 			<code>
@@ -566,17 +585,17 @@ const CodeBlockFallback = ({ children, ...props }) => (
 	</div>
 );
 
-export const CodeBlockBody = ({ children, ...props }) => {
+export const CodeBlockBody = ({ children = null, ...props }) => {
 	const { data } = useContext(CodeBlockContext);
 
 	return <div {...props}>{data.map(children)}</div>;
 };
 
 export const CodeBlockItem = ({
-	children,
+	children = null,
 	lineNumbers = true,
-	className,
-	value,
+	className = "",
+	value = undefined,
 	...props
 }) => {
 	const { value: activeValue } = useContext(CodeBlockContext);
@@ -610,15 +629,16 @@ export const CodeBlockItem = ({
 };
 
 export const CodeBlockContent = ({
-	children,
-	themes,
-	language,
+	children = "",
+	themes = undefined,
+	language = undefined,
 	syntaxHighlighting = true,
 	...props
 }) => {
 	const [html, setHtml] = useState(null);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [fullHeight, setFullHeight] = useState(null);
+	const [isReady, setIsReady] = useState(false);
 	const codeLines = children.split("\n");
 	const hasMoreThan10Lines = codeLines.length > 10;
 	const measureRef = useRef(null);
@@ -642,6 +662,7 @@ export const CodeBlockContent = ({
 			if (measureRef.current) {
 				const height = measureRef.current.getBoundingClientRect().height;
 				setFullHeight(height);
+				setIsReady(true);
 			}
 		};
 
@@ -669,6 +690,16 @@ export const CodeBlockContent = ({
 		damping: 25,
 	};
 
+	const shouldCollapse =
+		hasMoreThan10Lines && (fullHeight ? fullHeight > collapsedHeight : true);
+	const targetHeight = !isReady
+		? collapsedHeight
+		: shouldCollapse && !isExpanded
+			? collapsedHeight
+			: fullHeight || "auto";
+	const shouldShowExpand = isReady && shouldCollapse && !isExpanded;
+	const motionTransition = isReady ? transition : { duration: 0 };
+
 	return (
 		<div className="relative w-full flex flex-col min-h-0 min-w-0" {...props}>
 			<div
@@ -688,13 +719,8 @@ export const CodeBlockContent = ({
 			<motion.div
 				className="relative overflow-hidden w-full min-h-0 min-w-0"
 				style={{ maxHeight: "100%" }}
-				animate={{
-					height:
-						hasMoreThan10Lines && !isExpanded
-							? collapsedHeight
-							: fullHeight || "auto",
-				}}
-				transition={transition}
+				animate={{ height: targetHeight }}
+				transition={motionTransition}
 			>
 				<ScrollArea
 					maskColor="from-sidebar"
@@ -715,7 +741,7 @@ export const CodeBlockContent = ({
 				</ScrollArea>
 			</motion.div>
 			<AnimatePresence>
-				{hasMoreThan10Lines && !isExpanded && (
+				{shouldShowExpand && (
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}

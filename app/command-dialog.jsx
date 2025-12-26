@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import {
+	ArrowDown,
+	ArrowUp,
 	Bot,
 	Calculator,
 	Calendar,
@@ -16,6 +18,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/registry/optics/button";
 import {
+	Command,
 	CommandDialog,
 	CommandEmpty,
 	CommandGroup,
@@ -40,14 +43,14 @@ export function CommandDialogComponent({ links, className }) {
 			<Button
 				className={cn(
 					"text-muted-foreground text-xs justify-between pr-1.5 gap-2",
-					open && "!scale-[0.97] !ring-[3px] !ring-ring/25",
+					open && "!scale-[0.97] !ring-[3px] !ring-ring/25", //Se queda apretado el botón cuando el dialog está abierto
 					className,
 				)}
 				variant="raised"
-				size="sm"
+				size="lg"
 				onClick={() => setOpen(true)}
 			>
-				<span className=" items-center text-xs pr-2">Search the site ...</span>{" "}
+				<span className="items-center text-xs pr-2 ">Search the site ...</span>{" "}
 				<Kbd
 					useHotkey
 					hotkey="cmd+J"
@@ -99,11 +102,35 @@ export function CommandDialogComponent({ links, className }) {
 						</React.Fragment>
 					))}
 				</CommandList>
-				<DialogFooter className="bg-background border-t p-2">
+				<DialogFooter className="bg-background flex items-center justify-between! border-t p-2! sm:mx-0">
+					<Button
+						className="text-muted-foreground text-xs pl-0.25 disabled:opacity-100"
+						variant="ghost"
+						size="lg"
+						disabled
+					>
+						<Kbd
+							useHotkey
+							hotkey="ArrowUp"
+							onHotkeyPress={() => setOpen(false)}
+							className="mt-1 shadow-none aspect-square size-7"
+						>
+							<ArrowUp className="size-3!" />
+						</Kbd>
+						<Kbd
+							useHotkey
+							hotkey="ArrowDown"
+							onHotkeyPress={() => setOpen(false)}
+							className="mt-1 shadow-none aspect-square size-7"
+						>
+							<ArrowDown className="size-3!" />
+						</Kbd>{" "}
+						Navigate
+					</Button>
 					<Button
 						className="text-muted-foreground text-xs pr-0.25"
 						variant="ghost"
-						size="sm"
+						size="lg"
 						onClick={() => setOpen(false)}
 					>
 						Go to page{" "}
@@ -111,7 +138,7 @@ export function CommandDialogComponent({ links, className }) {
 							useHotkey
 							hotkey="Enter"
 							onHotkeyPress={() => setOpen(false)}
-							className="aspect-auto mt-1"
+							className="aspect-auto mt-1 shadow-none"
 						>
 							&#9166; Enter
 						</Kbd>

@@ -1,10 +1,10 @@
 "use client";
 import * as React from "react";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 import { Plus } from "lucide-react";
 
 // Crear el contexto
-const GridContext = React.createContext();
+const GridContext = React.createContext(null);
 
 // Hook para usar el contexto
 const useGridContext = () => {
@@ -75,11 +75,13 @@ export const GridRow = ({
 				className,
 			)}
 			style={
-				overrideStyles ? undefined : {
-					gridColumn: `span ${cols} / span ${span}`,
-					gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-					gap,
-				}
+				overrideStyles
+					? undefined
+					: {
+							gridColumn: `span ${cols} / span ${span}`,
+							gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+							gap,
+						}
 			}
 			{...props}
 		>

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
-import { FFResolver } from "@/components/ff-resolver";
 import { cn } from "@/lib/utils";
 import {
 	CodeBlock,
@@ -30,12 +29,6 @@ import {
 } from "@/registry/optics/tabs";
 import { ShowMore } from "@/registry/optics/show-more";
 
-/**
- * Generates CLI commands for a component based on the registry prefix
- * @param {string} componentName - Name of the component (e.g., "button", "card")
- * @returns {Array} Array of command objects with label and code
- */
-
 export function InstallationGuide({
 	value,
 	setValue,
@@ -47,42 +40,28 @@ export function InstallationGuide({
 	className = "",
 	showUpdateImportPaths = true,
 }) {
-	const [registryPrefixState, setRegistryPrefixState] = useState(false);
-	useEffect(() => {
-		async function fetchRegistryPrefix() {
-			const registryPrefixValue = await FFResolver();
-			setRegistryPrefixState(registryPrefixValue);
-		}
-		fetchRegistryPrefix();
-	}, []);
-
 	const commands = useMemo(() => {
-		const registryPrefix = registryPrefixState
-			? "@optics"
-			: `https://${process.env.NEXT_PUBLIC_DOMAIN}/r`;
-		const finalComponentName = registryPrefixState
-			? componentName
-			: `${componentName}.json`;
+		const registryPrefix = "@optics";
 
 		return [
 			{
 				label: "pnpm",
-				code: `pnpm dlx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+				code: `pnpm dlx shadcn@latest add ${registryPrefix}/${componentName}`,
 			},
 			{
 				label: "npm",
-				code: `npx shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+				code: `npx shadcn@latest add ${registryPrefix}/${componentName}`,
 			},
 			{
 				label: "yarn",
-				code: `yarn shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+				code: `yarn shadcn@latest add ${registryPrefix}/${componentName}`,
 			},
 			{
 				label: "bun",
-				code: `bunx --bun shadcn@latest add ${registryPrefix}/${finalComponentName}`,
+				code: `bunx --bun shadcn@latest add ${registryPrefix}/${componentName}`,
 			},
 		];
-	}, [registryPrefixState, componentName]);
+	}, [componentName]);
 
 	// Calculate activeCommand and activeDepsCommand based on current value and commands
 	const activeCommand = useMemo(() => {
@@ -99,9 +78,7 @@ export function InstallationGuide({
 				className,
 			)}
 		>
-			<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold shrink-0">
-				Installation
-			</h2>
+			<h2 className="text-20 shrink-0">Installation</h2>
 			<Tabs
 				value={installationTab}
 				onValueChange={handleTabChange}
@@ -133,6 +110,7 @@ export function InstallationGuide({
 										key={command.label}
 										value={command.label}
 										className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+										textClassName="text-[13px]"
 									>
 										{command.code}
 										{command.label === value && (
@@ -179,6 +157,7 @@ export function InstallationGuide({
 												key={command.label}
 												value={command.label}
 												className="w-full flex items-center justify-between gap-8 py-2 pr-2"
+												textClassName="text-[13px]"
 											>
 												{command.code}
 												{command.label === value && (
@@ -250,7 +229,7 @@ export function InstallationGuide({
 															>
 																<CodeBlockContent
 																	language={language}
-																	className="bg-sidebar"
+																	className="bg-sidebar text-[13px]"
 																>
 																	{item.code}
 																</CodeBlockContent>

@@ -1,24 +1,9 @@
 "use client";
-import { InstallationGuide } from "@/components/installation-guide";
-import { ComponentNavigation } from "@/components/component-navigation";
-import { PropsTable } from "@/components/props-table";
-import { useCookiePreferences } from "@/lib/use-cookie-preferences";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/registry/optics/accordion";
+import { ComponentConfig } from "../layout";
+import { useState } from "react";
 import { Button } from "@/registry/optics/button";
-import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	CodeBlock,
-	CodeBlockBody,
-	CodeBlockContent,
-	CodeBlockCopyButton,
-	CodeBlockHeader,
-	CodeBlockItem,
-} from "@/registry/optics/code-block";
+import { Input } from "@/registry/optics/input";
+import { Label } from "@/registry/optics/label";
 import {
 	Drawer,
 	DrawerClose,
@@ -29,14 +14,16 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/registry/optics/drawer";
-import { Input } from "@/registry/optics/input";
-import { Label } from "@/registry/optics/label";
-import { Separator } from "@/registry/optics/separator";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
 
-import componentCode from "@/registry/optics/drawer.jsx.txt";
+import componentCode from "@/registry/optics/dist/drawer.jsx.txt";
+import generatedProps from "@/registry/optics/dist/drawer.json";
+
+const componentFiles = [
+	{
+		path: "@/components/optics/drawer.jsx",
+		code: componentCode,
+	},
+];
 
 const code = [
 	{
@@ -53,9 +40,11 @@ const code = [
 	DrawerTrigger,
 } from "@/components/optics/drawer";
 import { Button } from "@/components/optics/button";
+import { Input } from "@/components/optics/input";
+import { Label } from "@/components/optics/label";
 
 <Drawer>
-	<DrawerTrigger asChild>
+	<DrawerTrigger>
 		<Button variant="raised">Open Drawer</Button>
 	</DrawerTrigger>
 	<DrawerContent>
@@ -73,7 +62,7 @@ import { Button } from "@/components/optics/button";
 		</div>
 		<DrawerFooter>
 			<Button variant="raised">Submit</Button>
-			<DrawerClose asChild>
+			<DrawerClose>
 				<Button variant="raised">Cancel</Button>
 			</DrawerClose>
 		</DrawerFooter>
@@ -82,287 +71,53 @@ import { Button } from "@/components/optics/button";
 	},
 ];
 
-const installDeps = [];
-
-const componentFiles = [
-	{
-		path: "@/components/optics/drawer.jsx",
-		code: componentCode,
-	},
-];
-
-export default function Page() {
-	const [open, setOpen] = React.useState(false);
-	const {
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-	} = useCookiePreferences("drawer", installDeps);
+function DrawerDemo() {
+	const [open, setOpen] = useState(false);
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<div className="w-full flex items-center justify-between">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Drawer
-					</h1>
-					<Button variant="link" size="sm" asChild>
-						<Link
-							href="https://ui.shadcn.com/docs/components/drawer"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							shadcn/ui
-							<ArrowUpRight className="-ml-1" />
-						</Link>
-					</Button>
+		<Drawer open={open} onOpenChange={setOpen}>
+			<DrawerTrigger render={<Button variant="raised">Open Drawer</Button>} />
+			<DrawerContent>
+				<DrawerHeader>
+					<DrawerTitle>Are you absolutely sure?</DrawerTitle>
+					<DrawerDescription>This action cannot be undone.</DrawerDescription>
+				</DrawerHeader>
+				<div className="p-4 pb-0">
+					<div className="space-y-4">
+						<div className="grid gap-2">
+							<Label htmlFor="email">Email</Label>
+							<Input id="email" placeholder="name@example.com" />
+						</div>
+					</div>
 				</div>
-
-				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A drawer component built on top of Vaul.
-				</p>
-			</div>
-
-			<Separator decoration />
-
-			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
-				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex items-center justify-center flex-wrap gap-4">
-						<Drawer open={open} onOpenChange={setOpen}>
-							<DrawerTrigger asChild>
-								<Button variant="raised">Open Drawer</Button>
-							</DrawerTrigger>
-							<DrawerContent>
-								<DrawerHeader>
-									<DrawerTitle>Are you absolutely sure?</DrawerTitle>
-									<DrawerDescription>
-										This action cannot be undone.
-									</DrawerDescription>
-								</DrawerHeader>
-								<div className="p-4 pb-0">
-									<div className="space-y-4">
-										<div className="grid gap-2">
-											<Label htmlFor="email">Email</Label>
-											<Input id="email" placeholder="name@example.com" />
-										</div>
-									</div>
-								</div>
-								<DrawerFooter>
-									<Button variant="raised">Submit</Button>
-									<DrawerClose asChild>
-										<Button variant="raised">Cancel</Button>
-									</DrawerClose>
-								</DrawerFooter>
-							</DrawerContent>
-						</Drawer>
-					</CardContent>
-
-					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
-						<Accordion type={"single"} collapsible className="w-full">
-							<AccordionItem value="codeblock" className="rounded-b-xl">
-								<AccordionTrigger
-									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-									showArrow
-								>
-									Show Code
-								</AccordionTrigger>
-								<AccordionContent
-									className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-									keepRendered
-								>
-									<CodeBlock
-										data={code}
-										defaultValue={code[0].filename}
-										className="border-none rounded-none rounded-b-xl shadow-none group"
-									>
-										<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-											<CodeBlockCopyButton
-												onCopy={() => console.log("Copied code to clipboard")}
-												onError={() =>
-													console.error("Failed to copy code to clipboard")
-												}
-											/>
-										</CodeBlockHeader>
-										<CodeBlockBody>
-											{(item) => (
-												<CodeBlockItem
-													key={item.language}
-													value={item.filename}
-												>
-													<CodeBlockContent
-														language={item.language}
-														className="bg-sidebar"
-													>
-														{item.code}
-													</CodeBlockContent>
-												</CodeBlockItem>
-											)}
-										</CodeBlockBody>
-									</CodeBlock>
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
-					</CardFooter>
-				</Card>
-			</div>
-
-			<InstallationGuide
-				value={value}
-				setValue={setValue}
-				componentName="drawer"
-				installDeps={installDeps}
-				manualFiles={componentFiles}
-				installationTab={installationTab}
-				handleTabChange={handleTabChange}
-			/>
-
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Props
-				</h2>
-				<PropsTable
-					data={[
-						{
-							component: "<Drawer />",
-							props: [
-								{
-									name: "open",
-									type: "boolean",
-									description: "The controlled open state of the drawer. Use with onOpenChange.",
-								},
-								{
-									name: "defaultOpen",
-									type: "boolean",
-									description: "The uncontrolled default open state of the drawer.",
-								},
-								{
-									name: "onOpenChange",
-									type: "(open: boolean) => void",
-									description: "Callback fired when the open state changes.",
-								},
-								{
-									name: "direction",
-									type: `"top" | "bottom" | "left" | "right"`,
-									description: "The direction from which the drawer slides in.",
-								},
-								{
-									name: "dismissible",
-									type: "boolean (default: true)",
-									description: "When true, the drawer can be dismissed by clicking outside or pressing Escape. Defaults to true.",
-								},
-								{
-									name: "snapPoints",
-									type: "number[]",
-									description: "Array of snap points for the drawer (0-100 representing percentage of viewport).",
-								},
-								{
-									name: "activeSnapPoint",
-									type: "number",
-									description: "The controlled active snap point. Use with setActiveSnapPoint.",
-								},
-								{
-									name: "setActiveSnapPoint",
-									type: "(snapPoint: number) => void",
-									description: "Callback fired when the active snap point changes.",
-								},
-							],
-						},
-						{
-							component: "<DrawerTrigger />",
-							props: [
-								{
-									name: "asChild",
-									type: "boolean",
-									description: "When true, the trigger will render as its child element instead of a button.",
-								},
-							],
-						},
-						{
-							component: "<DrawerContent />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the content.",
-								},
-								{
-									name: "onEscapeKeyDown",
-									type: "(event: KeyboardEvent) => void",
-									description: "Callback fired when the Escape key is pressed.",
-								},
-								{
-									name: "onPointerDownOutside",
-									type: "(event: PointerEvent) => void",
-									description: "Callback fired when a pointer event occurs outside the drawer.",
-								},
-							],
-						},
-						{
-							component: "<DrawerHeader />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the header.",
-								},
-							],
-						},
-						{
-							component: "<DrawerFooter />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the footer.",
-								},
-							],
-						},
-						{
-							component: "<DrawerTitle />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the title.",
-								},
-							],
-						},
-						{
-							component: "<DrawerDescription />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the description.",
-								},
-							],
-						},
-						{
-							component: "<DrawerOverlay />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the overlay.",
-								},
-							],
-						},
-						{
-							component: "<DrawerClose />",
-							props: [
-								{
-									name: "asChild",
-									type: "boolean",
-									description: "When true, the close button will render as its child element instead of a button.",
-								},
-							],
-						},
-					]}
-				/>
-			</div>
-
-			<ComponentNavigation />
-		</main>
+				<DrawerFooter>
+					<Button>Submit</Button>
+					<DrawerClose render={<Button variant="raised">Cancel</Button>} />
+				</DrawerFooter>
+			</DrawerContent>
+		</Drawer>
 	);
+}
+
+const componentConfig = {
+	header: {
+		title: "Drawer",
+		description: "A drawer component built on top of Vaul.",
+		href: "https://ui.shadcn.com/docs/components/drawer",
+		hrefText: "shadcn/ui",
+	},
+	content: {
+		children: <DrawerDemo />,
+		code: code,
+	},
+	installation: {
+		componentName: "drawer",
+		dependencies: "",
+		manualFiles: componentFiles,
+	},
+	props: generatedProps,
+};
+
+export default function Page() {
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

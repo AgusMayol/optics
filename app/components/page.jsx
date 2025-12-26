@@ -36,12 +36,18 @@ export default function Page() {
 							key={component.href}
 							className="flex items-center justify-between gap-2 py-1"
 						>
-							<Button variant="ghost" size="sm" asChild className="group">
-								<Link href={component.href}>
-									{component.name}
-									<ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-								</Link>
-							</Button>
+							<Button
+								variant="ghost"
+								size="sm"
+								className="group"
+								nativeButton={false}
+								render={
+									<Link href={component.href}>
+										{component.name}
+										<ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+									</Link>
+								}
+							/>
 						</div>
 					))}
 				</div>

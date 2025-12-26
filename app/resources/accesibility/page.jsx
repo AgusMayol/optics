@@ -660,24 +660,29 @@ export default function Page() {
 				{/* 1. Semantic HTML & Structure */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										1
-									</Badge>
-									Semantic HTML & Structure
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							nativeButton={false}
+							render={
+								<Link
+									href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											1
+										</Badge>
+										Semantic HTML & Structure
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use semantic HTML elements to provide meaning and structure. This
@@ -731,24 +736,28 @@ export default function Page() {
 				{/* 2. Skip Links */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										2
-									</Badge>
-									Skip Links
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											2
+										</Badge>
+										Skip Links
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Skip links allow keyboard users to bypass repetitive content and
@@ -803,24 +812,28 @@ export default function Page() {
 				{/* 3. Accessible Buttons */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/ARIA/apg/patterns/button/"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										3
-									</Badge>
-									Accessible Buttons
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/ARIA/apg/patterns/button/"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											3
+										</Badge>
+										Accessible Buttons
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Buttons must be keyboard accessible, have proper labels, and visible
@@ -874,24 +887,28 @@ export default function Page() {
 				{/* 4. Accessible Forms */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										4
-									</Badge>
-									Accessible Forms
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											4
+										</Badge>
+										Accessible Forms
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Forms must have proper labels, error messages, and validation states
@@ -945,24 +962,28 @@ export default function Page() {
 				{/* 5. Accessible Images */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										5
-									</Badge>
-									Accessible Images
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											5
+										</Badge>
+										Accessible Images
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						All images must have appropriate alt text. Use descriptive text for
@@ -1017,24 +1038,28 @@ export default function Page() {
 				{/* 6. ARIA Live Regions */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										6
-									</Badge>
-									ARIA Live Regions
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											6
+										</Badge>
+										ARIA Live Regions
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use live regions to announce dynamic content changes to screen
@@ -1088,24 +1113,28 @@ export default function Page() {
 				{/* 7. Keyboard Navigation */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										7
-									</Badge>
-									Keyboard Navigation
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											7
+										</Badge>
+										Keyboard Navigation
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						All functionality must be accessible via keyboard. Implement proper
@@ -1160,24 +1189,28 @@ export default function Page() {
 				{/* 8. Focus Management */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										8
-									</Badge>
-									Focus Management
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											8
+										</Badge>
+										Focus Management
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Manage focus properly when opening/closing modals, dialogs, and
@@ -1232,24 +1265,28 @@ export default function Page() {
 				{/* 9. Color Contrast */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										9
-									</Badge>
-									Color Contrast
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											9
+										</Badge>
+										Color Contrast
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Ensure sufficient color contrast between text and background. WCAG
@@ -1303,24 +1340,28 @@ export default function Page() {
 				{/* 10. Responsive Accessibility */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										10
-									</Badge>
-									Responsive Accessibility
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											10
+										</Badge>
+										Responsive Accessibility
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Ensure your application works on all screen sizes and orientations.
@@ -1374,24 +1415,28 @@ export default function Page() {
 				{/* 11. Data Tables */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										11
-									</Badge>
-									Accessible Data Tables
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											11
+										</Badge>
+										Accessible Data Tables
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use proper table markup with{" "}
@@ -1460,24 +1505,28 @@ export default function Page() {
 				{/* 12. Motion Preferences */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										12
-									</Badge>
-									Motion Preferences
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											12
+										</Badge>
+										Motion Preferences
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Respect user motion preferences using{" "}
@@ -1535,24 +1584,28 @@ export default function Page() {
 				{/* 13. Next.js Configuration */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/building-your-application/configuring"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										13
-									</Badge>
-									Next.js Configuration
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/building-your-application/configuring"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											13
+										</Badge>
+										Next.js Configuration
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure Next.js for better accessibility with React Strict Mode,
@@ -1675,49 +1728,61 @@ export default function Page() {
 				</div>
 
 				<div className="w-full flex flex-wrap items-center gap-8">
-					<Button variant="link" asChild>
-						<Link
-							href="https://www.w3.org/WAI/WCAG22/quickref/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							WCAG 2.2 Quick Reference
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						variant="link"
+						render={
+							<Link
+								href="https://www.w3.org/WAI/WCAG22/quickref/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								WCAG 2.2 Quick Reference
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://www.w3.org/WAI/ARIA/apg/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							ARIA Authoring Practices
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						variant="link"
+						render={
+							<Link
+								href="https://www.w3.org/WAI/ARIA/apg/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								ARIA Authoring Practices
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://webaim.org/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							WebAIM Resources
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						variant="link"
+						render={
+							<Link
+								href="https://webaim.org/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								WebAIM Resources
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://nextjs.org/docs/architecture/accessibility"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Next.js Accessibility
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						variant="link"
+						render={
+							<Link
+								href="https://nextjs.org/docs/architecture/accessibility"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Next.js Accessibility
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 				</div>
 			</div>
 		</main>

@@ -30,6 +30,15 @@ const nextConfig: NextConfig = {
 					}
 				: false,
 	},
+
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "github.com",
+			},
+		],
+	},
 };
 
 const withVercelToolbar = createWithVercelToolbar();

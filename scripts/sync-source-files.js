@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Script para sincronizar archivos .jsx, .ts, .js con .txt automáticamente
- * Corrige las importaciones según registry.json
- * Ejecuta: bun scripts/sync-source-files.js
+ * Script to sync .jsx, .ts, .js files to .txt automatically
+ * Fixes imports based on registry.json
+ * Run: bun scripts/sync-source-files.js
  */
 
 import {
@@ -11,6 +11,7 @@ import {
 	existsSync,
 	readdirSync,
 	statSync,
+	mkdirSync,
 } from "fs";
 import { join, dirname, relative } from "path";
 import { fileURLToPath } from "url";
@@ -18,17 +19,18 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const registryPath = join(__dirname, "..", "registry", "optics");
+const distPath = join(registryPath, "dist");
 const registryJsonPath = join(__dirname, "..", "registry.json");
 
-// Extensiones de archivos a procesar
+// File extensions to process
 const EXTENSIONS = [".jsx", ".js", ".mdc"];
 
-// Cargar registry.json
+// Load registry.json
 const registry = JSON.parse(readFileSync(registryJsonPath, "utf-8"));
 
 /**
- * Crea un mapa de rutas de origen a destino basado en registry.json
- * Retorna: { "registry/optics/...": "components/optics/..." }
+ * Creates a map of source-to-target paths based on registry.json
+ * Returns: { "registry/optics/...": "components/optics/..." }
  */
 function createPathMap() {
 	const pathMap = new Map();
@@ -60,7 +62,7 @@ function createPathMap() {
 }
 
 /**
- * Convierte una ruta de destino a una ruta de importación con @/
+ * Converts a target path to an import path with @/
  */
 function targetToImportPath(targetPath) {
 	// Remover extensión
@@ -70,34 +72,34 @@ function targetToImportPath(targetPath) {
 }
 
 /**
- * Corrige las importaciones en el contenido del archivo
+ * Fixes imports in the file content
  */
 function fixImports(content, sourceFilePath) {
 	const { pathMap, nameToPathMap } = createPathMap();
 
-	// Patrón para encontrar imports de @/registry/optics/...
+	// Pattern to find imports from @/registry/optics/...
 	const importPattern =
 		/@\/registry\/optics\/([a-zA-Z0-9\-_\/]+)(?:\.(jsx|js|ts|tsx))?/g;
 
 	return content.replace(importPattern, (match, importPath, ext) => {
-		// Remover extensión si existe en el path
+		// Remove extension if present in the path
 		const pathWithoutExt = importPath.replace(/\.(jsx|js|ts|tsx)$/, "");
 
-		// Buscar ruta completa en el mapa primero
+		// Try full registry path first
 		const fullRegistryPath = `registry/optics/${importPath}`;
 		if (pathMap.has(fullRegistryPath)) {
 			const targetPath = pathMap.get(fullRegistryPath);
 			return targetToImportPath(targetPath);
 		}
 
-		// Buscar en el mapa de nombres (para componentes simples como "accordion-primitive")
+		// Fallback to name map (for simple components like "accordion-primitive")
 		if (nameToPathMap.has(pathWithoutExt)) {
 			const targetPath = nameToPathMap.get(pathWithoutExt);
 			return targetToImportPath(targetPath);
 		}
 
-		// Si no se encuentra mapeo directo, construir la ruta de destino basándose en la estructura
-		// Por ejemplo: registry/optics/lib/utils -> lib/utils
+		// If no direct mapping, build destination path based on structure
+		// Example: registry/optics/lib/utils -> lib/utils
 		if (pathWithoutExt.startsWith("lib/")) {
 			return `@/${pathWithoutExt}`;
 		}
@@ -108,8 +110,8 @@ function fixImports(content, sourceFilePath) {
 			return `@/components/optics/${pathWithoutExt}`;
 		}
 
-		// Para componentes en la raíz de optics, cambiar a components/optics
-		// Por ejemplo: registry/optics/accordion -> components/optics/accordion
+		// For components at the optics root, point to components/optics
+		// Example: registry/optics/accordion -> components/optics/accordion
 		return `@/components/optics/${pathWithoutExt}`;
 	});
 }
@@ -123,12 +125,12 @@ function getAllSourceFiles(dir) {
 		const stat = statSync(fullPath);
 
 		if (stat.isDirectory()) {
-			// Incluir todos los directorios excepto los que empiezan con punto
+			// Include all directories except those starting with a dot
 			if (!item.startsWith(".")) {
 				files.push(...getAllSourceFiles(fullPath));
 			}
 		} else {
-			// Incluir archivos .jsx, .ts, .js, .mdc excepto .source.jsx y .txt
+			// Include .jsx, .ts, .js, .mdc except .source.jsx and .txt
 			const ext = EXTENSIONS.find((ext) => item.endsWith(ext));
 			if (ext && !item.endsWith(".source.jsx") && !item.endsWith(".txt")) {
 				files.push(fullPath);
@@ -141,28 +143,38 @@ function getAllSourceFiles(dir) {
 
 const sourceFiles = getAllSourceFiles(registryPath);
 
-console.log(`Encontrados ${sourceFiles.length} archivos fuente`);
+console.log(`[sync] Found ${sourceFiles.length} source file(s)`);
 
 let syncedCount = 0;
 
 for (const sourceFile of sourceFiles) {
-	// Generar el nombre del archivo .txt manteniendo la extensión original
-	const txtFile = `${sourceFile}.txt`;
+	// Get relative path from registry/optics
+	const relativePath = relative(registryPath, sourceFile);
+	const relativeDir = dirname(relativePath);
+
+	// Create dist directory preserving structure
+	const distDir = join(distPath, relativeDir);
+	if (!existsSync(distDir)) {
+		mkdirSync(distDir, { recursive: true });
+	}
+
+	// Generate .txt file name in dist preserving the original extension
+	const txtFile = join(distDir, `${relativePath.split("/").pop()}.txt`);
 	const originalContent = readFileSync(sourceFile, "utf-8");
 
-	// Corregir importaciones
+	// Fix imports
 	const fixedContent = fixImports(originalContent, sourceFile);
 
-	// Solo crear/actualizar si no existe o si el contenido es diferente
+	// Create/update only if missing or content differs
 	if (!existsSync(txtFile) || readFileSync(txtFile, "utf-8") !== fixedContent) {
 		writeFileSync(txtFile, fixedContent, "utf-8");
-		const relativePath = sourceFile.replace(registryPath + "/", "");
-		const relativeTxtPath = txtFile.replace(registryPath + "/", "");
-		console.log(`✓ Sincronizado: ${relativePath} -> ${relativeTxtPath}`);
+		const relativeSourcePath = relativePath;
+		const relativeTxtPath = relative(distPath, txtFile);
+		console.log(
+			`[sync] Updated ${relativeSourcePath} -> dist/${relativeTxtPath}`,
+		);
 		syncedCount++;
 	}
 }
 
-console.log(
-	`✅ Sincronización completada (${syncedCount} archivos actualizados)`,
-);
+console.log(`[sync] Completed - ${syncedCount} file(s) updated`);

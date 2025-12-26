@@ -416,24 +416,29 @@ export default function Page() {
 				{/* 1. Number Animations with NumberFlow */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://number-flow.barvian.me/"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										1
-									</Badge>
-									Number Animations
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://number-flow.barvian.me/"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											1
+										</Badge>
+										Number Animations
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Smooth number transitions with NumberFlow for counters, statistics,
@@ -515,24 +520,29 @@ export default function Page() {
 				{/* 2. Icon Animations */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://motion.dev/"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										2
-									</Badge>
-									Icon Animations with Motion
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://motion.dev/"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											2
+										</Badge>
+										Icon Animations with Motion
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Delightful icon animations using Motion (Framer Motion) for scale,
@@ -598,24 +608,29 @@ export default function Page() {
 				{/* 3. Layout Animations */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://motion.dev/docs/react-layout-animations"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										3
-									</Badge>
-									Layout Animations
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://motion.dev/docs/react-layout-animations"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											3
+										</Badge>
+										Layout Animations
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Animate layout changes automatically when items are added, removed,
@@ -669,24 +684,29 @@ export default function Page() {
 				{/* 4. CSS Animations */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										4
-									</Badge>
-									Pure CSS Animations
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											4
+										</Badge>
+										Pure CSS Animations
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Lightweight CSS animations for hover effects, loading states, and
@@ -872,49 +892,65 @@ export default function Page() {
 				</div>
 
 				<div className="w-full flex flex-wrap items-center gap-8">
-					<Button variant="link" asChild>
-						<Link
-							href="https://motion.dev/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Motion (Framer Motion)
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://motion.dev/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Motion (Framer Motion)
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://number-flow.barvian.me/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							NumberFlow
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://number-flow.barvian.me/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								NumberFlow
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://web.dev/animations/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Web.dev Animation Guide
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://web.dev/animations/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Web.dev Animation Guide
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://animations.dev/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Animations.dev
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://animations.dev/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Animations.dev
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 				</div>
 			</div>
 		</main>

@@ -1,40 +1,47 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card"
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/lib/utils"
 
-function HoverCard({ ...props }) {
-	return <HoverCardPrimitive.Root data-slot="hover-card" {...props} />;
+function HoverCard({
+  ...props
+} = {}) {
+  return <PreviewCardPrimitive.Root data-slot="hover-card" {...props} />;
 }
 
-function HoverCardTrigger({ ...props }) {
-	return (
-		<HoverCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />
-	);
+function HoverCardTrigger({
+  ...props
+} = {}) {
+  return (<PreviewCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />);
 }
 
 function HoverCardContent({
-	className,
-	align = "center",
-	sideOffset = 4,
-	...props
+  className = "",
+  side = "bottom",
+  sideOffset = 4,
+  align = "center",
+  alignOffset = 4,
+  ...props
 }) {
-	return (
-		<HoverCardPrimitive.Portal data-slot="hover-card-portal">
-			<HoverCardPrimitive.Content
-				data-slot="hover-card-content"
-				align={align}
-				sideOffset={sideOffset}
-				className={cn(
-					"bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-xl border p-4 shadow-md outline-hidden",
-					className,
-				)}
-				{...props}
-			/>
-		</HoverCardPrimitive.Portal>
-	);
+  return (
+    <PreviewCardPrimitive.Portal data-slot="hover-card-portal">
+      <PreviewCardPrimitive.Positioner
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset}
+        className="isolate z-50">
+        <PreviewCardPrimitive.Popup
+          data-slot="hover-card-content"
+          className={cn(
+            "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/10 bg-popover text-popover-foreground w-72 rounded-lg p-2.5 text-xs/relaxed shadow-md ring-1 duration-100 z-50 origin-(--transform-origin) outline-hidden",
+            className
+          )}
+          {...props} />
+      </PreviewCardPrimitive.Positioner>
+    </PreviewCardPrimitive.Portal>
+  );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent };
+export { HoverCard, HoverCardTrigger, HoverCardContent }

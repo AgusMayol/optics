@@ -1,38 +1,78 @@
 "use client";
 
-import * as React from "react";
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { Radio as RadioPrimitive } from "@base-ui/react/radio";
+import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
+import { buttonVariants } from "@/registry/optics/button";
+import { cn } from "@/lib/utils";
 import { CircleIcon } from "lucide-react";
+import * as React from "react";
 
-import { cn } from '@/registry/optics/lib/utils';
-
-function RadioGroup({ className, ...props }) {
+function RadioGroup({ className = "", ...props }) {
 	return (
-		<RadioGroupPrimitive.Root
+		<RadioGroupPrimitive
 			data-slot="radio-group"
-			className={cn("grid gap-3", className)}
+			className={cn("grid gap-3 w-full", className)}
 			{...props}
 		/>
 	);
 }
 
-function RadioGroupItem({ className, ...props }) {
+function RadioGroupItem({ className = "", ...props }) {
+	const [isChecked, setIsChecked] = React.useState(false);
+	const ref = React.useRef(null);
+
+	// Detectar cambios en el estado del radio usando MutationObserver
+	React.useEffect(() => {
+		const element = ref.current;
+		if (!element) return;
+
+		// Función para verificar el estado
+		const checkState = () => {
+			const checked =
+				element.hasAttribute("data-checked") ||
+				element.getAttribute("aria-checked") === "true";
+			setIsChecked(checked);
+		};
+
+		// Verificar estado inicial
+		checkState();
+
+		// Observar cambios en atributos
+		const observer = new MutationObserver(checkState);
+		observer.observe(element, {
+			attributes: true,
+			attributeFilter: ["data-checked", "aria-checked"],
+		});
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
+
 	return (
-		<RadioGroupPrimitive.Item
+		<RadioPrimitive.Root
+			ref={ref}
 			data-slot="radio-group-item"
 			className={cn(
-				"border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full squircle-none border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+				"border-input text-primary dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 data-checked:bg-primary data-checked:border-primary flex size-4 rounded-full squircle-none transition-none focus-visible:ring-[2px] aria-invalid:ring-[2px] group/radio-group-item peer relative aspect-square shrink-0 border outline-none after:absolute after:-inset-x-3 after:-inset-y-2 disabled:cursor-not-allowed disabled:opacity-50",
+				buttonVariants({
+					variant: isChecked ? "default" : "outline",
+					size: "icon-xs",
+					className: "rounded-full squircle-none",
+				}),
 				className,
 			)}
 			{...props}
 		>
-			<RadioGroupPrimitive.Indicator
+			<RadioPrimitive.Indicator
 				data-slot="radio-group-indicator"
-				className="relative flex items-center justify-center"
+				className={cn(
+					"group-aria-invalid/radio-group-item:text-destructive flex size-4 p-4 items-center justify-center text-white",
+				)}
 			>
-				<CircleIcon className="fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
-			</RadioGroupPrimitive.Indicator>
-		</RadioGroupPrimitive.Item>
+				<CircleIcon className="absolute top-1/2 left-1/2 size-2.5! -translate-x-1/2 -translate-y-1/2 fill-current" />
+			</RadioPrimitive.Indicator>
+		</RadioPrimitive.Root>
 	);
 }
 

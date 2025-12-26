@@ -8,13 +8,13 @@ import {
 	AccordionTrigger as AccordionTriggerPrimitive,
 	AccordionContent as AccordionContentPrimitive,
 } from "@/registry/optics/accordion-primitive";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
-function Accordion(props) {
+function Accordion(props = {}) {
 	return <AccordionPrimitive {...props} />;
 }
 
-function AccordionItem({ className, ...props }) {
+function AccordionItem({ className = "", ...props }) {
 	return (
 		<AccordionItemPrimitive
 			className={cn("border-b last:border-b-0", className)}
@@ -23,7 +23,12 @@ function AccordionItem({ className, ...props }) {
 	);
 }
 
-function AccordionTrigger({ className, children, showArrow = true, ...props }) {
+function AccordionTrigger({
+	className = "",
+	children = null,
+	showArrow = true,
+	...props
+}) {
 	return (
 		<AccordionHeaderPrimitive className="flex">
 			<AccordionTriggerPrimitive
@@ -42,7 +47,7 @@ function AccordionTrigger({ className, children, showArrow = true, ...props }) {
 	);
 }
 
-function AccordionContent({ className, children, ...props }) {
+function AccordionContent({ className = "", children = null, ...props }) {
 	return (
 		<AccordionContentPrimitive {...props}>
 			<div className={cn("text-sm pt-0 pb-4", className)}>{children}</div>

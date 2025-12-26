@@ -6,10 +6,9 @@ import {
 	Tooltip,
 	TooltipTrigger,
 	TooltipContent,
-	TooltipProvider,
 } from "@/registry/optics/tooltip";
 import { Button } from "@/registry/optics/button";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 // Constantes de tiempo calculadas una vez para evitar recálculos
 const ONE_SECOND = ms("1s");
@@ -18,12 +17,11 @@ const ONE_HOUR = ms("1h");
 const ONE_DAY = ms("1d");
 
 function Timezone({
-	timestamp,
-	asChild = false,
-	children,
-	className,
-	side,
-	sideOffset,
+	timestamp = Date.now(),
+	render = null,
+	className = "",
+	side = "top",
+	sideOffset = 4,
 	...props
 }) {
 	const [userTimezone, setUserTimezone] = React.useState(null);
@@ -33,6 +31,8 @@ function Timezone({
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [copiedButton, setCopiedButton] = React.useState(null);
 	const [isExiting, setIsExiting] = React.useState(false);
+	const exitTimeoutRef = React.useRef(null);
+	const resetTimeoutRef = React.useRef(null);
 
 	// Memoizar los formatters para evitar recrearlos en cada render
 	const utcFormatter = React.useMemo(
@@ -182,129 +182,148 @@ function Timezone({
 		};
 	}, [isOpen, updateTimeValues]);
 
-	// Función para copiar al portapapeles
-	const copyToClipboard = React.useCallback(async (text, buttonId) => {
-		if (
-			!text ||
-			text === "—" ||
-			text === "Invalid date" ||
-			text === "Loading..."
-		) {
-			return;
+	const clearCopyTimers = React.useCallback(() => {
+		if (exitTimeoutRef.current) {
+			clearTimeout(exitTimeoutRef.current);
+			exitTimeoutRef.current = null;
 		}
-
-		try {
-			await navigator.clipboard.writeText(text);
-			setIsExiting(false);
-			setCopiedButton(buttonId);
-			// Iniciar animación de salida después de 1.5 segundos
-			setTimeout(() => {
-				setIsExiting(true);
-				// Resetear el estado después de la animación de salida (300ms)
-				setTimeout(() => {
-					setCopiedButton(null);
-					setIsExiting(false);
-				}, 300);
-			}, 1500);
-		} catch (err) {
-			console.error("Error al copiar al portapapeles:", err);
+		if (resetTimeoutRef.current) {
+			clearTimeout(resetTimeoutRef.current);
+			resetTimeoutRef.current = null;
 		}
 	}, []);
 
+	// Función para copiar al portapapeles
+	const copyToClipboard = React.useCallback(
+		async (text, buttonId) => {
+			if (
+				!text ||
+				text === "—" ||
+				text === "Invalid date" ||
+				text === "Loading..."
+			) {
+				return;
+			}
+
+			try {
+				await navigator.clipboard.writeText(text);
+				clearCopyTimers();
+				setIsExiting(false);
+				setCopiedButton(buttonId);
+				// Iniciar animación de salida después de 1.5 segundos
+				exitTimeoutRef.current = setTimeout(() => {
+					setIsExiting(true);
+					// Resetear el estado después de la animación de salida (300ms)
+					resetTimeoutRef.current = setTimeout(() => {
+						setCopiedButton(null);
+						setIsExiting(false);
+					}, 300);
+				}, 1500);
+			} catch (err) {
+				console.error("Error al copiar al portapapeles:", err);
+			}
+		},
+		[clearCopyTimers],
+	);
+
+	React.useEffect(() => {
+		return () => {
+			clearCopyTimers();
+		};
+	}, [clearCopyTimers]);
+
 	return (
-		<TooltipProvider>
-			<Tooltip open={isOpen} onOpenChange={setIsOpen}>
-				<TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
-				<TooltipContent
-					className={cn(className, "p-1")}
-					side={side}
-					sideOffset={sideOffset}
-					{...props}
-				>
-					<div className="w-full flex flex-col gap-0.5 py-0 ">
-						<Button
-							variant="ghost"
-							size="sm"
-							className="font-normal"
-							animation="colors"
-							onClick={() => copyToClipboard(formattedUserTime, "user")}
-						>
-							<div className="w-full flex text-center justify-start gap-2 text-xs">
-								<div className="text-start text-muted-foreground w-40">
-									{userTimezone || "Loading..."}
-								</div>
-								<p
-									className={cn(
-										"tabular-nums font-mono transition-all duration-300",
-										copiedButton === "user"
-											? isExiting
-												? "opacity-0 scale-95"
-												: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
-											: "opacity-100 scale-100",
-									)}
-								>
-									{copiedButton === "user"
-										? "Copied!"
-										: formattedUserTime || "—"}
-								</p>
+		<Tooltip open={isOpen} onOpenChange={setIsOpen}>
+			<TooltipTrigger render={render} />
+			<TooltipContent
+				className={cn(
+					"w-full max-w-none min-w-sm h-full hover:bg-background",
+					className,
+					"p-1",
+				)}
+				side={side}
+				sideOffset={sideOffset}
+				{...props}
+			>
+				<div className="w-full flex flex-col gap-0.5 py-0 ">
+					<Button
+						variant="ghost"
+						size="sm"
+						className="font-normal"
+						animation="colors"
+						onClick={() => copyToClipboard(formattedUserTime, "user")}
+					>
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">
+								{userTimezone || "Loading..."}
 							</div>
-						</Button>
+							<p
+								className={cn(
+									"tabular-nums font-mono transition-all duration-300 text-foreground",
+									copiedButton === "user"
+										? isExiting
+											? "opacity-0 scale-95"
+											: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
+										: "opacity-100 scale-100",
+								)}
+							>
+								{copiedButton === "user" ? "Copied!" : formattedUserTime || "—"}
+							</p>
+						</div>
+					</Button>
 
-						<Button
-							variant="ghost"
-							size="sm"
-							className="font-normal"
-							animation="colors"
-							onClick={() => copyToClipboard(formattedUtcTime, "utc")}
-						>
-							<div className="w-full flex text-center justify-start gap-2 text-xs">
-								<div className="text-start text-muted-foreground w-40">UTC</div>
-								<p
-									className={cn(
-										"tabular-nums font-mono transition-all duration-300",
-										copiedButton === "utc"
-											? isExiting
-												? "opacity-0 scale-95"
-												: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
-											: "opacity-100 scale-100",
-									)}
-								>
-									{copiedButton === "utc" ? "Copied!" : formattedUtcTime || "—"}
-								</p>
-							</div>
-						</Button>
+					<Button
+						variant="ghost"
+						size="sm"
+						className="font-normal"
+						animation="colors"
+						onClick={() => copyToClipboard(formattedUtcTime, "utc")}
+					>
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">UTC</div>
+							<p
+								className={cn(
+									"tabular-nums font-mono transition-all duration-300 text-foreground",
+									copiedButton === "utc"
+										? isExiting
+											? "opacity-0 scale-95"
+											: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
+										: "opacity-100 scale-100",
+								)}
+							>
+								{copiedButton === "utc" ? "Copied!" : formattedUtcTime || "—"}
+							</p>
+						</div>
+					</Button>
 
-						<Button
-							variant="ghost"
-							size="sm"
-							className="font-normal z-10"
-							animation="colors"
-							onClick={() => copyToClipboard(relativeTime, "relative")}
-						>
-							<div className="w-full flex text-center justify-start gap-2 text-xs">
-								<div className="text-start text-muted-foreground w-40">
-									Relative
-								</div>
-								<p
-									className={cn(
-										"tabular-nums font-mono transition-all duration-300",
-										copiedButton === "relative"
-											? isExiting
-												? "opacity-0 scale-95"
-												: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
-											: "opacity-100 scale-100",
-									)}
-								>
-									{copiedButton === "relative"
-										? "Copied!"
-										: relativeTime || "—"}
-								</p>
+					<Button
+						variant="ghost"
+						size="sm"
+						className="font-normal z-10"
+						animation="colors"
+						onClick={() => copyToClipboard(relativeTime, "relative")}
+					>
+						<div className="w-full flex text-center justify-start gap-2 text-xs">
+							<div className="text-start text-muted-foreground w-40">
+								Relative
 							</div>
-						</Button>
-					</div>
-				</TooltipContent>
-			</Tooltip>
-		</TooltipProvider>
+							<p
+								className={cn(
+									"tabular-nums font-mono transition-all duration-300 text-foreground",
+									copiedButton === "relative"
+										? isExiting
+											? "opacity-0 scale-95"
+											: "opacity-100 scale-100 animate-in fade-in-0 zoom-in-95"
+										: "opacity-100 scale-100",
+								)}
+							>
+								{copiedButton === "relative" ? "Copied!" : relativeTime || "—"}
+							</p>
+						</div>
+					</Button>
+				</div>
+			</TooltipContent>
+		</Tooltip>
 	);
 }
 

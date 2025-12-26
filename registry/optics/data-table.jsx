@@ -19,7 +19,7 @@ import {
 	TableRow,
 } from "@/registry/optics/table";
 
-function DataTable({ columns, data, ...props }) {
+function DataTable({ columns = [], data = [], ...props }) {
 	const [sorting, setSorting] = React.useState([]);
 	const [columnFilters, setColumnFilters] = React.useState([]);
 	const [columnVisibility, setColumnVisibility] = React.useState({});

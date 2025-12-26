@@ -1,35 +1,29 @@
 "use client";
 
-import * as React from "react";
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/lib/utils";
 
 function Separator({
-	className,
-	children,
+	className = "",
+	orientation = "horizontal",
 	decoration = false,
 	decorationLeft = false,
 	decorationRight = false,
 	decorationTop = false,
 	decorationBottom = false,
-	orientation = "horizontal",
-	decorative = true,
 	...props
 }) {
 	return (
-		<SeparatorPrimitive.Root
+		<SeparatorPrimitive
 			data-slot="separator"
-			decorative={decorative}
 			orientation={orientation}
 			className={cn(
-				"bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px relative",
+				"bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch relative",
 				className,
 			)}
 			{...props}
 		>
-			{children}
-
 			{(decoration || decorationLeft) && orientation === "horizontal" && (
 				<div className={cn("absolute -left-[1px] -top-[0px] z-10")}>
 					<div className="relative">
@@ -65,7 +59,7 @@ function Separator({
 					</div>
 				</div>
 			)}
-		</SeparatorPrimitive.Root>
+		</SeparatorPrimitive>
 	);
 }
 

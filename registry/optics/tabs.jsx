@@ -15,7 +15,7 @@ import { getStrictContext } from "@/registry/optics/lib/get-strict-context";
 const [TabsVariantProvider, useTabsVariant] =
 	getStrictContext("TabsVariantContext");
 
-function Tabs({ className, ...props }) {
+function Tabs({ className = "", ...props }) {
 	return (
 		<TabsPrimitive
 			className={cn("flex flex-col gap-2", className)}
@@ -24,7 +24,7 @@ function Tabs({ className, ...props }) {
 	);
 }
 
-function TabsList({ className, variant = "default", ...props }) {
+function TabsList({ className = "", variant = "default", ...props }) {
 	const highlightStyles = {
 		default:
 			"absolute z-0 inset-0 border border-transparent rounded-md bg-background dark:border-input dark:bg-input/30 shadow-sm",
@@ -54,7 +54,7 @@ function TabsList({ className, variant = "default", ...props }) {
 	);
 }
 
-function TabsTrigger({ className, ...props }) {
+function TabsTrigger({ className = "", ...props }) {
 	const { variant } = useTabsVariant();
 
 	const triggerStyles = {
@@ -76,11 +76,11 @@ function TabsTrigger({ className, ...props }) {
 	);
 }
 
-function TabsContents(props) {
+function TabsContents(props = {}) {
 	return <TabsContentsPrimitive {...props} />;
 }
 
-function TabsContent({ className, ...props }) {
+function TabsContent({ className = "", ...props }) {
 	return (
 		<TabsContentPrimitive
 			className={cn("flex-1 outline-none", className)}

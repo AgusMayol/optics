@@ -1,36 +1,22 @@
 "use client";
-import { InstallationGuide } from "@/components/installation-guide";
-import { ComponentNavigation } from "@/components/component-navigation";
-import { PropsTable } from "@/components/props-table";
-import { useCookiePreferences } from "@/lib/use-cookie-preferences";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/registry/optics/accordion";
-import { Button } from "@/registry/optics/button";
-import { Card, CardContent, CardFooter } from "@/registry/optics/card";
-import {
-	CodeBlock,
-	CodeBlockBody,
-	CodeBlockContent,
-	CodeBlockCopyButton,
-	CodeBlockHeader,
-	CodeBlockItem,
-} from "@/registry/optics/code-block";
-import { Separator } from "@/registry/optics/separator";
+import { ComponentConfig } from "../layout";
+import { useState } from "react";
 import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
-import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
-import Link from "next/link";
 import * as React from "react";
-
-import componentCode from "@/registry/optics/theme-switcher.jsx.txt";
 import {
 	ThemeAnimationType,
 	useModeAnimation,
 } from "react-theme-switch-animation";
+
+import componentCode from "@/registry/optics/dist/theme-switcher.jsx.txt";
+
+const componentFiles = [
+	{
+		path: "@/components/optics/theme-switcher.jsx",
+		code: componentCode,
+	},
+];
 
 const code = [
 	{
@@ -130,44 +116,39 @@ export function MyComponent() {
 	},
 ];
 
-const componentFiles = [
+const propsData = [
 	{
-		path: "@/components/optics/theme-switcher.jsx",
-		code: componentCode,
+		component: "<ThemeSwitcher />",
+		props: [
+			{
+				name: "className",
+				type: "string",
+				description: "Additional CSS classes to apply to the theme switcher.",
+			},
+			{
+				name: "value",
+				type: `"system" | "light" | "dark"`,
+				description: "Current theme value (controlled). Use with onChange.",
+			},
+			{
+				name: "onChange",
+				type: "(theme: string) => void",
+				description: "Callback function called when theme changes.",
+			},
+			{
+				name: "defaultValue",
+				type: `"system" | "light" | "dark" (default: "system")`,
+				description: "Default theme value (uncontrolled).",
+			},
+		],
 	},
 ];
 
-const installDeps = [
-	{
-		label: "pnpm",
-		code: "pnpm add @radix-ui/react-use-controllable-state motion lucide-react",
-	},
-	{
-		label: "npm",
-		code: "npm install @radix-ui/react-use-controllable-state motion lucide-react",
-	},
-	{
-		label: "yarn",
-		code: "yarn add @radix-ui/react-use-controllable-state motion lucide-react",
-	},
-	{
-		label: "bun",
-		code: "bun add @radix-ui/react-use-controllable-state motion lucide-react",
-	},
-];
-
-export default function Page() {
-	const [mounted, setMounted] = React.useState(false);
-	const [themeSwitch, setThemeSwitch] = React.useState("system");
+function ThemeSwitcherDemo() {
+	const [mounted, setMounted] = useState(false);
+	const [themeSwitch, setThemeSwitch] = useState("system");
 	const { theme, setTheme, resolvedTheme, systemTheme } = useTheme();
 	const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation();
-
-	const {
-		value,
-		setValue,
-		installationTab,
-		handleTabChange,
-	} = useCookiePreferences("theme-switcher", installDeps);
 
 	const checkTheme = () => {
 		let tema = resolvedTheme;
@@ -218,7 +199,6 @@ export default function Page() {
 		setTimeout(() => {
 			localStorage.setItem("theme2", newTheme);
 		}, 200);
-		//setTheme(newTheme);
 	};
 
 	React.useEffect(() => {
@@ -241,137 +221,41 @@ export default function Page() {
 	}, [systemTheme]);
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<div className="w-full flex items-center justify-between">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Theme Switcher
-					</h1>
-					<Button variant="link" size="sm" asChild>
-						<Link
-							href="https://21st.dev/community/components/ncdai/theme-switcher-1/default"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							21st.dev
-							<ArrowUpRight className="-ml-1" />
-						</Link>
-					</Button>
-				</div>
-
-				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A theme switcher component with smooth animations between light, dark,
-					and system modes.
-				</p>
-			</div>
-
-			<Separator decoration />
-
-			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
-				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-center justify-center gap-2">
-						<ThemeSwitcher
-							ref={ref}
-							defaultValue={themeSwitch}
-							onChange={handleSetTheme}
-							value={themeSwitch}
-						/>
-						<p className="text-sm text-muted-foreground">
-							Current:{" "}
-							<span className="font-medium text-foreground">{themeSwitch}</span>
-						</p>
-					</CardContent>
-
-					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
-						<Accordion type={"single"} collapsible className="w-full">
-							<AccordionItem value="codeblock" className="rounded-b-xl">
-								<AccordionTrigger
-									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-									showArrow
-								>
-									Show Code
-								</AccordionTrigger>
-								<AccordionContent
-									className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-									keepRendered
-								>
-									<CodeBlock
-										data={code}
-										defaultValue={code[0].filename}
-										className="border-none rounded-none rounded-b-xl shadow-none group"
-									>
-										<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-											<CodeBlockCopyButton />
-										</CodeBlockHeader>
-										<CodeBlockBody>
-											{(item) => (
-												<CodeBlockItem
-													key={item.language}
-													value={item.filename}
-												>
-													<CodeBlockContent
-														language={item.language}
-														className="bg-sidebar"
-													>
-														{item.code}
-													</CodeBlockContent>
-												</CodeBlockItem>
-											)}
-										</CodeBlockBody>
-									</CodeBlock>
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
-					</CardFooter>
-				</Card>
-			</div>
-
-			<InstallationGuide
-				value={value}
-				setValue={setValue}
-				componentName="theme-switcher"
-				installDeps={installDeps}
-				manualFiles={componentFiles}
-				installationTab={installationTab}
-				handleTabChange={handleTabChange}
+		<div className="flex flex-col items-center justify-center gap-2">
+			<ThemeSwitcher
+				ref={ref}
+				defaultValue={themeSwitch}
+				onChange={handleSetTheme}
+				value={themeSwitch}
 			/>
-
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Props
-				</h2>
-				<PropsTable
-					data={[
-						{
-							component: "<ThemeSwitcher />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description: "Additional CSS classes to apply to the theme switcher.",
-								},
-								{
-									name: "value",
-									type: `"system" | "light" | "dark"`,
-									description: "Current theme value (controlled). Use with onChange.",
-								},
-								{
-									name: "onChange",
-									type: "(theme: string) => void",
-									description: "Callback function called when theme changes.",
-								},
-								{
-									name: "defaultValue",
-									type: `"system" | "light" | "dark" (default: "system")`,
-									description: "Default theme value (uncontrolled).",
-								},
-							],
-						},
-					]}
-				/>
-			</div>
-
-			<ComponentNavigation />
-		</main>
+			<p className="text-sm text-muted-foreground">
+				Current:{" "}
+				<span className="font-medium text-foreground">{themeSwitch}</span>
+			</p>
+		</div>
 	);
+}
+
+const componentConfig = {
+	header: {
+		title: "Theme Switcher",
+		description:
+			"A theme switcher component with smooth animations between light, dark, and system modes.",
+		href: "https://21st.dev/community/components/ncdai/theme-switcher-1/default",
+		hrefText: "21st.dev",
+	},
+	content: {
+		children: <ThemeSwitcherDemo />,
+		code: code,
+	},
+	installation: {
+		componentName: "theme-switcher",
+		dependencies: "@radix-ui/react-use-controllable-state motion lucide-react",
+		manualFiles: componentFiles,
+	},
+	props: propsData,
+};
+
+export default function Page() {
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

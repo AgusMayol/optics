@@ -1,11 +1,8 @@
 "use client";
 import { useElementHeight } from "@/hooks/use-element-height";
+import { useSidebarWidth } from "./sidebar-width-provider";
 import { Sidebar } from "./sidebar";
-import { Header } from "./header";
-import { Button } from "@/registry/optics/button";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { Footer } from "./footer";
 
 export const links = [
 	{
@@ -152,6 +149,10 @@ export const links = [
 				href: "/components/carousel",
 			},
 			{
+				name: "Chart",
+				href: "/components/chart",
+			},
+			{
 				name: "Checkbox",
 				href: "/components/checkbox",
 			},
@@ -296,6 +297,10 @@ export const links = [
 				href: "/components/show-more",
 			},
 			{
+				name: "Sidebar",
+				href: "/components/sidebar",
+			},
+			{
 				name: "Skeleton",
 				href: "/components/skeleton",
 			},
@@ -371,53 +376,24 @@ export const links = [
 
 export function LayoutContent({ children }) {
 	const [contentRef, contentHeight] = useElementHeight();
+	const { sidebarWidth } = useSidebarWidth();
+	const computedSidebarWidth =
+		sidebarWidth > 0 ? `${sidebarWidth}px` : undefined;
 
 	return (
-		<div className="w-full h-full lg:max-w-7xl mx-auto grid grid-cols-14 min-h-svh lg:px-4 lg:py-8 items-start">
-			<Sidebar links={links} maxHeight={contentHeight} />
+		<div className="w-full h-full grid grid-cols-14 min-h-svh items-start col-start-2 row-start-2 col-span-full lg:col-span-1 bg-background">
+			<Sidebar
+				links={links}
+				maxHeight={contentHeight}
+				width={computedSidebarWidth}
+			/>
 			<div
 				ref={contentRef}
-				className="w-full col-span-full lg:col-span-11 lg:border lg:border-l-0 lg:rounded-l-none lg:rounded-3xl flex flex-col flex-1 lg:bg-sidebar"
+				className="w-full col-span-full lg:col-start-4 lg:col-span-11 flex flex-col flex-1 lg:bg-sidebar"
 			>
-				<Header links={links} />
 				{children}
+				<Footer />
 			</div>
-			<footer className="col-span-full border-t lg:border-t-0 w-full flex items-center justify-end text-end py-3 px-4 lg:px-2">
-				<p className="flex items-center gap-1.5 text-xs text-muted-foreground/80">
-					Made from
-					<Image src="/images/AR.png" alt="Argentina" width={16} height={16} />
-					by{" "}
-					<Button
-						variant="link"
-						className="text-xs text-muted-foreground hover:text-primary transition-colors"
-						asChild
-					>
-						<Link
-							href="https://agusmayol.com.ar"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							AgusMayol
-							<ArrowUpRight size={16} className="-ml-2" />
-						</Link>
-					</Button>
-					. The source code is available on{" "}
-					<Button
-						variant="link"
-						className="text-xs text-muted-foreground hover:text-primary transition-colors"
-						asChild
-					>
-						<Link
-							href="https://github.com/agusmayol/optics"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							GitHub
-							<ArrowUpRight size={16} className="-ml-2" />
-						</Link>
-					</Button>
-				</p>
-			</footer>
 		</div>
 	);
 }

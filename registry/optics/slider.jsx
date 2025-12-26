@@ -1,18 +1,16 @@
 "use client";
 
 import * as React from "react";
-import * as SliderPrimitive from "@radix-ui/react-slider";
-
-import { cn } from '@/registry/optics/lib/utils';
-import { otherThemes } from "@/registry/optics/button";
+import { Slider as SliderPrimitive } from "@base-ui/react/slider";
+import { buttonVariants } from "@/registry/optics/button";
+import { cn } from "@/lib/utils";
 
 function Slider({
-	className,
-	defaultValue,
-	value,
+	className = "",
+	defaultValue = undefined,
+	value = undefined,
 	min = 0,
 	max = 100,
-	variant,
 	...props
 }) {
 	const _values = React.useMemo(
@@ -27,40 +25,49 @@ function Slider({
 
 	return (
 		<SliderPrimitive.Root
+			className="w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-40"
 			data-slot="slider"
 			defaultValue={defaultValue}
 			value={value}
 			min={min}
 			max={max}
-			className={cn(
-				"relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
-				className,
-			)}
+			thumbAlignment="edge"
 			{...props}
 		>
-			<SliderPrimitive.Track
-				data-slot="slider-track"
+			<SliderPrimitive.Control
 				className={cn(
-					"bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
+					"relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:min-h-40",
+					className,
 				)}
 			>
-				<SliderPrimitive.Range
-					data-slot="slider-range"
+				<SliderPrimitive.Track
+					data-slot="slider-track"
 					className={cn(
-						"bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
+						"bg-muted relative grow select-none overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
 					)}
-				/>
-			</SliderPrimitive.Track>
-			{Array.from({ length: _values.length }, (_, index) => (
-				<SliderPrimitive.Thumb
-					data-slot="slider-thumb"
-					key={index}
-					className={cn(
-						"border-primary ring-ring/50 block size-4 shrink-0 squircle-none rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-2 focus-visible:ring-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-						otherThemes({ variant: variant }),
-					)}
-				/>
-			))}
+				>
+					<SliderPrimitive.Indicator
+						data-slot="slider-range"
+						className="bg-primary absolute select-none data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+					/>
+				</SliderPrimitive.Track>
+				{Array.from({ length: _values.length }, (_, index) => (
+					<SliderPrimitive.Thumb
+						data-slot="slider-thumb"
+						key={index}
+						className={cn(
+							"border-primary ring-ring/30 size-4 border bg-white shadow-sm hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden block shrink-0 select-none disabled:pointer-events-none disabled:opacity-50",
+							buttonVariants({
+								variant: "raised",
+								size: "icon-xs",
+								animation: "none",
+								className:
+									"rounded-full squircle-none transition-[color,background-color,border-color,box-shadow] duration-150 motion-reduce:transition-none",
+							}),
+						)}
+					/>
+				))}
+			</SliderPrimitive.Control>
 		</SliderPrimitive.Root>
 	);
 }

@@ -1,9 +1,13 @@
 "use client";
 
 import * as React from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { Slot } from "@radix-ui/react-slot";
-import { cn } from '@/registry/optics/lib/utils';
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
+import {
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+} from "@/registry/optics/popover";
+import { cn } from "@/registry/optics/lib/utils";
 import { Button } from "@/registry/optics/button";
 import { X } from "lucide-react";
 
@@ -17,7 +21,7 @@ const GuidedTourContext = React.createContext({
 	totalSteps: 0,
 });
 
-function GuidedTourProvider({ children, ...props }) {
+function GuidedTourProvider({ children = null, ...props }) {
 	const [activeTour, setActiveTour] = React.useState(null);
 	const [currentStep, setCurrentStep] = React.useState(0);
 	const [steps, setSteps] = React.useState([]);
@@ -70,7 +74,7 @@ const GuidedTourOverlay = React.forwardRef(({ className, ...props }, ref) => {
 });
 GuidedTourOverlay.displayName = "GuidedTourOverlay";
 
-function GuidedTour({ children, ...props }) {
+function GuidedTour({ children = null, ...props }) {
 	return (
 		<div data-slot="guided-tour" {...props}>
 			{children}
@@ -79,16 +83,22 @@ function GuidedTour({ children, ...props }) {
 }
 
 function GuidedTourTrigger({
-	tourId,
-	children,
-	className,
-	asChild = false,
+	tourId = "",
+	children = null,
+	className = "",
+	render = null,
 	...props
 }) {
+	const { onClick, ...restProps } = props;
 	const { setActiveTour, setCurrentStep, setTotalSteps } = useGuidedTour();
 
-	const handleClick = () => {
-		// Find all elements with data-step for this tour
+	const handleClick = (event) => {
+		if (onClick) {
+			onClick(event);
+		}
+
+		if (event?.defaultPrevented) return;
+
 		const tourSteps = document.querySelectorAll(
 			`[data-tour="${tourId}"][data-step]`,
 		);
@@ -113,22 +123,33 @@ function GuidedTourTrigger({
 		}
 	};
 
-	const Comp = asChild ? Slot : "button";
+	const triggerProps = {
+		"data-slot": "guided-tour-trigger",
+		onClick: handleClick,
+		className: cn(!render && "cursor-pointer", className),
+		type: render ? undefined : "button",
+		...restProps,
+	};
 
-	return (
-		<Comp
-			type={asChild ? undefined : "button"}
-			onClick={handleClick}
-			className={cn(!asChild && "cursor-pointer", className)}
-			{...props}
-		>
-			{children}
-		</Comp>
-	);
+	if (render && React.isValidElement(render)) {
+		return React.cloneElement(render, triggerProps);
+	}
+
+	return <Button {...triggerProps}>{children}</Button>;
 }
 
 const GuidedTourStep = React.forwardRef(
-	({ tourId, step, children, className, content, ...props }, ref) => {
+	(
+		{
+			tourId = "",
+			step = 0,
+			children = null,
+			className = "",
+			content = null,
+			...props
+		},
+		ref,
+	) => {
 		const { activeTour, currentStep, setActiveTour, setCurrentStep } =
 			useGuidedTour();
 		const isActive = activeTour === tourId && currentStep === step - 1;
@@ -195,18 +216,22 @@ const GuidedTourStep = React.forwardRef(
 			),
 			...props,
 		});
+		const isNativeButton =
+			typeof clonedElement.type === "string" &&
+			clonedElement.type.toLowerCase() === "button";
 
 		if (!isActive || !content) {
 			return clonedElement;
 		}
 
 		return (
-			<PopoverPrimitive.Root open={open} onOpenChange={handleOpenChange}>
-				<PopoverPrimitive.Anchor asChild>
-					{clonedElement}
-				</PopoverPrimitive.Anchor>
+			<Popover
+				open={open}
+				onOpenChange={(nextOpen) => handleOpenChange(nextOpen)}
+			>
+				<PopoverTrigger nativeButton={isNativeButton} render={clonedElement} />
 				<GuidedTourStepContent>{content}</GuidedTourStepContent>
-			</PopoverPrimitive.Root>
+			</Popover>
 		);
 	},
 );
@@ -258,36 +283,42 @@ function GuidedTourStepContent({ children }) {
 }
 
 function GuidedTourContent({
-	children,
-	className,
-	onSkip,
-	onNext,
-	onBack,
-	onFinish,
+	children = null,
+	className = "",
+	onSkip = undefined,
+	onNext = undefined,
+	onBack = undefined,
+	onFinish = undefined,
 	isLastStep = false,
 	isFirstStep = false,
+	align = "start",
+	alignOffset = 0,
+	side = "bottom",
+	sideOffset = 8,
 	...props
 }) {
 	const { currentStep, totalSteps } = useGuidedTour();
 
 	return (
-		<PopoverPrimitive.Portal>
-			<PopoverPrimitive.Content
-				data-slot="guided-tour-content"
-				className={cn(
-					"z-[102] w-80 rounded-lg border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-					className,
-				)}
-				side="bottom"
-				align="start"
-				sideOffset={8}
-				{...props}
-			>
-				<div className="flex flex-col gap-4">
-					<div className="flex items-start justify-between gap-2">
-						<div className="flex-1">{children}</div>
-						{onSkip && (
-							<PopoverPrimitive.Close asChild>
+		<PopoverContent
+			align={align}
+			alignOffset={alignOffset}
+			side={side}
+			sideOffset={sideOffset}
+			positionerClassName="z-[102]"
+			className={cn(
+				"w-80 rounded-lg border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95",
+				className,
+			)}
+			data-slot="guided-tour-content"
+			{...props}
+		>
+			<div className="flex flex-col gap-4">
+				<div className="flex items-start justify-between gap-2">
+					<div className="flex-1">{children}</div>
+					{onSkip && (
+						<PopoverPrimitive.Close
+							render={
 								<button
 									type="button"
 									onClick={onSkip}
@@ -296,64 +327,59 @@ function GuidedTourContent({
 								>
 									<X className="h-4 w-4" />
 								</button>
-							</PopoverPrimitive.Close>
+							}
+						/>
+					)}
+				</div>
+
+				<div className="flex items-center justify-between gap-2">
+					<div className="text-xs text-muted-foreground">
+						Step {currentStep + 1} of {totalSteps}
+					</div>
+					<div className="flex items-center gap-2">
+						{onSkip && (
+							<Button variant="ghost" size="sm" onClick={onSkip} type="button">
+								Skip
+							</Button>
+						)}
+						{onBack && !isFirstStep && (
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={onBack}
+								type="button"
+							>
+								Back
+							</Button>
+						)}
+						{isLastStep ? (
+							<Button
+								variant="default"
+								size="sm"
+								onClick={onFinish}
+								type="button"
+							>
+								Finish
+							</Button>
+						) : (
+							<Button
+								variant="default"
+								size="sm"
+								onClick={onNext}
+								type="button"
+							>
+								Next
+							</Button>
 						)}
 					</div>
-
-					<div className="flex items-center justify-between gap-2">
-						<div className="text-xs text-muted-foreground">
-							Step {currentStep + 1} of {totalSteps}
-						</div>
-						<div className="flex items-center gap-2">
-							{onSkip && (
-								<Button
-									variant="ghost"
-									size="sm"
-									onClick={onSkip}
-									type="button"
-								>
-									Skip
-								</Button>
-							)}
-							{onBack && !isFirstStep && (
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={onBack}
-									type="button"
-								>
-									Back
-								</Button>
-							)}
-							{isLastStep ? (
-								<Button
-									variant="default"
-									size="sm"
-									onClick={onFinish}
-									type="button"
-								>
-									Finish
-								</Button>
-							) : (
-								<Button
-									variant="default"
-									size="sm"
-									onClick={onNext}
-									type="button"
-								>
-									Next
-								</Button>
-							)}
-						</div>
-					</div>
 				</div>
-			</PopoverPrimitive.Content>
-		</PopoverPrimitive.Portal>
+			</div>
+		</PopoverContent>
 	);
 }
 
 // GuidedTourPopover is now deprecated - use GuidedTourStep with content prop instead
-function GuidedTourPopover({ children, ...props }) {
+function GuidedTourPopover({ children = null, ...props }) {
 	const { activeTour, currentStep, setCurrentStep, setActiveTour, totalSteps } =
 		useGuidedTour();
 	const [open, setOpen] = React.useState(false);
@@ -418,19 +444,26 @@ function GuidedTourPopover({ children, ...props }) {
 	if (!activeTour || !open || !currentElement) return null;
 
 	return (
-		<PopoverPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
-			<PopoverPrimitive.Anchor asChild>
-				<div
-					style={{
-						position: "absolute",
-						left: currentElement.getBoundingClientRect().left,
-						top: currentElement.getBoundingClientRect().top,
-						width: currentElement.getBoundingClientRect().width,
-						height: currentElement.getBoundingClientRect().height,
-						pointerEvents: "none",
-					}}
-				/>
-			</PopoverPrimitive.Anchor>
+		<Popover
+			open={open}
+			onOpenChange={(nextOpen) => setOpen(nextOpen)}
+			{...props}
+		>
+			<PopoverTrigger
+				nativeButton={false}
+				render={
+					<div
+						style={{
+							position: "absolute",
+							left: currentElement.getBoundingClientRect().left,
+							top: currentElement.getBoundingClientRect().top,
+							width: currentElement.getBoundingClientRect().width,
+							height: currentElement.getBoundingClientRect().height,
+							pointerEvents: "none",
+						}}
+					/>
+				}
+			/>
 			<GuidedTourContent
 				onSkip={handleSkip}
 				onNext={handleNext}
@@ -441,7 +474,7 @@ function GuidedTourPopover({ children, ...props }) {
 			>
 				{children}
 			</GuidedTourContent>
-		</PopoverPrimitive.Root>
+		</Popover>
 	);
 }
 

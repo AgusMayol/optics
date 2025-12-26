@@ -2,24 +2,24 @@
 
 import * as React from "react"
 
-import { cn } from '@/registry/optics/lib/utils'
+import { cn } from "@/lib/utils"
 
 function Table({
-  className,
+  className = "",
   ...props
 }) {
   return (
     <div data-slot="table-container" className="relative w-full overflow-x-auto">
       <table
         data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
+        className={cn("w-full caption-bottom text-xs", className)}
         {...props} />
     </div>
   );
 }
 
 function TableHeader({
-  className,
+  className = "",
   ...props
 }) {
   return (
@@ -31,7 +31,7 @@ function TableHeader({
 }
 
 function TableBody({
-  className,
+  className = "",
   ...props
 }) {
   return (
@@ -43,7 +43,7 @@ function TableBody({
 }
 
 function TableFooter({
-  className,
+  className = "",
   ...props
 }) {
   return (
@@ -55,7 +55,7 @@ function TableFooter({
 }
 
 function TableRow({
-  className,
+  className = "",
   ...props
 }) {
   return (
@@ -70,14 +70,14 @@ function TableRow({
 }
 
 function TableHead({
-  className,
+  className = "",
   ...props
 }) {
   return (
     <th
       data-slot="table-head"
       className={cn(
-        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props} />
@@ -85,14 +85,14 @@ function TableHead({
 }
 
 function TableCell({
-  className,
+  className = "",
   ...props
 }) {
   return (
     <td
       data-slot="table-cell"
       className={cn(
-        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
         className
       )}
       {...props} />
@@ -100,13 +100,13 @@ function TableCell({
 }
 
 function TableCaption({
-  className,
+  className = "",
   ...props
 }) {
   return (
     <caption
       data-slot="table-caption"
-      className={cn("text-muted-foreground mt-4 text-sm", className)}
+      className={cn("text-muted-foreground mt-4 text-xs", className)}
       {...props} />
   );
 }
@@ -121,4 +121,3 @@ export {
   TableCell,
   TableCaption,
 }
-

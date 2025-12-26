@@ -9,7 +9,7 @@ import { links } from "@/app/layout-content";
 
 /**
  * ComponentNavigation - Componente reutilizable para navegación entre componentes
- * 
+ *
  * Este componente automáticamente:
  * - Obtiene la ruta actual usando usePathname()
  * - Calcula el componente anterior y siguiente en la sección "Components"
@@ -56,23 +56,32 @@ export function ComponentNavigation() {
 			)}
 		>
 			{previous && (
-				<Button variant="muted" size="sm" asChild>
-					<Link href={previous.href || "#"}>
-						<ArrowLeft />
-						{previous.name || "Previous"}
-					</Link>
-				</Button>
+				<Button
+					variant="muted"
+					size="lg"
+					nativeButton={false}
+					render={
+						<Link href={previous.href || "#"}>
+							<ArrowLeft />
+							{previous.name || "Previous"}
+						</Link>
+					}
+				/>
 			)}
 
 			{next && (
-				<Button variant="muted" size="sm" asChild>
-					<Link href={next.href || "#"}>
-						{next.name || "Next"}
-						<ArrowRight />
-					</Link>
-				</Button>
+				<Button
+					variant="muted"
+					size="lg"
+					nativeButton={false}
+					render={
+						<Link href={next.href || "#"}>
+							{next.name || "Next"}
+							<ArrowRight />
+						</Link>
+					}
+				/>
 			)}
 		</div>
 	);
 }
-

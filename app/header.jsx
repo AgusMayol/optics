@@ -1,40 +1,45 @@
 "use client";
-import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
-import { useTheme } from "next-themes";
-import {
-	useModeAnimation,
-	ThemeAnimationType,
-} from "react-theme-switch-animation";
-import * as React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { CommandDialogComponent } from "./command-dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/registry/optics/button";
+import {
+	Sheet,
+	SheetClose,
+	SheetHeader,
+	SheetPopup,
+	SheetTitle,
+	SheetTrigger,
+} from "@/registry/optics/sheet";
+import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
+import { MenuIcon, XIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
 import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
 	ContextMenuTrigger,
 } from "@/registry/optics/context-menu";
-import { ListItems } from "./sidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { MenuIcon, XIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { toast } from "@/registry/optics/sonner";
 import {
-	Sheet,
-	SheetPortal,
-	SheetOverlay,
-	SheetClose,
-	SheetContent,
-	SheetDescription,
-	SheetFooter,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-	SheetVariants,
-	SheetPrimitive,
-} from "@/registry/optics/sheet";
-import { Separator } from "@/registry/optics/separator";
+	ThemeAnimationType,
+	useModeAnimation,
+} from "react-theme-switch-animation";
+import { CommandDialogComponent } from "./command-dialog";
+import { ListItems } from "./sidebar";
+import { useAutoWidth } from "@/hooks/use-auto-width";
+import { useSidebarWidth } from "./sidebar-width-provider";
+const logoSvg = `<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+	<style>
+		.s1 { fill: #5eb0e8 } 
+	</style>
+	<g id="g3152">
+		<g id="g49864">
+			<path id="path2996" class="s1" d="m148.68 296.79c-1.34-3.39-12.56-30.23-21.59-51.67-1.96-4.65-4.2-10.11-4.99-12.13l-1.42-3.68 3.54-8.66c1.95-4.76 8-19.28 13.45-32.27 5.45-12.99 10.49-25.15 11.2-27.02 1.56-4.11 1-4.93 7.78 11.38 2.85 6.86 8.77 21.03 13.15 31.5 4.39 10.47 8.54 20.44 9.21 22.16l1.24 3.13-3.87 9.21c-2.13 5.06-5.24 12.53-6.92 16.6-1.68 4.07-5.12 12.32-7.63 18.33-2.52 6.01-5.96 14.26-7.64 18.33-1.69 4.07-3.29 7.65-3.55 7.96-0.27 0.31-1.15-1.12-1.96-3.17zm-104.45-43.77c1.3-3.34 22.88-55.17 28.89-69.37 0.2-0.47 1.05-1.06 1.89-1.31 0.84-0.26 3.61-1.34 6.14-2.4 2.53-1.07 10.99-4.56 18.79-7.74 16.99-6.95 26.45-10.85 36.8-15.16 4.25-1.78 7.83-3.12 7.97-2.99 0.19 0.2-12.21 30.82-14.62 36.09-0.65 1.43-2.12 4.94-10.13 24.22l-4.5 10.83-18.75 7.72c-22.15 9.12-23.94 9.85-29.03 11.85-2.15 0.84-4.86 1.96-6.03 2.49-2.1 0.94-13.42 5.57-16.46 6.73-1.4 0.54-1.5 0.44-0.96-0.96zm209.23 0.48c-1.37-0.6-8.23-3.41-15.25-6.26-7.02-2.84-15.95-6.5-19.85-8.12-3.9-1.61-9.81-4.04-13.12-5.39-19.26-7.82-21.12-8.73-21.89-10.67-0.41-1.05-3.51-8.56-6.87-16.71-6.11-14.78-9.39-22.72-15.43-37.36-1.76-4.26-3.87-9.3-4.69-11.2-0.83-1.89-1.39-3.56-1.25-3.69 0.14-0.14 10.12 3.82 22.18 8.8 12.06 4.99 27.67 11.38 34.69 14.22 7.02 2.84 13.31 5.66 13.98 6.27 1.11 1.02 2.6 4.3 9.42 20.85 1.28 3.1 4.31 10.4 6.73 16.21 2.41 5.82 6.09 14.7 8.17 19.74 2.08 5.04 4.29 10.35 4.91 11.8 0.62 1.46 1.04 2.64 0.94 2.62-0.11-0.02-1.31-0.51-2.67-1.11zm-217.82-88.95c-19.37-8.03-35.41-14.78-35.63-15.01-0.23-0.23 5.09-2.65 11.82-5.39 22.65-9.21 29.96-12.21 32.09-13.16 1.17-0.53 5.8-2.45 10.28-4.27 4.49-1.82 9.95-4.08 12.15-5.01 2.19-0.94 4.27-1.7 4.61-1.7 0.59 0 11.67 4.41 22.95 9.14 2.93 1.23 9.63 3.98 14.89 6.12 5.27 2.14 11.65 4.77 14.19 5.84 2.53 1.08 7.88 3.3 11.87 4.95 6.33 2.61 8.87 4.26 6.58 4.26-0.37 0-3.64 1.24-7.26 2.77-3.62 1.52-12.33 5.14-19.35 8.03-7.02 2.9-19.46 8.03-27.65 11.41-8.19 3.38-15.21 6.25-15.6 6.38-0.39 0.13-16.56-6.34-35.94-14.36zm188.04 12.58c-2.54-1.08-18.17-7.59-34.75-14.45-16.57-6.86-30.39-12.73-30.71-13.03-0.52-0.5 8.91-4.59 37.45-16.25 5.46-2.23 13.91-5.71 18.79-7.73 4.87-2.02 10.14-4.15 11.7-4.75l2.83-1.08 10.64 4.39c5.85 2.41 15.58 6.43 21.63 8.93 6.04 2.5 15.93 6.56 21.98 9.02 6.04 2.47 12.43 5.11 14.18 5.88 3.14 1.37 3.16 1.41 1.42 2.11-0.98 0.39-5.92 2.45-10.99 4.58-5.07 2.12-13.69 5.67-19.15 7.88-5.46 2.21-11.68 4.77-13.82 5.69-7.73 3.31-26.18 10.89-26.38 10.84-0.12-0.03-2.29-0.94-4.82-2.03zm-91.48-37.79c-6.04-2.51-17.69-7.29-25.88-10.63-8.19-3.34-16.16-6.62-17.72-7.29-9.36-4.06-15.05-6.35-15.76-6.35-0.45 0-1.04-0.71-1.31-1.58-0.44-1.42-7.51-18.61-15.3-37.19-4.87-11.62-13.37-32.41-13.37-32.7 0-0.26 19.15 7.38 31.55 12.6 3.12 1.31 13.17 5.45 22.34 9.2 9.16 3.75 17.02 7.18 17.46 7.63 0.44 0.44 5.34 11.75 10.89 25.12 5.55 13.38 12.1 29.16 14.55 35.07 2.46 5.91 4.26 10.73 4.01 10.71-0.26-0.02-5.41-2.08-11.46-4.59zm24.11 3.88c0-0.4 1.24-3.65 2.74-7.21 1.51-3.57 7.94-19.02 14.28-34.33 6.35-15.31 11.9-28.22 12.33-28.68 0.43-0.46 5.1-2.56 10.36-4.68 5.27-2.12 11.17-4.55 13.12-5.4 1.95-0.85 9.61-4.02 17.02-7.04 7.41-3.03 17.38-7.1 22.16-9.05 4.77-1.95 8.68-3.35 8.68-3.12 0 0.44-20.28 49.41-26.2 63.26l-3.31 7.75-7.05 2.91c-3.88 1.6-13.43 5.5-21.23 8.68-7.8 3.18-14.82 6.07-15.6 6.43-1.31 0.61-16.17 6.72-23.93 9.85-1.92 0.78-3.37 1.05-3.37 0.63zm-8.49-7.48c-1.26-3.03-6.6-15.82-11.86-28.42-5.27-12.6-10.82-25.9-12.34-29.54-1.52-3.65-2.76-6.99-2.76-7.43 0-0.44 1.87-5.23 4.16-10.64 2.28-5.41 8.89-21.18 14.68-35.03 5.79-13.86 10.74-24.96 11-24.67 0.25 0.28 3.42 7.65 7.03 16.38 3.61 8.72 10.17 24.46 14.57 34.98l8.01 19.12-8.51 20.35c-4.67 11.2-9.56 22.89-10.86 25.99-1.3 3.11-4.02 9.61-6.05 14.45-2.02 4.85-3.93 9.08-4.23 9.4-0.3 0.32-1.58-1.9-2.84-4.94z"/>
+		</g>
+	</g>
+</svg>`;
 
 export function Header({ links }) {
 	const [themeSwitch, setThemeSwitch] = React.useState("system");
@@ -43,6 +48,14 @@ export function Header({ links }) {
 	const [mounted, setMounted] = React.useState(false);
 	const [sheetOpen, setSheetOpen] = React.useState(false);
 	const isMobile = useIsMobile();
+	const { setSidebarWidth } = useSidebarWidth();
+	const { ref: mobileWidthRef, width: mobileWidth } = useAutoWidth([isMobile], {
+		includeParentBox: true,
+	});
+	const { ref: desktopWidthRef, width: desktopWidth } = useAutoWidth(
+		[isMobile],
+		{ includeParentBox: true },
+	);
 
 	const checkTheme = () => {
 		let tema = resolvedTheme;
@@ -57,10 +70,17 @@ export function Header({ links }) {
 		let temaActual = localStorage.getItem("theme2");
 		setThemeSwitch(newTheme);
 
+		const notifyThemeChange = () => {
+			if (typeof window !== "undefined") {
+				window.dispatchEvent(new Event("theme2-change"));
+			}
+		};
+
 		if (newTheme === "system") {
 			if (systemTheme === localStorage.getItem("theme"))
 				return setTimeout(() => {
 					localStorage.setItem("theme2", newTheme);
+					notifyThemeChange();
 				}, 200);
 
 			toggleSwitchTheme({
@@ -71,6 +91,7 @@ export function Header({ links }) {
 
 			return setTimeout(() => {
 				localStorage.setItem("theme2", newTheme);
+				notifyThemeChange();
 			}, 200);
 		}
 
@@ -82,6 +103,7 @@ export function Header({ links }) {
 		)
 			return setTimeout(() => {
 				localStorage.setItem("theme2", newTheme);
+				notifyThemeChange();
 			}, 200);
 
 		toggleSwitchTheme({
@@ -92,6 +114,7 @@ export function Header({ links }) {
 
 		setTimeout(() => {
 			localStorage.setItem("theme2", newTheme);
+			notifyThemeChange();
 		}, 200);
 		//setTheme(newTheme);
 	};
@@ -115,31 +138,40 @@ export function Header({ links }) {
 		}
 	}, [systemTheme]);
 
+	React.useEffect(() => {
+		const activeWidth = isMobile ? mobileWidth : desktopWidth;
+		if (activeWidth > 0) {
+			setSidebarWidth(activeWidth);
+		}
+	}, [desktopWidth, isMobile, mobileWidth, setSidebarWidth]);
+
 	return (
-		<div className="w-full h-16 flex items-center justify-between gap-4 lg:rounded-t-3xl border-b lg:rounded-tl-none p-4">
-			{isMobile && (
+		<header className="w-full h-16 grid grid-cols-14">
+			{isMobile ? (
 				<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-					<SheetTrigger asChild>
-						<Button
-							variant="ghost"
-							size="icon"
-							animation="none"
-							className="w-full flex items-center justify-start gap-2"
-						>
-							<MenuIcon />
-							Menu
-						</Button>
-					</SheetTrigger>
-					<SheetPortal>
-						<SheetOverlay className="fixed inset-0 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-[16px] h-[200svh] bg-gradient-to-b from-background via-transparent to-transparent via-[50%] [mask-image:linear-gradient(to_bottom,white_0%_50%,transparent_50%_100%)]" />
-						<SheetPrimitive.Content
-							className={cn(
-								SheetVariants({ side: "popIn" }),
-								"py-3 !max-w-none w-full h-full bg-transparent border-none rounded-none shadow-none",
-							)}
-						>
-							<SheetHeader className="-ml-6.5">
-								<SheetClose asChild>
+					<SheetTrigger
+						render={
+							<Button
+								ref={mobileWidthRef}
+								variant="ghost"
+								size="lg"
+								animation="none"
+								className="col-span-3 w-full h-full  flex items-center justify-start gap-2"
+							>
+								<MenuIcon />
+								Menu
+							</Button>
+						}
+					/>
+					<SheetPopup
+						side="left"
+						variant="full"
+						showCloseButton={false}
+						className="py-3 !max-w-none w-full h-full bg-transparent border-none rounded-none shadow-none"
+					>
+						<SheetHeader className="-ml-6.5">
+							<SheetClose
+								render={
 									<Button
 										variant="ghost"
 										animation="none"
@@ -148,45 +180,92 @@ export function Header({ links }) {
 										<XIcon className="!size-5.5" />
 										<SheetTitle className="">Close</SheetTitle>
 									</Button>
-								</SheetClose>
-							</SheetHeader>
-							<ListItems
-								links={links}
-								sidebarMaxHeight="100%"
-								isMobile={isMobile}
-								onLinkClick={() => setSheetOpen(false)}
+								}
 							/>
-						</SheetPrimitive.Content>
-					</SheetPortal>
+						</SheetHeader>
+						<ListItems
+							links={links}
+							sidebarMaxHeight="100%"
+							isMobile={isMobile}
+							onLinkClick={() => setSheetOpen(false)}
+						/>
+					</SheetPopup>
 				</Sheet>
+			) : (
+				<ContextMenu>
+					<ContextMenuTrigger className="col-span-3 border-r">
+						<Link
+							ref={desktopWidthRef}
+							href="/"
+							className="w-full flex flex-row items-center justify-center gap-0 p-4"
+						>
+							<Image
+								src="/images/logo.svg"
+								alt="AgusMayol's Optics logo"
+								className="size-8 ml-1.5"
+								width={100}
+								height={100}
+								priority
+							/>
+							<span className="text-base font-bold w-full text-center truncate select-none">
+								@optics/design-system
+							</span>
+						</Link>
+					</ContextMenuTrigger>
+					<ContextMenuContent className="w-42">
+						<ContextMenuItem
+							className="px-2!"
+							onClick={() => {
+								navigator.clipboard.writeText(logoSvg);
+								toast({
+									toastId: "copy-logo-svg",
+									type: "success",
+									title: "Logo copied to clipboard",
+								});
+							}}
+						>
+							<Image
+								src="/images/logo-muted.svg"
+								alt="AgusMayol's Optics logo"
+								className="size-5 mr-0.5"
+								width={16}
+								height={16}
+								priority
+							/>
+							Copy Logo as SVG
+						</ContextMenuItem>
+					</ContextMenuContent>
+				</ContextMenu>
 			)}
 
-			<CommandDialogComponent className="hidden lg:block" links={links} />
+			<div className="col-span-11 w-full flex items-center justify-between gap-4 px-4">
+				<CommandDialogComponent className="hidden lg:block" links={links} />
 
-			<div className="w-full h-full flex items-center justify-end gap-1.5">
-				<Button variant="ghost" size="icon" animation="none">
-					<Link
-						href="https://github.com/agusmayol/optics"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							src="/images/GitHub_Invertocat_Dark.svg"
-							alt="GitHub logo"
-							className="size-4.5"
-							width={100}
-							height={100}
-						/>
-					</Link>
-				</Button>
+				<div className="w-full h-full flex items-center justify-end gap-1.5">
+					<Button variant="ghost" size="icon" animation="none">
+						<Link
+							href="https://github.com/agusmayol/optics"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Image
+								src="/images/GitHub_Invertocat_Dark.svg"
+								alt="GitHub logo"
+								className="size-4.5"
+								width={100}
+								height={100}
+							/>
+						</Link>
+					</Button>
 
-				<ThemeSwitcher
-					ref={ref}
-					defaultValue={themeSwitch}
-					onChange={handleSetTheme}
-					value={themeSwitch}
-				/>
+					<ThemeSwitcher
+						ref={ref}
+						defaultValue={themeSwitch}
+						onChange={handleSetTheme}
+						value={themeSwitch}
+					/>
+				</div>
 			</div>
-		</div>
+		</header>
 	);
 }

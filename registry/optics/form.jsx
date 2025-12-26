@@ -8,12 +8,12 @@ import {
 	useFormState,
 } from "react-hook-form";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 import { Label } from "@/registry/optics/label";
 
 const Form = FormProvider;
 
-const FormFieldContext = React.createContext({});
+const FormFieldContext = React.createContext({ name: "" });
 
 const FormField = ({ ...props }) => {
 	return (
@@ -48,7 +48,7 @@ const useFormField = () => {
 
 const FormItemContext = React.createContext({});
 
-function FormItem({ className, ...props }) {
+function FormItem({ className = "", ...props }) {
 	const id = React.useId();
 
 	return (
@@ -62,7 +62,7 @@ function FormItem({ className, ...props }) {
 	);
 }
 
-function FormLabel({ className, ...props }) {
+function FormLabel({ className = "", ...props }) {
 	const { error, formItemId } = useFormField();
 
 	return (
@@ -76,7 +76,7 @@ function FormLabel({ className, ...props }) {
 	);
 }
 
-function FormControl({ ...props }) {
+function FormControl({ render = undefined, ...props }) {
 	const { error, formItemId, formDescriptionId, formMessageId } =
 		useFormField();
 
@@ -95,7 +95,7 @@ function FormControl({ ...props }) {
 	);
 }
 
-function FormDescription({ className, ...props }) {
+function FormDescription({ className = "", ...props }) {
 	const { formDescriptionId } = useFormField();
 
 	return (
@@ -108,9 +108,9 @@ function FormDescription({ className, ...props }) {
 	);
 }
 
-function FormMessage({ className, ...props }) {
+function FormMessage({ className = "", children = null, ...props }) {
 	const { error, formMessageId } = useFormField();
-	const body = error ? String(error?.message ?? "") : props.children;
+	const body = error ? String(error?.message ?? "") : children;
 
 	if (!body) {
 		return null;

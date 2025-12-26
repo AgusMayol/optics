@@ -1,5 +1,5 @@
 "use client";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { Separator } from "@/registry/optics/separator";
 import {
@@ -12,8 +12,8 @@ import { buttonVariants } from "@/registry/optics/button";
 import { useState } from "react";
 
 export function ShowMore({
-	children,
-	moreContent,
+	children = null,
+	moreContent = null,
 	maskColor = "oklch(var(--background))",
 	showSeparator = true,
 }) {

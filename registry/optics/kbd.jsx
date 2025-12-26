@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 import { cva } from "class-variance-authority";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
@@ -163,12 +163,12 @@ function matchesHotkey(hotkey, event) {
 }
 
 function Kbd({
-	className,
+	className = "",
 	variant = "default",
 	useHotkey = false,
 	animate = true,
-	onHotkeyPress,
-	hotkey: hotkeyProp,
+	onHotkeyPress = undefined,
+	hotkey: hotkeyProp = undefined,
 	...props
 }) {
 	const [isPressed, setIsPressed] = useState(false);

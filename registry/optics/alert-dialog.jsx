@@ -3,32 +3,32 @@
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/registry/optics/button";
 import { X } from "lucide-react";
 
-function AlertDialog({ ...props }) {
+function AlertDialog({ ...props } = {}) {
 	return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
 }
 
-function AlertDialogTrigger({ ...props }) {
+function AlertDialogTrigger({ ...props } = {}) {
 	return (
 		<AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
 	);
 }
 
-function AlertDialogPortal({ ...props }) {
+function AlertDialogPortal({ ...props } = {}) {
 	return (
 		<AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
 	);
 }
 
-function AlertDialogOverlay({ className, ...props }) {
+function AlertDialogOverlay({ className = "", ...props }) {
 	return (
 		<AlertDialogPrimitive.Overlay
 			data-slot="alert-dialog-overlay"
 			className={cn(
-				"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+						"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-all duration-150",
 				className,
 			)}
 			{...props}
@@ -36,7 +36,7 @@ function AlertDialogOverlay({ className, ...props }) {
 	);
 }
 
-function AlertDialogContent({ className, children, ...props }) {
+function AlertDialogContent({ className = "", children = null, ...props }) {
 	return (
 		<AlertDialogPortal>
 			<AlertDialogOverlay />
@@ -56,7 +56,7 @@ function AlertDialogContent({ className, children, ...props }) {
 	);
 }
 
-function AlertDialogHeader({ className, ...props }) {
+function AlertDialogHeader({ className = "", ...props }) {
 	return (
 		<div
 			data-slot="alert-dialog-header"
@@ -66,7 +66,7 @@ function AlertDialogHeader({ className, ...props }) {
 	);
 }
 
-function AlertDialogFooter({ className, ...props }) {
+function AlertDialogFooter({ className = "", ...props }) {
 	return (
 		<div
 			data-slot="alert-dialog-footer"
@@ -79,7 +79,7 @@ function AlertDialogFooter({ className, ...props }) {
 	);
 }
 
-function AlertDialogTitle({ className, ...props }) {
+function AlertDialogTitle({ className = "", ...props }) {
 	return (
 		<AlertDialogPrimitive.Title
 			data-slot="alert-dialog-title"
@@ -89,7 +89,7 @@ function AlertDialogTitle({ className, ...props }) {
 	);
 }
 
-function AlertDialogDescription({ className, ...props }) {
+function AlertDialogDescription({ className = "", ...props }) {
 	return (
 		<AlertDialogPrimitive.Description
 			data-slot="alert-dialog-description"
@@ -99,7 +99,7 @@ function AlertDialogDescription({ className, ...props }) {
 	);
 }
 
-function AlertDialogAction({ className, ...props }) {
+function AlertDialogAction({ className = "", ...props }) {
 	return (
 		<AlertDialogPrimitive.Action
 			className={cn(buttonVariants(), className)}
@@ -108,7 +108,7 @@ function AlertDialogAction({ className, ...props }) {
 	);
 }
 
-function AlertDialogCancel({ className, ...props }) {
+function AlertDialogCancel({ className = "", ...props }) {
 	return (
 		<AlertDialogPrimitive.Cancel
 			className={cn(buttonVariants({ variant: "raised" }), className)}
@@ -117,7 +117,7 @@ function AlertDialogCancel({ className, ...props }) {
 	);
 }
 
-function AlertDialogIcon({ className, children, ...props }) {
+function AlertDialogIcon({ className = "", children = null, ...props }) {
 	return (
 		<div className="w-full flex items-start justify-between -mt-2">
 			<div
@@ -129,15 +129,17 @@ function AlertDialogIcon({ className, children, ...props }) {
 				{children}
 			</div>
 
-			<AlertDialogPrimitive.Cancel asChild>
-				<Button
-					variant="outline"
-					size="icon"
-					className="rounded-full squircle-none size-6 p-0 -mr-4 -mt-2"
-				>
-					<X className="!size-4"></X>
-				</Button>
-			</AlertDialogPrimitive.Cancel>
+			<AlertDialogPrimitive.Cancel
+				render={
+					<Button
+						variant="outline"
+						size="icon"
+						className="rounded-full squircle-none size-6 p-0 -mr-4 -mt-2"
+					>
+						<X className="!size-4"></X>
+					</Button>
+				}
+			/>
 		</div>
 	);
 }

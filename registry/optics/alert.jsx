@@ -1,59 +1,77 @@
-import * as React from "react";
+import * as React from "react"
 import { cva } from "class-variance-authority";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/lib/utils"
 
 const alertVariants = cva(
-	"relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
-	{
-		variants: {
-			variant: {
-				default: "bg-card text-card-foreground",
-				destructive:
-					"text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-		},
-	},
-);
+  "grid gap-0.5 rounded-lg border px-2 py-1.5 text-left text-xs/relaxed has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-1.5 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-3.5 w-full relative group/alert",
+  {
+    variants: {
+      variant: {
+        default: "bg-card text-card-foreground",
+        destructive: "text-destructive bg-card *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
 
-function Alert({ className, variant, ...props }) {
-	return (
-		<div
-			data-slot="alert"
-			role="alert"
-			className={cn(alertVariants({ variant }), className)}
-			{...props}
-		/>
-	);
+function Alert({
+  className = "",
+  variant = "default",
+  ...props
+}) {
+  return (
+    <div
+      data-slot="alert"
+      role="alert"
+      className={cn(alertVariants({ variant }), className)}
+      {...props} />
+  );
 }
 
-function AlertTitle({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-title"
-			className={cn(
-				"col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
-				className,
-			)}
-			{...props}
-		/>
-	);
+function AlertTitle({
+  className = "",
+  ...props
+}) {
+  return (
+    <div
+      data-slot="alert-title"
+      className={cn(
+        "font-medium group-has-[>svg]/alert:col-start-2 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3",
+        className
+      )}
+      {...props} />
+  );
 }
 
-function AlertDescription({ className, ...props }) {
-	return (
-		<div
-			data-slot="alert-description"
-			className={cn(
-				"text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
-				className,
-			)}
-			{...props}
-		/>
-	);
+function AlertDescription({
+  className = "",
+  ...props
+}) {
+  return (
+    <div
+      data-slot="alert-description"
+      className={cn(
+        "text-muted-foreground text-xs/relaxed text-balance md:text-pretty [&_p:not(:last-child)]:mb-4 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3",
+        className
+      )}
+      {...props} />
+  );
 }
 
-export { Alert, AlertTitle, AlertDescription };
+function AlertAction({
+  className = "",
+  ...props
+}) {
+  return (
+    <div
+      data-slot="alert-action"
+      className={cn("absolute top-1.5 right-2", className)}
+      {...props} />
+  );
+}
+
+export { Alert, AlertTitle, AlertDescription, AlertAction }

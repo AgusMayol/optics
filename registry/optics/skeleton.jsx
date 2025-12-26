@@ -1,16 +1,15 @@
-import { cn } from '@/registry/optics/lib/utils'
+import { cn } from "@/lib/utils"
 
 function Skeleton({
-  className,
+  className = "",
   ...props
 }) {
   return (
     <div
       data-slot="skeleton"
-      className={cn("bg-accent animate-pulse rounded-md", className)}
+      className={cn("bg-muted rounded-md animate-pulse", className)}
       {...props} />
   );
 }
 
 export { Skeleton }
-

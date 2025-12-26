@@ -992,7 +992,7 @@ export default function Page() {
 
 									return (
 										<Tooltip key={colorClass}>
-											<TooltipTrigger asChild>
+											<TooltipTrigger render={
 												<GridItem
 													decorationBottomRight={colorClass === "bg-rose-950"}
 													className="!border-r-0 cursor-pointer aspect-square !min-h-0 min-w-0 p-0.5 sm:p-1"
@@ -1005,7 +1005,7 @@ export default function Page() {
 														)}
 													/>
 												</GridItem>
-											</TooltipTrigger>
+											} />
 											<TooltipContent className="px-0 pl-2 py-0">
 												<Snippet className="w-full z-[99999] flex items-center justify-center bg-transparent border-0 px-0">
 													<SnippetHeader className="w-full gap-2 flex items-center justify-center bg-transparent border-0">

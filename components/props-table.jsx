@@ -1,6 +1,13 @@
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/optics/badge";
-import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
+import {
+	Table,
+	TableHeader,
+	TableBody,
+	TableRow,
+	TableHead,
+	TableCell,
+} from "@/registry/optics/table";
 import { ALargeSmall, Binary, Info } from "lucide-react";
 import { Button } from "@/registry/optics/button";
 import {
@@ -16,127 +23,139 @@ const renderPropsTableItem = (item) => (
 		<Badge variant="outline" className="text-xs font-mono">
 			{item.component}
 		</Badge>
-
-		<GridContainer
-			cols={12}
-			rows={item.props.length + 1}
-			border={false}
-			className={`[&>*:not(:first-child)]:!border-t [&>*]:py-4 [&>*]:pl-4 [&>*:first-child]:rounded-t-[calc(var(--radius)+3px)] [&>*:last-child]:rounded-b-[calc(var(--radius)+3px)] shadow border rounded-xl [&>*:nth-child(odd)]:bg-muted`}
-		>
-			<GridRow
-				className="rounded-t-[calc(var(--radius)+3px)] w-full grid !grid-cols-12 !grid-rows-1 col-span-full !py-0"
-				overrideStyles={true}
+		<div className="border rounded-xl overflow-hidden">
+			<Table
+				className={cn(
+					"border-collapse",
+					"[&_thead_tr]:rounded-t-[calc(var(--radius)+3px)]",
+					"[&_tbody_tr:last-child]:rounded-b-[calc(var(--radius)+3px)]",
+					"[&_tbody_tr:nth-child(odd)]:bg-muted",
+					"[&_tbody_tr]:border-t",
+				)}
 			>
-				<GridItem
-					span={5}
-					className="text-xs font-semibold justify-start gap-1 !row-span-1"
-				>
-					<ALargeSmall />
-					Name
-				</GridItem>
-				<GridItem
-					span={6}
-					className="text-xs font-semibold gap-1 mr-auto !row-span-1"
-				>
-					<Binary size={16} />
-					Type
-				</GridItem>
-				<GridItem
-					span={1}
-					className="text-xs font-semibold gap-1 pl-4 !row-span-1"
-				></GridItem>
-			</GridRow>
-
-			{item.props.map((prop, index) => (
-				<GridRow
-					key={`${item.component}-${prop.name}`}
-					className={cn(
-						item.props.length - 1 === index &&
-							"rounded-b-[calc(var(--radius)+3px)]",
-						"h-[calc(100%)] w-full  grid !grid-cols-12 !grid-rows-1 col-span-full !py-0",
-					)}
-					overrideStyles={true}
-				>
-					{prop.name && (
-						<GridItem
-							span={5}
-							className="justify-start text-[14px] leading-[1.4] tracking-[-0.01em]"
+				<TableHeader>
+					<TableRow className="border-b rounded-t-[calc(var(--radius)+3px)]">
+						<TableHead className="text-xs font-semibold py-4 pl-4 w-[41.666667%]">
+							<div className="flex items-center justify-start gap-1">
+								<ALargeSmall />
+								Name
+							</div>
+						</TableHead>
+						<TableHead className="text-xs font-semibold py-4 pl-4 w-[50%]">
+							<div className="flex items-center gap-1">
+								<Binary size={16} />
+								Type
+							</div>
+						</TableHead>
+						<TableHead className="text-xs font-semibold py-4 pl-4 w-[8.333333%]"></TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{item.props.map((prop, index) => (
+						<TableRow
+							key={`${item.component}-${prop.name}`}
+							className={cn(
+								item.props.length - 1 === index &&
+									"rounded-b-[calc(var(--radius)+3px)]",
+								"border-t",
+							)}
 						>
-							<Badge
-								variant="outline"
-								className="font-mono text-blue-600 dark:text-blue-400 bg-background"
-							>
-								{prop.name}
-							</Badge>
-						</GridItem>
-					)}
-					{prop.type && (
-						<GridItem
-							span={6}
-							className="text-xs font-mono justify-start"
-						>
-							{prop.type}
-						</GridItem>
-					)}
-					{prop.description && (
-						<GridItem
-							span={1}
-							className="text-xs text-balance font-mono justify-end px-4 py-0"
-						>
-							<TooltipProvider>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button variant="ghost" size="icon">
-											<Info size={16} className="text-muted-foreground" />
-											<span className="sr-only">Description</span>
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent className="w-52">
-										<p className="text-xs text-pretty">
-											{prop.description}
-										</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
-						</GridItem>
-					)}
-				</GridRow>
-			))}
-		</GridContainer>
+							<TableCell className="py-4 pl-4 w-[41.666667%]">
+								{prop.name ? (
+									<div className="flex items-center justify-start text-[14px] leading-[1.4] tracking-[-0.01em]">
+										<Badge
+											variant="outline"
+											className="font-mono text-blue-600 dark:text-blue-400 bg-background"
+										>
+											{prop.name}
+											{/* {prop.required && <span className="ml-1 text-red-500">*</span>} */}
+										</Badge>
+									</div>
+								) : null}
+							</TableCell>
+							<TableCell className="py-4 pl-4 text-xs font-mono w-[50%]">
+								{prop.type ? (
+									<div className="flex items-center justify-start">
+										{prop.type}
+										{prop.defaultValue && (
+											<span className="ml-2 text-muted-foreground">
+												{prop.defaultValue}
+											</span>
+										)}
+									</div>
+								) : null}
+							</TableCell>
+							<TableCell className="py-4 pl-4 w-[8.333333%]">
+								{prop.description ? (
+									<div className="flex items-center justify-end px-4">
+										<TooltipProvider>
+											<Tooltip>
+												<TooltipTrigger
+													render={
+														<Button variant="ghost" size="icon">
+															<Info
+																size={16}
+																className="text-muted-foreground"
+															/>
+															<span className="sr-only">Description</span>
+														</Button>
+													}
+												/>
+												<TooltipContent className="w-52">
+													<p className="text-xs text-pretty">
+														{prop.description}
+													</p>
+												</TooltipContent>
+											</Tooltip>
+										</TooltipProvider>
+									</div>
+								) : null}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</div>
 	</div>
 );
 
 export const PropsTable = ({ data, className, ...props }) => {
-	// ExampleData = [
-	//     {
-	//          component: "<SnippetCopyButton />",
-	//          props: [
-	//              {
-	//                  name: "value",
-	//                  type: "string",
-	//                  description: "The value to copy to the clipboard.",
-	//              },
-	//              {
-	//                  name: "timeout",
-	//                  type: "number",
-	//                  description: "The timeout in milliseconds to copy the value to the clipboard.",
-	//              },
-	//          ],
-	//     },
-	// ]
+	// Si data es un string (nombre del componente), intentar cargar el JSON
+	let propsData = data;
 
-	// If there's only one item, render it normally
-	if (data.length === 1) {
+	if (typeof data === "string") {
+		try {
+			// En Next.js, podemos usar import dinámico para JSON en build time
+			// Pero para runtime, necesitamos usar require o import estático
+			// Por ahora, asumimos que el JSON se importa estáticamente
+			// El usuario debe importar: import propsData from "./props.json"
+			console.warn(
+				"PropsTable: data should be an array or imported JSON. String paths not supported in runtime.",
+			);
+			return null;
+		} catch (error) {
+			console.error(`Error loading props:`, error);
+			return null;
+		}
+	}
+
+	// Validar que data sea un array
+	if (!Array.isArray(propsData) || propsData.length === 0) {
+		return null;
+	}
+
+	// Si hay solo un item, renderizarlo normalmente
+	if (propsData.length === 1) {
 		return (
 			<div className={cn("w-full flex flex-col gap-12", className)} {...props}>
-				{renderPropsTableItem(data[0])}
+				{renderPropsTableItem(propsData[0])}
 			</div>
 		);
 	}
 
-	// If there are multiple items, use ShowMore
-	const firstItem = data[0];
-	const remainingItems = data.slice(1);
+	// Si hay múltiples items, usar ShowMore
+	const firstItem = propsData[0];
+	const remainingItems = propsData.slice(1);
 
 	return (
 		<div className={cn("w-full flex flex-col gap-12", className)} {...props}>

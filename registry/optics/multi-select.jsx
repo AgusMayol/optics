@@ -3,8 +3,8 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
-import { Button, buttonVariants, otherThemes } from "@/registry/optics/button";
-import { cn } from '@/registry/optics/lib/utils';
+import { Button, buttonVariants } from "@/registry/optics/button";
+import { cn } from "@/registry/optics/lib/utils";
 import { Badge } from "@/registry/optics/badge";
 import { Checkbox, CheckboxPrimitive } from "@/registry/optics/checkbox";
 
@@ -18,7 +18,11 @@ const MultiSelectContext = React.createContext({
 	registerColor: () => {},
 });
 
-function Select({ onValuesChange, onOpenChange, ...props }) {
+function Select({
+	onValuesChange = undefined,
+	onOpenChange = undefined,
+	...props
+}) {
 	const [values, setValues] = React.useState({});
 	const [colors, setColors] = React.useState({});
 	const [open, setOpen] = React.useState(false);
@@ -97,19 +101,19 @@ function Select({ onValuesChange, onOpenChange, ...props }) {
 	);
 }
 
-function SelectGroup({ ...props }) {
+function SelectGroup({ ...props } = {}) {
 	return <SelectPrimitive.Group data-slot="select-group" {...props} />;
 }
 
-function SelectValue({ ...props }) {
+function SelectValue({ ...props } = {}) {
 	return <SelectPrimitive.Value data-slot="select-value" {...props} />;
 }
 
 function SelectTrigger({
-	className,
+	className = "",
 	size = "default",
-	children,
-	variant,
+	children = null,
+	variant = undefined,
 	...props
 }) {
 	const { values, colors, itemCount } = React.useContext(MultiSelectContext);
@@ -132,8 +136,12 @@ function SelectTrigger({
 			data-slot="select-trigger"
 			data-size={size}
 			className={cn(
-				"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit min-w-3xs items-center justify-between gap-2 rounded-lg border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 cursor-pointer",
-				otherThemes({ variant: variant }),
+				"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit min-w-3xs items-center justify-between gap-2 rounded-lg border bg-transparent px-4 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 cursor-pointer",
+				buttonVariants({
+					variant: variant,
+					size: "icon-lg",
+					animation: "colors",
+				}),
 				className,
 			)}
 			{...props}
@@ -169,7 +177,12 @@ function SelectTrigger({
 	);
 }
 
-function SelectContent({ className, children, position = "popper", ...props }) {
+function SelectContent({
+	className = "",
+	children = null,
+	position = "popper",
+	...props
+}) {
 	return (
 		<SelectPrimitive.Portal>
 			<SelectPrimitive.Content
@@ -199,17 +212,23 @@ function SelectContent({ className, children, position = "popper", ...props }) {
 	);
 }
 
-function SelectLabel({ className, ...props }) {
+function SelectLabel({ className = "", ...props }) {
 	return (
 		<SelectPrimitive.Label
 			data-slot="select-label"
-			className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+			className={cn("text-muted-foreground p-1.5 text-xs", className)}
 			{...props}
 		/>
 	);
 }
 
-function SelectItem({ className, children, value, color, ...props }) {
+function SelectItem({
+	className = "",
+	children = null,
+	value,
+	color = undefined,
+	...props
+}) {
 	const { values, setValue, registerItem, registerColor, itemCount } =
 		React.useContext(MultiSelectContext);
 	const [isHoveringCheckbox, setIsHoveringCheckbox] = React.useState(false);
@@ -298,15 +317,16 @@ function SelectItem({ className, children, value, color, ...props }) {
 	};
 
 	return (
-		<div className="w-full flex items-center gap-1 group">
+		<div className="w-full min-w-0 flex items-center gap-0.5 group overflow-hidden">
 			<div
 				className={cn(
 					buttonVariants({
 						variant: "ghost",
-						size: "icon-sm",
+						size: "icon",
 						animation: "none",
+						className: "hover:bg-accent/75",
 					}),
-					"aspect-square [&_svg]:!size-3.5",
+					"aspect-square [&_svg]:!size-3.5 shrink-0",
 				)}
 				onClick={handleCheckboxClick}
 				onMouseEnter={() => setIsHoveringCheckbox(true)}
@@ -319,10 +339,11 @@ function SelectItem({ className, children, value, color, ...props }) {
 				className={cn(
 					buttonVariants({
 						variant: "ghost",
-						size: "icon-sm",
+						size: "",
 						animation: "none",
+						className: "hover:bg-accent/75",
 					}),
-					"focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center justify-between gap-8 w-full cursor-pointer rounded-lg py-1.5 pr-2 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+					"focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex items-center justify-between gap-2 flex-1 min-w-0 cursor-pointer rounded-lg py-1.5 pr-2 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 overflow-hidden",
 					className,
 				)}
 				value={value}
@@ -334,17 +355,17 @@ function SelectItem({ className, children, value, color, ...props }) {
 				onMouseLeave={() => setIsHoveringText(false)}
 				{...props}
 			>
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
 					<Badge
 						className={cn(
-							"rounded-full squircle-none aspect-square size-3 p-0 bg-gray-200 border border-background",
+							"rounded-full squircle-none aspect-square size-3 p-0 bg-gray-200 border border-background shrink-0",
 							color,
 						)}
 					/>
-					{children}
+					<span className="truncate min-w-0">{children}</span>
 				</div>
 
-				<div className="flex w-fit items-center justify-center text-xs text-muted-foreground font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-50">
+				<div className="flex items-center justify-center text-xs text-muted-foreground font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-50 shrink-0 ml-1">
 					{getActionText()}
 				</div>
 			</div>

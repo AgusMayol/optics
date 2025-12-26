@@ -13,7 +13,7 @@ import { AutoHeight } from "@/registry/optics/helpers/primitives/effects/auto-he
 
 const [TabsProvider, useTabs] = getStrictContext("TabsContext");
 
-function Tabs(props) {
+function Tabs(props = {}) {
 	const [value, setValue] = useControlledState({
 		value: props.value,
 		defaultValue: props.defaultValue,
@@ -49,15 +49,15 @@ function TabsHighlight({
 	);
 }
 
-function TabsList(props) {
+function TabsList(props = {}) {
 	return <TabsPrimitive.List data-slot="tabs-list" {...props} />;
 }
 
-function TabsHighlightItem(props) {
+function TabsHighlightItem(props = {}) {
 	return <HighlightItem data-slot="tabs-highlight-item" {...props} />;
 }
 
-function TabsTrigger(props) {
+function TabsTrigger(props = {}) {
 	return <TabsPrimitive.Trigger data-slot="tabs-trigger" {...props} />;
 }
 
@@ -65,21 +65,28 @@ function TabsContent({
 	value,
 	forceMount,
 	transition = { duration: 0.5, ease: "easeInOut" },
+	render,
 	...props
 }) {
+	const defaultContent = (
+		<motion.div
+			data-slot="tabs-content"
+			layout
+			layoutDependency={value}
+			initial={{ opacity: 0, filter: "blur(4px)" }}
+			animate={{ opacity: 1, filter: "blur(0px)" }}
+			exit={{ opacity: 0, filter: "blur(4px)" }}
+			transition={transition}
+			{...props}
+		/>
+	);
+
+	const content = render || defaultContent;
+
 	return (
 		<AnimatePresence mode="wait">
 			<TabsPrimitive.Content asChild forceMount={forceMount} value={value}>
-				<motion.div
-					data-slot="tabs-content"
-					layout
-					layoutDependency={value}
-					initial={{ opacity: 0, filter: "blur(4px)" }}
-					animate={{ opacity: 1, filter: "blur(0px)" }}
-					exit={{ opacity: 0, filter: "blur(4px)" }}
-					transition={transition}
-					{...props}
-				/>
+				{content}
 			</TabsPrimitive.Content>
 		</AnimatePresence>
 	);

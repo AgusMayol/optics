@@ -525,8 +525,7 @@ export default function Page() {
 				{/* 1. Server Components */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -541,8 +540,7 @@ export default function Page() {
 									Server Components (Default)
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						In Next.js 16, all components are Server Components by default. They
@@ -604,8 +602,7 @@ export default function Page() {
 				{/* 2. Client Components */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -620,8 +617,7 @@ export default function Page() {
 									Client Components (Only When Needed)
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use Client Components only for interactivity (events, state,
@@ -679,8 +675,7 @@ export default function Page() {
 				{/* 3. Dynamic Imports */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -695,8 +690,7 @@ export default function Page() {
 									Dynamic Imports & Code Splitting
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use dynamic imports to load heavy components only when needed. This
@@ -753,8 +747,7 @@ export default function Page() {
 				{/* 4. React Compiler */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://react.dev/learn/react-compiler"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -769,8 +762,7 @@ export default function Page() {
 									React Compiler
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						The React Compiler automatically optimizes your components,
@@ -835,8 +827,7 @@ export default function Page() {
 				{/* 5. Cache Strategies */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/caching"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -851,8 +842,7 @@ export default function Page() {
 									Cache Strategies
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js 16 offers multiple cache levels: React cache for
@@ -907,8 +897,7 @@ export default function Page() {
 				{/* 6. Fetch Cache */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -923,8 +912,7 @@ export default function Page() {
 									Fetch Cache & Revalidation
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js automatically caches fetch responses. Configure time-based
@@ -981,8 +969,7 @@ export default function Page() {
 				{/* 7. Loading Files & Streaming */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -997,8 +984,7 @@ export default function Page() {
 									Loading Files & Streaming
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js 16 recommends using separate{" "}
@@ -1064,8 +1050,7 @@ export default function Page() {
 				{/* 8. Image Optimization */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/optimizing/images"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1080,8 +1065,7 @@ export default function Page() {
 									Image Optimization
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js Image component automatically optimizes images, serving
@@ -1139,8 +1123,7 @@ export default function Page() {
 				{/* 9. Bundle Optimization */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/optimizing/bundle-analyzer"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1155,8 +1138,7 @@ export default function Page() {
 									Bundle Optimization
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Reduce bundle sizes by importing only what's needed, using tree
@@ -1213,8 +1195,7 @@ export default function Page() {
 				{/* 10. Partial Prerendering */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/routing/partial-prerendering"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1229,8 +1210,7 @@ export default function Page() {
 									Partial Prerendering (PPR)
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Partial Prerendering combines the best of SSG and SSR: prerenders
@@ -1359,38 +1339,32 @@ export default function Page() {
 				</div>
 
 				<div className="w-full flex flex-wrap items-center gap-8">
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://nextjs.org/docs/app/building-your-application/optimizing"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Next.js Optimization Docs
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://react.dev/learn/react-compiler"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							React Compiler
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://web.dev/vitals/"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Core Web Vitals
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 				</div>
 			</div>
 		</main>

@@ -2,19 +2,19 @@
 
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { SearchIcon } from "lucide-react";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/lib/utils";
 import {
 	Dialog,
-	DialogContent,
+	DialogPopup,
 	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 } from "@/registry/optics/dialog";
 import { ScrollArea } from "@/registry/optics/scroll-area";
+import { SearchIcon } from "lucide-react";
 
-function Command({ className, ...props }) {
+function Command({ className = "", ...props }) {
 	return (
 		<CommandPrimitive
 			data-slot="command"
@@ -30,8 +30,8 @@ function Command({ className, ...props }) {
 function CommandDialog({
 	title = "Command Palette",
 	description = "Search for a command to run...",
-	children,
-	className,
+	children = null,
+	className = "",
 	showCloseButton = false,
 	...props
 }) {
@@ -41,7 +41,7 @@ function CommandDialog({
 				<DialogTitle>{title}</DialogTitle>
 				<DialogDescription>{description}</DialogDescription>
 			</DialogHeader>
-			<DialogContent
+			<DialogPopup
 				className={cn("overflow-hidden", className)}
 				showCloseButton={showCloseButton}
 				containerClassName="p-0"
@@ -49,12 +49,12 @@ function CommandDialog({
 				<Command className="[&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
 					{children}
 				</Command>
-			</DialogContent>
+			</DialogPopup>
 		</Dialog>
 	);
 }
 
-function CommandInput({ className, ...props }) {
+function CommandInput({ className = "", ...props }) {
 	return (
 		<div
 			data-slot="command-input-wrapper"
@@ -73,7 +73,7 @@ function CommandInput({ className, ...props }) {
 	);
 }
 
-function CommandList({ className, ...props }) {
+function CommandList({ className = "", ...props }) {
 	return (
 		<ScrollArea
 			className={cn("max-h-[300px]", className)}
@@ -88,7 +88,7 @@ function CommandList({ className, ...props }) {
 	);
 }
 
-function CommandEmpty({ ...props }) {
+function CommandEmpty({ ...props } = {}) {
 	return (
 		<CommandPrimitive.Empty
 			data-slot="command-empty"
@@ -98,7 +98,7 @@ function CommandEmpty({ ...props }) {
 	);
 }
 
-function CommandGroup({ className, ...props }) {
+function CommandGroup({ className = "", ...props }) {
 	return (
 		<CommandPrimitive.Group
 			data-slot="command-group"
@@ -111,7 +111,7 @@ function CommandGroup({ className, ...props }) {
 	);
 }
 
-function CommandSeparator({ className, ...props }) {
+function CommandSeparator({ className = "", ...props }) {
 	return (
 		<CommandPrimitive.Separator
 			data-slot="command-separator"
@@ -121,7 +121,7 @@ function CommandSeparator({ className, ...props }) {
 	);
 }
 
-function CommandItem({ className, ...props }) {
+function CommandItem({ className = "", ...props }) {
 	return (
 		<CommandPrimitive.Item
 			data-slot="command-item"
@@ -134,7 +134,7 @@ function CommandItem({ className, ...props }) {
 	);
 }
 
-function CommandShortcut({ className, ...props }) {
+function CommandShortcut({ className = "", ...props }) {
 	return (
 		<span
 			data-slot="command-shortcut"

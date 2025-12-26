@@ -4,22 +4,22 @@ import * as React from "react";
 
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
-import { useTouchPrimary } from '@/registry/optics/hooks/use-has-primary-touch';
+import { useTouchPrimary } from "@/registry/optics/hooks/use-has-primary-touch";
 
 const ScrollAreaContext = React.createContext(false);
 
 const ScrollArea = React.forwardRef(
 	(
 		{
-			className,
-			children,
+			className = "",
+			children = null,
 			scrollHideDelay = 0,
-			viewportClassName,
-			maskClassName,
+			viewportClassName = "",
+			maskClassName = "",
 			maskHeight = 30,
-			maskColor,
+			maskColor = undefined,
 			...props
 		},
 		ref,
@@ -146,7 +146,7 @@ const ScrollArea = React.forwardRef(
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
 const ScrollBar = React.forwardRef(
-	({ className, orientation = "vertical", ...props }, ref) => {
+	({ className = "", orientation = "vertical", ...props }, ref) => {
 		const isTouch = React.useContext(ScrollAreaContext);
 
 		if (isTouch) return null;
@@ -184,8 +184,8 @@ ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 const ScrollMask = ({
 	showMask,
 	maskHeight,
-	maskColor,
-	className,
+	maskColor = undefined,
+	className = "",
 	...props
 }) => {
 	// Extract color name from maskColor (e.g., "from-sidebar" -> "sidebar", "sidebar" -> "sidebar")

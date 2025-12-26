@@ -7,6 +7,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/registry/optics/sonner";
 import { ViewTransition } from "react";
+import { Header } from "./header";
+import { links } from "./layout-content";
+import { Footer } from "./footer";
+import { SidebarWidthProvider } from "./sidebar-width-provider";
 
 const interSans = Inter({
 	variable: "--font-inter-sans",
@@ -69,7 +73,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	const shouldInjectToolbar = process.env.NODE_ENV === "development";
-
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "WebSite",
@@ -81,7 +84,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${interSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background`}
+				className={`${interSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background grid grid-cols-[1fr_minmax(0,1280px)_1fr] grid-rows-[1fr_auto]`}
 			>
 				<script
 					type="application/ld+json"
@@ -98,7 +101,21 @@ export default function RootLayout({ children }) {
 					<ViewTransition>
 						<Analytics />
 						<SpeedInsights />
-						<LayoutContent>{children}</LayoutContent>
+						<SidebarWidthProvider>
+							<div className="col-start-1 row-start-1 lg:border-r lg:border-b border-dashed bg-background sticky top-0 z-20" />
+							<div className="col-start-2 row-start-1 border-b z-50 bg-background sticky top-0">
+								<Header links={links} />
+							</div>
+							<div className="col-start-3 row-start-1 lg:border-l lg:border-b border-dashed bg-background sticky top-0 z-20" />
+
+							<div className="col-start-1 row-start-2 lg:border-r" />
+							<LayoutContent>{children}</LayoutContent>
+							<div className="col-start-3 row-start-2 lg:border-l sticky top-0" />
+
+							{/* <div className="bg-background z-10 fixed bottom-0 left-auto w-full">
+								<Footer />
+							</div> */}
+						</SidebarWidthProvider>
 						<Toaster />
 						{shouldInjectToolbar && <VercelToolbar />}
 					</ViewTransition>

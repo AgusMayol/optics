@@ -1,45 +1,10 @@
 "use client";
-import { InstallationGuide } from "@/components/installation-guide";
-import { ComponentNavigation } from "@/components/component-navigation";
-import { PropsTable } from "@/components/props-table";
-import { useCookiePreferences } from "@/lib/use-cookie-preferences";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/registry/optics/accordion";
-import { Button } from "@/registry/optics/button";
-import { Card, CardContent, CardFooter } from "@/registry/optics/card";
+import { ComponentConfig } from "../layout";
 import { Checkbox } from "@/registry/optics/checkbox";
-import {
-	CodeBlock,
-	CodeBlockBody,
-	CodeBlockContent,
-	CodeBlockCopyButton,
-	CodeBlockHeader,
-	CodeBlockItem,
-} from "@/registry/optics/code-block";
-import { Label } from "@/registry/optics/label";
-import { Separator } from "@/registry/optics/separator";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-
-import componentCode from "@/registry/optics/checkbox.jsx.txt";
-
-const code = [
-	{
-		language: "jsx",
-		filename: "checkbox.jsx",
-		code: `import { Checkbox } from "@/components/optics/checkbox";
 import { Label } from "@/registry/optics/label";
 
-<div className="flex items-center space-x-2">
-	<Checkbox id="terms" />
-	<Label htmlFor="terms">Accept terms and conditions</Label>
-</div>`,
-	},
-];
+import componentCode from "@/registry/optics/dist/checkbox.jsx.txt";
+import generatedProps from "@/registry/optics/dist/checkbox.json";
 
 const componentFiles = [
 	{
@@ -48,212 +13,61 @@ const componentFiles = [
 	},
 ];
 
-const installDeps = [
+const code = [
 	{
-		label: "pnpm",
-		code: "pnpm add @radix-ui/react-checkbox lucide-react",
-	},
-	{
-		label: "npm",
-		code: "npm install @radix-ui/react-checkbox lucide-react",
-	},
-	{
-		label: "yarn",
-		code: "yarn add @radix-ui/react-checkbox lucide-react",
-	},
-	{
-		label: "bun",
-		code: "bun add @radix-ui/react-checkbox lucide-react",
+		language: "jsx",
+		filename: "checkbox.jsx",
+		code: `import { Checkbox } from "@/components/optics/checkbox";
+import { Label } from "@/components/optics/label";
+
+<div className="flex items-center space-x-2">
+	<Checkbox id="terms" />
+	<Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`,
 	},
 ];
 
+const demoComponent = (
+	<div className="w-full flex flex-col items-center justify-center gap-4">
+		<div className="flex flex-col items-start gap-4">
+			<div className="flex items-center space-x-2">
+				<Checkbox id="terms" />
+				<Label htmlFor="terms">Accept terms and conditions</Label>
+			</div>
+
+			<div className="flex items-center space-x-2">
+				<Checkbox id="newsletter" />
+				<Label htmlFor="newsletter">Subscribe to newsletter</Label>
+			</div>
+
+			<div className="flex items-center space-x-2">
+				<Checkbox id="disabled" disabled />
+				<Label htmlFor="disabled">Disabled checkbox</Label>
+			</div>
+		</div>
+	</div>
+);
+
+const componentConfig = {
+	header: {
+		title: "Checkbox",
+		description:
+			"A control that allows the user to toggle between checked and not checked.",
+		href: "https://ui.shadcn.com/docs/components/checkbox",
+		hrefText: "shadcn/ui",
+	},
+	content: {
+		children: demoComponent,
+		code: code,
+	},
+	installation: {
+		componentName: "checkbox",
+		dependencies: "@radix-ui/react-checkbox lucide-react",
+		manualFiles: componentFiles,
+	},
+	props: generatedProps,
+};
+
 export default function Page() {
-	const { value, setValue, installationTab, handleTabChange } =
-		useCookiePreferences("checkbox", installDeps);
-
-	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
-			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<div className="w-full flex items-center justify-between">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
-						Checkbox
-					</h1>
-					<Button variant="link" size="sm" asChild>
-						<Link
-							href="https://ui.shadcn.com/docs/components/checkbox"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							shadcn/ui
-							<ArrowUpRight className="-ml-1" />
-						</Link>
-					</Button>
-				</div>
-
-				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
-					A control that allows the user to toggle between checked and not
-					checked.
-				</p>
-			</div>
-
-			<Separator decoration />
-
-			<div className="flex flex-col flex-1 gap-8 p-6 lg:p-12 pt-4">
-				<Card className="pt-8 pb-0 bg-sidebar">
-					<CardContent className="px-8 flex flex-col items-center gap-4">
-						<div className="flex flex-col items-start gap-4">
-							<div className="flex items-center space-x-2">
-								<Checkbox id="terms" />
-								<Label htmlFor="terms">Accept terms and conditions</Label>
-							</div>
-
-							<div className="flex items-center space-x-2">
-								<Checkbox id="newsletter" />
-								<Label htmlFor="newsletter">Subscribe to newsletter</Label>
-							</div>
-
-							<div className="flex items-center space-x-2">
-								<Checkbox id="disabled" disabled />
-								<Label htmlFor="disabled">Disabled checkbox</Label>
-							</div>
-						</div>
-					</CardContent>
-
-					<CardFooter className="border-t px-0 py-0 bg-background rounded-b-xl">
-						<Accordion type={"single"} collapsible className="w-full">
-							<AccordionItem value="codeblock" className="rounded-b-xl">
-								<AccordionTrigger
-									className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-									showArrow
-								>
-									Show Code
-								</AccordionTrigger>
-								<AccordionContent
-									className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-									keepRendered
-								>
-									<CodeBlock
-										data={code}
-										defaultValue={code[0].filename}
-										className="border-none rounded-none rounded-b-xl shadow-none group"
-									>
-										<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-											<CodeBlockCopyButton />
-										</CodeBlockHeader>
-										<CodeBlockBody>
-											{(item) => (
-												<CodeBlockItem
-													key={item.language}
-													value={item.filename}
-												>
-													<CodeBlockContent
-														language={item.language}
-														className="bg-sidebar"
-													>
-														{item.code}
-													</CodeBlockContent>
-												</CodeBlockItem>
-											)}
-										</CodeBlockBody>
-									</CodeBlock>
-								</AccordionContent>
-							</AccordionItem>
-						</Accordion>
-					</CardFooter>
-				</Card>
-			</div>
-
-			<InstallationGuide
-				value={value}
-				setValue={setValue}
-				componentName="checkbox"
-				installDeps={installDeps}
-				manualFiles={componentFiles}
-				installationTab={installationTab}
-				handleTabChange={handleTabChange}
-			/>
-
-			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Props
-				</h2>
-				<PropsTable
-					data={[
-						{
-							component: "<Checkbox />",
-							props: [
-								{
-									name: "className",
-									type: "string",
-									description:
-										"Additional CSS classes to apply to the checkbox.",
-								},
-								{
-									name: "variant",
-									type: `"black" | "raised" | "ghost" | "outline"`,
-									description:
-										"Variant style for the checkbox. Defaults to 'black'.",
-								},
-								{
-									name: "variantChecked",
-									type: `"black" | "raised" | "ghost" | "outline"`,
-									description:
-										"Variant style when the checkbox is checked. Overrides variant when checked.",
-								},
-								{
-									name: "variantUnchecked",
-									type: `"black" | "raised" | "ghost" | "outline"`,
-									description:
-										"Variant style when the checkbox is unchecked. Overrides variant when unchecked.",
-								},
-								{
-									name: "checked",
-									type: "boolean",
-									description:
-										"The controlled checked state of the checkbox. Use with onCheckedChange.",
-								},
-								{
-									name: "defaultChecked",
-									type: "boolean",
-									description:
-										"The uncontrolled default checked state of the checkbox.",
-								},
-								{
-									name: "onCheckedChange",
-									type: "(checked: boolean) => void",
-									description: "Callback fired when the checked state changes.",
-								},
-								{
-									name: "disabled",
-									type: "boolean",
-									description:
-										"When true, prevents user interaction with the checkbox.",
-								},
-								{
-									name: "required",
-									type: "boolean",
-									description:
-										"When true, indicates that the user must check the checkbox before the owning form can be submitted.",
-								},
-								{
-									name: "name",
-									type: "string",
-									description:
-										"The name of the checkbox. Submitted with its owning form as part of a name/value pair.",
-								},
-								{
-									name: "value",
-									type: "string",
-									description:
-										"The value given as data when submitted with a name.",
-								},
-							],
-						},
-					]}
-				/>
-			</div>
-
-			<ComponentNavigation />
-		</main>
-	);
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

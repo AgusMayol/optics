@@ -1,20 +1,19 @@
 "use client";
 
+import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
 import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { otherThemes } from "@/registry/optics/button";
+import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
-
-import { cn } from '@/registry/optics/lib/utils';
+import { buttonVariants } from "./button";
 
 function Checkbox({
-	className,
+	className = "",
 	variant = "black",
-	variantChecked,
-	variantUnchecked,
-	checked,
-	defaultChecked,
-	onCheckedChange,
+	variantChecked = undefined,
+	variantUnchecked = undefined,
+	checked = undefined,
+	defaultChecked = false,
+	onCheckedChange = undefined,
 	...props
 }) {
 	const [isChecked, setIsChecked] = React.useState(
@@ -33,13 +32,16 @@ function Checkbox({
 		setIsChecked(newChecked);
 		onCheckedChange?.(newChecked);
 	};
-
 	return (
 		<CheckboxPrimitive.Root
 			data-slot="checkbox"
 			className={cn(
-				"peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-all duration-300 ease-in-out outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer",
-				otherThemes({ variant: isChecked ? "black" : "outline" }),
+				buttonVariants({
+					variant: isChecked ? "default" : "outline",
+					size: "icon-sm",
+					className:
+						"border-input dark:bg-input/30 data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary data-checked:border-primary aria-invalid:aria-checked:border-primary aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 flex size-4 items-center justify-center rounded-[4px] border transition-all duration-200 ease-out group-has-disabled/field:opacity-50 focus-visible:ring-[2px] aria-invalid:ring-[2px] peer relative shrink-0 outline-none after:absolute after:-inset-x-3 after:-inset-y-2 disabled:cursor-not-allowed! disabled:opacity-50 data-[state=checked]:animate-in data-[state=checked]:zoom-in-50 data-[state=checked]:duration-200 data-[state=unchecked]:animate-out data-[state=unchecked]:zoom-out-50 data-[state=unchecked]:duration-150",
+				}),
 				className,
 			)}
 			checked={checked ?? isChecked}
@@ -48,12 +50,12 @@ function Checkbox({
 		>
 			<CheckboxPrimitive.Indicator
 				data-slot="checkbox-indicator"
-				className="flex items-center justify-center text-current data-[state=checked]:animate-in data-[state=checked]:fade-in-0 data-[state=checked]:zoom-in-50 data-[state=checked]:duration-200"
+				className="[&>svg]:size-3.5 grid place-content-center text-current animate-in fade-in-0 zoom-in-50 duration-200"
 			>
-				<CheckIcon className="size-3.5" />
+				<CheckIcon />
 			</CheckboxPrimitive.Indicator>
 		</CheckboxPrimitive.Root>
 	);
 }
 
-export { Checkbox, CheckboxPrimitive };
+export { Checkbox };

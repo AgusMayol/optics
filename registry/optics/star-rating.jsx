@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
 export function StarRating({
 	totalStars = 5,
 	defaultValue = 0,
-	onRate,
+	onRate = undefined,
 	size = "md",
-	className,
+	className = "",
 	disabled = false,
 }) {
 	const [rating, setRating] = useState(defaultValue);

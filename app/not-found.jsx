@@ -59,12 +59,17 @@ export default function Custom404() {
 					</p>
 
 					<div className="w-full flex items-center justify-center">
-						<Button variant="default" size="lg" asChild>
-							<Link href="/">
-								<ArrowLeft />
-								Go back to the homepage
-							</Link>
-						</Button>
+						<Button
+							variant="default"
+							size="lg"
+							nativeButton={false}
+							render={
+								<Link href="/">
+									<ArrowLeft />
+									Go back to the homepage
+								</Link>
+							}
+						/>
 					</div>
 				</div>
 			</div>

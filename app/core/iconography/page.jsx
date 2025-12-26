@@ -79,18 +79,19 @@ export default function Page() {
 					This design system loves{" "}
 					<Button
 						variant="link"
-						className="text-muted-foreground hover:text-primary transition-colors"
-						asChild
-					>
-						<Link
-							href="https://lucide.dev/"
-							rel="noopener noreferrer"
-							target="blank"
-						>
-							Lucide Icons
-							<ArrowUpRight size={16} className="-ml-1" />
-						</Link>
-					</Button>
+						className="text-muted-foreground hover:text-primary transition-colors text-base font-normal!"
+						nativeButton={false}
+						render={
+							<Link
+								href="https://lucide.dev/"
+								rel="noopener noreferrer"
+								target="blank"
+							>
+								Lucide Icons
+								<ArrowUpRight size={16} className="-ml-1" />
+							</Link>
+						}
+					/>
 				</p>
 				<Snippet className="w-auto mt-2">
 					<SnippetHeader className="pl-4 flex gap-4 bg-transparent border-0">

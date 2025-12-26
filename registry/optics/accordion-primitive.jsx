@@ -3,8 +3,8 @@ import * as React from "react";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { motion, AnimatePresence } from "motion/react";
 
-import { useControlledState } from '@/registry/optics/hooks/use-controlled-state';
-import { getStrictContext } from '@/registry/optics/lib/get-strict-context';
+import { useControlledState } from "@/registry/optics/hooks/use-controlled-state";
+import { getStrictContext } from "@/registry/optics/lib/get-strict-context";
 
 const [AccordionProvider, useAccordion] = getStrictContext("AccordionContext");
 
@@ -12,7 +12,7 @@ const [AccordionItemProvider, useAccordionItem] = getStrictContext(
 	"AccordionItemContext",
 );
 
-function Accordion(props) {
+function Accordion(props = {}) {
 	const [value, setValue] = useControlledState({
 		value: props?.value,
 		defaultValue: props?.defaultValue,
@@ -30,7 +30,7 @@ function Accordion(props) {
 	);
 }
 
-function AccordionItem(props) {
+function AccordionItem(props = {}) {
 	const { value } = useAccordion();
 	const [isOpen, setIsOpen] = React.useState(
 		value?.includes(props?.value) ?? false,
@@ -47,11 +47,11 @@ function AccordionItem(props) {
 	);
 }
 
-function AccordionHeader(props) {
+function AccordionHeader(props = {}) {
 	return <AccordionPrimitive.Header data-slot="accordion-header" {...props} />;
 }
 
-function AccordionTrigger(props) {
+function AccordionTrigger(props = {}) {
 	return (
 		<AccordionPrimitive.Trigger data-slot="accordion-trigger" {...props} />
 	);

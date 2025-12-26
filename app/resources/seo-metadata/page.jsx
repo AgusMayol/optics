@@ -471,24 +471,29 @@ export default function Page() {
 				{/* 1. Complete Configuration */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										1
-									</Badge>
-									Complete Metadata
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											1
+										</Badge>
+										Complete Metadata
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Below is a complete example of the metadata setup, so you can easily
@@ -545,24 +550,29 @@ export default function Page() {
 				{/* 2. Dynamic Metadata */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										2
-									</Badge>
-									Dynamic Metadata
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											2
+										</Badge>
+										Dynamic Metadata
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						For pages with dynamic content (blogs, products, etc.), use{" "}
@@ -618,24 +628,29 @@ export default function Page() {
 				{/* 3. Open Graph Image Generation */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										3
-									</Badge>
-									Open Graph Image Generation
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											3
+										</Badge>
+										Open Graph Image Generation
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Automatically generate Open Graph images using Next.js. Create{" "}
@@ -743,24 +758,29 @@ export default function Page() {
 				{/* 4. Sitemap & Robots */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
-								href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										4
-									</Badge>
-									Sitemap & Robots.txt
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											4
+										</Badge>
+										Sitemap & Robots.txt
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Next.js automatically generates sitemap.xml and robots.txt files.
@@ -896,27 +916,35 @@ export default function Page() {
 				</ul>
 
 				<div className="w-full flex items-center gap-8">
-					<Button variant="link" asChild>
-						<Link
-							href="https://www.newcopy.ai/m/tools"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							AI Marketing Tools
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://www.newcopy.ai/m/tools"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								AI Marketing Tools
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button variant="link" asChild>
-						<Link
-							href="https://www.cleanmyseo.com/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Clean My SEO
-							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://www.cleanmyseo.com/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Clean My SEO
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 				</div>
 			</div>
 		</main>

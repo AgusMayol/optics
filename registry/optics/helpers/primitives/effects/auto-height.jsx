@@ -19,22 +19,36 @@ function AutoHeight({
 
 	style,
 	animate,
-	asChild = false,
+	render,
 	...props
 }) {
 	const { ref, height } = useAutoHeight(deps);
 
-	const Comp = asChild ? Slot : motion.div;
+	const motionProps = {
+		style: { overflow: "hidden", ...style },
+		animate: { height, ...animate },
+		transition,
+	};
+
+	if (render) {
+		return (
+			<Slot {...motionProps} {...props}>
+				{React.cloneElement(render, {
+					children: (
+						<>
+							{render.props.children}
+							<div ref={ref}>{children}</div>
+						</>
+					),
+				})}
+			</Slot>
+		);
+	}
 
 	return (
-		<Comp
-			style={{ overflow: "hidden", ...style }}
-			animate={{ height, ...animate }}
-			transition={transition}
-			{...props}
-		>
+		<motion.div {...motionProps} {...props}>
 			<div ref={ref}>{children}</div>
-		</Comp>
+		</motion.div>
 	);
 }
 

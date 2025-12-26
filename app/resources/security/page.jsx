@@ -868,8 +868,7 @@ export default function Page() {
 				{/* 1. Content Security Policy (CSP) */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/guides/content-security-policy"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -884,8 +883,7 @@ export default function Page() {
 									Content Security Policy (CSP)
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						CSP is essential to protect against XSS attacks, clickjacking, and
@@ -940,8 +938,7 @@ export default function Page() {
 				{/* 2. Environment Variables */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://vercel.com/docs/environment-variables/sensitive-environment-variables"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -956,8 +953,7 @@ export default function Page() {
 									Secure Environment Variables
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Handle secrets and credentials securely with environment variables.
@@ -1011,8 +1007,7 @@ export default function Page() {
 				{/* 3. Authentication & Proxy */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1027,8 +1022,7 @@ export default function Page() {
 									Authentication with Proxy
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect routes and APIs with Proxy (formerly Middleware in Next.js
@@ -1083,8 +1077,7 @@ export default function Page() {
 				{/* 4. Input Sanitization & Validation */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1099,8 +1092,7 @@ export default function Page() {
 									Input Sanitization & Validation
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Validate and sanitize all user inputs. Use validation schemas and
@@ -1154,8 +1146,7 @@ export default function Page() {
 				{/* 5. Rate Limiting */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://vercel.com/docs/security/rate-limiting"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1170,8 +1161,7 @@ export default function Page() {
 									Rate Limiting
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect your APIs against abuse and DDoS attacks by implementing
@@ -1226,8 +1216,7 @@ export default function Page() {
 				{/* 6. Vercel Security Features */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://vercel.com/docs/security"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1242,8 +1231,7 @@ export default function Page() {
 									Vercel Security Features
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Vercel provides multiple security layers: Firewall, DDoS protection,
@@ -1298,8 +1286,7 @@ export default function Page() {
 				{/* 7. CSRF Protection */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1314,8 +1301,7 @@ export default function Page() {
 									CSRF Protection
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect against Cross-Site Request Forgery attacks using CSRF
@@ -1369,8 +1355,7 @@ export default function Page() {
 				{/* 8. Dependency Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://docs.npmjs.com/cli/v8/commands/npm-audit"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1385,8 +1370,7 @@ export default function Page() {
 									Dependency Security
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Keep your dependencies updated and free from vulnerabilities. Use
@@ -1440,8 +1424,7 @@ export default function Page() {
 				{/* 9. Secure Cookies & Sessions */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1456,8 +1439,7 @@ export default function Page() {
 									Secure Cookies & Sessions
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure cookies with security flags. Use httpOnly, secure, and
@@ -1511,8 +1493,7 @@ export default function Page() {
 				{/* 10. SQL Injection Prevention */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1527,8 +1508,7 @@ export default function Page() {
 									SQL Injection Prevention
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use ORMs like Prisma or parameterized queries to prevent SQL
@@ -1582,8 +1562,7 @@ export default function Page() {
 				{/* 11. Security Headers */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1598,8 +1577,7 @@ export default function Page() {
 									Security Headers
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure security headers in next.config.js. Include HSTS,
@@ -1653,8 +1631,7 @@ export default function Page() {
 				{/* 12. Server Actions Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1669,8 +1646,7 @@ export default function Page() {
 									Server Actions Security
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Server Actions must validate authentication and authorization.
@@ -1724,8 +1700,7 @@ export default function Page() {
 				{/* 13. Source Maps Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button variant="link" asChild className="gap-1">
-							<Link
+						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
 								href="https://nextjs.org/docs/app/api-reference/config/next-config-js/productionBrowserSourceMaps"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -1740,8 +1715,7 @@ export default function Page() {
 									Source Maps Security
 								</h2>
 								<ArrowUpRight size={16} className="mb-4" />
-							</Link>
-						</Button>
+							</Link>} />
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Disable source maps in production to prevent exposing your original
@@ -1865,49 +1839,41 @@ export default function Page() {
 				</div>
 
 				<div className="w-full flex flex-wrap items-center gap-8">
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://cheatsheetseries.owasp.org/"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							OWASP Cheat Sheets
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://nextjs.org/docs/app/guides/content-security-policy"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Next.js Security
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://vercel.com/docs/security"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Vercel Security
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 
-					<Button variant="link" asChild>
-						<Link
+					<Button nativeButton={false} variant="link" render={<Link
 							href="https://web.dev/security/"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Web.dev Security
 							<ArrowUpRight size={16} />
-						</Link>
-					</Button>
+						</Link>} />
 				</div>
 			</div>
 		</main>

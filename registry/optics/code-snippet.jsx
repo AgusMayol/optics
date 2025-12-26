@@ -1,8 +1,10 @@
 "use client";
 
 import { CheckIcon, CopyIcon } from "lucide-react";
-import { cloneElement, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/registry/optics/button";
+import { useRender } from "@base-ui/react/use-render";
+import { mergeProps } from "@base-ui/react/merge-props";
 import {
 	Tabs,
 	TabsContent,
@@ -11,9 +13,9 @@ import {
 	TabsTrigger,
 } from "@/registry/optics/tabs";
 import { ScrollArea } from "@/registry/optics/scroll-area";
-import { cn } from '@/registry/optics/lib/utils';
+import { cn } from "@/registry/optics/lib/utils";
 
-export const Snippet = ({ className, ...props }) => (
+export const Snippet = ({ className = "", ...props }) => (
 	<Tabs
 		className={cn(
 			"group w-full gap-0 overflow-hidden rounded-md border border-input",
@@ -23,7 +25,7 @@ export const Snippet = ({ className, ...props }) => (
 	/>
 );
 
-export const SnippetHeader = ({ className, ...props }) => (
+export const SnippetHeader = ({ className = "", ...props }) => (
 	<div
 		className={cn(
 			"flex flex-row items-center justify-between border-b bg-secondary p-1",
@@ -34,12 +36,11 @@ export const SnippetHeader = ({ className, ...props }) => (
 );
 
 export const SnippetCopyButton = ({
-	asChild,
-	value,
-	onCopy,
-	onError,
+	render = undefined,
+	value = "",
+	onCopy = undefined,
+	onError = undefined,
 	timeout = 2000,
-	children,
 	...props
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
@@ -70,22 +71,8 @@ export const SnippetCopyButton = ({
 		}
 	};
 
-	if (asChild) {
-		return cloneElement(children, {
-			onClick: copyToClipboard,
-		});
-	}
-
-	return (
-		<Button
-			variant="ghost"
-			role="button"
-			aria-label="Copy to clipboard"
-			size="icon"
-			className={cn("shrink-0")}
-			onClick={copyToClipboard}
-			{...props}
-		>
+	const buttonContent = (
+		<>
 			<div className="relative">
 				<div
 					className={cn(
@@ -109,22 +96,56 @@ export const SnippetCopyButton = ({
 				</div>
 			</div>
 			<span className="sr-only">Copy to clipboard</span>
-		</Button>
+		</>
+	);
+
+	const defaultProps = {
+		variant: "ghost",
+		role: "button",
+		"aria-label": "Copy to clipboard",
+		size: "icon",
+		className: cn("shrink-0"),
+		onClick: copyToClipboard,
+		children: buttonContent,
+	};
+
+	if (render) {
+		const element = useRender({
+			defaultTagName: "button",
+			render: typeof render === "function"
+				? (props, state) => {
+						const mergedProps = mergeProps("button", defaultProps, props);
+						return render(mergedProps, { isCopied, ...state });
+					}
+				: render,
+			props: mergeProps("button", defaultProps, props),
+			state: {
+				isCopied,
+			},
+		});
+		return element;
+	}
+
+	return (
+		<Button
+			{...defaultProps}
+			{...props}
+		/>
 	);
 };
 
-export const SnippetTabsList = ({ className, ...props }) => (
+export const SnippetTabsList = ({ className = "", ...props }) => (
 	<TabsList className={cn(className)} {...props} />
 );
 
-export const SnippetTabsTrigger = ({ className, ...props }) => (
+export const SnippetTabsTrigger = ({ className = "", ...props }) => (
 	<TabsTrigger className={cn("gap-1.5", className)} {...props} />
 );
 
 export const SnippetTabsContent = ({
-	className,
-	children,
-	textClassName,
+	className = "",
+	children = null,
+	textClassName = "",
 	...props
 }) => (
 	<TabsContent className={cn("mt-0 bg-background p-4", className)} {...props}>
@@ -142,8 +163,6 @@ export const SnippetTabsContent = ({
 	</TabsContent>
 );
 
-export const SnippetTabsContents = ({ className, children, ...props }) => (
-	<TabsContents className={cn(className)} {...props}>
-		{children}
-	</TabsContents>
+export const SnippetTabsContents = ({ className = "", children = null, ...props }) => (
+	<TabsContents className={cn(className)} {...props}>{children}</TabsContents>
 );
