@@ -50,7 +50,7 @@ export function MyComponent() {
 			if (typeof window !== "undefined") {
 				window.dispatchEvent(new Event("theme2-change"));
 				// Update cookie for server-side detection
-				document.cookie = `theme-preference=${newTheme}; path=/; max-age=31536000`;
+				document.cookie = \`theme-preference=\${newTheme}; path=/; max-age=31536000\`;
 			}
 		};
 
@@ -110,7 +110,7 @@ const propsData = [
 			},
 			{
 				name: "value",
-				type: `"system" | "light" | "dark"`,
+				type: '"system" | "light" | "dark"',
 				description: "Current theme value (controlled). Use with onChange.",
 			},
 			{
@@ -120,7 +120,7 @@ const propsData = [
 			},
 			{
 				name: "defaultValue",
-				type: `"system" | "light" | "dark" (default: "system")`,
+				type: '"system" | "light" | "dark" (default: "system")',
 				description: "Default theme value (uncontrolled).",
 			},
 		],
@@ -153,7 +153,8 @@ function ThemeSwitcherDemo() {
 		};
 
 		const isCurrentlyDark = checkTheme();
-		const willBeDark = newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
+		const willBeDark =
+			newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
 
 		if (isCurrentlyDark !== willBeDark) {
 			toggleSwitchTheme({
