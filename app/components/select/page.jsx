@@ -97,7 +97,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "select",
-		dependencies: "@radix-ui/react-select lucide-react",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

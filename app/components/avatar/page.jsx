@@ -87,7 +87,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "avatar",
-		dependencies: "@radix-ui/react-avatar",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

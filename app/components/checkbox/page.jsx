@@ -62,7 +62,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "checkbox",
-		dependencies: "@radix-ui/react-checkbox lucide-react",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

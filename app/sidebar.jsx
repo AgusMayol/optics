@@ -38,7 +38,6 @@ export function ListItems({ links, scrollHeight, isMobile, onLinkClick }) {
 		// Buscar el viewport del ScrollArea
 		const scrollElement =
 			scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]') ||
-			scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]") ||
 			scrollAreaRef.current;
 
 		if (!scrollElement) return;

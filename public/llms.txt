@@ -47,7 +47,7 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 ## Configuration
 
 ### Cursor Rules & MCPs
-[Cursor Rules & MCPsSoon](https://optics.agusmayol.com.ar/collections/cursor-rules): Upcoming guidelines for cursor behavior and multi-cursor patterns.
+[Cursor Rules & MCPs](https://optics.agusmayol.com.ar/collections/cursor-rules): Guidelines for cursor behavior, multi-cursor patterns, and MCP server integration.
 
 ### Next.js Configuration
 [Next.js ConfigurationSoon](https://optics.agusmayol.com.ar/collections/nextjs-configuration): Future documentation on configuring Next.js with the design system.
@@ -91,14 +91,13 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 - [Context Menu](https://optics.agusmayol.com.ar/components/context-menu): A component for displaying context menus.
 
 ### Data Display Components
+- [Chart](https://optics.agusmayol.com.ar/components/chart): Beautiful charts built with Recharts.
 - [Data Table](https://optics.agusmayol.com.ar/components/data-table): A component for displaying tabular data.
 - [Date Picker](https://optics.agusmayol.com.ar/components/date-picker): A component for selecting dates.
 - [Dialog](https://optics.agusmayol.com.ar/components/dialog): A modal dialog component for user interactions.
 - [Drawer](https://optics.agusmayol.com.ar/components/drawer): A component for side navigation.
 - [Dropdown Menu](https://optics.agusmayol.com.ar/components/dropdown-menu): A component for dropdown selections.
-- [Emoji Picker](https://optics.agusmayol.com.ar/components/emoji-picker): A component for selecting emojis.
 - [Empty State](https://optics.agusmayol.com.ar/components/empty): A component for displaying empty states in applications.
-- [Feedback](https://optics.agusmayol.com.ar/components/feedback): A component for providing user feedback.
 - [Field](https://optics.agusmayol.com.ar/components/field): A component for form fields.
 
 ### Form Components
@@ -127,6 +126,7 @@ AgusMayol's Optics: A comprehensive design system and component registry for bui
 - [Separator](https://optics.agusmayol.com.ar/components/separator): A component for separating content.
 - [Sheet](https://optics.agusmayol.com.ar/components/sheet): A component for displaying sheets of content.
 - [Show More](https://optics.agusmayol.com.ar/components/show-more): A component for expanding content sections.
+- [Sidebar](https://optics.agusmayol.com.ar/components/sidebar): A composable sidebar component with desktop and mobile support.
 - [Skeleton](https://optics.agusmayol.com.ar/components/skeleton): A component for loading placeholders.
 - [Slider](https://optics.agusmayol.com.ar/components/slider): A component for selecting values from a range.
 - [Sonner](https://optics.agusmayol.com.ar/components/sonner): A component for displaying notifications.

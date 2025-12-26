@@ -1,6 +1,6 @@
 "use client";
 
-import { useControllableState } from "@radix-ui/react-use-controllable-state";
+import { useControlledState } from "@/registry/optics/hooks/use-controlled-state";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useState, forwardRef } from "react";
@@ -35,9 +35,9 @@ export const ThemeSwitcher = forwardRef(
 		},
 		ref,
 	) => {
-		const [theme, setTheme] = useControllableState({
-			defaultProp: defaultValue,
-			prop: value,
+		const [theme, setTheme] = useControlledState({
+			defaultValue: defaultValue,
+			value: value,
 			onChange,
 		});
 		const [mounted, setMounted] = useState(false);

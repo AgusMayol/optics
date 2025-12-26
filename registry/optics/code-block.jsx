@@ -1,6 +1,6 @@
 "use client";
 
-import { useControllableState } from "@radix-ui/react-use-controllable-state";
+import { useControlledState } from "@/registry/optics/hooks/use-controlled-state";
 import {
 	transformerNotationDiff,
 	transformerNotationErrorLevel,
@@ -296,9 +296,9 @@ export const CodeBlock = ({
 	data = [],
 	...props
 }) => {
-	const [value, onValueChange] = useControllableState({
-		defaultProp: defaultValue ?? "",
-		prop: controlledValue,
+	const [value, onValueChange] = useControlledState({
+		defaultValue: defaultValue ?? "",
+		value: controlledValue,
 		onChange: controlledOnValueChange,
 	});
 

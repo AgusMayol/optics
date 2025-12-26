@@ -281,7 +281,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "code-block",
-		dependencies: "shiki @radix-ui/react-tabs",
+		dependencies: "shiki",
 		manualFiles: componentFiles,
 	},
 	props: propsData,

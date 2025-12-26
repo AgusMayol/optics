@@ -72,7 +72,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "popover",
-		dependencies: "@radix-ui/react-popover",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

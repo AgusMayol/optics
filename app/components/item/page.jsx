@@ -107,7 +107,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "item",
-		dependencies: "@radix-ui/react-slot class-variance-authority",
+		dependencies: "@base-ui/react class-variance-authority",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

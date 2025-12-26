@@ -46,13 +46,13 @@ import { ChevronDown } from "lucide-react";
 	</div>
 	<CollapsibleContent className="space-y-2 px-4">
 		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			@radix-ui/primitives
+			@base-ui/react
 		</div>
 		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			@radix-ui/colors
+			motion
 		</div>
 		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			@stitches/react
+			lucide-react
 		</div>
 	</CollapsibleContent>
 </Collapsible>`,
@@ -145,13 +145,13 @@ function CollapsibleDemo() {
 			</div>
 			<CollapsibleContent className="flex flex-col gap-4 px-4">
 				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					@radix-ui/primitives
+					@base-ui/react
 				</div>
 				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					@radix-ui/colors
+					motion
 				</div>
 				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					@stitches/react
+					lucide-react
 				</div>
 			</CollapsibleContent>
 		</Collapsible>

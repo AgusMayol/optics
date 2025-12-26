@@ -110,7 +110,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "breadcrumb",
-		dependencies: "@radix-ui/react-slot lucide-react",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

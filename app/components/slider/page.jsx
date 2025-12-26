@@ -73,7 +73,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "slider",
-		dependencies: "@radix-ui/react-slider",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

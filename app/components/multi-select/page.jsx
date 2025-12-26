@@ -107,7 +107,7 @@ const componentConfig = {
 	installation: {
 		componentName: "multi-select",
 		dependencies:
-			"@radix-ui/react-select @radix-ui/react-checkbox lucide-react",
+			"@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

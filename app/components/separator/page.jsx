@@ -49,7 +49,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "separator",
-		dependencies: "@radix-ui/react-separator",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

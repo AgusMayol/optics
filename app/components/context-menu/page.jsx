@@ -170,7 +170,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "context-menu",
-		dependencies: "@radix-ui/react-context-menu",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

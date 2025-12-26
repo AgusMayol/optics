@@ -128,7 +128,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "sheet",
-		dependencies: "@radix-ui/react-dialog class-variance-authority",
+		dependencies: "@base-ui/react class-variance-authority",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

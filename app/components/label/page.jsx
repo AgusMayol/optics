@@ -40,7 +40,7 @@ import { Input } from "@/components/optics/input";`,
 	},
 	installation: {
 		componentName: "label",
-		dependencies: "@radix-ui/react-label",
+		dependencies: "",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

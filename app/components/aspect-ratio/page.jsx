@@ -61,7 +61,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "aspect-ratio",
-		dependencies: "@radix-ui/react-aspect-ratio",
+		dependencies: "",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

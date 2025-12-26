@@ -199,7 +199,7 @@ function LayoutContent({ config }) {
 
 /**
  * Genera el array de installDeps desde un string de dependencias
- * @param {string} depsString - String con las dependencias separadas por espacios (ej: "@radix-ui/react-accordion lucide-react")
+ * @param {string} depsString - String con las dependencias separadas por espacios (ej: "@base-ui/react lucide-react")
  * @returns {Array} Array de objetos con label y code para cada package manager
  */
 function generateInstallDeps(depsString) {

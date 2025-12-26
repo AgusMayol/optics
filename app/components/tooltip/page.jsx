@@ -61,7 +61,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "tooltip",
-		dependencies: "@radix-ui/react-tooltip",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

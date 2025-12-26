@@ -250,7 +250,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "theme-switcher",
-		dependencies: "@radix-ui/react-use-controllable-state motion lucide-react",
+		dependencies: "motion lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: propsData,

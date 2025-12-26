@@ -1,108 +1,83 @@
+import fs from "node:fs";
+import path from "node:path";
+
 const baseUrl = process.env.NEXT_PUBLIC_DOMAIN
 	? `https://www.${process.env.NEXT_PUBLIC_DOMAIN}`
 	: "https://www.optics.agusmayol.com.ar";
 
-// Nota:
-// - Next.js App Router generará automáticamente /sitemap.xml a partir de este archivo.
-// - Ajusta NEXT_PUBLIC_SITE_URL en tus variables de entorno al dominio real (por ejemplo, https://optics.agusmayol.com.ar).
+/**
+ * Rutas que el desarrollador desea excluir manualmente.
+ * @type {string[]}
+ */
+const EXCLUDED_PATHS = [
+	// "/ejemplo-de-ruta-a-excluir",
+];
+
+/**
+ * Explora el directorio 'app' para encontrar todas las rutas (archivos page.jsx o page.js).
+ * Excluye automáticamente carpetas internas (_folder) y rutas de API (api/).
+ * Maneja correctamente los Grupos de Rutas (folder).
+ *
+ * @param {string} dir - Directorio actual a explorar.
+ * @param {string} baseDir - Ruta acumulada para la URL.
+ * @returns {string[]} Lista de rutas encontradas.
+ */
+function getAppRoutes(dir, baseDir = "") {
+	let routes = [];
+	if (!fs.existsSync(dir)) return routes;
+
+	const items = fs.readdirSync(dir, { withFileTypes: true });
+
+	for (const item of items) {
+		const fullPath = path.join(dir, item.name);
+
+		if (item.isDirectory()) {
+			// Ignorar carpetas internas de Next.js (_components, etc) y endpoints de API
+			if (item.name.startsWith("_") || item.name === "api") continue;
+
+			// Los Grupos de Rutas (carpetas entre paréntesis como (marketing)) no aparecen en la URL
+			const isRouteGroup = item.name.startsWith("(") && item.name.endsWith(")");
+			const nextBaseDir = isRouteGroup
+				? baseDir
+				: path.join(baseDir, item.name);
+
+			routes = routes.concat(getAppRoutes(fullPath, nextBaseDir));
+		} else if (item.name === "page.jsx" || item.name === "page.js") {
+			// Convertir la ruta del sistema de archivos en una ruta de URL normalizada
+			const normalizedPath = baseDir.replace(/\\/g, "/");
+			const routePath = normalizedPath === "" ? "/" : `/${normalizedPath}`;
+
+			if (!EXCLUDED_PATHS.includes(routePath)) {
+				routes.push(routePath);
+			}
+		}
+	}
+
+	return routes;
+}
 
 /** @returns {import("next").MetadataRoute.Sitemap} */
 export default function sitemap() {
-	const staticPaths = [
-		"/",
-		"/installation",
-		"/components",
-		"/resources/accesibility",
-		"/resources/animations",
-		"/resources/cursor-rules",
-		"/resources/performance",
-		"/resources/security",
-		"/resources/seo-metadata",
-		"/core/colors",
-		"/core/iconography",
-		"/core/layout",
-		"/core/materials",
-		"/core/typography",
-	];
+	// Obtenemos la ruta absoluta de la carpeta 'app'
+	const appDir = path.join(process.cwd(), "app");
 
-	const componentSlugs = [
-		"accordion",
-		"alert",
-		"alert-dialog",
-		"aspect-ratio",
-		"avatar",
-		"badge",
-		"breadcrumb",
-		"button",
-		"button-group",
-		"calendar",
-		"card",
-		"carousel",
-		"chart",
-		"checkbox",
-		"code-block",
-		"code-snippet",
-		"collapsible",
-		"command",
-		"context-menu",
-		"data-table",
-		"date-picker",
-		"dialog",
-		"drawer",
-		"dropdown-menu",
-		"empty",
-		"field",
-		"form",
-		"grid",
-		"guided-tour",
-		"hover-card",
-		"input",
-		"input-group",
-		"input-otp",
-		"item",
-		"kbd",
-		"label",
-		"menubar",
-		"multi-select",
-		"navigation-menu",
-		"pagination",
-		"popover",
-		"progress",
-		"radio-group",
-		"resizable",
-		"scroll-area",
-		"select",
-		"separator",
-		"sheet",
-		"show-more",
-		"sidebar",
-		"skeleton",
-		"slider",
-		"sonner",
-		"spinner",
-		"star-rating",
-		"switch",
-		"table",
-		"tabs",
-		"textarea",
-		"theme-switcher",
-		"timezone",
-		"toggle",
-		"toggle-group",
-		"tooltip",
-	];
+	// Obtenemos todas las rutas de forma programática crawling el sistema de archivos
+	const allPaths = getAppRoutes(appDir);
 
-	const allPaths = [
-		...staticPaths,
-		...componentSlugs.map((slug) => `/components/${slug}`),
-	];
+	// Eliminar duplicados y ordenar para un sitemap más limpio
+	const uniquePaths = [...new Set(allPaths)].sort((a, b) => {
+		// El home siempre primero, luego alfabéticamente
+		if (a === "/") return -1;
+		if (b === "/") return 1;
+		return a.localeCompare(b);
+	});
 
 	const lastModified = new Date().toISOString();
 
-	return allPaths.map((path) => ({
-		url: `${baseUrl}${path}`,
+	return uniquePaths.map((route) => ({
+		url: `${baseUrl}${route}`,
 		lastModified,
 		changeFrequency: "weekly",
-		priority: path === "/" ? 1.0 : 0.8,
+		priority: route === "/" ? 1.0 : 0.8,
 	}));
 }

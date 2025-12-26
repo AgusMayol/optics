@@ -48,7 +48,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "switch",
-		dependencies: "@radix-ui/react-switch",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

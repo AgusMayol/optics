@@ -132,7 +132,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "dropdown-menu",
-		dependencies: "@radix-ui/react-dropdown-menu",
+		dependencies: "@base-ui/react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

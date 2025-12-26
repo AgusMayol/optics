@@ -51,7 +51,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "timezone",
-		dependencies: "@radix-ui/react-tooltip ms",
+		dependencies: "@base-ui/react ms",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

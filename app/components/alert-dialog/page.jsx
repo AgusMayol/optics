@@ -112,7 +112,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "alert-dialog",
-		dependencies: "@radix-ui/react-alert-dialog lucide-react",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

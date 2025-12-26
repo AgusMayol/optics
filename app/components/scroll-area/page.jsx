@@ -107,7 +107,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "scroll-area",
-		dependencies: "@radix-ui/react-scroll-area",
+		dependencies: "",
 		manualFiles: componentFiles,
 	},
 	props: propsData,

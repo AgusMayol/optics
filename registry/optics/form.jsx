@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import {
 	Controller,
 	FormProvider,
@@ -10,6 +9,17 @@ import {
 
 import { cn } from "@/registry/optics/lib/utils";
 import { Label } from "@/registry/optics/label";
+
+const Slot = ({ children, ...props }) => {
+	if (React.isValidElement(children)) {
+		return React.cloneElement(children, {
+			...props,
+			...children.props,
+			className: cn(props.className, children.props.className),
+		});
+	}
+	return null;
+};
 
 const Form = FormProvider;
 

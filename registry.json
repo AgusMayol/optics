@@ -7,12 +7,13 @@
 			"name": "accordion-primitive",
 			"type": "registry:component",
 			"title": "Accordion Primitive",
-			"description": "Primitive accordion component built on Radix UI.",
+			"description": "Primitive accordion component built with motion.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/get-strict-context.json",
-				"https://optics.agusmayol.com.ar/r/use-controlled-state.json"
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["@radix-ui/react-accordion", "clsx", "tailwind-merge"],
+			"dependencies": ["radix-ui", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/accordion-primitive.jsx",
@@ -30,7 +31,7 @@
 				"https://optics.agusmayol.com.ar/r/accordion-primitive.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/accordion.jsx",
@@ -49,8 +50,8 @@
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@radix-ui/react-alert-dialog",
-				"class-variance-authority",
+				"@base-ui/react",
+				"lucide-react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -68,7 +69,12 @@
 			"title": "Alert",
 			"description": "Displays a callout for user attention.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"class-variance-authority",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/alert.jsx",
@@ -82,12 +88,8 @@
 			"type": "registry:component",
 			"title": "Aspect Ratio",
 			"description": "Displays content within a desired ratio.",
-			"registryDependencies": [],
-			"dependencies": [
-				"@radix-ui/react-aspect-ratio",
-				"clsx",
-				"tailwind-merge"
-			],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/aspect-ratio.jsx",
@@ -101,11 +103,8 @@
 			"type": "registry:component",
 			"title": "Avatar",
 			"description": "An image element with a fallback for representing the user.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/tooltip.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
-			],
-			"dependencies": ["@radix-ui/react-avatar", "clsx", "tailwind-merge"],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/avatar.jsx",
@@ -119,13 +118,11 @@
 			"type": "registry:component",
 			"title": "Badge",
 			"description": "Displays a badge or a component that looks like a badge.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@radix-ui/react-slot",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
+			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/badge.jsx",
@@ -139,8 +136,16 @@
 			"type": "registry:component",
 			"title": "Breadcrumb",
 			"description": "Displays the path to the current resource using a hierarchy of links.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/breadcrumb.jsx",
@@ -156,15 +161,9 @@
 			"description": "Groups buttons together with proper spacing and styling.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
-				"https://optics.agusmayol.com.ar/r/separator.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-slot",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/button-group.jsx",
@@ -180,8 +179,8 @@
 			"description": "Displays a button or a component that looks like a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
 			"dependencies": [
-				"@radix-ui/react-slot",
 				"class-variance-authority",
+				"motion",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -205,7 +204,7 @@
 			"dependencies": [
 				"react-day-picker",
 				"date-fns",
-				"class-variance-authority",
+				"lucide-react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -241,12 +240,27 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["embla-carousel-react", "clsx", "tailwind-merge"],
+			"dependencies": ["embla-carousel-react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/carousel.jsx",
 					"type": "registry:component",
 					"target": "components/optics/carousel.jsx"
+				}
+			]
+		},
+		{
+			"name": "chart",
+			"type": "registry:component",
+			"title": "Chart",
+			"description": "Beautiful charts built with Recharts.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["recharts", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/chart.jsx",
+					"type": "registry:component",
+					"target": "components/optics/chart.jsx"
 				}
 			]
 		},
@@ -257,8 +271,8 @@
 			"description": "A control that allows the user to toggle between checked and unchecked states.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
 			"dependencies": [
-				"@radix-ui/react-checkbox",
-				"class-variance-authority",
+				"@base-ui/react",
+				"lucide-react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -280,10 +294,10 @@
 				"https://optics.agusmayol.com.ar/r/select.json",
 				"https://optics.agusmayol.com.ar/r/sonner.json",
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@radix-ui/react-use-controllable-state",
 				"@shikijs/transformers",
 				"shiki",
 				"lucide-react",
@@ -309,9 +323,18 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/tabs.json",
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"shiki",
+				"lucide-react",
+				"motion",
+				"react-icons",
+				"@shikijs/transformers",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/code-snippet.jsx",
@@ -325,8 +348,8 @@
 			"type": "registry:component",
 			"title": "Collapsible",
 			"description": "An interactive component which expands/collapses a panel.",
-			"registryDependencies": [],
-			"dependencies": ["@radix-ui/react-collapsible", "clsx", "tailwind-merge"],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/collapsible.jsx",
@@ -345,7 +368,7 @@
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["cmdk", "clsx", "tailwind-merge"],
+			"dependencies": ["cmdk", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/command.jsx",
@@ -358,10 +381,11 @@
 			"name": "context-menu",
 			"type": "registry:component",
 			"title": "Context Menu",
-			"description": "Displays a menu to the user — such as a set of actions or functions — triggered by a right click or a long press.",
+			"description": "Displays a menu to the user triggered by a right click or a long press.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
 			"dependencies": [
-				"@radix-ui/react-context-menu",
+				"@base-ui/react",
+				"lucide-react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -378,7 +402,10 @@
 			"type": "registry:component",
 			"title": "Data Table",
 			"description": "Powerful table and datagrid built with TanStack Table.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/table.json"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/table.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
 			"dependencies": ["@tanstack/react-table", "clsx", "tailwind-merge"],
 			"files": [
 				{
@@ -402,6 +429,7 @@
 			"dependencies": [
 				"react-day-picker",
 				"date-fns",
+				"lucide-react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -417,13 +445,13 @@
 			"name": "dialog",
 			"type": "registry:component",
 			"title": "Dialog",
-			"description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+			"description": "A window overlaid on either the primary window or another dialog window.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@radix-ui/react-dialog",
+				"@base-ui/react",
 				"lucide-react",
 				"clsx",
 				"tailwind-merge"
@@ -442,7 +470,7 @@
 			"title": "Drawer",
 			"description": "A drawer component built with Vaul.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["vaul", "clsx", "tailwind-merge"],
+			"dependencies": ["vaul", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/drawer.jsx",
@@ -457,11 +485,7 @@
 			"title": "Dropdown Menu",
 			"description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@radix-ui/react-dropdown-menu",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/dropdown-menu.jsx",
@@ -475,8 +499,11 @@
 			"type": "registry:component",
 			"title": "Empty",
 			"description": "Displays an empty state with optional illustration, title, and description.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/empty.jsx",
@@ -492,10 +519,9 @@
 			"description": "A field component for grouping form elements with labels and descriptions.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/label.json",
-				"https://optics.agusmayol.com.ar/r/separator.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/field.jsx",
@@ -513,12 +539,7 @@
 				"https://optics.agusmayol.com.ar/r/label.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-slot",
-				"react-hook-form",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["react-hook-form", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/form.jsx",
@@ -533,7 +554,7 @@
 			"title": "Grid",
 			"description": "A flexible grid system component for layout.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/grid.jsx",
@@ -549,15 +570,10 @@
 			"description": "A guided tour component for onboarding users.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/popover.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-popover",
-				"@radix-ui/react-slot",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/guided-tour.jsx",
@@ -572,7 +588,7 @@
 			"title": "Hover Card",
 			"description": "For sighted users to preview content available behind a link.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-hover-card", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/hover-card.jsx",
@@ -587,12 +603,10 @@
 			"title": "Input Group",
 			"description": "Groups input fields with addons, buttons, and text.",
 			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/input.json",
-				"https://optics.agusmayol.com.ar/r/textarea.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/input-group.jsx",
@@ -606,17 +620,8 @@
 			"type": "registry:component",
 			"title": "Input OTP",
 			"description": "Accessible one-time password component with copy paste support.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/button.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
-			],
-			"dependencies": [
-				"input-otp",
-				"lucide-react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["input-otp", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/input-otp.jsx",
@@ -630,7 +635,10 @@
 			"type": "registry:component",
 			"title": "Input",
 			"description": "Displays a form input field or a component that looks like an input.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
 			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
@@ -644,18 +652,9 @@
 			"name": "item",
 			"type": "registry:component",
 			"title": "Item",
-			"description": "A flexible item component for displaying content with media, title, description, and actions.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/separator.json",
-				"https://optics.agusmayol.com.ar/r/button.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
-			],
-			"dependencies": [
-				"@radix-ui/react-slot",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"description": "A flexible item component for displaying content.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/item.jsx",
@@ -670,12 +669,7 @@
 			"title": "KBD",
 			"description": "Keyboard key component for displaying keyboard shortcuts.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"class-variance-authority",
-				"react-hotkeys-hook",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/kbd.jsx",
@@ -690,7 +684,7 @@
 			"title": "Label",
 			"description": "Renders an accessible label associated with controls.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-label", "clsx", "tailwind-merge"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/label.jsx",
@@ -704,8 +698,16 @@
 			"type": "registry:component",
 			"title": "Menubar",
 			"description": "A visually persistent menu common in desktop applications.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-menubar", "clsx", "tailwind-merge"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/dropdown-menu.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/menubar.jsx",
@@ -726,7 +728,7 @@
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@radix-ui/react-select",
+				"@base-ui/react",
 				"lucide-react",
 				"clsx",
 				"tailwind-merge"
@@ -744,9 +746,14 @@
 			"type": "registry:component",
 			"title": "Navigation Menu",
 			"description": "A collection of links for navigating websites.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
 			"dependencies": [
-				"@radix-ui/react-navigation-menu",
+				"@base-ui/react",
+				"lucide-react",
+				"class-variance-authority",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -762,12 +769,12 @@
 			"name": "pagination",
 			"type": "registry:component",
 			"title": "Pagination",
-			"description": "Pagination with page navigation, next and previous links, and page number indicators.",
+			"description": "Pagination with page navigation, next and previous links.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/pagination.jsx",
@@ -782,7 +789,7 @@
 			"title": "Popover",
 			"description": "Displays rich content in a portal, triggered by a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-popover", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/popover.jsx",
@@ -795,9 +802,9 @@
 			"name": "progress",
 			"type": "registry:component",
 			"title": "Progress",
-			"description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+			"description": "Displays an indicator showing the completion progress of a task.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-progress", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/progress.jsx",
@@ -810,9 +817,17 @@
 			"name": "radio-group",
 			"type": "registry:component",
 			"title": "Radio Group",
-			"description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-radio-group", "clsx", "tailwind-merge"],
+			"description": "A set of checkable buttons—known as radio buttons.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/radio-group.jsx",
@@ -825,14 +840,9 @@
 			"name": "resizable",
 			"type": "registry:component",
 			"title": "Resizable",
-			"description": "Accessible resizable panel groups and layouts with keyboard support.",
+			"description": "Accessible resizable panel groups and layouts.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"react-resizable-panels",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["react-resizable-panels", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/resizable.jsx",
@@ -846,11 +856,8 @@
 			"type": "registry:component",
 			"title": "Scroll Area",
 			"description": "Augments native scroll functionality for custom, cross-browser styling.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/utils.json",
-				"https://optics.agusmayol.com.ar/r/use-has-primary-touch.json"
-			],
-			"dependencies": ["@radix-ui/react-scroll-area", "clsx", "tailwind-merge"],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/scroll-area.jsx",
@@ -863,15 +870,14 @@
 			"name": "select",
 			"type": "registry:component",
 			"title": "Select",
-			"description": "Displays a list of options for the user to pick from—triggered by a button.",
+			"description": "Displays a list of options for the user to pick from.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@radix-ui/react-select",
+				"@base-ui/react",
 				"lucide-react",
-				"class-variance-authority",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -889,7 +895,7 @@
 			"title": "Separator",
 			"description": "Visually or semantically separates content.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-separator", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/separator.jsx",
@@ -902,9 +908,15 @@
 			"name": "sheet",
 			"type": "registry:component",
 			"title": "Sheet",
-			"description": "Extends the Dialog component to display content that complements the main content of the screen.",
+			"description": "Extends the Dialog component to display content that complements the main content.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@radix-ui/react-dialog", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"tailwind-variants",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/sheet.jsx",
@@ -934,6 +946,35 @@
 			]
 		},
 		{
+			"name": "sidebar",
+			"type": "registry:component",
+			"title": "Sidebar",
+			"description": "A composable sidebar component with desktop and mobile support.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/input.json",
+				"https://optics.agusmayol.com.ar/r/separator.json",
+				"https://optics.agusmayol.com.ar/r/sheet.json",
+				"https://optics.agusmayol.com.ar/r/skeleton.json",
+				"https://optics.agusmayol.com.ar/r/tooltip.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/optics/sidebar.jsx",
+					"type": "registry:component",
+					"target": "components/optics/sidebar.jsx"
+				}
+			]
+		},
+		{
 			"name": "skeleton",
 			"type": "registry:component",
 			"title": "Skeleton",
@@ -957,12 +998,7 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-slider",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/slider.jsx",
@@ -1017,12 +1053,7 @@
 			"title": "Star Rating",
 			"description": "An interactive star rating component.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"lucide-react",
-				"framer-motion",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/star-rating.jsx",
@@ -1040,12 +1071,7 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-switch",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/switch.jsx",
@@ -1100,7 +1126,7 @@
 			"name": "tabs",
 			"type": "registry:component",
 			"title": "Tabs",
-			"description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+			"description": "A set of layered sections of content—known as tab panels.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/tabs-primitive.json",
 				"https://optics.agusmayol.com.ar/r/utils.json",
@@ -1124,7 +1150,7 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/textarea.jsx",
@@ -1137,15 +1163,12 @@
 			"name": "theme-switcher",
 			"type": "registry:component",
 			"title": "Theme Switcher",
-			"description": "A theme switcher component for toggling between light, dark, and system themes.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@radix-ui/react-use-controllable-state",
-				"lucide-react",
-				"motion",
-				"clsx",
-				"tailwind-merge"
+			"description": "A theme switcher component for toggling between themes.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
+			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/theme-switcher.jsx",
@@ -1182,11 +1205,7 @@
 				"https://optics.agusmayol.com.ar/r/toggle.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-toggle-group",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/toggle-group.jsx",
@@ -1200,12 +1219,9 @@
 			"type": "registry:component",
 			"title": "Toggle",
 			"description": "A two-state button that can be either on or off.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/button.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
-			],
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
 			"dependencies": [
-				"@radix-ui/react-toggle",
+				"@base-ui/react",
 				"class-variance-authority",
 				"clsx",
 				"tailwind-merge"
@@ -1222,17 +1238,12 @@
 			"name": "tooltip",
 			"type": "registry:component",
 			"title": "Tooltip",
-			"description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+			"description": "A popup that displays information related to an element.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@radix-ui/react-tooltip",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/tooltip.jsx",
