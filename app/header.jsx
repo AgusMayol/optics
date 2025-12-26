@@ -67,76 +67,55 @@ export function Header({ links }) {
 	};
 
 	const handleSetTheme = (newTheme) => {
-		let temaActual = localStorage.getItem("theme2");
 		setThemeSwitch(newTheme);
 
 		const notifyThemeChange = () => {
 			if (typeof window !== "undefined") {
 				window.dispatchEvent(new Event("theme2-change"));
+				// Update cookie for server-side detection
+				document.cookie = `theme-preference=${newTheme}; path=/; max-age=31536000`;
 			}
 		};
 
-		if (newTheme === "system") {
-			if (systemTheme === localStorage.getItem("theme"))
-				return setTimeout(() => {
-					localStorage.setItem("theme2", newTheme);
-					notifyThemeChange();
-				}, 200);
+		// If the new theme is different from the current resolved theme (or if it's system and system matches but we want the animation)
+		// we trigger the animation.
+		const isCurrentlyDark = checkTheme();
+		const willBeDark =
+			newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
 
+		if (isCurrentlyDark !== willBeDark) {
 			toggleSwitchTheme({
 				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: checkTheme(),
+				isDarkMode: isCurrentlyDark,
 				onDarkModeChange: null,
 			});
-
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-				notifyThemeChange();
-			}, 200);
 		}
 
-		if (
-			newTheme === localStorage.getItem("theme") ||
-			(temaActual === "system" &&
-				systemTheme === newTheme &&
-				temaActual !== newTheme)
-		)
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-				notifyThemeChange();
-			}, 200);
-
-		toggleSwitchTheme({
-			animationType: ThemeAnimationType.BLUR_CIRCLE,
-			isDarkMode: checkTheme(),
-			onDarkModeChange: null,
-		});
+		// Important: Update next-themes state
+		setTheme(newTheme);
 
 		setTimeout(() => {
 			localStorage.setItem("theme2", newTheme);
 			notifyThemeChange();
 		}, 200);
-		//setTheme(newTheme);
 	};
 
 	React.useEffect(() => {
 		if (!mounted) {
-			let tema = localStorage.getItem("theme2") || "system";
+			const tema = localStorage.getItem("theme2") || "system";
 			setThemeSwitch(tema);
-			localStorage.setItem("theme", tema === "system" ? resolvedTheme : tema);
 			setMounted(true);
 		}
-		if (
-			systemTheme !== localStorage.getItem("theme") &&
-			localStorage.getItem("theme2") === "system"
-		) {
-			toggleSwitchTheme({
-				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: localStorage.getItem("theme") === "light" ? false : true,
-				onDarkModeChange: null,
-			});
+	}, [mounted]);
+
+	React.useEffect(() => {
+		if (mounted && themeSwitch === "system") {
+			// Ensure next-themes is in system mode if our preference is system
+			if (theme !== "system") {
+				setTheme("system");
+			}
 		}
-	}, [systemTheme]);
+	}, [mounted, themeSwitch, theme, setTheme]);
 
 	React.useEffect(() => {
 		const activeWidth = isMobile ? mobileWidth : desktopWidth;

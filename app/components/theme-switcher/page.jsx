@@ -44,65 +44,48 @@ export function MyComponent() {
 	};
 
 	const handleSetTheme = (newTheme) => {
-		let temaActual = localStorage.getItem("theme2");
 		setThemeSwitch(newTheme);
 
-		if (newTheme === "system") {
-			if (systemTheme === localStorage.getItem("theme"))
-				return setTimeout(() => {
-					localStorage.setItem("theme2", newTheme);
-				}, 200);
+		const notifyThemeChange = () => {
+			if (typeof window !== "undefined") {
+				window.dispatchEvent(new Event("theme2-change"));
+				// Update cookie for server-side detection
+				document.cookie = `theme-preference=${newTheme}; path=/; max-age=31536000`;
+			}
+		};
 
+		// If the new theme is different from the current resolved theme 
+		// we trigger the animation.
+		const isCurrentlyDark = checkTheme();
+		const willBeDark = newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
+
+		if (isCurrentlyDark !== willBeDark) {
 			toggleSwitchTheme({
 				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: checkTheme(),
+				isDarkMode: isCurrentlyDark,
 				onDarkModeChange: null,
 			});
-
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-			}, 200);
 		}
 
-		if (
-			newTheme === localStorage.getItem("theme") ||
-			(temaActual === "system" &&
-				systemTheme === newTheme &&
-				temaActual !== newTheme)
-		)
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-			}, 200);
-
-		toggleSwitchTheme({
-			animationType: ThemeAnimationType.BLUR_CIRCLE,
-			isDarkMode: checkTheme(),
-			onDarkModeChange: null,
-		});
+		// Update next-themes state
+		setTheme(newTheme);
 
 		setTimeout(() => {
 			localStorage.setItem("theme2", newTheme);
+			notifyThemeChange();
 		}, 200);
 	};
 
 	React.useEffect(() => {
-		let tema = localStorage.getItem("theme2") || "system";
+		const tema = localStorage.getItem("theme2") || "system";
 		setThemeSwitch(tema);
-		localStorage.setItem("theme", tema === "system" ? resolvedTheme : tema);
-	}, [resolvedTheme]);
+	}, []);
 
 	React.useEffect(() => {
-		if (
-			systemTheme !== localStorage.getItem("theme") &&
-			localStorage.getItem("theme2") === "system"
-		) {
-			toggleSwitchTheme({
-				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: localStorage.getItem("theme") === "light" ? false : true,
-				onDarkModeChange: null,
-			});
+		if (themeSwitch === "system" && theme !== "system") {
+			setTheme("system");
 		}
-	}, [systemTheme, toggleSwitchTheme]);
+	}, [themeSwitch, theme, setTheme]);
 	
 	return (
 		<ThemeSwitcher
@@ -160,65 +143,49 @@ function ThemeSwitcherDemo() {
 	};
 
 	const handleSetTheme = (newTheme) => {
-		let temaActual = localStorage.getItem("theme2");
 		setThemeSwitch(newTheme);
 
-		if (newTheme === "system") {
-			if (systemTheme === localStorage.getItem("theme"))
-				return setTimeout(() => {
-					localStorage.setItem("theme2", newTheme);
-				}, 200);
+		const notifyThemeChange = () => {
+			if (typeof window !== "undefined") {
+				window.dispatchEvent(new Event("theme2-change"));
+				document.cookie = `theme-preference=${newTheme}; path=/; max-age=31536000`;
+			}
+		};
 
+		const isCurrentlyDark = checkTheme();
+		const willBeDark = newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
+
+		if (isCurrentlyDark !== willBeDark) {
 			toggleSwitchTheme({
 				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: checkTheme(),
+				isDarkMode: isCurrentlyDark,
 				onDarkModeChange: null,
 			});
-
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-			}, 200);
 		}
 
-		if (
-			newTheme === localStorage.getItem("theme") ||
-			(temaActual === "system" &&
-				systemTheme === newTheme &&
-				temaActual !== newTheme)
-		)
-			return setTimeout(() => {
-				localStorage.setItem("theme2", newTheme);
-			}, 200);
-
-		toggleSwitchTheme({
-			animationType: ThemeAnimationType.BLUR_CIRCLE,
-			isDarkMode: checkTheme(),
-			onDarkModeChange: null,
-		});
+		setTheme(newTheme);
 
 		setTimeout(() => {
 			localStorage.setItem("theme2", newTheme);
+			notifyThemeChange();
 		}, 200);
 	};
 
 	React.useEffect(() => {
 		if (!mounted) {
-			let tema = localStorage.getItem("theme2") || "system";
+			const tema = localStorage.getItem("theme2") || "system";
 			setThemeSwitch(tema);
-			localStorage.setItem("theme", tema === "system" ? resolvedTheme : tema);
 			setMounted(true);
 		}
-		if (
-			systemTheme !== localStorage.getItem("theme") &&
-			localStorage.getItem("theme2") === "system"
-		) {
-			toggleSwitchTheme({
-				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: localStorage.getItem("theme") === "light" ? false : true,
-				onDarkModeChange: null,
-			});
+	}, [mounted]);
+
+	React.useEffect(() => {
+		if (mounted && themeSwitch === "system") {
+			if (theme !== "system") {
+				setTheme("system");
+			}
 		}
-	}, [systemTheme]);
+	}, [mounted, themeSwitch, theme, setTheme]);
 
 	return (
 		<div className="flex flex-col items-center justify-center gap-2">

@@ -1,41 +1,15 @@
 "use client";
-import { Button } from "@/registry/optics/button";
-import { cn } from "@/lib/utils";
 
-import { ALargeSmall, ArrowLeft, Info } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-	CardContent,
-	CardFooter,
-} from "@/registry/optics/card";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/registry/optics/select";
-import {
-	Tooltip,
-	TooltipTrigger,
-	TooltipContent,
-} from "@/registry/optics/tooltip";
+import { GridContainer, GridItem, GridRow } from "@/registry/optics/grid";
 import { Separator } from "@/registry/optics/separator";
+import { ALargeSmall, Info } from "lucide-react";
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Typography
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
+				<h1 className="text-32 tracking-tight! truncate">Typography</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
 					Rules of typesetting throughout the system.
 				</p>
 			</div>

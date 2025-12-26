@@ -82,32 +82,28 @@ const claudeCode = [
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
+				<h1 className="text-32 tracking-tight! truncate">
 					MCP Server Connection
 				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Connect to the shadcn MCP server and access the Optics registry.
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					The Model Context Protocol (MCP) allows AI agents to interact with the
+					shadcn CLI to browse, search, and install components from the Optics
+					registry. Follow the steps below to connect your agent.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						The Model Context Protocol (MCP) allows AI agents to interact with
-						the shadcn CLI to browse, search, and install components from the
-						Optics registry. Follow the steps below to connect your agent.
-					</p>
-				</div>
-
 				{/* Step 1: Configure components.json */}
 				<div className="flex flex-col gap-4 w-full">
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
-						<Badge variant="outline" className="tabular-nums aspect-square">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
 							1
 						</Badge>
 						Configure your registry
@@ -152,7 +148,10 @@ export default function Page() {
 				{/* Step 2: Connect with your agent */}
 				<div className="flex flex-col gap-4 w-full">
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
-						<Badge variant="outline" className="tabular-nums aspect-square">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
 							2
 						</Badge>
 						Connect with your agent
@@ -293,7 +292,10 @@ export default function Page() {
 				{/* Step 3: Using the MCP Server */}
 				<div className="flex flex-col gap-4 w-full">
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
-						<Badge variant="outline" className="tabular-nums aspect-square">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
 							3
 						</Badge>
 						Using the MCP Server

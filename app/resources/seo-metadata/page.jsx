@@ -1,24 +1,13 @@
 "use client";
-import * as React from "react";
-import { Badge } from "@/registry/optics/badge";
-import { Button } from "@/registry/optics/button";
-import { Separator } from "@/registry/optics/separator";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-	CardContent,
-	CardFooter,
-} from "@/registry/optics/card";
 import {
 	Accordion,
+	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-	AccordionContent,
 } from "@/registry/optics/accordion";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardFooter } from "@/registry/optics/card";
 import {
 	CodeBlock,
 	CodeBlockBody,
@@ -27,139 +16,10 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 } from "@/registry/optics/code-block";
-
-// Code examples data
-const basicMetadataCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  title: {
-    default: "My Application",
-    template: "%s | My Application",
-  },
-  description: "The best web application for your needs",
-  keywords: ["nextjs", "react", "web app", "seo"],
-  authors: [{ name: "Your Name", url: "https://yourdomain.com" }],
-  creator: "Your Name",
-  publisher: "Your Company",
-  metadataBase: new URL("https://yourdomain.com"),
-};`,
-	},
-];
-
-const openGraphCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  openGraph: {
-    title: "My Application",
-    description: "The best web application for your needs",
-    url: "https://yourdomain.com",
-    siteName: "My Application",
-    images: [
-      {
-        url: "https://yourdomain.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "My Application Preview",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-};`,
-	},
-];
-
-const twitterCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  twitter: {
-    card: "summary_large_image",
-    title: "My Application",
-    description: "The best web application for your needs",
-    creator: "@yourusername",
-    images: ["https://yourdomain.com/twitter-image.jpg"],
-  },
-};`,
-	},
-];
-
-const robotsCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-};`,
-	},
-];
-
-const iconsCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  icons: {
-    icon: [
-      { url: "/icon.png" },
-      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
-    ],
-    shortcut: "/shortcut-icon.png",
-    apple: [
-      { url: "/apple-icon.png" },
-      { url: "/apple-icon-180.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-};`,
-	},
-];
-
-const verificationCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-code",
-    yahoo: "your-yahoo-code",
-  },
-};`,
-	},
-];
-
-const alternatesCode = [
-	{
-		language: "jsx",
-		filename: "app/layout.js",
-		code: `export const metadata = {
-  alternates: {
-    canonical: "https://yourdomain.com",
-    languages: {
-      "en-US": "https://yourdomain.com/en",
-      "es-ES": "https://yourdomain.com/es",
-    },
-  },
-};`,
-	},
-];
+import { Separator } from "@/registry/optics/separator";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 const completeMetadataCode = [
 	{
@@ -445,29 +305,19 @@ export default async function Image({ params }) {
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					SEO & Metadata
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Optimize your Next.js application for search engines with ready-to-use
-					code snippets.
+				<h1 className="text-32 tracking-tight! truncate">SEO & Metadata</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Next.js includes a Metadata API that allows you to define metadata to
+					improve your application's SEO. This guide includes ready-to-copy
+					examples for your Next.js project.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Next.js includes a Metadata API that allows you to define metadata
-						to improve your application's SEO. This guide includes ready-to-copy
-						examples for your Next.js project.
-					</p>
-				</div>
-
 				{/* 1. Complete Configuration */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
@@ -484,7 +334,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											1
 										</Badge>
@@ -563,7 +413,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											2
 										</Badge>
@@ -641,7 +491,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											3
 										</Badge>
@@ -771,7 +621,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											4
 										</Badge>

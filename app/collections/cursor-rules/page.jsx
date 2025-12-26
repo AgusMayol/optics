@@ -186,12 +186,10 @@ export default function Page() {
 	} = useCookiePreferences(cursorRules[0]?.name || "cursor-rule");
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Cursor Rules
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
+				<h1 className="text-32 tracking-tight! truncate">Cursor Rules</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
 					Install Cursor rules to enhance your development workflow with Optics
 					guidelines.
 				</p>
@@ -200,17 +198,6 @@ export default function Page() {
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2 px-6 lg:px-12">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Cursor rules are configuration files that guide AI assistants in
-						your development workflow. Optics provides a collection of curated
-						rules covering general development, frontend, backend, React
-						optimization, and more. These rules are installed directly into your
-						project's `.cursor/rules/` directory.
-					</p>
-				</div>
-
 				{/* Available Rules */}
 				<div className="flex flex-col gap-8 w-full">
 					<div className="grid grid-cols-2 items-start justify-center gap-12 px-6">
@@ -227,19 +214,23 @@ export default function Page() {
 									<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
 										<Card className="w-[350px] h-full">
 											<CardHeader className="flex flex-col items-start justify-start">
-												<CardTitle>{rule.title}</CardTitle>
-												<CardDescription className="text-start text-pretty">
+												<CardTitle className="text-20 font-medium!">
+													{rule.title}
+												</CardTitle>
+												<CardDescription className="text-start text-16 font-normal! text-muted-foreground text-pretty">
 													{rule.description}
 												</CardDescription>
 											</CardHeader>
 										</Card>
 									</DialogTrigger>
 									<DialogPopup
-										className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden "
-										containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden"
+										className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden"
+										containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden pb-6"
 									>
 										<DialogHeader className="shrink-0">
-											<DialogTitle>{rule.title}</DialogTitle>
+											<DialogTitle className="text-24">
+												{rule.title}
+											</DialogTitle>
 											<DialogDescription>{rule.description}</DialogDescription>
 										</DialogHeader>
 										<ScrollArea
@@ -278,8 +269,10 @@ export default function Page() {
 								<DialogTrigger className="w-auto! h-full flex items-center justify-center cursor-pointer">
 									<Card className="w-[350px] h-full">
 										<CardHeader className="flex flex-col items-start justify-start">
-											<CardTitle>{mcp.title}</CardTitle>
-											<CardDescription className="text-start text-pretty">
+											<CardTitle className="text-20 font-medium!">
+												{mcp.title}
+											</CardTitle>
+											<CardDescription className="text-start text-16 font-normal! text-muted-foreground text-pretty">
 												{mcp.description}
 											</CardDescription>
 										</CardHeader>
@@ -287,10 +280,10 @@ export default function Page() {
 								</DialogTrigger>
 								<DialogPopup
 									className="max-w-5xl! w-full! max-h-[65vh] overflow-hidden"
-									containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden"
+									containerClassName="max-w-5xl! w-full! max-h-[65vh] flex flex-col min-h-0 overflow-hidden pb-6"
 								>
 									<DialogHeader className="shrink-0">
-										<DialogTitle>{mcp.title}</DialogTitle>
+										<DialogTitle className="text-24">{mcp.title}</DialogTitle>
 										<DialogDescription>{mcp.description}</DialogDescription>
 									</DialogHeader>
 									<ScrollArea

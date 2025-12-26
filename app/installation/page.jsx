@@ -13,33 +13,27 @@ export default function Page() {
 	const registryPrefix = "@optics";
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Installation
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					How to install Optics components in your project.
+				<h1 className="text-32 tracking-tight! truncate">Installation</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Optics is a collection of re-usable components built with Base UI and
+					Tailwind CSS. It follows the same philosophy as shadcn/ui - components
+					are not installed as dependencies, but copied directly into your
+					project so you have full control over them.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Optics is a collection of re-usable components built with Radix UI
-						and Tailwind CSS. It follows the same philosophy as shadcn/ui -
-						components are not installed as dependencies, but copied directly
-						into your project so you have full control over them.
-					</p>
-				</div>
-
 				{/* Step 1: Install shadcn CLI */}
 				<div className="flex flex-col gap-4 w-full">
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
-						<Badge variant="outline" className="tabular-nums aspect-square">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
 							1
 						</Badge>
 						Install the shadcn CLI
@@ -64,7 +58,10 @@ export default function Page() {
 				{/* Step 2: Add components */}
 				<div className="flex flex-col gap-4 w-full">
 					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
-						<Badge variant="outline" className="tabular-nums aspect-square">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
 							2
 						</Badge>
 						Add components

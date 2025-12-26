@@ -841,7 +841,7 @@ yarn-error.log*
 
 export default function Page() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
 					Security
@@ -868,22 +868,29 @@ export default function Page() {
 				{/* 1. Content Security Policy (CSP) */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://nextjs.org/docs/app/guides/content-security-policy"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										1
-									</Badge>
-									Content Security Policy (CSP)
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/guides/content-security-policy"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											1
+										</Badge>
+										Content Security Policy (CSP)
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						CSP is essential to protect against XSS attacks, clickjacking, and
@@ -938,22 +945,29 @@ export default function Page() {
 				{/* 2. Environment Variables */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://vercel.com/docs/environment-variables/sensitive-environment-variables"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										2
-									</Badge>
-									Secure Environment Variables
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://vercel.com/docs/environment-variables/sensitive-environment-variables"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											2
+										</Badge>
+										Secure Environment Variables
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Handle secrets and credentials securely with environment variables.
@@ -1007,22 +1021,29 @@ export default function Page() {
 				{/* 3. Authentication & Proxy */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										3
-									</Badge>
-									Authentication with Proxy
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/file-conventions/proxy"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											3
+										</Badge>
+										Authentication with Proxy
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect routes and APIs with Proxy (formerly Middleware in Next.js
@@ -1077,22 +1098,29 @@ export default function Page() {
 				{/* 4. Input Sanitization & Validation */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										4
-									</Badge>
-									Input Sanitization & Validation
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											4
+										</Badge>
+										Input Sanitization & Validation
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Validate and sanitize all user inputs. Use validation schemas and
@@ -1146,22 +1174,29 @@ export default function Page() {
 				{/* 5. Rate Limiting */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://vercel.com/docs/security/rate-limiting"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										5
-									</Badge>
-									Rate Limiting
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://vercel.com/docs/security/rate-limiting"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											5
+										</Badge>
+										Rate Limiting
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect your APIs against abuse and DDoS attacks by implementing
@@ -1216,22 +1251,29 @@ export default function Page() {
 				{/* 6. Vercel Security Features */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://vercel.com/docs/security"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										6
-									</Badge>
-									Vercel Security Features
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://vercel.com/docs/security"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											6
+										</Badge>
+										Vercel Security Features
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Vercel provides multiple security layers: Firewall, DDoS protection,
@@ -1286,22 +1328,29 @@ export default function Page() {
 				{/* 7. CSRF Protection */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										7
-									</Badge>
-									CSRF Protection
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											7
+										</Badge>
+										CSRF Protection
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Protect against Cross-Site Request Forgery attacks using CSRF
@@ -1355,22 +1404,29 @@ export default function Page() {
 				{/* 8. Dependency Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://docs.npmjs.com/cli/v8/commands/npm-audit"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										8
-									</Badge>
-									Dependency Security
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://docs.npmjs.com/cli/v8/commands/npm-audit"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											8
+										</Badge>
+										Dependency Security
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Keep your dependencies updated and free from vulnerabilities. Use
@@ -1424,22 +1480,29 @@ export default function Page() {
 				{/* 9. Secure Cookies & Sessions */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										9
-									</Badge>
-									Secure Cookies & Sessions
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											9
+										</Badge>
+										Secure Cookies & Sessions
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure cookies with security flags. Use httpOnly, secure, and
@@ -1493,22 +1556,29 @@ export default function Page() {
 				{/* 10. SQL Injection Prevention */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										10
-									</Badge>
-									SQL Injection Prevention
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											10
+										</Badge>
+										SQL Injection Prevention
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Use ORMs like Prisma or parameterized queries to prevent SQL
@@ -1562,22 +1632,29 @@ export default function Page() {
 				{/* 11. Security Headers */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										11
-									</Badge>
-									Security Headers
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/config/next-config-js/headers"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											11
+										</Badge>
+										Security Headers
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Configure security headers in next.config.js. Include HSTS,
@@ -1631,22 +1708,29 @@ export default function Page() {
 				{/* 12. Server Actions Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										12
-									</Badge>
-									Server Actions Security
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											12
+										</Badge>
+										Server Actions Security
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Server Actions must validate authentication and authorization.
@@ -1700,22 +1784,29 @@ export default function Page() {
 				{/* 13. Source Maps Security */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
-						<Button nativeButton={false} variant="link" className="gap-1" render={<Link
-								href="https://nextjs.org/docs/app/api-reference/config/next-config-js/productionBrowserSourceMaps"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
-									<Badge
-										variant="outline"
-										className="tabular-nums aspect-square"
-									>
-										13
-									</Badge>
-									Source Maps Security
-								</h2>
-								<ArrowUpRight size={16} className="mb-4" />
-							</Link>} />
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/config/next-config-js/productionBrowserSourceMaps"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square"
+										>
+											13
+										</Badge>
+										Source Maps Security
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
 					</div>
 					<p className="text-muted-foreground text-sm lg:leading-7">
 						Disable source maps in production to prevent exposing your original
@@ -1839,41 +1930,65 @@ export default function Page() {
 				</div>
 
 				<div className="w-full flex flex-wrap items-center gap-8">
-					<Button nativeButton={false} variant="link" render={<Link
-							href="https://cheatsheetseries.owasp.org/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							OWASP Cheat Sheets
-							<ArrowUpRight size={16} />
-						</Link>} />
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://cheatsheetseries.owasp.org/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								OWASP Cheat Sheets
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button nativeButton={false} variant="link" render={<Link
-							href="https://nextjs.org/docs/app/guides/content-security-policy"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Next.js Security
-							<ArrowUpRight size={16} />
-						</Link>} />
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://nextjs.org/docs/app/guides/content-security-policy"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Next.js Security
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button nativeButton={false} variant="link" render={<Link
-							href="https://vercel.com/docs/security"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Vercel Security
-							<ArrowUpRight size={16} />
-						</Link>} />
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://vercel.com/docs/security"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Vercel Security
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 
-					<Button nativeButton={false} variant="link" render={<Link
-							href="https://web.dev/security/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Web.dev Security
-							<ArrowUpRight size={16} />
-						</Link>} />
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link
+								href="https://web.dev/security/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Web.dev Security
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
 				</div>
 			</div>
 		</main>

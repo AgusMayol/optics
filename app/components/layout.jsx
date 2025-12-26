@@ -88,7 +88,9 @@ function LayoutContent({ config }) {
 			{headerData && (
 				<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
 					<div className="w-full flex items-center justify-between">
-						<h1 className="text-32 truncate">{headerData.title}</h1>
+						<h1 className="text-32 tracking-tight! truncate">
+							{headerData.title}
+						</h1>
 						{headerData.href && (
 							<Button
 								variant="link"
@@ -108,7 +110,7 @@ function LayoutContent({ config }) {
 						)}
 					</div>
 					{headerData.description && (
-						<p className="text-muted-foreground text-16 font-medium! text-pretty">
+						<p className="text-muted-foreground text-20 font-normal! text-pretty">
 							{headerData.description}
 						</p>
 					)}

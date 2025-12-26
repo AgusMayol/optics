@@ -59,12 +59,10 @@ export default function Page() {
 	const activeCommand = commands.find((command) => command.label === value);
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Iconography
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
+				<h1 className="text-32 tracking-tight! truncate">Iconography</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
 					Beautiful & consistent icons.
 				</p>
 			</div>
@@ -72,9 +70,7 @@ export default function Page() {
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-4">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Installation
-				</h2>
+				<h2 className="text-20">Installation</h2>
 				<p className="w-full flex items-center justify-start text-muted-foreground gap-1">
 					This design system loves{" "}
 					<Button
@@ -106,9 +102,7 @@ export default function Page() {
 			</div>
 
 			<div className="flex flex-col items-start justify-start gap-4 p-6 lg:p-12 pt-0">
-				<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold">
-					Props
-				</h2>
+				<h2 className="text-20">Props</h2>
 
 				<PropsTable
 					data={[

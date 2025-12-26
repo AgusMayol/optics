@@ -240,7 +240,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["embla-carousel-react", "lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"embla-carousel-react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/carousel.jsx",
@@ -269,7 +274,10 @@
 			"type": "registry:component",
 			"title": "Checkbox",
 			"description": "A control that allows the user to toggle between checked and unchecked states.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/utils.json",
+				"https://optics.agusmayol.com.ar/r/button.json"
+			],
 			"dependencies": [
 				"@base-ui/react",
 				"lucide-react",
@@ -485,7 +493,12 @@
 			"title": "Dropdown Menu",
 			"description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/dropdown-menu.jsx",

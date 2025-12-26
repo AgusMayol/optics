@@ -8,7 +8,7 @@ import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 
 export default function Custom404() {
 	return (
-		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] screen flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col flex-1 gap-8 p-12">
 				<GridContainer cols={12} rows={6}>
 					<GridRow>

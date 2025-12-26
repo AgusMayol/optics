@@ -61,10 +61,10 @@ export default function Home() {
 	return (
 		<main className="flex flex-col flex-1 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 relative lg:pb-20">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight truncate">
+				<h1 className="text-32 tracking-tight! truncate">
 					@optics/design-system
 				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
 					More than just a design system. It&apos;s a collection of tools and
 					resources that help build a more accessible, intuitive, and
 					aesthetically pleasing web applications.
@@ -246,7 +246,7 @@ export default function Home() {
 								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group"
 							>
 								<div className="w-full flex flex-col gap-4 mt-4">
-									<Snippet value={null} className="border border-input">
+									<Snippet value={null} className="border  border-border!">
 										<SnippetTabsContent
 											value={null}
 											className="w-full text-start flex items-center !justify-between py-1 pr-1 text-muted-foreground truncate !text-xs"
@@ -264,7 +264,7 @@ export default function Home() {
 											<div className="w-3 h-3 rounded-full squircle-none bg-[#27c93f]" />
 										</div>
 										<Button
-											className="text-xs truncate min-w-24 bg-background group-hover:bg-background text-muted-foreground"
+											className="text-xs truncate min-w-24 bg-background! group-hover:bg-background text-muted-foreground border-border!"
 											variant="outline"
 										>
 											Call to Action
@@ -272,7 +272,7 @@ export default function Home() {
 										<Button
 											size="icon"
 											variant="outline"
-											className="min-w-9 truncate bg-background group-hover:bg-background text-muted-foreground"
+											className="truncate bg-background! group-hover:bg-background text-muted-foreground border-border!"
 											role="button"
 											aria-label="Add"
 										>
@@ -284,7 +284,8 @@ export default function Home() {
 											type="email"
 											name="email"
 											placeholder="Email Address"
-											className="w-full text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 !bg-background group-hover:!bg-background"
+											variant="raised"
+											className="flex-1 text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 !bg-background group-hover:!bg-background border-border!"
 										/>
 									</div>
 								</div>

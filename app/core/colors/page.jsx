@@ -806,12 +806,10 @@ export default function Page() {
 
 	return (
 		<TooltipProvider delayDuration={400} skipDelayDuration={0} shared={true}>
-			<main className="flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+			<main className="flex flex-col flex-1 gap-8 bg-background">
 				<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-					<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-						Colors
-					</h1>
-					<p className="text-muted-foreground text-base lg:text-xl">
+					<h1 className="text-32 tracking-tight! truncate">Colors</h1>
+					<p className="text-muted-foreground text-20 font-normal! text-pretty">
 						The complete Tailwind color palette in HEX, RGB, HSL, CSS variables,
 						and classes. Ready to copy and paste into your project.
 					</p>
@@ -822,14 +820,14 @@ export default function Page() {
 				{/* Color Picker Section */}
 				<div className="flex flex-col gap-6 p-6 lg:p-12 pt-4">
 					<div className="flex flex-col gap-4">
-						<h2 className="text-2xl font-bold tracking-tight">Color Picker</h2>
-						<p className="text-muted-foreground text-sm">
+						<h2 className="text-20">Color Picker</h2>
+						<p className="text-muted-foreground text-16 font-normal! text-pretty">
 							Select a color and choose the format you want to see it in.
 						</p>
 					</div>
 
 					<div className="flex flex-col lg:flex-row lg:items-center justify-start gap-12">
-						<div className="w-full flex items-center justify-center lg:items-start gap-6 flex-wrap">
+						<div className="w-full lg:w-auto flex items-center justify-center lg:justify-start gap-6 flex-wrap">
 							<div className="relative p-4 rounded-lg border border-border bg-card">
 								<HexColorPicker
 									color={inputColorHex}
@@ -846,7 +844,7 @@ export default function Page() {
 							>
 								Input:
 							</Label>
-							<InputGroup>
+							<InputGroup variant="raised" className="pr-0">
 								<InputGroupInput
 									id="input-color"
 									type="text"
@@ -859,18 +857,19 @@ export default function Page() {
 									<InputGroupText>
 										<SnippetCopyButton
 											size="icon-sm"
-											className="rounded-sm"
+											className="rounded-md"
 											value={inputColorValue}
 										/>
 									</InputGroupText>
 								</InputGroupAddon>
 							</InputGroup>
 
-							<div className="col-start-2 w-full flex items-center justify-center">
-								<ButtonGroup>
+							<div className="col-start-2 w-full flex items-center justify-start">
+								<ButtonGroup className="w-full flex items-center justify-start">
 									<ButtonGroupText
 										size="icon"
-										variant="outline"
+										variant="raised"
+										animation="colors"
 										className="p-0 text-center flex items-center justify-center text-muted-foreground hover:bg-background dark:bg-input/30 dark:hover:bg-input/30"
 									>
 										<ArrowDown />
@@ -879,7 +878,7 @@ export default function Page() {
 										value={outputColorFormat}
 										onValueChange={setOutputColorFormat}
 									>
-										<SelectTrigger className="w-[120px]" animation="colors">
+										<SelectTrigger className="flex-1" animation="colors">
 											<SelectValue />
 										</SelectTrigger>
 										<SelectContent>
@@ -899,9 +898,9 @@ export default function Page() {
 								Output:
 							</Label>
 							<div className="flex-1 flex gap-2">
-								<InputGroup>
+								<InputGroup variant="raised" className="pr-0">
 									<InputGroupInput
-										id="input-color"
+										id="output-color"
 										type="text"
 										value={convertedColor}
 										placeholder=""
@@ -912,7 +911,7 @@ export default function Page() {
 										<InputGroupText>
 											<SnippetCopyButton
 												size="icon-sm"
-												className="rounded-sm"
+												className="rounded-md"
 												value={convertedColor}
 											/>
 										</InputGroupText>
@@ -967,10 +966,13 @@ export default function Page() {
 						{colors.map((color) => (
 							<GridRow
 								key={color.name}
-								className="not-last:h-[calc(100%-1px)] min-h-0"
+								className="not-last:h-[calc(100%-1px)] min-h-0 group"
 							>
 								{!isMobile && (
-									<GridItem span={2} className="text-xs font-semibold">
+									<GridItem
+										span={2}
+										className="text-xs font-semibold group-not-last:-mb-[1px]"
+									>
 										{color.name}
 									</GridItem>
 								)}
@@ -992,20 +994,22 @@ export default function Page() {
 
 									return (
 										<Tooltip key={colorClass}>
-											<TooltipTrigger render={
-												<GridItem
-													decorationBottomRight={colorClass === "bg-rose-950"}
-													className="!border-r-0 cursor-pointer aspect-square !min-h-0 min-w-0 p-0.5 sm:p-1"
-													onClick={handleColorClick}
-												>
-													<Card
-														className={cn(
-															"w-full h-full aspect-square rounded-sm md:rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg p-0",
-															colorClass,
-														)}
-													/>
-												</GridItem>
-											} />
+											<TooltipTrigger
+												render={
+													<GridItem
+														decorationBottomRight={colorClass === "bg-rose-950"}
+														className="!border-r-0 cursor-pointer aspect-square !min-h-0 min-w-0 p-0.5 sm:p-1"
+														onClick={handleColorClick}
+													>
+														<Card
+															className={cn(
+																"w-full h-full aspect-square rounded-sm md:rounded-md border-0 transition-all duration-200 hover:scale-105 hover:shadow-lg p-0",
+																colorClass,
+															)}
+														/>
+													</GridItem>
+												}
+											/>
 											<TooltipContent className="px-0 pl-2 py-0">
 												<Snippet className="w-full z-[99999] flex items-center justify-center bg-transparent border-0 px-0">
 													<SnippetHeader className="w-full gap-2 flex items-center justify-center bg-transparent border-0">

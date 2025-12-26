@@ -15,12 +15,10 @@ export default function Page() {
 	}, []);
 
 	return (
-		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background rounded-b-3xl lg:rounded-bl-none">
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Components
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl text-pretty">
+				<h1 className="text-32 tracking-tight! truncate">Components</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
 					A comprehensive collection of reusable components for building modern
 					web applications. Each component is designed with accessibility,
 					customization, and performance in mind.
@@ -38,7 +36,7 @@ export default function Page() {
 						>
 							<Button
 								variant="ghost"
-								size="sm"
+								size="lg"
 								className="group"
 								nativeButton={false}
 								render={
