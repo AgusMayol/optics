@@ -6,7 +6,17 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/optics/button";
 
-const TooltipProviderContext = React.createContext(false);
+const TooltipProviderContext = React.createContext({ hasProvider: false, delay: 400 });
+
+// Context local para cada instancia de Tooltip para manejar estados de interacción
+const TooltipInstanceContext = React.createContext({
+	shouldKeepOpenRef: { current: false },
+	setShouldKeepOpen: () => {},
+	isPointerOverTriggerRef: { current: false },
+	isPointerOverContentRef: { current: false },
+	openTooltip: () => {},
+	delay: 400,
+});
 
 function TooltipProvider({
 	delay = 400,
@@ -22,7 +32,7 @@ function TooltipProvider({
 	// - skipDelayDuration: 0ms para transiciones instantáneas entre tooltips cuando ya hay uno abierto
 	// Para que skipDelayDuration funcione entre múltiples tooltips, todos deben compartir el mismo TooltipProvider
 	return (
-		<TooltipProviderContext.Provider value={true}>
+		<TooltipProviderContext.Provider value={{ hasProvider: true, delay: resolvedDelayDuration }}>
 			<TooltipPrimitive.Provider
 				data-slot="tooltip-provider"
 				delay={resolvedDelayDuration}
@@ -36,39 +46,217 @@ function TooltipProvider({
 	);
 }
 
-function Tooltip({ onOpenChange, ...props } = {}) {
-	const hasProvider = React.useContext(TooltipProviderContext);
+function Tooltip({ open: controlledOpen, onOpenChange, delay: localDelay, ...props } = {}) {
+	const { hasProvider, delay: providerDelay } = React.useContext(TooltipProviderContext);
+	const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
+
+	const isControlled = controlledOpen !== undefined;
+	const isOpen = isControlled ? controlledOpen : uncontrolledOpen;
+
+	// El delay efectivo viene del prop local, del provider, o del default (400)
+	const effectiveDelay = localDelay ?? providerDelay ?? 400;
+
+	// Refs locales para cada instancia de Tooltip
+	const shouldKeepOpenRef = React.useRef(false);
+	const isPointerOverTriggerRef = React.useRef(false);
+	const isPointerOverContentRef = React.useRef(false);
+
+	const setShouldKeepOpen = React.useCallback((value) => {
+		shouldKeepOpenRef.current = value;
+	}, []);
+
+	const openTooltip = React.useCallback(() => {
+		if (isControlled) {
+			onOpenChange?.(true);
+		} else {
+			setUncontrolledOpen(true);
+		}
+	}, [isControlled, onOpenChange]);
 
 	function handleOpenChange(nextOpen, eventDetails) {
-		if (!nextOpen && eventDetails?.reason === "trigger-press") {
-			// Mantén el tooltip abierto cuando el cierre proviene de un click en el trigger.
-			eventDetails.cancel();
-			return;
+		// Lógica para mantener abierto si el mouse está sobre el trigger o el contenido
+		if (!nextOpen) {
+			if (
+				isPointerOverTriggerRef.current ||
+				isPointerOverContentRef.current ||
+				shouldKeepOpenRef.current
+			) {
+				if (isControlled) {
+					onOpenChange?.(true);
+				} else {
+					setUncontrolledOpen(true);
+				}
+				return;
+			}
+		}
+
+		if (!isControlled) {
+			setUncontrolledOpen(nextOpen);
+		}
+
+		if (nextOpen) {
+			setShouldKeepOpen(true);
+		} else {
+			setShouldKeepOpen(false);
 		}
 
 		onOpenChange?.(nextOpen, eventDetails);
 	}
 
 	const tooltipRoot = (
-		<TooltipPrimitive.Root
-			data-slot="tooltip"
-			onOpenChange={handleOpenChange}
-			{...props}
-		/>
+		<TooltipInstanceContext.Provider
+			value={{
+				shouldKeepOpenRef,
+				setShouldKeepOpen,
+				isPointerOverTriggerRef,
+				isPointerOverContentRef,
+				openTooltip,
+				delay: effectiveDelay,
+			}}
+		>
+			<TooltipPrimitive.Root
+				data-slot="tooltip"
+				open={isOpen}
+				onOpenChange={handleOpenChange}
+				delay={effectiveDelay}
+				{...props}
+			/>
+		</TooltipInstanceContext.Provider>
 	);
 
-	// Si ya hay un TooltipProvider en el contexto, no crear otro
-	// Esto permite que múltiples tooltips compartan el mismo Provider y skipDelayDuration funcione
 	if (hasProvider) {
 		return tooltipRoot;
 	}
 
-	// Si no hay Provider, crear uno con los valores por defecto
-	return <TooltipProvider>{tooltipRoot}</TooltipProvider>;
+	return <TooltipProvider delay={effectiveDelay}>{tooltipRoot}</TooltipProvider>;
 }
 
-function TooltipTrigger({ ...props } = {}) {
-	return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+function TooltipTrigger({
+	onClick,
+	onPointerDown,
+	onPointerLeave,
+	onPointerEnter,
+	onTouchStart,
+	onTouchEnd,
+	onTouchCancel,
+	...props
+} = {}) {
+	const {
+		setShouldKeepOpen,
+		isPointerOverTriggerRef,
+		isPointerOverContentRef,
+		openTooltip,
+		delay,
+	} = React.useContext(TooltipInstanceContext);
+
+	const longPressTimeoutRef = React.useRef(null);
+	const isTouchActiveRef = React.useRef(false);
+
+	React.useEffect(() => {
+		return () => {
+			if (longPressTimeoutRef.current) {
+				clearTimeout(longPressTimeoutRef.current);
+			}
+		};
+	}, []);
+
+	const handleClick = React.useCallback(
+		(event) => {
+			event.stopPropagation();
+			onClick?.(event);
+		},
+		[onClick],
+	);
+
+	const handlePointerDown = React.useCallback(
+		(event) => {
+			setShouldKeepOpen(true);
+			isPointerOverTriggerRef.current = true;
+			event.stopPropagation();
+			onPointerDown?.(event);
+		},
+		[onPointerDown, setShouldKeepOpen],
+	);
+
+	const handlePointerEnter = React.useCallback(
+		(event) => {
+			setShouldKeepOpen(true);
+			isPointerOverTriggerRef.current = true;
+			onPointerEnter?.(event);
+		},
+		[onPointerEnter, setShouldKeepOpen],
+	);
+
+	const handlePointerLeave = React.useCallback(
+		(event) => {
+			isPointerOverTriggerRef.current = false;
+			if (!isPointerOverContentRef.current) {
+				setShouldKeepOpen(false);
+			}
+			onPointerLeave?.(event);
+		},
+		[onPointerLeave, setShouldKeepOpen, isPointerOverContentRef],
+	);
+
+	const handleTouchStart = React.useCallback(
+		(event) => {
+			isTouchActiveRef.current = true;
+			if (longPressTimeoutRef.current) {
+				clearTimeout(longPressTimeoutRef.current);
+			}
+
+			longPressTimeoutRef.current = setTimeout(() => {
+				if (isTouchActiveRef.current) {
+					setShouldKeepOpen(true);
+					isPointerOverTriggerRef.current = true;
+					openTooltip();
+					// En mobile, el preventDefault evita el menú contextual al hacer long press
+					if (event.cancelable) event.preventDefault();
+				}
+			}, delay); // Usamos el delay del componente
+
+			onTouchStart?.(event);
+		},
+		[onTouchStart, setShouldKeepOpen, openTooltip, delay],
+	);
+
+	const handleTouchEnd = React.useCallback(
+		(event) => {
+			isTouchActiveRef.current = false;
+			if (longPressTimeoutRef.current) {
+				clearTimeout(longPressTimeoutRef.current);
+				longPressTimeoutRef.current = null;
+			}
+			onTouchEnd?.(event);
+		},
+		[onTouchEnd],
+	);
+
+	const handleTouchCancel = React.useCallback(
+		(event) => {
+			isTouchActiveRef.current = false;
+			if (longPressTimeoutRef.current) {
+				clearTimeout(longPressTimeoutRef.current);
+				longPressTimeoutRef.current = null;
+			}
+			onTouchCancel?.(event);
+		},
+		[onTouchCancel],
+	);
+
+	return (
+		<TooltipPrimitive.Trigger
+			data-slot="tooltip-trigger"
+			onClick={handleClick}
+			onPointerDown={handlePointerDown}
+			onPointerEnter={handlePointerEnter}
+			onPointerLeave={handlePointerLeave}
+			onTouchStart={handleTouchStart}
+			onTouchEnd={handleTouchEnd}
+			onTouchCancel={handleTouchCancel}
+			{...props}
+		/>
+	);
 }
 
 function TooltipContent({
@@ -79,8 +267,36 @@ function TooltipContent({
 	alignOffset = 0,
 	variant = "raised",
 	children = null,
+	onPointerEnter,
+	onPointerLeave,
 	...props
 }) {
+	const {
+		setShouldKeepOpen,
+		isPointerOverTriggerRef,
+		isPointerOverContentRef,
+	} = React.useContext(TooltipInstanceContext);
+
+	const handlePointerEnter = React.useCallback(
+		(event) => {
+			setShouldKeepOpen(true);
+			isPointerOverContentRef.current = true;
+			onPointerEnter?.(event);
+		},
+		[onPointerEnter, setShouldKeepOpen],
+	);
+
+	const handlePointerLeave = React.useCallback(
+		(event) => {
+			isPointerOverContentRef.current = false;
+			if (!isPointerOverTriggerRef.current) {
+				setShouldKeepOpen(false);
+			}
+			onPointerLeave?.(event);
+		},
+		[onPointerLeave, setShouldKeepOpen, isPointerOverTriggerRef],
+	);
+
 	return (
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Positioner
@@ -97,6 +313,8 @@ function TooltipContent({
 						buttonVariants({ variant, size: "default", animation: "none" }),
 						className,
 					)}
+					onPointerEnter={handlePointerEnter}
+					onPointerLeave={handlePointerLeave}
 					{...props}
 				>
 					<div className="flex flex-col gap-2 z-50">{children}</div>

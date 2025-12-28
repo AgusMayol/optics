@@ -15,6 +15,11 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
+	CodeBlockSelect,
+	CodeBlockSelectContent,
+	CodeBlockSelectItem,
+	CodeBlockSelectTrigger,
+	CodeBlockSelectValue,
 } from "@/registry/optics/code-block";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
@@ -353,11 +358,11 @@ export default function Page() {
 						</Badge>
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className=" px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										app/layout.jsx
@@ -382,7 +387,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -431,11 +436,11 @@ export default function Page() {
 						</Badge>
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										[slug]/page.jsx
@@ -460,7 +465,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -514,95 +519,64 @@ export default function Page() {
 						for dynamic routes. Next.js will automatically generate the image
 						and add the correct meta tags.
 					</p>
-					<div className="flex flex-col gap-4">
-						<Card className="pt-0 pb-0 bg-background">
-							<CardFooter className="px-0 py-0 rounded-b-xl">
-								<Accordion type={"single"} collapsible className="w-full">
-									<AccordionItem value="codeblock" className="rounded-b-xl">
-										<AccordionTrigger
-											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-											showArrow
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type={"single"} collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										Open Graph Images
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={[...ogImageCode, ...ogImageDynamicCode]}
+											defaultValue={ogImageCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											Static OG Image
-										</AccordionTrigger>
-										<AccordionContent
-											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-											keepRendered
-										>
-											<CodeBlock
-												data={ogImageCode}
-												defaultValue={ogImageCode[0].filename}
-												className="border-none rounded-none rounded-b-xl shadow-none group"
-											>
-												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-													<CodeBlockCopyButton />
-												</CodeBlockHeader>
-												<CodeBlockBody>
-													{(item) => (
-														<CodeBlockItem
-															key={item.language}
-															value={item.filename}
-														>
-															<CodeBlockContent
-																language={item.language}
-																className="bg-sidebar"
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
 															>
-																{item.code}
-															</CodeBlockContent>
-														</CodeBlockItem>
-													)}
-												</CodeBlockBody>
-											</CodeBlock>
-										</AccordionContent>
-									</AccordionItem>
-								</Accordion>
-							</CardFooter>
-						</Card>
-
-						<Card className="pt-0 pb-0 bg-background">
-							<CardFooter className="px-0 py-0 rounded-b-xl">
-								<Accordion type={"single"} collapsible className="w-full">
-									<AccordionItem value="codeblock" className="rounded-b-xl">
-										<AccordionTrigger
-											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-											showArrow
-										>
-											Dynamic OG Image (per route)
-										</AccordionTrigger>
-										<AccordionContent
-											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-											keepRendered
-										>
-											<CodeBlock
-												data={ogImageDynamicCode}
-												defaultValue={ogImageDynamicCode[0].filename}
-												className="border-none rounded-none rounded-b-xl shadow-none group"
-											>
-												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-													<CodeBlockCopyButton />
-												</CodeBlockHeader>
-												<CodeBlockBody>
-													{(item) => (
-														<CodeBlockItem
-															key={item.language}
-															value={item.filename}
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={`og-${item.language}-${item.filename}`}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
 														>
-															<CodeBlockContent
-																language={item.language}
-																className="bg-sidebar"
-															>
-																{item.code}
-															</CodeBlockContent>
-														</CodeBlockItem>
-													)}
-												</CodeBlockBody>
-											</CodeBlock>
-										</AccordionContent>
-									</AccordionItem>
-								</Accordion>
-							</CardFooter>
-						</Card>
-					</div>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
 				</div>
 
 				{/* 4. Sitemap & Robots */}
@@ -646,95 +620,64 @@ export default function Page() {
 						<code className="text-xs">/sitemap.xml</code> and{" "}
 						<code className="text-xs">/robots.txt</code>.
 					</p>
-					<div className="flex flex-col gap-4">
-						<Card className="pt-0 pb-0 bg-background">
-							<CardFooter className="px-0 py-0 rounded-b-xl">
-								<Accordion type={"single"} collapsible className="w-full">
-									<AccordionItem value="codeblock" className="rounded-b-xl">
-										<AccordionTrigger
-											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-											showArrow
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type={"single"} collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										Sitemap & Robots
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={[...sitemapCode, ...robotsTxtCode]}
+											defaultValue={sitemapCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											Sitemap (app/sitemap.js)
-										</AccordionTrigger>
-										<AccordionContent
-											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-											keepRendered
-										>
-											<CodeBlock
-												data={sitemapCode}
-												defaultValue={sitemapCode[0].filename}
-												className="border-none rounded-none rounded-b-xl shadow-none group"
-											>
-												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-													<CodeBlockCopyButton />
-												</CodeBlockHeader>
-												<CodeBlockBody>
-													{(item) => (
-														<CodeBlockItem
-															key={item.language}
-															value={item.filename}
-														>
-															<CodeBlockContent
-																language={item.language}
-																className="bg-sidebar"
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
 															>
-																{item.code}
-															</CodeBlockContent>
-														</CodeBlockItem>
-													)}
-												</CodeBlockBody>
-											</CodeBlock>
-										</AccordionContent>
-									</AccordionItem>
-								</Accordion>
-							</CardFooter>
-						</Card>
-
-						<Card className="pt-0 pb-0 bg-background">
-							<CardFooter className="px-0 py-0 rounded-b-xl">
-								<Accordion type={"single"} collapsible className="w-full">
-									<AccordionItem value="codeblock" className="rounded-b-xl">
-										<AccordionTrigger
-											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
-											showArrow
-										>
-											Robots.txt (app/robots.js)
-										</AccordionTrigger>
-										<AccordionContent
-											className="border-b-0 border-x-0 border-t pb-0 shadow-none"
-											keepRendered
-										>
-											<CodeBlock
-												data={robotsTxtCode}
-												defaultValue={robotsTxtCode[0].filename}
-												className="border-none rounded-none rounded-b-xl shadow-none group"
-											>
-												<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
-													<CodeBlockCopyButton />
-												</CodeBlockHeader>
-												<CodeBlockBody>
-													{(item) => (
-														<CodeBlockItem
-															key={item.language}
-															value={item.filename}
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={`sitemap-${item.language}-${item.filename}`}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
 														>
-															<CodeBlockContent
-																language={item.language}
-																className="bg-sidebar"
-															>
-																{item.code}
-															</CodeBlockContent>
-														</CodeBlockItem>
-													)}
-												</CodeBlockBody>
-											</CodeBlock>
-										</AccordionContent>
-									</AccordionItem>
-								</Accordion>
-							</CardFooter>
-						</Card>
-					</div>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
 				</div>
 			</div>
 

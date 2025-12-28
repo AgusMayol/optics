@@ -134,7 +134,7 @@ function LayoutContent({ config }) {
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Show Code

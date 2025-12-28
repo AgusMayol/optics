@@ -8,9 +8,10 @@ import {
 } from "@/registry/optics/accordion";
 
 import componentCode from "@/registry/optics/dist/accordion.jsx.txt";
-import utilsCode from "@/registry/optics/dist/lib/utils.js.txt";
 import generatedProps from "@/registry/optics/dist/accordion.json";
-import accordionPrimitiveCode from "@/registry/optics/dist/accordion-primitive.jsx.txt";
+import utilsCode from "@/registry/optics/dist/lib/utils.js.txt";
+import getStrictContextCode from "@/registry/optics/dist/lib/get-strict-context.jsx.txt";
+import controlledStateCode from "@/registry/optics/dist/hooks/use-controlled-state.jsx.txt";
 
 const componentFiles = [
 	{
@@ -18,8 +19,16 @@ const componentFiles = [
 		code: componentCode,
 	},
 	{
-		path: "@/components/optics/accordion-primitive.jsx",
-		code: accordionPrimitiveCode,
+		path: "@/components/optics/hooks/use-controlled-state.jsx",
+		code: controlledStateCode,
+	},
+	{
+		path: "@/components/optics/lib/get-strict-context.jsx",
+		code: getStrictContextCode,
+	},
+	{
+		path: "@/components/optics/lib/utils.js",
+		code: utilsCode,
 	},
 ];
 
@@ -69,7 +78,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "accordion",
-		dependencies: "@radix-ui/react-accordion lucide-react",
+		dependencies: "@base-ui-components/react motion lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

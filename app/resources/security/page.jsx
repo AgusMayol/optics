@@ -843,28 +843,18 @@ export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Security
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Complete guide to security best practices for Next.js applications
-					deployed on Vercel.
+				<h1 className="text-32 tracking-tight! truncate">Security</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Security is fundamental in modern web applications. This guide
+					provides practical examples and proven patterns to protect your
+					Next.js application deployed on Vercel, based on official
+					documentation and industry best practices.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Security is fundamental in modern web applications. This guide
-						provides practical examples and proven patterns to protect your
-						Next.js application deployed on Vercel, based on official
-						documentation and industry best practices.
-					</p>
-				</div>
-
 				{/* 1. Content Security Policy (CSP) */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
@@ -881,7 +871,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											1
 										</Badge>
@@ -898,11 +888,11 @@ export default function Page() {
 						security.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className=" px-0 py-0 rounded-b-xl">
+						<CardFooter className=" px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										CSP Implementation with Proxy
@@ -927,7 +917,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -958,7 +948,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											2
 										</Badge>
@@ -974,11 +964,11 @@ export default function Page() {
 						Vercel offers encrypted sensitive variables that are never exposed.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Variables Configuration
@@ -1003,7 +993,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1034,7 +1024,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											3
 										</Badge>
@@ -1051,11 +1041,11 @@ export default function Page() {
 						on every request.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Security Proxy
@@ -1080,7 +1070,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1111,7 +1101,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											4
 										</Badge>
@@ -1127,11 +1117,11 @@ export default function Page() {
 						sanitize HTML to prevent XSS attacks.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Validation with Zod & DOMPurify
@@ -1156,7 +1146,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1187,7 +1177,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											5
 										</Badge>
@@ -1204,11 +1194,11 @@ export default function Page() {
 						time period.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Rate Limiter Implementation
@@ -1233,7 +1223,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1264,7 +1254,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											6
 										</Badge>
@@ -1281,11 +1271,11 @@ export default function Page() {
 						deployments.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Vercel Configuration
@@ -1310,7 +1300,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1341,7 +1331,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											7
 										</Badge>
@@ -1357,11 +1347,11 @@ export default function Page() {
 						tokens. Verify the authenticity of each request that modifies data.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										CSRF Tokens Implementation
@@ -1386,7 +1376,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1417,7 +1407,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											8
 										</Badge>
@@ -1433,11 +1423,11 @@ export default function Page() {
 						npm audit, Snyk, or Dependabot to detect and fix issues.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Dependency Audit
@@ -1462,7 +1452,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1493,7 +1483,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											9
 										</Badge>
@@ -1509,11 +1499,11 @@ export default function Page() {
 						sameSite to protect against XSS and CSRF.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Secure Cookies Configuration
@@ -1538,7 +1528,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1569,7 +1559,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											10
 										</Badge>
@@ -1585,11 +1575,11 @@ export default function Page() {
 						injection. Never concatenate strings directly in queries.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Secure Prisma Usage
@@ -1614,7 +1604,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1645,7 +1635,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											11
 										</Badge>
@@ -1661,11 +1651,11 @@ export default function Page() {
 						X-Frame-Options, X-Content-Type-Options, and Referrer-Policy.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										next.config.js with Security Headers
@@ -1690,7 +1680,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1714,14 +1704,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+									href="https://nextjs.org/docs/app/getting-started/updating-data"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											12
 										</Badge>
@@ -1737,11 +1727,11 @@ export default function Page() {
 						Always validate inputs and verify user permissions.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Secure Server Action
@@ -1766,7 +1756,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1797,7 +1787,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											13
 										</Badge>
@@ -1815,11 +1805,11 @@ export default function Page() {
 						vulnerabilities.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Disable Source Maps in Production
@@ -1844,7 +1834,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>

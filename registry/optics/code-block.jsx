@@ -396,7 +396,7 @@ export const CodeBlockSelectContent = ({
 	const { data } = useContext(CodeBlockContext);
 
 	return (
-		<SelectContent className={className} {...props}>
+		<SelectContent className={cn("w-[calc(100%+2rem)]", className)} {...props}>
 			{data.map(children)}
 		</SelectContent>
 	);

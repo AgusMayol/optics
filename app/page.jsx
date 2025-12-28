@@ -284,7 +284,6 @@ export default function Home() {
 											type="email"
 											name="email"
 											placeholder="Email Address"
-											variant="raised"
 											className="flex-1 text-xs placeholder:text-xs pointer-events-none disabled:opacity-100 !bg-background group-hover:!bg-background border-border!"
 										/>
 									</div>

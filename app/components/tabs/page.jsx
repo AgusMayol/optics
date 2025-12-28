@@ -21,10 +21,10 @@ import {
 
 import componentCode from "@/registry/optics/dist/tabs.jsx.txt";
 import generatedProps from "@/registry/optics/dist/tabs.json";
-import tabsPrimitiveCode from "@/registry/optics/dist/helpers/primitives/radix/tabs.jsx.txt";
 import highlightCode from "@/registry/optics/dist/helpers/primitives/effects/highlight.jsx.txt";
 import autoHeightCode from "@/registry/optics/dist/helpers/primitives/effects/auto-height.jsx.txt";
 import slotCode from "@/registry/optics/dist/helpers/primitives/animate/slot.jsx.txt";
+import controlledStateCode from "@/registry/optics/dist/hooks/use-controlled-state.jsx.txt";
 import utilsCode from "@/registry/optics/dist/lib/utils.js.txt";
 import getStrictContextCode from "@/registry/optics/dist/lib/get-strict-context.jsx.txt";
 
@@ -32,10 +32,6 @@ const componentFiles = [
 	{
 		path: "@/components/optics/tabs.jsx",
 		code: componentCode,
-	},
-	{
-		path: "@/components/optics/helpers/primitives/radix/tabs.jsx",
-		code: tabsPrimitiveCode,
 	},
 	{
 		path: "@/components/optics/helpers/primitives/effects/highlight.jsx",
@@ -48,6 +44,10 @@ const componentFiles = [
 	{
 		path: "@/components/optics/helpers/primitives/animate/slot.jsx",
 		code: slotCode,
+	},
+	{
+		path: "@/components/optics/hooks/use-controlled-state.jsx",
+		code: controlledStateCode,
 	},
 	{
 		path: "@/components/optics/lib/utils.js",
@@ -187,7 +187,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "tabs",
-		dependencies: "@radix-ui/react-tabs",
+		dependencies: "@base-ui-components/react motion",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

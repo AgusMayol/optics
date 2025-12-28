@@ -26,6 +26,12 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
+	CodeBlockSelect,
+	CodeBlockSelectContent,
+	CodeBlockSelectItem,
+	CodeBlockSelectTrigger,
+	CodeBlockSelectValue,
+	CodeBlockFilename,
 } from "@/registry/optics/code-block";
 
 // Code examples data
@@ -635,28 +641,18 @@ export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Accessibility
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Build inclusive Next.js applications that work for everyone, following
-					WCAG 2.2 guidelines.
+				<h1 className="text-32 tracking-tight! truncate">Accessibility</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Web accessibility ensures that your application can be used by
+					everyone, including people with disabilities. This guide provides
+					practical examples following WCAG 2.2 standards and Next.js best
+					practices.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Web accessibility ensures that your application can be used by
-						everyone, including people with disabilities. This guide provides
-						practical examples following WCAG 2.2 standards and Next.js best
-						practices.
-					</p>
-				</div>
-
 				{/* 1. Semantic HTML & Structure */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
@@ -673,7 +669,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											1
 										</Badge>
@@ -689,11 +685,11 @@ export default function Page() {
 						helps screen readers understand your content hierarchy.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className=" px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Semantic Layout Example
@@ -713,12 +709,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`semantic-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -739,6 +735,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html"
@@ -748,7 +745,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											2
 										</Badge>
@@ -765,11 +762,11 @@ export default function Page() {
 						compliance.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Skip Link Implementation
@@ -789,12 +786,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`skip-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -815,6 +812,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/ARIA/apg/patterns/button/"
@@ -824,7 +822,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											3
 										</Badge>
@@ -840,11 +838,11 @@ export default function Page() {
 						focus states. Always use proper ARIA attributes when needed.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Button Components
@@ -864,12 +862,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`button-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -890,6 +888,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html"
@@ -899,7 +898,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											4
 										</Badge>
@@ -915,11 +914,11 @@ export default function Page() {
 						that are accessible to screen readers.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Form with Validation
@@ -939,12 +938,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`form-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -965,6 +964,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"
@@ -974,7 +974,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											5
 										</Badge>
@@ -991,11 +991,11 @@ export default function Page() {
 						descriptions for complex images.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Image Examples
@@ -1015,12 +1015,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`images-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1041,6 +1041,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
@@ -1050,7 +1051,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											6
 										</Badge>
@@ -1066,11 +1067,11 @@ export default function Page() {
 						reader users without interrupting their current task.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Notification System
@@ -1090,12 +1091,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`aria-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1116,6 +1117,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
@@ -1125,7 +1127,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											7
 										</Badge>
@@ -1142,11 +1144,11 @@ export default function Page() {
 						menus and dropdowns.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Keyboard-Accessible Menu
@@ -1166,12 +1168,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`keyboard-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1192,6 +1194,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
@@ -1201,7 +1204,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											8
 										</Badge>
@@ -1218,11 +1221,11 @@ export default function Page() {
 						closed.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Modal with Focus Trap
@@ -1242,12 +1245,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`focus-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1268,6 +1271,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -1277,7 +1281,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											9
 										</Badge>
@@ -1293,11 +1297,11 @@ export default function Page() {
 						2.2 Level AA requires 4.5:1 for normal text and 3:1 for large text.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Color Contrast CSS
@@ -1317,12 +1321,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`contrast-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1343,6 +1347,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
@@ -1352,7 +1357,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											10
 										</Badge>
@@ -1368,11 +1373,11 @@ export default function Page() {
 						Mobile navigation should be just as accessible as desktop.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Responsive Navigation
@@ -1392,12 +1397,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`responsive-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1418,6 +1423,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
@@ -1427,7 +1433,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											11
 										</Badge>
@@ -1458,11 +1464,11 @@ export default function Page() {
 						attributes to help screen readers understand table relationships.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Data Table Example
@@ -1482,12 +1488,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`table-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1508,6 +1514,7 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
 									href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html"
@@ -1517,7 +1524,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											12
 										</Badge>
@@ -1537,11 +1544,11 @@ export default function Page() {
 						animations.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Motion Preferences CSS
@@ -1561,12 +1568,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`motion-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1587,16 +1594,17 @@ export default function Page() {
 						<Button
 							variant="link"
 							className="gap-1"
+							nativeButton={false}
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/configuring"
+									href="https://nextjs.org/docs/app/api-reference/config/next-config-js"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											13
 										</Badge>
@@ -1612,11 +1620,11 @@ export default function Page() {
 						internationalization, and optimized images.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										next.config.js
@@ -1636,12 +1644,12 @@ export default function Page() {
 											<CodeBlockBody>
 												{(item) => (
 													<CodeBlockItem
-														key={item.language}
+														key={`config-${item.language}-${item.filename}`}
 														value={item.filename}
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1730,6 +1738,7 @@ export default function Page() {
 				<div className="w-full flex flex-wrap items-center gap-8">
 					<Button
 						variant="link"
+						nativeButton={false}
 						render={
 							<Link
 								href="https://www.w3.org/WAI/WCAG22/quickref/"
@@ -1744,6 +1753,7 @@ export default function Page() {
 
 					<Button
 						variant="link"
+						nativeButton={false}
 						render={
 							<Link
 								href="https://www.w3.org/WAI/ARIA/apg/"
@@ -1758,6 +1768,7 @@ export default function Page() {
 
 					<Button
 						variant="link"
+						nativeButton={false}
 						render={
 							<Link
 								href="https://webaim.org/"
@@ -1772,6 +1783,7 @@ export default function Page() {
 
 					<Button
 						variant="link"
+						nativeButton={false}
 						render={
 							<Link
 								href="https://nextjs.org/docs/architecture/accessibility"

@@ -26,6 +26,12 @@ import {
 	CodeBlockCopyButton,
 	CodeBlockHeader,
 	CodeBlockItem,
+	CodeBlockSelect,
+	CodeBlockSelectContent,
+	CodeBlockSelectItem,
+	CodeBlockSelectTrigger,
+	CodeBlockSelectValue,
+	CodeBlockFilename,
 } from "@/registry/optics/code-block";
 
 // Code examples data
@@ -33,7 +39,7 @@ const serverComponentsCode = [
 	{
 		language: "jsx",
 		filename: "app/products/page.jsx",
-		code: `// ✅ Server Component (default in Next.js 16)
+		code: `// Server Component (default in Next.js 16)
 // Runs on the server, not sent to client
 import { db } from '@/lib/db';
 
@@ -69,7 +75,7 @@ const clientComponentsCode = [
 	{
 		language: "jsx",
 		filename: "app/components/InteractiveButton.jsx",
-		code: `"use client"; // ✅ Required for interactivity
+		code: `"use client"; // Required for interactivity
 
 import { useState } from 'react';
 
@@ -86,7 +92,7 @@ export function InteractiveButton() {
   );
 }
 
-// ❌ DON'T use "use client" if you don't need interactivity
+// DON'T use "use client" if you don't need interactivity
 // Server Components are faster and reduce bundle size`,
 	},
 ];
@@ -98,19 +104,19 @@ const dynamicImportsCode = [
 		code: `import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// ✅ Lazy loading with loading state
+// Lazy loading with loading state
 const HeavyChart = dynamic(() => import('./Chart'), {
   loading: () => <div>Loading chart...</div>,
   ssr: false, // Disable SSR if not needed
 });
 
-// ✅ With named exports
+// With named exports
 const HeavyEditor = dynamic(
   () => import('./Editor').then(mod => ({ default: mod.Editor })),
   { loading: () => <p>Loading editor...</p> }
 );
 
-// ✅ With Suspense for better control
+// With Suspense for better control
 export default function Dashboard() {
   return (
     <div>
@@ -131,7 +137,7 @@ const reactCompilerCode = [
 		code: `import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ✅ Enable React Compiler (Next.js 16+)
+  // Enable React Compiler (Next.js 16+)
   reactCompiler: true,
   
   // Or advanced configuration:
@@ -145,7 +151,7 @@ export default nextConfig;`,
 	{
 		language: "jsx",
 		filename: "app/components/OptimizedComponent.jsx",
-		code: `// ✅ React Compiler automatically optimizes this component
+		code: `// React Compiler automatically optimizes this component
 // You don't need useMemo, useCallback manually
 
 export function ProductList({ products, filter }) {
@@ -170,8 +176,8 @@ export function ProductList({ products, filter }) {
   );
 }
 
-// ✅ Compiler detects dependencies and memoizes automatically
-// ❌ You no longer need to write useMemo/useCallback manually`,
+// Compiler detects dependencies and memoizes automatically
+// You no longer need to write useMemo/useCallback manually`,
 	},
 ];
 
@@ -182,13 +188,13 @@ const cacheCode = [
 		code: `import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
-// ✅ React cache for request deduplication
+// React cache for request deduplication
 const getProduct = cache(async (id) => {
   const res = await fetch(\`https://api.example.com/products/\${id}\`);
   return res.json();
 });
 
-// ✅ Next.js cache with revalidation
+// Next.js cache with revalidation
 const getCachedProducts = unstable_cache(
   async () => {
     const res = await fetch('https://api.example.com/products');
@@ -202,7 +208,7 @@ const getCachedProducts = unstable_cache(
 );
 
 export default async function ProductsPage() {
-  // ✅ Multiple calls to getProduct with same id
+  // Multiple calls to getProduct with same id
   // only make one real request (deduplication)
   const product1 = await getProduct(1);
   const product2 = await getProduct(1); // Uses cache
@@ -218,7 +224,7 @@ export default async function ProductsPage() {
 		code: `import { revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-// ✅ On-demand revalidation
+// On-demand revalidation
 export async function POST(request) {
   const { tag } = await request.json();
   
@@ -237,7 +243,7 @@ const fetchCacheCode = [
 	{
 		language: "jsx",
 		filename: "app/data/page.jsx",
-		code: `// ✅ Fetch with automatic caching
+		code: `// Fetch with automatic caching
 export default async function DataPage() {
   // Default cache (force-cache)
   const staticData = await fetch('https://api.example.com/data', {
@@ -280,7 +286,7 @@ const loadingFilesCode = [
 		filename: "app/dashboard/page.jsx",
 		code: `import { Suspense } from 'react';
 
-// ✅ Page component with async data
+// Page component with async data
 export default async function Dashboard() {
   return (
     <div>
@@ -322,7 +328,7 @@ async function Stats() {
 	{
 		language: "jsx",
 		filename: "app/dashboard/loading.jsx",
-		code: `// ✅ Loading UI file (Next.js 16+)
+		code: `// Loading UI file (Next.js 16+)
 // Automatically shown while page.tsx is loading
 // This is the recommended approach in Next.js 16
 
@@ -339,7 +345,7 @@ export default function Loading() {
   );
 }
 
-// ✅ Benefits of loading.jsx:
+// Benefits of loading.jsx:
 // - Automatically wraps page in Suspense boundary
 // - Shows immediately while page loads
 // - Better UX than manual Suspense fallbacks
@@ -353,7 +359,7 @@ const imageOptimizationCode = [
 		filename: "app/components/ProductImage.jsx",
 		code: `import Image from 'next/image';
 
-// ✅ Automatic image optimization
+// Automatic image optimization
 export function ProductImage({ src, alt, width, height }) {
   return (
     <Image
@@ -361,26 +367,26 @@ export function ProductImage({ src, alt, width, height }) {
       alt={alt}
       width={width}
       height={height}
-      // ✅ Lazy loading by default
+      // Lazy loading by default
       loading="lazy"
       
-      // ✅ Placeholder while loading
+      // Placeholder while loading
       placeholder="blur"
       blurDataURL="data:image/jpeg;base64,..."
       
-      // ✅ Priority for above-the-fold images
+      // Priority for above-the-fold images
       priority={false}
       
-      // ✅ Modern formats automatically
+      // Modern formats automatically
       // Next.js serves WebP/AVIF automatically
       
-      // ✅ Responsive images
+      // Responsive images
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
   );
 }
 
-// ✅ For above-the-fold images
+// For above-the-fold images
 export function HeroImage({ src, alt }) {
   return (
     <Image
@@ -400,10 +406,7 @@ const bundleOptimizationCode = [
 	{
 		language: "jsx",
 		filename: "app/components/IconButton.jsx",
-		code: `// ❌ Imports entire package
-import * as Icons from 'lucide-react';
-
-// ✅ Import only what you need
+		code: `// Imports only what you need
 import { Heart, Star, Share } from 'lucide-react';
 
 export function IconButton({ icon }) {
@@ -411,7 +414,7 @@ export function IconButton({ icon }) {
   return <Icon className="w-5 h-5" />;
 }
 
-// ✅ For large libraries, use dynamic imports
+// For large libraries, use dynamic imports
 const HeavyLibrary = dynamic(() => import('heavy-library'));`,
 	},
 	{
@@ -420,7 +423,7 @@ const HeavyLibrary = dynamic(() => import('heavy-library'));`,
 		code: `import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ✅ Bundle optimization
+  // Bundle optimization
   experimental: {
     optimizePackageImports: [
       'lucide-react',
@@ -429,13 +432,13 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // ✅ Bundle analysis
+  // Bundle analysis
   // Run: next build --analyze
   // Or install: @next/bundle-analyzer
   
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      // ✅ Improved tree shaking
+      // Improved tree shaking
       config.optimization = {
         ...config.optimization,
         usedExports: true,
@@ -456,18 +459,18 @@ const partialPrerenderingCode = [
 		filename: "app/products/[id]/page.jsx",
 		code: `import { Suspense } from 'react';
 
-// ✅ Partial Prerendering (Next.js 16+)
+// Partial Prerendering (Next.js 16+)
 // Renders static part immediately
 // and streams dynamic part
 
 export default function ProductPage({ params }) {
   return (
     <div>
-      {/* ✅ This part is prerendered statically */}
+      {/* This part is prerendered statically */}
       <ProductHeader />
       <ProductDescription />
       
-      {/* ✅ This part is streamed dynamically */}
+      {/* This part is streamed dynamically */}
       <Suspense fallback={<ReviewsSkeleton />}>
         <ProductReviews productId={params.id} />
       </Suspense>
@@ -500,28 +503,18 @@ export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Performance
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Complete guide to optimize Next.js 16 applications using Server
-					Components, React Compiler, Cache, and more.
+				<h1 className="text-32 tracking-tight! truncate">Performance</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Next.js 16 introduces significant performance improvements with React
+					Compiler, better Server Components support, and new caching
+					strategies. This guide covers best practices to maximize your
+					application's performance.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Next.js 16 introduces significant performance improvements with
-						React Compiler, better Server Components support, and new caching
-						strategies. This guide covers best practices to maximize your
-						application's performance.
-					</p>
-				</div>
-
 				{/* 1. Server Components */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
@@ -531,14 +524,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+									href="https://nextjs.org/docs/app/getting-started/server-and-client-components"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											1
 										</Badge>
@@ -559,14 +552,14 @@ export default function Page() {
 						when you need interactivity.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="server-components-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Server Components Example
@@ -591,7 +584,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -615,14 +608,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/rendering/client-components"
+									href="https://nextjs.org/docs/app/getting-started/server-and-client-components"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											2
 										</Badge>
@@ -639,14 +632,14 @@ export default function Page() {
 						logic in Server Components whenever possible.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="client-components-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Client Component Example
@@ -671,7 +664,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -695,14 +688,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading"
+									href="https://nextjs.org/docs/app/guides/lazy-loading"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											3
 										</Badge>
@@ -718,14 +711,14 @@ export default function Page() {
 						reduces the initial bundle and improves Time to Interactive.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="dynamic-imports-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Dynamic Import Examples
@@ -750,7 +743,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -781,7 +774,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											4
 										</Badge>
@@ -805,14 +798,14 @@ export default function Page() {
 						. Available in Next.js 16+.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="react-compiler-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										React Compiler Setup
@@ -826,7 +819,22 @@ export default function Page() {
 											defaultValue={reactCompilerCode[0].filename}
 											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
+															>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
 												<CodeBlockCopyButton />
 											</CodeBlockHeader>
 											<CodeBlockBody>
@@ -837,7 +845,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -861,14 +869,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/caching"
+									href="https://nextjs.org/docs/app/guides/caching"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											5
 										</Badge>
@@ -885,11 +893,11 @@ export default function Page() {
 						with tags.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="cache-codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Cache Examples
@@ -903,7 +911,22 @@ export default function Page() {
 											defaultValue={cacheCode[0].filename}
 											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
+															>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
 												<CodeBlockCopyButton />
 											</CodeBlockHeader>
 											<CodeBlockBody>
@@ -914,7 +937,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -938,14 +961,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
+									href="https://nextjs.org/docs/app/getting-started/caching-and-revalidating"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											6
 										</Badge>
@@ -961,14 +984,14 @@ export default function Page() {
 						revalidation (ISR) or tag-based revalidation to keep data fresh.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="fetch-cache-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Fetch Cache Options
@@ -993,7 +1016,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1017,14 +1040,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming"
+									href="https://nextjs.org/docs/app/getting-started/loading-ui-and-streaming"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											7
 										</Badge>
@@ -1049,14 +1072,14 @@ export default function Page() {
 						content while other parts load.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="loading-files-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Loading Files Pattern
@@ -1070,7 +1093,22 @@ export default function Page() {
 											defaultValue={loadingFilesCode[0].filename}
 											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
+															>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
 												<CodeBlockCopyButton />
 											</CodeBlockHeader>
 											<CodeBlockBody>
@@ -1081,7 +1119,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1105,14 +1143,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/optimizing/images"
+									href="https://nextjs.org/docs/app/getting-started/images"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											8
 										</Badge>
@@ -1129,14 +1167,14 @@ export default function Page() {
 						Significantly reduces image sizes.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="image-optimization-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Image Optimization
@@ -1161,7 +1199,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1185,14 +1223,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/optimizing/bundle-analyzer"
+									href="https://nextjs.org/docs/app/guides/production-checklist#bundle-analysis"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											9
 										</Badge>
@@ -1208,14 +1246,14 @@ export default function Page() {
 						shaking, and analyzing bundle sizes with tools like bundle-analyzer.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="bundle-optimization-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Bundle Optimization Techniques
@@ -1229,7 +1267,22 @@ export default function Page() {
 											defaultValue={bundleOptimizationCode[0].filename}
 											className="border-none rounded-none rounded-b-xl shadow-none group"
 										>
-											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem
+																key={item.filename}
+																value={item.filename}
+															>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
 												<CodeBlockCopyButton />
 											</CodeBlockHeader>
 											<CodeBlockBody>
@@ -1240,7 +1293,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1264,14 +1317,14 @@ export default function Page() {
 							className="gap-1"
 							render={
 								<Link
-									href="https://nextjs.org/docs/app/building-your-application/routing/partial-prerendering"
+									href="https://nextjs.org/docs/app/getting-started/cache-components"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											10
 										</Badge>
@@ -1288,14 +1341,14 @@ export default function Page() {
 						while maintaining dynamic content.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem
 									value="partial-prerendering-codeblock"
 									className="rounded-b-xl"
 								>
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Partial Prerendering Example
@@ -1320,7 +1373,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -1414,7 +1467,7 @@ export default function Page() {
 						variant="link"
 						render={
 							<Link
-								href="https://nextjs.org/docs/app/building-your-application/optimizing"
+								href="https://nextjs.org/docs/app/guides/production-checklist"
 								target="_blank"
 								rel="noopener noreferrer"
 							>

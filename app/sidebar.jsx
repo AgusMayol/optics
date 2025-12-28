@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { ScrollArea } from "@/registry/optics/scroll-area";
+import { SheetClose } from "@/registry/optics/sheet";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,8 +38,9 @@ export function ListItems({ links, scrollHeight, isMobile, onLinkClick }) {
 
 		// Buscar el viewport del ScrollArea
 		const scrollElement =
-			scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]') ||
-			scrollAreaRef.current;
+			scrollAreaRef.current.querySelector(
+				'[data-slot="scroll-area-viewport"]',
+			) || scrollAreaRef.current;
 
 		if (!scrollElement) return;
 
@@ -80,83 +82,97 @@ export function ListItems({ links, scrollHeight, isMobile, onLinkClick }) {
 			ref={scrollAreaRef}
 			className="w-full"
 			style={{ height: scrollHeight }}
-			maskColor={isMobile ? "from-transparent" : "from-background"}
+			maskColor={"from-background"}
 		>
 			<div className="w-full h-full flex flex-col gap-10 py-8 lg:p-4 max-w-xs lg:max-w-none">
-				{links.map((item) => (
-					<div key={item.name} className={cn("flex flex-col gap-2")}>
+				{links.map((group) => (
+					<div key={group.name} className={cn("flex flex-col gap-2")}>
 						<h2 className="font-semibold px-2 text-base lg:text-sm">
-							{item.name}
+							{group.name}
 						</h2>
-						{item.items.map((item) => (
-							<Button
-								key={item.name}
-								ref={(el) => {
-									if (el) {
-										itemRefs.current[item.href] = el;
-									}
-								}}
-								size="lg"
-								variant="ghost"
-								nativeButton={false}
-								className={cn(
-									"group w-full text-sm lg:text-xs pr-2 justify-between font-medium data-[active=true]:bg-sidebar-accent/80 data-[active=true]:lg:bg-sidebar-accent text-foreground lg:text-muted-foreground data-[active=true]:text-foreground transition-none transition-transform",
-									item.disabled && "cursor-not-allowed",
-								)}
-								data-active={item.href === pathname}
-								render={
-									<Link
-										href={item.href}
-										rel="noopener noreferrer"
-										target={item.href.includes("https://") ? "_blank" : "_self"}
-										onClick={(e) => {
-											item.disabled
-												? e.preventDefault()
-												: isMobile && onLinkClick
-													? onLinkClick
-													: undefined;
-										}}
-										className={cn(item.disabled && "cursor-not-allowed")}
-									>
-										<div className="flex flex-row items-center justify-start gap-2">
-											{item.name}
-											{item.href.includes("https://") && (
-												<ArrowUpRight className="-ml-1" />
-											)}
-										</div>
-										{item.disabled && (
-											<Badge
-												variant="outline"
-												className="squircle-none !text-[10px] group-hover:bg-muted group-hover:border-muted-foreground/25 transition-none!"
-											>
-												Soon
-											</Badge>
-										)}
-										{item.logo && (
-											<Image
-												src={item.logo}
-												alt={item.name}
-												className={cn(
-													"size-4 mr-0.5",
-													item.logoDark && "dark:hidden",
+						{group.items.map((item) => {
+							const itemButton = (
+								<Button
+									key={item.name}
+									ref={(el) => {
+										if (el) {
+											itemRefs.current[item.href] = el;
+										}
+									}}
+									size="lg"
+									variant="ghost"
+									nativeButton={false}
+									className={cn(
+										"group w-full text-sm lg:text-xs pr-2 justify-between font-medium data-[active=true]:bg-sidebar-accent/80 data-[active=true]:lg:bg-sidebar-accent text-foreground lg:text-muted-foreground data-[active=true]:text-foreground transition-none transition-transform",
+										item.disabled && "cursor-not-allowed",
+									)}
+									data-active={item.href === pathname}
+									render={
+										<Link
+											href={item.href}
+											rel="noopener noreferrer"
+											target={
+												item.href.includes("https://") ? "_blank" : "_self"
+											}
+											onClick={(e) => {
+												if (item.disabled) {
+													e.preventDefault();
+												} else if (isMobile && onLinkClick) {
+													onLinkClick();
+												}
+											}}
+											className={cn(item.disabled && "cursor-not-allowed")}
+										>
+											<div className="flex flex-row items-center justify-start gap-2">
+												{item.name}
+												{item.href.includes("https://") && (
+													<ArrowUpRight className="-ml-1" />
 												)}
-												width={16}
-												height={16}
-											/>
-										)}
-										{item.logoDark && (
-											<Image
-												src={item.logoDark}
-												alt={item.name}
-												className="size-4 mr-0.5 hidden dark:block"
-												width={16}
-												height={16}
-											/>
-										)}
-									</Link>
-								}
-							/>
-						))}
+											</div>
+											{item.disabled && (
+												<Badge
+													variant="outline"
+													className="squircle-none !text-[10px] group-hover:bg-muted group-hover:border-muted-foreground/25 transition-none!"
+												>
+													Soon
+												</Badge>
+											)}
+											{item.logo && (
+												<Image
+													src={item.logo}
+													alt={item.name}
+													className={cn(
+														"size-4 mr-0.5",
+														item.logoDark && "dark:hidden",
+													)}
+													width={16}
+													height={16}
+												/>
+											)}
+											{item.logoDark && (
+												<Image
+													src={item.logoDark}
+													alt={item.name}
+													className="size-4 mr-0.5 hidden dark:block"
+													width={16}
+													height={16}
+												/>
+											)}
+										</Link>
+									}
+								/>
+							);
+
+							return isMobile ? (
+								<SheetClose
+									key={item.name}
+									nativeButton={false}
+									render={itemButton}
+								/>
+							) : (
+								itemButton
+							);
+						})}
 					</div>
 				))}
 			</div>

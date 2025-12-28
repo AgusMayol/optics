@@ -135,7 +135,7 @@ export function Header({ links }) {
 								variant="ghost"
 								size="lg"
 								animation="none"
-								className="col-span-3 w-full h-full  flex items-center justify-start gap-2"
+								className="col-span-3 w-full h-full flex lg:hidden items-center justify-start gap-2"
 							>
 								<MenuIcon />
 								Menu
@@ -146,7 +146,7 @@ export function Header({ links }) {
 						side="left"
 						variant="full"
 						showCloseButton={false}
-						className="py-3 !max-w-none w-full h-full bg-transparent border-none rounded-none shadow-none"
+						className="py-3 !max-w-none w-full h-full border-none rounded-none shadow-none"
 					>
 						<SheetHeader className="-ml-6.5">
 							<SheetClose
@@ -154,7 +154,8 @@ export function Header({ links }) {
 									<Button
 										variant="ghost"
 										animation="none"
-										className="w-full items-center justify-start px-6.5"
+										size="lg"
+										className="w-auto max-w-xs items-center justify-start px-6.5"
 									>
 										<XIcon className="!size-5.5" />
 										<SheetTitle className="">Close</SheetTitle>
@@ -172,7 +173,7 @@ export function Header({ links }) {
 				</Sheet>
 			) : (
 				<ContextMenu>
-					<ContextMenuTrigger className="col-span-3 border-r">
+					<ContextMenuTrigger className="col-span-3 border-r hidden lg:block">
 						<Link
 							ref={desktopWidthRef}
 							href="/"

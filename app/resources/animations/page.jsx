@@ -391,28 +391,18 @@ export default function Page() {
 	return (
 		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
 			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
-				<h1 className="text-3xl lg:text-4xl font-bold tracking-tight">
-					Animations
-				</h1>
-				<p className="text-muted-foreground text-base lg:text-xl">
-					Create beautiful, performant animations for modern web applications
-					using React, Motion, and CSS.
+				<h1 className="text-32 tracking-tight! truncate">Animations</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Animations enhance user experience by providing visual feedback,
+					guiding attention, and creating delightful interactions. This guide
+					provides practical examples and best practices for implementing
+					animations in Next.js applications.
 				</p>
 			</div>
 
 			<Separator decoration />
 
 			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
-				{/* Introduction */}
-				<div className="flex flex-col gap-4 -mt-2">
-					<p className="text-muted-foreground text-sm lg:leading-7">
-						Animations enhance user experience by providing visual feedback,
-						guiding attention, and creating delightful interactions. This guide
-						provides practical examples and best practices for implementing
-						animations in Next.js applications.
-					</p>
-				</div>
-
 				{/* 1. Number Animations with NumberFlow */}
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex items-center justify-between">
@@ -429,7 +419,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											1
 										</Badge>
@@ -458,11 +448,11 @@ export default function Page() {
 									<AnimatedCounter />
 								</div>
 							</CardContent>
-							<CardFooter className="px-0 py-0 rounded-b-xl">
+							<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 								<Accordion type={"single"} collapsible className="w-full">
 									<AccordionItem value="codeblock" className="rounded-b-xl">
 										<AccordionTrigger
-											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+											className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 											showArrow
 										>
 											Show Code
@@ -487,7 +477,7 @@ export default function Page() {
 														>
 															<CodeBlockContent
 																language={item.language}
-																className="bg-sidebar"
+																className="bg-sidebar text-[13px]"
 															>
 																{item.code}
 															</CodeBlockContent>
@@ -533,7 +523,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											2
 										</Badge>
@@ -561,11 +551,11 @@ export default function Page() {
 								<AnimatedIcon />
 							</div>
 						</CardContent>
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Show Code
@@ -590,7 +580,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -621,7 +611,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											3
 										</Badge>
@@ -637,11 +627,11 @@ export default function Page() {
 						or reordered. Perfect for dynamic lists and grids.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										Layout Animation Example
@@ -666,7 +656,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -697,7 +687,7 @@ export default function Page() {
 									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4 break-words">
 										<Badge
 											variant="outline"
-											className="tabular-nums aspect-square"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
 										>
 											4
 										</Badge>
@@ -713,11 +703,11 @@ export default function Page() {
 						transitions. No JavaScript required for simple animations.
 					</p>
 					<Card className="pt-0 pb-0 bg-background">
-						<CardFooter className="px-0 py-0 rounded-b-xl">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
 							<Accordion type={"single"} collapsible className="w-full">
 								<AccordionItem value="codeblock" className="rounded-b-xl">
 									<AccordionTrigger
-										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-state=open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
 										showArrow
 									>
 										CSS Animation Examples
@@ -742,7 +732,7 @@ export default function Page() {
 													>
 														<CodeBlockContent
 															language={item.language}
-															className="bg-sidebar"
+															className="bg-sidebar text-[13px]"
 														>
 															{item.code}
 														</CodeBlockContent>
@@ -762,71 +752,6 @@ export default function Page() {
 
 			{/* Animation Principles & Resources */}
 			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
-				<div className="flex flex-col gap-8">
-					<h3 className="text-xl font-semibold">Animation Principles</h3>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-						<Card decorations>
-							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<Clock className="h-5 w-5" />
-									Timing
-								</CardTitle>
-							</CardHeader>
-							<CardContent className="text-sm">
-								<p>
-									Use appropriate durations (200-300ms for micro-interactions)
-									and easing functions for natural motion.
-								</p>
-							</CardContent>
-						</Card>
-
-						<Card decorations>
-							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<Eye className="h-5 w-5" />
-									Purpose
-								</CardTitle>
-							</CardHeader>
-							<CardContent className="text-sm">
-								<p>
-									Every animation should serve a clear functional purpose:
-									feedback, guidance, or delight.
-								</p>
-							</CardContent>
-						</Card>
-
-						<Card decorations>
-							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<Zap className="h-5 w-5" />
-									Performance
-								</CardTitle>
-							</CardHeader>
-							<CardContent className="text-sm">
-								<p>
-									Optimize for 60fps using transform and opacity. Avoid
-									animating layout properties like width or height.
-								</p>
-							</CardContent>
-						</Card>
-
-						<Card decorations>
-							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<Accessibility className="h-5 w-5" />
-									Accessibility
-								</CardTitle>
-							</CardHeader>
-							<CardContent className="text-sm">
-								<p>
-									Respect user preferences for reduced motion using the
-									prefers-reduced-motion media query.
-								</p>
-							</CardContent>
-						</Card>
-					</div>
-				</div>
-
 				<div className="flex flex-col gap-8 w-full">
 					<h3 className="text-xl font-semibold">Best Practices</h3>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">

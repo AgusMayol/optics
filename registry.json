@@ -4,34 +4,22 @@
 	"homepage": "https://optics.agusmayol.com.ar",
 	"items": [
 		{
-			"name": "accordion-primitive",
-			"type": "registry:component",
-			"title": "Accordion Primitive",
-			"description": "Primitive accordion component built with motion.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/get-strict-context.json",
-				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
-			],
-			"dependencies": ["radix-ui", "motion", "clsx", "tailwind-merge"],
-			"files": [
-				{
-					"path": "registry/optics/accordion-primitive.jsx",
-					"type": "registry:component",
-					"target": "components/optics/accordion-primitive.jsx"
-				}
-			]
-		},
-		{
 			"name": "accordion",
 			"type": "registry:component",
 			"title": "Accordion",
 			"description": "A vertically stacked set of interactive headings that each reveal a section of content.",
 			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/accordion-primitive.json",
+				"https://optics.agusmayol.com.ar/r/get-strict-context.json",
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui-components/react",
+				"lucide-react",
+				"motion",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/accordion.jsx",
@@ -306,6 +294,7 @@
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
+				"@base-ui/react",
 				"@shikijs/transformers",
 				"shiki",
 				"lucide-react",
@@ -949,7 +938,7 @@
 				"https://optics.agusmayol.com.ar/r/accordion.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/show-more.jsx",
@@ -1109,43 +1098,23 @@
 			]
 		},
 		{
-			"name": "tabs-primitive",
-			"type": "registry:component",
-			"title": "Tabs Primitive",
-			"description": "Primitive tabs component built on Radix UI.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/get-strict-context.json",
-				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
-				"https://optics.agusmayol.com.ar/r/use-auto-height.json",
-				"https://optics.agusmayol.com.ar/r/utils.json",
-				"https://optics.agusmayol.com.ar/r/highlight.json",
-				"https://optics.agusmayol.com.ar/r/auto-height.json"
-			],
-			"dependencies": [
-				"@radix-ui/react-tabs",
-				"clsx",
-				"tailwind-merge",
-				"motion"
-			],
-			"files": [
-				{
-					"path": "registry/optics/tabs-primitive.jsx",
-					"type": "registry:component",
-					"target": "components/optics/tabs-primitive.jsx"
-				}
-			]
-		},
-		{
 			"name": "tabs",
 			"type": "registry:component",
 			"title": "Tabs",
 			"description": "A set of layered sections of content—known as tab panels.",
 			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/tabs-primitive.json",
-				"https://optics.agusmayol.com.ar/r/utils.json",
-				"https://optics.agusmayol.com.ar/r/get-strict-context.json"
+				"https://optics.agusmayol.com.ar/r/highlight.json",
+				"https://optics.agusmayol.com.ar/r/auto-height.json",
+				"https://optics.agusmayol.com.ar/r/get-strict-context.json",
+				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui-components/react",
+				"motion",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/tabs.jsx",
