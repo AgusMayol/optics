@@ -1395,7 +1395,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/back-end.mdc",
+					"path": "registry/optics/cursor/rules/back-end.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/back-end.mdc"
 				}
@@ -1410,7 +1410,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/bulk-processing.mdc",
+					"path": "registry/optics/cursor/rules/bulk-processing.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/bulk-processing.mdc"
 				}
@@ -1425,7 +1425,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/commits-convention.mdc",
+					"path": "registry/optics/cursor/rules/commits-convention.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/commits-convention.mdc"
 				}
@@ -1440,7 +1440,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/front-end.mdc",
+					"path": "registry/optics/cursor/rules/front-end.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/front-end.mdc"
 				}
@@ -1455,7 +1455,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/general.mdc",
+					"path": "registry/optics/cursor/rules/general.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/general.mdc"
 				}
@@ -1470,7 +1470,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/react-optimization.mdc",
+					"path": "registry/optics/cursor/rules/react-optimization.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/react-optimization.mdc"
 				}
@@ -1485,7 +1485,7 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/web-interface-guidelines.mdc",
+					"path": "registry/optics/cursor/rules/web-interface-guidelines.md",
 					"type": "registry:file",
 					"target": ".cursor/rules/web-interface-guidelines.mdc"
 				}
