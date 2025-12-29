@@ -35,9 +35,10 @@ import {
 } from "@/registry/optics/dialog";
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
 import { Separator } from "@/registry/optics/separator";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
+import { Alert, AlertTitle, AlertDescription } from "@/registry/optics/alert";
 
 const cursorRules = [
 	{
@@ -193,6 +194,15 @@ export default function Page() {
 					Install Cursor rules to enhance your development workflow with Optics
 					guidelines.
 				</p>
+				<Alert variant="destructive">
+					<AlertCircle />
+					<AlertTitle>CLI Installation Not Recommended</AlertTitle>
+					<AlertDescription>
+						Due to an error during the installation of the rules via the CLI, it
+						is recommended to install the rules manually until the problem is
+						resolved.
+					</AlertDescription>
+				</Alert>
 			</div>
 
 			<Separator decoration />
