@@ -17,6 +17,7 @@ const componentFiles = [
 const demoComponent = (
 	<div className="flex flex-wrap items-center justify-center gap-4">
 		<Button>Default</Button>
+		<Button variant="decorations">Decorations</Button>
 		<Button variant="secondary">Secondary</Button>
 		<Button variant="outline">Outline</Button>
 		<Button variant="info">Info</Button>

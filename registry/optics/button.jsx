@@ -12,6 +12,8 @@ const buttonVariants = cva(
 					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary bg-background from-primary/70 to-primary/95 hover:from-primary/80 hover:to-primary/100 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border shadow-md shadow-zinc-950/30",
 				secondary:
 					"shadow-xs bg-linear-to-t hover:to-muted to-sidebar from-muted bg-background dark:from-muted/50 dark:border-border border border-zinc-300 shadow-zinc-950/10 text-foreground",
+				decorations:
+					"shadow-xs hover:bg-muted bg-background dark:border-border border border-zinc-300 shadow-zinc-950/10 text-foreground",
 				muted:
 					"bg-muted hover:bg-neutral-200 dark:hover:bg-accent shadow-zinc-950/10 duration-200 text-foreground",
 				outline:
@@ -61,14 +63,56 @@ function Button({
 	variant = "default",
 	size = "default",
 	animation = "all",
+	children,
 	...props
 }) {
 	return (
 		<ButtonPrimitive
 			data-slot="button"
-			className={cn(buttonVariants({ variant, size, animation, className }))}
+			className={cn(
+				buttonVariants({ variant, size, animation, className }),
+				variant === "decorations" &&
+					"relative rounded-none squircle-none overflow-visible",
+			)}
 			{...props}
-		/>
+		>
+			{children}
+			{variant === "decorations" && (
+				<div className={cn("absolute -left-[1px] -top-[1px] z-10")}>
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[5px] rounded-full absolute top-0" />
+						<div className="bg-muted-foreground w-[5px] h-[1px] rounded-full absolute left-0" />
+					</div>
+				</div>
+			)}
+
+			{variant === "decorations" && (
+				<div className={cn("absolute -right-[0px] -top-[1px] z-10")}>
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[5px] rounded-full absolute top-0" />
+						<div className="bg-muted-foreground w-[5px] h-[1px] rounded-full absolute -left-[4.5px]" />
+					</div>
+				</div>
+			)}
+
+			{variant === "decorations" && (
+				<div className={cn("absolute -left-[1px] -bottom-[0px] z-10")}>
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[5px] rounded-full absolute -top-[4.5px]" />
+						<div className="bg-muted-foreground w-[5px] h-[1px] rounded-full absolute left-0" />
+					</div>
+				</div>
+			)}
+
+			{variant === "decorations" && (
+				<div className={cn("absolute -right-[0px] -bottom-[0px] z-10")}>
+					<div className="relative">
+						<div className="bg-muted-foreground w-[1px] h-[5px] rounded-full absolute -top-[4.5px]" />
+						<div className="bg-muted-foreground w-[5px] h-[1px] rounded-full absolute -left-[4.5px]" />
+					</div>
+				</div>
+			)}
+		</ButtonPrimitive>
 	);
 }
 
