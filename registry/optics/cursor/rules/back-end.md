@@ -1,3 +1,8 @@
+---
+description: Rules for back-end development
+globs: *.js, *.jsx, *.ts, *.tsx
+alwaysApply: false
+---
 # Backend Development Rules
 
 ## Languages and Frameworks
