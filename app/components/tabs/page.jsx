@@ -178,7 +178,7 @@ const componentConfig = {
 		title: "Tabs",
 		description:
 			"A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-		href: "https://animate-ui.com/docs/components/radix/tabs",
+		href: "https://animate-ui.com/docs/components/base/tabs",
 		hrefText: "animate-ui",
 	},
 	content: {
@@ -187,7 +187,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "tabs",
-		dependencies: "@base-ui-components/react motion",
+		dependencies: "@base-ui/react motion",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

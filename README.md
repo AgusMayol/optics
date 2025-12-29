@@ -4,13 +4,13 @@ A modern component library and documentation site built with Next.js, React, and
 
 ## Overview
 
-Optics provides a comprehensive collection of reusable UI components, hooks, and utilities for building React applications. The library is built on top of Radix UI primitives and follows modern design patterns.
+Optics provides a comprehensive collection of reusable UI components, hooks, and utilities for building React applications. The library is built on top of Base UI primitives and follows modern design patterns.
 
 ## Features
 
 - 60+ customizable UI components
 - Built with Tailwind CSS v4
-- Fully accessible components based on Radix UI
+- Fully accessible components based on Base UI
 - TypeScript support
 - Dark mode support
 - Component registry compatible with shadcn CLI
@@ -40,6 +40,6 @@ bun build
 - Next.js 16
 - React 19
 - Tailwind CSS v4
-- Radix UI
+- Base UI
 - TypeScript
 - Bun

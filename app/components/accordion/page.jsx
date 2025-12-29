@@ -61,7 +61,7 @@ const componentConfig = {
 		title: "Accordion",
 		description:
 			"A vertically stacked set of interactive headings that each reveal a section of content.",
-		href: "https://ui.shadcn.com/docs/components/accordion",
+		href: "https://animate-ui.com/docs/components/base/accordion",
 		hrefText: "shadcn/ui",
 	},
 	content: {
@@ -78,7 +78,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "accordion",
-		dependencies: "@base-ui-components/react motion lucide-react",
+		dependencies: "@base-ui/react motion lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

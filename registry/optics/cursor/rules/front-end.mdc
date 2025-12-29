@@ -7,7 +7,7 @@ alwaysApply: false
 
 ## Languages and Frameworks
 
-Expert in React, Next.js, JavaScript, TypeScript, HTML, CSS, TailwindCSS, Shadcn, Radix.
+Expert in React, Next.js, JavaScript, TypeScript, HTML, CSS, TailwindCSS, Shadcn, Base UI.
 
 Use JavaScript by default. Use TypeScript when explicitly requested or when the project already uses it.
 
@@ -189,7 +189,7 @@ Provide alt text for images and aria-labels for icon-only buttons.
 
 Maintain sufficient color contrast and support reduced motion preferences.
 
-Use Radix UI and Shadcn components for accessible primitives.
+Use Base UI and Shadcn components for accessible primitives.
 
 ## UI/UX Best Practices
 

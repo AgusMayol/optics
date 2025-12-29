@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
+import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { motion, AnimatePresence } from "motion/react";
 
 import {

@@ -14,7 +14,7 @@
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"@base-ui-components/react",
+				"@base-ui/react",
 				"lucide-react",
 				"motion",
 				"clsx",
@@ -91,7 +91,10 @@
 			"type": "registry:component",
 			"title": "Avatar",
 			"description": "An image element with a fallback for representing the user.",
-			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/tooltip.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
@@ -106,11 +109,13 @@
 			"type": "registry:component",
 			"title": "Badge",
 			"description": "Displays a badge or a component that looks like a badge.",
-			"registryDependencies": [
-				"https://optics.agusmayol.com.ar/r/button.json",
-				"https://optics.agusmayol.com.ar/r/utils.json"
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": [
+				"@base-ui/react",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/badge.jsx",
@@ -149,9 +154,15 @@
 			"description": "Groups buttons together with proper spacing and styling.",
 			"registryDependencies": [
 				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/separator.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/button-group.jsx",
@@ -167,8 +178,8 @@
 			"description": "Displays a button or a component that looks like a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
 			"dependencies": [
+				"@base-ui/react",
 				"class-variance-authority",
-				"motion",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -320,15 +331,11 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/tabs.json",
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
-				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
 			"dependencies": [
-				"shiki",
 				"lucide-react",
-				"motion",
-				"react-icons",
-				"@shikijs/transformers",
+				"@base-ui/react",
 				"clsx",
 				"tailwind-merge"
 			],
@@ -346,7 +353,7 @@
 			"title": "Collapsible",
 			"description": "An interactive component which expands/collapses a panel.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["motion", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/collapsible.jsx",
@@ -467,7 +474,7 @@
 			"title": "Drawer",
 			"description": "A drawer component built with Vaul.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["vaul", "lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["vaul-base", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/drawer.jsx",
@@ -575,7 +582,12 @@
 				"https://optics.agusmayol.com.ar/r/popover.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"lucide-react",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/guided-tour.jsx",
@@ -605,10 +617,12 @@
 			"title": "Input Group",
 			"description": "Groups input fields with addons, buttons, and text.",
 			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/input.json",
+				"https://optics.agusmayol.com.ar/r/textarea.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["clsx", "tailwind-merge"],
+			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/input-group.jsx",
@@ -641,7 +655,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/input.jsx",
@@ -656,7 +675,12 @@
 			"title": "Item",
 			"description": "A flexible item component for displaying content.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui/react",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/item.jsx",
@@ -671,7 +695,12 @@
 			"title": "KBD",
 			"description": "Keyboard key component for displaying keyboard shortcuts.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"react-hotkeys-hook",
+				"class-variance-authority",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/kbd.jsx",
@@ -1109,12 +1138,7 @@
 				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui-components/react",
-				"motion",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/tabs.jsx",
@@ -1359,7 +1383,7 @@
 		},
 		{
 			"name": "cursor-rule-back-end",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: Back End",
 			"description": "Cursor rule file for back-end development guidelines.",
 			"registryDependencies": [],
@@ -1374,7 +1398,7 @@
 		},
 		{
 			"name": "cursor-rule-bulk-processing",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: Bulk Processing",
 			"description": "Cursor rule file for bulk processing guidelines.",
 			"registryDependencies": [],
@@ -1389,7 +1413,7 @@
 		},
 		{
 			"name": "cursor-rule-commits-convention",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: Commits Convention",
 			"description": "Cursor rule file for commit conventions.",
 			"registryDependencies": [],
@@ -1404,7 +1428,7 @@
 		},
 		{
 			"name": "cursor-rule-front-end",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: Front End",
 			"description": "Cursor rule file for front-end development guidelines.",
 			"registryDependencies": [],
@@ -1419,7 +1443,7 @@
 		},
 		{
 			"name": "cursor-rule-general",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: General",
 			"description": "Cursor rule file for general development guidelines.",
 			"registryDependencies": [],
@@ -1434,7 +1458,7 @@
 		},
 		{
 			"name": "cursor-rule-react-optimization",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: React Optimization",
 			"description": "Cursor rule file for React optimization guidelines.",
 			"registryDependencies": [],
@@ -1449,7 +1473,7 @@
 		},
 		{
 			"name": "cursor-rule-web-interface-guidelines",
-			"type": "registry:file",
+			"type": "registry:item",
 			"title": "Cursor Rule: Web Interface Guidelines",
 			"description": "Cursor rule file for web interface guidelines.",
 			"registryDependencies": [],

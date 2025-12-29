@@ -5,8 +5,7 @@
 		"GROWTHBOOK_CLIENT_KEY",
 		"VERCEL_TARGET_ENV",
 		"VERCEL",
-		"VERCEL_ENV",
-		"VERCEL_URL"
+		"VERCEL_ENV"
 	],
 	"envMode": "loose",
 	"tasks": {
@@ -41,6 +40,7 @@
 		},
 		"extract-props": {
 			"dependsOn": ["sync:sources"],
+			"cache": true,
 			"inputs": [
 				"scripts/extract-props.js",
 				"registry/optics/**/*.{jsx,tsx,js,ts}",
@@ -61,6 +61,7 @@
 			"cache": false
 		},
 		"sync:sources": {
+			"cache": true,
 			"inputs": [
 				"registry/optics/**/*.jsx",
 				"registry/optics/**/*.js",
