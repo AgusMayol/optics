@@ -1138,7 +1138,12 @@
 				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["@base-ui/react", "motion", "clsx", "tailwind-merge"],
+			"dependencies": [
+				"@base-ui-components/react",
+				"motion",
+				"clsx",
+				"tailwind-merge"
+			],
 			"files": [
 				{
 					"path": "registry/optics/tabs.jsx",
@@ -1392,7 +1397,7 @@
 				{
 					"path": "registry/optics/cursor/rules/back-end.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/back-end.mdc"
+					"target": "~/.cursor/rules/back-end.mdc"
 				}
 			]
 		},
