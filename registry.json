@@ -1388,106 +1388,106 @@
 		},
 		{
 			"name": "cursor-rule-back-end",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: Back End",
 			"description": "Cursor rule file for back-end development guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/back-end.md",
+					"path": "registry/optics/cursor/rules/back-end.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/back-end.mdc"
+					"target": "~/.cursor/rules/back-end.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-bulk-processing",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: Bulk Processing",
 			"description": "Cursor rule file for bulk processing guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/bulk-processing.md",
+					"path": "registry/optics/cursor/rules/bulk-processing.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/bulk-processing.mdc"
+					"target": "~/.cursor/rules/bulk-processing.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-commits-convention",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: Commits Convention",
 			"description": "Cursor rule file for commit conventions.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/commits-convention.md",
+					"path": "registry/optics/cursor/rules/commits-convention.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/commits-convention.mdc"
+					"target": "~/.cursor/rules/commits-convention.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-front-end",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: Front End",
 			"description": "Cursor rule file for front-end development guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/front-end.md",
+					"path": "registry/optics/cursor/rules/front-end.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/front-end.mdc"
+					"target": "~/.cursor/rules/front-end.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-general",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: General",
 			"description": "Cursor rule file for general development guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/general.md",
+					"path": "registry/optics/cursor/rules/general.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/general.mdc"
+					"target": "~/.cursor/rules/general.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-react-optimization",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: React Optimization",
 			"description": "Cursor rule file for React optimization guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/react-optimization.md",
+					"path": "registry/optics/cursor/rules/react-optimization.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/react-optimization.mdc"
+					"target": "~/.cursor/rules/react-optimization.mdc"
 				}
 			]
 		},
 		{
 			"name": "cursor-rule-web-interface-guidelines",
-			"type": "registry:item",
+			"type": "registry:file",
 			"title": "Cursor Rule: Web Interface Guidelines",
 			"description": "Cursor rule file for web interface guidelines.",
 			"registryDependencies": [],
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/cursor/rules/web-interface-guidelines.md",
+					"path": "registry/optics/cursor/rules/web-interface-guidelines.mdc",
 					"type": "registry:file",
-					"target": ".cursor/rules/web-interface-guidelines.mdc"
+					"target": "~/.cursor/rules/web-interface-guidelines.mdc"
 				}
 			]
 		}
