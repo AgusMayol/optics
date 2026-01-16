@@ -124,7 +124,7 @@ function CardFooter({ className, background = false, children, ...props }) {
 			className={cn(
 				"rounded-b-lg h-full p-4 group-data-[size=sm]/card:px-3 group-data-[size=sm]/card:pb-3 [.border-t]:pt-4 -mb-4 group-data-[size=sm]/card:[.border-t]:pt-3 flex items-center",
 				background &&
-					`bg-[repeating-linear-gradient(45deg,var(--card),var(--card)_3px,var(--muted)_3px,var(--muted)_6px)] p-3! border-t relative`,
+				`bg-[repeating-linear-gradient(45deg,var(--card),var(--card)_3px,var(--muted)_3px,var(--muted)_6px)] p-3! border-t relative`,
 				className,
 			)}
 		>
@@ -151,6 +151,15 @@ function CardFooter({ className, background = false, children, ...props }) {
 	);
 }
 
+
+Card.displayName = "Card";
+CardHeader.displayName = "CardHeader";
+CardFooter.displayName = "CardFooter";
+CardTitle.displayName = "CardTitle";
+CardAction.displayName = "CardAction";
+CardDescription.displayName = "CardDescription";
+CardContent.displayName = "CardContent";
+
 export {
 	Card,
 	CardHeader,
@@ -160,3 +169,4 @@ export {
 	CardDescription,
 	CardContent,
 };
+

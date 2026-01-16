@@ -11,11 +11,11 @@ import { Checkbox } from "@/registry/optics/checkbox";
 // Contexto para compartir el estado de selección entre todos los items
 const MultiSelectContext = React.createContext({
 	values: {},
-	setValue: () => {},
-	onValuesChange: () => {},
+	setValue: () => { },
+	onValuesChange: () => { },
 	itemCount: 0,
 	colors: {},
-	registerColor: () => {},
+	registerColor: () => { },
 });
 
 function Select({
@@ -381,6 +381,18 @@ function SelectScrollDownButton({ className, ...props }) {
 	);
 }
 
+
+Select.displayName = "MultiSelect";
+SelectContent.displayName = "MultiSelectContent";
+SelectGroup.displayName = "MultiSelectGroup";
+SelectItem.displayName = "MultiSelectItem";
+SelectLabel.displayName = "MultiSelectLabel";
+SelectScrollDownButton.displayName = "MultiSelectScrollDownButton";
+SelectScrollUpButton.displayName = "MultiSelectScrollUpButton";
+SelectSeparator.displayName = "MultiSelectSeparator";
+SelectTrigger.displayName = "MultiSelectTrigger";
+SelectValue.displayName = "MultiSelectValue";
+
 export {
 	Select,
 	SelectContent,
@@ -393,3 +405,4 @@ export {
 	SelectTrigger,
 	SelectValue,
 };
+

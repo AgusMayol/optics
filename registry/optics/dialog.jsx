@@ -276,6 +276,19 @@ function DialogClose(props) {
 	return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
+
+Dialog.displayName = "Dialog";
+DialogClose.displayName = "DialogClose";
+DialogPopup.displayName = "DialogPopup";
+DialogDescription.displayName = "DialogDescription";
+DialogFooter.displayName = "DialogFooter";
+DialogHeader.displayName = "DialogHeader";
+DialogBackdrop.displayName = "DialogBackdrop";
+DialogViewport.displayName = "DialogViewport";
+DialogPortal.displayName = "DialogPortal";
+DialogTitle.displayName = "DialogTitle";
+DialogTrigger.displayName = "DialogTrigger";
+
 export {
 	Dialog,
 	DialogClose,
@@ -289,3 +302,4 @@ export {
 	DialogTitle,
 	DialogTrigger,
 };
+

@@ -54,15 +54,15 @@ function Timezone({
 		() =>
 			userTimezone
 				? new Intl.DateTimeFormat("en-US", {
-						timeZone: userTimezone,
-						year: "numeric",
-						month: "short",
-						day: "numeric",
-						hour: "numeric",
-						minute: "2-digit",
-						second: "2-digit",
-						hour12: true,
-					})
+					timeZone: userTimezone,
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+					hour: "numeric",
+					minute: "2-digit",
+					second: "2-digit",
+					hour12: true,
+				})
 				: null,
 		[userTimezone],
 	);
@@ -327,4 +327,8 @@ function Timezone({
 	);
 }
 
+
+Timezone.displayName = "Timezone";
+
 export { Timezone };
+

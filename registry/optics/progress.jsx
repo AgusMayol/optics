@@ -75,6 +75,13 @@ function ProgressValue({
   );
 }
 
+
+Progress.displayName = "Progress";
+ProgressTrack.displayName = "ProgressTrack";
+ProgressIndicator.displayName = "ProgressIndicator";
+ProgressLabel.displayName = "ProgressLabel";
+ProgressValue.displayName = "ProgressValue";
+
 export {
   Progress,
   ProgressTrack,
@@ -82,3 +89,4 @@ export {
   ProgressLabel,
   ProgressValue,
 }
+

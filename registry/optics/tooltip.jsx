@@ -11,10 +11,10 @@ const TooltipProviderContext = React.createContext({ hasProvider: false, delay: 
 // Context local para cada instancia de Tooltip para manejar estados de interacción
 const TooltipInstanceContext = React.createContext({
 	shouldKeepOpenRef: { current: false },
-	setShouldKeepOpen: () => {},
+	setShouldKeepOpen: () => { },
 	isPointerOverTriggerRef: { current: false },
 	isPointerOverContentRef: { current: false },
-	openTooltip: () => {},
+	openTooltip: () => { },
 	delay: 400,
 });
 
@@ -326,4 +326,11 @@ function TooltipContent({
 	);
 }
 
+
+Tooltip.displayName = "Tooltip";
+TooltipTrigger.displayName = "TooltipTrigger";
+TooltipContent.displayName = "TooltipContent";
+TooltipProvider.displayName = "TooltipProvider";
+
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+

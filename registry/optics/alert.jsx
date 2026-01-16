@@ -74,4 +74,11 @@ function AlertAction({
   );
 }
 
+
+Alert.displayName = "Alert";
+AlertTitle.displayName = "AlertTitle";
+AlertDescription.displayName = "AlertDescription";
+AlertAction.displayName = "AlertAction";
+
 export { Alert, AlertTitle, AlertDescription, AlertAction }
+

@@ -42,4 +42,8 @@ function Badge({
   });
 }
 
+
+Badge.displayName = "Badge";
+
 export { Badge, badgeVariants }
+

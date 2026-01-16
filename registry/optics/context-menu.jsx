@@ -217,6 +217,23 @@ function ContextMenuShortcut({ className = "", ...props }) {
 	);
 }
 
+
+ContextMenu.displayName = "ContextMenu";
+ContextMenuTrigger.displayName = "ContextMenuTrigger";
+ContextMenuContent.displayName = "ContextMenuContent";
+ContextMenuItem.displayName = "ContextMenuItem";
+ContextMenuCheckboxItem.displayName = "ContextMenuCheckboxItem";
+ContextMenuRadioItem.displayName = "ContextMenuRadioItem";
+ContextMenuLabel.displayName = "ContextMenuLabel";
+ContextMenuSeparator.displayName = "ContextMenuSeparator";
+ContextMenuShortcut.displayName = "ContextMenuShortcut";
+ContextMenuGroup.displayName = "ContextMenuGroup";
+ContextMenuPortal.displayName = "ContextMenuPortal";
+ContextMenuSub.displayName = "ContextMenuSub";
+ContextMenuSubContent.displayName = "ContextMenuSubContent";
+ContextMenuSubTrigger.displayName = "ContextMenuSubTrigger";
+ContextMenuRadioGroup.displayName = "ContextMenuRadioGroup";
+
 export {
 	ContextMenu,
 	ContextMenuTrigger,
@@ -234,3 +251,4 @@ export {
 	ContextMenuSubTrigger,
 	ContextMenuRadioGroup,
 };
+

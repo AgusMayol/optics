@@ -72,7 +72,7 @@ function Button({
 			className={cn(
 				buttonVariants({ variant, size, animation, className }),
 				variant === "decorations" &&
-					"relative rounded-none squircle-none overflow-visible",
+				"relative rounded-none squircle-none overflow-visible",
 			)}
 			{...props}
 		>
@@ -116,4 +116,8 @@ function Button({
 	);
 }
 
+
+Button.displayName = "Button";
+
 export { Button, buttonVariants };
+

@@ -189,6 +189,18 @@ function ItemFooter({
   );
 }
 
+
+Item.displayName = "Item";
+ItemMedia.displayName = "ItemMedia";
+ItemContent.displayName = "ItemContent";
+ItemActions.displayName = "ItemActions";
+ItemGroup.displayName = "ItemGroup";
+ItemSeparator.displayName = "ItemSeparator";
+ItemTitle.displayName = "ItemTitle";
+ItemDescription.displayName = "ItemDescription";
+ItemHeader.displayName = "ItemHeader";
+ItemFooter.displayName = "ItemFooter";
+
 export {
   Item,
   ItemMedia,
@@ -201,3 +213,4 @@ export {
   ItemHeader,
   ItemFooter,
 }
+

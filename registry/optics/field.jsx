@@ -217,6 +217,18 @@ function FieldError({
   );
 }
 
+
+Field.displayName = "Field";
+FieldLabel.displayName = "FieldLabel";
+FieldDescription.displayName = "FieldDescription";
+FieldError.displayName = "FieldError";
+FieldGroup.displayName = "FieldGroup";
+FieldLegend.displayName = "FieldLegend";
+FieldSeparator.displayName = "FieldSeparator";
+FieldSet.displayName = "FieldSet";
+FieldContent.displayName = "FieldContent";
+FieldTitle.displayName = "FieldTitle";
+
 export {
   Field,
   FieldLabel,
@@ -229,3 +241,4 @@ export {
   FieldContent,
   FieldTitle,
 }
+

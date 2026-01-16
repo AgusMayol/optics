@@ -72,4 +72,8 @@ function Slider({
 	);
 }
 
+
+Slider.displayName = "Slider";
+
 export { Slider };
+

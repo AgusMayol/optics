@@ -46,4 +46,10 @@ function ResizableHandle({
   );
 }
 
+
+ResizablePanelGroup.displayName = "ResizablePanelGroup";
+ResizablePanel.displayName = "ResizablePanel";
+ResizableHandle.displayName = "ResizableHandle";
+
 export { ResizablePanelGroup, ResizablePanel, ResizableHandle }
+

@@ -71,4 +71,11 @@ function InputOTPSeparator({ ...props } = {}) {
 	);
 }
 
+
+InputOTP.displayName = "InputOTP";
+InputOTPGroup.displayName = "InputOTPGroup";
+InputOTPSlot.displayName = "InputOTPSlot";
+InputOTPSeparator.displayName = "InputOTPSeparator";
+
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };
+

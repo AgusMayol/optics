@@ -552,9 +552,9 @@ export const CodeBlockCopyButton = ({
 			render:
 				typeof render === "function"
 					? (props, state) => {
-							const mergedProps = mergeProps("button", defaultProps, props);
-							return render(mergedProps, { isCopied, isLoading, ...state });
-						}
+						const mergedProps = mergeProps("button", defaultProps, props);
+						return render(mergedProps, { isCopied, isLoading, ...state });
+					}
 					: render,
 			props: mergeProps("button", defaultProps, props),
 			state: {
@@ -764,3 +764,18 @@ export const CodeBlockContent = ({
 		</div>
 	);
 };
+
+CodeBlock.displayName = "CodeBlock";
+CodeBlockHeader.displayName = "CodeBlockHeader";
+CodeBlockFiles.displayName = "CodeBlockFiles";
+CodeBlockFilename.displayName = "CodeBlockFilename";
+CodeBlockSelect.displayName = "CodeBlockSelect";
+CodeBlockSelectTrigger.displayName = "CodeBlockSelectTrigger";
+CodeBlockSelectValue.displayName = "CodeBlockSelectValue";
+CodeBlockSelectContent.displayName = "CodeBlockSelectContent";
+CodeBlockSelectItem.displayName = "CodeBlockSelectItem";
+CodeBlockCopyButton.displayName = "CodeBlockCopyButton";
+CodeBlockBody.displayName = "CodeBlockBody";
+CodeBlockItem.displayName = "CodeBlockItem";
+CodeBlockContent.displayName = "CodeBlockContent";
+

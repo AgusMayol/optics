@@ -79,3 +79,6 @@ export function StarRating({
 		</div>
 	);
 }
+
+StarRating.displayName = "StarRating";
+

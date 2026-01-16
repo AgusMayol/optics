@@ -220,6 +220,24 @@ function MenubarSubContent({ className = "", ...props }) {
 	);
 }
 
+
+Menubar.displayName = "Menubar";
+MenubarPortal.displayName = "MenubarPortal";
+MenubarMenu.displayName = "MenubarMenu";
+MenubarTrigger.displayName = "MenubarTrigger";
+MenubarContent.displayName = "MenubarContent";
+MenubarGroup.displayName = "MenubarGroup";
+MenubarSeparator.displayName = "MenubarSeparator";
+MenubarLabel.displayName = "MenubarLabel";
+MenubarItem.displayName = "MenubarItem";
+MenubarShortcut.displayName = "MenubarShortcut";
+MenubarCheckboxItem.displayName = "MenubarCheckboxItem";
+MenubarRadioGroup.displayName = "MenubarRadioGroup";
+MenubarRadioItem.displayName = "MenubarRadioItem";
+MenubarSub.displayName = "MenubarSub";
+MenubarSubTrigger.displayName = "MenubarSubTrigger";
+MenubarSubContent.displayName = "MenubarSubContent";
+
 export {
 	Menubar,
 	MenubarPortal,
@@ -238,3 +256,4 @@ export {
 	MenubarSubTrigger,
 	MenubarSubContent,
 };
+

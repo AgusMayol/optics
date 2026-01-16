@@ -18,4 +18,8 @@ function AspectRatio({
   );
 }
 
+
+AspectRatio.displayName = "AspectRatio";
+
 export { AspectRatio }
+

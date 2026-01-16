@@ -103,6 +103,15 @@ function PaginationEllipsis({ className = "", ...props }) {
 	);
 }
 
+
+Pagination.displayName = "Pagination";
+PaginationContent.displayName = "PaginationContent";
+PaginationEllipsis.displayName = "PaginationEllipsis";
+PaginationItem.displayName = "PaginationItem";
+PaginationLink.displayName = "PaginationLink";
+PaginationNext.displayName = "PaginationNext";
+PaginationPrevious.displayName = "PaginationPrevious";
+
 export {
 	Pagination,
 	PaginationContent,
@@ -112,3 +121,4 @@ export {
 	PaginationNext,
 	PaginationPrevious,
 };
+

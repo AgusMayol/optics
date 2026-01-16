@@ -26,3 +26,6 @@ export function Spinner({ size = "size-6", className, ...props }) {
 		</div>
 	);
 }
+
+Spinner.displayName = "Spinner";
+

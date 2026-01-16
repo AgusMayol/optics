@@ -197,9 +197,9 @@ export function toast(toastConfig = {}) {
 				button={
 					button
 						? {
-								label: button.label,
-								onClick: () => button.onClick(),
-							}
+							label: button.label,
+							onClick: () => button.onClick(),
+						}
 						: undefined
 				}
 				duration={duration}
@@ -455,3 +455,8 @@ function Toast(props) {
 		</div>
 	);
 }
+
+Toaster.displayName = "Toaster";
+PromiseToast.displayName = "PromiseToast";
+Toast.displayName = "Toast";
+

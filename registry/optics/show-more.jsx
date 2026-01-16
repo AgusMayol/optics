@@ -227,7 +227,13 @@ export function ShowMore({
 				>
 					{children}
 				</ShowMoreContent>
+
 			</AccordionItem>
 		</Accordion>
 	);
 }
+
+ShowMoreButton.displayName = "ShowMoreButton";
+ShowMoreContent.displayName = "ShowMoreContent";
+ShowMore.displayName = "ShowMore";
+

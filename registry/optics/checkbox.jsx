@@ -58,4 +58,8 @@ function Checkbox({
 	);
 }
 
+
+Checkbox.displayName = "Checkbox";
+
 export { Checkbox };
+

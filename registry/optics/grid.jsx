@@ -78,10 +78,10 @@ export const GridRow = ({
 				overrideStyles
 					? undefined
 					: {
-							gridColumn: `span ${cols} / span ${span}`,
-							gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-							gap,
-						}
+						gridColumn: `span ${cols} / span ${span}`,
+						gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+						gap,
+					}
 			}
 			{...props}
 		>
@@ -191,5 +191,11 @@ export const GridItem = ({
 				</div>
 			)}
 		</div>
+
 	);
 };
+
+GridContainer.displayName = "GridContainer";
+GridRow.displayName = "GridRow";
+GridItem.displayName = "GridItem";
+

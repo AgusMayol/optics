@@ -150,6 +150,20 @@ function AlertDialogIcon({ className = "", children = null, ...props }) {
 	);
 }
 
+
+AlertDialog.displayName = "AlertDialog";
+AlertDialogPortal.displayName = "AlertDialogPortal";
+AlertDialogOverlay.displayName = "AlertDialogOverlay";
+AlertDialogTrigger.displayName = "AlertDialogTrigger";
+AlertDialogContent.displayName = "AlertDialogContent";
+AlertDialogHeader.displayName = "AlertDialogHeader";
+AlertDialogFooter.displayName = "AlertDialogFooter";
+AlertDialogTitle.displayName = "AlertDialogTitle";
+AlertDialogDescription.displayName = "AlertDialogDescription";
+AlertDialogAction.displayName = "AlertDialogAction";
+AlertDialogCancel.displayName = "AlertDialogCancel";
+AlertDialogIcon.displayName = "AlertDialogIcon";
+
 export {
 	AlertDialog,
 	AlertDialogPortal,
@@ -164,3 +178,4 @@ export {
 	AlertDialogCancel,
 	AlertDialogIcon,
 };
+

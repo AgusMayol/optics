@@ -222,6 +222,23 @@ function DropdownMenuShortcut({ className, ...props }) {
 	);
 }
 
+
+DropdownMenu.displayName = "DropdownMenu";
+DropdownMenuPortal.displayName = "DropdownMenuPortal";
+DropdownMenuTrigger.displayName = "DropdownMenuTrigger";
+DropdownMenuContent.displayName = "DropdownMenuContent";
+DropdownMenuGroup.displayName = "DropdownMenuGroup";
+DropdownMenuLabel.displayName = "DropdownMenuLabel";
+DropdownMenuItem.displayName = "DropdownMenuItem";
+DropdownMenuCheckboxItem.displayName = "DropdownMenuCheckboxItem";
+DropdownMenuRadioGroup.displayName = "DropdownMenuRadioGroup";
+DropdownMenuRadioItem.displayName = "DropdownMenuRadioItem";
+DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
+DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
+DropdownMenuSub.displayName = "DropdownMenuSub";
+DropdownMenuSubTrigger.displayName = "DropdownMenuSubTrigger";
+DropdownMenuSubContent.displayName = "DropdownMenuSubContent";
+
 export {
 	DropdownMenu,
 	DropdownMenuPortal,
@@ -239,3 +256,5 @@ export {
 	DropdownMenuSubTrigger,
 	DropdownMenuSubContent,
 };
+
+

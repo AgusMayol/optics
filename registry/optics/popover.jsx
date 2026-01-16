@@ -82,6 +82,14 @@ function PopoverDescription({
   );
 }
 
+
+Popover.displayName = "Popover";
+PopoverContent.displayName = "PopoverContent";
+PopoverDescription.displayName = "PopoverDescription";
+PopoverHeader.displayName = "PopoverHeader";
+PopoverTitle.displayName = "PopoverTitle";
+PopoverTrigger.displayName = "PopoverTrigger";
+
 export {
   Popover,
   PopoverContent,
@@ -90,3 +98,4 @@ export {
   PopoverTitle,
   PopoverTrigger,
 }
+

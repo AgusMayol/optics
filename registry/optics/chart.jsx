@@ -68,13 +68,13 @@ const ChartStyle = ({
           .map(([theme, prefix]) => `
 ${prefix} [data-chart=${id}] {
 ${colorConfig
-.map(([key, itemConfig]) => {
-const color =
-  itemConfig.theme?.[theme] ||
-  itemConfig.color
-return color ? `  --color-${key}: ${color};` : null
-})
-.join("\n")}
+              .map(([key, itemConfig]) => {
+                const color =
+                  itemConfig.theme?.[theme] ||
+                  itemConfig.color
+                return color ? `  --color-${key}: ${color};` : null
+              })
+              .join("\n")}
 }
 `)
           .join("\n"),
@@ -278,8 +278,8 @@ function getPayloadConfigFromPayload(
 
   const payloadPayload =
     "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
+      typeof payload.payload === "object" &&
+      payload.payload !== null
       ? payload.payload
       : undefined
 
@@ -303,6 +303,14 @@ function getPayloadConfigFromPayload(
     : config[key];
 }
 
+
+ChartContainer.displayName = "ChartContainer";
+ChartTooltip.displayName = "ChartTooltip";
+ChartTooltipContent.displayName = "ChartTooltipContent";
+ChartLegend.displayName = "ChartLegend";
+ChartLegendContent.displayName = "ChartLegendContent";
+ChartStyle.displayName = "ChartStyle";
+
 export {
   ChartContainer,
   ChartTooltip,
@@ -311,3 +319,4 @@ export {
   ChartLegendContent,
   ChartStyle,
 }
+

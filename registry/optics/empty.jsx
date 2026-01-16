@@ -100,6 +100,14 @@ function EmptyContent({
   );
 }
 
+
+Empty.displayName = "Empty";
+EmptyHeader.displayName = "EmptyHeader";
+EmptyTitle.displayName = "EmptyTitle";
+EmptyDescription.displayName = "EmptyDescription";
+EmptyContent.displayName = "EmptyContent";
+EmptyMedia.displayName = "EmptyMedia";
+
 export {
   Empty,
   EmptyHeader,
@@ -108,3 +116,4 @@ export {
   EmptyContent,
   EmptyMedia,
 }
+

@@ -114,9 +114,9 @@ export const SnippetCopyButton = ({
 			defaultTagName: "button",
 			render: typeof render === "function"
 				? (props, state) => {
-						const mergedProps = mergeProps("button", defaultProps, props);
-						return render(mergedProps, { isCopied, ...state });
-					}
+					const mergedProps = mergeProps("button", defaultProps, props);
+					return render(mergedProps, { isCopied, ...state });
+				}
 				: render,
 			props: mergeProps("button", defaultProps, props),
 			state: {
@@ -163,6 +163,16 @@ export const SnippetTabsContent = ({
 	</TabsContent>
 );
 
+
 export const SnippetTabsContents = ({ className = "", children = null, ...props }) => (
 	<TabsContents className={cn(className)} {...props}>{children}</TabsContents>
 );
+
+Snippet.displayName = "Snippet";
+SnippetHeader.displayName = "SnippetHeader";
+SnippetCopyButton.displayName = "SnippetCopyButton";
+SnippetTabsList.displayName = "SnippetTabsList";
+SnippetTabsTrigger.displayName = "SnippetTabsTrigger";
+SnippetTabsContent.displayName = "SnippetTabsContent";
+SnippetTabsContents.displayName = "SnippetTabsContents";
+

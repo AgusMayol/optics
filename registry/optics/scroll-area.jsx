@@ -235,4 +235,8 @@ const ScrollMask = ({
 	);
 };
 
+
+ScrollBar.displayName = "ScrollBar";
+
 export { ScrollArea, ScrollBar };
+

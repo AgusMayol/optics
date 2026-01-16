@@ -15,7 +15,7 @@ import {
 
 function DatePicker({
 	date = null,
-	onDateChange = () => {},
+	onDateChange = () => { },
 	placeholder = "Pick a date",
 	variant = "outline",
 	className = "",
@@ -52,4 +52,8 @@ function DatePicker({
 	);
 }
 
+
+DatePicker.displayName = "DatePicker";
+
 export { DatePicker };
+

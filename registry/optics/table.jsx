@@ -111,6 +111,16 @@ function TableCaption({
   );
 }
 
+
+Table.displayName = "Table";
+TableHeader.displayName = "TableHeader";
+TableBody.displayName = "TableBody";
+TableFooter.displayName = "TableFooter";
+TableHead.displayName = "TableHead";
+TableRow.displayName = "TableRow";
+TableCell.displayName = "TableCell";
+TableCaption.displayName = "TableCaption";
+
 export {
   Table,
   TableHeader,
@@ -121,3 +131,4 @@ export {
   TableCell,
   TableCaption,
 }
+

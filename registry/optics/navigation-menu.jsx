@@ -163,6 +163,16 @@ function NavigationMenuIndicator({ className = "", ...props }) {
 	);
 }
 
+
+NavigationMenu.displayName = "NavigationMenu";
+NavigationMenuContent.displayName = "NavigationMenuContent";
+NavigationMenuIndicator.displayName = "NavigationMenuIndicator";
+NavigationMenuItem.displayName = "NavigationMenuItem";
+NavigationMenuLink.displayName = "NavigationMenuLink";
+NavigationMenuList.displayName = "NavigationMenuList";
+NavigationMenuTrigger.displayName = "NavigationMenuTrigger";
+NavigationMenuPositioner.displayName = "NavigationMenuPositioner";
+
 export {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -174,3 +184,4 @@ export {
 	navigationMenuTriggerStyle,
 	NavigationMenuPositioner,
 };
+

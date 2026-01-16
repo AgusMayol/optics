@@ -176,4 +176,9 @@ function CalendarDayButton({
   );
 }
 
+
+Calendar.displayName = "Calendar";
+CalendarDayButton.displayName = "CalendarDayButton";
+
 export { Calendar, CalendarDayButton }
+

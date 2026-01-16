@@ -147,6 +147,17 @@ function CommandShortcut({ className = "", ...props }) {
 	);
 }
 
+
+Command.displayName = "Command";
+CommandDialog.displayName = "CommandDialog";
+CommandInput.displayName = "CommandInput";
+CommandList.displayName = "CommandList";
+CommandEmpty.displayName = "CommandEmpty";
+CommandGroup.displayName = "CommandGroup";
+CommandItem.displayName = "CommandItem";
+CommandShortcut.displayName = "CommandShortcut";
+CommandSeparator.displayName = "CommandSeparator";
+
 export {
 	Command,
 	CommandDialog,
@@ -158,3 +169,4 @@ export {
 	CommandShortcut,
 	CommandSeparator,
 };
+

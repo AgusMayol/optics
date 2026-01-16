@@ -58,9 +58,9 @@ function DataTable({ columns = [], data = [], ...props }) {
 											{header.isPlaceholder
 												? null
 												: flexRender(
-														header.column.columnDef.header,
-														header.getContext(),
-													)}
+													header.column.columnDef.header,
+													header.getContext(),
+												)}
 										</TableHead>
 									);
 								})}
@@ -101,4 +101,8 @@ function DataTable({ columns = [], data = [], ...props }) {
 	);
 }
 
+
+DataTable.displayName = "DataTable";
+
 export { DataTable };
+

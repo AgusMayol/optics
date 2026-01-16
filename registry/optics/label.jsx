@@ -19,4 +19,8 @@ function Label({
   );
 }
 
+
+Label.displayName = "Label";
+
 export { Label }
+

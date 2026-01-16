@@ -109,6 +109,19 @@ function DrawerDescription({ className = "", ...props }) {
 	);
 }
 
+
+Drawer.displayName = "Drawer";
+DrawerPortal.displayName = "DrawerPortal";
+DrawerOverlay.displayName = "DrawerOverlay";
+DrawerTrigger.displayName = "DrawerTrigger";
+DrawerClose.displayName = "DrawerClose";
+DrawerHandle.displayName = "DrawerHandle";
+DrawerContent.displayName = "DrawerContent";
+DrawerHeader.displayName = "DrawerHeader";
+DrawerFooter.displayName = "DrawerFooter";
+DrawerTitle.displayName = "DrawerTitle";
+DrawerDescription.displayName = "DrawerDescription";
+
 export {
 	Drawer,
 	DrawerPortal,
@@ -122,3 +135,4 @@ export {
 	DrawerTitle,
 	DrawerDescription,
 };
+
