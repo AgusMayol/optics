@@ -23,6 +23,26 @@ const componentFiles = [
 	},
 ];
 
+function ListItem({ title, children, href, ...props }) {
+	return (
+		<li {...props}>
+			<NavigationMenuLink
+				render={
+					<Link
+						href={href}
+						className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+					>
+						<div className="text-sm leading-none font-medium">{title}</div>
+						<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+							{children}
+						</p>
+					</Link>
+				}
+			/>
+		</li>
+	);
+}
+
 export default function Page() {
 	const isMobile = useIsMobile();
 	const components = [

@@ -3,6 +3,14 @@ import { ComponentConfig } from "../layout";
 import { ShowMore } from "@/registry/optics/show-more";
 
 import generatedProps from "@/registry/optics/dist/show-more.json";
+import componentCode from "@/registry/optics/dist/show-more.jsx.txt";
+
+const componentFiles = [
+	{
+		path: "@/components/optics/show-more.jsx",
+		code: componentCode,
+	},
+];
 
 const demoComponent = (
 	<div className="flex flex-col gap-2">

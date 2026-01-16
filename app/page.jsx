@@ -118,7 +118,7 @@ export default function Home() {
 									src="/images/sections/typography.svg"
 									alt="Typography"
 									fill
-									className="object-cover object-center -z-10"
+									className="object-cover object-center"
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -579,7 +579,7 @@ export default function Home() {
 									src="/images/sections/accessibility.svg"
 									alt="Accessibility"
 									fill
-									className="object-cover object-center -z-10"
+									className="object-cover object-center"
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -614,7 +614,7 @@ export default function Home() {
 									src="/images/sections/cursor-rules.svg"
 									alt="Cursor Rules & MCPs"
 									fill
-									className="object-cover object-center -z-10"
+									className="object-cover object-center"
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -650,7 +650,7 @@ export default function Home() {
 									src="/images/sections/security.svg"
 									alt="Security"
 									fill
-									className="object-cover object-center -z-10"
+									className="object-cover object-center"
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
