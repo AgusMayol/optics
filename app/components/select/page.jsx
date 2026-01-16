@@ -21,67 +21,23 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "select.jsx",
-		code: `import { useState } from "react";
-
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/optics/select";
-
-export default function Demo() {
-	const [value, setValue] = useState("apple");
-
-	return (
-		<Select value={value} onValueChange={setValue}>
-			<SelectTrigger variant="raised">
-				<SelectValue placeholder="Select a fruit" />
-			</SelectTrigger>
-			<SelectContent>
-				<SelectGroup>
-					<SelectLabel>Fruits</SelectLabel>
-					<SelectItem value="apple">Apple</SelectItem>
-					<SelectItem value="banana">Banana</SelectItem>
-					<SelectItem value="blueberry">Blueberry</SelectItem>
-					<SelectItem value="grapes">Grapes</SelectItem>
-					<SelectItem value="pineapple">Pineapple</SelectItem>
-				</SelectGroup>
-			</SelectContent>
-		</Select>
-	);
-}`,
-	},
-];
-
-function SelectDemo() {
-	const [value, setValue] = useState("apple");
-
-	return (
-		<Select value={value} onValueChange={setValue}>
-			<SelectTrigger variant="raised">
-				<SelectValue placeholder="Select a fruit" />
-			</SelectTrigger>
-			<SelectContent>
-				<SelectGroup>
-					<SelectLabel>Fruits</SelectLabel>
-					<SelectItem value="apple">Apple</SelectItem>
-					<SelectItem value="banana">Banana</SelectItem>
-					<SelectItem value="blueberry">Blueberry</SelectItem>
-					<SelectItem value="grapes">Grapes</SelectItem>
-					<SelectItem value="pineapple">Pineapple</SelectItem>
-				</SelectGroup>
-			</SelectContent>
-		</Select>
-	);
-}
+const demoComponent = (
+	<Select defaultValue="apple">
+		<SelectTrigger variant="raised">
+			<SelectValue placeholder="Select a fruit" />
+		</SelectTrigger>
+		<SelectContent>
+			<SelectGroup>
+				<SelectLabel>Fruits</SelectLabel>
+				<SelectItem value="apple">Apple</SelectItem>
+				<SelectItem value="banana">Banana</SelectItem>
+				<SelectItem value="blueberry">Blueberry</SelectItem>
+				<SelectItem value="grapes">Grapes</SelectItem>
+				<SelectItem value="pineapple">Pineapple</SelectItem>
+			</SelectGroup>
+		</SelectContent>
+	</Select>
+);
 
 const componentConfig = {
 	header: {
@@ -92,8 +48,9 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <SelectDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/optics/select";`,
+		filename: "select.jsx",
 	},
 	installation: {
 		componentName: "select",

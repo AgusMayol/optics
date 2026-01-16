@@ -39,59 +39,7 @@ const chartConfig = {
 	},
 };
 
-const chartExampleCode = `import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
-} from "@/components/optics/chart";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
 
-const data = [
-  { month: "Jan", visitors: 1200, sales: 900 },
-  { month: "Feb", visitors: 1500, sales: 1100 },
-  { month: "Mar", visitors: 1800, sales: 1400 },
-  { month: "Apr", visitors: 1600, sales: 1200 },
-  { month: "May", visitors: 1900, sales: 1500 },
-  { month: "Jun", visitors: 2100, sales: 1700 },
-];
-
-const chartConfig = {
-  visitors: { label: "Visitors", color: "var(--chart-1, #2563eb)" },
-  sales: { label: "Sales", color: "var(--chart-2, #16a34a)" },
-};
-
-export function ChartExample() {
-  return (
-    <ChartContainer config={chartConfig} className="w-full max-w-4xl">
-      <LineChart data={data} margin={{ left: 8, right: 8 }}>
-        <CartesianGrid strokeDasharray="4 4" vertical={false} />
-        <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={10} />
-        <YAxis tickLine={false} axisLine={false} tickMargin={6} allowDecimals={false} />
-        <ChartTooltip content={<ChartTooltipContent />} />
-        <ChartLegend content={<ChartLegendContent />} />
-        <Line
-          type="monotone"
-          dataKey="visitors"
-          stroke="var(--color-visitors, #2563eb)"
-          strokeWidth={2.5}
-          dot={false}
-          activeDot={{ r: 5 }}
-        />
-        <Line
-          type="monotone"
-          dataKey="sales"
-          stroke="var(--color-sales, #16a34a)"
-          strokeWidth={2.5}
-          dot={false}
-          activeDot={{ r: 5 }}
-        />
-      </LineChart>
-    </ChartContainer>
-  );
-}
-`;
 
 const demoComponent = (
 	<ChartContainer config={chartConfig} className="w-full max-w-4xl">
@@ -141,13 +89,29 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: [
-			{
-				filename: "chart.jsx",
-				language: "jsx",
-				code: chartExampleCode,
-			},
-		],
+		imports: `import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/optics/chart";
+import { Line, LineChart, XAxis, YAxis, CartesianGrid } from "recharts";
+
+const data = [
+	{ month: "Jan", visitors: 1200, sales: 900 },
+	{ month: "Feb", visitors: 1500, sales: 1100 },
+	{ month: "Mar", visitors: 1800, sales: 1400 },
+	{ month: "Apr", visitors: 1600, sales: 1200 },
+	{ month: "May", visitors: 1900, sales: 1500 },
+	{ month: "Jun", visitors: 2100, sales: 1700 },
+];
+
+const chartConfig = {
+	visitors: {
+		label: "Visitors",
+		color: "var(--chart-1, #2563eb)",
+	},
+	sales: {
+		label: "Sales",
+		color: "var(--chart-2, #16a34a)",
+	},
+};`,
+		filename: "chart.jsx",
 	},
 	installation: {
 		componentName: "chart",

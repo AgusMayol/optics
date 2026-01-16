@@ -17,32 +17,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "hover-card.jsx",
-		code: `import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/components/optics/hover-card";
-import { Button } from "@/components/optics/button";
 
-<HoverCard>
-	<HoverCardTrigger render={<Button variant="raised">@nextjs</Button>} />
-	<HoverCardContent>
-		<div className="flex justify-between space-x-4">
-			<div className="space-y-1">
-				<h4 className="text-sm font-semibold">@nextjs</h4>
-				<p className="text-sm">
-					The React Framework – created and maintained by @vercel.
-				</p>
-			</div>
-		</div>
-	</HoverCardContent>
-</HoverCard>`,
-	},
-];
 
 
 
@@ -78,7 +53,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/optics/hover-card";
+import { Button } from "@/components/optics/button";`,
+		filename: "hover-card.jsx",
 	},
 	installation: {
 		componentName: "hover-card",

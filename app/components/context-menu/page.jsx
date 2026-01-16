@@ -26,76 +26,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "context-menu.jsx",
-		code: `import {
-	ContextMenu,
-	ContextMenuCheckboxItem,
-	ContextMenuContent,
-	ContextMenuItem,
-	ContextMenuLabel,
-	ContextMenuRadioGroup,
-	ContextMenuRadioItem,
-	ContextMenuSeparator,
-	ContextMenuShortcut,
-	ContextMenuSub,
-	ContextMenuSubContent,
-	ContextMenuSubTrigger,
-	ContextMenuTrigger,
-} from "@/components/optics/context-menu";
 
-<ContextMenu>
-	<ContextMenuTrigger>
-		<div className="bg-muted rounded-lg p-8 border border-dashed flex items-center justify-center">
-			<p className="text-muted-foreground text-sm select-none">
-				Right click here to see the context menu
-			</p>
-		</div>
-	</ContextMenuTrigger>
-	<ContextMenuContent className="w-52">
-		<ContextMenuItem inset>
-			Back
-			<ContextMenuShortcut>⌘[</ContextMenuShortcut>
-		</ContextMenuItem>
-		<ContextMenuItem inset disabled>
-			Forward
-			<ContextMenuShortcut>⌘]</ContextMenuShortcut>
-		</ContextMenuItem>
-		<ContextMenuItem inset>
-			Reload
-			<ContextMenuShortcut>⌘R</ContextMenuShortcut>
-		</ContextMenuItem>
-		<ContextMenuSub>
-			<ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
-			<ContextMenuSubContent className="w-44">
-				<ContextMenuItem>Save Page...</ContextMenuItem>
-				<ContextMenuItem>Create Shortcut...</ContextMenuItem>
-				<ContextMenuItem>Name Window...</ContextMenuItem>
-				<ContextMenuSeparator />
-				<ContextMenuItem>Developer Tools</ContextMenuItem>
-				<ContextMenuSeparator />
-				<ContextMenuItem variant="destructive">Delete</ContextMenuItem>
-			</ContextMenuSubContent>
-		</ContextMenuSub>
-		<ContextMenuSeparator />
-		<ContextMenuCheckboxItem checked>
-			Show Bookmarks
-		</ContextMenuCheckboxItem>
-		<ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
-		<ContextMenuSeparator />
-		<ContextMenuRadioGroup value="pedro">
-			<ContextMenuLabel inset>People</ContextMenuLabel>
-			<ContextMenuRadioItem value="pedro">
-				Pedro Duarte
-			</ContextMenuRadioItem>
-			<ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
-		</ContextMenuRadioGroup>
-	</ContextMenuContent>
-</ContextMenu>`,
-	},
-];
 
 
 
@@ -166,7 +97,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger } from "@/components/optics/context-menu";`,
+		filename: "context-menu.jsx",
 	},
 	installation: {
 		componentName: "context-menu",

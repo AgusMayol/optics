@@ -13,25 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "aspect-ratio.jsx",
-		code: `import { AspectRatio } from "@/components/optics/aspect-ratio";
-import Image from "next/image";
 
-<div className="w-[450px]">
-	<AspectRatio ratio={16 / 9} className="bg-muted">
-		<Image
-			src="/images/background-placeholder.jpeg"
-			alt="Photo by Ale"
-			fill
-			className="rounded-md object-cover"
-		/>
-	</AspectRatio>
-</div>`,
-	},
-];
 
 
 
@@ -57,7 +39,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { AspectRatio } from "@/components/optics/aspect-ratio";
+import Image from "next/image";`,
+		filename: "aspect-ratio.jsx",
 	},
 	installation: {
 		componentName: "aspect-ratio",

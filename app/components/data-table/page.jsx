@@ -48,35 +48,6 @@ const columns = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "data-table.jsx",
-		code: `import { DataTable } from "@/components/optics/data-table";
-import { ColumnDef } from "@tanstack/react-table";
-
-const columns = [
-	{
-		accessorKey: "email",
-		header: "Email",
-	},
-	{
-		accessorKey: "status",
-		header: "Status",
-	},
-];
-
-const data = [
-	{
-		email: "ken99@example.com",
-		status: "success",
-	},
-];
-
-<DataTable columns={columns} data={data} />`,
-	},
-];
-
 
 const demoComponent = <DataTable columns={columns} data={paymentData} />;
 
@@ -90,7 +61,45 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { DataTable } from "@/components/optics/data-table";
+import { ColumnDef } from "@tanstack/react-table";
+
+const columns = [
+	{
+		accessorKey: "email",
+		header: "Email",
+	},
+	{
+		accessorKey: "status",
+		header: "Status",
+	},
+	{
+		accessorKey: "amount",
+		header: "Amount",
+	},
+];
+
+const paymentData = [
+	{
+		id: "m5gr84i9",
+		amount: 316,
+		status: "success",
+		email: "ken99@example.com",
+	},
+	{
+		id: "3u1reuv4",
+		amount: 242,
+		status: "success",
+		email: "Abe45@example.com",
+	},
+	{
+		id: "derv1ws0",
+		amount: 837,
+		status: "processing",
+		email: "Monserrat44@example.com",
+	},
+];`,
+		filename: "data-table.jsx",
 	},
 	installation: {
 		componentName: "data-table",

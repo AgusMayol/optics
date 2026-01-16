@@ -13,37 +13,12 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "date-picker.jsx",
-		code: `import { DatePicker } from "@/components/optics/date-picker";
-import { useState } from "react";
-
-const [date, setDate] = useState();
-
-<DatePicker
-	date={date}
-	onDateChange={setDate}
-	placeholder="Pick a date"
-	variant="raised"
-/>`,
-	},
-];
-
-
-function DatePickerDemo() {
-	const [date, setDate] = useState();
-
-	return (
-		<DatePicker
-			date={date}
-			onDateChange={setDate}
-			placeholder="Pick a date"
-			variant="raised"
-		/>
-	);
-}
+const demoComponent = (
+	<DatePicker
+		placeholder="Pick a date"
+		variant="raised"
+	/>
+);
 
 const componentConfig = {
 	header: {
@@ -54,8 +29,9 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <DatePickerDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { DatePicker } from "@/components/optics/date-picker";`,
+		filename: "date-picker.jsx",
 	},
 	installation: {
 		componentName: "date-picker",

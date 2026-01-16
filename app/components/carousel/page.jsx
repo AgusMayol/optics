@@ -19,40 +19,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "carousel.jsx",
-		code: `import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from "@/components/optics/carousel";
-import { Card, CardContent } from "@/components/optics/card";
 
-<Carousel className="w-full max-w-xs">
-	<CarouselContent>
-		{Array.from({ length: 5 }).map((_, index) => (
-			<CarouselItem key={index}>
-				<div className="p-1">
-					<Card>
-						<CardContent className="flex aspect-square items-center justify-center p-6">
-							<span className="text-4xl font-semibold">
-								{index + 1}
-							</span>
-						</CardContent>
-					</Card>
-				</div>
-			</CarouselItem>
-		))}
-	</CarouselContent>
-	<CarouselPrevious />
-	<CarouselNext />
-</Carousel>`,
-	},
-];
 
 
 
@@ -87,7 +54,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/optics/carousel";
+import { Card, CardContent } from "@/components/optics/card";`,
+		filename: "carousel.jsx",
 	},
 	installation: {
 		componentName: "carousel",

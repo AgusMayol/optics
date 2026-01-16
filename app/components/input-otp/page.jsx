@@ -16,28 +16,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "input-otp.jsx",
-		code: `import {
-	InputOTP,
-	InputOTPGroup,
-	InputOTPSlot,
-} from "@/components/optics/input-otp";
 
-<InputOTP maxLength={6} variant="raised">
-	<InputOTPGroup>
-		<InputOTPSlot variant="raised" index={0} />
-		<InputOTPSlot variant="raised" index={1} />
-		<InputOTPSlot variant="raised" index={2} />
-		<InputOTPSlot variant="raised" index={3} />
-		<InputOTPSlot variant="raised" index={4} />
-		<InputOTPSlot variant="raised" index={5} />
-	</InputOTPGroup>
-</InputOTP>`,
-	},
-];
 
 
 
@@ -64,7 +43,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/optics/input-otp";`,
+		filename: "input-otp.jsx",
 	},
 	installation: {
 		componentName: "input-otp",

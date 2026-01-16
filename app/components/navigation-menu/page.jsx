@@ -23,64 +23,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "navigation-menu.jsx",
-		code: `import {
-	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-	NavigationMenuTrigger,
-	navigationMenuTriggerStyle,
-} from "@/components/optics/navigation-menu";
-import Link from "next/link";
-
-<NavigationMenu>
-	<NavigationMenuList>
-		<NavigationMenuItem>
-			<NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-			<NavigationMenuContent>
-				<ul className="grid gap-3 p-4 w-[400px]">
-					<li>
-						<NavigationMenuLink render={<a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-							<div className="text-sm font-medium leading-none">Introduction</div>
-							<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-								Re-usable components built using Base UI and Tailwind CSS.
-							</p>
-						</a>} />
-					</li>
-				</ul>
-			</NavigationMenuContent>
-		</NavigationMenuItem>
-	</NavigationMenuList>
-</NavigationMenu>`,
-	},
-];
-
-function ListItem({ title, children, href, ...props }) {
-	return (
-		<li {...props}>
-			<NavigationMenuLink
-				render={
-					<Link
-						href={href}
-						className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-					>
-						<div className="text-sm leading-none font-medium">{title}</div>
-						<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-							{children}
-						</p>
-					</Link>
-				}
-			/>
-		</li>
-	);
-}
-
-function NavigationMenuDemo() {
+export default function Page() {
 	const isMobile = useIsMobile();
 	const components = [
 		{
@@ -120,7 +63,7 @@ function NavigationMenuDemo() {
 		},
 	];
 
-	return (
+	const demoComponent = (
 		<NavigationMenu viewport={isMobile}>
 			<NavigationMenuList className="flex-wrap">
 				<NavigationMenuItem>
@@ -261,27 +204,48 @@ function NavigationMenuDemo() {
 			</NavigationMenuList>
 		</NavigationMenu>
 	);
-}
 
-const componentConfig = {
-	header: {
-		title: "Navigation Menu",
-		description: "A collection of links for navigating websites.",
-		href: "https://ui.shadcn.com/docs/components/navigation-menu",
-		hrefText: "shadcn/ui",
-	},
-	content: {
-		children: <NavigationMenuDemo />,
-		code: code,
-	},
-	installation: {
-		componentName: "navigation-menu",
-		dependencies: "",
-		manualFiles: componentFiles,
-	},
-	props: generatedProps,
-};
+	const componentConfig = {
+		header: {
+			title: "Navigation Menu",
+			description: "A collection of links for navigating websites.",
+			href: "https://ui.shadcn.com/docs/components/navigation-menu",
+			hrefText: "shadcn/ui",
+		},
+		content: {
+			children: demoComponent,
+			imports: `import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/optics/navigation-menu";
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
+import Link from "next/link";
 
-export default function Page() {
+function ListItem({ title, children, href, ...props }) {
+	return (
+		<li {...props}>
+			<NavigationMenuLink
+				render={
+					<Link
+						href={href}
+						className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+					>
+						<div className="text-sm leading-none font-medium">{title}</div>
+						<p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+							{children}
+						</p>
+					</Link>
+				}
+			/>
+		</li>
+	);
+}`,
+			filename: "navigation-menu.jsx",
+		},
+		installation: {
+			componentName: "navigation-menu",
+			dependencies: "",
+			manualFiles: componentFiles,
+		},
+		props: generatedProps,
+	};
+
 	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

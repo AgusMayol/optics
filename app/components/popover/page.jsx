@@ -17,26 +17,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "popover.jsx",
-		code: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/optics/popover";
-import { Button } from "@/components/optics/button";
 
-<Popover>
-	<PopoverTrigger render={<Button variant="raised">Open Popover</Button>} />
-	<PopoverContent>
-		<div className="space-y-2">
-			<h4 className="font-medium leading-none">Dimensions</h4>
-			<p className="text-sm text-muted-foreground">
-				Set the dimensions for the layer.
-			</p>
-		</div>
-	</PopoverContent>
-</Popover>`,
-	},
-];
 
 
 const demoComponent = (
@@ -68,7 +49,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Popover, PopoverContent, PopoverTrigger } from "@/components/optics/popover";
+import { Button } from "@/components/optics/button";`,
+		filename: "popover.jsx",
 	},
 	installation: {
 		componentName: "popover",

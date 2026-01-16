@@ -26,34 +26,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "dropdown-menu.jsx",
-		code: `import {
-	DropdownMenu,
-	DropdownMenuTrigger,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-} from "@/components/optics/dropdown-menu";
-import { Button } from "@/components/optics/button";
 
-<DropdownMenu>
-	<DropdownMenuTrigger render={<Button variant="raised">Open Menu</Button>} />
-	<DropdownMenuContent>
-		<DropdownMenuLabel>My Account</DropdownMenuLabel>
-		<DropdownMenuSeparator />
-		<DropdownMenuItem>Profile</DropdownMenuItem>
-		<DropdownMenuItem>Settings</DropdownMenuItem>
-		<DropdownMenuItem>Team</DropdownMenuItem>
-		<DropdownMenuSeparator />
-		<DropdownMenuItem>Logout</DropdownMenuItem>
-	</DropdownMenuContent>
-</DropdownMenu>`,
-	},
-];
 
 
 
@@ -128,7 +101,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/optics/dropdown-menu";
+import { Button } from "@/components/optics/button";`,
+		filename: "dropdown-menu.jsx",
 	},
 	installation: {
 		componentName: "dropdown-menu",

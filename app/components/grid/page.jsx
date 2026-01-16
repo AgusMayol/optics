@@ -11,28 +11,6 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "grid.jsx",
-		code: `import { GridContainer, GridRow, GridItem } from "@/components/optics/grid";
-
-<GridContainer cols={12} rows={3} border>
-	<GridRow className="rounded-t-xl">
-		<GridItem span={4}>Column 1</GridItem>
-		<GridItem span={4}>Column 2</GridItem>
-		<GridItem span={4}>Column 3</GridItem>
-	</GridRow>
-	<GridRow>
-		<GridItem span={6}>Half</GridItem>
-		<GridItem span={6}>Half</GridItem>
-	</GridRow>
-	<GridRow>
-		<GridItem span={12}>Full Width</GridItem>
-	</GridRow>
-</GridContainer>`,
-	},
-];
 
 const propsData = [
 	{
@@ -204,7 +182,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { GridContainer, GridItem, GridRow } from "@/components/optics/grid";`,
+		filename: "grid.jsx",
 	},
 	installation: {
 		componentName: "grid",

@@ -48,23 +48,44 @@ function LayoutContent({ config }) {
 		() =>
 			installationData
 				? {
-						...installationData,
-						installDeps:
-							installationData.installDeps ||
-							(installationData.dependencies &&
+					...installationData,
+					installDeps:
+						installationData.installDeps ||
+						(installationData.dependencies &&
 							typeof installationData.dependencies === "string"
-								? generateInstallDeps(installationData.dependencies)
-								: []),
-					}
+							? generateInstallDeps(installationData.dependencies)
+							: []),
+				}
 				: null,
 		[installationData],
 	);
 
+	// Validation for deprecated 'code' prop
+	if (contentData?.code) {
+		throw new Error(
+			"The 'code' prop in content configuration is deprecated. Please remove it and allow the layout to generate code from 'children' automatically.",
+		);
+	}
+
 	// Generar código automáticamente desde children si no se proporciona
 	const generatedCode = useMemo(() => {
-		if (!contentData?.children || contentData?.code) return null;
+		if (!contentData?.children) return null;
 
-		const childrenJSX = reactElementToJSXString(contentData.children);
+		const childrenJSX = reactElementToJSXString(contentData.children, {
+			showDefaultProps: false,
+			showFunctions: true,
+			functionValue: (fn) => (fn.name ? fn.name : fn.toString()),
+			displayName: (element) => {
+				if (typeof element.type === "string") return element.type;
+				return (
+					element.type.displayName ||
+					element.type.name ||
+					(element.type.render &&
+						(element.type.render.displayName || element.type.render.name)) ||
+					"UnknownElementType"
+				);
+			},
+		});
 		const imports = contentData.imports || "";
 
 		return [
@@ -77,7 +98,7 @@ function LayoutContent({ config }) {
 		];
 	}, [contentData]);
 
-	const codeToDisplay = contentData?.code || generatedCode;
+	const codeToDisplay = generatedCode;
 	const activeCodeFile = codeToDisplay?.[0]?.filename || null;
 	const [currentActiveCodeFile, setCurrentActiveCodeFile] =
 		useState(activeCodeFile);

@@ -18,46 +18,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "collapsible.jsx",
-		code: `import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/optics/collapsible";
-import { Button } from "@/components/optics/button";
-import { ChevronDown } from "lucide-react";
 
-<Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full max-w-md space-y-2">
-	<div className="flex items-center justify-between space-x-4 px-4">
-		<h4 className="text-sm font-semibold">
-			@peduarte starred 3 repositories
-		</h4>
-		<CollapsibleTrigger
-			render={
-				<Button variant="raised" size="icon" className="w-9 p-0">
-					<ChevronDown className="h-4 w-4" />
-					<span className="sr-only">Toggle</span>
-				</Button>
-			}
-		/>
-	</div>
-	<CollapsibleContent className="space-y-2 px-4">
-		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			@base-ui/react
-		</div>
-		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			motion
-		</div>
-		<div className="rounded-md border px-4 py-3 font-mono text-sm">
-			lucide-react
-		</div>
-	</CollapsibleContent>
-</Collapsible>`,
-	},
-];
 
 const propsData = [
 	{
@@ -121,42 +82,37 @@ const propsData = [
 	},
 ];
 
-function CollapsibleDemo() {
-	const [isOpen, setIsOpen] = useState(false);
-
-	return (
-		<Collapsible
-			open={isOpen}
-			onOpenChange={setIsOpen}
-			className="w-full max-w-md space-y-2"
-		>
-			<div className="flex items-center justify-between space-x-4 px-4">
-				<h4 className="text-sm font-semibold">
-					@agusmayol starred 3 repositories
-				</h4>
-				<CollapsibleTrigger
-					render={
-						<Button variant="raised" size="icon">
-							<ChevronDown className="h-4 w-4" />
-							<span className="sr-only">Toggle</span>
-						</Button>
-					}
-				/>
+const demoComponent = (
+	<Collapsible
+		defaultOpen={false}
+		className="w-full max-w-md space-y-2"
+	>
+		<div className="flex items-center justify-between space-x-4 px-4">
+			<h4 className="text-sm font-semibold">
+				@agusmayol starred 3 repositories
+			</h4>
+			<CollapsibleTrigger
+				render={
+					<Button variant="raised" size="icon">
+						<ChevronDown className="h-4 w-4" />
+						<span className="sr-only">Toggle</span>
+					</Button>
+				}
+			/>
+		</div>
+		<CollapsibleContent className="flex flex-col gap-4 px-4">
+			<div className="rounded-md border px-4 py-3 font-mono text-sm">
+				@base-ui/react
 			</div>
-			<CollapsibleContent className="flex flex-col gap-4 px-4">
-				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					@base-ui/react
-				</div>
-				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					motion
-				</div>
-				<div className="rounded-md border px-4 py-3 font-mono text-sm">
-					lucide-react
-				</div>
-			</CollapsibleContent>
-		</Collapsible>
-	);
-}
+			<div className="rounded-md border px-4 py-3 font-mono text-sm">
+				motion
+			</div>
+			<div className="rounded-md border px-4 py-3 font-mono text-sm">
+				lucide-react
+			</div>
+		</CollapsibleContent>
+	</Collapsible>
+);
 
 const componentConfig = {
 	header: {
@@ -167,8 +123,11 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <CollapsibleDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/optics/collapsible";
+import { Button } from "@/components/optics/button";
+import { ChevronDown } from "lucide-react";`,
+		filename: "collapsible.jsx",
 	},
 	installation: {
 		componentName: "collapsible",

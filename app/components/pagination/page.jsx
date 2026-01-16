@@ -19,40 +19,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "pagination.jsx",
-		code: `import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from "@/components/optics/pagination";
 
-<Pagination>
-	<PaginationContent>
-		<PaginationItem>
-			<PaginationPrevious href="#" />
-		</PaginationItem>
-		<PaginationItem>
-			<PaginationLink href="#">1</PaginationLink>
-		</PaginationItem>
-		<PaginationItem>
-			<PaginationLink href="#" isActive variant="raised">2</PaginationLink>
-		</PaginationItem>
-		<PaginationItem>
-			<PaginationLink href="#">3</PaginationLink>
-		</PaginationItem>
-		<PaginationItem>
-			<PaginationNext href="#" />
-		</PaginationItem>
-	</PaginationContent>
-</Pagination>`,
-	},
-];
 
 
 
@@ -90,7 +57,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/optics/pagination";`,
+		filename: "pagination.jsx",
 	},
 	installation: {
 		componentName: "pagination",

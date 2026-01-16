@@ -25,13 +25,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "js",
-		filename: "example.js",
-		code: `console.log("Hello World!");`,
-	},
-];
+
 
 const propsData = [
 	{
@@ -238,9 +232,17 @@ const propsData = [
 	},
 ];
 
+const demoData = [
+	{
+		language: "js",
+		filename: "example.js",
+		code: `console.log("Hello World!");`,
+	},
+];
+
 const demoComponent = (
 	<div className="w-full">
-		<CodeBlock data={code} defaultValue={code[0].filename}>
+		<CodeBlock data={demoData} defaultValue={demoData[0].filename}>
 			<CodeBlockHeader>
 				<CodeBlockFiles>
 					{(item) => (
@@ -277,7 +279,16 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { CodeBlock, CodeBlockBody, CodeBlockContent, CodeBlockCopyButton, CodeBlockFilename, CodeBlockFiles, CodeBlockHeader, CodeBlockItem } from "@/components/optics/code-block";
+
+const demoData = [
+	{
+		language: "js",
+		filename: "example.js",
+		code: \`console.log("Hello World!");\`,
+	},
+];`,
+		filename: "code-block.jsx",
 	},
 	installation: {
 		componentName: "code-block",

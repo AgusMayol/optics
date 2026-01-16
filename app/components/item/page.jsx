@@ -23,37 +23,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "item.jsx",
-		code: `import {
-	Item,
-	ItemMedia,
-	ItemContent,
-	ItemTitle,
-	ItemDescription,
-	ItemActions,
-} from "@/components/optics/item";
-import { Button } from "@/components/optics/button";
-import { Mail } from "lucide-react";
 
-<Item>
-	<ItemMedia variant="icon">
-		<Mail />
-	</ItemMedia>
-	<ItemContent>
-		<ItemTitle>New Message</ItemTitle>
-		<ItemDescription>
-			You have a new message from John Doe
-		</ItemDescription>
-	</ItemContent>
-	<ItemActions>
-		<Button size="sm">View</Button>
-	</ItemActions>
-</Item>`,
-	},
-];
 
 
 
@@ -103,7 +73,10 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/optics/item";
+import { Button } from "@/components/optics/button";
+import { Mail, Star } from "lucide-react";`,
+		filename: "item.jsx",
 	},
 	installation: {
 		componentName: "item",

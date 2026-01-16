@@ -112,8 +112,14 @@ export default function Home() {
 						render={
 							<Link
 								href="/core/typography"
-								className="!p-5 !py-7 flex flex-col items-start !justify-between group [background-image:url('/images/sections/typography.svg')] bg-no-repeat bg-cover bg-center"
+								className="!p-5 !py-7 flex flex-col items-start !justify-between group relative overflow-hidden"
 							>
+								<Image
+									src="/images/sections/typography.svg"
+									alt="Typography"
+									fill
+									className="object-cover object-center -z-10"
+								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
 										Typography
@@ -567,8 +573,14 @@ export default function Home() {
 						render={
 							<Link
 								href="/resources/accesibility"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between [background-image:url('/images/sections/accessibility.svg')] bg-no-repeat bg-cover bg-center"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between relative overflow-hidden"
 							>
+								<Image
+									src="/images/sections/accessibility.svg"
+									alt="Accessibility"
+									fill
+									className="object-cover object-center -z-10"
+								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
 										Accessibility
@@ -596,8 +608,14 @@ export default function Home() {
 						render={
 							<Link
 								href="/collections/cursor-rules"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group [background-image:url('/images/sections/cursor-rules.svg')] bg-no-repeat bg-cover bg-center"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group relative overflow-hidden"
 							>
+								<Image
+									src="/images/sections/cursor-rules.svg"
+									alt="Cursor Rules & MCPs"
+									fill
+									className="object-cover object-center -z-10"
+								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
 										Cursor Rules & MCPs
@@ -626,8 +644,14 @@ export default function Home() {
 						render={
 							<Link
 								href="/resources/security"
-								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group [background-image:url('/images/sections/security.svg')] bg-no-repeat bg-cover bg-center"
+								className="!p-5 !py-7 w-full h-full flex flex-col items-start !justify-between group relative overflow-hidden"
 							>
+								<Image
+									src="/images/sections/security.svg"
+									alt="Security"
+									fill
+									className="object-cover object-center -z-10"
+								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
 										Security

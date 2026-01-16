@@ -13,26 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "toggle-group.jsx",
-		code: `import { ToggleGroup, ToggleGroupItem } from "@/components/optics/toggle-group";
-import { Bold, Italic, Underline } from "lucide-react";
 
-<ToggleGroup type="multiple">
-	<ToggleGroupItem value="bold" aria-label="Toggle bold">
-		<Bold className="h-4 w-4" />
-	</ToggleGroupItem>
-	<ToggleGroupItem value="italic" aria-label="Toggle italic">
-		<Italic className="h-4 w-4" />
-	</ToggleGroupItem>
-	<ToggleGroupItem value="underline" aria-label="Toggle underline">
-		<Underline className="h-4 w-4" />
-	</ToggleGroupItem>
-</ToggleGroup>`,
-	},
-];
 
 const demoComponent = (
 	<ToggleGroup type="multiple">
@@ -57,7 +38,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { ToggleGroup, ToggleGroupItem } from "@/components/optics/toggle-group";
+import { Bold, Italic, Underline } from "lucide-react";`,
+		filename: "toggle-group.jsx",
 	},
 	installation: {
 		componentName: "toggle-group",

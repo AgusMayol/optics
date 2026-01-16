@@ -12,17 +12,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "progress.jsx",
-		code: `import { Progress } from "@/components/optics/progress";
 
-<Progress value={33} />
-<Progress value={66} />
-<Progress value={100} />`,
-	},
-];
 
 
 
@@ -44,7 +34,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Progress } from "@/components/optics/progress";`,
+		filename: "progress.jsx",
 	},
 	installation: {
 		componentName: "progress",

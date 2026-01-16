@@ -26,47 +26,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "menubar.jsx",
-		code: `import {
-	Menubar,
-	MenubarContent,
-	MenubarItem,
-	MenubarMenu,
-	MenubarSeparator,
-	MenubarShortcut,
-	MenubarSub,
-	MenubarSubContent,
-	MenubarSubTrigger,
-	MenubarTrigger,
-} from "@/components/optics/menubar";
 
-<Menubar>
-	<MenubarMenu>
-		<MenubarTrigger>File</MenubarTrigger>
-		<MenubarContent>
-			<MenubarItem>
-				New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-			</MenubarItem>
-			<MenubarItem>
-				New Window <MenubarShortcut>⌘N</MenubarShortcut>
-			</MenubarItem>
-			<MenubarSeparator />
-			<MenubarSub>
-				<MenubarSubTrigger>Share</MenubarSubTrigger>
-				<MenubarSubContent>
-					<MenubarItem>Email link</MenubarItem>
-					<MenubarItem>Messages</MenubarItem>
-					<MenubarItem>Notes</MenubarItem>
-				</MenubarSubContent>
-			</MenubarSub>
-		</MenubarContent>
-	</MenubarMenu>
-</Menubar>`,
-	},
-];
 
 const demoComponent = (
 	<Menubar>
@@ -166,7 +126,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarItem, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from "@/components/optics/menubar";`,
+		filename: "menubar.jsx",
 	},
 	installation: {
 		componentName: "menubar",

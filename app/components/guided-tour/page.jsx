@@ -22,79 +22,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "example.jsx",
-		code: `import {
-	GuidedTourProvider,
-	GuidedTour,
-	GuidedTourTrigger,
-	GuidedTourStep,
-	GuidedTourOverlay,
-} from "@/components/optics/guided-tour";
-import { Button } from "@/components/optics/button";
 
-function MyComponent() {
-	return (
-		<GuidedTourProvider>
-			<GuidedTour>
-				<GuidedTourOverlay />
-				
-				<GuidedTourTrigger tourId="welcome-tour" render={<Button>Start Tour</Button>} />
-
-				<div className="space-y-4">
-					<GuidedTourStep
-						tourId="welcome-tour"
-						step={1}
-						content={
-							<div>
-								<h3 className="font-semibold mb-2">Welcome</h3>
-								<p className="text-sm text-muted-foreground">
-									This is the first step of the tour.
-								</p>
-							</div>
-						}
-					>
-						<Button>Main Button</Button>
-					</GuidedTourStep>
-
-					<GuidedTourStep
-						tourId="welcome-tour"
-						step={2}
-						content={
-							<div>
-								<h3 className="font-semibold mb-2">Second Step</h3>
-								<p className="text-sm text-muted-foreground">
-									Here you can see the second element.
-								</p>
-							</div>
-						}
-					>
-						<Input placeholder="Input field" />
-					</GuidedTourStep>
-
-					<GuidedTourStep
-						tourId="welcome-tour"
-						step={3}
-						content={
-							<div>
-								<h3 className="font-semibold mb-2">Final</h3>
-								<p className="text-sm text-muted-foreground">
-									This is the last step of the tour.
-								</p>
-							</div>
-						}
-					>
-						<Button variant="secondary">Finish</Button>
-					</GuidedTourStep>
-				</div>
-			</GuidedTour>
-		</GuidedTourProvider>
-	);
-}`,
-	},
-];
 
 const demoComponent = (
 	<GuidedTourProvider>
@@ -188,7 +116,12 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { GuidedTour, GuidedTourOverlay, GuidedTourProvider, GuidedTourStep, GuidedTourTrigger } from "@/components/optics/guided-tour";
+import { Button } from "@/components/optics/button";
+import { Input } from "@/components/optics/input";
+import { Label } from "@/components/optics/label";
+import { HelpCircle } from "lucide-react";`,
+		filename: "guided-tour.jsx",
 	},
 	installation: {
 		componentName: "guided-tour",

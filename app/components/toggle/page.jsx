@@ -13,18 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "toggle.jsx",
-		code: `import { Toggle } from "@/components/optics/toggle";
-import { Italic } from "lucide-react";
 
-<Toggle aria-label="Toggle italic" variant="raised">
-	<Italic className="h-4 w-4" />
-</Toggle>`,
-	},
-];
 
 const demoComponent = (
 	<div className="flex items-center justify-center flex-wrap gap-4">
@@ -49,7 +38,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Toggle } from "@/components/optics/toggle";
+import { Bold, Italic, Underline } from "lucide-react";`,
+		filename: "toggle.jsx",
 	},
 	installation: {
 		componentName: "toggle",

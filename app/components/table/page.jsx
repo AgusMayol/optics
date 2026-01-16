@@ -19,47 +19,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "table.jsx",
-		code: `import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/optics/table";
 
-<Table className="w-full">
-	<TableHeader>
-		<TableRow>
-			<TableHead>Name</TableHead>
-			<TableHead>Status</TableHead>
-			<TableHead>Role</TableHead>
-		</TableRow>
-	</TableHeader>
-	<TableBody>
-		<TableRow>
-			<TableCell className="font-medium">John Doe</TableCell>
-			<TableCell>Active</TableCell>
-			<TableCell>Admin</TableCell>
-		</TableRow>
-		<TableRow>
-			<TableCell className="font-medium">Jane Smith</TableCell>
-			<TableCell>Active</TableCell>
-			<TableCell>User</TableCell>
-		</TableRow>
-		<TableRow>
-			<TableCell className="font-medium">Bob Johnson</TableCell>
-			<TableCell>Inactive</TableCell>
-			<TableCell>User</TableCell>
-		</TableRow>
-	</TableBody>
-</Table>`,
-	},
-];
 
 
 
@@ -102,7 +62,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/optics/table";`,
+		filename: "table.jsx",
 	},
 	installation: {
 		componentName: "table",

@@ -2,32 +2,17 @@
 import { ComponentConfig } from "../layout";
 import { StarRating } from "@/registry/optics/star-rating";
 
-import componentCode from "@/registry/optics/dist/star-rating.jsx.txt";
+// import componentCode from "@/registry/optics/dist/star-rating.jsx.txt"; // Removed as per instruction
 import generatedProps from "@/registry/optics/dist/star-rating.json";
 
 const componentFiles = [
 	{
 		path: "@/components/optics/star-rating.jsx",
-		code: componentCode,
+		// code: componentCode, // Removed as per instruction
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "star-rating.jsx",
-		code: `import { StarRating } from "@/components/optics/star-rating";
 
-<StarRating />
-<StarRating defaultValue={3} />
-<StarRating size="sm" />
-<StarRating size="md" />
-<StarRating size="lg" />
-<StarRating totalStars={10} />
-<StarRating disabled />
-<StarRating onRate={(rating) => console.log(rating)} />`,
-	},
-];
 
 
 const demoComponent = (
@@ -73,7 +58,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { StarRating } from "@/components/optics/star-rating";`,
+		filename: "star-rating.jsx",
 	},
 	installation: {
 		componentName: "star-rating",

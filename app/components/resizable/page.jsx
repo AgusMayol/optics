@@ -16,31 +16,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "resizable.jsx",
-		code: `import {
-	ResizablePanelGroup,
-	ResizablePanel,
-	ResizableHandle,
-} from "@/components/optics/resizable";
 
-<ResizablePanelGroup direction="horizontal" className="max-w-md rounded-lg border bg-background">
-	<ResizablePanel defaultSize={50}>
-		<div className="flex h-[200px] items-center justify-center p-6">
-			<span className="font-semibold">One</span>
-		</div>
-	</ResizablePanel>
-	<ResizableHandle withHandle />
-	<ResizablePanel defaultSize={50}>
-		<div className="flex h-[200px] items-center justify-center p-6">
-			<span className="font-semibold">Two</span>
-		</div>
-	</ResizablePanel>
-</ResizablePanelGroup>`,
-	},
-];
 
 
 
@@ -73,7 +49,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/optics/resizable";`,
+		filename: "resizable.jsx",
 	},
 	installation: {
 		componentName: "resizable",

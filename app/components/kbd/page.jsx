@@ -12,35 +12,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "kbd.jsx",
-		code: `import { Kbd, KbdGroup } from "@/components/optics/kbd";
 
-// Basic usage
-<Kbd>⌘</Kbd>
-<Kbd>K</Kbd>
-
-// Grouped keys
-<KbdGroup>
-	<Kbd>⌘ + K</Kbd>
-</KbdGroup>
-
-// With hotkey detection and animation
-<Kbd useHotkey>⌘</Kbd>
-<Kbd useHotkey>K</Kbd>
-
-// With custom hotkey prop
-<Kbd useHotkey hotkey="mod+k" onHotkeyPress={() => console.log("Pressed!")}>
-	⌘ K
-</Kbd>
-
-// Legacy variant
-<Kbd variant="legacy">⌘</Kbd>
-<Kbd variant="legacy">K</Kbd>`,
-	},
-];
 
 
 
@@ -71,7 +43,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Kbd, KbdGroup } from "@/components/optics/kbd";`,
+		filename: "kbd.jsx",
 	},
 	installation: {
 		componentName: "kbd",

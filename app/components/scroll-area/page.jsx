@@ -21,24 +21,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "scroll-area.jsx",
-		code: `import { ScrollArea } from "@/components/optics/scroll-area";
 
-<ScrollArea className="h-72 w-48 rounded-md border bg-background">
-	<div className="p-4">
-		<h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
-		{Array.from({ length: 50 }).map((_, i) => (
-			<div key={i} className="text-sm py-1">
-				Tag {i + 1}
-			</div>
-		))}
-	</div>
-</ScrollArea>`,
-	},
-];
 
 const propsData = [
 	{
@@ -103,7 +86,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { ScrollArea } from "@/components/optics/scroll-area";`,
+		filename: "scroll-area.jsx",
 	},
 	installation: {
 		componentName: "scroll-area",

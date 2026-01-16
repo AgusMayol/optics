@@ -13,27 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "sonner.jsx",
-		code: `import { toast } from "@/components/optics/sonner";
 
-<Button onClick={() => toast({ type: "success", title: "Success!", description: "Your action was completed." })}>
-	Show Toast
-</Button>
-
-<Button onClick={() => toast({ 
-	type: "promise", 
-	promise: fetch("/api/data"),
-	loading: "Loading...",
-	success: "Data loaded!",
-	error: "Failed to load data"
-})}>
-	Promise Toast
-</Button>`,
-	},
-];
 
 const propsData = [
 	{
@@ -163,7 +143,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { toast, Toaster } from "@/components/optics/sonner";
+import { Button } from "@/components/optics/button";`,
+		filename: "sonner.jsx",
 	},
 	installation: {
 		componentName: "sonner",

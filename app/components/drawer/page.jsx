@@ -25,79 +25,29 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "drawer.jsx",
-		code: `import {
-	Drawer,
-	DrawerClose,
-	DrawerContent,
-	DrawerDescription,
-	DrawerFooter,
-	DrawerHeader,
-	DrawerTitle,
-	DrawerTrigger,
-} from "@/components/optics/drawer";
-import { Button } from "@/components/optics/button";
-import { Input } from "@/components/optics/input";
-import { Label } from "@/components/optics/label";
-
-<Drawer>
-	<DrawerTrigger>
-		<Button variant="raised">Open Drawer</Button>
-	</DrawerTrigger>
-	<DrawerContent>
-		<DrawerHeader>
-			<DrawerTitle>Are you absolutely sure?</DrawerTitle>
-			<DrawerDescription>This action cannot be undone.</DrawerDescription>
-		</DrawerHeader>
-		<div className="p-4 pb-0">
-			<div className="space-y-4">
-				<div className="grid gap-2">
-					<Label htmlFor="email">Email</Label>
-					<Input id="email" placeholder="name@example.com" />
-				</div>
-			</div>
-		</div>
-		<DrawerFooter>
-			<Button variant="raised">Submit</Button>
-			<DrawerClose>
-				<Button variant="raised">Cancel</Button>
-			</DrawerClose>
-		</DrawerFooter>
-	</DrawerContent>
-</Drawer>`,
-	},
-];
-
-function DrawerDemo() {
-	const [open, setOpen] = useState(false);
-
-	return (
-		<Drawer open={open} onOpenChange={setOpen}>
-			<DrawerTrigger render={<Button variant="raised">Open Drawer</Button>} />
-			<DrawerContent>
-				<DrawerHeader>
-					<DrawerTitle>Are you absolutely sure?</DrawerTitle>
-					<DrawerDescription>This action cannot be undone.</DrawerDescription>
-				</DrawerHeader>
-				<div className="p-4 pb-0">
-					<div className="space-y-4">
-						<div className="grid gap-2">
-							<Label htmlFor="email">Email</Label>
-							<Input id="email" placeholder="name@example.com" />
-						</div>
+const demoComponent = (
+	<Drawer>
+		<DrawerTrigger render={<Button variant="raised">Open Drawer</Button>} />
+		<DrawerContent>
+			<DrawerHeader>
+				<DrawerTitle>Are you absolutely sure?</DrawerTitle>
+				<DrawerDescription>This action cannot be undone.</DrawerDescription>
+			</DrawerHeader>
+			<div className="p-4 pb-0">
+				<div className="space-y-4">
+					<div className="grid gap-2">
+						<Label htmlFor="email">Email</Label>
+						<Input id="email" placeholder="name@example.com" />
 					</div>
 				</div>
-				<DrawerFooter>
-					<Button>Submit</Button>
-					<DrawerClose render={<Button variant="raised">Cancel</Button>} />
-				</DrawerFooter>
-			</DrawerContent>
-		</Drawer>
-	);
-}
+			</div>
+			<DrawerFooter>
+				<Button>Submit</Button>
+				<DrawerClose render={<Button variant="raised">Cancel</Button>} />
+			</DrawerFooter>
+		</DrawerContent>
+	</Drawer>
+);
 
 const componentConfig = {
 	header: {
@@ -107,8 +57,12 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <DrawerDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/optics/drawer";
+import { Button } from "@/components/optics/button";
+import { Input } from "@/components/optics/input";
+import { Label } from "@/components/optics/label";`,
+		filename: "drawer.jsx",
 	},
 	installation: {
 		componentName: "drawer",

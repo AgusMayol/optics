@@ -18,86 +18,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "theme-switcher.jsx",
-		code: `import { ThemeSwitcher } from "@/components/optics/theme-switcher";
-import { useTheme } from "next-themes";
-import {
-	useModeAnimation,
-	ThemeAnimationType,
-} from "react-theme-switch-animation";
-import * as React from "react";
 
-export function MyComponent() {
-	const [themeSwitch, setThemeSwitch] = React.useState("system");
-	const { theme, setTheme, resolvedTheme, systemTheme } = useTheme();
-	const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation();
-
-	const checkTheme = () => {
-		let tema = resolvedTheme;
-		if (tema === "system") {
-			tema = systemTheme;
-		}
-		return tema === "light" ? false : true;
-	};
-
-	const handleSetTheme = (newTheme) => {
-		setThemeSwitch(newTheme);
-
-		const notifyThemeChange = () => {
-			if (typeof window !== "undefined") {
-				window.dispatchEvent(new Event("theme2-change"));
-				// Update cookie for server-side detection
-				document.cookie = \`theme-preference=\${newTheme}; path=/; max-age=31536000\`;
-			}
-		};
-
-		// If the new theme is different from the current resolved theme 
-		// we trigger the animation.
-		const isCurrentlyDark = checkTheme();
-		const willBeDark = newTheme === "system" ? systemTheme === "dark" : newTheme === "dark";
-
-		if (isCurrentlyDark !== willBeDark) {
-			toggleSwitchTheme({
-				animationType: ThemeAnimationType.BLUR_CIRCLE,
-				isDarkMode: isCurrentlyDark,
-				onDarkModeChange: null,
-			});
-		}
-
-		// Update next-themes state
-		setTheme(newTheme);
-
-		setTimeout(() => {
-			localStorage.setItem("theme2", newTheme);
-			notifyThemeChange();
-		}, 200);
-	};
-
-	React.useEffect(() => {
-		const tema = localStorage.getItem("theme2") || "system";
-		setThemeSwitch(tema);
-	}, []);
-
-	React.useEffect(() => {
-		if (themeSwitch === "system" && theme !== "system") {
-			setTheme("system");
-		}
-	}, [themeSwitch, theme, setTheme]);
-	
-	return (
-		<ThemeSwitcher
-			ref={ref}
-			defaultValue={themeSwitch}
-			onChange={handleSetTheme}
-			value={themeSwitch}
-		/>
-	);
-}`,
-	},
-];
 
 const propsData = [
 	{
@@ -214,7 +135,11 @@ const componentConfig = {
 	},
 	content: {
 		children: <ThemeSwitcherDemo />,
-		code: code,
+		imports: `import { ThemeSwitcher } from "@/components/optics/theme-switcher";
+import { useTheme } from "next-themes";
+import { useModeAnimation, ThemeAnimationType } from "react-theme-switch-animation";
+import * as React from "react";`,
+		filename: "theme-switcher.jsx",
 	},
 	installation: {
 		componentName: "theme-switcher",

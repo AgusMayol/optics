@@ -13,35 +13,12 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "calendar.jsx",
-		code: `import { Calendar } from "@/components/optics/calendar";
-
-<Calendar
-	mode="single"
-	selected={date}
-	onSelect={setDate}
-	className="rounded-md border !bg-background"
-/>`,
-	},
-];
-
-
-
-function CalendarDemo() {
-	const [date, setDate] = useState();
-
-	return (
-		<Calendar
-			mode="single"
-			selected={date}
-			onSelect={setDate}
-			className="rounded-md border !bg-background"
-		/>
-	);
-}
+const demoComponent = (
+	<Calendar
+		mode="single"
+		className="rounded-md border !bg-background"
+	/>
+);
 
 const componentConfig = {
 	header: {
@@ -52,8 +29,9 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <CalendarDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Calendar } from "@/components/optics/calendar";`,
+		filename: "calendar.jsx",
 	},
 	installation: {
 		componentName: "calendar",

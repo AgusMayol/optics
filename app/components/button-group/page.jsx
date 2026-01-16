@@ -18,62 +18,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "button-group.jsx",
-		code: `import { ButtonGroup } from "@/components/optics/button-group";
-import { Button } from "@/registry/optics/button";
 
-<div className="flex items-center justify-center gap-6">
-	<ButtonGroup orientation="vertical">
-		<Button variant="raised" animation="none">
-			<Copy />
-			Copy
-		</Button>
-		<Button variant="raised" animation="colors">
-			<Download />
-			Download
-		</Button>
-		<Button variant="raised" animation="colors">
-			<Share2 />
-			Share
-		</Button>
-	</ButtonGroup>
-
-	<div className="flex flex-col items-start justify-center gap-6">
-		<ButtonGroup>
-			<Button variant="raised" animation="colors">
-				<Copy />
-				Copy
-			</Button>
-			<Button variant="raised" animation="colors">
-				<Download />
-				Download
-			</Button>
-			<Button variant="raised" animation="colors">
-				<Share2 />
-				Share
-			</Button>
-		</ButtonGroup>
-
-		<ButtonGroup>
-			<ButtonGroupText variant="raised">Actions</ButtonGroupText>
-			<ButtonGroupSeparator />
-			<Button variant="raised" animation="colors">
-				<Copy />
-			</Button>
-			<Button variant="raised" animation="colors">
-				<Download />
-			</Button>
-			<Button variant="raised" animation="colors">
-				<Share2 />
-			</Button>
-		</ButtonGroup>
-	</div>
-</div>`,
-	},
-];
 
 
 const demoComponent = (
@@ -136,7 +81,10 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "@/components/optics/button-group";
+import { Button } from "@/components/optics/button";
+import { Copy, Download, Share2 } from "lucide-react";`,
+		filename: "button-group.jsx",
 	},
 	installation: {
 		componentName: "button-group",

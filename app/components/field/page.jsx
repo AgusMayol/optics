@@ -20,43 +20,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "field.jsx",
-		code: `import {
-	Field,
-	FieldDescription,
-	FieldGroup,
-	FieldLabel,
-	FieldLegend,
-	FieldSet,
-} from "@/components/optics/field";
-import { Input } from "@/components/optics/input";
 
-<FieldGroup>
-	<FieldSet>
-		<FieldLegend>Payment Method</FieldLegend>
-		<FieldDescription>
-			All transactions are secure and encrypted
-		</FieldDescription>
-		<FieldGroup>
-			<Field>
-				<FieldLabel htmlFor="card-name">Name on Card</FieldLabel>
-				<Input id="card-name" placeholder="John Doe" required />
-			</Field>
-			<Field>
-				<FieldLabel htmlFor="card-number">Card Number</FieldLabel>
-				<Input id="card-number" placeholder="1234 5678 9012 3456" required />
-				<FieldDescription>
-					Enter your 16-digit card number
-				</FieldDescription>
-			</Field>
-		</FieldGroup>
-	</FieldSet>
-</FieldGroup>`,
-	},
-];
 
 
 
@@ -110,7 +74,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/optics/field";
+import { Input } from "@/components/optics/input";`,
+		filename: "field.jsx",
 	},
 	installation: {
 		componentName: "field",

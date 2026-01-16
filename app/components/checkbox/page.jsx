@@ -13,19 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "checkbox.jsx",
-		code: `import { Checkbox } from "@/components/optics/checkbox";
-import { Label } from "@/components/optics/label";
 
-<div className="flex items-center space-x-2">
-	<Checkbox id="terms" />
-	<Label htmlFor="terms">Accept terms and conditions</Label>
-</div>`,
-	},
-];
 
 const demoComponent = (
 	<div className="w-full flex flex-col items-center justify-center gap-4">
@@ -58,7 +46,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Checkbox } from "@/components/optics/checkbox";
+import { Label } from "@/components/optics/label";`,
+		filename: "checkbox.jsx",
 	},
 	installation: {
 		componentName: "checkbox",

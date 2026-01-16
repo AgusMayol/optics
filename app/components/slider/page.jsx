@@ -13,51 +13,31 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "slider.jsx",
-		code: `import { Slider } from "@/components/optics/slider";
-
-<Slider defaultValue={[50]} max={100} step={1} />
-<Slider defaultValue={[25, 75]} max={100} step={1} />`,
-	},
-];
-
-
-
-function SliderDemo() {
-	const [sliderValue, setSliderValue] = useState([50]);
-	const [rangeValue, setRangeValue] = useState([25, 75]);
-
-	return (
-		<div className="w-full flex flex-col items-center gap-8">
-			<div className="w-full max-w-md flex flex-col gap-2">
-				<Slider
-					value={sliderValue}
-					onValueChange={setSliderValue}
-					max={100}
-					step={1}
-				/>
-				<p className="text-sm text-muted-foreground">
-					Value: {sliderValue[0]}
-				</p>
-			</div>
-
-			<div className="w-full max-w-md flex flex-col gap-2">
-				<Slider
-					value={rangeValue}
-					onValueChange={setRangeValue}
-					max={100}
-					step={1}
-				/>
-				<p className="text-sm text-muted-foreground">
-					Range: {rangeValue[0]} - {rangeValue[1]}
-				</p>
-			</div>
+const demoComponent = (
+	<div className="w-full flex flex-col items-center gap-8">
+		<div className="w-full max-w-md flex flex-col gap-2">
+			<Slider
+				defaultValue={[50]}
+				max={100}
+				step={1}
+			/>
+			<p className="text-sm text-muted-foreground">
+				Value: 50
+			</p>
 		</div>
-	);
-}
+
+		<div className="w-full max-w-md flex flex-col gap-2">
+			<Slider
+				defaultValue={[25, 75]}
+				max={100}
+				step={1}
+			/>
+			<p className="text-sm text-muted-foreground">
+				Range: 25 - 75
+			</p>
+		</div>
+	</div>
+);
 
 const componentConfig = {
 	header: {
@@ -68,8 +48,9 @@ const componentConfig = {
 		hrefText: "shadcn/ui",
 	},
 	content: {
-		children: <SliderDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Slider } from "@/components/optics/slider";`,
+		filename: "slider.jsx",
 	},
 	installation: {
 		componentName: "slider",

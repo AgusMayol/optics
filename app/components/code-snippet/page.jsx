@@ -32,41 +32,37 @@ const commandsExample = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "code-snippet.jsx",
-		code: `import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-	SnippetTabsContents,
-} from "@/components/optics/code-snippet";
-
-<Snippet value={value} onValueChange={setValue}>
-	<SnippetHeader>
-		<SnippetTabsList variant="outline">
-			{commands.map((cmd) => (
-				<SnippetTabsTrigger key={cmd.label} value={cmd.label}>
-					{cmd.label}
-				</SnippetTabsTrigger>
+const demoComponent = (
+	<Snippet
+		defaultValue="npm"
+		className="w-full"
+	>
+		<SnippetHeader>
+			<SnippetTabsList variant="outline">
+				{commandsExample.map((command) => (
+					<SnippetTabsTrigger
+						key={command.label}
+						value={command.label}
+					>
+						{command.label}
+					</SnippetTabsTrigger>
+				))}
+			</SnippetTabsList>
+		</SnippetHeader>
+		<SnippetTabsContents>
+			{commandsExample.map((command) => (
+				<SnippetTabsContent
+					key={command.label}
+					value={command.label}
+					className="flex items-center justify-between gap-4"
+				>
+					{command.code}
+					<SnippetCopyButton value={command.code} />
+				</SnippetTabsContent>
 			))}
-		</SnippetTabsList>
-	</SnippetHeader>
-	<SnippetTabsContents>
-		{commands.map((cmd) => (
-			<SnippetTabsContent key={cmd.label} value={cmd.label}>
-				{cmd.code}
-				<SnippetCopyButton value={cmd.code} />
-			</SnippetTabsContent>
-		))}
-	</SnippetTabsContents>
-</Snippet>`,
-	},
-];
+		</SnippetTabsContents>
+	</Snippet>
+);
 
 const propsData = [
 	{
@@ -87,42 +83,7 @@ const propsData = [
 	},
 ];
 
-function CodeSnippetDemo() {
-	const [valueExample, setValueExample] = useState(commandsExample[0].label);
 
-	return (
-		<Snippet
-			value={valueExample}
-			onValueChange={setValueExample}
-			className="w-full"
-		>
-			<SnippetHeader>
-				<SnippetTabsList variant="outline">
-					{commandsExample.map((command) => (
-						<SnippetTabsTrigger
-							key={command.label}
-							value={command.label}
-						>
-							{command.label}
-						</SnippetTabsTrigger>
-					))}
-				</SnippetTabsList>
-			</SnippetHeader>
-			<SnippetTabsContents>
-				{commandsExample.map((command) => (
-					<SnippetTabsContent
-						key={command.label}
-						value={command.label}
-						className="flex items-center justify-between gap-4"
-					>
-						{command.code}
-						<SnippetCopyButton value={command.code} />
-					</SnippetTabsContent>
-				))}
-			</SnippetTabsContents>
-		</Snippet>
-	);
-}
 
 const componentConfig = {
 	header: {
@@ -133,8 +94,20 @@ const componentConfig = {
 		hrefText: undefined,
 	},
 	content: {
-		children: <CodeSnippetDemo />,
-		code: code,
+		children: demoComponent,
+		imports: `import { Snippet, SnippetCopyButton, SnippetHeader, SnippetTabsContent, SnippetTabsContents, SnippetTabsList, SnippetTabsTrigger } from "@/components/optics/code-snippet";
+
+const commandsExample = [
+	{
+		label: "npm",
+		code: "npm install package",
+	},
+	{
+		label: "yarn",
+		code: "yarn add package",
+	},
+];`,
+		filename: "code-snippet.jsx",
 	},
 	installation: {
 		componentName: "code-snippet",

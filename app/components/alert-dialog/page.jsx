@@ -25,52 +25,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "alert-dialog.jsx",
-		code: `import {
-	AlertDialog,
-	AlertDialogTrigger,
-	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogDescription,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogIcon,
-} from "@/components/optics/alert-dialog";
-import { Button } from "@/components/optics/button";
-import { Info } from "lucide-react";
 
-<AlertDialog>
-	<AlertDialogTrigger asChild>
-		<Button variant="raised">Show Dialog</Button>
-	</AlertDialogTrigger>
-	<AlertDialogContent>
-		<AlertDialogHeader>
-			<AlertDialogIcon>
-				<div className="p-2 rounded-full squircle-none flex items-center justify-center shadow-md bg-emerald-500/20">
-					<Info className="text-emerald-600" />
-				</div>
-				<AlertDialogTitle>
-					Are you absolutely sure?
-				</AlertDialogTitle>
-			</AlertDialogIcon>
-			<AlertDialogDescription>
-				This action cannot be undone. This will permanently delete
-				your account and remove your data from our servers.
-			</AlertDialogDescription>
-		</AlertDialogHeader>
-		<AlertDialogFooter>
-			<AlertDialogCancel>Cancel</AlertDialogCancel>
-			<AlertDialogAction>Continue</AlertDialogAction>
-		</AlertDialogFooter>
-	</AlertDialogContent>
-</AlertDialog>`,
-	},
-];
 
 const demoComponent = (
 	<AlertDialog>
@@ -108,7 +63,10 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogIcon, AlertDialogTitle, AlertDialogTrigger } from "@/components/optics/alert-dialog";
+import { Button } from "@/components/optics/button";
+import { Info } from "lucide-react";`,
+		filename: "alert-dialog.jsx",
 	},
 	installation: {
 		componentName: "alert-dialog",

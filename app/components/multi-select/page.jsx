@@ -20,44 +20,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "multi-select.jsx",
-		code: `import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/optics/multi-select";
 
-<Select onValuesChange={(values) => console.log(values)}>
-	<SelectTrigger variant="raised">
-		<SelectValue placeholder="Select status" />
-	</SelectTrigger>
-	<SelectContent className="w-full">
-		<SelectGroup>
-			<SelectLabel>Status</SelectLabel>
-			<SelectItem value="ready" color="bg-teal-400">
-				Ready
-			</SelectItem>
-			<SelectItem value="error" color="bg-red-500">
-				Error
-			</SelectItem>
-			<SelectItem value="building" color="bg-amber-400">
-				Building
-			</SelectItem>
-			<SelectItem value="queued" color="bg-gray-200">
-				Queued
-			</SelectItem>
-		</SelectGroup>
-	</SelectContent>
-</Select>`,
-	},
-];
 
 
 
@@ -102,7 +65,8 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/optics/multi-select";`,
+		filename: "multi-select.jsx",
 	},
 	installation: {
 		componentName: "multi-select",

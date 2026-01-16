@@ -13,33 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "textarea.jsx",
-		code: `import { Textarea } from "@/components/optics/textarea";
-import { Label } from "@/components/optics/label";
 
-<div className="w-full flex flex-col gap-2 max-w-sm">
-	<Label htmlFor="message">Your message</Label>
-	<Textarea
-		id="message"
-		placeholder="Type your message here."
-		variant="raised"
-	/>
-</div>
-
-<div className="w-full flex flex-col gap-2 max-w-sm">
-	<Label htmlFor="disabled">Disabled</Label>
-	<Textarea
-		id="disabled"
-		placeholder="Disabled textarea"
-		variant="raised"
-		disabled
-	/>
-</div>`,
-	},
-];
 
 const demoComponent = (
 	<div className="w-full flex flex-col items-center justify-center gap-4">
@@ -74,7 +48,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Textarea } from "@/components/optics/textarea";
+import { Label } from "@/components/optics/label";`,
+		filename: "textarea.jsx",
 	},
 	installation: {
 		componentName: "textarea",

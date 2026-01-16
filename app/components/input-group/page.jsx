@@ -18,29 +18,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "input-group.jsx",
-		code: `import {
-	InputGroup,
-	InputGroupAddon,
-	InputGroupInput,
-	InputGroupText,
-} from "@/components/optics/input-group";
-import { Search } from "lucide-react";
 
-<InputGroup variant="raised">
-	<InputGroupInput placeholder="Search..." />
-	<InputGroupAddon>
-		<Search className="size-4" />
-	</InputGroupAddon>
-	<InputGroupAddon align="inline-end">
-		<InputGroupText>12 results</InputGroupText>
-	</InputGroupAddon>
-</InputGroup>`,
-	},
-];
 
 const demoComponent = (
 	<div className="w-full max-w-sm">
@@ -66,7 +44,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/optics/input-group";
+import { Search } from "lucide-react";`,
+		filename: "input-group.jsx",
 	},
 	installation: {
 		componentName: "input-group",

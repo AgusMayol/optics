@@ -13,19 +13,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "switch.jsx",
-		code: `import { Switch } from "@/components/optics/switch";
-import { Label } from "@/components/optics/label";
 
-<div className="flex items-center space-x-2">
-	<Switch id="airplane-mode" variant="raised" />
-	<Label htmlFor="airplane-mode">Airplane Mode</Label>
-</div>`,
-	},
-];
 
 const demoComponent = (
 	<div className="flex items-center space-x-2">
@@ -44,7 +32,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Switch } from "@/components/optics/switch";
+import { Label } from "@/components/optics/label";`,
+		filename: "switch.jsx",
 	},
 	installation: {
 		componentName: "switch",

@@ -14,21 +14,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "timezone.jsx",
-		code: `import { Timezone } from "@/components/optics/timezone";
-import { Button } from "@/components/optics/button";
 
-<Timezone 
-	timestamp={Date.now() - 5 * 60 * 1000} 
-	render={<Button variant="raised">Open Timezone</Button>}
-	side="top"
-	sideOffset={4}
-/>`,
-	},
-];
 
 const demoComponent = (
 	<Timezone
@@ -47,7 +33,10 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		children: demoComponent,
+		imports: `import { Timezone } from "@/components/optics/timezone";
+import { Button } from "@/components/optics/button";`,
+		filename: "timezone.jsx",
 	},
 	installation: {
 		componentName: "timezone",

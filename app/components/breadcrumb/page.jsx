@@ -22,37 +22,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "breadcrumb.jsx",
-		code: `import {
-	Breadcrumb,
-	BreadcrumbList,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from "@/components/optics/breadcrumb";
-import Link from "next/link";
 
-<Breadcrumb>
-	<BreadcrumbList>
-		<BreadcrumbItem>
-			<BreadcrumbLink nativeButton={false} render={<Link href="/">Home</Link>} />
-		</BreadcrumbItem>
-		<BreadcrumbSeparator />
-		<BreadcrumbItem>
-			<BreadcrumbLink nativeButton={false} render={<Link href="/components">Components</Link>} />
-		</BreadcrumbItem>
-		<BreadcrumbSeparator />
-		<BreadcrumbItem>
-			<BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-		</BreadcrumbItem>
-	</BreadcrumbList>
-</Breadcrumb>`,
-	},
-];
 
 const demoComponent = (
 	<div className="flex flex-col items-center justify-center gap-4">
@@ -106,7 +76,10 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/optics/breadcrumb";
+import { Slash } from "lucide-react";
+import Link from "next/link";`,
+		filename: "breadcrumb.jsx",
 	},
 	installation: {
 		componentName: "breadcrumb",

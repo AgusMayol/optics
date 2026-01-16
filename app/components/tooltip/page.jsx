@@ -18,23 +18,7 @@ const componentFiles = [
 	},
 ];
 
-const code = [
-	{
-		language: "jsx",
-		filename: "tooltip.jsx",
-		code: `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/optics/tooltip";
-import { Button } from "@/components/optics/button";
 
-<TooltipProvider>
-	<Tooltip>
-		<TooltipTrigger render={<Button variant="raised">Hover me</Button>} />
-		<TooltipContent>
-			<p>Add to library</p>
-		</TooltipContent>
-	</Tooltip>
-</TooltipProvider>`,
-	},
-];
 
 const demoComponent = (
 	<TooltipProvider>
@@ -57,7 +41,9 @@ const componentConfig = {
 	},
 	content: {
 		children: demoComponent,
-		code: code,
+		imports: `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/optics/tooltip";
+import { Button } from "@/components/optics/button";`,
+		filename: "tooltip.jsx",
 	},
 	installation: {
 		componentName: "tooltip",
