@@ -22,9 +22,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/accordion.jsx",
+					"path": "registry/optics/accordion.tsx",
 					"type": "registry:component",
-					"target": "components/optics/accordion.jsx"
+					"target": "components/optics/accordion.tsx"
 				}
 			]
 		},
@@ -45,9 +45,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/alert-dialog.jsx",
+					"path": "registry/optics/alert-dialog.tsx",
 					"type": "registry:component",
-					"target": "components/optics/alert-dialog.jsx"
+					"target": "components/optics/alert-dialog.tsx"
 				}
 			]
 		},
@@ -65,9 +65,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/alert.jsx",
+					"path": "registry/optics/alert.tsx",
 					"type": "registry:component",
-					"target": "components/optics/alert.jsx"
+					"target": "components/optics/alert.tsx"
 				}
 			]
 		},
@@ -80,9 +80,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/aspect-ratio.jsx",
+					"path": "registry/optics/aspect-ratio.tsx",
 					"type": "registry:component",
-					"target": "components/optics/aspect-ratio.jsx"
+					"target": "components/optics/aspect-ratio.tsx"
 				}
 			]
 		},
@@ -98,9 +98,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/avatar.jsx",
+					"path": "registry/optics/avatar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/avatar.jsx"
+					"target": "components/optics/avatar.tsx"
 				}
 			]
 		},
@@ -118,9 +118,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/badge.jsx",
+					"path": "registry/optics/badge.tsx",
 					"type": "registry:component",
-					"target": "components/optics/badge.jsx"
+					"target": "components/optics/badge.tsx"
 				}
 			]
 		},
@@ -141,9 +141,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/breadcrumb.jsx",
+					"path": "registry/optics/breadcrumb.tsx",
 					"type": "registry:component",
-					"target": "components/optics/breadcrumb.jsx"
+					"target": "components/optics/breadcrumb.tsx"
 				}
 			]
 		},
@@ -165,9 +165,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/button-group.jsx",
+					"path": "registry/optics/button-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/button-group.jsx"
+					"target": "components/optics/button-group.tsx"
 				}
 			]
 		},
@@ -185,9 +185,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/button.jsx",
+					"path": "registry/optics/button.tsx",
 					"type": "registry:component",
-					"target": "components/optics/button.jsx"
+					"target": "components/optics/button.tsx"
 				}
 			]
 		},
@@ -209,9 +209,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/calendar.jsx",
+					"path": "registry/optics/calendar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/calendar.jsx"
+					"target": "components/optics/calendar.tsx"
 				}
 			]
 		},
@@ -224,9 +224,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/card.jsx",
+					"path": "registry/optics/card.tsx",
 					"type": "registry:component",
-					"target": "components/optics/card.jsx"
+					"target": "components/optics/card.tsx"
 				}
 			]
 		},
@@ -247,9 +247,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/carousel.jsx",
+					"path": "registry/optics/carousel.tsx",
 					"type": "registry:component",
-					"target": "components/optics/carousel.jsx"
+					"target": "components/optics/carousel.tsx"
 				}
 			]
 		},
@@ -262,9 +262,9 @@
 			"dependencies": ["recharts", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/chart.jsx",
+					"path": "registry/optics/chart.tsx",
 					"type": "registry:component",
-					"target": "components/optics/chart.jsx"
+					"target": "components/optics/chart.tsx"
 				}
 			]
 		},
@@ -285,9 +285,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/checkbox.jsx",
+					"path": "registry/optics/checkbox.tsx",
 					"type": "registry:component",
-					"target": "components/optics/checkbox.jsx"
+					"target": "components/optics/checkbox.tsx"
 				}
 			]
 		},
@@ -316,9 +316,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/code-block.jsx",
+					"path": "registry/optics/code-block.tsx",
 					"type": "registry:component",
-					"target": "components/optics/code-block.jsx"
+					"target": "components/optics/code-block.tsx"
 				}
 			]
 		},
@@ -341,9 +341,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/code-snippet.jsx",
+					"path": "registry/optics/code-snippet.tsx",
 					"type": "registry:component",
-					"target": "components/optics/code-snippet.jsx"
+					"target": "components/optics/code-snippet.tsx"
 				}
 			]
 		},
@@ -356,9 +356,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/collapsible.jsx",
+					"path": "registry/optics/collapsible.tsx",
 					"type": "registry:component",
-					"target": "components/optics/collapsible.jsx"
+					"target": "components/optics/collapsible.tsx"
 				}
 			]
 		},
@@ -375,9 +375,9 @@
 			"dependencies": ["cmdk", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/command.jsx",
+					"path": "registry/optics/command.tsx",
 					"type": "registry:component",
-					"target": "components/optics/command.jsx"
+					"target": "components/optics/command.tsx"
 				}
 			]
 		},
@@ -395,9 +395,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/context-menu.jsx",
+					"path": "registry/optics/context-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/context-menu.jsx"
+					"target": "components/optics/context-menu.tsx"
 				}
 			]
 		},
@@ -413,9 +413,9 @@
 			"dependencies": ["@tanstack/react-table", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/data-table.jsx",
+					"path": "registry/optics/data-table.tsx",
 					"type": "registry:component",
-					"target": "components/optics/data-table.jsx"
+					"target": "components/optics/data-table.tsx"
 				}
 			]
 		},
@@ -439,9 +439,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/date-picker.jsx",
+					"path": "registry/optics/date-picker.tsx",
 					"type": "registry:component",
-					"target": "components/optics/date-picker.jsx"
+					"target": "components/optics/date-picker.tsx"
 				}
 			]
 		},
@@ -462,9 +462,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/dialog.jsx",
+					"path": "registry/optics/dialog.tsx",
 					"type": "registry:component",
-					"target": "components/optics/dialog.jsx"
+					"target": "components/optics/dialog.tsx"
 				}
 			]
 		},
@@ -477,9 +477,9 @@
 			"dependencies": ["vaul-base", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/drawer.jsx",
+					"path": "registry/optics/drawer.tsx",
 					"type": "registry:component",
-					"target": "components/optics/drawer.jsx"
+					"target": "components/optics/drawer.tsx"
 				}
 			]
 		},
@@ -497,9 +497,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/dropdown-menu.jsx",
+					"path": "registry/optics/dropdown-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/dropdown-menu.jsx"
+					"target": "components/optics/dropdown-menu.tsx"
 				}
 			]
 		},
@@ -515,9 +515,9 @@
 			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/empty.jsx",
+					"path": "registry/optics/empty.tsx",
 					"type": "registry:component",
-					"target": "components/optics/empty.jsx"
+					"target": "components/optics/empty.tsx"
 				}
 			]
 		},
@@ -533,9 +533,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/field.jsx",
+					"path": "registry/optics/field.tsx",
 					"type": "registry:component",
-					"target": "components/optics/field.jsx"
+					"target": "components/optics/field.tsx"
 				}
 			]
 		},
@@ -551,9 +551,9 @@
 			"dependencies": ["react-hook-form", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/form.jsx",
+					"path": "registry/optics/form.tsx",
 					"type": "registry:component",
-					"target": "components/optics/form.jsx"
+					"target": "components/optics/form.tsx"
 				}
 			]
 		},
@@ -566,9 +566,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/grid.jsx",
+					"path": "registry/optics/grid.tsx",
 					"type": "registry:component",
-					"target": "components/optics/grid.jsx"
+					"target": "components/optics/grid.tsx"
 				}
 			]
 		},
@@ -590,9 +590,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/guided-tour.jsx",
+					"path": "registry/optics/guided-tour.tsx",
 					"type": "registry:component",
-					"target": "components/optics/guided-tour.jsx"
+					"target": "components/optics/guided-tour.tsx"
 				}
 			]
 		},
@@ -605,9 +605,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/hover-card.jsx",
+					"path": "registry/optics/hover-card.tsx",
 					"type": "registry:component",
-					"target": "components/optics/hover-card.jsx"
+					"target": "components/optics/hover-card.tsx"
 				}
 			]
 		},
@@ -625,9 +625,9 @@
 			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/input-group.jsx",
+					"path": "registry/optics/input-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input-group.jsx"
+					"target": "components/optics/input-group.tsx"
 				}
 			]
 		},
@@ -640,9 +640,9 @@
 			"dependencies": ["input-otp", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/input-otp.jsx",
+					"path": "registry/optics/input-otp.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input-otp.jsx"
+					"target": "components/optics/input-otp.tsx"
 				}
 			]
 		},
@@ -663,9 +663,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/input.jsx",
+					"path": "registry/optics/input.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input.jsx"
+					"target": "components/optics/input.tsx"
 				}
 			]
 		},
@@ -683,9 +683,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/item.jsx",
+					"path": "registry/optics/item.tsx",
 					"type": "registry:component",
-					"target": "components/optics/item.jsx"
+					"target": "components/optics/item.tsx"
 				}
 			]
 		},
@@ -703,9 +703,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/kbd.jsx",
+					"path": "registry/optics/kbd.tsx",
 					"type": "registry:component",
-					"target": "components/optics/kbd.jsx"
+					"target": "components/optics/kbd.tsx"
 				}
 			]
 		},
@@ -718,9 +718,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/label.jsx",
+					"path": "registry/optics/label.tsx",
 					"type": "registry:component",
-					"target": "components/optics/label.jsx"
+					"target": "components/optics/label.tsx"
 				}
 			]
 		},
@@ -741,9 +741,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/menubar.jsx",
+					"path": "registry/optics/menubar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/menubar.jsx"
+					"target": "components/optics/menubar.tsx"
 				}
 			]
 		},
@@ -766,9 +766,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/multi-select.jsx",
+					"path": "registry/optics/multi-select.tsx",
 					"type": "registry:component",
-					"target": "components/optics/multi-select.jsx"
+					"target": "components/optics/multi-select.tsx"
 				}
 			]
 		},
@@ -790,9 +790,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/navigation-menu.jsx",
+					"path": "registry/optics/navigation-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/navigation-menu.jsx"
+					"target": "components/optics/navigation-menu.tsx"
 				}
 			]
 		},
@@ -808,9 +808,9 @@
 			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/pagination.jsx",
+					"path": "registry/optics/pagination.tsx",
 					"type": "registry:component",
-					"target": "components/optics/pagination.jsx"
+					"target": "components/optics/pagination.tsx"
 				}
 			]
 		},
@@ -823,9 +823,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/popover.jsx",
+					"path": "registry/optics/popover.tsx",
 					"type": "registry:component",
-					"target": "components/optics/popover.jsx"
+					"target": "components/optics/popover.tsx"
 				}
 			]
 		},
@@ -838,9 +838,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/progress.jsx",
+					"path": "registry/optics/progress.tsx",
 					"type": "registry:component",
-					"target": "components/optics/progress.jsx"
+					"target": "components/optics/progress.tsx"
 				}
 			]
 		},
@@ -861,9 +861,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/radio-group.jsx",
+					"path": "registry/optics/radio-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/radio-group.jsx"
+					"target": "components/optics/radio-group.tsx"
 				}
 			]
 		},
@@ -876,9 +876,9 @@
 			"dependencies": ["react-resizable-panels", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/resizable.jsx",
+					"path": "registry/optics/resizable.tsx",
 					"type": "registry:component",
-					"target": "components/optics/resizable.jsx"
+					"target": "components/optics/resizable.tsx"
 				}
 			]
 		},
@@ -891,9 +891,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/scroll-area.jsx",
+					"path": "registry/optics/scroll-area.tsx",
 					"type": "registry:component",
-					"target": "components/optics/scroll-area.jsx"
+					"target": "components/optics/scroll-area.tsx"
 				}
 			]
 		},
@@ -914,9 +914,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/select.jsx",
+					"path": "registry/optics/select.tsx",
 					"type": "registry:component",
-					"target": "components/optics/select.jsx"
+					"target": "components/optics/select.tsx"
 				}
 			]
 		},
@@ -929,9 +929,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/separator.jsx",
+					"path": "registry/optics/separator.tsx",
 					"type": "registry:component",
-					"target": "components/optics/separator.jsx"
+					"target": "components/optics/separator.tsx"
 				}
 			]
 		},
@@ -950,9 +950,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/sheet.jsx",
+					"path": "registry/optics/sheet.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sheet.jsx"
+					"target": "components/optics/sheet.tsx"
 				}
 			]
 		},
@@ -970,9 +970,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/show-more.jsx",
+					"path": "registry/optics/show-more.tsx",
 					"type": "registry:component",
-					"target": "components/optics/show-more.jsx"
+					"target": "components/optics/show-more.tsx"
 				}
 			]
 		},
@@ -999,9 +999,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/sidebar.jsx",
+					"path": "registry/optics/sidebar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sidebar.jsx"
+					"target": "components/optics/sidebar.tsx"
 				}
 			]
 		},
@@ -1014,9 +1014,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/skeleton.jsx",
+					"path": "registry/optics/skeleton.tsx",
 					"type": "registry:component",
-					"target": "components/optics/skeleton.jsx"
+					"target": "components/optics/skeleton.tsx"
 				}
 			]
 		},
@@ -1032,9 +1032,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/slider.jsx",
+					"path": "registry/optics/slider.tsx",
 					"type": "registry:component",
-					"target": "components/optics/slider.jsx"
+					"target": "components/optics/slider.tsx"
 				}
 			]
 		},
@@ -1057,9 +1057,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/sonner.jsx",
+					"path": "registry/optics/sonner.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sonner.jsx"
+					"target": "components/optics/sonner.tsx"
 				}
 			]
 		},
@@ -1072,9 +1072,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/spinner.jsx",
+					"path": "registry/optics/spinner.tsx",
 					"type": "registry:component",
-					"target": "components/optics/spinner.jsx"
+					"target": "components/optics/spinner.tsx"
 				}
 			]
 		},
@@ -1087,9 +1087,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/star-rating.jsx",
+					"path": "registry/optics/star-rating.tsx",
 					"type": "registry:component",
-					"target": "components/optics/star-rating.jsx"
+					"target": "components/optics/star-rating.tsx"
 				}
 			]
 		},
@@ -1105,9 +1105,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/switch.jsx",
+					"path": "registry/optics/switch.tsx",
 					"type": "registry:component",
-					"target": "components/optics/switch.jsx"
+					"target": "components/optics/switch.tsx"
 				}
 			]
 		},
@@ -1120,9 +1120,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/table.jsx",
+					"path": "registry/optics/table.tsx",
 					"type": "registry:component",
-					"target": "components/optics/table.jsx"
+					"target": "components/optics/table.tsx"
 				}
 			]
 		},
@@ -1146,9 +1146,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/tabs.jsx",
+					"path": "registry/optics/tabs.tsx",
 					"type": "registry:component",
-					"target": "components/optics/tabs.jsx"
+					"target": "components/optics/tabs.tsx"
 				}
 			]
 		},
@@ -1164,9 +1164,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/textarea.jsx",
+					"path": "registry/optics/textarea.tsx",
 					"type": "registry:component",
-					"target": "components/optics/textarea.jsx"
+					"target": "components/optics/textarea.tsx"
 				}
 			]
 		},
@@ -1182,9 +1182,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/theme-switcher.jsx",
+					"path": "registry/optics/theme-switcher.tsx",
 					"type": "registry:component",
-					"target": "components/optics/theme-switcher.jsx"
+					"target": "components/optics/theme-switcher.tsx"
 				}
 			]
 		},
@@ -1201,9 +1201,9 @@
 			"dependencies": ["ms", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/timezone.jsx",
+					"path": "registry/optics/timezone.tsx",
 					"type": "registry:component",
-					"target": "components/optics/timezone.jsx"
+					"target": "components/optics/timezone.tsx"
 				}
 			]
 		},
@@ -1219,9 +1219,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/toggle-group.jsx",
+					"path": "registry/optics/toggle-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/toggle-group.jsx"
+					"target": "components/optics/toggle-group.tsx"
 				}
 			]
 		},
@@ -1239,9 +1239,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/toggle.jsx",
+					"path": "registry/optics/toggle.tsx",
 					"type": "registry:component",
-					"target": "components/optics/toggle.jsx"
+					"target": "components/optics/toggle.tsx"
 				}
 			]
 		},
@@ -1257,9 +1257,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/tooltip.jsx",
+					"path": "registry/optics/tooltip.tsx",
 					"type": "registry:component",
-					"target": "components/optics/tooltip.jsx"
+					"target": "components/optics/tooltip.tsx"
 				}
 			]
 		},
@@ -1272,9 +1272,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/lib/get-strict-context.jsx",
+					"path": "registry/optics/lib/get-strict-context.tsx",
 					"type": "registry:lib",
-					"target": "lib/get-strict-context.jsx"
+					"target": "lib/get-strict-context.tsx"
 				}
 			]
 		},
@@ -1287,9 +1287,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-controlled-state.jsx",
+					"path": "registry/optics/hooks/use-controlled-state.tsx",
 					"type": "registry:lib",
-					"target": "hooks/use-controlled-state.jsx"
+					"target": "hooks/use-controlled-state.tsx"
 				}
 			]
 		},
@@ -1302,9 +1302,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/lib/utils.js",
+					"path": "registry/optics/lib/utils.ts",
 					"type": "registry:lib",
-					"target": "lib/utils.js"
+					"target": "lib/utils.ts"
 				}
 			]
 		},
@@ -1317,9 +1317,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-auto-height.jsx",
+					"path": "registry/optics/hooks/use-auto-height.tsx",
 					"type": "registry:lib",
-					"target": "hooks/use-auto-height.jsx"
+					"target": "hooks/use-auto-height.tsx"
 				}
 			]
 		},
@@ -1332,9 +1332,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-has-primary-touch.jsx",
+					"path": "registry/optics/hooks/use-has-primary-touch.tsx",
 					"type": "registry:lib",
-					"target": "hooks/use-has-primary-touch.jsx"
+					"target": "hooks/use-has-primary-touch.tsx"
 				}
 			]
 		},
@@ -1347,9 +1347,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/effects/highlight.jsx",
+					"path": "registry/optics/helpers/primitives/effects/highlight.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/effects/highlight.jsx"
+					"target": "components/optics/helpers/primitives/effects/highlight.tsx"
 				}
 			]
 		},
@@ -1365,9 +1365,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/effects/auto-height.jsx",
+					"path": "registry/optics/helpers/primitives/effects/auto-height.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/effects/auto-height.jsx"
+					"target": "components/optics/helpers/primitives/effects/auto-height.tsx"
 				}
 			]
 		},
@@ -1380,9 +1380,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/animate/slot.jsx",
+					"path": "registry/optics/helpers/primitives/animate/slot.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/animate/slot.jsx"
+					"target": "components/optics/helpers/primitives/animate/slot.tsx"
 				}
 			]
 		},

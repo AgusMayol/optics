@@ -1,0 +1,326 @@
+"use client";
+
+import * as React from "react";
+import { Tabs as BaseTabs } from "@base-ui/react/tabs";
+import { motion, AnimatePresence } from "motion/react";
+
+import {
+	Highlight,
+	HighlightItem,
+} from "@/registry/optics/helpers/primitives/effects/highlight";
+import { AutoHeight } from "@/registry/optics/helpers/primitives/effects/auto-height";
+import { getStrictContext } from "@/registry/optics/lib/get-strict-context";
+import { useControlledState } from "@/registry/optics/hooks/use-controlled-state";
+import { cn } from "@/registry/optics/lib/utils";
+
+type TabsRootProps = React.ComponentProps<typeof BaseTabs.Root>;
+type TabsRootValue = string | null | undefined;
+type MotionDivProps = React.ComponentPropsWithoutRef<typeof motion.div>;
+type TabsListProps = Omit<
+	React.ComponentProps<typeof BaseTabs.List>,
+	"className"
+> & {
+	className?: string;
+	variant?: TabsVariant;
+};
+type TabsTabProps = Omit<
+	React.ComponentProps<typeof BaseTabs.Tab>,
+	"className" | "value" | "children"
+> & {
+	className?: string;
+	value: string;
+	children?: React.ReactNode;
+};
+type TabsPanelProps = Omit<
+	React.ComponentProps<typeof BaseTabs.Panel>,
+	"className" | "render" | "children" | keyof MotionDivProps
+> &
+	Omit<MotionDivProps, "transition"> & {
+		className?: string;
+		children?: React.ReactNode;
+		value?: string;
+		transition?: React.ComponentProps<typeof motion.div>["transition"];
+	};
+type TabsChangeDetails = Parameters<
+	NonNullable<TabsRootProps["onValueChange"]>
+>[1];
+type TabsContextValue = {
+	value: string | null | undefined;
+	setValue: (nextValue: string, eventDetails: TabsChangeDetails) => void;
+};
+type TabsVariant = "default" | "outline" | "underline";
+type TabsVariantContextValue = {
+	variant: TabsVariant;
+};
+type TabsPanelsProps = Omit<MotionDivProps, "children" | "transition"> & {
+	children?: React.ReactNode;
+	mode?: "auto-height" | "layout";
+	transition?: React.ComponentProps<typeof motion.div>["transition"];
+};
+
+// --- Internal Primitive Logic ---
+
+const [TabsProvider, useTabs] =
+	getStrictContext<TabsContextValue>("TabsContext");
+
+const [TabsVariantProvider, useTabsVariant] =
+	getStrictContext<TabsVariantContextValue>("TabsVariantContext");
+
+function PrimitiveTabs({
+	value: controlledValue,
+	defaultValue,
+	onValueChange,
+	...props
+}: Omit<TabsRootProps, "value" | "defaultValue" | "onValueChange"> & {
+	value?: TabsRootValue;
+	defaultValue?: TabsRootValue;
+	onValueChange?: (value: string, eventDetails: TabsChangeDetails) => void;
+}) {
+	const [value, setValue] = useControlledState({
+		value: controlledValue ?? undefined,
+		defaultValue: defaultValue ?? undefined,
+		onChange: onValueChange,
+	});
+
+	return (
+		<TabsProvider value={{ value, setValue }}>
+			<BaseTabs.Root
+				data-slot="tabs"
+				{...props}
+				onValueChange={setValue}
+				value={value}
+			/>
+		</TabsProvider>
+	);
+}
+
+function PrimitiveTabsHighlight({
+	transition = { type: "spring", stiffness: 200, damping: 25 },
+	...props
+}: Omit<React.ComponentProps<typeof Highlight>, "transition" | "value"> & {
+	transition?: React.ComponentProps<typeof Highlight>["transition"];
+}) {
+	const { value } = useTabs();
+
+	return (
+		<Highlight
+			data-slot="tabs-highlight"
+			controlledItems
+			value={value}
+			transition={transition}
+			click={false}
+			{...props}
+		/>
+	);
+}
+
+function PrimitiveTabsList(props: React.ComponentProps<typeof BaseTabs.List>) {
+	return <BaseTabs.List data-slot="tabs-list" {...props} />;
+}
+
+function PrimitiveTabsHighlightItem(
+	props: React.ComponentProps<typeof HighlightItem>,
+) {
+	return <HighlightItem data-slot="tabs-highlight-item" {...props} />;
+}
+
+function PrimitiveTabsTab(props: React.ComponentProps<typeof BaseTabs.Tab>) {
+	return <BaseTabs.Tab data-slot="tabs-tab" {...props} />;
+}
+
+function PrimitiveTabsPanel({
+	value = "",
+	keepMounted = false,
+	transition = { duration: 0.5, ease: "easeInOut" },
+	...props
+}: TabsPanelProps) {
+	return (
+		<AnimatePresence mode="wait">
+			<BaseTabs.Panel
+				render={
+					<motion.div
+						data-slot="tabs-panel"
+						layout
+						layoutDependency={value}
+						initial={{ opacity: 0, filter: "blur(4px)" }}
+						animate={{ opacity: 1, filter: "blur(0px)" }}
+						exit={{ opacity: 0, filter: "blur(4px)" }}
+						transition={transition}
+						{...props}
+					/>
+				}
+				keepMounted={keepMounted}
+				value={value}
+			/>
+		</AnimatePresence>
+	);
+}
+
+const defaultTransition: React.ComponentProps<typeof motion.div>["transition"] =
+	{
+		type: "spring",
+		stiffness: 200,
+		damping: 30,
+	};
+
+function isAutoMode(props: TabsPanelsProps) {
+	return !props.mode || props.mode === "auto-height";
+}
+
+function PrimitiveTabsPanels(props: TabsPanelsProps) {
+	const { value } = useTabs();
+
+	if (isAutoMode(props)) {
+		const {
+			children = null,
+			transition = defaultTransition,
+			...autoProps
+		} = props;
+
+		return (
+			<AutoHeight
+				data-slot="tabs-panels"
+				deps={[value]}
+				transition={
+					transition as React.ComponentProps<typeof motion.div>["transition"]
+				}
+				{...autoProps}
+			>
+				<React.Fragment key={value}>{children}</React.Fragment>
+			</AutoHeight>
+		);
+	}
+
+	const {
+		children = null,
+		style = {},
+		transition = defaultTransition,
+		...layoutProps
+	} = props;
+
+	return (
+		<motion.div
+			data-slot="tabs-panels"
+			layout="size"
+			layoutDependency={value}
+			transition={{
+				layout: transition as React.ComponentProps<
+					typeof motion.div
+				>["transition"],
+			}}
+			style={{ overflow: "hidden", ...style }}
+			{...layoutProps}
+		>
+			<React.Fragment key={value}>{children}</React.Fragment>
+		</motion.div>
+	);
+}
+
+// --- User-Facing Components ---
+
+function Tabs({
+	className = "",
+	...props
+}: Omit<
+	TabsRootProps,
+	"className" | "value" | "defaultValue" | "onValueChange"
+> & {
+	className?: string;
+	value?: TabsRootValue;
+	defaultValue?: TabsRootValue;
+	onValueChange?: (value: string, eventDetails: TabsChangeDetails) => void;
+}) {
+	return (
+		<PrimitiveTabs
+			className={cn("flex flex-col gap-2", className)}
+			{...props}
+		/>
+	);
+}
+
+function TabsList({
+	className = "",
+	variant = "default",
+	...props
+}: TabsListProps) {
+	const highlightStyles = {
+		default:
+			"absolute z-0 inset-0 border border-transparent rounded-md bg-background dark:border-input dark:bg-input/30 shadow-sm",
+		outline:
+			"absolute z-0 inset-0 border rounded-md dark:border-input dark:bg-input/30",
+		underline: "absolute z-0 -bottom-0.25 left-0 right-0 h-0.5 bg-foreground",
+	};
+
+	const listStyles = {
+		default:
+			"bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]",
+		outline:
+			"bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]",
+		underline:
+			"inline-flex h-9 w-fit items-center justify-center gap-1 border-b border-border",
+	};
+
+	return (
+		<TabsVariantProvider value={{ variant }}>
+			<PrimitiveTabsHighlight className={highlightStyles[variant]}>
+				<PrimitiveTabsList
+					className={cn(listStyles[variant], className)}
+					{...props}
+				/>
+			</PrimitiveTabsHighlight>
+		</TabsVariantProvider>
+	);
+}
+
+function TabsTab({ className = "", value, ...props }: TabsTabProps) {
+	const { variant } = useTabsVariant();
+
+	const triggerStyles = {
+		default:
+			"data-[selected]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md w-full px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors duration-500 ease-in-out focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+		outline:
+			"data-[selected]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md w-full px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors duration-500 ease-in-out focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+		underline:
+			"data-[selected]:text-foreground text-muted-foreground inline-flex h-full flex-1 items-center justify-center gap-1.5 w-full px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+	};
+
+	return (
+		<PrimitiveTabsHighlightItem value={value} className="flex-1">
+			<PrimitiveTabsTab
+				value={value}
+				className={cn(triggerStyles[variant], className)}
+				{...props}
+			/>
+		</PrimitiveTabsHighlightItem>
+	);
+}
+
+// Aliases for backward compatibility
+const TabsTrigger = TabsTab;
+const TabsPanels = PrimitiveTabsPanels; // Original name was TabsPanels in previous version, but let's keep it consistent
+const TabsContents = PrimitiveTabsPanels;
+const TabsPanel = ({ className = "", ...props }: TabsPanelProps) => (
+	<PrimitiveTabsPanel
+		className={cn("flex-1 outline-none", className)}
+		{...props}
+	/>
+);
+const TabsContent = TabsPanel;
+
+Tabs.displayName = "Tabs";
+TabsList.displayName = "TabsList";
+TabsTab.displayName = "TabsTab";
+TabsTrigger.displayName = "TabsTrigger";
+TabsPanel.displayName = "TabsPanel";
+TabsContent.displayName = "TabsContent";
+
+export {
+	Tabs,
+	TabsList,
+	TabsTab,
+	TabsTrigger,
+	TabsPanels,
+	TabsContents,
+	TabsPanel,
+	TabsContent,
+};

@@ -1,6 +1,6 @@
 # AgusMayol's Optics - Design System for Modern Web Apps
 
-AgusMayol's Optics: A comprehensive design system and component registry for building accessible, modern web applications with React, Next.js, and Tailwind CSS.
+AgusMayol's Optics: A comprehensive TypeScript-first design system and component registry for building accessible, modern web applications with React, Next.js, and Tailwind CSS.
 
 ## Overview
 [AgusMayol's Optics](https://optics.agusmayol.com.ar/): This is the main entry point for the design system, providing an overview of its purpose and features.

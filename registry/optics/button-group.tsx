@@ -1,0 +1,115 @@
+import * as React from "react";
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
+import { cva } from "class-variance-authority";
+import { buttonVariants } from "@/registry/optics/button";
+import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/optics/separator";
+
+const buttonGroupVariants = cva(
+	"has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md flex w-fit items-stretch [&>*]:focus-visible:z-10 [&>*]:focus-visible:relative [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
+	{
+		variants: {
+			orientation: {
+				horizontal:
+					"[&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-md! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0 [&>[data-slot]]:rounded-r-none",
+				vertical:
+					"[&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-md! flex-col [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0 [&>[data-slot]]:rounded-b-none",
+			},
+		},
+		defaultVariants: {
+			orientation: "horizontal",
+		},
+	},
+);
+
+type ButtonVariantOptions = NonNullable<Parameters<typeof buttonVariants>[0]>;
+type ButtonGroupOrientation = "horizontal" | "vertical";
+
+type ButtonGroupProps = React.ComponentProps<"div"> & {
+	orientation?: ButtonGroupOrientation;
+};
+
+type ButtonGroupTextProps = React.ComponentPropsWithoutRef<"div"> & {
+	render?: Parameters<typeof useRender>[0]["render"];
+	variant?: ButtonVariantOptions["variant"];
+	size?: ButtonVariantOptions["size"];
+	animation?: ButtonVariantOptions["animation"];
+	className?: string;
+};
+
+type ButtonGroupSeparatorProps = React.ComponentProps<typeof Separator> & {
+	orientation?: ButtonGroupOrientation;
+};
+
+function ButtonGroup({
+	className = "",
+	orientation = "horizontal",
+	...props
+}: ButtonGroupProps) {
+	return (
+		<div
+			role="group"
+			data-slot="button-group"
+			data-orientation={orientation}
+			className={cn(buttonGroupVariants({ orientation }), className)}
+			{...props}
+		/>
+	);
+}
+
+function ButtonGroupText({
+	className = "",
+	render = undefined,
+	variant,
+	size,
+	animation,
+	...props
+}: ButtonGroupTextProps) {
+	return useRender({
+		defaultTagName: "div",
+		props: mergeProps(
+			{
+				className: cn(
+					"bg-muted gap-2 rounded-md border px-2.5 text-xs/relaxed font-medium [&_svg:not([class*='size-'])]:size-4 flex items-center [&_svg]:pointer-events-none",
+					variant && buttonVariants({ variant, size, animation }),
+					className,
+				),
+			},
+			props,
+		),
+		render,
+		state: {
+			slot: "button-group-text",
+		},
+	});
+}
+
+function ButtonGroupSeparator({
+	className = "",
+	orientation = "vertical",
+	...props
+}: ButtonGroupSeparatorProps) {
+	return (
+		<Separator
+			data-slot="button-group-separator"
+			orientation={orientation}
+			className={cn(
+				"bg-input relative self-stretch data-[orientation=horizontal]:mx-px data-[orientation=horizontal]:w-auto data-[orientation=vertical]:my-px data-[orientation=vertical]:h-auto",
+				className,
+			)}
+			{...props}
+		/>
+	);
+}
+
+ButtonGroup.displayName = "ButtonGroup";
+ButtonGroupText.displayName = "ButtonGroupText";
+ButtonGroupSeparator.displayName = "ButtonGroupSeparator";
+
+export {
+	ButtonGroup,
+	ButtonGroupSeparator,
+	ButtonGroupText,
+	buttonGroupVariants,
+};

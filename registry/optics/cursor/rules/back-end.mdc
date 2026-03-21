@@ -9,16 +9,16 @@ alwaysApply: false
 
 Expert in Node.js, Express, Next.js API Routes, Server Actions, Route Handlers, Fastify, Prisma, Drizzle.
 
-Use JavaScript by default. Use TypeScript when explicitly requested or when project requires it.
+Use TypeScript by default. Reach for JavaScript only when the user explicitly requests it or when a runtime or tool requires it.
 
 For monolithic Next.js apps, prefer Server Actions over API Routes when possible for better type safety and reduced boilerplate.
 
 ## Next.js Backend Patterns
 
 Server Actions are the preferred way to handle mutations in Next.js 16:
-```javascript
+```ts
 'use server'
-export async function createUser(formData) {
+export async function createUser(formData: FormData) {
   // Validate, process, return result
 }
 ```
@@ -44,7 +44,7 @@ Return structured error responses with appropriate HTTP status codes and message
 Create custom error classes for different error types (ValidationError, AuthError, NotFoundError).
 
 Good:
-```javascript
+```ts
 try {
   const user = await db.user.findUnique({ where: { id } })
   if (!user) throw new NotFoundError('User not found')
@@ -64,7 +64,7 @@ Log errors properly with context (user ID, request ID, timestamp) but never expo
 Validate all incoming data at the entry point. Never trust client input.
 
 Use validation libraries like Zod or Yup for schema validation:
-```javascript
+```ts
 const userSchema = z.object({
   email: z.string().email(),
   age: z.number().min(18)
@@ -90,11 +90,11 @@ Implement authorization checks at the business logic level, not just at the rout
 
 Use JWT tokens, session cookies, or OAuth depending on requirements.
 
-In Next.js, use middleware or Server Actions for auth checks:
-```javascript
+In Next.js, use `proxy.ts`, Route Handlers, or Server Actions for auth checks:
+```ts
 import { auth } from '@/lib/auth'
 
-export async function deletePost(postId) {
+export async function deletePost(postId: string) {
   'use server'
   const session = await auth()
   if (!session) throw new AuthError('Unauthorized')
@@ -141,7 +141,7 @@ Include context in logs: request ID, user ID, timestamp, relevant data.
 Never log sensitive information (passwords, tokens, credit cards, PII).
 
 Good:
-```javascript
+```ts
 logger.info('User created', { 
   userId: user.id, 
   requestId: req.id,
@@ -175,7 +175,7 @@ Use status codes correctly and consistently:
 Return consistent response structures across all endpoints.
 
 Good:
-```javascript
+```ts
 // Success
 { data: { user: {...} }, success: true }
 
@@ -200,12 +200,12 @@ Organize code by feature or domain, not by technical role:
 ```
 /features
   /users
-    user.service.js
-    user.controller.js
-    user.validation.js
+    user.service.ts
+    user.controller.ts
+    user.validation.ts
   /posts
-    post.service.js
-    post.controller.js
+    post.service.ts
+    post.controller.ts
 ```
 
 Separate concerns clearly:
@@ -218,15 +218,15 @@ Separate concerns clearly:
 Keep controllers thin. Move business logic to services.
 
 Good:
-```javascript
+```ts
 // Controller
-export async function createUser(req, res) {
+export async function createUser(req: Request, res: Response) {
   const result = await userService.create(req.body)
   return res.status(201).json(result)
 }
 
 // Service
-export async function create(userData) {
+export async function create(userData: CreateUserInput) {
   // Business logic here
   return await db.user.create({ data: userData })
 }
@@ -270,7 +270,7 @@ Return appropriate resource representations after mutations (created/updated res
 Use environment variables for configuration. Never hardcode credentials or URLs.
 
 Validate required environment variables at startup:
-```javascript
+```ts
 const requiredEnvVars = ['DATABASE_URL', 'JWT_SECRET']
 requiredEnvVars.forEach(key => {
   if (!process.env[key]) {
@@ -338,7 +338,7 @@ Keep functions small. If over 30-40 lines, consider refactoring.
 ## Deployment Considerations
 
 Use health check endpoints for monitoring:
-```javascript
+```ts
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date() })
 })

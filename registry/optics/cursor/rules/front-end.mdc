@@ -7,9 +7,9 @@ alwaysApply: false
 
 ## Languages and Frameworks
 
-Expert in React, Next.js, JavaScript, TypeScript, HTML, CSS, TailwindCSS, Shadcn, Base UI.
+Expert in React, Next.js, TypeScript, HTML, CSS, TailwindCSS, Shadcn, Base UI.
 
-Use JavaScript by default. Use TypeScript when explicitly requested or when the project already uses it.
+Use TypeScript by default. Reach for JavaScript only when the user explicitly requests it or when a tool requires it.
 
 Prioritize TailwindCSS utility classes for styling. Avoid separate CSS files for component-specific styles. Use CSS modules or global styles only for truly global definitions.
 
@@ -34,15 +34,19 @@ React 19.2 features: View Transitions, useEffectEvent, and Activity component.
 Use function declarations for React components. Use arrow functions for callbacks and inline functions.
 
 Good:
-```javascript
-function UserProfile({ user }) {
+```tsx
+type UserProfileProps = {
+  user: { name: string }
+}
+
+function UserProfile({ user }: UserProfileProps) {
   return <div>...</div>
 }
 ```
 
 Avoid:
-```javascript
-const UserProfile = ({ user }) => {...}
+```tsx
+const UserProfile = ({ user }: UserProfileProps) => {...}
 ```
 
 Name functions based on what they do, not the event they respond to. Be specific and semantic.
@@ -63,7 +67,7 @@ Group related state together. Use objects for related values or useReducer for c
 Keep state as local as possible. Lift state only when multiple components need to share it.
 
 Use state updater functions when new state depends on previous state:
-```javascript
+```ts
 setCount(prev => prev + 1)
 ```
 
@@ -82,7 +86,7 @@ Check for `typeof window !== 'undefined'` before accessing browser APIs in compo
 ## Caching in Next.js 16
 
 Use "use cache" directive for explicit caching of pages, components, or functions:
-```javascript
+```ts
 'use cache'
 export async function getProducts() {
   // This will be cached
@@ -134,7 +138,7 @@ Validate input on both client and server. Provide immediate feedback on validati
 Keep components focused and single-purpose. If a component does more than one thing, split it.
 
 Use early returns to handle edge cases and reduce nesting:
-```javascript
+```tsx
 if (!user) return <LoginPrompt />
 if (isLoading) return <Spinner />
 return <UserDashboard user={user} />
@@ -147,17 +151,17 @@ Avoid prop drilling. Use composition, context, or state management libraries for
 ## Conditional Rendering and Styling
 
 Use logical AND (&&) for simple conditionals:
-```javascript
+```tsx
 {isVisible && <Component />}
 ```
 
 Use ternary operators for if-else rendering:
-```javascript
+```tsx
 {isLoading ? <Spinner /> : <Content />}
 ```
 
 For conditional Tailwind classes, use clsx or cn utility:
-```javascript
+```tsx
 import { cn } from '@/lib/utils'
 className={cn("base-classes", isActive && "active-classes")}
 ```
@@ -165,7 +169,7 @@ className={cn("base-classes", isActive && "active-classes")}
 ## Performance Optimization
 
 Use React.lazy and dynamic imports for code splitting:
-```javascript
+```tsx
 const HeavyComponent = lazy(() => import('./HeavyComponent'))
 ```
 

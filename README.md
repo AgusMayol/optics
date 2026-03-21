@@ -1,6 +1,6 @@
 # Optics
 
-A modern component library and documentation site built with Next.js, React, and Tailwind CSS.
+A TypeScript-first component library and documentation site built with Next.js, React, and Tailwind CSS.
 
 ## Overview
 
@@ -11,7 +11,7 @@ Optics provides a comprehensive collection of reusable UI components, hooks, and
 - 60+ customizable UI components
 - Built with Tailwind CSS v4
 - Fully accessible components based on Base UI
-- TypeScript support
+- Fully typed components, hooks, and utilities
 - Dark mode support
 - Component registry compatible with shadcn CLI
 
@@ -33,6 +33,13 @@ bun dev
 
 ```bash
 bun build
+```
+
+### Checks
+
+```bash
+bun run check-types
+bun run lint
 ```
 
 ## Tech Stack
