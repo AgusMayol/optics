@@ -42,7 +42,7 @@
 			"dependsOn": ["sync:sources"],
 			"cache": true,
 			"inputs": [
-				"scripts/extract-props.js",
+				"scripts/extract-props.ts",
 				"registry/optics/**/*.{jsx,tsx,js,ts}",
 				"tsconfig.json",
 				"package.json"
@@ -63,9 +63,8 @@
 		"sync:sources": {
 			"cache": true,
 			"inputs": [
-				"registry/optics/**/*.jsx",
-				"registry/optics/**/*.js",
-				"scripts/sync-source-files.js"
+				"registry/optics/**/*.{ts,tsx,js,jsx,mdc}",
+				"scripts/sync-source-files.ts"
 			],
 			"outputs": ["registry/optics/dist/**/*.txt"]
 		}

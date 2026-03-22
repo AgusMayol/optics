@@ -14,8 +14,8 @@
 		"turbo:build": "turbo run build",
 		"turbo:lint": "turbo run lint",
 		"registry:build": "shadcn build",
-		"sync:sources": "bun --bun scripts/sync-source-files.js",
-		"extract-props": "bun --bun scripts/extract-props.js",
+		"sync:sources": "bun --bun scripts/sync-source-files.ts",
+		"extract-props": "bun --bun scripts/extract-props.ts",
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {

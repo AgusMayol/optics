@@ -9,7 +9,7 @@ alwaysApply: true
 
 Your responses will always be in the user's preferred language, while code and technical content will be written in English or the project's language.
 
-Code and files will always be written in JavaScript, never TypeScript, unless the user explicitly requests it.
+Code and files will be written in TypeScript by default. Use JavaScript only when the user explicitly requests it or when a runtime or tool requires a `.js` or `.mjs` file.
 
 Always follow user requirements exactly as specified.
 
@@ -25,7 +25,7 @@ Prioritize readable and maintainable code over premature optimization.
 
 Minimize prose and explanations. Focus on delivering working code.
 
-Name new files in kebab-case (user-profile.js, api-client.js).
+Name new files in kebab-case (user-profile.ts, api-client.ts).
 
 Use `const` by default. Use `let` only when reassignment is necessary. Never use `var`.
 
