@@ -4,7 +4,7 @@ import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import {
 	Card,
 	CardHeader,
@@ -51,11 +51,11 @@ const semanticHTMLCode = [
           </ul>
         </nav>
       </header>
-      
+
       <main id="main-content">
         {children}
       </main>
-      
+
       <footer>
         <p>&copy; 2024 Your Company. All rights reserved.</p>
       </footer>
@@ -103,9 +103,9 @@ const accessibleButtonCode = [
 		filename: "app/components/Button.jsx",
 		code: `"use client";
 
-export function Button({ 
-  children, 
-  onClick, 
+export function Button({
+  children,
+  onClick,
   disabled = false,
   ariaLabel,
   ariaDescribedBy,
@@ -150,7 +150,7 @@ import { useState } from "react";
 export function AccessibleForm() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.includes("@")) {
@@ -159,7 +159,7 @@ export function AccessibleForm() {
     }
     // Submit form
   };
-  
+
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div>
@@ -183,7 +183,7 @@ export function AccessibleForm() {
           </p>
         )}
       </div>
-      
+
       <button
         type="submit"
         className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-md"
@@ -256,18 +256,18 @@ import { useState } from "react";
 
 export function NotificationSystem() {
   const [message, setMessage] = useState("");
-  
+
   const notify = (text) => {
     setMessage(text);
     setTimeout(() => setMessage(""), 5000);
   };
-  
+
   return (
     <div>
       <button onClick={() => notify("Item added to cart")}>
         Add to Cart
       </button>
-      
+
       {/* Live region for screen readers */}
       <div
         role="status"
@@ -277,7 +277,7 @@ export function NotificationSystem() {
       >
         {message}
       </div>
-      
+
       {/* Visual notification */}
       {message && (
         <div className="fixed bottom-4 right-4 p-4 bg-primary text-primary-foreground rounded-md">
@@ -301,24 +301,24 @@ export function KeyboardMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const menuRef = useRef(null);
-  
+
   const menuItems = [
     { label: "Profile", href: "/profile" },
     { label: "Settings", href: "/settings" },
     { label: "Logout", href: "/logout" },
   ];
-  
+
   const handleKeyDown = (e) => {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setFocusedIndex((prev) => 
+        setFocusedIndex((prev) =>
           prev < menuItems.length - 1 ? prev + 1 : 0
         );
         break;
       case "ArrowUp":
         e.preventDefault();
-        setFocusedIndex((prev) => 
+        setFocusedIndex((prev) =>
           prev > 0 ? prev - 1 : menuItems.length - 1
         );
         break;
@@ -335,7 +335,7 @@ export function KeyboardMenu() {
         break;
     }
   };
-  
+
   return (
     <div>
       <button
@@ -346,7 +346,7 @@ export function KeyboardMenu() {
       >
         Menu
       </button>
-      
+
       {isOpen && (
         <ul
           id="menu"
@@ -386,15 +386,15 @@ import { createPortal } from "react-dom";
 export function AccessibleModal({ isOpen, onClose, title, children }) {
   const modalRef = useRef(null);
   const previousFocusRef = useRef(null);
-  
+
   useEffect(() => {
     if (isOpen) {
       // Store the currently focused element
       previousFocusRef.current = document.activeElement;
-      
+
       // Focus the modal
       modalRef.current?.focus();
-      
+
       // Trap focus within modal
       const handleTabKey = (e) => {
         const focusableElements = modalRef.current?.querySelectorAll(
@@ -402,7 +402,7 @@ export function AccessibleModal({ isOpen, onClose, title, children }) {
         );
         const firstElement = focusableElements?.[0];
         const lastElement = focusableElements?.[focusableElements.length - 1];
-        
+
         if (e.key === "Tab") {
           if (e.shiftKey && document.activeElement === firstElement) {
             e.preventDefault();
@@ -413,9 +413,9 @@ export function AccessibleModal({ isOpen, onClose, title, children }) {
           }
         }
       };
-      
+
       document.addEventListener("keydown", handleTabKey);
-      
+
       return () => {
         document.removeEventListener("keydown", handleTabKey);
         // Restore focus when modal closes
@@ -423,9 +423,9 @@ export function AccessibleModal({ isOpen, onClose, title, children }) {
       };
     }
   }, [isOpen]);
-  
+
   if (!isOpen) return null;
-  
+
   return createPortal(
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center"
@@ -443,9 +443,9 @@ export function AccessibleModal({ isOpen, onClose, title, children }) {
         <h2 id="modal-title" className="text-xl font-bold mb-4">
           {title}
         </h2>
-        
+
         {children}
-        
+
         <button
           onClick={onClose}
           className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-md"
@@ -474,10 +474,10 @@ const colorContrastCode = [
   /* Good contrast examples */
   --primary: 220 13% 13%;        /* Dark blue - passes AA */
   --primary-foreground: 0 0% 100%; /* White - passes AAA */
-  
+
   --secondary: 220 13% 91%;      /* Light blue - passes AA */
   --secondary-foreground: 220 13% 13%; /* Dark blue - passes AAA */
-  
+
   /* Focus indicators must be visible */
   --ring: 220 13% 50%;
   --ring-offset: 0 0% 100%;
@@ -506,7 +506,7 @@ import { Menu, X } from "lucide-react";
 
 export function ResponsiveNav() {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <nav aria-label="Main navigation">
       {/* Mobile menu button */}
@@ -523,14 +523,14 @@ export function ResponsiveNav() {
           <Menu aria-hidden="true" />
         )}
       </button>
-      
+
       {/* Desktop navigation */}
       <ul className="hidden md:flex gap-4">
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
-      
+
       {/* Mobile navigation */}
       {isOpen && (
         <ul id="mobile-menu" className="md:hidden">
@@ -585,13 +585,13 @@ const nextConfigA11yCode = [
 const nextConfig = {
   // Enable React strict mode for better accessibility warnings
   reactStrictMode: true,
-  
+
   // Configure i18n for language support
   i18n: {
     locales: ['en', 'es', 'fr'],
     defaultLocale: 'en',
   },
-  
+
   // Image optimization maintains aspect ratios and supports alt text
   images: {
     domains: ['yourdomain.com'],

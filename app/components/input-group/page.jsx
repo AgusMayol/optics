@@ -18,8 +18,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<div className="w-full max-w-sm">
 		<InputGroup variant="raised">

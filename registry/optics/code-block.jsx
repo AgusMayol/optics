@@ -552,9 +552,9 @@ export const CodeBlockCopyButton = ({
 			render:
 				typeof render === "function"
 					? (props, state) => {
-						const mergedProps = mergeProps("button", defaultProps, props);
-						return render(mergedProps, { isCopied, isLoading, ...state });
-					}
+							const mergedProps = mergeProps("button", defaultProps, props);
+							return render(mergedProps, { isCopied, isLoading, ...state });
+						}
 					: render,
 			props: mergeProps("button", defaultProps, props),
 			state: {
@@ -778,4 +778,3 @@ CodeBlockCopyButton.displayName = "CodeBlockCopyButton";
 CodeBlockBody.displayName = "CodeBlockBody";
 CodeBlockItem.displayName = "CodeBlockItem";
 CodeBlockContent.displayName = "CodeBlockContent";
-

@@ -13,18 +13,12 @@ const componentFiles = [
 	},
 ];
 
-const demoComponent = (
-	<DatePicker
-		placeholder="Pick a date"
-		variant="raised"
-	/>
-);
+const demoComponent = <DatePicker placeholder="Pick a date" variant="raised" />;
 
 const componentConfig = {
 	header: {
 		title: "Date Picker",
-		description:
-			"A date picker component built with Calendar and Popover.",
+		description: "A date picker component built with Calendar and Popover.",
 		href: "https://ui.shadcn.com/docs/components/date-picker",
 		hrefText: "shadcn/ui",
 	},

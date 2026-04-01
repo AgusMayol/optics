@@ -13,8 +13,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<ToggleGroup type="multiple">
 		<ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -51,9 +49,5 @@ import { Bold, Italic, Underline } from "lucide-react";`,
 };
 
 export default function Page() {
-	return (
-		<ComponentConfig config={componentConfig}>
-			{null}
-		</ComponentConfig>
-	);
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

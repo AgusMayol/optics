@@ -207,7 +207,6 @@ function CarouselNext({
 	);
 }
 
-
 Carousel.displayName = "Carousel";
 CarouselContent.displayName = "CarouselContent";
 CarouselItem.displayName = "CarouselItem";
@@ -222,4 +221,3 @@ export {
 	CarouselNext,
 	useCarousel,
 };
-

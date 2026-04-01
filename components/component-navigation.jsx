@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";

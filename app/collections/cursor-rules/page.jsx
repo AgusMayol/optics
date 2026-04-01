@@ -36,7 +36,7 @@ import {
 import { ScrollArea, ScrollBar } from "@/registry/optics/scroll-area";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight, AlertCircle } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import * as React from "react";
 import { Alert, AlertTitle, AlertDescription } from "@/registry/optics/alert";
 

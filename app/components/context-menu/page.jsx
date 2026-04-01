@@ -26,10 +26,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<ContextMenu>
 		<ContextMenuTrigger>
@@ -53,9 +49,7 @@ const demoComponent = (
 				<ContextMenuShortcut>⌘R</ContextMenuShortcut>
 			</ContextMenuItem>
 			<ContextMenuSub>
-				<ContextMenuSubTrigger inset>
-					More Tools
-				</ContextMenuSubTrigger>
+				<ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
 				<ContextMenuSubContent className="w-44">
 					<ContextMenuItem>Save Page...</ContextMenuItem>
 					<ContextMenuItem>Create Shortcut...</ContextMenuItem>
@@ -63,25 +57,17 @@ const demoComponent = (
 					<ContextMenuSeparator />
 					<ContextMenuItem>Developer Tools</ContextMenuItem>
 					<ContextMenuSeparator />
-					<ContextMenuItem variant="destructive">
-						Delete
-					</ContextMenuItem>
+					<ContextMenuItem variant="destructive">Delete</ContextMenuItem>
 				</ContextMenuSubContent>
 			</ContextMenuSub>
 			<ContextMenuSeparator />
-			<ContextMenuCheckboxItem checked>
-				Show Bookmarks
-			</ContextMenuCheckboxItem>
+			<ContextMenuCheckboxItem checked>Show Bookmarks</ContextMenuCheckboxItem>
 			<ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
 			<ContextMenuSeparator />
 			<ContextMenuRadioGroup value="pedro">
 				<ContextMenuLabel inset>People</ContextMenuLabel>
-				<ContextMenuRadioItem value="pedro">
-					Pedro Duarte
-				</ContextMenuRadioItem>
-				<ContextMenuRadioItem value="colm">
-					Colm Tuite
-				</ContextMenuRadioItem>
+				<ContextMenuRadioItem value="pedro">Pedro Duarte</ContextMenuRadioItem>
+				<ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
 			</ContextMenuRadioGroup>
 		</ContextMenuContent>
 	</ContextMenu>

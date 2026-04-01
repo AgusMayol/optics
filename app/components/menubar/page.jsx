@@ -26,8 +26,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<Menubar>
 		<MenubarMenu>

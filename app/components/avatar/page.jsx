@@ -75,8 +75,7 @@ const demoComponent = (
 const componentConfig = {
 	header: {
 		title: "Avatar",
-		description:
-			"An image element with a fallback for representing the user.",
+		description: "An image element with a fallback for representing the user.",
 		href: "https://ui.shadcn.com/docs/components/avatar",
 		hrefText: "shadcn/ui",
 	},

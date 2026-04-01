@@ -11,7 +11,7 @@ import {
 	navigationMenuTriggerStyle,
 } from "@/registry/optics/navigation-menu";
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 
 import componentCode from "@/registry/optics/dist/navigation-menu.jsx.txt";
 import generatedProps from "@/registry/optics/dist/navigation-menu.json";
@@ -236,7 +236,7 @@ export default function Page() {
 			children: demoComponent,
 			imports: `import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/optics/navigation-menu";
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link";;
 
 function ListItem({ title, children, href, ...props }) {
 	return (

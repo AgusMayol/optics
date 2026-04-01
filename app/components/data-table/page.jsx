@@ -48,7 +48,6 @@ const columns = [
 	},
 ];
 
-
 const demoComponent = <DataTable columns={columns} data={paymentData} />;
 
 const componentConfig = {

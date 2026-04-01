@@ -39,8 +39,6 @@ const chartConfig = {
 	},
 };
 
-
-
 const demoComponent = (
 	<ChartContainer config={chartConfig} className="w-full max-w-4xl">
 		<LineChart data={data} margin={{ left: 8, right: 8 }}>
@@ -124,4 +122,3 @@ const chartConfig = {
 export default function Page() {
 	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }
-

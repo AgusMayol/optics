@@ -17,19 +17,9 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<HoverCard>
-		<HoverCardTrigger
-			render={
-				<Button variant="raised">
-					@nextjs
-				</Button>
-			}
-		/>
+		<HoverCardTrigger render={<Button variant="raised">@nextjs</Button>} />
 		<HoverCardContent>
 			<div className="flex justify-between space-x-4">
 				<div className="space-y-1">

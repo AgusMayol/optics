@@ -77,9 +77,7 @@ function ToggleGroupItem({
 	);
 }
 
-
 ToggleGroup.displayName = "ToggleGroup";
 ToggleGroupItem.displayName = "ToggleGroupItem";
 
 export { ToggleGroup, ToggleGroupItem };
-

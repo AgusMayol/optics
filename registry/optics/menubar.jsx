@@ -220,7 +220,6 @@ function MenubarSubContent({ className = "", ...props }) {
 	);
 }
 
-
 Menubar.displayName = "Menubar";
 MenubarPortal.displayName = "MenubarPortal";
 MenubarMenu.displayName = "MenubarMenu";
@@ -256,4 +255,3 @@ export {
 	MenubarSubTrigger,
 	MenubarSubContent,
 };
-

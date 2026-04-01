@@ -59,10 +59,8 @@ function CollapsibleContent({
 	);
 }
 
-
 Collapsible.displayName = "Collapsible";
 CollapsibleTrigger.displayName = "CollapsibleTrigger";
 CollapsibleContent.displayName = "CollapsibleContent";
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };
-

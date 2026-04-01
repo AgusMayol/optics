@@ -109,7 +109,6 @@ function DrawerDescription({ className = "", ...props }) {
 	);
 }
 
-
 Drawer.displayName = "Drawer";
 DrawerPortal.displayName = "DrawerPortal";
 DrawerOverlay.displayName = "DrawerOverlay";
@@ -135,4 +134,3 @@ export {
 	DrawerTitle,
 	DrawerDescription,
 };
-

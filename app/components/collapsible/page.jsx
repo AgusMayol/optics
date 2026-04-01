@@ -18,8 +18,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const propsData = [
 	{
 		component: "<Collapsible />",
@@ -83,10 +81,7 @@ const propsData = [
 ];
 
 const demoComponent = (
-	<Collapsible
-		defaultOpen={false}
-		className="w-full max-w-md space-y-2"
-	>
+	<Collapsible defaultOpen={false} className="w-full max-w-md space-y-2">
 		<div className="flex items-center justify-between space-x-4 px-4">
 			<h4 className="text-sm font-semibold">
 				@agusmayol starred 3 repositories

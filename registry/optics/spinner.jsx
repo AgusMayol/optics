@@ -28,4 +28,3 @@ export function Spinner({ size = "size-6", className, ...props }) {
 }
 
 Spinner.displayName = "Spinner";
-

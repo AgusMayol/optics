@@ -17,18 +17,9 @@ const componentFiles = [
 	},
 ];
 
-
-
-
 const demoComponent = (
 	<Popover>
-		<PopoverTrigger
-			render={
-				<Button variant="raised">
-					Open Popover
-				</Button>
-			}
-		/>
+		<PopoverTrigger render={<Button variant="raised">Open Popover</Button>} />
 		<PopoverContent>
 			<div className="space-y-2">
 				<h4 className="font-medium leading-none">Dimensions</h4>

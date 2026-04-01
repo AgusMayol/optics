@@ -25,8 +25,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const propsData = [
 	{
 		component: "<CodeBlock />",
@@ -40,14 +38,12 @@ const propsData = [
 			{
 				name: "data",
 				type: "Array<{ language: string, filename: string, code: string }> (required)",
-				description:
-					"Array of code files to display in the code block.",
+				description: "Array of code files to display in the code block.",
 			},
 			{
 				name: "value",
 				type: "string",
-				description:
-					"The controlled active filename. Use with onValueChange.",
+				description: "The controlled active filename. Use with onValueChange.",
 			},
 			{
 				name: "defaultValue",
@@ -57,8 +53,7 @@ const propsData = [
 			{
 				name: "onValueChange",
 				type: "(value: string) => void",
-				description:
-					"Callback fired when the active filename changes.",
+				description: "Callback fired when the active filename changes.",
 			},
 		],
 	},
@@ -78,8 +73,7 @@ const propsData = [
 			{
 				name: "children",
 				type: "(item: { language: string, filename: string, code: string }) => React.ReactNode",
-				description:
-					"Render function that receives each code file item.",
+				description: "Render function that receives each code file item.",
 			},
 		],
 	},
@@ -94,14 +88,12 @@ const propsData = [
 			{
 				name: "language",
 				type: "string",
-				description:
-					"The programming language for syntax highlighting.",
+				description: "The programming language for syntax highlighting.",
 			},
 			{
 				name: "themes",
 				type: "{ light: string, dark: string }",
-				description:
-					"Shiki theme configuration for light and dark modes.",
+				description: "Shiki theme configuration for light and dark modes.",
 			},
 			{
 				name: "syntaxHighlighting",
@@ -111,8 +103,7 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the content.",
+				description: "Additional CSS classes to apply to the content.",
 			},
 		],
 	},
@@ -127,8 +118,7 @@ const propsData = [
 			{
 				name: "value",
 				type: "string (required)",
-				description:
-					"The filename that identifies this code block item.",
+				description: "The filename that identifies this code block item.",
 			},
 			{
 				name: "lineNumbers",
@@ -138,8 +128,7 @@ const propsData = [
 			{
 				name: "children",
 				type: "React.ReactNode (required)",
-				description:
-					"The code content to display (usually CodeBlockContent).",
+				description: "The code content to display (usually CodeBlockContent).",
 			},
 		],
 	},
@@ -176,8 +165,7 @@ const propsData = [
 			{
 				name: "onCopy",
 				type: "() => void",
-				description:
-					"Callback fired when code is successfully copied.",
+				description: "Callback fired when code is successfully copied.",
 			},
 			{
 				name: "onError",
@@ -192,14 +180,12 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the files container.",
+				description: "Additional CSS classes to apply to the files container.",
 			},
 			{
 				name: "children",
 				type: "(item: { language: string, filename: string, code: string }) => React.ReactNode",
-				description:
-					"Render function that receives each code file item.",
+				description: "Render function that receives each code file item.",
 			},
 		],
 	},
@@ -209,8 +195,7 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the filename.",
+				description: "Additional CSS classes to apply to the filename.",
 			},
 			{
 				name: "value",
@@ -220,8 +205,7 @@ const propsData = [
 			{
 				name: "icon",
 				type: "React.ComponentType",
-				description:
-					"Custom icon component to display before the filename.",
+				description: "Custom icon component to display before the filename.",
 			},
 			{
 				name: "children",
@@ -246,10 +230,7 @@ const demoComponent = (
 			<CodeBlockHeader>
 				<CodeBlockFiles>
 					{(item) => (
-						<CodeBlockFilename
-							key={item.language}
-							value={item.filename}
-						>
+						<CodeBlockFilename key={item.language} value={item.filename}>
 							{item.filename}
 						</CodeBlockFilename>
 					)}

@@ -12,7 +12,9 @@ function AlertDialog({ ...props } = {}) {
 }
 
 function AlertDialogTrigger({ ...props } = {}) {
-	return <DialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />;
+	return (
+		<DialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
+	);
 }
 
 function AlertDialogPortal({ ...props } = {}) {
@@ -150,7 +152,6 @@ function AlertDialogIcon({ className = "", children = null, ...props }) {
 	);
 }
 
-
 AlertDialog.displayName = "AlertDialog";
 AlertDialogPortal.displayName = "AlertDialogPortal";
 AlertDialogOverlay.displayName = "AlertDialogOverlay";
@@ -178,4 +179,3 @@ export {
 	AlertDialogCancel,
 	AlertDialogIcon,
 };
-

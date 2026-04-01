@@ -21,8 +21,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const propsData = [
 	{
 		component: "<ScrollArea />",
@@ -30,14 +28,12 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the scroll area.",
+				description: "Additional CSS classes to apply to the scroll area.",
 			},
 			{
 				name: "scrollHideDelay",
 				type: "number (default: 0)",
-				description:
-					"Delay in milliseconds before hiding the scrollbar.",
+				description: "Delay in milliseconds before hiding the scrollbar.",
 			},
 			{
 				name: "viewportClassName",

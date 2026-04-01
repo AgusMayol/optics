@@ -25,8 +25,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<AlertDialog>
 		<AlertDialogTrigger asChild>

@@ -16,25 +16,13 @@ const componentFiles = [
 const demoComponent = (
 	<div className="w-full flex flex-col items-center gap-8">
 		<div className="w-full max-w-md flex flex-col gap-2">
-			<Slider
-				defaultValue={[50]}
-				max={100}
-				step={1}
-			/>
-			<p className="text-sm text-muted-foreground">
-				Value: 50
-			</p>
+			<Slider defaultValue={[50]} max={100} step={1} />
+			<p className="text-sm text-muted-foreground">Value: 50</p>
 		</div>
 
 		<div className="w-full max-w-md flex flex-col gap-2">
-			<Slider
-				defaultValue={[25, 75]}
-				max={100}
-				step={1}
-			/>
-			<p className="text-sm text-muted-foreground">
-				Range: 25 - 75
-			</p>
+			<Slider defaultValue={[25, 75]} max={100} step={1} />
+			<p className="text-sm text-muted-foreground">Range: 25 - 75</p>
 		</div>
 	</div>
 );

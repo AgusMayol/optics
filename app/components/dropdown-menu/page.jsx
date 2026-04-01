@@ -26,19 +26,9 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<DropdownMenu>
-		<DropdownMenuTrigger
-			render={
-				<Button variant="raised">
-					Open Menu
-				</Button>
-			}
-		/>
+		<DropdownMenuTrigger render={<Button variant="raised">Open Menu</Button>} />
 		<DropdownMenuContent className="w-56" align="start">
 			<DropdownMenuLabel>My Account</DropdownMenuLabel>
 			<DropdownMenuGroup>

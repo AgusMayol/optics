@@ -29,10 +29,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<Command className="rounded-lg border shadow-md max-w-md">
 		<CommandInput placeholder="Type a command or search..." />

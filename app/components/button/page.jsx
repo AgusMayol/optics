@@ -2,7 +2,7 @@
 import { ComponentConfig } from "../layout";
 import { Button } from "@/registry/optics/button";
 import { ArrowUpRight, Sparkle } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 
 import componentCode from "@/registry/optics/dist/button.jsx.txt";
 import generatedProps from "@/registry/optics/dist/button.json";

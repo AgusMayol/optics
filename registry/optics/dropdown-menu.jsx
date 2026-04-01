@@ -222,7 +222,6 @@ function DropdownMenuShortcut({ className, ...props }) {
 	);
 }
 
-
 DropdownMenu.displayName = "DropdownMenu";
 DropdownMenuPortal.displayName = "DropdownMenuPortal";
 DropdownMenuTrigger.displayName = "DropdownMenuTrigger";
@@ -256,5 +255,3 @@ export {
 	DropdownMenuSubTrigger,
 	DropdownMenuSubContent,
 };
-
-

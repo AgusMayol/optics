@@ -18,8 +18,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const propsData = [
 	{
 		component: "<ThemeSwitcher />",

@@ -30,11 +30,3 @@ export function useIsLight() {
 	const activeTheme = useActiveTheme();
 	return activeTheme === "light";
 }
-
-/**
- * Returns true if the current active theme is dark.
- */
-export function useIsDark() {
-	const activeTheme = useActiveTheme();
-	return activeTheme === "dark";
-}

@@ -13,11 +13,11 @@ import { X } from "lucide-react";
 
 const GuidedTourContext = React.createContext({
 	activeTour: null,
-	setActiveTour: () => { },
+	setActiveTour: () => {},
 	currentStep: 0,
-	setCurrentStep: () => { },
+	setCurrentStep: () => {},
 	steps: [],
-	setSteps: () => { },
+	setSteps: () => {},
 	totalSteps: 0,
 });
 
@@ -478,7 +478,6 @@ function GuidedTourPopover({ children = null, ...props }) {
 	);
 }
 
-
 GuidedTourProvider.displayName = "GuidedTourProvider";
 GuidedTour.displayName = "GuidedTour";
 GuidedTourTrigger.displayName = "GuidedTourTrigger";
@@ -497,4 +496,3 @@ export {
 	GuidedTourPopover,
 	useGuidedTour,
 };
-

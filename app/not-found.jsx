@@ -3,7 +3,7 @@ import { Button } from "@/registry/optics/button";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 
 export default function Custom404() {

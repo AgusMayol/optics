@@ -16,10 +16,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<InputOTP maxLength={6} variant="raised">
 		<InputOTPGroup>

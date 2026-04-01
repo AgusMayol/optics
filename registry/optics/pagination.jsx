@@ -103,7 +103,6 @@ function PaginationEllipsis({ className = "", ...props }) {
 	);
 }
 
-
 Pagination.displayName = "Pagination";
 PaginationContent.displayName = "PaginationContent";
 PaginationEllipsis.displayName = "PaginationEllipsis";
@@ -121,4 +120,3 @@ export {
 	PaginationNext,
 	PaginationPrevious,
 };
-

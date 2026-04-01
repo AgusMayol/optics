@@ -138,7 +138,6 @@ function FormMessage({ className = "", children = null, ...props }) {
 	);
 }
 
-
 Form.displayName = "Form";
 FormItem.displayName = "FormItem";
 FormLabel.displayName = "FormLabel";
@@ -157,4 +156,3 @@ export {
 	FormMessage,
 	FormField,
 };
-

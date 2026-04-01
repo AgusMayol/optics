@@ -12,10 +12,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<div className="w-full max-w-md space-y-4">
 		<Progress value={33} />

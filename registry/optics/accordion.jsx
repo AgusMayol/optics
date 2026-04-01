@@ -183,7 +183,6 @@ function AccordionPanel({ className = "", children = null, ...props } = {}) {
 // Aliases for backward compatibility
 const AccordionContent = AccordionPanel;
 
-
 Accordion.displayName = "Accordion";
 AccordionItem.displayName = "AccordionItem";
 AccordionTrigger.displayName = "AccordionTrigger";
@@ -198,4 +197,3 @@ export {
 	AccordionContent,
 	useAccordionItem,
 };
-

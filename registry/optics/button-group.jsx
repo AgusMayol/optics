@@ -79,7 +79,6 @@ function ButtonGroupSeparator({
 	);
 }
 
-
 ButtonGroup.displayName = "ButtonGroup";
 ButtonGroupText.displayName = "ButtonGroupText";
 ButtonGroupSeparator.displayName = "ButtonGroupSeparator";
@@ -90,4 +89,3 @@ export {
 	ButtonGroupText,
 	buttonGroupVariants,
 };
-

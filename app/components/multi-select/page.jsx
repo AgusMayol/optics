@@ -20,10 +20,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<Select onValuesChange={(values) => console.log(values)}>
 		<SelectTrigger variant="raised">
@@ -70,8 +66,7 @@ const componentConfig = {
 	},
 	installation: {
 		componentName: "multi-select",
-		dependencies:
-			"@base-ui/react lucide-react",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

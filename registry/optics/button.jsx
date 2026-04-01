@@ -4,20 +4,20 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-	"focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 border border-transparent bg-clip-padding text-xs/relaxed font-medium focus-visible:ring-[2px] aria-invalid:ring-[2px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none gap-2! rounded-lg disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 cursor-pointer aria-expanded:ring-[2px] aria-expanded:ring-ring/30",
+	"focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 border border-transparent text-xs/relaxed font-medium focus-visible:ring-[2px] aria-invalid:ring-[2px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none gap-2! rounded-lg disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 cursor-pointer aria-expanded:ring-[2px] aria-expanded:ring-ring/30 appearance-none",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary bg-background from-primary/70 to-primary/95 hover:from-primary/80 hover:to-primary/100 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border shadow-md shadow-zinc-950/30",
+					"bg-radial-[at_52%_-52%] [text-shadow:0_1px_0_var(--color-primary)] border-primary bg-background from-primary/70 to-primary/95 hover:brightness-110 active:brightness-95 text-primary-foreground inset-shadow-2xs inset-shadow-white/25 border shadow-md shadow-zinc-950/30",
 				secondary:
-					"shadow-xs bg-linear-to-t hover:to-muted to-sidebar from-muted bg-background dark:from-muted/50 dark:border-border border border-zinc-300 shadow-zinc-950/10 text-foreground",
+					"shadow-xs bg-linear-to-t hover:brightness-[0.97] to-sidebar from-muted bg-background dark:from-muted/50 dark:border-border border border-zinc-300 shadow-zinc-950/10 text-foreground",
 				decorations:
 					"shadow-xs hover:bg-muted bg-background dark:border-border border border-zinc-300 shadow-zinc-950/10 text-foreground",
 				muted:
 					"bg-muted hover:bg-neutral-200 dark:hover:bg-accent shadow-zinc-950/10 duration-200 text-foreground",
 				outline:
-					"border-border dark:bg-input/20 dark:bg-input/30 hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+					"border-border dark:bg-input/20 dark:bg-input/30 hover:brightness-[0.97] hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
 				ghost:
 					"hover:bg-neutral-200 dark:hover:bg-accent hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
 				info: "text-white [text-shadow:0_1px_0_var(--color-blue-800)] from-blue-600/85 to-blue-600 inset-shadow-2xs inset-shadow-white/25 bg-linear-to-b border border-zinc-950/35 shadow-md shadow-zinc-950/20 border-0 hover:brightness-110 active:brightness-95",
@@ -44,10 +44,12 @@ const buttonVariants = cva(
 				"icon-lg": "size-8 [&_svg:not([class*='size-'])]:size-4",
 			},
 			animation: {
-				all: "active:scale-[0.97] transition-all duration-150",
-				colors: "transition-colors duration-150",
+				all: "active:scale-[0.97] duration-150 [transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,outline-color,--tw-gradient-from,--tw-gradient-to] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
+				colors:
+					"duration-150 [transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-to] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
 				none: "",
-				"only-scale": "active:scale-[0.97] transition-scale duration-150",
+				"only-scale":
+					"active:scale-[0.97] duration-150 [transition-property:transform] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
 			},
 		},
 		defaultVariants: {
@@ -72,7 +74,7 @@ function Button({
 			className={cn(
 				buttonVariants({ variant, size, animation, className }),
 				variant === "decorations" &&
-				"relative rounded-none squircle-none overflow-visible",
+					"relative rounded-none squircle-none overflow-visible",
 			)}
 			{...props}
 		>
@@ -116,8 +118,6 @@ function Button({
 	);
 }
 
-
 Button.displayName = "Button";
 
 export { Button, buttonVariants };
-

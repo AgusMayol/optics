@@ -13,8 +13,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<div className="flex items-center justify-center flex-wrap gap-4">
 		<Toggle aria-label="Toggle italic" variant="raised">
@@ -51,9 +49,5 @@ import { Bold, Italic, Underline } from "lucide-react";`,
 };
 
 export default function Page() {
-	return (
-		<ComponentConfig config={componentConfig}>
-			{null}
-		</ComponentConfig>
-	);
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
 }

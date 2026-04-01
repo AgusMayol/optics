@@ -22,7 +22,7 @@ import {
 } from "@/registry/optics/code-block";
 import { Button } from "@/registry/optics/button";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import reactElementToJSXString from "react-element-to-jsx-string";
 
 // Context para pasar la configuración de forma síncrona
@@ -48,14 +48,14 @@ function LayoutContent({ config }) {
 		() =>
 			installationData
 				? {
-					...installationData,
-					installDeps:
-						installationData.installDeps ||
-						(installationData.dependencies &&
+						...installationData,
+						installDeps:
+							installationData.installDeps ||
+							(installationData.dependencies &&
 							typeof installationData.dependencies === "string"
-							? generateInstallDeps(installationData.dependencies)
-							: []),
-				}
+								? generateInstallDeps(installationData.dependencies)
+								: []),
+					}
 				: null,
 		[installationData],
 	);

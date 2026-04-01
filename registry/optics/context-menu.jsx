@@ -217,7 +217,6 @@ function ContextMenuShortcut({ className = "", ...props }) {
 	);
 }
 
-
 ContextMenu.displayName = "ContextMenu";
 ContextMenuTrigger.displayName = "ContextMenuTrigger";
 ContextMenuContent.displayName = "ContextMenuContent";
@@ -251,4 +250,3 @@ export {
 	ContextMenuSubTrigger,
 	ContextMenuRadioGroup,
 };
-

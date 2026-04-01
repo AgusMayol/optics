@@ -14,8 +14,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<Timezone
 		timestamp={Date.now() - 5 * 60 * 1000}

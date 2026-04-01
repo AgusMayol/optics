@@ -34,7 +34,7 @@ import {
 	Accessibility,
 	TrendingUp,
 } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import {
 	Card,
 	CardHeader,

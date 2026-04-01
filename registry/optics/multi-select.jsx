@@ -11,11 +11,11 @@ import { Checkbox } from "@/registry/optics/checkbox";
 // Contexto para compartir el estado de selección entre todos los items
 const MultiSelectContext = React.createContext({
 	values: {},
-	setValue: () => { },
-	onValuesChange: () => { },
+	setValue: () => {},
+	onValuesChange: () => {},
 	itemCount: 0,
 	colors: {},
-	registerColor: () => { },
+	registerColor: () => {},
 });
 
 function Select({
@@ -185,7 +185,11 @@ function SelectContent({
 }) {
 	return (
 		<SelectPrimitive.Portal>
-			<SelectPrimitive.Positioner side={side} sideOffset={4} className="isolate z-50">
+			<SelectPrimitive.Positioner
+				side={side}
+				sideOffset={4}
+				className="isolate z-50"
+			>
 				<SelectPrimitive.Popup
 					data-slot="select-content"
 					className={cn(
@@ -255,7 +259,8 @@ function SelectItem({
 		if (someChecked && !checked && isHoveringCheckbox) return "Check";
 		if (!checked && someChecked && isHoveringText) return "Only";
 		if (checked && allChecked && isHoveringText) return "Only";
-		if (checked && someChecked && !allChecked && isHoveringText) return "Check All";
+		if (checked && someChecked && !allChecked && isHoveringText)
+			return "Check All";
 		return "";
 	};
 
@@ -381,7 +386,6 @@ function SelectScrollDownButton({ className, ...props }) {
 	);
 }
 
-
 Select.displayName = "MultiSelect";
 SelectContent.displayName = "MultiSelectContent";
 SelectGroup.displayName = "MultiSelectGroup";
@@ -405,4 +409,3 @@ export {
 	SelectTrigger,
 	SelectValue,
 };
-

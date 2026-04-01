@@ -19,10 +19,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<Carousel className="w-full max-w-xs">
 		<CarouselContent>
@@ -31,9 +27,7 @@ const demoComponent = (
 					<div className="p-1">
 						<Card>
 							<CardContent className="flex aspect-square items-center justify-center p-6">
-								<span className="text-4xl font-semibold">
-									{index + 1}
-								</span>
+								<span className="text-4xl font-semibold">{index + 1}</span>
 							</CardContent>
 						</Card>
 					</div>

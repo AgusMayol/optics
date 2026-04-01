@@ -29,8 +29,8 @@ const demoComponent = (
 			</EmptyMedia>
 			<EmptyTitle>No Projects Yet</EmptyTitle>
 			<EmptyDescription>
-				You haven't created any projects yet. Get started by creating your
-				first project.
+				You haven't created any projects yet. Get started by creating your first
+				project.
 			</EmptyDescription>
 		</EmptyHeader>
 		<EmptyContent>

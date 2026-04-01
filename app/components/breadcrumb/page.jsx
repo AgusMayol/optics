@@ -10,7 +10,7 @@ import {
 	BreadcrumbSeparator,
 } from "@/registry/optics/breadcrumb";
 import { Slash } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 
 import componentCode from "@/registry/optics/dist/breadcrumb.jsx.txt";
 import generatedProps from "@/registry/optics/dist/breadcrumb.json";
@@ -22,8 +22,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<div className="flex flex-col items-center justify-center gap-4">
 		<Breadcrumb>
@@ -33,9 +31,7 @@ const demoComponent = (
 				</BreadcrumbItem>
 				<BreadcrumbSeparator />
 				<BreadcrumbItem>
-					<BreadcrumbLink
-						render={<Link href="/components">Components</Link>}
-					/>
+					<BreadcrumbLink render={<Link href="/components">Components</Link>} />
 				</BreadcrumbItem>
 				<BreadcrumbSeparator />
 				<BreadcrumbItem>

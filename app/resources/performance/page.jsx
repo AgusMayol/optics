@@ -4,7 +4,7 @@ import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import {
 	Card,
 	CardHeader,
@@ -46,7 +46,7 @@ import { db } from '@/lib/db';
 export default async function ProductsPage() {
   // This function runs on the server
   const products = await db.products.findMany();
-  
+
   return (
     <div>
       <h1>Products</h1>
@@ -81,9 +81,9 @@ import { useState } from 'react';
 
 export function InteractiveButton() {
   const [count, setCount] = useState(0);
-  
+
   return (
-    <button 
+    <button
       onClick={() => setCount(count + 1)}
       className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
     >
@@ -139,7 +139,7 @@ const reactCompilerCode = [
 const nextConfig: NextConfig = {
   // Enable React Compiler (Next.js 16+)
   reactCompiler: true,
-  
+
   // Or advanced configuration:
   // reactCompiler: {
   //   compilationMode: 'annotation', // or 'infer'
@@ -156,15 +156,15 @@ export default nextConfig;`,
 
 export function ProductList({ products, filter }) {
   // Compiler optimizes this automatically
-  const filteredProducts = products.filter(p => 
+  const filteredProducts = products.filter(p =>
     p.category === filter
   );
-  
+
   // Also optimizes callbacks automatically
   const handleClick = (id) => {
     console.log('Product clicked:', id);
   };
-  
+
   return (
     <ul>
       {filteredProducts.map(product => (
@@ -212,9 +212,9 @@ export default async function ProductsPage() {
   // only make one real request (deduplication)
   const product1 = await getProduct(1);
   const product2 = await getProduct(1); // Uses cache
-  
+
   const products = await getCachedProducts();
-  
+
   return <div>{/* ... */}</div>;
 }`,
 	},
@@ -227,9 +227,9 @@ import { NextResponse } from 'next/server';
 // On-demand revalidation
 export async function POST(request) {
   const { tag } = await request.json();
-  
+
   revalidateTag(tag); // Revalidate cache with this tag
-  
+
   return NextResponse.json({ revalidated: true });
 }
 
@@ -249,32 +249,31 @@ export default async function DataPage() {
   const staticData = await fetch('https://api.example.com/data', {
     cache: 'force-cache', // Indefinite cache
   });
-  
+
   // Revalidation every 60 seconds
   const revalidatedData = await fetch('https://api.example.com/data', {
     next: { revalidate: 60 },
   });
-  
+
   // Revalidation with tags
   const taggedData = await fetch('https://api.example.com/data', {
-    next: { 
+    next: {
       revalidate: 3600,
       tags: ['data'],
     },
   });
-  
-  // No cache (always fresh)
-  const freshData = await fetch('https://api.example.com/data', {
-    cache: 'no-store',
-  });
-  
+
+  // No cache (always fresh) — Next.js 16+: prefer "use cache" with short cacheLife
+  // For truly per-request data, use a separate cached function with cacheLife('seconds')
+  const freshData = await fetch('https://api.example.com/data');
+
   // Cache only at build time
   const buildTimeData = await fetch('https://api.example.com/data', {
     next: { revalidate: false },
   });
-  
+
   const data = await staticData.json();
-  
+
   return <div>{/* ... */}</div>;
 }`,
 	},
@@ -291,15 +290,15 @@ export default async function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      
+
       {/* Renders immediately */}
       <Header />
-      
+
       {/* Renders when data is ready */}
       <Suspense fallback={<DashboardSkeleton />}>
         <DashboardContent />
       </Suspense>
-      
+
       {/* Another independent block */}
       <Suspense fallback={<StatsSkeleton />}>
         <Stats />
@@ -313,7 +312,7 @@ async function DashboardContent() {
   const data = await fetch('https://api.example.com/dashboard', {
     cache: 'no-store',
   }).then(r => r.json());
-  
+
   return <div>{/* ... */}</div>;
 }
 
@@ -321,7 +320,7 @@ async function Stats() {
   const stats = await fetch('https://api.example.com/stats', {
     cache: 'no-store',
   }).then(r => r.json());
-  
+
   return <div>{/* ... */}</div>;
 }`,
 	},
@@ -369,17 +368,17 @@ export function ProductImage({ src, alt, width, height }) {
       height={height}
       // Lazy loading by default
       loading="lazy"
-      
+
       // Placeholder while loading
       placeholder="blur"
       blurDataURL="data:image/jpeg;base64,..."
-      
+
       // Priority for above-the-fold images
       priority={false}
-      
+
       // Modern formats automatically
       // Next.js serves WebP/AVIF automatically
-      
+
       // Responsive images
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
@@ -430,11 +429,11 @@ const nextConfig: NextConfig = {
       'date-fns',
     ],
   },
-  
+
   // Bundle analysis
   // Run: next build --analyze
   // Or install: @next/bundle-analyzer
-  
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Improved tree shaking
@@ -468,12 +467,12 @@ export default function ProductPage({ params }) {
       {/* This part is prerendered statically */}
       <ProductHeader />
       <ProductDescription />
-      
+
       {/* This part is streamed dynamically */}
       <Suspense fallback={<ReviewsSkeleton />}>
         <ProductReviews productId={params.id} />
       </Suspense>
-      
+
       <Suspense fallback={<RelatedSkeleton />}>
         <RelatedProducts productId={params.id} />
       </Suspense>
@@ -492,7 +491,7 @@ async function ProductReviews({ productId }) {
     \`https://api.example.com/products/\${productId}/reviews\`,
     { cache: 'no-store' }
   ).then(r => r.json());
-  
+
   return <div>{/* ... */}</div>;
 }`,
 	},

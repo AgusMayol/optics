@@ -13,10 +13,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<div className="w-[450px]">
 		<AspectRatio ratio={16 / 9} className="bg-muted">
@@ -24,6 +20,7 @@ const demoComponent = (
 				src="/images/background-placeholder.jpeg"
 				alt="Photo by Ale"
 				fill
+				sizes="(max-width: 768px) 100vw, 450px"
 				className="rounded-md object-cover"
 			/>
 		</AspectRatio>

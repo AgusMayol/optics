@@ -163,7 +163,6 @@ function NavigationMenuIndicator({ className = "", ...props }) {
 	);
 }
 
-
 NavigationMenu.displayName = "NavigationMenu";
 NavigationMenuContent.displayName = "NavigationMenuContent";
 NavigationMenuIndicator.displayName = "NavigationMenuIndicator";
@@ -184,4 +183,3 @@ export {
 	navigationMenuTriggerStyle,
 	NavigationMenuPositioner,
 };
-

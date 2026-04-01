@@ -53,3 +53,4 @@ package-lock.json
 /public/r/*
 
 .turbo
+.claude

@@ -39,7 +39,7 @@ import {
 	Zap,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import * as React from "react";
 import { useIsLight } from "@/hooks/use-get-theme";
 
@@ -118,7 +118,9 @@ export default function Home() {
 									src="/images/sections/typography.svg"
 									alt="Typography"
 									fill
+									sizes="(max-width: 768px) 100vw, 50vw"
 									className="object-cover object-center"
+									unoptimized
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -579,7 +581,9 @@ export default function Home() {
 									src="/images/sections/accessibility.svg"
 									alt="Accessibility"
 									fill
+									sizes="(max-width: 768px) 100vw, 50vw"
 									className="object-cover object-center"
+									unoptimized
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -614,7 +618,9 @@ export default function Home() {
 									src="/images/sections/cursor-rules.svg"
 									alt="Cursor Rules & MCPs"
 									fill
+									sizes="(max-width: 768px) 100vw, 50vw"
 									className="object-cover object-center"
+									unoptimized
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">
@@ -650,7 +656,9 @@ export default function Home() {
 									src="/images/sections/security.svg"
 									alt="Security"
 									fill
+									sizes="(max-width: 768px) 100vw, 50vw"
 									className="object-cover object-center"
+									unoptimized
 								/>
 								<div className="relative -bottom-38 left-0 w-full">
 									<h2 className="text-base text-foreground truncate">

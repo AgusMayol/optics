@@ -12,9 +12,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
 const demoComponent = (
 	<div className="flex items-center justify-center flex-wrap gap-8">
 		<div className="flex flex-col items-center gap-2">

@@ -23,7 +23,7 @@ import {
 } from "@/registry/optics/code-block";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import * as React from "react";
 
 const completeMetadataCode = [
@@ -41,7 +41,7 @@ const completeMetadataCode = [
   authors: [{ name: "Your Name", url: "https://yourdomain.com" }],
   creator: "Your Name",
   publisher: "Your Company",
-  
+
   // Open Graph
   openGraph: {
     title: "My Application",
@@ -59,7 +59,7 @@ const completeMetadataCode = [
     locale: "en_US",
     type: "website",
   },
-  
+
   // Twitter
   twitter: {
     card: "summary_large_image",
@@ -68,7 +68,7 @@ const completeMetadataCode = [
     creator: "@yourusername",
     images: ["/twitter-image.jpg"],
   },
-  
+
   // Robots
   robots: {
     index: true,
@@ -81,19 +81,19 @@ const completeMetadataCode = [
       "max-snippet": -1,
     },
   },
-  
+
   // Icons
   icons: {
     icon: "/icon.png",
     shortcut: "/shortcut-icon.png",
     apple: "/apple-icon.png",
   },
-  
+
   // Verification
   verification: {
     google: "your-google-verification-code",
   },
-  
+
   // Alternates
   alternates: {
     canonical: "https://yourdomain.com",
@@ -108,11 +108,11 @@ const dynamicMetadataCode = [
 		filename: "app/blog/[slug]/page.js",
 		code: `export async function generateMetadata({ params }) {
   const { slug } = await params;
-  
+
   // Fetch data
   const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
     .then((res) => res.json());
-  
+
   return {
     title: post.title,
     description: post.excerpt,
@@ -279,7 +279,7 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }) {
   const { slug } = await params;
-  
+
   // Fetch post data
   const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
     .then((res) => res.json());

@@ -13,8 +13,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const propsData = [
 	{
 		component: "toast()",
@@ -119,9 +117,7 @@ const demoComponent = (
 			onClick={() =>
 				toast({
 					type: "promise",
-					promise: new Promise((resolve) =>
-						setTimeout(resolve, 2000),
-					),
+					promise: new Promise((resolve) => setTimeout(resolve, 2000)),
 					loading: "Loading...",
 					success: "Done!",
 					error: "Failed!",

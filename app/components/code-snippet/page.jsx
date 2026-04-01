@@ -33,17 +33,11 @@ const commandsExample = [
 ];
 
 const demoComponent = (
-	<Snippet
-		defaultValue="npm"
-		className="w-full"
-	>
+	<Snippet defaultValue="npm" className="w-full">
 		<SnippetHeader>
 			<SnippetTabsList variant="outline">
 				{commandsExample.map((command) => (
-					<SnippetTabsTrigger
-						key={command.label}
-						value={command.label}
-					>
+					<SnippetTabsTrigger key={command.label} value={command.label}>
 						{command.label}
 					</SnippetTabsTrigger>
 				))}
@@ -82,8 +76,6 @@ const propsData = [
 		],
 	},
 ];
-
-
 
 const componentConfig = {
 	header: {

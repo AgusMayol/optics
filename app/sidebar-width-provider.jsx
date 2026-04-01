@@ -22,7 +22,3 @@ export function useSidebarWidth() {
 
 	return context;
 }
-
-
-
-

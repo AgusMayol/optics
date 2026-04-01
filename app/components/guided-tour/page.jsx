@@ -22,8 +22,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<GuidedTourProvider>
 		<GuidedTour>

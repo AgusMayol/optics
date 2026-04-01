@@ -19,10 +19,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<Table className="w-full">
 		<TableHeader>

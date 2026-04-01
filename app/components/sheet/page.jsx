@@ -24,8 +24,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<Sheet>
 		<SheetTrigger

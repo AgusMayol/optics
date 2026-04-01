@@ -100,4 +100,3 @@ export const ThemeSwitcher = forwardRef(
 );
 
 ThemeSwitcher.displayName = "ThemeSwitcher";
-

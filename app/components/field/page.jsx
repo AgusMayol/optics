@@ -20,10 +20,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<div className="w-full max-w-md">
 		<FieldGroup>
@@ -34,9 +30,7 @@ const demoComponent = (
 				</FieldDescription>
 				<FieldGroup>
 					<Field>
-						<FieldLabel htmlFor="demo-card-name">
-							Name on Card
-						</FieldLabel>
+						<FieldLabel htmlFor="demo-card-name">Name on Card</FieldLabel>
 						<Input
 							id="demo-card-name"
 							placeholder="John Doe"
@@ -45,18 +39,14 @@ const demoComponent = (
 						/>
 					</Field>
 					<Field>
-						<FieldLabel htmlFor="demo-card-number">
-							Card Number
-						</FieldLabel>
+						<FieldLabel htmlFor="demo-card-number">Card Number</FieldLabel>
 						<Input
 							id="demo-card-number"
 							placeholder="1234 5678 9012 3456"
 							variant="raised"
 							required
 						/>
-						<FieldDescription>
-							Enter your 16-digit card number
-						</FieldDescription>
+						<FieldDescription>Enter your 16-digit card number</FieldDescription>
 					</Field>
 				</FieldGroup>
 			</FieldSet>

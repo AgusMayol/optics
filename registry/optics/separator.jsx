@@ -63,8 +63,6 @@ function Separator({
 	);
 }
 
-
 Separator.displayName = "Separator";
 
 export { Separator };
-

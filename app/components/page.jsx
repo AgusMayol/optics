@@ -3,7 +3,7 @@ import { links } from "@/app/layout-content";
 import { Button } from "@/registry/optics/button";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { useMemo } from "react";
 
 export default function Page() {

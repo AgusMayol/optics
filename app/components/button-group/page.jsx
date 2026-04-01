@@ -18,9 +18,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
 const demoComponent = (
 	<div className="flex items-center justify-center gap-6">
 		<ButtonGroup orientation="vertical">

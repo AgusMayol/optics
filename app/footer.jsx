@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/registry/optics/button";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { Dithering } from "@paper-design/shaders-react";

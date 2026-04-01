@@ -23,10 +23,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<ItemGroup>
 		<Item>
@@ -35,9 +31,7 @@ const demoComponent = (
 			</ItemMedia>
 			<ItemContent>
 				<ItemTitle>New Message</ItemTitle>
-				<ItemDescription>
-					You have a new message from John Doe
-				</ItemDescription>
+				<ItemDescription>You have a new message from John Doe</ItemDescription>
 			</ItemContent>
 			<ItemActions>
 				<Button size="sm">View</Button>

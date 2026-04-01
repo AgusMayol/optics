@@ -47,11 +47,7 @@ export default function Page() {
 						<FormItem>
 							<FormLabel>Username</FormLabel>
 							<FormControl>
-								<Input
-									placeholder="John Doe"
-									variant="raised"
-									{...field}
-								/>
+								<Input placeholder="John Doe" variant="raised" {...field} />
 							</FormControl>
 							<FormDescription>
 								This is your public display name.

@@ -175,7 +175,6 @@ function SheetDescription({ className = "", ...props }) {
 	);
 }
 
-
 Sheet.displayName = "Sheet";
 SheetTrigger.displayName = "SheetTrigger";
 SheetClose.displayName = "SheetClose";
@@ -195,4 +194,3 @@ export {
 	SheetTitle,
 	SheetDescription,
 };
-

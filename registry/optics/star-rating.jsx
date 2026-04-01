@@ -81,4 +81,3 @@ export function StarRating({
 }
 
 StarRating.displayName = "StarRating";
-

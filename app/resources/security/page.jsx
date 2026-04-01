@@ -4,7 +4,7 @@ import { Badge } from "@/registry/optics/badge";
 import { Button } from "@/registry/optics/button";
 import { Separator } from "@/registry/optics/separator";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import {
 	Card,
 	CardHeader,
@@ -64,7 +64,7 @@ export function proxy(request) {
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   });
-  
+
   response.headers.set('Content-Security-Policy', contentSecurityPolicyHeaderValue);
   return response;
 }
@@ -114,7 +114,7 @@ const nextConfig = {
   env: {
     // Only add non-sensitive public vars here
   },
-  
+
   // Configure allowed image domains
   images: {
     domains: ['trusted-cdn.com', 'yourdomain.com'],
@@ -139,9 +139,9 @@ const authProxyCode = [
 import { getToken } from 'next-auth/jwt';
 
 export async function proxy(request) {
-  const token = await getToken({ 
+  const token = await getToken({
     req: request,
-    secret: process.env.NEXTAUTH_SECRET 
+    secret: process.env.NEXTAUTH_SECRET
   });
 
   // Protect API routes
@@ -195,16 +195,16 @@ const PostSchema = z.object({
 export async function POST(request) {
   try {
     const body = await request.json();
-    
+
     // Validate input
     const validatedData = PostSchema.parse(body);
-    
+
     // Sanitize HTML content to prevent XSS
     const sanitizedContent = DOMPurify.sanitize(validatedData.content, {
       ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a'],
       ALLOWED_ATTR: ['href'],
     });
-    
+
     // Save to database with parameterized queries
     const post = await db.post.create({
       data: {
@@ -213,7 +213,7 @@ export async function POST(request) {
         authorId: validatedData.authorId,
       },
     });
-    
+
     return NextResponse.json(post, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -222,7 +222,7 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    
+
     // Don't expose internal errors
     console.error('Post creation error:', error);
     return NextResponse.json(
@@ -251,15 +251,15 @@ export function rateLimit(options = {}) {
     check: (limit, token) =>
       new Promise((resolve, reject) => {
         const tokenCount = tokenCache.get(token) || [0];
-        
+
         if (tokenCount[0] === 0) {
           tokenCache.set(token, [1]);
         }
-        
+
         tokenCount[0] += 1;
         const currentUsage = tokenCount[0];
         const isRateLimited = currentUsage >= limit;
-        
+
         return isRateLimited ? reject() : resolve();
       }),
   };
@@ -275,10 +275,10 @@ const limiter = rateLimit({
 
 export async function GET(request) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous';
-  
+
   try {
     await limiter.check(10, ip); // 10 requests per minute
-    
+
     // Your API logic here
     return NextResponse.json({ data: 'success' });
   } catch {
@@ -361,9 +361,9 @@ import { randomBytes } from 'crypto';
 // Generate CSRF token
 export async function GET() {
   const token = randomBytes(32).toString('hex');
-  
+
   const response = NextResponse.json({ csrfToken: token });
-  
+
   // Set CSRF token in httpOnly cookie
   response.cookies.set('csrf-token', token, {
     httpOnly: true,
@@ -371,7 +371,7 @@ export async function GET() {
     sameSite: 'strict',
     maxAge: 3600, // 1 hour
   });
-  
+
   return response;
 }`,
 	},
@@ -385,7 +385,7 @@ export function proxy(request) {
   if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
     const csrfTokenFromCookie = request.cookies.get('csrf-token')?.value;
     const csrfTokenFromHeader = request.headers.get('x-csrf-token');
-    
+
     if (!csrfTokenFromCookie || csrfTokenFromCookie !== csrfTokenFromHeader) {
       return NextResponse.json(
         { error: 'Invalid CSRF token' },
@@ -393,7 +393,7 @@ export function proxy(request) {
       );
     }
   }
-  
+
   return NextResponse.next();
 }
 
@@ -537,7 +537,7 @@ const secureCookiesCode = [
 
 export async function POST(request) {
   const response = NextResponse.json({ success: true });
-  
+
   // Secure cookie configuration
   response.cookies.set('session', 'your-session-token', {
     httpOnly: true,        // Prevents JavaScript access
@@ -546,7 +546,7 @@ export async function POST(request) {
     maxAge: 60 * 60 * 24,  // 1 day
     path: '/',
   });
-  
+
   return response;
 }`,
 	},
@@ -598,12 +598,12 @@ const prisma = new PrismaClient();
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');
-  
+
   // ❌ BAD: Vulnerable to SQL injection
   // const user = await prisma.$queryRawUnsafe(
   //   \`SELECT * FROM users WHERE email = '\${email}'\`
   // );
-  
+
   // ✅ GOOD: Use Prisma's type-safe queries
   const user = await prisma.user.findUnique({
     where: { email: email },
@@ -614,20 +614,20 @@ export async function GET(request) {
       // Don't select sensitive fields like password
     },
   });
-  
+
   return NextResponse.json(user);
 }
 
 // ✅ GOOD: Using parameterized queries if needed
 export async function POST(request) {
   const { name, email } = await request.json();
-  
+
   // Parameterized query prevents SQL injection
   const user = await prisma.$queryRaw\`
-    SELECT * FROM users 
+    SELECT * FROM users
     WHERE name = \${name} AND email = \${email}
   \`;
-  
+
   return NextResponse.json(user);
 }`,
 	},
@@ -640,7 +640,7 @@ const securityHeadersCode = [
 		code: `/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  
+
   async headers() {
     return [
       {
@@ -678,7 +678,7 @@ const nextConfig = {
       },
     ];
   },
-  
+
   images: {
     remotePatterns: [
       {
@@ -714,33 +714,33 @@ export async function updateProfile(formData) {
   if (!session?.userId) {
     throw new Error('Unauthorized');
   }
-  
+
   // 2. Validate input
   const rawData = {
     name: formData.get('name'),
     bio: formData.get('bio'),
   };
-  
+
   const validatedData = UpdateProfileSchema.parse(rawData);
-  
+
   // 3. Check authorization
   const user = await db.user.findUnique({
     where: { id: session.userId },
   });
-  
+
   if (!user) {
     throw new Error('User not found');
   }
-  
+
   // 4. Perform action
   await db.user.update({
     where: { id: session.userId },
     data: validatedData,
   });
-  
+
   // 5. Revalidate cache
   revalidatePath('/profile');
-  
+
   return { success: true };
 }`,
 	},
@@ -753,10 +753,10 @@ const sourceMapsSecurityCode = [
 		code: `/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  
+
   // Disable source maps in production
   productionBrowserSourceMaps: false,
-  
+
   // Additional security configurations
   compiler: {
     // Remove console logs in production
@@ -764,13 +764,13 @@ const nextConfig = {
       exclude: ['error', 'warn'],
     } : false,
   },
-  
+
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       // Disable source maps for client-side production builds
       config.devtool = false;
     }
-    
+
     return config;
   },
 };

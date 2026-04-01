@@ -11,7 +11,6 @@ const componentFiles = [
 	},
 ];
 
-
 const propsData = [
 	{
 		component: "<GridContainer />",
@@ -19,8 +18,7 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the grid container.",
+				description: "Additional CSS classes to apply to the grid container.",
 			},
 			{
 				name: "cols",
@@ -50,8 +48,7 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the grid row.",
+				description: "Additional CSS classes to apply to the grid row.",
 			},
 			{
 				name: "span",
@@ -87,8 +84,7 @@ const propsData = [
 			{
 				name: "className",
 				type: "string",
-				description:
-					"Additional CSS classes to apply to the grid item.",
+				description: "Additional CSS classes to apply to the grid item.",
 			},
 			{
 				name: "span",
@@ -140,18 +136,9 @@ const propsData = [
 ];
 
 const demoComponent = (
-	<GridContainer
-		cols={12}
-		rows={3}
-		border
-		className="w-full max-w-2xl"
-	>
+	<GridContainer cols={12} rows={3} border className="w-full max-w-2xl">
 		<GridRow className="rounded-t-xl">
-			<GridItem
-				decorationTopLeft
-				span={4}
-				className="aspect-square"
-			></GridItem>
+			<GridItem decorationTopLeft span={4} className="aspect-square"></GridItem>
 			<GridItem span={4} className="aspect-square"></GridItem>
 			<GridItem span={4} className="aspect-square"></GridItem>
 		</GridRow>

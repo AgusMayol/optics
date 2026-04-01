@@ -6,7 +6,7 @@ import { ScrollArea } from "@/registry/optics/scroll-area";
 import { SheetClose } from "@/registry/optics/sheet";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 

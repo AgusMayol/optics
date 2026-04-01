@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 const AvatarContext = React.createContext({
 	loaded: false,
-	setLoaded: () => { },
+	setLoaded: () => {},
 });
 
 function Avatar({
@@ -182,7 +182,6 @@ function AvatarGroupCount({ className = "", ...props }) {
 	);
 }
 
-
 Avatar.displayName = "Avatar";
 AvatarStack.displayName = "AvatarStack";
 AvatarImage.displayName = "AvatarImage";
@@ -200,4 +199,3 @@ export {
 	AvatarGroupCount,
 	AvatarBadge,
 };
-

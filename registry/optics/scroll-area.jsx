@@ -108,7 +108,6 @@ ScrollArea.displayName = "ScrollArea";
 
 const ScrollBar = () => null;
 
-
 const ScrollMask = ({
 	showMask,
 	maskHeight,
@@ -235,8 +234,6 @@ const ScrollMask = ({
 	);
 };
 
-
 ScrollBar.displayName = "ScrollBar";
 
 export { ScrollArea, ScrollBar };
-

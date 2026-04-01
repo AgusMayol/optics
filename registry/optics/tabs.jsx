@@ -221,7 +221,6 @@ const TabsPanel = ({ className = "", ...props } = {}) => (
 );
 const TabsContent = TabsPanel;
 
-
 Tabs.displayName = "Tabs";
 TabsList.displayName = "TabsList";
 TabsTab.displayName = "TabsTab";
@@ -241,4 +240,3 @@ export {
 	TabsPanel,
 	TabsContent,
 };
-

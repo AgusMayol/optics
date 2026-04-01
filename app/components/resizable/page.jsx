@@ -16,10 +16,6 @@ const componentFiles = [
 	},
 ];
 
-
-
-
-
 const demoComponent = (
 	<ResizablePanelGroup
 		direction="horizontal"

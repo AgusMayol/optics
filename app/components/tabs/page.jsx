@@ -59,8 +59,6 @@ const componentFiles = [
 	},
 ];
 
-
-
 const demoComponent = (
 	<Tabs defaultValue="account" className="w-full max-w-sm">
 		<TabsList variant="default">

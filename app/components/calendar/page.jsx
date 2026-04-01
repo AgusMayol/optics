@@ -14,10 +14,7 @@ const componentFiles = [
 ];
 
 const demoComponent = (
-	<Calendar
-		mode="single"
-		className="rounded-md border !bg-background"
-	/>
+	<Calendar mode="single" className="rounded-md border !bg-background" />
 );
 
 const componentConfig = {

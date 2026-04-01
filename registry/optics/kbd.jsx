@@ -369,9 +369,7 @@ function KbdGroup({ className, ...props }) {
 	);
 }
 
-
 Kbd.displayName = "Kbd";
 KbdGroup.displayName = "KbdGroup";
 
 export { Kbd, KbdGroup };
-

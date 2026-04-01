@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 import { ALargeSmall, ArrowLeft, Info } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import { toast } from "@/registry/optics/sonner";
 import {

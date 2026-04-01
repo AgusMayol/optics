@@ -13,7 +13,7 @@ import { ThemeSwitcher } from "@/registry/optics/theme-switcher";
 import { MenuIcon, XIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import * as React from "react";
 import {
 	ContextMenu,
@@ -32,7 +32,7 @@ import { useAutoWidth } from "@/hooks/use-auto-width";
 import { useSidebarWidth } from "./sidebar-width-provider";
 const logoSvg = `<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
 	<style>
-		.s1 { fill: #5eb0e8 } 
+		.s1 { fill: #5eb0e8 }
 	</style>
 	<g id="g3152">
 		<g id="g49864">
@@ -186,6 +186,7 @@ export function Header({ links }) {
 								width={100}
 								height={100}
 								priority
+								unoptimized
 							/>
 							<span className="text-base font-bold w-full text-center truncate select-none">
 								@optics/design-system
@@ -211,6 +212,7 @@ export function Header({ links }) {
 								width={16}
 								height={16}
 								priority
+								unoptimized
 							/>
 							Copy Logo as SVG
 						</ContextMenuItem>
@@ -234,6 +236,7 @@ export function Header({ links }) {
 								className="size-4.5"
 								width={100}
 								height={100}
+								unoptimized
 							/>
 						</Link>
 					</Button>

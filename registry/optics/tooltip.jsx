@@ -6,15 +6,18 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/optics/button";
 
-const TooltipProviderContext = React.createContext({ hasProvider: false, delay: 400 });
+const TooltipProviderContext = React.createContext({
+	hasProvider: false,
+	delay: 400,
+});
 
 // Context local para cada instancia de Tooltip para manejar estados de interacción
 const TooltipInstanceContext = React.createContext({
 	shouldKeepOpenRef: { current: false },
-	setShouldKeepOpen: () => { },
+	setShouldKeepOpen: () => {},
 	isPointerOverTriggerRef: { current: false },
 	isPointerOverContentRef: { current: false },
-	openTooltip: () => { },
+	openTooltip: () => {},
 	delay: 400,
 });
 
@@ -32,7 +35,9 @@ function TooltipProvider({
 	// - skipDelayDuration: 0ms para transiciones instantáneas entre tooltips cuando ya hay uno abierto
 	// Para que skipDelayDuration funcione entre múltiples tooltips, todos deben compartir el mismo TooltipProvider
 	return (
-		<TooltipProviderContext.Provider value={{ hasProvider: true, delay: resolvedDelayDuration }}>
+		<TooltipProviderContext.Provider
+			value={{ hasProvider: true, delay: resolvedDelayDuration }}
+		>
 			<TooltipPrimitive.Provider
 				data-slot="tooltip-provider"
 				delay={resolvedDelayDuration}
@@ -46,8 +51,15 @@ function TooltipProvider({
 	);
 }
 
-function Tooltip({ open: controlledOpen, onOpenChange, delay: localDelay, ...props } = {}) {
-	const { hasProvider, delay: providerDelay } = React.useContext(TooltipProviderContext);
+function Tooltip({
+	open: controlledOpen,
+	onOpenChange,
+	delay: localDelay,
+	...props
+} = {}) {
+	const { hasProvider, delay: providerDelay } = React.useContext(
+		TooltipProviderContext,
+	);
 	const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
 
 	const isControlled = controlledOpen !== undefined;
@@ -128,7 +140,9 @@ function Tooltip({ open: controlledOpen, onOpenChange, delay: localDelay, ...pro
 		return tooltipRoot;
 	}
 
-	return <TooltipProvider delay={effectiveDelay}>{tooltipRoot}</TooltipProvider>;
+	return (
+		<TooltipProvider delay={effectiveDelay}>{tooltipRoot}</TooltipProvider>
+	);
 }
 
 function TooltipTrigger({
@@ -326,11 +340,9 @@ function TooltipContent({
 	);
 }
 
-
 Tooltip.displayName = "Tooltip";
 TooltipTrigger.displayName = "TooltipTrigger";
 TooltipContent.displayName = "TooltipContent";
 TooltipProvider.displayName = "TooltipProvider";
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
-

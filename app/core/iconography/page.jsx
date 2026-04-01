@@ -14,7 +14,7 @@ import {
 	Info,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ForesightLink as Link } from "@/components/link";
 import { GridContainer, GridRow, GridItem } from "@/registry/optics/grid";
 import {
 	Card,
