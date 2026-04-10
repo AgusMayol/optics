@@ -3,13 +3,10 @@ import "./globals.css";
 import { ThemeProvider } from "./theme-provider";
 import { LayoutContent } from "./layout-content";
 import { VercelToolbar } from "@vercel/toolbar/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/registry/optics/sonner";
 import { ViewTransition } from "react";
 import { Header } from "./header";
 import { links } from "./layout-content";
-import { Footer } from "./footer";
 import { SidebarWidthProvider } from "./sidebar-width-provider";
 
 const interSans = Inter({
@@ -99,8 +96,6 @@ export default function RootLayout({ children }) {
 					disableTransitionOnChange
 				>
 					<ViewTransition>
-						<Analytics />
-						<SpeedInsights />
 						<SidebarWidthProvider>
 							<div className="col-start-1 row-start-1 lg:border-r lg:border-b border-dashed bg-background sticky top-0 z-20" />
 							<div className="col-start-2 row-start-1 border-b z-50 bg-background sticky top-0">
