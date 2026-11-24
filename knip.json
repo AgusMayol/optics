@@ -1,4 +1,0 @@
-{
-	"entry": ["registry/**/*.{js,jsx,ts,tsx}"],
-	"ignore": ["registry/**", "hooks/**", "lib/**", "scripts/**"]
-}

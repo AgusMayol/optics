@@ -1,18 +1,17 @@
 "use client";
 
 import type { ForesightRegisterOptions } from "js.foresight";
-import type { LinkProps } from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, type Ref } from "react";
+import type * as React from "react";
+import { useCallback } from "react";
 import useForesight from "@/hooks/use-foresight";
 
 interface ForesightLinkProps
-	extends Omit<LinkProps, "prefetch">,
+	extends
+		Omit<React.ComponentProps<typeof Link>, "prefetch">,
 		Omit<ForesightRegisterOptions, "element" | "callback"> {
 	children: React.ReactNode;
-	className?: string;
-	ref?: Ref<HTMLAnchorElement>;
 }
 
 export function ForesightLink({

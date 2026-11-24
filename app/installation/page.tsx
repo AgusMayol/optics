@@ -1,0 +1,84 @@
+"use client";
+
+import { Badge } from "@/registry/optics/badge";
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+} from "@/registry/optics/code-snippet";
+import { Separator } from "@/registry/optics/separator";
+
+export default function Page() {
+	const registryPrefix = "@optics";
+
+	return (
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-32 tracking-tight! truncate">Installation</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Optics is a collection of re-usable components built with Base UI and Tailwind CSS. It
+					follows the same philosophy as shadcn/ui - components are not installed as dependencies,
+					but copied directly into your project so you have full control over them.
+				</p>
+			</div>
+
+			<Separator decoration />
+
+			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
+				<div className="flex flex-col gap-4 w-full">
+					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
+							1
+						</Badge>
+						Install the shadcn CLI
+					</h2>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						Optics uses the official shadcn CLI to add components to your project.
+					</p>
+					<Snippet>
+						<SnippetHeader className="pl-4 flex gap-4 bg-transparent border-0">
+							<span className="text-xs font-mono">bunx --bun shadcn@latest init</span>
+							<SnippetCopyButton value="bunx --bun shadcn@latest init" />
+						</SnippetHeader>
+						<SnippetTabsContent>bunx --bun shadcn@latest init</SnippetTabsContent>
+					</Snippet>
+				</div>
+
+				<div className="flex flex-col gap-4 w-full">
+					<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 break-words">
+						<Badge
+							variant="outline"
+							className="tabular-nums aspect-square squircle-none rounded-sm"
+						>
+							2
+						</Badge>
+						Add components
+					</h2>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						Now you can add any component from the Optics registry:
+					</p>
+					<Snippet>
+						<SnippetHeader className="pl-4 flex gap-4 bg-transparent border-0">
+							<span className="text-xs font-mono">
+								bunx --bun shadcn@latest add {registryPrefix}/accordion
+							</span>
+							<SnippetCopyButton
+								value={`bunx --bun shadcn@latest add ${registryPrefix}/accordion`}
+							/>
+						</SnippetHeader>
+						<SnippetTabsContent>
+							bunx --bun shadcn@latest add {registryPrefix}/accordion
+						</SnippetTabsContent>
+					</Snippet>
+					<p className="text-sm text-muted-foreground">
+						This will copy the button component and its dependencies into your project.
+					</p>
+				</div>
+			</div>
+		</main>
+	);
+}

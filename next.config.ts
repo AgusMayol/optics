@@ -6,15 +6,13 @@ const nextConfig: NextConfig = {
 	reactCompiler: true,
 	reactStrictMode: true,
 	experimental: {
-		viewTransition: true,
 		turbopackFileSystemCacheForDev: true,
 		turbopackFileSystemCacheForBuild: true,
 		optimizePackageImports: ["lucide-react"],
 	},
 	turbopack: {
 		rules: {
-			// Archivos .jsx.txt se cargan como texto plano usando raw-loader
-			"{*.jsx.txt,*.js.txt,}": {
+			"{*.tsx.txt,*.ts.txt}": {
 				loaders: ["raw-loader"],
 				as: "*.js",
 			},

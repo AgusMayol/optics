@@ -1,0 +1,45 @@
+"use client";
+import type { ManualFile } from "@/components/installation-guide";
+import generatedProps from "@/registry/optics/dist/progress.json";
+import componentCode from "@/registry/optics/dist/progress.tsx.txt";
+import { Progress } from "@/registry/optics/progress";
+import { ComponentConfig, type ComponentConfigData } from "../layout";
+
+const componentFiles: ManualFile[] = [
+	{
+		path: "@/components/optics/progress.tsx",
+		code: componentCode,
+	},
+];
+
+const demoComponent = (
+	<div className="w-full max-w-md space-y-4">
+		<Progress value={33} />
+		<Progress value={66} />
+		<Progress value={100} />
+	</div>
+);
+
+const componentConfig: ComponentConfigData = {
+	header: {
+		title: "Progress",
+		description: "Displays an indicator showing the completion progress of a task.",
+		href: "https://ui.shadcn.com/docs/components/progress",
+		hrefText: "shadcn/ui",
+	},
+	content: {
+		children: demoComponent,
+		imports: `import { Progress } from "@/components/optics/progress";`,
+		filename: "progress.tsx",
+	},
+	installation: {
+		componentName: "progress",
+		dependencies: "",
+		manualFiles: componentFiles,
+	},
+	props: generatedProps,
+};
+
+export default function Page() {
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
+}

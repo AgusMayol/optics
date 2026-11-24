@@ -1,0 +1,681 @@
+"use client";
+
+import { ArrowUpRight } from "lucide-react";
+import { ForesightLink as Link } from "@/components/link";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/registry/optics/accordion";
+import { Badge } from "@/registry/optics/badge";
+import { Button } from "@/registry/optics/button";
+import { Card, CardFooter } from "@/registry/optics/card";
+import {
+	CodeBlock,
+	CodeBlockBody,
+	CodeBlockContent,
+	CodeBlockCopyButton,
+	type CodeBlockData,
+	CodeBlockHeader,
+	CodeBlockItem,
+	CodeBlockSelect,
+	CodeBlockSelectContent,
+	CodeBlockSelectItem,
+	CodeBlockSelectTrigger,
+	CodeBlockSelectValue,
+} from "@/registry/optics/code-block";
+import { Separator } from "@/registry/optics/separator";
+
+const completeMetadataCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/layout.js",
+		code: `export const metadata = {
+  metadataBase: new URL("https://yourdomain.com"),
+  title: {
+    default: "My Application - Main Tagline",
+    template: "%s | My Application",
+  },
+  description: "The best web application for your needs. Detailed description of what you offer.",
+  keywords: ["nextjs", "react", "web app", "seo", "typescript"],
+  authors: [{ name: "Your Name", url: "https://yourdomain.com" }],
+  creator: "Your Name",
+  publisher: "Your Company",
+
+  // Open Graph
+  openGraph: {
+    title: "My Application",
+    description: "The best web application for your needs",
+    url: "https://yourdomain.com",
+    siteName: "My Application",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "My Application Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  // Twitter
+  twitter: {
+    card: "summary_large_image",
+    title: "My Application",
+    description: "The best web application for your needs",
+    creator: "@yourusername",
+    images: ["/twitter-image.jpg"],
+  },
+
+  // Robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // Icons
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/shortcut-icon.png",
+    apple: "/apple-icon.png",
+  },
+
+  // Verification
+  verification: {
+    google: "your-google-verification-code",
+  },
+
+  // Alternates
+  alternates: {
+    canonical: "https://yourdomain.com",
+  },
+};`,
+	},
+];
+
+const dynamicMetadataCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/blog/[slug]/page.js",
+		code: `export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  // Fetch data
+  const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
+    .then((res) => res.json());
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: [post.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
+}
+
+export default function BlogPost({ params }) {
+  // Your component...
+}`,
+	},
+];
+
+const sitemapCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/sitemap.js",
+		code: `export default function sitemap() {
+  return [
+    {
+      url: "https://yourdomain.com",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 1,
+    },
+    {
+      url: "https://yourdomain.com/about",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://yourdomain.com/blog",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+  ];
+}`,
+	},
+];
+
+const robotsTxtCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/robots.js",
+		code: `export default function robots() {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/admin/", "/api/"],
+    },
+    sitemap: "https://yourdomain.com/sitemap.xml",
+  };
+}`,
+	},
+];
+
+const ogImageCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/opengraph-image.tsx",
+		code: `import { ImageResponse } from 'next/og';
+
+// Image metadata
+export const alt = 'My Application';
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = 'image/png';
+
+// Image generation
+export default async function Image() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 128,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        My Application
+      </div>
+    ),
+    {
+      ...size,
+    }
+  );
+}`,
+	},
+];
+
+const ogImageDynamicCode: [CodeBlockData, ...CodeBlockData[]] = [
+	{
+		language: "jsx",
+		filename: "app/blog/[slug]/opengraph-image.tsx",
+		code: `import { ImageResponse } from 'next/og';
+
+export const alt = 'Blog Post';
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = 'image/png';
+
+export default async function Image({ params }) {
+  const { slug } = await params;
+
+  // Fetch post data
+  const post = await fetch(\`https://api.yourdomain.com/posts/\${slug}\`)
+    .then((res) => res.json());
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          fontSize: 48,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {post.title}
+      </div>
+    ),
+    {
+      ...size,
+    }
+  );
+}`,
+	},
+];
+
+export default function Page() {
+	return (
+		<main className="min-h-[calc(100vh-128px)] flex flex-col flex-1 gap-8 bg-background">
+			<div className="flex flex-col gap-4 p-6 lg:p-12 pb-4">
+				<h1 className="text-32 tracking-tight! truncate">SEO & Metadata</h1>
+				<p className="text-muted-foreground text-20 font-normal! text-pretty">
+					Next.js includes a Metadata API that allows you to define metadata to improve your
+					application's SEO. This guide includes ready-to-copy examples for your Next.js project.
+				</p>
+			</div>
+
+			<Separator decoration />
+
+			<div className="flex flex-col items-start justify-start gap-12 lg:gap-24 p-6 lg:p-12 pt-4">
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
+										>
+											1
+										</Badge>
+										Complete Metadata
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
+					</div>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						Below is a complete example of the metadata setup, so you can easily copy it into your{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/layout.jsx
+						</Badge>
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type="single" collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										app/layout.jsx
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={completeMetadataCode}
+											defaultValue={completeMetadataCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem key={item.filename} value={item.filename}>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
+				</div>
+
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
+										>
+											2
+										</Badge>
+										Dynamic Metadata
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
+					</div>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						For pages with dynamic content (blogs, products, etc.), use{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							generateMetadata()
+						</Badge>
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type="single" collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										[slug]/page.jsx
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={dynamicMetadataCode}
+											defaultValue={dynamicMetadataCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 absolute right-0 z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-150 ease-in-out bg-transparent">
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem key={item.filename} value={item.filename}>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
+				</div>
+
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
+										>
+											3
+										</Badge>
+										Open Graph Image Generation
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
+					</div>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						Automatically generate Open Graph images using Next.js. Create{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/opengraph-image.tsx
+						</Badge>{" "}
+						or{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/[route]/opengraph-image.tsx
+						</Badge>{" "}
+						for dynamic routes. Next.js will automatically generate the image and add the correct
+						meta tags.
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type="single" collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										Open Graph Images
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={[...ogImageCode, ...ogImageDynamicCode]}
+											defaultValue={ogImageCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem key={item.filename} value={item.filename}>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={`og-${item.language}-${item.filename}`}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
+				</div>
+
+				<div className="flex flex-col gap-4 w-full">
+					<div className="flex items-center justify-between">
+						<Button
+							nativeButton={false}
+							variant="link"
+							className="gap-1"
+							render={
+								<Link
+									href="https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<h2 className="text-xl lg:text-[24px] leading-[1.2] tracking-[-0.02em] font-bold flex items-center gap-3 pb-4">
+										<Badge
+											variant="outline"
+											className="tabular-nums aspect-square squircle-none rounded-sm"
+										>
+											4
+										</Badge>
+										Sitemap & Robots.txt
+									</h2>
+									<ArrowUpRight size={16} className="mb-4" />
+								</Link>
+							}
+						/>
+					</div>
+					<p className="text-muted-foreground text-sm lg:leading-7">
+						Next.js automatically generates sitemap.xml and robots.txt files. Create{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/sitemap.js
+						</Badge>{" "}
+						and{" "}
+						<Badge variant="outline" className="text-xs font-mono">
+							app/robots.js
+						</Badge>{" "}
+						in your app directory. These files will be automatically served at{" "}
+						<code className="text-xs">/sitemap.xml</code> and{" "}
+						<code className="text-xs">/robots.txt</code>.
+					</p>
+					<Card className="pt-0 pb-0 bg-background">
+						<CardFooter className="px-0 py-0 pt-0! -mb-0! rounded-b-xl">
+							<Accordion type="single" collapsible className="w-full">
+								<AccordionItem value="codeblock" className="rounded-b-xl">
+									<AccordionTrigger
+										className="px-4 py-4 flex-row-reverse items-center justify-end [&>svg]:rotate-270 [&[data-panel-open]>svg]:rotate-360 hover:no-underline hover:cursor-pointer [data-state=open]:border-b rounded-none"
+										showArrow
+									>
+										Sitemap & Robots
+									</AccordionTrigger>
+									<AccordionContent
+										className="border-b-0 border-x-0 border-t pb-0 shadow-none"
+										keepRendered
+									>
+										<CodeBlock
+											data={[...sitemapCode, ...robotsTxtCode]}
+											defaultValue={sitemapCode[0].filename}
+											className="border-none rounded-none rounded-b-xl shadow-none group"
+										>
+											<CodeBlockHeader className="border-0 bg-sidebar flex items-center justify-between p-1">
+												<CodeBlockSelect>
+													<CodeBlockSelectTrigger>
+														<CodeBlockSelectValue />
+													</CodeBlockSelectTrigger>
+													<CodeBlockSelectContent>
+														{(item) => (
+															<CodeBlockSelectItem key={item.filename} value={item.filename}>
+																{item.filename}
+															</CodeBlockSelectItem>
+														)}
+													</CodeBlockSelectContent>
+												</CodeBlockSelect>
+												<CodeBlockCopyButton />
+											</CodeBlockHeader>
+											<CodeBlockBody>
+												{(item) => (
+													<CodeBlockItem
+														key={`sitemap-${item.language}-${item.filename}`}
+														value={item.filename}
+													>
+														<CodeBlockContent
+															language={item.language}
+															className="bg-sidebar text-[13px]"
+														>
+															{item.code}
+														</CodeBlockContent>
+													</CodeBlockItem>
+												)}
+											</CodeBlockBody>
+										</CodeBlock>
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardFooter>
+					</Card>
+				</div>
+			</div>
+
+			<Separator decoration />
+
+			<div className="flex flex-col items-start justify-start gap-12 p-6 lg:p-12 pt-4">
+				<h3 className="text-xl font-semibold">Additional SEO Tips</h3>
+				<ul className="list-disc list-inside space-y-2 text-muted-foreground">
+					<li>
+						<strong>OG Images:</strong> Use 1200x630px for Open Graph (Facebook, LinkedIn)
+					</li>
+					<li>
+						<strong>Twitter Images:</strong> 1200x600px works best for Twitter Cards
+					</li>
+					<li>
+						<strong>Description:</strong> Between 150-160 characters is ideal for Google
+					</li>
+					<li>
+						<strong>Title:</strong> Maximum 60 characters to avoid truncation in results
+					</li>
+					<li>
+						<strong>Keywords:</strong> 5-10 relevant keywords is sufficient
+					</li>
+				</ul>
+
+				<div className="w-full flex items-center gap-8">
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link href="https://www.newcopy.ai/m/tools" target="_blank" rel="noopener noreferrer">
+								AI Marketing Tools
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
+
+					<Button
+						nativeButton={false}
+						variant="link"
+						render={
+							<Link href="https://www.cleanmyseo.com/" target="_blank" rel="noopener noreferrer">
+								Clean My SEO
+								<ArrowUpRight size={16} />
+							</Link>
+						}
+					/>
+				</div>
+			</div>
+		</main>
+	);
+}
