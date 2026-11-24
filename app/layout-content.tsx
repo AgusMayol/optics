@@ -112,6 +112,99 @@ export const links: NavLinkGroup[] = [
 		],
 	},
 	{
+		name: "AI Elements",
+		items: [
+			{
+				name: "Overview",
+				href: "/ai-elements",
+			},
+			{
+				name: "Chain of Thought",
+				href: "/ai-elements/chain-of-thought",
+			},
+			{
+				name: "Chat",
+				href: "/ai-elements/chat",
+			},
+			{
+				name: "Checkpoint",
+				href: "/ai-elements/checkpoint",
+			},
+			{
+				name: "Confirmation",
+				href: "/ai-elements/confirmation",
+			},
+			{
+				name: "Context",
+				href: "/ai-elements/context",
+			},
+			{
+				name: "File Tree",
+				href: "/ai-elements/file-tree",
+			},
+			{
+				name: "Inline Citation",
+				href: "/ai-elements/inline-citation",
+			},
+			{
+				name: "Message",
+				href: "/ai-elements/message",
+			},
+			{
+				name: "Model Selector",
+				href: "/ai-elements/model-selector",
+			},
+			{
+				name: "Plan",
+				href: "/ai-elements/plan",
+			},
+			{
+				name: "Prompt Input",
+				href: "/ai-elements/prompt-input",
+			},
+			{
+				name: "Queue",
+				href: "/ai-elements/queue",
+			},
+			{
+				name: "Reasoning",
+				href: "/ai-elements/reasoning",
+			},
+			{
+				name: "Sources",
+				href: "/ai-elements/sources",
+			},
+			{
+				name: "Stack Trace",
+				href: "/ai-elements/stack-trace",
+			},
+			{
+				name: "Subagent",
+				href: "/ai-elements/subagent",
+			},
+			{
+				name: "Suggestion",
+				href: "/ai-elements/suggestion",
+			},
+			{
+				name: "Task",
+				href: "/ai-elements/task",
+			},
+			{
+				name: "Terminal",
+				href: "/ai-elements/terminal",
+			},
+			{
+				name: "Test Results",
+				href: "/ai-elements/test-results",
+			},
+			{
+				name: "Tool",
+				href: "/ai-elements/tool",
+			},
+		],
+	},
+	{
 		name: "Components",
 		items: [
 			{

@@ -1314,6 +1314,417 @@
 			]
 		},
 		{
+			"name": "ai-chain-of-thought",
+			"type": "registry:component",
+			"title": "AI Chain of Thought",
+			"description": "A collapsible reasoning summary expanding into the steps an agent took.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/chain-of-thought.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/chain-of-thought.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-chat",
+			"type": "registry:component",
+			"title": "AI Chat",
+			"description": "Scrollable agent conversation viewport backed by Message Scroller with sticky bottom tracking.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/empty.json",
+				"https://optics.agusmayol.com.ar/r/message-scroller.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/chat.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/chat.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-checkpoint",
+			"type": "registry:component",
+			"title": "AI Checkpoint",
+			"description": "Marks a restore point in a conversation thread with an icon, label, and trigger button.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/marker.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/checkpoint.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/checkpoint.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-confirmation",
+			"type": "registry:component",
+			"title": "AI Confirmation",
+			"description": "Approval request prompt displaying pending, approved, and rejected tool execution states.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/confirmation.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/confirmation.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-context",
+			"type": "registry:component",
+			"title": "AI Context",
+			"description": "Displays token context window utilization with a circular gauge and breakdown hover card.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/hover-card.json",
+				"https://optics.agusmayol.com.ar/r/progress.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/context.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/context.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-file-tree",
+			"type": "registry:component",
+			"title": "AI File Tree",
+			"description": "Collapsible folder tree showing modified, added, and deleted workspace files.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/file-tree.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/file-tree.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-inline-citation",
+			"type": "registry:component",
+			"title": "AI Inline Citation",
+			"description": "Inline source attribution pill with a hover card carousel for inspecting quotes and URLs.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/hover-card.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/inline-citation.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/inline-citation.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-message",
+			"type": "registry:component",
+			"title": "AI Message",
+			"description": "Turn container supporting message branching, copy controls, actions, and role alignment.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/bubble.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/message.json",
+				"https://optics.agusmayol.com.ar/r/tooltip.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/message.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/message.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-model-selector",
+			"type": "registry:component",
+			"title": "AI Model Selector",
+			"description": "Grouped model and reasoning-effort selector menus with integrated prompt composer.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/dropdown-menu.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/model-selector.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/model-selector.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-plan",
+			"type": "registry:component",
+			"title": "AI Plan",
+			"description": "Structured execution plan displaying overall progress and expandable step details.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/progress.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/plan.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/plan.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-prompt-input",
+			"type": "registry:component",
+			"title": "AI Prompt Input",
+			"description": "Chat composer with file attachments, keyboard submission shortcuts, and streaming status.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/attachment.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/prompt-input.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/prompt-input.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-queue",
+			"type": "registry:component",
+			"title": "AI Queue",
+			"description": "Agent task queue splitting pending and completed work into collapsible trace sections.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/queue.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/queue.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-reasoning",
+			"type": "registry:component",
+			"title": "AI Reasoning",
+			"description": "Collapsible thinking panel showing live streaming shimmer and elapsed reasoning time.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/reasoning.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/reasoning.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-sources",
+			"type": "registry:component",
+			"title": "AI Sources",
+			"description": "Collapsible reference list rendering external links cited by an agent reply.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/sources.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/sources.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-stack-trace",
+			"type": "registry:component",
+			"title": "AI Stack Trace",
+			"description": "Expandable error frame viewer with copy controls and selectable stack frame lines.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/stack-trace.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/stack-trace.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-subagent",
+			"type": "registry:component",
+			"title": "AI Subagent",
+			"description": "Displays a delegated subagent execution run with nested tool calls and final result.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/subagent.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/subagent.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-suggestion",
+			"type": "registry:component",
+			"title": "AI Suggestion",
+			"description": "Horizontal scrollable row of one-click prompt suggestions for the user.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/suggestion.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/suggestion.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-task",
+			"type": "registry:component",
+			"title": "AI Task",
+			"description": "Step-by-step agent activity tracker with status icons and affected file badges.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/task.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/task.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-terminal",
+			"type": "registry:component",
+			"title": "AI Terminal",
+			"description": "Collapsible shell command log with exit code badge, output preview, and copy button.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/terminal.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/terminal.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-test-results",
+			"type": "registry:component",
+			"title": "AI Test Results",
+			"description": "Test execution summary with collapsible suites, individual test cases, and failure traces.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/test-results.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/test-results.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-tool",
+			"type": "registry:component",
+			"title": "AI Tool",
+			"description": "Displays an agent tool invocation lifecycle across streaming, approval, output, and error states.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/tool.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/tool.tsx"
+				}
+			]
+		},
+		{
 			"name": "get-strict-context",
 			"type": "registry:lib",
 			"title": "Get strict context",

@@ -13,15 +13,16 @@ export function ComponentNavigation() {
 		currentPathname: string,
 		direction: "previous" | "next" = "previous",
 	): NavLinkItem | null {
-		const componentsSection = links.find(
-			(section) => section.name && section.name.toLowerCase().includes("component"),
+		const currentSection = links.find(
+			(section) =>
+				Array.isArray(section.items) && section.items.some((item) => item.href === currentPathname),
 		);
 
-		if (!componentsSection || !Array.isArray(componentsSection.items)) {
+		if (!currentSection || !Array.isArray(currentSection.items)) {
 			return null;
 		}
 
-		const items = componentsSection.items;
+		const items = currentSection.items.filter((item) => !item.disabled);
 		const currentIdx = items.findIndex((item) => item.href === currentPathname);
 
 		if (currentIdx === -1) return null;
