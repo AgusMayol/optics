@@ -1,6 +1,6 @@
 import { VercelToolbar } from "@vercel/toolbar/next";
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { Geist_Mono, Instrument_Serif, Roboto_Flex } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
 import { Toaster } from "@/registry/optics/sonner";
@@ -9,9 +9,10 @@ import { LayoutContent, links } from "./layout-content";
 import { SidebarWidthProvider } from "./sidebar-width-provider";
 import { ThemeProvider } from "./theme-provider";
 
-const interSans = Inter({
-	variable: "--font-inter-sans",
+const robotoFlex = Roboto_Flex({
+	variable: "--font-roboto-flex",
 	subsets: ["latin"],
+	display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -75,7 +76,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const shouldInjectToolbar = process.env.NODE_ENV === "development";
+	const shouldInjectToolbar = Boolean(process.env.VERCEL);
 	const domain = process.env.NEXT_PUBLIC_DOMAIN || "optics.agusmayol.com.ar";
 	const jsonLd = {
 		"@context": "https://schema.org",
@@ -86,10 +87,12 @@ export default function RootLayout({
 	};
 
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body
-				className={`${interSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background grid grid-cols-[1fr_minmax(0,1280px)_1fr] grid-rows-[1fr_auto]`}
-			>
+		<html
+			lang="en"
+			className={`${robotoFlex.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+			suppressHydrationWarning
+		>
+			<body className="font-sans antialiased bg-background grid grid-cols-[1fr_minmax(0,1280px)_1fr] grid-rows-[1fr_auto]">
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{

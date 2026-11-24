@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
 		optimizePackageImports: ["lucide-react"],
 	},
 	turbopack: {
+		root: import.meta.dirname,
 		rules: {
 			"{*.tsx.txt,*.ts.txt}": {
 				loaders: ["raw-loader"],
@@ -65,5 +66,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-const withVercelToolbar = createWithVercelToolbar();
-export default withVercelToolbar(nextConfig);
+export default process.env.VERCEL ? createWithVercelToolbar()(nextConfig) : nextConfig;

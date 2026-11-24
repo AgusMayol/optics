@@ -77,7 +77,7 @@ import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-
 	},
 	installation: {
 		componentName: "command",
-		dependencies: "",
+		dependencies: "@base-ui/react lucide-react",
 		manualFiles: componentFiles,
 	},
 	props: generatedProps,

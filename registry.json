@@ -71,6 +71,24 @@
 			]
 		},
 		{
+			"name": "attachment",
+			"type": "registry:component",
+			"title": "Attachment",
+			"description": "Displays uploaded files, media previews, and actions in horizontal or vertical layouts.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/attachment.tsx",
+					"type": "registry:component",
+					"target": "components/optics/attachment.tsx"
+				}
+			]
+		},
+		{
 			"name": "avatar",
 			"type": "registry:component",
 			"title": "Avatar",
@@ -118,6 +136,21 @@
 					"path": "registry/optics/breadcrumb.tsx",
 					"type": "registry:component",
 					"target": "components/optics/breadcrumb.tsx"
+				}
+			]
+		},
+		{
+			"name": "bubble",
+			"type": "registry:component",
+			"title": "Bubble",
+			"description": "Styled chat message bubble with alignment variants and reaction badges.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/bubble.tsx",
+					"type": "registry:component",
+					"target": "components/optics/bubble.tsx"
 				}
 			]
 		},
@@ -306,6 +339,25 @@
 			]
 		},
 		{
+			"name": "combobox",
+			"type": "registry:component",
+			"title": "Combobox",
+			"description": "Autocomplete input and command palette with filterable dropdown options and chips.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/combobox.tsx",
+					"type": "registry:component",
+					"target": "components/optics/combobox.tsx"
+				}
+			]
+		},
+		{
 			"name": "command",
 			"type": "registry:component",
 			"title": "Command",
@@ -315,7 +367,7 @@
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["cmdk", "lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
 					"path": "registry/optics/command.tsx",
@@ -392,6 +444,21 @@
 					"path": "registry/optics/dialog.tsx",
 					"type": "registry:component",
 					"target": "components/optics/dialog.tsx"
+				}
+			]
+		},
+		{
+			"name": "direction",
+			"type": "registry:component",
+			"title": "Direction",
+			"description": "Provides RTL or LTR text direction context for interactive components.",
+			"registryDependencies": [],
+			"dependencies": ["@base-ui/react"],
+			"files": [
+				{
+					"path": "registry/optics/direction.tsx",
+					"type": "registry:component",
+					"target": "components/optics/direction.tsx"
 				}
 			]
 		},
@@ -627,6 +694,21 @@
 			]
 		},
 		{
+			"name": "marker",
+			"type": "registry:component",
+			"title": "Marker",
+			"description": "Highlights status indicators, badges, or timeline waypoints with icons and content.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/marker.tsx",
+					"type": "registry:component",
+					"target": "components/optics/marker.tsx"
+				}
+			]
+		},
+		{
 			"name": "menubar",
 			"type": "registry:component",
 			"title": "Menubar",
@@ -641,6 +723,39 @@
 					"path": "registry/optics/menubar.tsx",
 					"type": "registry:component",
 					"target": "components/optics/menubar.tsx"
+				}
+			]
+		},
+		{
+			"name": "message",
+			"type": "registry:component",
+			"title": "Message",
+			"description": "Structured chat message container with header, avatar, content, and footer slots.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/message.tsx",
+					"type": "registry:component",
+					"target": "components/optics/message.tsx"
+				}
+			]
+		},
+		{
+			"name": "message-scroller",
+			"type": "registry:component",
+			"title": "Message Scroller",
+			"description": "Scrollable message viewport with sticky-to-bottom tracking and scroll-to-latest control.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@shadcn/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/message-scroller.tsx",
+					"type": "registry:component",
+					"target": "components/optics/message-scroller.tsx"
 				}
 			]
 		},
@@ -661,6 +776,21 @@
 					"path": "registry/optics/multi-select.tsx",
 					"type": "registry:component",
 					"target": "components/optics/multi-select.tsx"
+				}
+			]
+		},
+		{
+			"name": "native-select",
+			"type": "registry:component",
+			"title": "Native Select",
+			"description": "Accessible styled native HTML select control with option group support.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/native-select.tsx",
+					"type": "registry:component",
+					"target": "components/optics/native-select.tsx"
 				}
 			]
 		},
@@ -733,6 +863,24 @@
 					"path": "registry/optics/progress.tsx",
 					"type": "registry:component",
 					"target": "components/optics/progress.tsx"
+				}
+			]
+		},
+		{
+			"name": "questionnaire",
+			"type": "registry:component",
+			"title": "Questionnaire",
+			"description": "Multi-step guided form and quiz flow with progress bar, choices, and validation.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@shadcn/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/questionnaire.tsx",
+					"type": "registry:component",
+					"target": "components/optics/questionnaire.tsx"
 				}
 			]
 		},
@@ -1079,6 +1227,24 @@
 			]
 		},
 		{
+			"name": "toast",
+			"type": "registry:component",
+			"title": "Toast",
+			"description": "Accessible notification toast manager, viewport, and dismissible message cards.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/toast.tsx",
+					"type": "registry:component",
+					"target": "components/optics/toast.tsx"
+				}
+			]
+		},
+		{
 			"name": "toggle-group",
 			"type": "registry:component",
 			"title": "Toggle Group",
@@ -1126,6 +1292,24 @@
 					"path": "registry/optics/tooltip.tsx",
 					"type": "registry:component",
 					"target": "components/optics/tooltip.tsx"
+				}
+			]
+		},
+		{
+			"name": "trace",
+			"type": "registry:component",
+			"title": "Trace",
+			"description": "Displays step-by-step execution traces with status icons and collapsible details.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/trace.tsx",
+					"type": "registry:component",
+					"target": "components/optics/trace.tsx"
 				}
 			]
 		},

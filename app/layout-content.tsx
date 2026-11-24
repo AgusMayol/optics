@@ -131,6 +131,10 @@ export const links: NavLinkGroup[] = [
 				href: "/components/aspect-ratio",
 			},
 			{
+				name: "Attachment",
+				href: "/components/attachment",
+			},
+			{
 				name: "Avatar",
 				href: "/components/avatar",
 			},
@@ -141,6 +145,10 @@ export const links: NavLinkGroup[] = [
 			{
 				name: "Breadcrumb",
 				href: "/components/breadcrumb",
+			},
+			{
+				name: "Bubble",
+				href: "/components/bubble",
 			},
 			{
 				name: "Button",
@@ -183,6 +191,10 @@ export const links: NavLinkGroup[] = [
 				href: "/components/collapsible",
 			},
 			{
+				name: "Combobox",
+				href: "/components/combobox",
+			},
+			{
 				name: "Command",
 				href: "/components/command",
 			},
@@ -201,6 +213,10 @@ export const links: NavLinkGroup[] = [
 			{
 				name: "Dialog",
 				href: "/components/dialog",
+			},
+			{
+				name: "Direction",
+				href: "/components/direction",
 			},
 			{
 				name: "Drawer",
@@ -259,12 +275,28 @@ export const links: NavLinkGroup[] = [
 				href: "/components/label",
 			},
 			{
+				name: "Marker",
+				href: "/components/marker",
+			},
+			{
 				name: "Menubar",
 				href: "/components/menubar",
 			},
 			{
+				name: "Message",
+				href: "/components/message",
+			},
+			{
+				name: "Message Scroller",
+				href: "/components/message-scroller",
+			},
+			{
 				name: "Multi Select",
 				href: "/components/multi-select",
+			},
+			{
+				name: "Native Select",
+				href: "/components/native-select",
 			},
 			{
 				name: "Navigation Menu",
@@ -281,6 +313,10 @@ export const links: NavLinkGroup[] = [
 			{
 				name: "Progress",
 				href: "/components/progress",
+			},
+			{
+				name: "Questionnaire",
+				href: "/components/questionnaire",
 			},
 			{
 				name: "Radio Group",
@@ -359,6 +395,10 @@ export const links: NavLinkGroup[] = [
 				href: "/components/timezone",
 			},
 			{
+				name: "Toast",
+				href: "/components/toast",
+			},
+			{
 				name: "Toggle",
 				href: "/components/toggle",
 			},
@@ -369,6 +409,10 @@ export const links: NavLinkGroup[] = [
 			{
 				name: "Tooltip",
 				href: "/components/tooltip",
+			},
+			{
+				name: "Trace",
+				href: "/components/trace",
 			},
 		],
 	},

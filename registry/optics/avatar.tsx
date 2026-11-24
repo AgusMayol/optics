@@ -137,7 +137,7 @@ function AvatarImage({
 			width={width}
 			height={height}
 			alt={alt}
-			onLoadingComplete={() => setLoaded(true)}
+			onLoad={() => setLoaded(true)}
 			onError={() => setLoaded(false)}
 			{...props}
 		/>
