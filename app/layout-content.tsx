@@ -1,0 +1,545 @@
+"use client";
+import type * as React from "react";
+import { useElementHeight } from "@/hooks/use-element-height";
+import { Footer } from "./footer";
+import { Sidebar } from "./sidebar";
+import { useSidebarWidth } from "./sidebar-width-provider";
+
+export interface NavLinkItem {
+	name: string;
+	href: string;
+	disabled?: boolean;
+	logo?: string;
+	logoDark?: string;
+}
+
+export interface NavLinkGroup {
+	name: string;
+	items: NavLinkItem[];
+}
+
+export const links: NavLinkGroup[] = [
+	{
+		name: "Core",
+		items: [
+			{
+				name: "Introduction",
+				href: "/",
+			},
+			{
+				name: "Installation",
+				href: "/installation",
+			},
+			{
+				name: "Typography",
+				href: "/core/typography",
+			},
+			{
+				name: "Iconography",
+				href: "/core/iconography",
+			},
+			{
+				name: "Materials",
+				href: "/core/materials",
+			},
+			{
+				name: "Colors",
+				href: "/core/colors",
+			},
+		],
+	},
+	{
+		name: "Resources",
+		items: [
+			{
+				name: "Web Interface Guidelines",
+				href: "https://vercel.com/design/guidelines",
+			},
+			{
+				name: "SEO & Metadata",
+				href: "/resources/seo-metadata",
+			},
+			{
+				name: "Performance",
+				href: "/resources/performance",
+			},
+			{
+				name: "Accesibility",
+				href: "/resources/accesibility",
+			},
+			{
+				name: "Animations",
+				href: "/resources/animations",
+			},
+			{
+				name: "Security",
+				href: "/resources/security",
+			},
+		],
+	},
+	{
+		name: "Collections",
+		items: [
+			{
+				name: "Cursor Rules & MCPs",
+				href: "/collections/cursor-rules",
+			},
+			{
+				name: "Next.js Configuration",
+				href: "/collections/nextjs-configuration",
+				disabled: true,
+			},
+			{
+				name: "Biome Configuration",
+				href: "/collections/biome",
+				disabled: true,
+			},
+			{
+				name: "Tailwind Variables",
+				href: "/resources/tailwind-variables",
+				disabled: true,
+			},
+			{
+				name: "Gitignore File",
+				href: "/collections/gitignore",
+				disabled: true,
+			},
+			{
+				name: "Hooks",
+				href: "/collections/hooks",
+				disabled: true,
+			},
+		],
+	},
+	{
+		name: "AI Elements",
+		items: [
+			{
+				name: "Overview",
+				href: "/ai-elements",
+			},
+			{
+				name: "Chain of Thought",
+				href: "/ai-elements/chain-of-thought",
+			},
+			{
+				name: "Chat",
+				href: "/ai-elements/chat",
+			},
+			{
+				name: "Checkpoint",
+				href: "/ai-elements/checkpoint",
+			},
+			{
+				name: "Confirmation",
+				href: "/ai-elements/confirmation",
+			},
+			{
+				name: "Context",
+				href: "/ai-elements/context",
+			},
+			{
+				name: "File Tree",
+				href: "/ai-elements/file-tree",
+			},
+			{
+				name: "Inline Citation",
+				href: "/ai-elements/inline-citation",
+			},
+			{
+				name: "Message",
+				href: "/ai-elements/message",
+			},
+			{
+				name: "Model Selector",
+				href: "/ai-elements/model-selector",
+			},
+			{
+				name: "Plan",
+				href: "/ai-elements/plan",
+			},
+			{
+				name: "Prompt Input",
+				href: "/ai-elements/prompt-input",
+			},
+			{
+				name: "Queue",
+				href: "/ai-elements/queue",
+			},
+			{
+				name: "Reasoning",
+				href: "/ai-elements/reasoning",
+			},
+			{
+				name: "Sources",
+				href: "/ai-elements/sources",
+			},
+			{
+				name: "Stack Trace",
+				href: "/ai-elements/stack-trace",
+			},
+			{
+				name: "Subagent",
+				href: "/ai-elements/subagent",
+			},
+			{
+				name: "Suggestion",
+				href: "/ai-elements/suggestion",
+			},
+			{
+				name: "Task",
+				href: "/ai-elements/task",
+			},
+			{
+				name: "Terminal",
+				href: "/ai-elements/terminal",
+			},
+			{
+				name: "Test Results",
+				href: "/ai-elements/test-results",
+			},
+			{
+				name: "Tool",
+				href: "/ai-elements/tool",
+			},
+		],
+	},
+	{
+		name: "Components",
+		items: [
+			{
+				name: "Accordion",
+				href: "/components/accordion",
+			},
+			{
+				name: "Alert",
+				href: "/components/alert",
+			},
+			{
+				name: "Alert Dialog",
+				href: "/components/alert-dialog",
+			},
+			{
+				name: "Aspect Ratio",
+				href: "/components/aspect-ratio",
+			},
+			{
+				name: "Attachment",
+				href: "/components/attachment",
+			},
+			{
+				name: "Avatar",
+				href: "/components/avatar",
+			},
+			{
+				name: "Badge",
+				href: "/components/badge",
+			},
+			{
+				name: "Breadcrumb",
+				href: "/components/breadcrumb",
+			},
+			{
+				name: "Bubble",
+				href: "/components/bubble",
+			},
+			{
+				name: "Button",
+				href: "/components/button",
+			},
+			{
+				name: "Button Group",
+				href: "/components/button-group",
+			},
+			{
+				name: "Calendar",
+				href: "/components/calendar",
+			},
+			{
+				name: "Card",
+				href: "/components/card",
+			},
+			{
+				name: "Carousel",
+				href: "/components/carousel",
+			},
+			{
+				name: "Chart",
+				href: "/components/chart",
+			},
+			{
+				name: "Checkbox",
+				href: "/components/checkbox",
+			},
+			{
+				name: "Code Block",
+				href: "/components/code-block",
+			},
+			{
+				name: "Code Snippet",
+				href: "/components/code-snippet",
+			},
+			{
+				name: "Collapsible",
+				href: "/components/collapsible",
+			},
+			{
+				name: "Combobox",
+				href: "/components/combobox",
+			},
+			{
+				name: "Command",
+				href: "/components/command",
+			},
+			{
+				name: "Context Menu",
+				href: "/components/context-menu",
+			},
+			{
+				name: "Data Table",
+				href: "/components/data-table",
+			},
+			{
+				name: "Date Picker",
+				href: "/components/date-picker",
+			},
+			{
+				name: "Dialog",
+				href: "/components/dialog",
+			},
+			{
+				name: "Direction",
+				href: "/components/direction",
+			},
+			{
+				name: "Drawer",
+				href: "/components/drawer",
+			},
+			{
+				name: "Dropdown Menu",
+				href: "/components/dropdown-menu",
+			},
+			{
+				name: "Empty",
+				href: "/components/empty",
+			},
+			{
+				name: "Field",
+				href: "/components/field",
+			},
+			{
+				name: "Form",
+				href: "/components/form",
+			},
+			{
+				name: "Grid",
+				href: "/components/grid",
+			},
+			{
+				name: "Guided Tour",
+				href: "/components/guided-tour",
+			},
+			{
+				name: "Hover Card",
+				href: "/components/hover-card",
+			},
+			{
+				name: "Input",
+				href: "/components/input",
+			},
+			{
+				name: "Input Group",
+				href: "/components/input-group",
+			},
+			{
+				name: "Input OTP",
+				href: "/components/input-otp",
+			},
+			{
+				name: "Item",
+				href: "/components/item",
+			},
+			{
+				name: "Kbd",
+				href: "/components/kbd",
+			},
+			{
+				name: "Label",
+				href: "/components/label",
+			},
+			{
+				name: "Marker",
+				href: "/components/marker",
+			},
+			{
+				name: "Menubar",
+				href: "/components/menubar",
+			},
+			{
+				name: "Message",
+				href: "/components/message",
+			},
+			{
+				name: "Message Scroller",
+				href: "/components/message-scroller",
+			},
+			{
+				name: "Multi Select",
+				href: "/components/multi-select",
+			},
+			{
+				name: "Native Select",
+				href: "/components/native-select",
+			},
+			{
+				name: "Navigation Menu",
+				href: "/components/navigation-menu",
+			},
+			{
+				name: "Pagination",
+				href: "/components/pagination",
+			},
+			{
+				name: "Popover",
+				href: "/components/popover",
+			},
+			{
+				name: "Progress",
+				href: "/components/progress",
+			},
+			{
+				name: "Questionnaire",
+				href: "/components/questionnaire",
+			},
+			{
+				name: "Radio Group",
+				href: "/components/radio-group",
+			},
+			{
+				name: "Resizable",
+				href: "/components/resizable",
+			},
+			{
+				name: "Scroll Area",
+				href: "/components/scroll-area",
+			},
+			{
+				name: "Select",
+				href: "/components/select",
+			},
+			{
+				name: "Separator",
+				href: "/components/separator",
+			},
+			{
+				name: "Sheet",
+				href: "/components/sheet",
+			},
+			{
+				name: "Show More",
+				href: "/components/show-more",
+			},
+			{
+				name: "Sidebar",
+				href: "/components/sidebar",
+			},
+			{
+				name: "Skeleton",
+				href: "/components/skeleton",
+			},
+			{
+				name: "Slider",
+				href: "/components/slider",
+			},
+			{
+				name: "Sonner",
+				href: "/components/sonner",
+			},
+			{
+				name: "Spinner",
+				href: "/components/spinner",
+			},
+			{
+				name: "Star Rating",
+				href: "/components/star-rating",
+			},
+			{
+				name: "Switch",
+				href: "/components/switch",
+			},
+			{
+				name: "Table",
+				href: "/components/table",
+			},
+			{
+				name: "Tabs",
+				href: "/components/tabs",
+			},
+			{
+				name: "Textarea",
+				href: "/components/textarea",
+			},
+			{
+				name: "Theme Switcher",
+				href: "/components/theme-switcher",
+			},
+			{
+				name: "Timezone",
+				href: "/components/timezone",
+			},
+			{
+				name: "Toast",
+				href: "/components/toast",
+			},
+			{
+				name: "Toggle",
+				href: "/components/toggle",
+			},
+			{
+				name: "Toggle Group",
+				href: "/components/toggle-group",
+			},
+			{
+				name: "Tooltip",
+				href: "/components/tooltip",
+			},
+			{
+				name: "Trace",
+				href: "/components/trace",
+			},
+		],
+	},
+	{
+		name: "",
+		items: [
+			{
+				name: "MCP Server",
+				href: "/mcp-server",
+				logo: "/images/mcp.svg",
+			},
+			{
+				name: "llms.txt",
+				href: "https://optics.agusmayol.com.ar/llms.txt",
+			},
+		],
+	},
+];
+
+export function LayoutContent({ children }: { children: React.ReactNode }) {
+	const [contentRef, contentHeight] = useElementHeight();
+	const { sidebarWidth } = useSidebarWidth();
+	const computedSidebarWidth = sidebarWidth > 0 ? `${sidebarWidth}px` : undefined;
+
+	return (
+		<div className="w-full h-full grid grid-cols-14 min-h-svh items-start col-start-2 row-start-2 col-span-full lg:col-span-1 bg-background">
+			<Sidebar links={links} maxHeight={contentHeight} width={computedSidebarWidth} />
+			<div
+				ref={contentRef}
+				className="w-full col-span-full lg:col-start-4 lg:col-span-11 flex flex-col flex-1 lg:bg-sidebar"
+			>
+				{children}
+				<Footer />
+			</div>
+		</div>
+	);
+}

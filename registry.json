@@ -13,18 +13,12 @@
 				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"motion",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/accordion.jsx",
+					"path": "registry/optics/accordion.tsx",
 					"type": "registry:component",
-					"target": "components/optics/accordion.jsx"
+					"target": "components/optics/accordion.tsx"
 				}
 			]
 		},
@@ -37,17 +31,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/alert-dialog.jsx",
+					"path": "registry/optics/alert-dialog.tsx",
 					"type": "registry:component",
-					"target": "components/optics/alert-dialog.jsx"
+					"target": "components/optics/alert-dialog.tsx"
 				}
 			]
 		},
@@ -57,17 +46,12 @@
 			"title": "Alert",
 			"description": "Displays a callout for user attention.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"class-variance-authority",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["class-variance-authority", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/alert.jsx",
+					"path": "registry/optics/alert.tsx",
 					"type": "registry:component",
-					"target": "components/optics/alert.jsx"
+					"target": "components/optics/alert.tsx"
 				}
 			]
 		},
@@ -80,9 +64,27 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/aspect-ratio.jsx",
+					"path": "registry/optics/aspect-ratio.tsx",
 					"type": "registry:component",
-					"target": "components/optics/aspect-ratio.jsx"
+					"target": "components/optics/aspect-ratio.tsx"
+				}
+			]
+		},
+		{
+			"name": "attachment",
+			"type": "registry:component",
+			"title": "Attachment",
+			"description": "Displays uploaded files, media previews, and actions in horizontal or vertical layouts.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/attachment.tsx",
+					"type": "registry:component",
+					"target": "components/optics/attachment.tsx"
 				}
 			]
 		},
@@ -98,9 +100,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/avatar.jsx",
+					"path": "registry/optics/avatar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/avatar.jsx"
+					"target": "components/optics/avatar.tsx"
 				}
 			]
 		},
@@ -110,17 +112,12 @@
 			"title": "Badge",
 			"description": "Displays a badge or a component that looks like a badge.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/badge.jsx",
+					"path": "registry/optics/badge.tsx",
 					"type": "registry:component",
-					"target": "components/optics/badge.jsx"
+					"target": "components/optics/badge.tsx"
 				}
 			]
 		},
@@ -133,17 +130,27 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/breadcrumb.jsx",
+					"path": "registry/optics/breadcrumb.tsx",
 					"type": "registry:component",
-					"target": "components/optics/breadcrumb.jsx"
+					"target": "components/optics/breadcrumb.tsx"
+				}
+			]
+		},
+		{
+			"name": "bubble",
+			"type": "registry:component",
+			"title": "Bubble",
+			"description": "Styled chat message bubble with alignment variants and reaction badges.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/bubble.tsx",
+					"type": "registry:component",
+					"target": "components/optics/bubble.tsx"
 				}
 			]
 		},
@@ -157,17 +164,12 @@
 				"https://optics.agusmayol.com.ar/r/separator.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/button-group.jsx",
+					"path": "registry/optics/button-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/button-group.jsx"
+					"target": "components/optics/button-group.tsx"
 				}
 			]
 		},
@@ -177,17 +179,12 @@
 			"title": "Button",
 			"description": "Displays a button or a component that looks like a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/button.jsx",
+					"path": "registry/optics/button.tsx",
 					"type": "registry:component",
-					"target": "components/optics/button.jsx"
+					"target": "components/optics/button.tsx"
 				}
 			]
 		},
@@ -200,18 +197,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"react-day-picker",
-				"date-fns",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["react-day-picker", "date-fns", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/calendar.jsx",
+					"path": "registry/optics/calendar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/calendar.jsx"
+					"target": "components/optics/calendar.tsx"
 				}
 			]
 		},
@@ -224,9 +215,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/card.jsx",
+					"path": "registry/optics/card.tsx",
 					"type": "registry:component",
-					"target": "components/optics/card.jsx"
+					"target": "components/optics/card.tsx"
 				}
 			]
 		},
@@ -239,17 +230,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"embla-carousel-react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["embla-carousel-react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/carousel.jsx",
+					"path": "registry/optics/carousel.tsx",
 					"type": "registry:component",
-					"target": "components/optics/carousel.jsx"
+					"target": "components/optics/carousel.tsx"
 				}
 			]
 		},
@@ -262,9 +248,9 @@
 			"dependencies": ["recharts", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/chart.jsx",
+					"path": "registry/optics/chart.tsx",
 					"type": "registry:component",
-					"target": "components/optics/chart.jsx"
+					"target": "components/optics/chart.tsx"
 				}
 			]
 		},
@@ -277,17 +263,12 @@
 				"https://optics.agusmayol.com.ar/r/utils.json",
 				"https://optics.agusmayol.com.ar/r/button.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/checkbox.jsx",
+					"path": "registry/optics/checkbox.tsx",
 					"type": "registry:component",
-					"target": "components/optics/checkbox.jsx"
+					"target": "components/optics/checkbox.tsx"
 				}
 			]
 		},
@@ -316,9 +297,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/code-block.jsx",
+					"path": "registry/optics/code-block.tsx",
 					"type": "registry:component",
-					"target": "components/optics/code-block.jsx"
+					"target": "components/optics/code-block.tsx"
 				}
 			]
 		},
@@ -333,17 +314,12 @@
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"lucide-react",
-				"@base-ui/react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["lucide-react", "@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/code-snippet.jsx",
+					"path": "registry/optics/code-snippet.tsx",
 					"type": "registry:component",
-					"target": "components/optics/code-snippet.jsx"
+					"target": "components/optics/code-snippet.tsx"
 				}
 			]
 		},
@@ -356,9 +332,28 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/collapsible.jsx",
+					"path": "registry/optics/collapsible.tsx",
 					"type": "registry:component",
-					"target": "components/optics/collapsible.jsx"
+					"target": "components/optics/collapsible.tsx"
+				}
+			]
+		},
+		{
+			"name": "combobox",
+			"type": "registry:component",
+			"title": "Combobox",
+			"description": "Autocomplete input and command palette with filterable dropdown options and chips.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/combobox.tsx",
+					"type": "registry:component",
+					"target": "components/optics/combobox.tsx"
 				}
 			]
 		},
@@ -372,12 +367,12 @@
 				"https://optics.agusmayol.com.ar/r/scroll-area.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": ["cmdk", "lucide-react", "clsx", "tailwind-merge"],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/command.jsx",
+					"path": "registry/optics/command.tsx",
 					"type": "registry:component",
-					"target": "components/optics/command.jsx"
+					"target": "components/optics/command.tsx"
 				}
 			]
 		},
@@ -387,17 +382,12 @@
 			"title": "Context Menu",
 			"description": "Displays a menu to the user triggered by a right click or a long press.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/context-menu.jsx",
+					"path": "registry/optics/context-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/context-menu.jsx"
+					"target": "components/optics/context-menu.tsx"
 				}
 			]
 		},
@@ -413,9 +403,9 @@
 			"dependencies": ["@tanstack/react-table", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/data-table.jsx",
+					"path": "registry/optics/data-table.tsx",
 					"type": "registry:component",
-					"target": "components/optics/data-table.jsx"
+					"target": "components/optics/data-table.tsx"
 				}
 			]
 		},
@@ -430,18 +420,12 @@
 				"https://optics.agusmayol.com.ar/r/popover.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"react-day-picker",
-				"date-fns",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["react-day-picker", "date-fns", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/date-picker.jsx",
+					"path": "registry/optics/date-picker.tsx",
 					"type": "registry:component",
-					"target": "components/optics/date-picker.jsx"
+					"target": "components/optics/date-picker.tsx"
 				}
 			]
 		},
@@ -454,17 +438,27 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/dialog.jsx",
+					"path": "registry/optics/dialog.tsx",
 					"type": "registry:component",
-					"target": "components/optics/dialog.jsx"
+					"target": "components/optics/dialog.tsx"
+				}
+			]
+		},
+		{
+			"name": "direction",
+			"type": "registry:component",
+			"title": "Direction",
+			"description": "Provides RTL or LTR text direction context for interactive components.",
+			"registryDependencies": [],
+			"dependencies": ["@base-ui/react"],
+			"files": [
+				{
+					"path": "registry/optics/direction.tsx",
+					"type": "registry:component",
+					"target": "components/optics/direction.tsx"
 				}
 			]
 		},
@@ -477,9 +471,9 @@
 			"dependencies": ["vaul-base", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/drawer.jsx",
+					"path": "registry/optics/drawer.tsx",
 					"type": "registry:component",
-					"target": "components/optics/drawer.jsx"
+					"target": "components/optics/drawer.tsx"
 				}
 			]
 		},
@@ -489,17 +483,12 @@
 			"title": "Dropdown Menu",
 			"description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/dropdown-menu.jsx",
+					"path": "registry/optics/dropdown-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/dropdown-menu.jsx"
+					"target": "components/optics/dropdown-menu.tsx"
 				}
 			]
 		},
@@ -515,9 +504,9 @@
 			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/empty.jsx",
+					"path": "registry/optics/empty.tsx",
 					"type": "registry:component",
-					"target": "components/optics/empty.jsx"
+					"target": "components/optics/empty.tsx"
 				}
 			]
 		},
@@ -533,9 +522,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/field.jsx",
+					"path": "registry/optics/field.tsx",
 					"type": "registry:component",
-					"target": "components/optics/field.jsx"
+					"target": "components/optics/field.tsx"
 				}
 			]
 		},
@@ -551,9 +540,9 @@
 			"dependencies": ["react-hook-form", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/form.jsx",
+					"path": "registry/optics/form.tsx",
 					"type": "registry:component",
-					"target": "components/optics/form.jsx"
+					"target": "components/optics/form.tsx"
 				}
 			]
 		},
@@ -566,9 +555,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/grid.jsx",
+					"path": "registry/optics/grid.tsx",
 					"type": "registry:component",
-					"target": "components/optics/grid.jsx"
+					"target": "components/optics/grid.tsx"
 				}
 			]
 		},
@@ -582,17 +571,12 @@
 				"https://optics.agusmayol.com.ar/r/popover.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/guided-tour.jsx",
+					"path": "registry/optics/guided-tour.tsx",
 					"type": "registry:component",
-					"target": "components/optics/guided-tour.jsx"
+					"target": "components/optics/guided-tour.tsx"
 				}
 			]
 		},
@@ -605,9 +589,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/hover-card.jsx",
+					"path": "registry/optics/hover-card.tsx",
 					"type": "registry:component",
-					"target": "components/optics/hover-card.jsx"
+					"target": "components/optics/hover-card.tsx"
 				}
 			]
 		},
@@ -625,9 +609,9 @@
 			"dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/input-group.jsx",
+					"path": "registry/optics/input-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input-group.jsx"
+					"target": "components/optics/input-group.tsx"
 				}
 			]
 		},
@@ -640,9 +624,9 @@
 			"dependencies": ["input-otp", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/input-otp.jsx",
+					"path": "registry/optics/input-otp.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input-otp.jsx"
+					"target": "components/optics/input-otp.tsx"
 				}
 			]
 		},
@@ -655,17 +639,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/input.jsx",
+					"path": "registry/optics/input.tsx",
 					"type": "registry:component",
-					"target": "components/optics/input.jsx"
+					"target": "components/optics/input.tsx"
 				}
 			]
 		},
@@ -675,17 +654,12 @@
 			"title": "Item",
 			"description": "A flexible item component for displaying content.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/item.jsx",
+					"path": "registry/optics/item.tsx",
 					"type": "registry:component",
-					"target": "components/optics/item.jsx"
+					"target": "components/optics/item.tsx"
 				}
 			]
 		},
@@ -695,17 +669,12 @@
 			"title": "KBD",
 			"description": "Keyboard key component for displaying keyboard shortcuts.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"react-hotkeys-hook",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["react-hotkeys-hook", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/kbd.jsx",
+					"path": "registry/optics/kbd.tsx",
 					"type": "registry:component",
-					"target": "components/optics/kbd.jsx"
+					"target": "components/optics/kbd.tsx"
 				}
 			]
 		},
@@ -718,9 +687,24 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/label.jsx",
+					"path": "registry/optics/label.tsx",
 					"type": "registry:component",
-					"target": "components/optics/label.jsx"
+					"target": "components/optics/label.tsx"
+				}
+			]
+		},
+		{
+			"name": "marker",
+			"type": "registry:component",
+			"title": "Marker",
+			"description": "Highlights status indicators, badges, or timeline waypoints with icons and content.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/marker.tsx",
+					"type": "registry:component",
+					"target": "components/optics/marker.tsx"
 				}
 			]
 		},
@@ -733,17 +717,45 @@
 				"https://optics.agusmayol.com.ar/r/dropdown-menu.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/menubar.jsx",
+					"path": "registry/optics/menubar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/menubar.jsx"
+					"target": "components/optics/menubar.tsx"
+				}
+			]
+		},
+		{
+			"name": "message",
+			"type": "registry:component",
+			"title": "Message",
+			"description": "Structured chat message container with header, avatar, content, and footer slots.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/message.tsx",
+					"type": "registry:component",
+					"target": "components/optics/message.tsx"
+				}
+			]
+		},
+		{
+			"name": "message-scroller",
+			"type": "registry:component",
+			"title": "Message Scroller",
+			"description": "Scrollable message viewport with sticky-to-bottom tracking and scroll-to-latest control.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@shadcn/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/message-scroller.tsx",
+					"type": "registry:component",
+					"target": "components/optics/message-scroller.tsx"
 				}
 			]
 		},
@@ -758,17 +770,27 @@
 				"https://optics.agusmayol.com.ar/r/checkbox.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/multi-select.jsx",
+					"path": "registry/optics/multi-select.tsx",
 					"type": "registry:component",
-					"target": "components/optics/multi-select.jsx"
+					"target": "components/optics/multi-select.tsx"
+				}
+			]
+		},
+		{
+			"name": "native-select",
+			"type": "registry:component",
+			"title": "Native Select",
+			"description": "Accessible styled native HTML select control with option group support.",
+			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/native-select.tsx",
+					"type": "registry:component",
+					"target": "components/optics/native-select.tsx"
 				}
 			]
 		},
@@ -790,9 +812,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/navigation-menu.jsx",
+					"path": "registry/optics/navigation-menu.tsx",
 					"type": "registry:component",
-					"target": "components/optics/navigation-menu.jsx"
+					"target": "components/optics/navigation-menu.tsx"
 				}
 			]
 		},
@@ -808,9 +830,9 @@
 			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/pagination.jsx",
+					"path": "registry/optics/pagination.tsx",
 					"type": "registry:component",
-					"target": "components/optics/pagination.jsx"
+					"target": "components/optics/pagination.tsx"
 				}
 			]
 		},
@@ -823,9 +845,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/popover.jsx",
+					"path": "registry/optics/popover.tsx",
 					"type": "registry:component",
-					"target": "components/optics/popover.jsx"
+					"target": "components/optics/popover.tsx"
 				}
 			]
 		},
@@ -838,9 +860,27 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/progress.jsx",
+					"path": "registry/optics/progress.tsx",
 					"type": "registry:component",
-					"target": "components/optics/progress.jsx"
+					"target": "components/optics/progress.tsx"
+				}
+			]
+		},
+		{
+			"name": "questionnaire",
+			"type": "registry:component",
+			"title": "Questionnaire",
+			"description": "Multi-step guided form and quiz flow with progress bar, choices, and validation.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@shadcn/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/questionnaire.tsx",
+					"type": "registry:component",
+					"target": "components/optics/questionnaire.tsx"
 				}
 			]
 		},
@@ -853,17 +893,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/radio-group.jsx",
+					"path": "registry/optics/radio-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/radio-group.jsx"
+					"target": "components/optics/radio-group.tsx"
 				}
 			]
 		},
@@ -876,9 +911,9 @@
 			"dependencies": ["react-resizable-panels", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/resizable.jsx",
+					"path": "registry/optics/resizable.tsx",
 					"type": "registry:component",
-					"target": "components/optics/resizable.jsx"
+					"target": "components/optics/resizable.tsx"
 				}
 			]
 		},
@@ -891,9 +926,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/scroll-area.jsx",
+					"path": "registry/optics/scroll-area.tsx",
 					"type": "registry:component",
-					"target": "components/optics/scroll-area.jsx"
+					"target": "components/optics/scroll-area.tsx"
 				}
 			]
 		},
@@ -906,17 +941,12 @@
 				"https://optics.agusmayol.com.ar/r/button.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui/react",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/select.jsx",
+					"path": "registry/optics/select.tsx",
 					"type": "registry:component",
-					"target": "components/optics/select.jsx"
+					"target": "components/optics/select.tsx"
 				}
 			]
 		},
@@ -929,9 +959,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/separator.jsx",
+					"path": "registry/optics/separator.tsx",
 					"type": "registry:component",
-					"target": "components/optics/separator.jsx"
+					"target": "components/optics/separator.tsx"
 				}
 			]
 		},
@@ -950,9 +980,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/sheet.jsx",
+					"path": "registry/optics/sheet.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sheet.jsx"
+					"target": "components/optics/sheet.tsx"
 				}
 			]
 		},
@@ -970,9 +1000,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/show-more.jsx",
+					"path": "registry/optics/show-more.tsx",
 					"type": "registry:component",
-					"target": "components/optics/show-more.jsx"
+					"target": "components/optics/show-more.tsx"
 				}
 			]
 		},
@@ -999,9 +1029,9 @@
 			],
 			"files": [
 				{
-					"path": "registry/optics/sidebar.jsx",
+					"path": "registry/optics/sidebar.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sidebar.jsx"
+					"target": "components/optics/sidebar.tsx"
 				}
 			]
 		},
@@ -1014,9 +1044,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/skeleton.jsx",
+					"path": "registry/optics/skeleton.tsx",
 					"type": "registry:component",
-					"target": "components/optics/skeleton.jsx"
+					"target": "components/optics/skeleton.tsx"
 				}
 			]
 		},
@@ -1032,9 +1062,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/slider.jsx",
+					"path": "registry/optics/slider.tsx",
 					"type": "registry:component",
-					"target": "components/optics/slider.jsx"
+					"target": "components/optics/slider.tsx"
 				}
 			]
 		},
@@ -1048,18 +1078,12 @@
 				"https://optics.agusmayol.com.ar/r/spinner.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"next-themes",
-				"sonner",
-				"lucide-react",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["next-themes", "sonner", "lucide-react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/sonner.jsx",
+					"path": "registry/optics/sonner.tsx",
 					"type": "registry:component",
-					"target": "components/optics/sonner.jsx"
+					"target": "components/optics/sonner.tsx"
 				}
 			]
 		},
@@ -1072,9 +1096,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/spinner.jsx",
+					"path": "registry/optics/spinner.tsx",
 					"type": "registry:component",
-					"target": "components/optics/spinner.jsx"
+					"target": "components/optics/spinner.tsx"
 				}
 			]
 		},
@@ -1087,9 +1111,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/star-rating.jsx",
+					"path": "registry/optics/star-rating.tsx",
 					"type": "registry:component",
-					"target": "components/optics/star-rating.jsx"
+					"target": "components/optics/star-rating.tsx"
 				}
 			]
 		},
@@ -1105,9 +1129,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/switch.jsx",
+					"path": "registry/optics/switch.tsx",
 					"type": "registry:component",
-					"target": "components/optics/switch.jsx"
+					"target": "components/optics/switch.tsx"
 				}
 			]
 		},
@@ -1120,9 +1144,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/table.jsx",
+					"path": "registry/optics/table.tsx",
 					"type": "registry:component",
-					"target": "components/optics/table.jsx"
+					"target": "components/optics/table.tsx"
 				}
 			]
 		},
@@ -1138,17 +1162,12 @@
 				"https://optics.agusmayol.com.ar/r/use-controlled-state.json",
 				"https://optics.agusmayol.com.ar/r/utils.json"
 			],
-			"dependencies": [
-				"@base-ui-components/react",
-				"motion",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/tabs.jsx",
+					"path": "registry/optics/tabs.tsx",
 					"type": "registry:component",
-					"target": "components/optics/tabs.jsx"
+					"target": "components/optics/tabs.tsx"
 				}
 			]
 		},
@@ -1164,9 +1183,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/textarea.jsx",
+					"path": "registry/optics/textarea.tsx",
 					"type": "registry:component",
-					"target": "components/optics/textarea.jsx"
+					"target": "components/optics/textarea.tsx"
 				}
 			]
 		},
@@ -1182,9 +1201,9 @@
 			"dependencies": ["lucide-react", "motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/theme-switcher.jsx",
+					"path": "registry/optics/theme-switcher.tsx",
 					"type": "registry:component",
-					"target": "components/optics/theme-switcher.jsx"
+					"target": "components/optics/theme-switcher.tsx"
 				}
 			]
 		},
@@ -1201,9 +1220,27 @@
 			"dependencies": ["ms", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/timezone.jsx",
+					"path": "registry/optics/timezone.tsx",
 					"type": "registry:component",
-					"target": "components/optics/timezone.jsx"
+					"target": "components/optics/timezone.tsx"
+				}
+			]
+		},
+		{
+			"name": "toast",
+			"type": "registry:component",
+			"title": "Toast",
+			"description": "Accessible notification toast manager, viewport, and dismissible message cards.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["@base-ui/react", "lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/toast.tsx",
+					"type": "registry:component",
+					"target": "components/optics/toast.tsx"
 				}
 			]
 		},
@@ -1219,9 +1256,9 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/toggle-group.jsx",
+					"path": "registry/optics/toggle-group.tsx",
 					"type": "registry:component",
-					"target": "components/optics/toggle-group.jsx"
+					"target": "components/optics/toggle-group.tsx"
 				}
 			]
 		},
@@ -1231,17 +1268,12 @@
 			"title": "Toggle",
 			"description": "A two-state button that can be either on or off.",
 			"registryDependencies": ["https://optics.agusmayol.com.ar/r/utils.json"],
-			"dependencies": [
-				"@base-ui/react",
-				"class-variance-authority",
-				"clsx",
-				"tailwind-merge"
-			],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/toggle.jsx",
+					"path": "registry/optics/toggle.tsx",
 					"type": "registry:component",
-					"target": "components/optics/toggle.jsx"
+					"target": "components/optics/toggle.tsx"
 				}
 			]
 		},
@@ -1257,9 +1289,438 @@
 			"dependencies": ["@base-ui/react", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/tooltip.jsx",
+					"path": "registry/optics/tooltip.tsx",
 					"type": "registry:component",
-					"target": "components/optics/tooltip.jsx"
+					"target": "components/optics/tooltip.tsx"
+				}
+			]
+		},
+		{
+			"name": "trace",
+			"type": "registry:component",
+			"title": "Trace",
+			"description": "Displays step-by-step execution traces with status icons and collapsible details.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/trace.tsx",
+					"type": "registry:component",
+					"target": "components/optics/trace.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-chain-of-thought",
+			"type": "registry:component",
+			"title": "AI Chain of Thought",
+			"description": "A collapsible reasoning summary expanding into the steps an agent took.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/chain-of-thought.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/chain-of-thought.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-chat",
+			"type": "registry:component",
+			"title": "AI Chat",
+			"description": "Scrollable agent conversation viewport backed by Message Scroller with sticky bottom tracking.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/empty.json",
+				"https://optics.agusmayol.com.ar/r/message-scroller.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/chat.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/chat.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-checkpoint",
+			"type": "registry:component",
+			"title": "AI Checkpoint",
+			"description": "Marks a restore point in a conversation thread with an icon, label, and trigger button.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/marker.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/checkpoint.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/checkpoint.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-confirmation",
+			"type": "registry:component",
+			"title": "AI Confirmation",
+			"description": "Approval request prompt displaying pending, approved, and rejected tool execution states.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/confirmation.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/confirmation.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-context",
+			"type": "registry:component",
+			"title": "AI Context",
+			"description": "Displays token context window utilization with a circular gauge and breakdown hover card.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/hover-card.json",
+				"https://optics.agusmayol.com.ar/r/progress.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/context.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/context.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-file-tree",
+			"type": "registry:component",
+			"title": "AI File Tree",
+			"description": "Collapsible folder tree showing modified, added, and deleted workspace files.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/file-tree.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/file-tree.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-inline-citation",
+			"type": "registry:component",
+			"title": "AI Inline Citation",
+			"description": "Inline source attribution pill with a hover card carousel for inspecting quotes and URLs.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/hover-card.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/inline-citation.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/inline-citation.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-message",
+			"type": "registry:component",
+			"title": "AI Message",
+			"description": "Turn container supporting message branching, copy controls, actions, and role alignment.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/bubble.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/message.json",
+				"https://optics.agusmayol.com.ar/r/tooltip.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/message.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/message.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-model-selector",
+			"type": "registry:component",
+			"title": "AI Model Selector",
+			"description": "Grouped model and reasoning-effort selector menus with integrated prompt composer.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/dropdown-menu.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/model-selector.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/model-selector.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-plan",
+			"type": "registry:component",
+			"title": "AI Plan",
+			"description": "Structured execution plan displaying overall progress and expandable step details.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/progress.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/plan.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/plan.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-prompt-input",
+			"type": "registry:component",
+			"title": "AI Prompt Input",
+			"description": "Chat composer with file attachments, keyboard submission shortcuts, and streaming status.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/attachment.json",
+				"https://optics.agusmayol.com.ar/r/input-group.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/prompt-input.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/prompt-input.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-queue",
+			"type": "registry:component",
+			"title": "AI Queue",
+			"description": "Agent task queue splitting pending and completed work into collapsible trace sections.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/queue.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/queue.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-reasoning",
+			"type": "registry:component",
+			"title": "AI Reasoning",
+			"description": "Collapsible thinking panel showing live streaming shimmer and elapsed reasoning time.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/reasoning.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/reasoning.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-sources",
+			"type": "registry:component",
+			"title": "AI Sources",
+			"description": "Collapsible reference list rendering external links cited by an agent reply.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/sources.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/sources.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-stack-trace",
+			"type": "registry:component",
+			"title": "AI Stack Trace",
+			"description": "Expandable error frame viewer with copy controls and selectable stack frame lines.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/collapsible.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/stack-trace.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/stack-trace.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-subagent",
+			"type": "registry:component",
+			"title": "AI Subagent",
+			"description": "Displays a delegated subagent execution run with nested tool calls and final result.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/subagent.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/subagent.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-suggestion",
+			"type": "registry:component",
+			"title": "AI Suggestion",
+			"description": "Horizontal scrollable row of one-click prompt suggestions for the user.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/suggestion.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/suggestion.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-task",
+			"type": "registry:component",
+			"title": "AI Task",
+			"description": "Step-by-step agent activity tracker with status icons and affected file badges.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/task.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/task.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-terminal",
+			"type": "registry:component",
+			"title": "AI Terminal",
+			"description": "Collapsible shell command log with exit code badge, output preview, and copy button.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/button.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/terminal.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/terminal.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-test-results",
+			"type": "registry:component",
+			"title": "AI Test Results",
+			"description": "Test execution summary with collapsible suites, individual test cases, and failure traces.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/test-results.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/test-results.tsx"
+				}
+			]
+		},
+		{
+			"name": "ai-tool",
+			"type": "registry:component",
+			"title": "AI Tool",
+			"description": "Displays an agent tool invocation lifecycle across streaming, approval, output, and error states.",
+			"registryDependencies": [
+				"https://optics.agusmayol.com.ar/r/badge.json",
+				"https://optics.agusmayol.com.ar/r/trace.json",
+				"https://optics.agusmayol.com.ar/r/utils.json"
+			],
+			"dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+			"files": [
+				{
+					"path": "registry/optics/ai-elements/tool.tsx",
+					"type": "registry:component",
+					"target": "components/optics/ai-elements/tool.tsx"
 				}
 			]
 		},
@@ -1272,9 +1733,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/lib/get-strict-context.jsx",
+					"path": "registry/optics/lib/get-strict-context.tsx",
 					"type": "registry:lib",
-					"target": "lib/get-strict-context.jsx"
+					"target": "lib/get-strict-context.tsx"
 				}
 			]
 		},
@@ -1287,9 +1748,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-controlled-state.jsx",
+					"path": "registry/optics/hooks/use-controlled-state.ts",
 					"type": "registry:lib",
-					"target": "hooks/use-controlled-state.jsx"
+					"target": "hooks/use-controlled-state.ts"
 				}
 			]
 		},
@@ -1302,9 +1763,9 @@
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/lib/utils.js",
+					"path": "registry/optics/lib/utils.ts",
 					"type": "registry:lib",
-					"target": "lib/utils.js"
+					"target": "lib/utils.ts"
 				}
 			]
 		},
@@ -1317,9 +1778,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-auto-height.jsx",
+					"path": "registry/optics/hooks/use-auto-height.ts",
 					"type": "registry:lib",
-					"target": "hooks/use-auto-height.jsx"
+					"target": "hooks/use-auto-height.ts"
 				}
 			]
 		},
@@ -1332,9 +1793,9 @@
 			"dependencies": [],
 			"files": [
 				{
-					"path": "registry/optics/hooks/use-has-primary-touch.jsx",
+					"path": "registry/optics/hooks/use-has-primary-touch.ts",
 					"type": "registry:lib",
-					"target": "hooks/use-has-primary-touch.jsx"
+					"target": "hooks/use-has-primary-touch.ts"
 				}
 			]
 		},
@@ -1347,9 +1808,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/effects/highlight.jsx",
+					"path": "registry/optics/helpers/primitives/effects/highlight.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/effects/highlight.jsx"
+					"target": "components/optics/helpers/primitives/effects/highlight.tsx"
 				}
 			]
 		},
@@ -1365,9 +1826,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/effects/auto-height.jsx",
+					"path": "registry/optics/helpers/primitives/effects/auto-height.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/effects/auto-height.jsx"
+					"target": "components/optics/helpers/primitives/effects/auto-height.tsx"
 				}
 			]
 		},
@@ -1380,9 +1841,9 @@
 			"dependencies": ["motion", "clsx", "tailwind-merge"],
 			"files": [
 				{
-					"path": "registry/optics/helpers/primitives/animate/slot.jsx",
+					"path": "registry/optics/helpers/primitives/animate/slot.tsx",
 					"type": "registry:component",
-					"target": "components/optics/helpers/primitives/animate/slot.jsx"
+					"target": "components/optics/helpers/primitives/animate/slot.tsx"
 				}
 			]
 		},

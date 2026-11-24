@@ -1,0 +1,66 @@
+"use client";
+import type { ManualFile } from "@/components/installation-guide";
+import { ShowMore } from "@/registry/optics/show-more";
+import generatedProps from "@/registry/optics/dist/show-more.json";
+import componentCode from "@/registry/optics/dist/show-more.tsx.txt";
+import { ComponentConfig, type ComponentConfigData } from "../layout";
+
+const componentFiles: ManualFile[] = [
+	{
+		path: "@/components/optics/show-more.tsx",
+		code: componentCode,
+	},
+];
+
+const demoComponent = (
+	<div className="flex flex-col gap-2">
+		<ShowMore
+			maskColor={{
+				default: "from-sidebar",
+				dark: "from-sidebar",
+			}}
+			moreContent={
+				<div className="text-base space-y-3 mt-3">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua.
+					</p>
+					<p>
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+						commodo consequat.
+					</p>
+				</div>
+			}
+		>
+			<p className="text-base ">
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus quisquam assumenda eligendi
+				provident magni error voluptatibus obcaecati ab qui necessitatibus.
+			</p>
+		</ShowMore>
+	</div>
+);
+
+const componentConfig: ComponentConfigData = {
+	header: {
+		title: "Show More",
+		description:
+			'An expandable content component that shows a "Show More" button when content exceeds a specified length or number of lines.',
+		href: "https://ui.shadcn.com/docs/components/accordion",
+		hrefText: "shadcn/ui",
+	},
+	content: {
+		children: demoComponent,
+		imports: `import { ShowMore } from "@/components/optics/show-more";`,
+		filename: "show-more.tsx",
+	},
+	installation: {
+		componentName: "show-more",
+		dependencies: "",
+		manualFiles: componentFiles,
+	},
+	props: generatedProps,
+};
+
+export default function Page() {
+	return <ComponentConfig config={componentConfig}>{null}</ComponentConfig>;
+}
